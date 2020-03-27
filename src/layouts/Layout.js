@@ -1,5 +1,6 @@
 import React from 'react'
 import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 import Logo from '../assets/images/protegeLogo.svg'
 
 const Layout = ({children}) => (
@@ -13,9 +14,7 @@ const Layout = ({children}) => (
       </div>
     </header>
       {children}
-    <footer>
-      Footer
-    </footer>
+    <Footer />
   </div>
 )
 
