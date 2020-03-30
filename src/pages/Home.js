@@ -1,5 +1,6 @@
 import React from 'react'
 import FindYourNext from '../components/FindYourNext'
+import JobCard from '../components/JobCard'
 
 const Home = () => (
   <div>
@@ -21,6 +22,18 @@ const Home = () => (
           <button className='w-24 bg-gray-800 mt-3 px-2 text-xs uppercase font-bold text-gray-400'>Post A Job</button>
         </div>
       </div>
+    </div>
+
+    <div className="my-24 mx-auto px-3" style={{maxWidth: 680}}>
+      <h2 className="text-center text-3xl text-blue-500 font-bold mb-10">
+        Latest Opportunities
+      </h2>
+
+      <JobCard />
+      <JobCard />
+      <JobCard />
+      <JobCard />
+      <JobCard />
     </div>
   </div>
 )
