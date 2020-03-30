@@ -5,7 +5,7 @@
 /*--Buttons--*/
 
 .btn {
-  @apply px-4 py-1 font-bold shadow opacity-75 transition-transform duration-200 transform
+  @apply px-4 py-1 font-bold shadow transition-transform duration-200 transform
 }
 
 .btn-teal {
@@ -17,5 +17,5 @@
 }
 
 .btn:hover {
-  @apply shadow-md opacity-100 scale-105
+  @apply shadow-md scale-105
 }
