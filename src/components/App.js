@@ -6,6 +6,7 @@ import Home from '../pages/Home'
 import ProjectBoard from '../pages/project-board'
 import Contribute from '../pages/contribute'
 import Contact from '../pages/contact'
+import IndividualJob from '../pages/individual-job'
 
 import * as ROUTES from '../constants/routes'
 
@@ -17,6 +18,7 @@ const App = () => (
     <Route path={ROUTES.PROJECT_BOARD} component={ProjectBoard} />
     <Route path={ROUTES.CONTACT} component={Contact} />
     <Route path={ROUTES.CONTRIBUTE} component={Contribute} />
+    <Route path={ROUTES.INDIVIDUAL_JOB} component={IndividualJob} />
   </Layout>
 </Router>
 
