@@ -4,7 +4,7 @@ import * as ROUTES from '../constants/routes'
 
 const Nav = () => (
   <nav>
-    <ul class="flex text-blue-500">
+    <ul className="flex text-blue-500">
       <li className='pr-10 opacity-75 hover:opacity-100'>
         <Link to={ROUTES.PROJECT_BOARD}>Project Board</Link>
       </li>
