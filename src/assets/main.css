@@ -8149,7 +8149,6 @@ video {
   padding-bottom: 0.25rem;
   font-weight: 700;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  opacity: 0.75;
   transition-property: transform;
   transition-duration: 200ms;
   --transform-translate-x: 0;
@@ -8174,7 +8173,6 @@ video {
 
 .btn:hover {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  opacity: 1;
   --transform-scale-x: 1.05;
   --transform-scale-y: 1.05
 }
