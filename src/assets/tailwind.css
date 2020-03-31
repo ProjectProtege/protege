@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*--Buttons--*/
+
+.btn {
+  @apply px-4 py-1 font-bold shadow transition-transform duration-200 transform
+}
+
+.btn-teal {
+  @apply bg-teal-300 text-blue-500
+}
+
+.btn-blue {
+  @apply bg-blue-500 text-white
+}
+
+.btn:hover {
+  @apply shadow-md scale-105
+}
