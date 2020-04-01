@@ -20,7 +20,7 @@ const Landing = () => (
         <form name="email-list" method="post">
           <label for="email" className="sr-only">Email input</label>
 
-          <input className="w-1/2 lg:w-1/3 bg-gray-300 px-4 py-1" type="email" name="email" id="email" autocomplete="off"/>
+          <input className="w-1/2 lg:w-1/4 bg-gray-300 px-4 py-1" type="email" name="email" id="email" autocomplete="off"/>
 
           <button className="btn btn-teal" type="submit">Sign Up</button>
 

@@ -5,7 +5,7 @@
 /*--Buttons--*/
 
 .btn {
-  @apply px-4 py-1 font-bold shadow transition-transform duration-200 transform
+  @apply px-4 py-1 font-bold shadow transition-transform duration-200 transform uppercase
 }
 
 .btn-teal {
