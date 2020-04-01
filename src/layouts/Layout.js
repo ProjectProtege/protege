@@ -15,7 +15,7 @@ const Layout = ({children}) => (
       </div>
     </header>
 
-    <main className="flex-grow container mx-auto">
+    <main>
       {children}
     </main>
 

@@ -8177,6 +8177,14 @@ video {
   --transform-scale-y: 1.05
 }
 
+/*--Landing Page styles - to be deleted after launch --*/
+
+.landing-wrapper {
+  background-image: url(../assets/images/bg-pattern.png);
+  background-position: center;
+  background-size: cover;
+}
+
 @media (min-width: 640px) {
   .sm\:sr-only {
     position: absolute;

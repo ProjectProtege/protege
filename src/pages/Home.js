@@ -3,7 +3,7 @@ import FindYourNext from '../components/FindYourNext'
 import JobCard from '../components/JobCard'
 
 const Home = () => (
-  <div>
+  <div className="container mx-auto">
     <FindYourNext />
     <div className='flex md:w-3/4 flex-col text-center mx-auto mt-6'>
       <p className='tracking-wide font-light md:w-3/4 mx-auto text-lg text-blue-400 mb-6'>Looking for your next junior developer role? Look no further! Any jobs listed here are geared for those hungry to work and learn.</p>
