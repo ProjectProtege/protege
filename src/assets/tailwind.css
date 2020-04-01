@@ -19,3 +19,10 @@
 .btn:hover {
   @apply shadow-md scale-105
 }
+
+/*--Landing Page styles - to be deleted after launch --*/
+.landing-wrapper {
+  background-image: url(../assets/images/bg-pattern.png);
+  background-position: center;
+  background-size: cover;
+}

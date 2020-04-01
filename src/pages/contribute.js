@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Contribute = () => (
-  <div>
+  <div className="container mx-auto">
     <h1>Contribute Page</h1>
   </div>
 )
