@@ -45,7 +45,7 @@ const Nav = () => {
           <Link to={ROUTES.PROJECT_BOARD} className="pb-3 border-b-2 border-white hover:border-teal-500 ">Learning Resources</Link>
         </li>
         <li className="btn btn-teal">
-          <Link to={ROUTES.PROJECT_BOARD}>Post a Job</Link>
+          <Link to={ROUTES.POST_A_JOB}>Post a Job</Link>
         </li>
       </ul>
     </nav>

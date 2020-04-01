@@ -7,6 +7,7 @@ import ProjectBoard from '../pages/project-board'
 import Contribute from '../pages/contribute'
 import Contact from '../pages/contact'
 import IndividualJobPage from '../pages/individual-job'
+import PostAJob from '../pages/post-a-job'
 
 import * as ROUTES from '../constants/routes'
 
@@ -18,7 +19,7 @@ const App = () => (
     <Route path={ROUTES.PROJECT_BOARD} component={ProjectBoard} />
     <Route path={ROUTES.CONTACT} component={Contact} />
     <Route path={ROUTES.CONTRIBUTE} component={Contribute} />
-    <Route path={ROUTES.INDIVIDUAL_JOB} component={IndividualJobPage} />
+    <Route path={ROUTES.POST_A_JOB} component={PostAJob} />
   </Layout>
 </Router>
 
