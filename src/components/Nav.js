@@ -10,7 +10,7 @@ const Nav = () => {
 
   return(
     <React.Fragment>
-    <nav className="md:hidden text-blue-500 text-right relative">
+    <nav className="md:hidden text-blue-500 text-right uppercase relative">
       <button className="nav-toggle relative md:hidden text-3xl p-3" onClick={() => setActive(oldActive => !oldActive)}>
         <FontAwesomeIcon icon={faBars}/>
       </button>
@@ -28,7 +28,7 @@ const Nav = () => {
           <Link to={ROUTES.CONTACT}>Learning Resources</Link>
         </li>
         <li className="bg-teal-300 px-4 mt-3 mb-1 w-1/2 py-1 mx-auto font-bold">
-          <Link to={ROUTES.PROJECT_BOARD}>Post a Job</Link>
+          <Link to={ROUTES.POST_A_JOB}>Post a Job</Link>
           </li>
       </ul> 
     </nav>

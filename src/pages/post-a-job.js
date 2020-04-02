@@ -1,16 +1,14 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-import * as ROUTES from '../constants/routes'
 import backgroundImage from '../assets/images/bg-pattern.png'
 
 const PostAJob = () => {
     
     
     return(
-        <div className='flex flex-col mx-auto justify-center'>
+        <div className='container mx-auto mt-6 md:mt-12 p-2'>
 
-        <h1 className='text-2xl text-gray-800 font-bold text-center leading-snug'>Inexperienced doesn’t mean incapable. <br />Fill your role with ambition.</h1>
-        <div className='my-6 mx-auto'>
+        <h1 className='text-lg md:text-2xl text-blue-500 font-bold text-center leading-snug'>Inexperienced doesn’t mean incapable. <br />Fill your role with ambition.</h1>
+        <div className='my-6'>
             <svg width="216" height="52" viewBox="0 0 216 52" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2.212 41.562H3.668C4.37733 41.562 4.93267 41.38 5.334 41.016C5.73533 40.6427 5.936 40.1713 5.936 39.602C5.936 38.9673 5.73067 38.4633 5.32 38.09C4.90933 37.7167 4.326 37.53 3.57 37.53H2.212V41.562ZM1.078 36.564H3.556C4.648 36.564 5.50667 36.8487 6.132 37.418C6.76667 37.978 7.084 38.706 7.084 39.602C7.084 40.442 6.77133 41.142 6.146 41.702C5.52067 42.2527 4.69467 42.528 3.668 42.528H2.212V46H1.078V36.564ZM11.5349 46.126C10.5176 46.126 9.71024 45.7853 9.11291 45.104C8.52491 44.4133 8.23091 43.5453 8.23091 42.5C8.23091 41.4453 8.53424 40.568 9.14091 39.868C9.75691 39.1587 10.5549 38.804 11.5349 38.804C12.6082 38.804 13.4342 39.1493 14.0129 39.84C14.6009 40.5307 14.8949 41.408 14.8949 42.472C14.8949 43.5267 14.5962 44.3993 13.9989 45.09C13.4016 45.7807 12.5802 46.126 11.5349 46.126ZM11.5349 39.784C10.8629 39.784 10.3356 40.0453 9.95291 40.568C9.57024 41.0907 9.37891 41.73 9.37891 42.486C9.37891 43.2233 9.57491 43.8533 9.96691 44.376C10.3589 44.8893 10.8816 45.146 11.5349 45.146C12.2442 45.146 12.7902 44.894 13.1729 44.39C13.5556 43.8767 13.7469 43.242 13.7469 42.486C13.7469 41.702 13.5649 41.058 13.2009 40.554C12.8369 40.0407 12.2816 39.784 11.5349 39.784ZM20.3762 39.14V40.19C19.9469 39.9287 19.3589 39.798 18.6122 39.798C18.2389 39.798 17.9402 39.8867 17.7162 40.064C17.5016 40.232 17.3942 40.4513 17.3942 40.722C17.3942 40.89 17.4269 41.0393 17.4922 41.17C17.5576 41.2913 17.6836 41.4127 17.8702 41.534C18.0662 41.6553 18.2062 41.7393 18.2902 41.786C18.3836 41.8233 18.5796 41.9073 18.8782 42.038C19.4756 42.2807 19.9422 42.556 20.2782 42.864C20.6142 43.172 20.7822 43.5873 20.7822 44.11C20.7822 44.7167 20.5676 45.1973 20.1382 45.552C19.7182 45.9067 19.1396 46.084 18.4022 46.084C17.5436 46.084 16.8482 45.9393 16.3162 45.65V44.572C16.9416 44.9453 17.6136 45.132 18.3322 45.132C18.7616 45.132 19.0882 45.048 19.3122 44.88C19.5362 44.712 19.6482 44.4833 19.6482 44.194C19.6482 43.858 19.5222 43.5967 19.2702 43.41C19.0276 43.2233 18.6169 43.0133 18.0382 42.78C17.5062 42.5747 17.0769 42.318 16.7502 42.01C16.4329 41.702 16.2742 41.2867 16.2742 40.764C16.2742 40.176 16.4936 39.7093 16.9322 39.364C17.3802 39.0093 17.9356 38.832 18.5982 38.832C19.3356 38.832 19.9282 38.9347 20.3762 39.14ZM23.8078 39.798V43.956C23.8078 44.712 24.1624 45.09 24.8718 45.09C25.2358 45.09 25.5578 44.9827 25.8378 44.768V45.818C25.5298 45.986 25.1844 46.07 24.8018 46.07C23.4018 46.07 22.7018 45.356 22.7018 43.928V39.798H21.5678V38.902H22.7018V37.138H23.8078V38.902H25.7678V39.798H23.8078Z" fill="#394056"/>
                 <path d="M77.212 41.562H78.668C79.3773 41.562 79.9327 41.38 80.334 41.016C80.7353 40.6427 80.936 40.1713 80.936 39.602C80.936 38.9673 80.7307 38.4633 80.32 38.09C79.9093 37.7167 79.326 37.53 78.57 37.53H77.212V41.562ZM76.078 36.564H78.556C79.648 36.564 80.5067 36.8487 81.132 37.418C81.7667 37.978 82.084 38.706 82.084 39.602C82.084 40.442 81.7713 41.142 81.146 41.702C80.5207 42.2527 79.6947 42.528 78.668 42.528H77.212V46H76.078V36.564ZM84.7429 38.902V40.148C85.1162 39.2707 85.7602 38.832 86.6749 38.832C86.8429 38.832 86.9736 38.8413 87.0669 38.86V39.952C86.8709 39.8867 86.6702 39.854 86.4649 39.854C85.9702 39.854 85.5596 40.0827 85.2329 40.54C84.9062 40.9973 84.7429 41.5247 84.7429 42.122V46H83.6369L83.6509 38.902H84.7429ZM92.7393 41.996V41.716C92.7393 41.128 92.5806 40.6613 92.2633 40.316C91.946 39.9613 91.5073 39.784 90.9473 39.784C90.4153 39.784 89.9626 39.9753 89.5893 40.358C89.216 40.7407 88.9966 41.2867 88.9313 41.996H92.7393ZM93.3973 44.6V45.636C92.8466 45.9253 92.1746 46.07 91.3813 46.07C90.308 46.07 89.44 45.7433 88.7773 45.09C88.124 44.4273 87.7973 43.5547 87.7973 42.472C87.7973 41.3427 88.0913 40.4513 88.6793 39.798C89.2673 39.1447 90.0233 38.818 90.9473 38.818C91.834 38.818 92.5386 39.1027 93.0613 39.672C93.584 40.2413 93.8453 41.0487 93.8453 42.094C93.8453 42.3927 93.822 42.668 93.7753 42.92H88.9313C89.0153 43.62 89.2813 44.1567 89.7293 44.53C90.1773 44.9033 90.7653 45.09 91.4933 45.09C92.2866 45.09 92.9213 44.9267 93.3973 44.6ZM97.3378 46L94.8598 38.902H96.0078L96.9878 41.898L98.0238 45.132C98.1078 44.7307 98.4578 43.6527 99.0738 41.898L100.082 38.902H101.23L98.6958 46H97.3378ZM102.656 46V38.902H103.762V46H102.656ZM102.684 37.194C102.553 37.054 102.488 36.8813 102.488 36.676C102.488 36.4707 102.553 36.298 102.684 36.158C102.824 36.018 102.997 35.948 103.202 35.948C103.407 35.948 103.58 36.018 103.72 36.158C103.86 36.298 103.93 36.4707 103.93 36.676C103.93 36.8813 103.86 37.054 103.72 37.194C103.58 37.3247 103.407 37.39 103.202 37.39C102.997 37.39 102.824 37.3247 102.684 37.194ZM110.39 41.996V41.716C110.39 41.128 110.231 40.6613 109.914 40.316C109.596 39.9613 109.158 39.784 108.598 39.784C108.066 39.784 107.613 39.9753 107.24 40.358C106.866 40.7407 106.647 41.2867 106.582 41.996H110.39ZM111.048 44.6V45.636C110.497 45.9253 109.825 46.07 109.032 46.07C107.958 46.07 107.09 45.7433 106.428 45.09C105.774 44.4273 105.448 43.5547 105.448 42.472C105.448 41.3427 105.742 40.4513 106.33 39.798C106.918 39.1447 107.674 38.818 108.598 38.818C109.484 38.818 110.189 39.1027 110.712 39.672C111.234 40.2413 111.496 41.0487 111.496 42.094C111.496 42.3927 111.472 42.668 111.426 42.92H106.582C106.666 43.62 106.932 44.1567 107.38 44.53C107.828 44.9033 108.416 45.09 109.144 45.09C109.937 45.09 110.572 44.9267 111.048 44.6ZM114.694 46L112.51 38.902H113.686L114.372 41.254C114.615 42.0753 114.815 42.794 114.974 43.41C115.142 44.0167 115.249 44.4227 115.296 44.628L115.366 44.922C115.506 44.3247 115.847 43.0973 116.388 41.24L117.06 38.902H118.236L118.922 41.24L119.972 44.936C120.103 44.3853 120.462 43.1533 121.05 41.24L121.764 38.902H122.898L120.658 46H119.3L118.628 43.676L117.648 40.134C117.508 40.7313 117.191 41.912 116.696 43.676L116.052 46H114.694Z" fill="#394056"/>
@@ -26,83 +24,110 @@ const PostAJob = () => {
                 <line opacity="0.5" x1="111" y1="12.5" x2="180" y2="12.5" stroke="#54AF8E"/>
             </svg>
         </div>
-        <div className="lg:w-3/5 mx-auto pb-6 shadow-md border-t-4 border-teal-500">
-            <h2  style={{backgroundImage: `url(${backgroundImage})`}} className='bg-cover text-gray-800 font-bold p-4 bg-gray-100'>About the Role</h2>
-            <form className='w-full flex flex-col'>
-                <label htmlFor='' className='text-gray-800 font-bold text-sm p-4'>Job Title</label><br />
-                <input id='' name='' className='border-1 border-gray-800 mx-4 my-1' type='text'></input>
-                <div className='flex'>
-                    <div className='flex flex-col w-1/2'>
-                        <label htmlFor='' className='text-gray-800 font-bold text-sm pl-4 pt-4'>Role Focus</label>
-                        <span className='text-gray-500 text-xs tracking-tight pl-4'>Frontend, Backend, Full-Stack</span>
-                        <select id='role-focus' name='' className='border-1 border-gray-800 mx-4 my-1' type='select'>
-                            <option>Frontend</option>
-                            <option>Backend</option>
-                            <option>Full-Stack</option>
+        
+        <div className="lg:w-3/5 mx-auto">
+        <div className="shadow-md border-t-4 border-teal-500">
+            <h2  style={{backgroundImage: `url(${backgroundImage})`}} className='bg-cover text-blue-500 font-bold p-4 bg-blue-100 text-xl'>About the Role</h2>
+
+            <form className='w-full flex flex-col p-4'>
+                <div className="mb-3 flex flex-col">
+                    <label htmlFor='job-title' className='text-blue-500 font-bold mb-2'>Job Title</label>
+                    <input id='job-title' className='input' type='text'></input>
+                </div>
+
+                <div className='md:flex'>
+                    <div className='flex flex-col md:w-1/2 mb-3 md:mr-6'>
+                        <label htmlFor='role-focus' className='text-blue-500 font-bold'>Role Focus</label>
+
+                        <span className='text-blue-200 text-xs mb-2 tracking-tight '>Frontend, Backend, Full-Stack</span>
+
+                        <select id='role-focus' name='' className='input' type='select'>
+                            <option value="frontend">Frontend</option>
+                            <option value="backend">Backend</option>
+                            <option value="full-stack">Full-Stack</option>
                         </select>
                     </div>
-                    <div className='flex flex-col'>
-                        <span htmlFor='positionType' className='text-gray-800 font-bold text-sm p-4'>Position Type</span>
-                        <div className='flex items-center'>
-                            <input className='border-1 border-gray-800 ml-4 my-1' type='radio' id='full-time' name='positionType'></input>
-                            <label className='text-gray-800  text-xs ml-2 ' htmlFor='full-time' >Full-time</label>
-                            <input className='border-1 border-gray-800 ml-4 my-1' type='radio' id='part-time' name='positionType'></input>
-                            <label className='text-gray-800  text-xs ml-2 ' htmlFor='part-time' >Part-time</label>
-                            <input className='border-1 border-gray-800 ml-4 my-1' type='radio' id='contract' name='positionType'></input>
-                            <label className='text-gray-800  text-xs ml-2 ' htmlFor='contract' >Contract</label>
+
+                    <div className='flex flex-col md:w-1/2 mb-3 md:mb-0'>
+                        <span htmlFor='positionType' className='text-blue-500 font-bold mb-2'>Position Type</span>
+                        <div className='flex justify-between'>
+                            <div>
+                                <input className='mr-3' type='radio' id='full-time' name='positionType'></input>
+                                <label className='text-blue-800' htmlFor='full-time' >Full-time</label>
+                            </div>
+
+                            <div>
+                                <input className='mr-3' type='radio' id='part-time' name='positionType'></input>
+                                <label className='text-blue-800' htmlFor='part-time' >Part-time</label>
+                            </div>
+
+                            <div>
+                                <input className='mr-3' type='radio' id='contract' name='positionType'></input>
+                                <label className='text-blue-800' htmlFor='contract' >Contract</label>
+                            </div>
                         </div>
 
                     </div>
                 </div>
-                <label htmlFor='job-description' className='text-gray-800 font-bold text-sm p-4'>Job Description</label><br />
-                <input id='' name='' className='border-1 border-gray-800 mx-4 h-48' type='textarea'></input>
-                <label htmlFor='' className='text-gray-800 font-bold text-sm pl-4 pt-4'>How To Apply</label><br />
-                <span className='text-gray-500 text-xs tracking-tight pl-4'>Email Address or linke to 3rd party job application page</span>
-                <input id='' name='' className='border-1 border-gray-800 mx-4 my-1' type='text'></input>
+
+                <div className="flex flex-col mb-3">
+                    <label htmlFor='job-description' className='text-blue-500 font-bold mb-2'>Job Description</label>
+                    <input id='job-description' className='border border-blue-100 h-48' type='textarea'></input>
+                </div>
+
+                <label htmlFor='how-to-apply' className='text-blue-500 font-bold'>How To Apply</label>
+                <span className='text-blue-200 text-xs tracking-tight mb-2'>Email Address or link to 3rd party job application page</span>
+                <input id='how-to-apply' className='input' type='text'></input>
             </form>
         </div>
-        <div className="lg:w-3/5 mt-16 pb-6 mx-auto shadow-md border-t-4 border-teal-500">
+
+        <div className="mt-16 shadow-md border-t-4 border-teal-500">
             <div>
-                <h3  style={{backgroundImage: `url(${backgroundImage})`}} className='bg-cover text-gray-800 font-bold p-4 bg-gray-100'>About the Company</h3>
-                <form className='w-full flex flex-col'>
-                    <div className='flex'>
-                        <div className='flex flex-col w-1/2'>
-                            <label htmlFor='companyName' className='text-gray-800 font-bold text-sm p-4'>Company Name</label><br />
-                            <input id='companyName' name='' className='border-1 border-gray-800 mx-4 my-1' title='name of the company' type='text'></input>    
+                <h2  style={{backgroundImage: `url(${backgroundImage})`}} className='bg-cover text-blue-500 p-4 font-bold bg-blue-100 text-xl'>About the Company</h2>
+
+                <form className='w-full flex flex-col p-4'>
+                    <div className='md:flex mb-3'>
+                        <div className='flex flex-col md:w-1/2 md:mr-6 mb-3 md:mb-0'>
+                            <label htmlFor='companyName' className='text-blue-500 font-bold mb-2'>Company Name</label>
+                            <input id='companyName' name='' className='input' title='name of the company' type='text'></input>    
                         </div>
-                        <div className='flex flex-col w-1/2'>
-                            <label htmlFor='companyWebsite' className='text-gray-800 font-bold text-sm p-4'>Company Website</label><br />
-                            <input id='companyWebsite' name='' className='border-1 border-gray-800 mx-4 my-1' title='url of the company' type='url' placeholder=''></input>    
+
+                        <div className='flex flex-col md:w-1/2'>
+                            <label htmlFor='companyWebsite' className='text-blue-500 font-bold mb-2'>Company Website</label>
+                            <input id='companyWebsite' name='' className='input' title='url of the company' type='url'></input>    
                         </div>
                     </div>
-                    <div className='flex'>
-                        <div className='flex flex-col w-1/2'>
-                            <label htmlFor='contactEmail' className='text-gray-800 font-bold text-sm p-4'>Email</label>
-                            <input id='contactEmail' name='' className='border-1 border-gray-800 mx-4 my-1' type='email' placeholder=''></input>
+                    <div className='md:flex'>
+                        <div className='flex flex-col md:w-1/2 md:mr-6 mb-3'>
+                            <label htmlFor='contactEmail' className='text-blue-500 font-bold mb-2'>Email</label>
+                            <input id='contactEmail' name='' className='input' type='email'></input>
                         </div>
-                        <div className='flex flex-col w-1/2'>
-                            <span className='text-gray-800 font-bold text-sm p-4'>Logo</span>
-                            
-                            <div className='flex'>
-                                <div className='flex flex-col w-1/2'>
-                                        <label htmlFor='companyLogo' className="h-24 w-5/6 border-1 border-dashed border-gray-800 mx-4 my-1 text-center">
-                                            <span className='text-teal-500 text-2xl '>+</span>
-                                            <input id='companyLogo' name='' className='hidden' type='file' accept='image/*'></input>
-                                        </label>      
 
+                        <div className='flex flex-col md:w-1/2 mb-3'>
+                            <span className='text-blue-500 font-bold mb-2'>Logo</span>
+                            
+                            <div className='md:flex'>
+                                <div className='flex flex-col md:w-1/2 pr-3'>
+                                    <label htmlFor='companyLogo' className="h-24 w-full mb-2 border border-dashed border-blue-300 text-center">
+                                        <span className='text-teal-500 align-middle text-2xl'>+</span>
+                                        <input id='companyLogo' name='' className='hidden' type='file' accept='image/*'></input>
+                                    </label>      
                                 </div>
-                                <div className='flex flex-col w-1/2'>
-                                    <span className='text-gray-500 text-xs tracking-tight pr-4'>Please provide a .png format of your companies logo to be displayed with your job opening listing.</span>
+                                <div className='flex flex-col md:w-1/2'>
+                                    <span className='text-blue-200 text-xs tracking-tight'>Please provide a .png format of your companies logo to be displayed with your job opening listing.</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <label htmlFor='companyDescription' className='text-gray-800 font-bold text-sm p-4'>Company Description</label><br />
-                    <input id='companyDescription' name='' className='border-1 border-gray-800 mx-4 h-48' type='textarea'></input>
+                    <div class="flex flex-col">
+                        <label htmlFor='companyDescription' className='text-blue-500 font-bold mb-2'>Company Description</label>
+                        <input id='companyDescription' name='' className='border border-blue-100 h-48' type='textarea'></input>
+                    </div>
                 </form>
             </div>
         </div>
-        <button class='ml-64 mt-6 btn btn-teal w-32'>Next Step</button>
+        <button class='mt-6 btn btn-teal w-32'>Next Step</button>
+        </div>
     </div>
   )
 }
