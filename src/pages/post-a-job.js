@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import * as ROUTES from '../constants/routes'
+import backgroundImage from '../assets/images/bg-pattern.png'
 
 const PostAJob = () => {
     
@@ -25,15 +26,15 @@ const PostAJob = () => {
                 <line opacity="0.5" x1="111" y1="12.5" x2="180" y2="12.5" stroke="#54AF8E"/>
             </svg>
         </div>
-        <div className="lg:w-3/5 mx-auto shadow-md border-t-4 border-teal-500">
-            <h2 className='text-gray-800 font-bold p-4 bg-gray-100'>About the Role</h2>
+        <div className="lg:w-3/5 mx-auto pb-6 shadow-md border-t-4 border-teal-500">
+            <h2  style={{backgroundImage: `url(${backgroundImage})`}} className='bg-cover text-gray-800 font-bold p-4 bg-gray-100'>About the Role</h2>
             <form className='w-full flex flex-col'>
                 <label htmlFor='' className='text-gray-800 font-bold text-sm p-4'>Job Title</label><br />
                 <input id='' name='' className='border-1 border-gray-800 mx-4 my-1' type='text'></input>
                 <div className='flex'>
                     <div className='flex flex-col w-1/2'>
-                        <label htmlFor='' className='text-gray-800 font-bold text-sm pl-4 pt-4'>Role Focus</label><br />
-                            <span className='text-gray-500 text-xs tracking-tight pl-4'>Frontend, Backend, Full-Stack</span>
+                        <label htmlFor='' className='text-gray-800 font-bold text-sm pl-4 pt-4'>Role Focus</label>
+                        <span className='text-gray-500 text-xs tracking-tight pl-4'>Frontend, Backend, Full-Stack</span>
                         <select id='role-focus' name='' className='border-1 border-gray-800 mx-4 my-1' type='select'>
                             <option>Frontend</option>
                             <option>Backend</option>
@@ -59,20 +60,49 @@ const PostAJob = () => {
                 <span className='text-gray-500 text-xs tracking-tight pl-4'>Email Address or linke to 3rd party job application page</span>
                 <input id='' name='' className='border-1 border-gray-800 mx-4 my-1' type='text'></input>
             </form>
-            <h3 className='text-gray-800 font-bold p-4 bg-gray-100'>About the Company</h3>
-            <form className='w-full flex flex-col'>
-                <label htmlFor='' className='text-gray-800 font-bold text-sm p-4'>Job Title</label><br />
-                <input id='' name='' className='border-1 border-gray-800 mx-4 my-1' type='text'></input>
-                <label htmlFor='' className='text-gray-800 font-bold text-sm p-4'>Job Title</label><br />
-                <input id='' name='' className='border-1 border-gray-800 mx-4 my-1' type='text'></input>
-                <label htmlFor='' className='text-gray-800 font-bold text-sm p-4'>Job Title</label><br />
-                <input id='' name='' className='border-1 border-gray-800 mx-4 my-1' type='text'></input>
-                <label htmlFor='' className='text-gray-800 font-bold text-sm p-4'>Job Title</label><br />
-                <input id='' name='' className='border-1 border-gray-800 mx-4 my-1' type='text'></input>
-                <label htmlFor='' className='text-gray-800 font-bold text-sm p-4'>Job Title</label><br />
-                <input id='' name='' className='border-1 border-gray-800 mx-4 my-1' type='text'></input>
-            </form>
         </div>
+        <div className="lg:w-3/5 mt-16 pb-6 mx-auto shadow-md border-t-4 border-teal-500">
+            <div>
+                <h3  style={{backgroundImage: `url(${backgroundImage})`}} className='bg-cover text-gray-800 font-bold p-4 bg-gray-100'>About the Company</h3>
+                <form className='w-full flex flex-col'>
+                    <div className='flex'>
+                        <div className='flex flex-col w-1/2'>
+                            <label htmlFor='companyName' className='text-gray-800 font-bold text-sm p-4'>Company Name</label><br />
+                            <input id='companyName' name='' className='border-1 border-gray-800 mx-4 my-1' title='name of the company' type='text'></input>    
+                        </div>
+                        <div className='flex flex-col w-1/2'>
+                            <label htmlFor='companyWebsite' className='text-gray-800 font-bold text-sm p-4'>Company Website</label><br />
+                            <input id='companyWebsite' name='' className='border-1 border-gray-800 mx-4 my-1' title='url of the company' type='url' placeholder=''></input>    
+                        </div>
+                    </div>
+                    <div className='flex'>
+                        <div className='flex flex-col w-1/2'>
+                            <label htmlFor='contactEmail' className='text-gray-800 font-bold text-sm p-4'>Email</label>
+                            <input id='contactEmail' name='' className='border-1 border-gray-800 mx-4 my-1' type='email' placeholder=''></input>
+                        </div>
+                        <div className='flex flex-col w-1/2'>
+                            <span className='text-gray-800 font-bold text-sm p-4'>Logo</span>
+                            
+                            <div className='flex'>
+                                <div className='flex flex-col w-1/2'>
+                                        <label htmlFor='companyLogo' className="h-24 w-5/6 border-1 border-dashed border-gray-800 mx-4 my-1 text-center">
+                                            <span className='text-teal-500 text-2xl '>+</span>
+                                            <input id='companyLogo' name='' className='hidden' type='file' accept='image/*'></input>
+                                        </label>      
+
+                                </div>
+                                <div className='flex flex-col w-1/2'>
+                                    <span className='text-gray-500 text-xs tracking-tight pr-4'>Please provide a .png format of your companies logo to be displayed with your job opening listing.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <label htmlFor='companyDescription' className='text-gray-800 font-bold text-sm p-4'>Company Description</label><br />
+                    <input id='companyDescription' name='' className='border-1 border-gray-800 mx-4 h-48' type='textarea'></input>
+                </form>
+            </div>
+        </div>
+        <button class='ml-64 mt-6 btn btn-teal w-32'>Next Step</button>
     </div>
   )
 }
