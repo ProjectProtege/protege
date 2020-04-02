@@ -32,7 +32,7 @@ const PostAJob = () => {
             <form className='w-full flex flex-col p-4'>
                 <div className="mb-3 flex flex-col">
                     <label htmlFor='job-title' className='text-blue-500 font-bold mb-2'>Job Title</label>
-                    <input id='job-title' className='input' type='text'></input>
+                    <input id='job-title' className='input' type='text' required></input>
                 </div>
 
                 <div className='md:flex'>
@@ -41,7 +41,7 @@ const PostAJob = () => {
 
                         <span className='text-blue-200 text-xs mb-2 tracking-tight '>Frontend, Backend, Full-Stack</span>
 
-                        <select id='role-focus' name='' className='input' type='select'>
+                        <select id='role-focus' name='' className='input' type='select' required>
                             <option value="frontend">Frontend</option>
                             <option value="backend">Backend</option>
                             <option value="full-stack">Full-Stack</option>
@@ -52,17 +52,17 @@ const PostAJob = () => {
                         <span htmlFor='positionType' className='text-blue-500 font-bold mb-2'>Position Type</span>
                         <div className='flex justify-between'>
                             <div>
-                                <input className='mr-3' type='radio' id='full-time' name='positionType'></input>
+                                <input className='mr-3' type='radio' id='full-time' name='positionType' required></input>
                                 <label className='text-blue-800' htmlFor='full-time' >Full-time</label>
                             </div>
 
                             <div>
-                                <input className='mr-3' type='radio' id='part-time' name='positionType'></input>
+                                <input className='mr-3' type='radio' id='part-time' name='positionType' required></input>
                                 <label className='text-blue-800' htmlFor='part-time' >Part-time</label>
                             </div>
 
                             <div>
-                                <input className='mr-3' type='radio' id='contract' name='positionType'></input>
+                                <input className='mr-3' type='radio' id='contract' name='positionType' required></input>
                                 <label className='text-blue-800' htmlFor='contract' >Contract</label>
                             </div>
                         </div>
@@ -72,12 +72,12 @@ const PostAJob = () => {
 
                 <div className="flex flex-col mb-3">
                     <label htmlFor='job-description' className='text-blue-500 font-bold mb-2'>Job Description</label>
-                    <input id='job-description' className='border border-blue-100 h-48' type='textarea'></input>
+                    <input id='job-description' className='border border-blue-100 h-48' type='textarea' required></input>
                 </div>
 
                 <label htmlFor='how-to-apply' className='text-blue-500 font-bold'>How To Apply</label>
                 <span className='text-blue-200 text-xs tracking-tight mb-2'>Email Address or link to 3rd party job application page</span>
-                <input id='how-to-apply' className='input' type='text'></input>
+                <input id='how-to-apply' className='input' type='text' required></input>
             </form>
         </div>
 
@@ -89,18 +89,18 @@ const PostAJob = () => {
                     <div className='md:flex mb-3'>
                         <div className='flex flex-col md:w-1/2 md:mr-6 mb-3 md:mb-0'>
                             <label htmlFor='companyName' className='text-blue-500 font-bold mb-2'>Company Name</label>
-                            <input id='companyName' name='' className='input' title='name of the company' type='text'></input>    
+                            <input id='companyName' name='' className='input' title='name of the company' type='text' required></input>    
                         </div>
 
                         <div className='flex flex-col md:w-1/2'>
                             <label htmlFor='companyWebsite' className='text-blue-500 font-bold mb-2'>Company Website</label>
-                            <input id='companyWebsite' name='' className='input' title='url of the company' type='url'></input>    
+                            <input id='companyWebsite' name='' className='input' title='url of the company' type='url' required></input>    
                         </div>
                     </div>
                     <div className='md:flex'>
                         <div className='flex flex-col md:w-1/2 md:mr-6 mb-3'>
                             <label htmlFor='contactEmail' className='text-blue-500 font-bold mb-2'>Email</label>
-                            <input id='contactEmail' name='' className='input' type='email'></input>
+                            <input id='contactEmail' name='' className='input' type='email' required></input>
                         </div>
 
                         <div className='flex flex-col md:w-1/2 mb-3'>
@@ -108,11 +108,10 @@ const PostAJob = () => {
                             
                             <div className='md:flex'>
                                 <div className='flex flex-grow flex-col md:w-1/2 pr-3'>
-                                    {/* <label htmlFor='companyLogo' className="h-24 w-full mb-2 border border-dashed border-blue-300 "> */}
                                     <label htmlFor='companyLogo' className="h-24 w-full mb-2 border border-dashed border-blue-300 text-center hover:bg-gray-200">
                                         <br />
                                         <span className='flex-grow text-teal-500 text-2xl'>+</span>
-                                        <input id='companyLogo' name='' className='hidden' type='file' accept='image/*'></input>
+                                        <input id='companyLogo' name='' className='hidden' type='file' accept='image/*' required></input>
                                     </label>      
                                 </div>
                                 <div className='flex flex-col md:w-1/2'>
@@ -123,7 +122,7 @@ const PostAJob = () => {
                     </div>
                     <div class="flex flex-col">
                         <label htmlFor='companyDescription' className='text-blue-500 font-bold mb-2'>Company Description</label>
-                        <input id='companyDescription' name='' className='border border-blue-100 h-48' type='textarea'></input>
+                        <input id='companyDescription' name='' className='border border-blue-100 h-48' type='textarea' required></input>
                     </div>
                 </form>
             </div>
