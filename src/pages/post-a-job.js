@@ -107,9 +107,11 @@ const PostAJob = () => {
                             <span className='text-blue-500 font-bold mb-2'>Logo</span>
                             
                             <div className='md:flex'>
-                                <div className='flex flex-col md:w-1/2 pr-3'>
-                                    <label htmlFor='companyLogo' className="h-24 w-full mb-2 border border-dashed border-blue-300 text-center">
-                                        <span className='text-teal-500 align-middle text-2xl'>+</span>
+                                <div className='flex flex-grow flex-col md:w-1/2 pr-3'>
+                                    {/* <label htmlFor='companyLogo' className="h-24 w-full mb-2 border border-dashed border-blue-300 "> */}
+                                    <label htmlFor='companyLogo' className="h-24 w-full mb-2 border border-dashed border-blue-300 text-center hover:bg-gray-200">
+                                        <br />
+                                        <span className='flex-grow text-teal-500 text-2xl'>+</span>
                                         <input id='companyLogo' name='' className='hidden' type='file' accept='image/*'></input>
                                     </label>      
                                 </div>
