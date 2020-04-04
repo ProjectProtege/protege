@@ -1,5 +1,6 @@
 import React from 'react'
 import backgroundImage from '../assets/images/bg-pattern.png'
+import QuillInput from '../components/QuillInput'
 
 const PostAJob = () => {
     
@@ -72,12 +73,14 @@ const PostAJob = () => {
 
                 <div className="flex flex-col mb-3">
                     <label htmlFor='job-description' className='text-blue-500 font-bold mb-2'>Job Description</label>
-                    <input id='job-description' className='border border-blue-100 h-48' type='textarea' required></input>
+                    <QuillInput/>
                 </div>
 
-                <label htmlFor='how-to-apply' className='text-blue-500 font-bold'>How To Apply</label>
-                <span className='text-blue-200 text-xs tracking-tight mb-2'>Email Address or link to 3rd party job application page</span>
-                <input id='how-to-apply' className='input' type='text' required></input>
+                <div className='flex flex-col'>
+                    <label htmlFor='how-to-apply' className='text-blue-500 font-bold'>How To Apply</label>
+                    <span className='text-blue-200 text-xs tracking-tight mb-2'>Email Address or link to 3rd party job application page</span>
+                    <input id='how-to-apply' className='input' type='text'></input>
+                </div>
             </form>
         </div>
 
@@ -107,11 +110,10 @@ const PostAJob = () => {
                             <span className='text-blue-500 font-bold mb-2'>Logo</span>
                             
                             <div className='md:flex'>
-                                <div className='flex flex-grow flex-col md:w-1/2 pr-3'>
-                                    <label htmlFor='companyLogo' className="h-24 w-full mb-2 border border-dashed border-blue-300 text-center hover:bg-gray-200">
-                                        <br />
-                                        <span className='flex-grow text-teal-500 text-2xl'>+</span>
-                                        <input id='companyLogo' name='' className='hidden' type='file' accept='image/*' required></input>
+                                <div className='flex flex-col md:w-1/2 md:pr-3'>
+                                    <label htmlFor='companyLogo' className="h-24 w-full mb-2 border border-dashed border-blue-300 text-center">
+                                        <span className='text-teal-500 align-middle text-2xl'>+</span>
+                                        <input id='companyLogo' name='' className='hidden' type='file' accept='image/*'></input>
                                     </label>      
                                 </div>
                                 <div className='flex flex-col md:w-1/2'>
@@ -122,7 +124,7 @@ const PostAJob = () => {
                     </div>
                     <div class="flex flex-col">
                         <label htmlFor='companyDescription' className='text-blue-500 font-bold mb-2'>Company Description</label>
-                        <input id='companyDescription' name='' className='border border-blue-100 h-48' type='textarea' required></input>
+                        <QuillInput />
                     </div>
                 </form>
             </div>
