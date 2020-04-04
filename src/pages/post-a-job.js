@@ -1,12 +1,68 @@
 import React from 'react'
 import backgroundImage from '../assets/images/bg-pattern.png'
+import { useState } from 'react'
+import JobTemplate from '../components/JobTemplate'
+
 
 const PostAJob = () => {
     
     
+    // const jobData = {
+    //     positionTitle : "",
+    //     roleFocus: "",
+    //     positionType: "",
+    //     company: "",
+    //     howToApply: "",
+    //     aboutTheJob: "",
+    //     requirements: [], 
+    //     responsibilities: [],
+    //     benefits: []
+    //     }
+
+    
+    const [positionTitle, setPositionTitle] = useState("")
+    const [roleFocus, setRoleFocus] = useState()
+    const [positionType, setPositionType] = useState("")
+    const [jobDescription, setJobDescription] = useState("")
+    const [howToApply, setHowToApply] = useState("")
+    const [companyName, setCompanyName] = useState("")
+    const [companyWebsite, setCompanyWebsite] = useState("")
+    const [companyContactEmail, setCompanyContactEmail] = useState("")
+    const [companyLogo, setCompanyLogo] = useState("")
+    const [companyDescription, setCompanyDescription] = useState("")
+    // const [requirements, setRequirements] = useState([]) 
+    // const [responsibilities, setResponsibilities] = useState([])
+    // const [benefits, setBenefits] = useState([])    
+
+    
+    // function updateValues(e){
+    //     console.log('name', e.target.id)
+    //     console.log('value', e.target.value)
+    // }
+    
+    function formSubmission(event) {
+        console.log('you clicked it')
+        const jobData = {
+            positionTitle : positionTitle,
+            roleFocus: roleFocus,
+            positionType: positionType,
+            companyName: companyName,
+            companyWebsite: companyWebsite,
+            companyDescription: companyDescription,
+            companyContactEmail: companyContactEmail,
+            howToApply: howToApply,
+            companyLogo: companyLogo,
+            jobDescription: jobDescription,
+            // requirements: requirements, 
+            // responsibilities: [],
+            // benefits: []
+            }
+        console.log(jobData)
+        event.preventDefault();
+    }
+
     return(
         <div className='container mx-auto mt-6 md:mt-12 p-2'>
-
         <h1 className='text-lg md:text-2xl text-blue-500 font-bold text-center leading-snug'>Inexperienced doesn’t mean incapable. <br />Fill your role with ambition.</h1>
         <div className='flex justify-center my-6'>
             <svg width="216" height="52" viewBox="0 0 216 52" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -29,19 +85,19 @@ const PostAJob = () => {
         <div className="shadow-md border-t-4 border-teal-500">
             <h2  style={{backgroundImage: `url(${backgroundImage})`}} className='bg-cover text-blue-500 font-bold p-4 bg-blue-100 text-xl'>About the Role</h2>
 
-            <form className='w-full flex flex-col p-4'>
+            <form onSubmit={formSubmission} name='jobForm' className='w-full flex flex-col p-4'>
                 <div className="mb-3 flex flex-col">
-                    <label htmlFor='job-title' className='text-blue-500 font-bold mb-2'>Job Title</label>
-                    <input id='job-title' className='input' type='text' required></input>
+                    <label htmlFor='positionTitle' className='text-blue-500 font-bold mb-2'>Job Title</label>
+                    <input id='positionTitle' className='input' type='text' required onChange={(e) => setPositionTitle(e.target.value)}></input>
                 </div>
 
                 <div className='md:flex'>
                     <div className='flex flex-col md:w-1/2 mb-3 md:mr-6'>
-                        <label htmlFor='role-focus' className='text-blue-500 font-bold'>Role Focus</label>
+                        <label htmlFor='roleFocus' className='text-blue-500 font-bold'>Role Focus</label>
 
                         <span className='text-blue-200 text-xs mb-2 tracking-tight '>Frontend, Backend, Full-Stack</span>
 
-                        <select id='role-focus' name='' className='input' type='select' required>
+                        <select id='roleFocus' name='' className='input' type='select' required onChange={(e) => setRoleFocus(e.target.value)}>
                             <option value="frontend">Frontend</option>
                             <option value="backend">Backend</option>
                             <option value="full-stack">Full-Stack</option>
@@ -51,6 +107,7 @@ const PostAJob = () => {
                     <div className='flex flex-col md:w-1/2 mb-3 md:mb-0'>
                         <span htmlFor='positionType' className='text-blue-500 font-bold mb-2'>Position Type</span>
                         <div className='flex justify-between'>
+                            {/* isn't hooked up to useState() */}
                             <div>
                                 <input className='mr-3' type='radio' id='full-time' name='positionType' required></input>
                                 <label className='text-blue-800' htmlFor='full-time' >Full-time</label>
@@ -71,13 +128,13 @@ const PostAJob = () => {
                 </div>
 
                 <div className="flex flex-col mb-3">
-                    <label htmlFor='job-description' className='text-blue-500 font-bold mb-2'>Job Description</label>
-                    <input id='job-description' className='border border-blue-100 h-48' type='textarea' required></input>
+                    <label htmlFor='jobDescription' className='text-blue-500 font-bold mb-2'>Job Description</label>
+                    <input id='jobDescription' className='border border-blue-100 h-48' type='textarea' required onChange={(e) => setJobDescription(e.target.value)}></input>
                 </div>
 
-                <label htmlFor='how-to-apply' className='text-blue-500 font-bold'>How To Apply</label>
+                <label htmlFor='howToApply' className='text-blue-500 font-bold'>How To Apply</label>
                 <span className='text-blue-200 text-xs tracking-tight mb-2'>Email Address or link to 3rd party job application page</span>
-                <input id='how-to-apply' className='input' type='text' required></input>
+                <input id='howToApply' className='input' type='text' required onChange={(e) => setHowToApply(e.target.value)}></input>
             </form>
         </div>
 
@@ -89,18 +146,18 @@ const PostAJob = () => {
                     <div className='md:flex mb-3'>
                         <div className='flex flex-col md:w-1/2 md:mr-6 mb-3 md:mb-0'>
                             <label htmlFor='companyName' className='text-blue-500 font-bold mb-2'>Company Name</label>
-                            <input id='companyName' name='' className='input' title='name of the company' type='text' required></input>    
+                            <input id='companyName' name='' className='input' title='name of the company' type='text' required onChange={(e) => setCompanyName(e.target.value)}></input>    
                         </div>
 
                         <div className='flex flex-col md:w-1/2'>
                             <label htmlFor='companyWebsite' className='text-blue-500 font-bold mb-2'>Company Website</label>
-                            <input id='companyWebsite' name='' className='input' title='url of the company' type='url' required></input>    
+                            <input id='companyWebsite' name='' className='input' title='url of the company' type='url' required onChange={(e) => setCompanyWebsite(e.target.value)}></input>    
                         </div>
                     </div>
                     <div className='md:flex'>
                         <div className='flex flex-col md:w-1/2 md:mr-6 mb-3'>
-                            <label htmlFor='contactEmail' className='text-blue-500 font-bold mb-2'>Email</label>
-                            <input id='contactEmail' name='' className='input' type='email' required></input>
+                            <label htmlFor='companyContactEmail' className='text-blue-500 font-bold mb-2'>Email</label>
+                            <input id='companyContactEmail' name='' className='input' type='email' required onChange={(e) => setCompanyContactEmail(e.target.value)}></input>
                         </div>
 
                         <div className='flex flex-col md:w-1/2 mb-3'>
@@ -111,7 +168,8 @@ const PostAJob = () => {
                                     <label htmlFor='companyLogo' className="h-24 w-full mb-2 border border-dashed border-blue-300 text-center hover:bg-gray-200">
                                         <br />
                                         <span className='flex-grow text-teal-500 text-2xl'>+</span>
-                                        <input id='companyLogo' name='' className='hidden' type='file' accept='image/*' required></input>
+                                        {/* Not Hooked up to useState() */}
+                                        <input id='companyLogo' name='' className='hidden' type='file' accept='image/*' multiple='false' onChange={(e) => setCompanyContactEmail(e.target.value)}></input>
                                     </label>      
                                 </div>
                                 <div className='flex flex-col md:w-1/2'>
@@ -120,14 +178,14 @@ const PostAJob = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-col">
+                    <div className="flex flex-col">
                         <label htmlFor='companyDescription' className='text-blue-500 font-bold mb-2'>Company Description</label>
-                        <input id='companyDescription' name='' className='border border-blue-100 h-48' type='textarea' required></input>
+                        <input id='companyDescription' name='' className='border border-blue-100 h-48' type='textarea' required onChange={(e) => setCompanyDescription(e.target.value)}></input>
                     </div>
                 </form>
             </div>
         </div>
-        <button class='mt-6 btn btn-teal w-32'>Next Step</button>
+        <button className='mt-6 btn btn-teal w-32' type='submit' htmlFor='jobForm' onClick={(event) => formSubmission(event)}>Next Step</button>
         </div>
     </div>
   )
