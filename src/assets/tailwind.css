@@ -25,3 +25,7 @@
 .input {
   @apply border border-blue-100 p-2
 }
+
+.input-error {
+  @apply text-error text-xs
+}

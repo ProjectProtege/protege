@@ -1,11 +1,12 @@
 import React from "react";
 import backgroundImage from "../assets/images/bg-pattern.png";
-import QuillInput from "../components/QuillInput";
 
 import { string, object } from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import RadioButton from "../components/form/RadioInput";
+import ReactQuill from "react-quill";
+import 'react-quill/dist/quill.snow.css';
 
 const schema = object().shape({
   jobTitle: string().required("Job title is a required field."),
@@ -129,7 +130,7 @@ const PostAJob = () => {
                       <ErrorMessage
                         name="jobTitle"
                         component="span"
-                        className="text-teal-800 text-xs"
+                        className="input-error"
                       />
                     </div>
 
@@ -151,9 +152,8 @@ const PostAJob = () => {
                           name="roleFocus"
                           className="input"
                           as="select"
-                          placeholder="Select One"
                         >
-                          <option>Select One</option>
+                          <option value="" className="text-gray-300">Select One..</option>
                           <option value="frontend">Frontend</option>
                           <option value="backend">Backend</option>
                           <option value="full-stack">Full-Stack</option>
@@ -161,7 +161,7 @@ const PostAJob = () => {
                         <ErrorMessage
                           name="roleFocus"
                           component="span"
-                          className="text-teal-800 text-xs"
+                          className="input-error"
                         />
                       </div>
 
@@ -203,7 +203,7 @@ const PostAJob = () => {
                           <ErrorMessage
                             name="positionType"
                             component="span"
-                            className="text-teal-800 text-xs"
+                            className="input-error"
                           />
                         </div>
                       </div>
@@ -216,7 +216,20 @@ const PostAJob = () => {
                       >
                         Job Description
                       </label>
-                      <QuillInput />
+                        <Field
+                            id="jobDescription"
+                            name="jobDescription"
+                            className="input"
+                        >
+                          {({field}) => 
+                            <ReactQuill value={field.value} onChange={field.onChange(field.name)}/>
+                          }
+                        </Field>
+                        <ErrorMessage
+                          name="jobDescription"
+                          component="span"
+                          className="input-error"
+                        />
                     </div>
 
                     <div className="flex flex-col">
@@ -238,7 +251,7 @@ const PostAJob = () => {
                       <ErrorMessage
                         name="howToApply"
                         component="span"
-                        className="text-teal-800 text-xs"
+                        className="input-error"
                       />
                     </div>
                   </div>
@@ -272,7 +285,7 @@ const PostAJob = () => {
                           <ErrorMessage
                             name="companyName"
                             component="span"
-                            className="text-teal-800 text-xs"
+                            className="input-error"
                           />
                         </div>
 
@@ -293,7 +306,7 @@ const PostAJob = () => {
                           <ErrorMessage
                             name="companyWebsite"
                             component="span"
-                            className="text-teal-800 text-xs"
+                            className="input-error"
                           />
                         </div>
                       </div>
@@ -314,7 +327,7 @@ const PostAJob = () => {
                           <ErrorMessage
                             name="companyEmail"
                             component="span"
-                            className="text-teal-800 text-xs"
+                            className="input-error"
                           />
                         </div>
 
@@ -358,7 +371,20 @@ const PostAJob = () => {
                         >
                           Company Description
                         </label>
-                        <QuillInput />
+                        <Field
+                            id="companyDescription"
+                            name="companyDescription"
+                            className="input"
+                        >
+                          {({field}) => 
+                            <ReactQuill value={field.value} onChange={field.onChange(field.name)}/>
+                          }
+                        </Field>
+                        <ErrorMessage
+                          name="companyDescription"
+                          component="span"
+                          className="input-error"
+                        />
                       </div>
                     </div>
                   </div>

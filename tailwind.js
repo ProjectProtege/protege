@@ -47,7 +47,8 @@ module.exports = {
         700: '#2a2b3a',
         800: '#252633',
         900: '#20202c',
-      }
+      },
+      error: '#E53E3E'
     },
     spacing: {
       px: '1px',
