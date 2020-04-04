@@ -125,7 +125,7 @@ const PostAJob = () => {
                         name="jobTitle"
                         className="input"
                         type="text"
-                        autocomplete="off"
+                        autoComplete="off"
                       ></Field>
                       <ErrorMessage
                         name="jobTitle"
