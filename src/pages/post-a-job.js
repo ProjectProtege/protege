@@ -27,7 +27,7 @@ const PostAJob = () => {
         Inexperienced doesn’t mean incapable. <br />
         Fill your role with ambition.
       </h1>
-      <div className="my-6">
+      <div className="flex justify-center my-6">
         <svg
           width="216"
           height="52"
