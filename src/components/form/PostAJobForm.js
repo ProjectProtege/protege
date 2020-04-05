@@ -1,52 +1,64 @@
 import React from 'react';
 import backgroundImage from "../../assets/images/bg-pattern.png";
 
-import { string, object } from "yup";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { Formik, Form, Field, ErrorMessage} from "formik";
 
-import RadioButton from "../form/RadioInput";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 
 
-const schema = object().shape({
-    jobTitle: string().required("Job title is a required field."),
-    roleFocus: string().required("Please select a focus area."),
-    positionType: string().required("Please select a position type."),
-    jobDescription: string().required("Please give a description of the job and responsibilities."),
-    howToApply: string().required("Please provide a way for candidates to apply."),
-    companyName: string().required("Please enter a company name."),
-    companyWebsite: string().required("Please enter a company website."),
-    companyEmail: string().required("Please enter a company email."),
-    companyDescription: string().required("Please give a brief description of the company and culture.")
-  });
+// This can be refactored into mini-components at somepoint using something like below. Also add `useField` into the formik import statement: 
+// const MyTextInput = ({ label, ...props }) => {
+//     // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
+//     // which we can spread on <input> and also replace ErrorMessage entirely.
+//     const [field, meta] = useField(props);
+//     return (
+//       <>
+//         <label htmlFor={props.id || props.name}>{label}</label>
+//         <input className="text-input" {...field} {...props} />
+//         {meta.touched && meta.error ? (
+//           <div className="error">{meta.error}</div>
+//         ) : null}
+//       </>
+//     );
+//   };
+
 
 const PostAJobForm = ({ id, label, ...props}) => {
-
   return (
     <div className="lg:w-3/5 mx-auto">
         <Formik
           initialValues={{
-            jobTitle: "",
-            roleFocus: "",
-            positionType: "",
-            jobDescription: "",
-            howToApply: "",
-            companyName: "",
-            companyWebsite: "",
-            companyEmail: "",
-            companyDescription: "",
+            jobTitle: '',
+            roleFocus: '',
+            positionType: '',
+            jobDescription: '',
+            howToApply: '',
+            companyName: '',
+            companyWebsite: '',
+            companyEmail: '',
+            companyDescription: '',
           }}
+          validationSchema={Yup.object({
+            jobTitle: Yup.string().required("Job title is a required field."),
+            roleFocus: Yup.string().required("Please select a focus area."),
+            positionType: Yup.string().required("Please select a position type."),
+            jobDescription: Yup.string().required("Please give a description of the job and responsibilities."),
+            howToApply: Yup.string().required("Please provide a way for candidates to apply."),
+            companyName: Yup.string().required("Please enter a company name."),
+            companyWebsite: Yup.string().required("Please enter a company website."),
+            companyEmail: Yup.string().required("Please enter a company email."),
+            companyDescription: Yup.string().required("Please give a brief description of the company and culture.")
+          })}
           onSubmit={(values, { setSubmitting }) => {
+            alert(JSON.stringify(values, null, 2));
+            console.log('you are submitting these values');
             console.log(values);
-            setSubmitting(false);
           }}
-          validationSchema={schema}
         >
-          {({ isSubmitting, values, errors, setFieldValue }) => {
-            // console.log({ values, errors });
-            return (
-              <Form>
+          {formik => (
+              <Form onSubmit={formik.handleSubmit}>
                 <div className="shadow-md border-t-4 border-teal-500">
                   <h2
                     style={{ backgroundImage: `url(${backgroundImage})` }}
@@ -95,7 +107,7 @@ const PostAJobForm = ({ id, label, ...props}) => {
                           className="input"
                           as="select"
                         >
-                          <option value="" className="text-gray-300">Select One..</option>
+                          <option value="" className="text-gray-300">Select One...</option>
                           <option value="frontend">Frontend</option>
                           <option value="backend">Backend</option>
                           <option value="full-stack">Full-Stack</option>
@@ -107,15 +119,27 @@ const PostAJobForm = ({ id, label, ...props}) => {
                         />
                       </div>
 
-                      <div className="flex flex-col md:w-1/2 mb-3 md:mb-0">
-                        <span
+                      <div className="flex flex-col md:w-1/2 mb-3 md:mr-6">
+                        <label
                           htmlFor="positionType"
-                          className="text-blue-500 font-bold mb-2"
+                          className="text-blue-500 font-bold"
                         >
                           Position Type
-                        </span>
-                        <div className="flex justify-between">
-                          <Field id="position-type" name="positionType">
+                        </label>
+
+                            <span className="text-blue-200 text-xs mb-2 tracking-tight ">
+                            Full-time, Part-time, or Contract?
+                            </span>
+                            <Field
+                                id='position-type' name='positionType' className='input' as='select'
+                            >
+                                <option value="" className="text-gray-300">Select One...</option>
+                                <option value="full-time">Full-time</option>
+                                <option value="part-time">Part-time</option>
+                                <option value="contract">contract</option>
+                            </Field>
+                            {/* Removing Radio in Favor of simplier Select form */}
+                          {/* <Field id="position-type" name="positionType">
                             {({ field }) => (
                               <>
                                 <RadioButton
@@ -141,13 +165,13 @@ const PostAJobForm = ({ id, label, ...props}) => {
                                 />
                               </>
                             )}
-                          </Field>
+                          </Field> */}
                           <ErrorMessage
                             name="positionType"
                             component="span"
                             className="input-error"
                           />
-                        </div>
+
                       </div>
                     </div>
 
@@ -331,13 +355,14 @@ const PostAJobForm = ({ id, label, ...props}) => {
                     </div>
                   </div>
                 </div>
+                <button type='submit' className="mt-6 btn btn-teal w-32">Next Step</button>
               </Form>
-            );
-          }}
+            // );
+          )}
         </Formik>
-        <button className="mt-6 btn btn-teal w-32">Next Step</button>
       </div>
 
   )
 }
+
 export default PostAJobForm
