@@ -1,10 +1,11 @@
 @tailwind base;
 @tailwind components;
+@tailwind utilities;
 
 /*--Buttons--*/
 
 .btn {
-  @apply px-4 py-1 font-bold shadow transition-transform duration-200 transform
+  @apply px-4 py-1 font-bold shadow transition-transform duration-200 transform uppercase
 }
 
 .btn-teal {
@@ -19,5 +20,12 @@
   @apply shadow-md scale-105
 }
 
+/*--Inputs--*/
 
-@tailwind utilities;
+.input {
+  @apply border border-gray-400 p-2
+}
+
+.input-error {
+  @apply text-error text-xs
+}

@@ -1,5 +1,5 @@
-import React from 'react'
-import JobCard from '../components/JobCard'
+import React from "react";
+import JobCard from "../components/JobCard";
 
 const tempJobData = [
   {
@@ -110,14 +110,24 @@ const tempJobData = [
 
 const JobBoard = () => (
   <div className="container mx-auto pt-32">
-    <h1 className=" text-2xl font-semibold text-teal-600 mb-6">Frontend Jobs</h1>
-    <div className="flex justify-between">
-      <input className="input" placeholder="Keyword Search"/>
-      <select classname="input">
-        <option value="">Front-end</option>
-        <option value="">Back-end</option>
-        <option value="">Full-stack</option>
-      </select>
+    <div className="flex justify-between mb-6">
+      <h1 className=" text-2xl font-semibold text-teal-600 mb-6">
+        Frontend Jobs
+      </h1>
+
+      <div class="w-1/5">
+        <label for="filter-by" className="sr-only">
+          Filter
+        </label>
+        <select className="input justify-end w-full cursor-pointer" id="filter-by" placeholder="Filter By">
+          <option value="" selected disabled>
+            Filter by
+          </option>
+          <option value="">Front-end</option>
+          <option value="">Back-end</option>
+          <option value="">Full-stack</option>
+        </select>
+      </div>
     </div>
 
     <div className="mx-auto">
@@ -126,6 +136,6 @@ const JobBoard = () => (
       ))}
     </div>
   </div>
-)
+);
 
-export default JobBoard
+export default JobBoard;
