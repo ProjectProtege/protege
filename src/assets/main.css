@@ -643,11 +643,6 @@ video {
   --transform-scale-y: 1.05
 }
 
-.hero-bg {
-  -webkit-clip-path: url(#clip-shape);
-  clip-path: url(#clip-shape);
-}
-
 .sr-only {
   position: absolute;
   width: 1px;

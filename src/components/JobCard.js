@@ -9,18 +9,18 @@ const JobCard = ({job}) => (
       <img src={Logo} alt="logo" className="opacity-0"/>
     </div>
 
-    <div className="w-full md:w-5/6 flex justify-between md:pl-6">
+    <div className="w-full md:w-11/12 flex justify-between md:pl-6">
       <div className="flex flex-col justify-between">
         <p className="text-sm text-blue-300">{job.companyName}</p>
         <h3 className="md:-mt-1 text-blue-500 leading-tight text-lg md:text-2xl font-bold">{job.positionTitle}</h3>
-        <p className="text-teal-700 text-lg">{job.location}</p>
+        <p className="text-blue-100 text-lg">{job.location}</p>
       </div>
       
       <div className="md:text-right flex flex-col justify-between">
-        <p className="text-teal-700 md:text-xl">{job.postDate}</p>
+        <p className="text-blue-100 md:text-xl">{job.postDate}</p>
         <ul>
           {job.tags.map((tag) => (
-            <li className="hidden sm:inline sm:pl-2 text-blue-300">{tag}</li>
+            <li className="hidden sm:inline sm:pl-2 text-teal-600">{tag}</li>
           ))
           }
         </ul>
