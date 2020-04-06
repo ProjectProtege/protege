@@ -25,20 +25,32 @@ import 'react-quill/dist/quill.snow.css';
 //   };
 
 
-const PostAJobForm = ({ id, label, ...props}) => {
+const PostAJobForm = ({ id, label, receivingJobData, ...props}) => {
+
+
+
   return (
     <div className="lg:w-3/5 mx-auto">
         <Formik
           initialValues={{
-            jobTitle: '',
-            roleFocus: '',
-            positionType: '',
-            jobDescription: '',
-            howToApply: '',
-            companyName: '',
-            companyWebsite: '',
-            companyEmail: '',
-            companyDescription: '',
+            // jobTitle: '',
+            // roleFocus: '',
+            // positionType: '',
+            // jobDescription: '',
+            // howToApply: '',
+            // companyName: '',
+            // companyWebsite: '',
+            // companyEmail: '',
+            // companyDescription: '',
+            jobTitle: 'Title',
+            roleFocus: 'Frontend',
+            positionType: 'Full-time',
+            jobDescription: 'Its a really great job',
+            howToApply: 'email someone',
+            companyName: 'Great Company',
+            companyWebsite: 'https://greatcompany.com',
+            companyEmail: 'ernie@greatcompany.com',
+            companyDescription: 'We\'re a really great company.',
           }}
           validationSchema={Yup.object({
             jobTitle: Yup.string().required("Job title is a required field."),
@@ -52,9 +64,11 @@ const PostAJobForm = ({ id, label, ...props}) => {
             companyDescription: Yup.string().required("Please give a brief description of the company and culture.")
           })}
           onSubmit={(values, { setSubmitting }) => {
-            alert(JSON.stringify(values, null, 2));
-            console.log('you are submitting these values');
-            console.log(values);
+            console.log('showing changes')
+            receivingJobData(values)
+            // alert(JSON.stringify(values, null, 2));
+            // console.log('you are submitting these values');
+            // console.log(values);
           }}
         >
           {formik => (
