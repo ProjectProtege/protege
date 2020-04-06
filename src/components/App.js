@@ -7,6 +7,7 @@ import ProjectBoard from '../pages/project-board'
 import Contribute from '../pages/contribute'
 import Contact from '../pages/contact'
 import IndividualJobPage from '../pages/individual-job'
+import BlankPage from '../pages/Blank'
 
 import * as ROUTES from '../constants/routes'
 
@@ -19,6 +20,7 @@ const App = () => (
     <Route path={ROUTES.CONTACT} component={Contact} />
     <Route path={ROUTES.CONTRIBUTE} component={Contribute} />
     <Route path={ROUTES.INDIVIDUAL_JOB} component={IndividualJobPage} />
+    <Route path={ROUTES.BLANK} component={BlankPage} />
   </Layout>
 </Router>
 
