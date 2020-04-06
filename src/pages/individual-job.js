@@ -4,12 +4,12 @@ import * as ROUTES from '../constants/routes'
 import JobTemplate from '../components/JobTemplate'
 
 const fakeJob = {
-  positionTitle : "Junior Developer",
+  jobTitle : "Junior Developer",
   roleFocus: "Full Stack",
   positionType: "Full-Time",
-  company: "Snakehole Lounge",
+  companyName: "Snakehole Lounge",
   howToApply: "mailto:tomhaverford@snakeholelounge.com",
-  aboutTheJob: "Here at the Snakehole Lounge we take new devs very seriously. The Snakejuice is free-flowing, the beats are SICK, and the mentorship is on point. We are looking to grow our online presence and go direct-to-consumer eCommerce, so we need a team that is ready to PARTY and make MOVES in the market.",
+  jobDescription: "Here at the Snakehole Lounge we take new devs very seriously. The Snakejuice is free-flowing, the beats are SICK, and the mentorship is on point. We are looking to grow our online presence and go direct-to-consumer eCommerce, so we need a team that is ready to PARTY and make MOVES in the market.",
   requirements: ["Enjoys Snakejuice", "React", "Figma", "AWS", "Postgres"], 
   responsibilities: ["Implements designs from Designers", "Ask for help from Senior Devs", "Ability to double as a bouncer when Eddie is busy"],
   benefits: ['401k Matching', 'Mentorship', 'Path to Mid-Level', 'Free Snakejuice']

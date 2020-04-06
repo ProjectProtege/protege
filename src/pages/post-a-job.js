@@ -25,7 +25,8 @@ const PostAJob = () => {
 
         <StatusBar props={status} /> 
         {!jobData && <PostAJobForm receivingJobData={receivingJobData}/>}
-        {jobData && <div>{jobData.jobTitle}</div>}
+        {/* {jobData && <div>{jobData.jobTitle}</div>} */}
+        {jobData && <JobTemplate props={jobData} />}
     </div>
   );
 };
