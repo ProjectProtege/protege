@@ -1,6 +1,5 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
 
 /*--Buttons--*/
 
@@ -19,3 +18,6 @@
 .btn:hover {
   @apply shadow-md scale-105
 }
+
+
+@tailwind utilities;
