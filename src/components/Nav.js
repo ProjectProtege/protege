@@ -33,15 +33,27 @@ const Nav = () => {
       </ul> 
     </nav>
 
-    <nav className="hidden md:block text-blue-500 uppercase font-semibold">
+    <nav className="hidden md:block text-blue-500 uppercase font-semibold" role="navigation">
       <ul className="flex justify-between">
-        <li className="mt-1 pr-4 lg:pr-10 opacity-75 hover:opacity-100">
+        <li className="menu-item mt-1 pr-4 lg:pr-10 opacity-75 hover:opacity-100">
           <Link to={ROUTES.JOB_BOARD} className="pb-3 border-b-2 border-white hover:border-teal-500 ">Find a Job</Link>
+        </li> 
+        <li className="menu-item quick-filter mt-1 pr-4 lg:pr-10 cursor-pointer group" aria-haspopup="true">
+            <Link className="opacity-75 pb-3 hover:opacity-100 group-hover:block">Quick Filter
+            </Link>
+            <ul className="submenu absolute mt-2 bg-white p-4 shadow-md rounded" aria-label="submenu">   
+              <li className="mb-3">
+                <Link to={ROUTES.JOB_BOARD} jobFilter={'Front-end'} className='submenu-item opacity-75 hover:opacity-100 border-b-2 border-white hover:border-teal-500 w-full pb-1'>Front-end</Link>
+              </li>
+              <li className="mb-3">
+                <Link to={ROUTES.JOB_BOARD} jobFilter={'Back-end'} className='submenu-item opacity-75 hover:opacity-100 border-b-2 border-white hover:border-teal-500 w-full pb-1'>Back-end</Link>
+              </li>
+              <li>
+                <Link to={ROUTES.JOB_BOARD} jobFilter={'Full-stack'} className='submenu-item opacity-75 hover:opacity-100 border-b-2 border-white hover:border-teal-500 w-full pb-1'>Full-stack</Link>
+              </li>
+            </ul>
         </li>
-        <li className="mt-1 pr-4 lg:pr-10 opacity-75 hover:opacity-100">
-          <Link to={ROUTES.JOB_BOARD} className="pb-3 border-b-2 border-white hover:border-teal-500 ">Quick filter</Link>
-        </li>
-        <li className="mt-1 pr-4 lg:pr-10 opacity-75 hover:opacity-100">
+        <li className="menu-item mt-1 pr-4 lg:pr-10 opacity-75 hover:opacity-100">
           <Link to={ROUTES.JOB_BOARD} className="pb-3 border-b-2 border-white hover:border-teal-500 ">Learning Resources</Link>
         </li>
         <li className="btn btn-teal">

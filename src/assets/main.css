@@ -8235,6 +8235,21 @@ video {
   font-size: 0.75rem
 }
 
+.quick-filter .submenu {
+  display: none;
+  opacity: 0;
+}
+
+.quick-filter:hover .submenu, 
+.quick-filter:focus-within .submenu {
+  display: block;
+  opacity: 100;
+}
+
+.quick-filter:focus-within{
+  opacity: 100%;
+}
+
 @media (min-width: 640px) {
   .sm\:sr-only {
     position: absolute;
@@ -38554,3 +38569,4 @@ video {
     transition-duration: 1000ms;
   }
 }
+

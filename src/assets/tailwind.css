@@ -29,3 +29,19 @@
 .input-error {
   @apply text-error text-xs
 }
+
+.quick-filter .submenu {
+  display: none;
+  opacity: 0;
+}
+
+.quick-filter:hover .submenu, 
+.quick-filter:focus-within .submenu {
+  display: block;
+  opacity: 100;
+}
+
+.quick-filter:focus-within{
+  opacity: 100%;
+}
+
