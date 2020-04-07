@@ -123,7 +123,7 @@ const JobBoard = () => {
     <div className="container mx-auto pt-32">
       <div className="flex justify-between mb-6">
         <h1 className=" text-2xl font-semibold text-teal-600 mb-6">
-          {jobFilter ? `${jobFilter} jobs` : 'All Jobs'}
+          {jobFilter ? `${jobFilter} Jobs` : 'All Jobs'}
         </h1>
 
         <div className="md:w-1/4">
