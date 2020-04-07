@@ -8,7 +8,7 @@ const tempJobData = [
     positionTitle: "Junior Frontend Developer",
     location: "Jacksonville, FL",
     postDate: "Mar. 24",
-    tags: ["React", "GraphQL", "Apollo"],
+    focus: "Front-end",
   },
   {
     postId: "7345345",
@@ -16,7 +16,7 @@ const tempJobData = [
     positionTitle: "Junior Backend Developer",
     location: "Seattle, WA",
     postDate: "Mar. 24",
-    tags: ["Elixir", "Postgres", "Sql"],
+    focus: "Front-end",
   },
   {
     postId: "98613855",
@@ -24,7 +24,7 @@ const tempJobData = [
     positionTitle: "Junior Frontend Developer",
     location: "Jacksonville, FL",
     postDate: "Mar. 24",
-    tags: ["Vue", "Node", "Bootstrap"],
+    focus: "Front-end",
   },
   {
     postId: "8946541",
@@ -32,7 +32,7 @@ const tempJobData = [
     positionTitle: "Junior Frontend Developer",
     location: "Jacksonville, FL",
     postDate: "Mar. 24",
-    tags: ["React", "GraphQL", "Apollo"],
+    focus: "Front-end",
   },
   {
     postId: "684354",
@@ -40,7 +40,7 @@ const tempJobData = [
     positionTitle: "Junior Frontend Developer",
     location: "Jacksonville, FL",
     postDate: "Mar. 24",
-    tags: ["React", "GraphQL", "Apollo"],
+    focus: "Front-end",
   },
   {
     postId: "89646874",
@@ -48,7 +48,7 @@ const tempJobData = [
     positionTitle: "Junior Frontend Developer",
     location: "Jacksonville, FL",
     postDate: "Mar. 24",
-    tags: ["React", "GraphQL", "Apollo"],
+    focus: "Front-end",
   },
   {
     postId: "138543541685",
@@ -56,7 +56,7 @@ const tempJobData = [
     positionTitle: "Junior Backend Developer",
     location: "Seattle, WA",
     postDate: "Mar. 24",
-    tags: ["Elixir", "Postgres", "Sql"],
+    focus: "Front-end",
   },
   {
     postId: "6846168",
@@ -64,7 +64,7 @@ const tempJobData = [
     positionTitle: "Junior Frontend Developer",
     location: "Jacksonville, FL",
     postDate: "Mar. 24",
-    tags: ["Vue", "Node", "Bootstrap"],
+    focus: "Front-end",
   },
   {
     postId: "6874358",
@@ -72,7 +72,7 @@ const tempJobData = [
     positionTitle: "Junior Frontend Developer",
     location: "Jacksonville, FL",
     postDate: "Mar. 24",
-    tags: ["React", "GraphQL", "Apollo"],
+    focus: "Front-end",
   },
   {
     postId: "6813584",
@@ -80,7 +80,7 @@ const tempJobData = [
     positionTitle: "Junior Frontend Developer",
     location: "Jacksonville, FL",
     postDate: "Mar. 24",
-    tags: ["React", "GraphQL", "Apollo"],
+    focus: "Front-end",
   },
   {
     postId: "681384384",
@@ -88,7 +88,7 @@ const tempJobData = [
     positionTitle: "Junior Frontend Developer",
     location: "Jacksonville, FL",
     postDate: "Mar. 24",
-    tags: ["React", "GraphQL", "Apollo"],
+    focus: "Front-end",
   },
   {
     postId: "1688354",
@@ -96,7 +96,7 @@ const tempJobData = [
     positionTitle: "Junior Frontend Developer",
     location: "Jacksonville, FL",
     postDate: "Mar. 24",
-    tags: ["React", "GraphQL", "Apollo"],
+    focus: "Front-end",
   },
   {
     postId: "4168435",
@@ -104,7 +104,7 @@ const tempJobData = [
     positionTitle: "Junior Frontend Developer",
     location: "Jacksonville, FL",
     postDate: "Mar. 24",
-    tags: ["React", "GraphQL", "Apollo"],
+    focus: "Front-end",
   },
 ];
 
@@ -123,9 +123,9 @@ const JobBoard = () => (
           <option value="" selected disabled>
             Filter by
           </option>
-          <option value="">Front-end</option>
-          <option value="">Back-end</option>
-          <option value="">Full-stack</option>
+          <option value="front-end">Front-end</option>
+          <option value="back-end">Back-end</option>
+          <option value="full-stack">Full-stack</option>
         </select>
       </div>
     </div>

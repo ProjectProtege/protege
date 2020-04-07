@@ -13,17 +13,12 @@ const JobCard = ({job}) => (
       <div className="flex flex-col justify-between">
         <p className="text-sm text-blue-300">{job.companyName}</p>
         <h3 className="md:-mt-1 text-blue-500 leading-tight text-lg md:text-2xl font-bold">{job.positionTitle}</h3>
-        <p className="text-blue-100 text-lg">{job.location}</p>
+        <p className="text-teal-700 text-lg">{job.focus}</p>
       </div>
       
       <div className="md:text-right flex flex-col justify-between">
         <p className="text-blue-100 md:text-xl">{job.postDate}</p>
-        <ul>
-          {job.tags.map((tag) => (
-            <li className="hidden sm:inline sm:pl-2 text-teal-600">{tag}</li>
-          ))
-          }
-        </ul>
+        <p className="text-blue-100">{job.location}</p>
       </div>
     </div>
   </Link>
