@@ -42,15 +42,6 @@ const PostAJobForm = ({ id, label, receivingJobData, ...props}) => {
             // companyWebsite: '',
             // companyEmail: '',
             // companyDescription: '',
-            jobTitle: 'Junior Developer',
-            roleFocus: 'Frontend',
-            positionType: 'Full-time',
-            jobDescription: 'Its a really great job',
-            howToApply: 'email marty',
-            companyName: 'Snakehole Lounge',
-            companyWebsite: 'https://snakehole.com',
-            companyEmail: 'ernie@greatcompany.com',
-            companyDescription: 'We\'re a really great company.',
           }}
           validationSchema={Yup.object({
             jobTitle: Yup.string().required("Job title is a required field."),
