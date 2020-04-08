@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import PostAJobForm from "../components/form/PostAJobForm"
 import StatusBar from "../components/form/StatusBar"
 import JobTemplate from "../components/JobTemplate";
-// import JobTemplate from "../components/JobTemplate"
+import JobPostingConfirmation from '../components/JobPostingConfirmation'
 
 
 
@@ -15,6 +15,10 @@ const PostAJob = () => {
         setJobData(e);
         setStatus(2)
      }
+    function recievingTemplateApproval(e){
+        console.log('recieved template approval')
+        setStatus(3)
+    }
 
   return (
     <div className="container mx-auto mt-6 md:mt-12 p-2">
@@ -24,9 +28,11 @@ const PostAJob = () => {
         </h1>
 
         <StatusBar props={status} /> 
-        {!jobData && <PostAJobForm receivingJobData={receivingJobData}/>}
+        {status === 1 && !jobData && <PostAJobForm receivingJobData={receivingJobData}/>}
         {/* {jobData && <div>{jobData.jobTitle}</div>} */}
-        {jobData && <JobTemplate props={jobData} />}
+        {status === 2 && jobData && <JobTemplate props={jobData} recievingTemplateApproval={recievingTemplateApproval}/>}
+        {status === 3 && jobData && <JobPostingConfirmation props={jobData}/>}
+
     </div>
   );
 };
