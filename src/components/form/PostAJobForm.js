@@ -33,15 +33,15 @@ const PostAJobForm = ({ id, label, receivingJobData, ...props}) => {
     <div className="lg:w-3/5 mx-auto">
         <Formik
           initialValues={{
-            // jobTitle: '',
-            // roleFocus: '',
-            // positionType: '',
-            // jobDescription: '',
-            // howToApply: '',
-            // companyName: '',
-            // companyWebsite: '',
-            // companyEmail: '',
-            // companyDescription: '',
+            jobTitle: '',
+            roleFocus: '',
+            positionType: '',
+            jobDescription: '',
+            howToApply: '',
+            companyName: '',
+            companyWebsite: '',
+            companyEmail: '',
+            companyDescription: '',
           }}
           validationSchema={Yup.object({
             jobTitle: Yup.string().required("Job title is a required field."),
@@ -58,9 +58,6 @@ const PostAJobForm = ({ id, label, receivingJobData, ...props}) => {
             console.log('showing changes')
             console.log(values)
             receivingJobData(values)
-            // alert(JSON.stringify(values, null, 2));
-            // console.log('you are submitting these values');
-            // console.log(values);
           }}
         >
           {formik => (
