@@ -56,7 +56,7 @@ const Nav = () => {
             className="menu-item quick-filter mt-1 pr-4 lg:pr-10 cursor-pointer"
             aria-haspopup="true"
           >
-            <Link href="" className="opacity-75 pb-3 hover:opacity-100 ">
+            <Link to="" className="opacity-75 pb-3 hover:opacity-100 ">
               Quick Filter
             </Link>
             <ul
@@ -65,8 +65,7 @@ const Nav = () => {
             >
               <li className="mb-3">
                 <Link
-                  to={ROUTES.JOB_BOARD}
-                  jobFilter={"Front-end"}
+                  to={ROUTES.JOB_BOARD + '?f=Front-end'}
                   className="submenu-item opacity-75 hover:opacity-100 border-b-2 border-white hover:border-teal-500 w-full pb-1"
                 >
                   Front-end
@@ -74,8 +73,7 @@ const Nav = () => {
               </li>
               <li className="mb-3">
                 <Link
-                  to={ROUTES.JOB_BOARD}
-                  jobFilter={"Back-end"}
+                  to={ROUTES.JOB_BOARD + '?f=Back-end'}
                   className="submenu-item opacity-75 hover:opacity-100 border-b-2 border-white hover:border-teal-500 w-full pb-1"
                 >
                   Back-end
@@ -83,8 +81,7 @@ const Nav = () => {
               </li>
               <li>
                 <Link
-                  to={ROUTES.JOB_BOARD}
-                  jobFilter={"Full-stack"}
+                  to={ROUTES.JOB_BOARD + '?f=Full-stack'}
                   className="submenu-item opacity-75 hover:opacity-100 border-b-2 border-white hover:border-teal-500 w-full pb-1"
                 >
                   Full-stack
