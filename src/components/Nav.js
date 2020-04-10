@@ -38,8 +38,8 @@ const Nav = () => {
         <li className="menu-item mt-1 pr-4 lg:pr-10 opacity-75 hover:opacity-100">
           <Link to={ROUTES.JOB_BOARD} className="pb-3 border-b-2 border-white hover:border-teal-500 ">Find a Job</Link>
         </li> 
-        <li className="menu-item quick-filter mt-1 pr-4 lg:pr-10 cursor-pointer group" aria-haspopup="true">
-            <Link className="opacity-75 pb-3 hover:opacity-100 group-hover:block">Quick Filter
+        <li className="menu-item quick-filter mt-1 pr-4 lg:pr-10 cursor-pointer" aria-haspopup="true">
+            <Link className="opacity-75 pb-3 hover:opacity-100 ">Quick Filter
             </Link>
             <ul className="submenu absolute mt-2 bg-white p-4 shadow-md rounded" aria-label="submenu">   
               <li className="mb-3">
