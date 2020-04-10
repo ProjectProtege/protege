@@ -17,7 +17,7 @@
 }
 
 .btn:hover {
-  @apply shadow-md scale-105;
+  @apply shadow-md scale-105 duration-100;
 }
 
 
