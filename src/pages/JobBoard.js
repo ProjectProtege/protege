@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import JobCard from "../components/JobCard";
 
 const tempJobData = [
@@ -116,8 +116,16 @@ function filteredJobs(tempJobData, jobFilter) {
   return filteredJobs
 }
 
-const JobBoard = () => {
-  const [jobFilter, setJobFilter] = useState('');
+const JobBoard = ({location}) => {
+  const filterQueryParam = location.search.replace('?', '').split('&').find(qs => qs[0] === 'f')
+
+  const initialFilterValue = filterQueryParam ? filterQueryParam.split('=')[1] : ''
+  
+  const [jobFilter, setJobFilter] = useState(initialFilterValue);
+
+  useEffect(() => {
+    setJobFilter(initialFilterValue)
+  }, [initialFilterValue])
 
   return (
     <div className="container mx-auto pt-32">
@@ -135,8 +143,9 @@ const JobBoard = () => {
             id="filter-by"
             placeholder="Filter By"
             onChange={event => setJobFilter(event.target.value)}
+            value={jobFilter}
           >
-            <option value="" defaultValue>
+            <option value="">
               All
             </option>
             <option value="Front-end">Front-end</option>
