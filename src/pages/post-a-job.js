@@ -29,7 +29,6 @@ const PostAJob = () => {
 
         <StatusBar props={status} /> 
         {status === 1 && !jobData && <PostAJobForm receivingJobData={receivingJobData}/>}
-        {/* {jobData && <div>{jobData.jobTitle}</div>} */}
         {status === 2 && jobData && <JobTemplate props={jobData} recievingTemplateApproval={recievingTemplateApproval}/>}
         {status === 3 && jobData && <JobPostingConfirmation props={jobData}/>}
 

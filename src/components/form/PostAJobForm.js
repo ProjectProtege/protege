@@ -33,15 +33,24 @@ const PostAJobForm = ({ id, label, receivingJobData, ...props}) => {
     <div className="lg:w-3/5 mx-auto">
         <Formik
           initialValues={{
-            jobTitle: '',
-            roleFocus: '',
-            positionType: '',
+            jobTitle: 'Junior Dev',
+            roleFocus: 'Frontend',
+            positionType: 'Full-time',
             jobDescription: '',
-            howToApply: '',
-            companyName: '',
-            companyWebsite: '',
-            companyEmail: '',
+            howToApply: 'https://indeed.com/?company=SnakeholeLounge',
+            companyName: 'Snakehole Lounge',
+            companyWebsite: 'https://SnakeholeLounge.com',
+            companyEmail: 'tom@SnakeholeLounge.com',
             companyDescription: '',
+            // jobTitle: '',
+            // roleFocus: '',
+            // positionType: '',
+            // jobDescription: '',
+            // howToApply: '',
+            // companyName: '',
+            // companyWebsite: '',
+            // companyEmail: '',
+            // companyDescription: '',
           }}
           validationSchema={Yup.object({
             jobTitle: Yup.string().required("Job title is a required field."),
