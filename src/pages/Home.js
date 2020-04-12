@@ -117,7 +117,7 @@ const Home = () => (
     <img src={heroBG} alt="" className="hidden md:block absolute top-0 left-0 w-full" />
     <img src={mobileBG} alt="" className="fixed md:hidden w-screen"/>
 
-    <div className="relative pt-20 lg:pt-32 px-3">
+    <div className="relative pt-20 lg:pt-32 px-2">
       <FindYourNext />
       <div className="flex md:w-3/4 flex-col text-center mx-auto mt-6">
         <p className="tracking-wide font-light lg:w-3/4 mx-auto text-lg text-blue-400 mb-6">
@@ -127,7 +127,7 @@ const Home = () => (
         <button className="btn btn-teal mx-auto text-xl">Find A Job</button>
       </div>
 
-      <div className="mt-12 lg:pt-16 mx-auto px-3" style={{ maxWidth: 680 }}>
+      <div className="mt-12 lg:pt-16 mx-auto" style={{ maxWidth: 680 }}>
         <h2 className="text-center text-2xl text-blue-500 font-bold mb-8">
           Latest Opportunities
         </h2>
