@@ -7,12 +7,6 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 const Nav = () => {
   const [active, setActive] = React.useState(false);
 
-  const mobileMenuRef = React.createRef();
-
-  const feRef = React.createRef();
-  const beRef = React.createRef();
-  const fsRef = React.createRef();
-
   function handleClick (e){
     return e.target.blur()
   }
@@ -35,7 +29,6 @@ const Nav = () => {
           className={`${
             active ? "absolute" : "hidden"
           } mt-2 text-center uppercase right-0 font-semibold bg-white shadow-lg p-2 w-screen mx-auto`}
-          ref={mobileMenuRef}
           onClick={handleMobileClick}
         >
           <li className="py-3 opacity-75 hover:opacity-100 border-b-2 border-gray-300">
@@ -84,7 +77,6 @@ const Nav = () => {
                 <Link
                   to={ROUTES.JOB_BOARD + "?f=Front-end"}
                   className="submenu-item opacity-75 hover:opacity-100 border-b-2 border-white hover:border-teal-500 w-full pb-1"
-                  ref={feRef}
                   onClick={handleClick}
                 >
                   Front-end
@@ -94,7 +86,6 @@ const Nav = () => {
                 <Link
                   to={ROUTES.JOB_BOARD + "?f=Back-end"}
                   className="submenu-item opacity-75 hover:opacity-100 border-b-2 border-white hover:border-teal-500 w-full pb-1"
-                  ref={beRef}
                   onClick={handleClick}
                 >
                   Back-end
@@ -104,7 +95,6 @@ const Nav = () => {
                 <Link
                   to={ROUTES.JOB_BOARD + "?f=Full-stack"}
                   className="submenu-item opacity-75 hover:opacity-100 border-b-2 border-white hover:border-teal-500 w-full pb-1"
-                  ref={fsRef}
                   onClick={handleClick}
                 >
                   Full-stack
