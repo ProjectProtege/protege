@@ -66,7 +66,7 @@ const Nav = () => {
             className="menu-item quick-filter mt-1 pr-4 lg:pr-10 cursor-pointer"
             aria-haspopup="true"
           >
-            <Link to="/job-bard" className="opacity-75 pb-3 hover:opacity-100 ">
+            <Link to="/job-board" className="opacity-75 pb-3 hover:opacity-100 ">
               Quick Filter
             </Link>
             <ul
