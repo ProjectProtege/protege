@@ -7,6 +7,20 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 const Nav = () => {
   const [active, setActive] = React.useState(false);
 
+  const mobileMenuRef = React.createRef();
+
+  const feRef = React.createRef();
+  const beRef = React.createRef();
+  const fsRef = React.createRef();
+
+  function handleClick (e){
+    return e.target.blur()
+  }
+
+  function handleMobileClick(){
+    setActive(false)
+  }
+
   return (
     <React.Fragment>
       <nav className="md:hidden text-blue-500 text-right relative">
@@ -21,6 +35,8 @@ const Nav = () => {
           className={`${
             active ? "absolute" : "hidden"
           } mt-2 text-center uppercase right-0 font-semibold bg-white shadow-lg p-2 w-screen mx-auto`}
+          ref={mobileMenuRef}
+          onClick={handleMobileClick}
         >
           <li className="py-3 opacity-75 hover:opacity-100 border-b-2 border-gray-300">
             <Link to={ROUTES.JOB_BOARD}>Find a Job</Link>
@@ -68,6 +84,8 @@ const Nav = () => {
                 <Link
                   to={ROUTES.JOB_BOARD + "?f=Front-end"}
                   className="submenu-item opacity-75 hover:opacity-100 border-b-2 border-white hover:border-teal-500 w-full pb-1"
+                  ref={feRef}
+                  onClick={handleClick}
                 >
                   Front-end
                 </Link>
@@ -76,6 +94,8 @@ const Nav = () => {
                 <Link
                   to={ROUTES.JOB_BOARD + "?f=Back-end"}
                   className="submenu-item opacity-75 hover:opacity-100 border-b-2 border-white hover:border-teal-500 w-full pb-1"
+                  ref={beRef}
+                  onClick={handleClick}
                 >
                   Back-end
                 </Link>
@@ -84,6 +104,8 @@ const Nav = () => {
                 <Link
                   to={ROUTES.JOB_BOARD + "?f=Full-stack"}
                   className="submenu-item opacity-75 hover:opacity-100 border-b-2 border-white hover:border-teal-500 w-full pb-1"
+                  ref={fsRef}
+                  onClick={handleClick}
                 >
                   Full-stack
                 </Link>
