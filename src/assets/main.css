@@ -8238,12 +8238,18 @@ video {
 
 .quick-filter .submenu {
   transform: scale(0);
+  opacity: 0;
   transition: 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  visibility: hidden;
+  display: none;
 }
 
 .quick-filter:hover .submenu, 
 .quick-filter:focus-within .submenu {
+  visibility: visible;
   transform: scale(1);
+  opacity: 1;
+  display: block;
 }
 
 .quick-filter:focus-within{
