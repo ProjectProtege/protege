@@ -19,12 +19,10 @@ const JobTemplate = ({recievingTemplateApproval, props}) => {
     // Cleans up the text provided by QuillJS wysiwyg
     function styleChildren(children){
       children.forEach(child => {
-        console.log('in the foreach?')
         if(child.tagName === 'H1'){ child.classList = quillStyle.h1 }
         if(child.tagName === 'H2'){ child.classList = quillStyle.h2 }
         if(child.tagName === 'H3'){ child.classList = quillStyle.h3 }
         if(child.tagName === 'P'){ child.classList = quillStyle.p }
-        // below need to be nested loops
         if(child.tagName === 'A'){ child.classList = quillStyle.a }
         if(child.tagName === 'OL'){ 
           child.classList = quillStyle.ol 
@@ -44,11 +42,9 @@ const JobTemplate = ({recievingTemplateApproval, props}) => {
         }
       )
     }
-    console.log('updating jobDesc')
     var jobDesc = document.getElementById('jobDesc')
     var jobChildren = [...jobDesc.children]
     styleChildren(jobChildren)
-    console.log('updating companyDesc')
     var companyDesc = document.getElementById('companyDesc')
     var companyChildren = [...companyDesc.children]
     styleChildren(companyChildren)
