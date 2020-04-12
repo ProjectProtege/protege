@@ -16,7 +16,7 @@ const JobCard = ({job}) => (
         <p className="text-teal-700 text-lg">{job.focus}</p>
       </div>
       
-      <div className="md:text-right flex flex-col justify-between">
+      <div className="text-right flex flex-col justify-between">
         <p className="text-blue-100 md:text-xl">{job.postDate}</p>
         <p className="text-blue-100">{job.location}</p>
       </div>
