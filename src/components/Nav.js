@@ -52,6 +52,7 @@ const Nav = () => {
               Find a Job
             </Link>
           </li>
+
           <li
             className="menu-item quick-filter mt-1 pr-4 lg:pr-10 cursor-pointer"
             aria-haspopup="true"
@@ -65,7 +66,7 @@ const Nav = () => {
             >
               <li className="mb-3">
                 <Link
-                  to={ROUTES.JOB_BOARD + '?f=Front-end'}
+                  to={ROUTES.JOB_BOARD + "?f=Front-end"}
                   className="submenu-item opacity-75 hover:opacity-100 border-b-2 border-white hover:border-teal-500 w-full pb-1"
                 >
                   Front-end
@@ -73,7 +74,7 @@ const Nav = () => {
               </li>
               <li className="mb-3">
                 <Link
-                  to={ROUTES.JOB_BOARD + '?f=Back-end'}
+                  to={ROUTES.JOB_BOARD + "?f=Back-end"}
                   className="submenu-item opacity-75 hover:opacity-100 border-b-2 border-white hover:border-teal-500 w-full pb-1"
                 >
                   Back-end
@@ -81,7 +82,7 @@ const Nav = () => {
               </li>
               <li>
                 <Link
-                  to={ROUTES.JOB_BOARD + '?f=Full-stack'}
+                  to={ROUTES.JOB_BOARD + "?f=Full-stack"}
                   className="submenu-item opacity-75 hover:opacity-100 border-b-2 border-white hover:border-teal-500 w-full pb-1"
                 >
                   Full-stack
@@ -89,6 +90,7 @@ const Nav = () => {
               </li>
             </ul>
           </li>
+
           <li className="menu-item mt-1 pr-4 lg:pr-10 opacity-75 hover:opacity-100">
             <Link
               to={ROUTES.JOB_BOARD}
@@ -97,6 +99,7 @@ const Nav = () => {
               Learning Resources
             </Link>
           </li>
+
           <li className="btn btn-teal">
             <Link to={ROUTES.JOB_BOARD}>Post a Job</Link>
           </li>

@@ -139,7 +139,7 @@ const JobBoard = ({location}) => {
             Filter
           </label>
           <select
-            className="input rounded-full text-xs justify-end w-full cursor-pointer"
+            className="input rounded-full justify-end w-full cursor-pointer"
             id="filter-by"
             placeholder="Filter By"
             onChange={event => setJobFilter(event.target.value)}
