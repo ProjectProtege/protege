@@ -1,6 +1,6 @@
 export const HOME = '/'
 export const JOB_BOARD = '/job-board'
-export const CONTRIBUTE = '/contribute'
+export const LEARNING = '/learning-resources'
 export const CONTACT = '/contact'
 export const INDIVIDUAL_JOB = '/individual-job'
 export const BLANK = '/blank'

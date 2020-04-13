@@ -130,7 +130,7 @@ const JobBoard = ({location}) => {
   return (
     <div className="container mx-auto pt-32 px-2 md:px-0" style={{maxWidth: 680}}>
       <div className="flex justify-between mb-6">
-        <h1 className=" text-2xl font-semibold text-teal-600 mb-6">
+        <h1 className="text-2xl font-semibold text-teal-600 mb-6">
           {jobFilter ? `${jobFilter} Jobs` : 'All Jobs'}
         </h1>
 

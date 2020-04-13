@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import Home from '../pages/Home'
 import JobBoard from '../pages/JobBoard'
-import Contribute from '../pages/contribute'
+import LearningResources from '../pages/learning-resources'
 import Contact from '../pages/contact'
 import IndividualJobPage from '../pages/individual-job'
 import BlankPage from '../pages/Blank'
@@ -18,7 +18,7 @@ const App = () => (
     <Route exact path={ROUTES.HOME} component={Home} />
     <Route path={ROUTES.JOB_BOARD} component={JobBoard} />
     <Route path={ROUTES.CONTACT} component={Contact} />
-    <Route path={ROUTES.CONTRIBUTE} component={Contribute} />
+    <Route path={ROUTES.LEARNING} component={LearningResources} />
     <Route path={ROUTES.INDIVIDUAL_JOB} component={IndividualJobPage} />
     <Route path={ROUTES.BLANK} component={BlankPage} />
   </Layout>
