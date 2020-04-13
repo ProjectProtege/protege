@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import backgroundImage from "../../assets/images/bg-pattern.png";
 
 import * as Yup from "yup";
-import { Formik, Form, Field, ErrorMessage} from "formik";
+import { Formik, Form, Field, useField, ErrorMessage} from "formik";
 
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
+
+import LogoUpload from "./LogoUpload"
 
 
 // This can be refactored into mini-components at somepoint using something like below. Also add `useField` into the formik import statement: 
@@ -27,7 +29,13 @@ import 'react-quill/dist/quill.snow.css';
 
 const PostAJobForm = ({ id, label, receivingJobData, ...props}) => {
 
+  const [fileValue, setFileValue] = useState(undefined)
 
+  function recievingLogo(logo){
+    console.log('logo recieved')
+    // console.log(logo)
+    setFileValue(logo)
+  }
 
   return (
     <div className="lg:w-3/5 mx-auto">
@@ -36,12 +44,13 @@ const PostAJobForm = ({ id, label, receivingJobData, ...props}) => {
             jobTitle: 'Junior Dev',
             roleFocus: 'Frontend',
             positionType: 'Full-time',
-            jobDescription: '',
+            jobDescription: 'This is a job Description',
             howToApply: 'https://indeed.com/?company=SnakeholeLounge',
             companyName: 'Snakehole Lounge',
             companyWebsite: 'https://SnakeholeLounge.com',
             companyEmail: 'tom@SnakeholeLounge.com',
-            companyDescription: '',
+            companyDescription: 'This is a company description.',
+            companyLogo: undefined,
             // jobTitle: '',
             // roleFocus: '',
             // positionType: '',
@@ -61,13 +70,16 @@ const PostAJobForm = ({ id, label, receivingJobData, ...props}) => {
             companyName: Yup.string().required("Please enter a company name."),
             companyWebsite: Yup.string().required("Please enter a company website."),
             companyEmail: Yup.string().required("Please enter a company email."),
-            companyDescription: Yup.string().required("Please give a brief description of the company and culture.")
+            companyDescription: Yup.string().required("Please give a brief description of the company and culture."),
+            companyLogo: Yup.mixed().required('need a logo!')
+            //  .test('fileSize', "File Size is too large", value => value.size <= FILE_SIZE) .test('fileType', "Unsupported File Format", value => SUPPORTED_FORMATS.includes(value.type) )
           })}
           onSubmit={(values, { setSubmitting }) => {
             console.log('showing changes')
             console.log(values)
             receivingJobData(values)
           }}
+
         >
           {formik => (
               <Form onSubmit={formik.handleSubmit}>
@@ -308,39 +320,22 @@ const PostAJobForm = ({ id, label, receivingJobData, ...props}) => {
                             className="input-error"
                           />
                         </div>
-
                         <div className="flex flex-col md:w-1/2 mb-3">
-                          <span className="text-blue-500 font-bold mb-2">
-                            Logo
-                          </span>
+                          {/* Logo Upload */}
+                          <Field 
+                            name="companyLogo"
+                            component={LogoUpload}
+                            recievingLogo={recievingLogo}
+                            value={fileValue}
+                          />
+                          <ErrorMessage
+                            name="companyLogo"
+                            component="span"
+                            className="input-error"
+                          />
 
-                          <div className="md:flex">
-                            <div className="flex flex-col md:w-1/2 md:pr-3">
-                              <label
-                                htmlFor="companyLogo"
-                                className="h-24 w-full mb-2 border border-dashed border-blue-300 text-center"
-                              >
-                                <span className="text-teal-500 align-middle text-2xl">
-                                  +
-                                </span>
-                                <input
-                                  id="companyLogo"
-                                  name=""
-                                  className="hidden"
-                                  type="file"
-                                  accept="image/*"
-                                ></input>
-                              </label>
-                            </div>
-                            <div className="flex flex-col md:w-1/2">
-                              <span className="text-blue-200 text-xs tracking-tight">
-                                Please provide a .png format of your companies
-                                logo to be displayed with your job opening
-                                listing.
-                              </span>
-                            </div>
-                          </div>
                         </div>
+                        
                       </div>
                       <div className="flex flex-col">
                         <label
