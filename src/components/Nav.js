@@ -35,12 +35,8 @@ const Nav = () => {
             <Link to={ROUTES.JOB_BOARD}>Find a Job</Link>
           </li>
 
-          <li className="py-3 opacity-75 hover:opacity-100 border-b-2 border-gray-300">
-            <Link to={ROUTES.CONTRIBUTE}>Quick Filter</Link>
-          </li>
-
           <li className="pt-3 pb-2 opacity-75 hover:opacity-100 border-b-2 border-gray-300">
-            <Link to={ROUTES.CONTACT}>Learning Resources</Link>
+            <Link to={ROUTES.LEARNING}>Learning Resources</Link>
           </li>
           <li className="bg-teal-300 px-4 mt-3 mb-1 w-1/2 py-1 mx-auto font-bold">
             <Link to={ROUTES.JOB_BOARD}>Post a Job</Link>
@@ -105,7 +101,7 @@ const Nav = () => {
 
           <li className="menu-item mt-1 pr-4 lg:pr-10 opacity-75 hover:opacity-100">
             <Link
-              to={ROUTES.JOB_BOARD}
+              to={ROUTES.LEARNING}
               className="pb-3 border-b-2 border-white hover:border-teal-500 "
             >
               Learning Resources
