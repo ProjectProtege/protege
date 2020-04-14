@@ -11,10 +11,16 @@ import JobPostingConfirmation from '../components/JobPostingConfirmation'
 const PostAJob = () => {
     const [status, setStatus] = useState(1)
     const [jobData, setJobData] = useState()
+    const [companyLogo, setcompanyLogo] = useState(undefined)
     function receivingJobData(e){ 
         setJobData(e);
         setStatus(2)
      }
+    function recievingLogo2(logo){
+      console.log('logo has been passed up')
+      console.log(logo)
+      setcompanyLogo(logo)
+    }
     function recievingTemplateApproval(e){
         console.log('recieved template approval')
         setStatus(3)
@@ -28,8 +34,8 @@ const PostAJob = () => {
         </h1>
 
         <StatusBar props={status} /> 
-        {status === 1 && !jobData && <PostAJobForm receivingJobData={receivingJobData}/>}
-        {status === 2 && jobData && <JobTemplate props={jobData} recievingTemplateApproval={recievingTemplateApproval}/>}
+        {status === 1 && !jobData && <PostAJobForm recievingLogo2={recievingLogo2} receivingJobData={receivingJobData}/>}
+        {status === 2 && jobData && <JobTemplate props={jobData} logo={companyLogo} recievingTemplateApproval={recievingTemplateApproval}/>}
         {status === 3 && jobData && <JobPostingConfirmation props={jobData}/>}
 
     </div>

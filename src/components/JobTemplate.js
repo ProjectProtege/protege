@@ -1,8 +1,24 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Redirect } from 'react-router-dom'
 
 
-const JobTemplate = ({recievingTemplateApproval, props}) => {
+const JobTemplate = ({recievingTemplateApproval, logo, props}) => {
+
+  const [companyLogo, setCompanyLogo] = useState(undefined)
+  
+  function readLogo(logo){
+    let reader = new FileReader();
+    let file = logo
+    if (file) {
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            console.log(file)
+            console.log('reader.result:', reader.result)
+            setCompanyLogo(reader.result)
+        };
+
+    }
+  }
   
   const quillStyle = {
     h1: 'text-blue-500 font-bold text-xl',
@@ -48,10 +64,13 @@ const JobTemplate = ({recievingTemplateApproval, props}) => {
     var companyDesc = document.getElementById('companyDesc')
     var companyChildren = [...companyDesc.children]
     styleChildren(companyChildren)
+
+    // Setting Logo
+    readLogo(logo)
+
     })
 
   function createMarkup(text){
-    // console.log('text', text)
     return {__html: text}
   }
 
@@ -75,6 +94,7 @@ const JobTemplate = ({recievingTemplateApproval, props}) => {
               <div className='text-gray-600 uppercase tracking-tight text-md'>
                 <a href={props.companyWebsite}>Website</a> • <a href={`mailto:${props.companyEmail}`}>Contact Email</a>
               </div>
+              {logo ? <img id='companyLogo' className='m-2 object-contain' src={companyLogo} alt={`${props.companyName} logo`} /> : null}
         </div>
       </div>
       <div className='flex-row'>

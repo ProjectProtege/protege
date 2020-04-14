@@ -18,7 +18,7 @@ function LogoUpload({recievingLogo}, props){
               setFileName(file.name)
             //   console.log(reader.result)
               setFileResult(reader.result)
-              recievingLogo(reader.result)
+              recievingLogo(file)
             //   form.setFieldValue(field.name, reader.result)
           };
   

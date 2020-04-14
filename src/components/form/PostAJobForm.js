@@ -27,14 +27,15 @@ import LogoUpload from "./LogoUpload"
 //   };
 
 
-const PostAJobForm = ({ id, label, receivingJobData, ...props}) => {
+const PostAJobForm = ({ id, label, receivingJobData, recievingLogo2, ...props}) => {
 
   const [fileValue, setFileValue] = useState(undefined)
 
   function recievingLogo(logo){
     console.log('logo recieved')
-    // console.log(logo)
+    console.log(logo)
     setFileValue(logo)
+    recievingLogo2(logo)
   }
 
   return (
@@ -71,7 +72,8 @@ const PostAJobForm = ({ id, label, receivingJobData, ...props}) => {
             companyWebsite: Yup.string().required("Please enter a company website."),
             companyEmail: Yup.string().required("Please enter a company email."),
             companyDescription: Yup.string().required("Please give a brief description of the company and culture."),
-            companyLogo: Yup.mixed().required('need a logo!')
+            companyLogo: Yup.mixed()
+            // .required('need a logo!')
             //  .test('fileSize', "File Size is too large", value => value.size <= FILE_SIZE) .test('fileType', "Unsupported File Format", value => SUPPORTED_FORMATS.includes(value.type) )
           })}
           onSubmit={(values, { setSubmitting }) => {
