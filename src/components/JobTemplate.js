@@ -91,7 +91,7 @@ const JobTemplate = ({recievingTemplateApproval, logo, props}) => {
               <div className='text-gray-600 uppercase tracking-tight text-md'>
                 <a href={props.companyWebsite}>Website</a> • <a href={`mailto:${props.companyEmail}`}>Contact Email</a>
               </div>
-              {logo ? <img id='companyLogo' className='m-2 object-contain' src={companyLogo} alt={`${props.companyName} logo`} /> : null}
+              {logo ? <img id='companyLogo' className='mt-2 object-contain' src={companyLogo} alt={`${props.companyName} logo`} /> : null}
         </div>
       </div>
       <div className='flex-row'>
