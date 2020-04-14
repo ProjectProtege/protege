@@ -145,7 +145,7 @@ const PostAJobForm = ({ id, label, receivingJobData, recievingLogo2, ...props}) 
                         />
                       </div>
 
-                      <div className="flex flex-col md:w-1/2 mb-3 md:mr-6">
+                      <div className="flex flex-col md:w-1/2 mb-3">
                         <label
                           htmlFor="positionType"
                           className="text-blue-500 font-bold"
@@ -164,34 +164,6 @@ const PostAJobForm = ({ id, label, receivingJobData, recievingLogo2, ...props}) 
                                 <option value="part-time">Part-time</option>
                                 <option value="contract">contract</option>
                             </Field>
-                            {/* Removing Radio in Favor of simplier Select form */}
-                          {/* <Field id="position-type" name="positionType">
-                            {({ field }) => (
-                              <>
-                                <RadioButton
-                                  name="type"
-                                  type="radio"
-                                  label="Full-time"
-                                  id="full-time"
-                                  value="Full-time"
-                                />
-                                <RadioButton
-                                  name="type"
-                                  type="radio"
-                                  label="Part-time"
-                                  id="part-time"
-                                  value="Part-time"
-                                />
-                                <RadioButton
-                                  name="type"
-                                  type="radio"
-                                  label="Contract"
-                                  id="contract"
-                                  value="Contract"
-                                />
-                              </>
-                            )}
-                          </Field> */}
                           <ErrorMessage
                             name="positionType"
                             component="span"
@@ -323,6 +295,13 @@ const PostAJobForm = ({ id, label, receivingJobData, recievingLogo2, ...props}) 
                           />
                         </div>
                         <div className="flex flex-col md:w-1/2 mb-3">
+
+                          <label
+                            htmlFor="companyEmail"
+                            className="text-blue-500 font-bold mb-2"
+                          >
+                            Logo
+                          </label>
                           {/* Logo Upload */}
                           <Field 
                             name="companyLogo"
