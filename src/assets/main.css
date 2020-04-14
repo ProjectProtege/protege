@@ -8223,23 +8223,51 @@ video {
   --transform-scale-x: 1;
   --transform-scale-y: 1;
   transform: translateX(var(--transform-translate-x)) translateY(var(--transform-translate-y)) rotate(var(--transform-rotate)) skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y)) scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
-  text-transform: uppercase
+  text-transform: uppercase;
 }
 
 .btn-teal {
   background-color: #8ddbc1;
-  color: #353649
+  color: #353649;
 }
 
 .btn-blue {
   background-color: #353649;
-  color: #fff
+  color: #fff;
 }
 
 .btn:hover {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --transform-scale-x: 1.05;
-  --transform-scale-y: 1.05
+  --transform-scale-y: 1.05;
+  transition-duration: 100ms;
+}
+
+/*--Buttons--*/
+
+.input {
+  border-width: 1px;
+  border-color: #cbd5e0;
+  padding: 0.5rem;
+}
+
+.input-error {
+  color: #E53E3E;
+  font-size: 0.75rem;
+}
+
+.quick-filter .submenu {
+  transform: scale(0);
+  opacity: 0;
+  transition: 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  visibility: hidden;
+}
+
+.quick-filter:hover .submenu, 
+.quick-filter:focus-within .submenu {
+  transform: scale(1);
+  opacity: 1;
+  visibility: visible;
 }
 
 /*--Inputs--*/

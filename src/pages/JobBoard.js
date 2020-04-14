@@ -1,9 +1,5 @@
-import React from "react";
-import FindYourNext from "../components/FindYourNext";
+import React, { useState, useEffect } from "react";
 import JobCard from "../components/JobCard";
-
-import heroBG from "../assets/images/bg-pattern.png";
-import mobileBG from '../assets/images/mobile-bg-pattern.png'
 
 const tempJobData = [
   {
@@ -20,7 +16,7 @@ const tempJobData = [
     positionTitle: "Junior Backend Developer",
     location: "Seattle, WA",
     postDate: "Mar. 24",
-    focus: "Front-end",
+    focus: "Back-end",
   },
   {
     postId: "98613855",
@@ -28,7 +24,7 @@ const tempJobData = [
     positionTitle: "Junior Frontend Developer",
     location: "Jacksonville, FL",
     postDate: "Mar. 24",
-    focus: "Front-end",
+    focus: "Full-stack",
   },
   {
     postId: "8946541",
@@ -44,7 +40,7 @@ const tempJobData = [
     positionTitle: "Junior Frontend Developer",
     location: "Jacksonville, FL",
     postDate: "Mar. 24",
-    focus: "Front-end",
+    focus: "Back-end",
   },
   {
     postId: "89646874",
@@ -52,7 +48,7 @@ const tempJobData = [
     positionTitle: "Junior Frontend Developer",
     location: "Jacksonville, FL",
     postDate: "Mar. 24",
-    focus: "Front-end",
+    focus: "Full-stack",
   },
   {
     postId: "138543541685",
@@ -68,7 +64,7 @@ const tempJobData = [
     positionTitle: "Junior Frontend Developer",
     location: "Jacksonville, FL",
     postDate: "Mar. 24",
-    focus: "Front-end",
+    focus: "Back-end",
   },
   {
     postId: "6874358",
@@ -76,7 +72,7 @@ const tempJobData = [
     positionTitle: "Junior Frontend Developer",
     location: "Jacksonville, FL",
     postDate: "Mar. 24",
-    focus: "Front-end",
+    focus: "Full-stack",
   },
   {
     postId: "6813584",
@@ -84,7 +80,7 @@ const tempJobData = [
     positionTitle: "Junior Frontend Developer",
     location: "Jacksonville, FL",
     postDate: "Mar. 24",
-    tags: ["React", "GraphQL", "Apollo"],
+    focus: "Front-end",
   },
   {
     postId: "681384384",
@@ -92,7 +88,7 @@ const tempJobData = [
     positionTitle: "Junior Frontend Developer",
     location: "Jacksonville, FL",
     postDate: "Mar. 24",
-    focus: "Front-end",
+    focus: "Back-end",
   },
   {
     postId: "1688354",
@@ -100,7 +96,7 @@ const tempJobData = [
     positionTitle: "Junior Frontend Developer",
     location: "Jacksonville, FL",
     postDate: "Mar. 24",
-    focus: "Front-end",
+    focus: "Full-stack",
   },
   {
     postId: "4168435",
@@ -112,34 +108,72 @@ const tempJobData = [
   },
 ];
 
-const Home = () => (
-  <div>
-    <img src={heroBG} alt="" className="hidden md:block absolute top-0 left-0 w-full" />
-    <img src={mobileBG} alt="" className="fixed md:hidden w-full h-full"/>
+function filteredJobs(tempJobData, jobFilter) {
+  const filteredJobs = tempJobData.filter(job => {
+    return job.focus === jobFilter
+  })
 
-    <div className="relative pt-20 lg:pt-32 px-2">
-      <FindYourNext />
-      <div className="flex md:w-3/4 flex-col text-center mx-auto mt-6">
-        <p className="tracking-wide lg:w-3/5 mx-auto text-lg text-blue-400 mb-6">
-          Looking for your next junior developer role? Look no further! Any jobs
-          listed here are geared for those hungry to work and learn.
-        </p>
-        <button className="btn btn-teal mx-auto">Find A Job</button>
-      </div>
+  return filteredJobs
+}
 
-      <div className="mt-12 lg:pt-16 mx-auto" style={{ maxWidth: 680 }}>
-        <h2 className="text-center text-2xl text-blue-500 font-bold mb-8">
-          Latest Opportunities
-        </h2>
+const JobBoard = ({location}) => {
+  const filterQueryParam = location.search.replace('?', '').split('&').find(qs => qs[0] === 'f')
 
-        <div>
-          {tempJobData.slice(0, 6).map((job) => (
-            <JobCard key={job.postId} job={job} />
-          ))}
+  const initialFilterValue = filterQueryParam ? filterQueryParam.split('=')[1] : ''
+  
+  const [jobFilter, setJobFilter] = useState(initialFilterValue);
+
+  useEffect(() => {
+    setJobFilter(initialFilterValue)
+  }, [initialFilterValue])
+
+  return (
+    <div className="container mx-auto pt-32 px-2 md:px-0" style={{maxWidth: 680}}>
+      <div className="flex justify-between mb-6">
+        <h1 className="text-2xl font-semibold text-teal-600 mb-6">
+          {jobFilter ? `${jobFilter} Jobs` : 'All Jobs'}
+        </h1>
+
+        <div className="w-1/2 md:w-1/4">
+          <label htmlFor="filter-by" className="sr-only">
+            Filter
+          </label>
+          <select
+            className="input rounded-full justify-end w-full cursor-pointer"
+            id="filter-by"
+            placeholder="Filter By"
+            onChange={event => setJobFilter(event.target.value)}
+            value={jobFilter}
+          >
+            <option value="">
+              All
+            </option>
+            <option value="Front-end">Front-end</option>
+            <option value="Back-end">Back-end</option>
+            <option value="Full-stack">Full-stack</option>
+          </select>
         </div>
       </div>
-    </div>
-  </div>
-);
 
-export default Home;
+      <div className="mx-auto">
+        {!jobFilter && (
+          <React.Fragment>
+            {tempJobData.map((job) => (
+              <JobCard key={job.postId} job={job} />
+            ))}
+          </React.Fragment>
+        )}
+
+        {jobFilter && (
+          <React.Fragment>
+            {filteredJobs(tempJobData, jobFilter).map(job => (
+              <JobCard key={job.postId} job={job}/>
+            ))}
+          </React.Fragment>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default JobBoard;
