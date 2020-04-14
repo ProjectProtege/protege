@@ -17,8 +17,6 @@ const PostAJob = () => {
         setStatus(2)
      }
     function recievingLogo2(logo){
-      console.log('logo has been passed up')
-      console.log(logo)
       setcompanyLogo(logo)
     }
     function recievingTemplateApproval(e){
