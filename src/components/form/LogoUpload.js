@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 
 
 function LogoUpload({recievingLogo}, props){
-    // const {field, form} = props
+
     const [fileResult, setFileResult] = useState(undefined)
     const [fileName, setFileName] = useState("");
-    // const [fileResult, setFileResult] = useState(undefined)
   
     const handleLogoChange = (e) => {
       e.preventDefault();
@@ -14,12 +13,9 @@ function LogoUpload({recievingLogo}, props){
       if (file) {
           reader.readAsDataURL(file);
           reader.onloadend = () => {
-              console.log(file)
               setFileName(file.name)
-            //   console.log(reader.result)
               setFileResult(reader.result)
               recievingLogo(file)
-            //   form.setFieldValue(field.name, reader.result)
           };
   
       }
@@ -41,7 +37,6 @@ function LogoUpload({recievingLogo}, props){
                         type="file"
                         accept="image/*"
                     >
-
                     </input>
                 </label>
             </div>
