@@ -89,7 +89,7 @@ const JobTemplate = ({recievingTemplateApproval, logo, props}) => {
           <div className='mt-2 text-blue-300' id='companyDesc' dangerouslySetInnerHTML={createMarkup(props.companyDescription)}></div>
 
         </div>
-        <div className='flex-row w-2/5 bg-gray-200 flex-wrap mt-16 p-4 h-64'>
+        <div className='flex-row w-2/5 bg-gray-200 flex-wrap mt-16 p-4 min-h-64'>
               <h4 className='text-blue-500 font-bold text-2xl flex-wrap'>About {props.companyName}</h4>
               <div className='text-gray-600 uppercase tracking-tight text-md'>
                 <a href={props.companyWebsite}>Website</a> • <a href={`mailto:${props.companyEmail}`}>Contact Email</a>
