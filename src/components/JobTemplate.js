@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Redirect } from 'react-router-dom'
 
 
 const JobTemplate = ({recievingTemplateApproval, logo, props}) => {
@@ -12,8 +11,6 @@ const JobTemplate = ({recievingTemplateApproval, logo, props}) => {
     if (file) {
         reader.readAsDataURL(file);
         reader.onloadend = () => {
-            console.log(file)
-            console.log('reader.result:', reader.result)
             setCompanyLogo(reader.result)
         };
 
