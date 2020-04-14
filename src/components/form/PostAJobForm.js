@@ -42,25 +42,25 @@ const PostAJobForm = ({ id, label, receivingJobData, recievingLogo2, ...props}) 
     <div className="lg:w-3/5 mx-auto">
         <Formik
           initialValues={{
-            jobTitle: 'Junior Dev',
-            roleFocus: 'Frontend',
-            positionType: 'Full-time',
-            jobDescription: 'This is a job Description',
-            howToApply: 'https://indeed.com/?company=SnakeholeLounge',
-            companyName: 'Snakehole Lounge',
-            companyWebsite: 'https://SnakeholeLounge.com',
-            companyEmail: 'tom@SnakeholeLounge.com',
-            companyDescription: 'This is a company description.',
-            companyLogo: undefined,
-            // jobTitle: '',
-            // roleFocus: '',
-            // positionType: '',
-            // jobDescription: '',
-            // howToApply: '',
-            // companyName: '',
-            // companyWebsite: '',
-            // companyEmail: '',
-            // companyDescription: '',
+            // jobTitle: 'Junior Dev',
+            // roleFocus: 'Frontend',
+            // positionType: 'Full-time',
+            // jobDescription: 'This is a job Description',
+            // howToApply: 'https://indeed.com/?company=SnakeholeLounge',
+            // companyName: 'Snakehole Lounge',
+            // companyWebsite: 'https://SnakeholeLounge.com',
+            // companyEmail: 'tom@SnakeholeLounge.com',
+            // companyDescription: 'This is a company description.',
+            // companyLogo: undefined,
+            jobTitle: '',
+            roleFocus: '',
+            positionType: '',
+            jobDescription: '',
+            howToApply: '',
+            companyName: '',
+            companyWebsite: '',
+            companyEmail: '',
+            companyDescription: '',
           }}
           validationSchema={Yup.object({
             jobTitle: Yup.string().required("Job title is a required field."),
@@ -77,8 +77,6 @@ const PostAJobForm = ({ id, label, receivingJobData, recievingLogo2, ...props}) 
             //  .test('fileSize', "File Size is too large", value => value.size <= FILE_SIZE) .test('fileType', "Unsupported File Format", value => SUPPORTED_FORMATS.includes(value.type) )
           })}
           onSubmit={(values, { setSubmitting }) => {
-            console.log('showing changes')
-            console.log(values)
             receivingJobData(values)
           }}
 
