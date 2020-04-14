@@ -7,6 +7,7 @@ import JobBoard from '../pages/JobBoard'
 import LearningResources from '../pages/learning-resources'
 import Contact from '../pages/contact'
 import IndividualJobPage from '../pages/individual-job'
+import PostAJob from '../pages/post-a-job'
 import BlankPage from '../pages/Blank'
 
 import * as ROUTES from '../constants/routes'
@@ -18,6 +19,8 @@ const App = () => (
     <Route exact path={ROUTES.HOME} component={Home} />
     <Route path={ROUTES.JOB_BOARD} component={JobBoard} />
     <Route path={ROUTES.CONTACT} component={Contact} />
+    <Route path={ROUTES.POST_A_JOB} component={PostAJob} />
+
     <Route path={ROUTES.LEARNING} component={LearningResources} />
     <Route path={ROUTES.INDIVIDUAL_JOB} component={IndividualJobPage} />
     <Route path={ROUTES.BLANK} component={BlankPage} />
