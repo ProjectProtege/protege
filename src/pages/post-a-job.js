@@ -4,7 +4,6 @@ import StatusBar from "../components/form/StatusBar";
 import JobTemplate from "../components/JobTemplate";
 import JobPostingConfirmation from "../components/JobPostingConfirmation";
 
-
 import {db, storage} from '../firebase/firebase'
 
 const PostAJob = () => {
@@ -30,13 +29,15 @@ const PostAJob = () => {
   }
 
   function sendJobToDB(data) {
-    const uploadTask = storage.ref(`images/${data.companyLogo.name}`).put(companyLogo)
+    const logoFileName = `${new Date().getTime()}${data.companyLogo.name}`
+
+    const uploadTask = storage.ref(`images/${logoFileName}`).put(companyLogo)
 
     uploadTask.then(
       db.collection('jobs').doc().set({
         approved: false,
         companyEmail: data.jobData.companyEmail,
-        companyLogo: data.companyLogo.name,
+        companyLogo: logoFileName,
         companyName: data.jobData.companyName,
         companyWebsite: data.jobData.companyWebsite,
         companyHQ: data.jobData.companyHQ,

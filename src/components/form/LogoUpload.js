@@ -4,10 +4,13 @@ function LogoUpload({ recievingLogo }, props) {
   const [fileResult, setFileResult] = useState(undefined);
   const [fileName, setFileName] = useState("");
 
+
   const handleLogoChange = (e) => {
     e.preventDefault();
+
     let reader = new FileReader();
     let file = e.target.files[0];
+
     if (file) {
       reader.readAsDataURL(file);
       reader.onloadend = () => {
@@ -17,6 +20,7 @@ function LogoUpload({ recievingLogo }, props) {
       };
     }
   };
+
 
   return (
     <div className="md:flex">

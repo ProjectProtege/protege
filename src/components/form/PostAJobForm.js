@@ -32,6 +32,7 @@ const PostAJobForm = ({
           companyName: "",
           companyWebsite: "",
           companyEmail: "",
+          companyLogo: '',
           companyDescription: "",
           companyHQ: ""
         }}
