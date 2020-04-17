@@ -109,7 +109,7 @@ const Nav = () => {
           </li>
 
           <li className="btn btn-teal">
-            <Link to={ROUTES.JOB_BOARD}>Post a Job</Link>
+            <Link to={ROUTES.POST_A_JOB}>Post a Job</Link>
           </li>
         </ul>
       </nav>

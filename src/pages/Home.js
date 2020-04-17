@@ -1,145 +1,68 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import FindYourNext from "../components/FindYourNext";
 import JobCard from "../components/JobCard";
-
 import heroBG from "../assets/images/bg-pattern.png";
 import mobileBG from '../assets/images/mobile-bg-pattern.png'
+import {db} from '../firebase/firebase'
 
-const tempJobData = [
-  {
-    postId: "124532",
-    companyName: "Fake.io",
-    positionTitle: "Junior Frontend Developer",
-    location: "Jacksonville, FL",
-    postDate: "Mar. 24",
-    focus: "Front-end",
-  },
-  {
-    postId: "7345345",
-    companyName: "NotReal",
-    positionTitle: "Junior Backend Developer",
-    location: "Seattle, WA",
-    postDate: "Mar. 24",
-    focus: "Front-end",
-  },
-  {
-    postId: "98613855",
-    companyName: "BildStuph",
-    positionTitle: "Junior Frontend Developer",
-    location: "Jacksonville, FL",
-    postDate: "Mar. 24",
-    focus: "Front-end",
-  },
-  {
-    postId: "8946541",
-    companyName: "Fake.io",
-    positionTitle: "Junior Frontend Developer",
-    location: "Jacksonville, FL",
-    postDate: "Mar. 24",
-    focus: "Front-end",
-  },
-  {
-    postId: "684354",
-    companyName: "Fake.io",
-    positionTitle: "Junior Frontend Developer",
-    location: "Jacksonville, FL",
-    postDate: "Mar. 24",
-    focus: "Front-end",
-  },
-  {
-    postId: "89646874",
-    companyName: "Fake.io",
-    positionTitle: "Junior Frontend Developer",
-    location: "Jacksonville, FL",
-    postDate: "Mar. 24",
-    focus: "Front-end",
-  },
-  {
-    postId: "138543541685",
-    companyName: "NotReal",
-    positionTitle: "Junior Backend Developer",
-    location: "Seattle, WA",
-    postDate: "Mar. 24",
-    focus: "Front-end",
-  },
-  {
-    postId: "6846168",
-    companyName: "BildStuph",
-    positionTitle: "Junior Frontend Developer",
-    location: "Jacksonville, FL",
-    postDate: "Mar. 24",
-    focus: "Front-end",
-  },
-  {
-    postId: "6874358",
-    companyName: "Fake.io",
-    positionTitle: "Junior Frontend Developer",
-    location: "Jacksonville, FL",
-    postDate: "Mar. 24",
-    focus: "Front-end",
-  },
-  {
-    postId: "6813584",
-    companyName: "Fake.io",
-    positionTitle: "Junior Frontend Developer",
-    location: "Jacksonville, FL",
-    postDate: "Mar. 24",
-    tags: ["React", "GraphQL", "Apollo"],
-  },
-  {
-    postId: "681384384",
-    companyName: "Fake.io",
-    positionTitle: "Junior Frontend Developer",
-    location: "Jacksonville, FL",
-    postDate: "Mar. 24",
-    focus: "Front-end",
-  },
-  {
-    postId: "1688354",
-    companyName: "Fake.io",
-    positionTitle: "Junior Frontend Developer",
-    location: "Jacksonville, FL",
-    postDate: "Mar. 24",
-    focus: "Front-end",
-  },
-  {
-    postId: "4168435",
-    companyName: "Fake.io",
-    positionTitle: "Junior Frontend Developer",
-    location: "Jacksonville, FL",
-    postDate: "Mar. 24",
-    focus: "Front-end",
-  },
-];
+const Home = () => {
 
-const Home = () => (
-  <div>
-    <img src={heroBG} alt="" className="hidden md:block absolute top-0 left-0 w-full" />
-    <img src={mobileBG} alt="" className="fixed md:hidden w-full h-full"/>
+  const [jobs, setJobs] = useState([])
 
-    <div className="relative pt-20 lg:pt-32 px-2">
-      <FindYourNext />
-      <div className="flex md:w-3/4 flex-col text-center mx-auto mt-6">
-        <p className="tracking-wide lg:w-3/5 mx-auto text-lg text-blue-400 mb-6">
-          Looking for your next junior developer role? Look no further! Any jobs
-          listed here are geared for those hungry to work and learn.
-        </p>
-        <button className="btn btn-teal mx-auto">Find A Job</button>
-      </div>
+  useEffect(() => {
+    (async function retrieveJobs() {
+      const querySnapshot = await db.collection('jobs').where('approved', '==', true).get()
+  
+      const jobList = querySnapshot.docs.map(documentSnapshot => {
+        let doc = documentSnapshot
+        let job = documentSnapshot.data()
+    
+        return {
+          id: doc.id,
+          jobTitle: job.jobtitle,
+          roleFocus: job.roleFocus,
+          companyHQ: job.companyHQ,
+          companyName: job.companyName,
+          postedAt: job.postedAt,
+          companyLogo: job.companyLogo
+        }
+      })
+      setJobs(jobList)
+    })();
+  }, [])
 
-      <div className="mt-12 lg:pt-16 mx-auto" style={{ maxWidth: 680 }}>
-        <h2 className="text-center text-2xl text-blue-500 font-bold mb-8">
-          Latest Opportunities
-        </h2>
+  return (
+    <div>
+      <img src={heroBG} alt="" className="hidden md:block absolute top-0 left-0 w-full" />
 
-        <div>
-          {tempJobData.slice(0, 6).map((job) => (
-            <JobCard key={job.postId} job={job} />
-          ))}
+      <img src={mobileBG} alt="" className="fixed md:hidden w-full h-full"/>
+
+      <div className="relative pt-20 lg:pt-32 px-2">
+        <FindYourNext />
+
+        <div className="flex md:w-3/4 flex-col text-center mx-auto mt-6">
+          <p className="tracking-wide lg:w-3/5 mx-auto text-lg text-blue-400 mb-6">
+            Looking for your next junior developer role? Look no further! Any jobs
+            listed here are geared for those hungry to work and learn.
+          </p>
+          
+          <button className="btn btn-teal mx-auto">Find A Job</button>
+        </div>
+
+        <div className="mt-12 lg:pt-16 mx-auto" style={{ maxWidth: 680 }}>
+          <h2 className="text-center text-2xl text-blue-500 font-bold mb-8">
+            Latest Opportunities
+          </h2>
+
+          <div>
+            {jobs.slice(0, 6).map((job) => (
+              <JobCard key={job.Id} job={job} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  )
+};
 
 export default Home;

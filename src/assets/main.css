@@ -8234,6 +8234,7 @@ video {
 .btn-blue {
   background-color: #353649;
   color: #fff;
+  font-weight: 500;
 }
 
 .btn:hover {
@@ -8243,11 +8244,11 @@ video {
   transition-duration: 100ms;
 }
 
-/*--Buttons--*/
+/*--Input--*/
 
 .input {
   border-width: 1px;
-  border-color: #cbd5e0;
+  border-color: #718096;
   padding: 0.5rem;
 }
 
@@ -8268,19 +8269,6 @@ video {
   transform: scale(1);
   opacity: 1;
   visibility: visible;
-}
-
-/*--Inputs--*/
-
-.input {
-  border-width: 1px;
-  border-color: #868692;
-  padding: 0.5rem
-}
-
-.input-error {
-  color: #E53E3E;
-  font-size: 0.75rem
 }
 
 @media (min-width: 640px) {

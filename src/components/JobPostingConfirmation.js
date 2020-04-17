@@ -57,7 +57,7 @@ const JobPostingConfirmation = ({ props }) => {
 
       </ul>
 
-      <button class="btn btn-teal mt-12">
+      <button className="btn btn-teal mt-12">
           <Link to="/">
               Back to homepage
           </Link>

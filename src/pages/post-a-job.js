@@ -1,28 +1,56 @@
 import React, { useState } from "react";
-
 import PostAJobForm from "../components/form/PostAJobForm";
 import StatusBar from "../components/form/StatusBar";
 import JobTemplate from "../components/JobTemplate";
 import JobPostingConfirmation from "../components/JobPostingConfirmation";
 
+
+import {db, storage} from '../firebase/firebase'
+
 const PostAJob = () => {
   const [status, setStatus] = useState(1);
+
   const [jobData, setJobData] = useState();
+
   const [companyLogo, setcompanyLogo] = useState(undefined);
+
   function receivingJobData(e) {
     setJobData(e);
     setStatus(2);
   }
+
   function recievingLogo2(logo) {
     setcompanyLogo(logo);
   }
+
   function recievingTemplateApproval(e) {
-    console.log("recieved template approval");
     setStatus(3);
+    console.log(companyLogo)
+    sendJobToDB({jobData, companyLogo});
+  }
+
+  function sendJobToDB(data) {
+    const uploadTask = storage.ref(`images/${data.companyLogo.name}`).put(companyLogo)
+
+    uploadTask.then(
+      db.collection('jobs').doc().set({
+        approved: false,
+        companyEmail: data.jobData.companyEmail,
+        companyLogo: `gs://protege-dev-env.appspot.com/images/${data.companyLogo.name}`,
+        companyName: data.jobData.companyName,
+        companyWebsite: data.jobData.companyWebsite,
+        howToApply: data.jobData.howToApply,
+        jobDescription: data.jobData.jobDescription,
+        jobtitle: data.jobData.jobTitle,
+        positionType: data.jobData.positionType,
+        postedAt: Date.now(),
+        roleFocus: data.jobData.roleFocus
+      })
+    )
   }
 
   return (
-    <div className="container mx-auto mt-6 md:mt-12 p-2">
+    <div className="container mx-auto mt-24 md:mt-32 p-2">
       <h1 className="text-lg md:text-2xl text-blue-500 font-bold text-center leading-snug">
         Inexperienced doesn’t mean incapable. <br />
         Fill your role with ambition.
@@ -35,13 +63,19 @@ const PostAJob = () => {
           receivingJobData={receivingJobData}
         />
       )}
+
       {status === 2 && jobData && (
-        <JobTemplate
-          props={jobData}
-          logo={companyLogo}
-          recievingTemplateApproval={recievingTemplateApproval}
-        />
+        <>
+          <JobTemplate
+            props={jobData}
+            logo={companyLogo}
+          />
+          <button className="btn btn-blue mt-8" onClick=    {recievingTemplateApproval}>
+            Approve
+          </button>
+        </>
       )}
+
       {status === 3 && jobData && <JobPostingConfirmation props={jobData} />}
     </div>
   );

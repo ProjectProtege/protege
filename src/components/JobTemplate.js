@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const JobTemplate = ({ recievingTemplateApproval, logo, props }) => {
+const JobTemplate = ({ logo, props }) => {
   const [companyLogo, setCompanyLogo] = useState(undefined);
 
   function readLogo(logo) {
@@ -138,10 +138,6 @@ const JobTemplate = ({ recievingTemplateApproval, logo, props }) => {
           <button className="btn btn-teal mt-8">Apply</button>
         </a>
       </div>
-
-      <button className="btn btn-teal mt-8" onClick={recievingTemplateApproval}>
-        Confirm Your Posting
-      </button>
       </div>
     </>
   );
