@@ -33,6 +33,8 @@ const PostAJob = () => {
   function sendJobToDB(data) {
     const logoFileName = `${new Date().getTime()}${data.companyLogo.name}`
 
+    const postDate = firebase.firestore.Timestamp.fromDate(new Date())
+
     const uploadTask = storage.ref(`images/${logoFileName}`).put(companyLogo)
 
     uploadTask.then(
@@ -47,7 +49,7 @@ const PostAJob = () => {
         jobDescription: data.jobData.jobDescription,
         jobtitle: data.jobData.jobTitle,
         positionType: data.jobData.positionType,
-        postedAt: firebase.firestore.Timestamp.fromDate(new Date()),
+        postedAt: postDate,
         roleFocus: data.jobData.roleFocus
       })
     )
