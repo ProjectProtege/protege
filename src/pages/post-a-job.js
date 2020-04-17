@@ -5,6 +5,8 @@ import JobTemplate from "../components/JobTemplate";
 import JobPostingConfirmation from "../components/JobPostingConfirmation";
 
 import {db, storage} from '../firebase/firebase'
+import firebase from 'firebase'
+
 
 const PostAJob = () => {
   const [status, setStatus] = useState(1);
@@ -45,7 +47,7 @@ const PostAJob = () => {
         jobDescription: data.jobData.jobDescription,
         jobtitle: data.jobData.jobTitle,
         positionType: data.jobData.positionType,
-        postedAt: Date.now(),
+        postedAt: firebase.firestore.Timestamp.fromDate(new Date()),
         roleFocus: data.jobData.roleFocus
       })
     )
