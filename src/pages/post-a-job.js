@@ -36,9 +36,10 @@ const PostAJob = () => {
       db.collection('jobs').doc().set({
         approved: false,
         companyEmail: data.jobData.companyEmail,
-        companyLogo: `gs://protege-dev-env.appspot.com/images/${data.companyLogo.name}`,
+        companyLogo: data.companyLogo.name,
         companyName: data.jobData.companyName,
         companyWebsite: data.jobData.companyWebsite,
+        companyHQ: data.jobData.companyHQ,
         howToApply: data.jobData.howToApply,
         jobDescription: data.jobData.jobDescription,
         jobtitle: data.jobData.jobTitle,

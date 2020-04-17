@@ -19,7 +19,7 @@ const JobCard = ({ job }) => {
   return (
     <Link
       to="/"
-      className="flex mb-6 md:mb-12 px-3 md:px-6 py-4 bg-white shadow-md border-l-4 border-teal-500"
+      className="flex mb-6 md:mb-12 px-3 md:px-6 py-4 bg-white shadow border-l-4 border-teal-500 transform hover:scale-105 hover:shadow-lg transition duration-150 ease-in-out"
     >
       <div
         className="hidden md:block shadow-md rounded-full p-2 md:w-1/6 overflow-hidden"
