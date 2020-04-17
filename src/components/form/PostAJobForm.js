@@ -33,6 +33,7 @@ const PostAJobForm = ({
           companyWebsite: "",
           companyEmail: "",
           companyDescription: "",
+          companyHQ: ""
         }}
         validationSchema={Yup.object({
           jobTitle: Yup.string().required("Job title is a required field."),
@@ -53,8 +54,7 @@ const PostAJobForm = ({
             "Please give a brief description of the company and culture."
           ),
           companyLogo: Yup.mixed(),
-          // .required('need a logo!')
-          //  .test('fileSize', "File Size is too large", value => value.size <= FILE_SIZE) .test('fileType', "Unsupported File Format", value => SUPPORTED_FORMATS.includes(value.type) )
+          companyHQ: Yup.string().required("Please provide a location for your office headquarters.")
         })}
         onSubmit={(values, { setSubmitting }) => {
           receivingJobData(values);
@@ -116,7 +116,7 @@ const PostAJobForm = ({
                       <option value="" className="text-gray-300">
                         Select One...
                       </option>
-                      
+
                       <option value="Front-end">Front-end</option>
 
                       <option value="Back-end">Back-end</option>
@@ -211,7 +211,7 @@ const PostAJobForm = ({
                     className="input"
                     type="text"
                   ></Field>
-                  
+
                   <ErrorMessage
                     name="howToApply"
                     component="span"
@@ -324,7 +324,7 @@ const PostAJobForm = ({
                       />
                     </div>
                   </div>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col mb-3">
                     <label
                       htmlFor="companyDescription"
                       className="text-blue-500 font-bold mb-2"
@@ -347,6 +347,31 @@ const PostAJobForm = ({
 
                     <ErrorMessage
                       name="companyDescription"
+                      component="span"
+                      className="input-error"
+                    />
+                  </div>
+
+                  <div className="flex flex-col">
+                    <label
+                      htmlFor="companyEmail"
+                      className="text-blue-500 font-bold"
+                    >
+                      Company Headquarters
+                    </label>
+
+                    <span className="text-blue-200 text-xs tracking-tight mb-2">
+                      These are remote job listings, but where is your main office?
+                    </span>
+
+                    <Field
+                      id="companyHQ"
+                      name="companyHQ"
+                      className="input"
+                    />
+
+                    <ErrorMessage
+                      name="companyHQ"
                       component="span"
                       className="input-error"
                     />

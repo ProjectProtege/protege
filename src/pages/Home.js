@@ -56,7 +56,7 @@ const Home = () => {
 
           <div>
             {jobs.slice(0, 6).map((job) => (
-              <JobCard key={job.Id} job={job} />
+              <JobCard key={job.id} job={job} />
             ))}
           </div>
         </div>
