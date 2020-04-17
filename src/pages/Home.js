@@ -4,6 +4,7 @@ import JobCard from "../components/JobCard";
 import heroBG from "../assets/images/bg-pattern.png";
 import mobileBG from '../assets/images/mobile-bg-pattern.png'
 import {db} from '../firebase/firebase'
+import { Link } from "react-router-dom";
 
 const Home = () => {
 
@@ -46,7 +47,7 @@ const Home = () => {
             listed here are geared for those hungry to work and learn.
           </p>
           
-          <button className="btn btn-teal mx-auto">Find A Job</button>
+          <button className="btn btn-teal mx-auto"><Link to='/job-board'>Find a Job</Link></button>
         </div>
 
         <div className="mt-12 lg:pt-16 mx-auto" style={{ maxWidth: 680 }}>

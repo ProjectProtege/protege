@@ -5,6 +5,25 @@ import { storage } from '../firebase/firebase'
 const JobCard = ({ job }) => {
   const [logoUrl, setLogoUrl] = useState()
 
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'June',
+    'July',
+    'Aug',
+    'Sept',
+    'Oct',
+    'Nov',
+    'Dec'
+  ]
+
+  const postDate = job.postedAt.toDate()
+
+  const formattedPostDate = `${months[postDate.getMonth()+1]} ${postDate.getDate()}`
+
   useEffect(() =>  {
     storage
       .ref('images')
@@ -40,8 +59,8 @@ const JobCard = ({ job }) => {
         </div>
 
         <div className="text-right flex flex-col justify-between">
-          <p className="text-blue-100">
-            {job.postedAt.toDate().toLocaleDateString()}
+          <p className="text-teal-600 font-semibold">
+            {formattedPostDate}
           </p>
 
           <p className="text-blue-100 text-sm">{job.companyHQ}</p>
