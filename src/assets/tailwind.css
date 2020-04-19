@@ -5,17 +5,42 @@
 /*--Buttons--*/
 
 .btn {
-  @apply px-4 py-1 font-bold shadow transition-transform duration-200 transform
+  @apply px-4 py-1 font-bold shadow transition-transform duration-200 transform uppercase;
 }
 
 .btn-teal {
-  @apply bg-teal-300 text-blue-500
+  @apply bg-teal-300 text-blue-500;
 }
 
 .btn-blue {
-  @apply bg-blue-500 text-white
+  @apply bg-blue-500 text-white font-medium;
 }
 
 .btn:hover {
-  @apply shadow-md scale-105
+  @apply shadow-md scale-105 duration-100;
+}
+
+
+/*--Input--*/
+
+.input {
+  @apply border border-gray-600 p-2;
+}
+
+.input-error {
+  @apply text-error text-xs;
+}
+
+.quick-filter .submenu {
+  transform: scale(0);
+  opacity: 0;
+  transition: 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  visibility: hidden;
+}
+
+.quick-filter:hover .submenu, 
+.quick-filter:focus-within .submenu {
+  transform: scale(1);
+  opacity: 1;
+  visibility: visible;
 }

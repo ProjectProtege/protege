@@ -1,5 +1,6 @@
 export const HOME = '/'
-export const PROJECT_BOARD = '/project-board'
-export const CONTRIBUTE = '/contribute'
+export const JOB_BOARD = '/job-board'
+export const LEARNING = '/learning-resources'
 export const CONTACT = '/contact'
 export const INDIVIDUAL_JOB = '/individual-job'
+export const POST_A_JOB = '/post-a-job'

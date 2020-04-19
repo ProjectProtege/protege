@@ -1,32 +1,146 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 
+const JobTemplate = ({ logo, props }) => {
+  const [companyLogo, setCompanyLogo] = useState(undefined);
 
-const JobTemplate = ({props}) => {
-  const requirements = props.requirements.map((requirement, index) => <li className="mt-2" key={index}>{requirement || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.'}</li>)
-  const responsibilities = props.responsibilities.map((responsibility, index) => <li className="mt-2" key={index}>{responsibility || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'}</li>)
-  const benefits = props.benefits.map((benefit, index) => <li className="mt-2" key={index}>{benefit || 'Lorem ipsum dolor sit amet, consectetur.'}</li>)
-  return(
-  <div className=''>
-    {/* Needs Link back to Job List */}
-    {/* <a href='#'>Back to Job List </a> */}
-    <h1 className='mt-12 text-blue-500 font-bold text-2xl'>{props.positionTitle || 'Position Title'}, {props.company || "Company Name"}</h1>
-    <p className='mt-8 text-blue-300 '>
-      {props.aboutTheJob || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'}
-    </p>
-    <h2 className='mt-8 text-blue-500 font-bold text-2xl'>Requirements</h2>
-      <ul className='list-disc list-inside mt-8 text-blue-300 '>
-        {requirements}
-      </ul>
-    <h3 className='mt-8 text-blue-500 font-bold text-2xl'>Responsibilities</h3>
-    <ul className='list-disc list-inside mt-8 text-blue-300 '>
-      {responsibilities}
-    </ul>
-    <h4 className='mt-8 text-blue-500 font-bold text-2xl'>Benefits</h4>
-    <ul className='list-disc list-inside mt-8 text-blue-300 '>
-      {benefits}
-    </ul>
-    <button className='btn btn-teal mt-8'>Apply</button>
-  </div>)
-}
+  function readLogo(logo) {
+    let reader = new FileReader();
+    let file = logo;
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setCompanyLogo(reader.result);
+      };
+    }
+  }
 
-export default JobTemplate
+  const quillStyle = {
+    h1: "text-blue-500 font-bold text-xl",
+    h2: "text-blue-500 font-bold text-lg",
+    h3: "text-blue-500 font-bold text-md",
+    a: "text-teal-600 font-bold",
+    p: "text-blue-300",
+    ol: "list-decimal list-inside",
+    ul: "list-disc list-inside",
+    li: "pl-2 text-blue-300",
+  };
+
+  useEffect(() => {
+    // Cleans up the text provided by QuillJS wysiwyg
+    function styleChildren(children) {
+      children.forEach((child) => {
+        if (child.tagName === "H1") {
+          child.classList = quillStyle.h1;
+        }
+        if (child.tagName === "H2") {
+          child.classList = quillStyle.h2;
+        }
+        if (child.tagName === "H3") {
+          child.classList = quillStyle.h3;
+        }
+        if (child.tagName === "P") {
+          child.classList = quillStyle.p;
+        }
+        if (child.tagName === "A") {
+          child.classList = quillStyle.a;
+        }
+        if (child.tagName === "OL") {
+          child.classList = quillStyle.ol;
+          let listItems = [...child.children];
+          listItems.forEach((listItem) => {
+            listItem.classList = quillStyle.li;
+          });
+        }
+        if (child.tagName === "UL") {
+          child.classList = quillStyle.ul;
+          let listItems = [...child.children];
+          listItems.forEach((listItem) => {
+            listItem.classList = quillStyle.li;
+          });
+        }
+        if (child.tagName === "LI") {
+          child.classList = quillStyle.li;
+        }
+      });
+    }
+    var jobDesc = document.getElementById("jobDesc");
+    var jobChildren = [...jobDesc.children];
+    styleChildren(jobChildren);
+    var companyDesc = document.getElementById("companyDesc");
+    var companyChildren = [...companyDesc.children];
+    styleChildren(companyChildren);
+
+    // Setting Logo
+    readLogo(logo);
+  });
+
+  function createMarkup(text) {
+    return { __html: text };
+  }
+
+  return (
+    <>
+      <div className='mx-auto' style={{maxWidth: 960}}>
+      <div className="md:flex justify-center">
+        <div className="md:w-3/4 md:pr-12">
+          <h2 className="text-blue-500 font-bold text-3xl">
+            {props.jobTitle || "Position Title"}
+          </h2>
+
+          <div className="text-gray-600 uppercase tracking-tight text-md mb-6">
+            {props.roleFocus} • {props.positionType}
+          </div>
+
+          <h3 className="text-blue-500 font-bold text-2xl mb-4">Job Description</h3>
+
+          <div
+            id="jobDesc"
+            dangerouslySetInnerHTML={createMarkup(props.jobDescription)}
+            className='mb-6'
+          ></div>
+
+          <h4 className="text-blue-500 font-bold text-2xl mb-4">
+            About {props.companyName}
+          </h4>
+
+          <div
+            className="mt-2 text-blue-300"
+            id="companyDesc"
+            dangerouslySetInnerHTML={createMarkup(props.companyDescription)}
+          ></div>
+        </div>
+        <div className="md:w-1/4 mt-16">
+          <div className='bg-gray-200 p-4'>
+
+            {logo ? (
+              <img
+                id="companyLogo"
+                className="mb-6 object-contain"
+                src={companyLogo}
+                alt={`${props.companyName} logo`}
+              />
+            ) : null}
+
+            <h4 className="text-blue-500 font-bold text-lg mb-3">
+              {props.companyName}
+            </h4>
+
+            <div className="text-blue-500 uppercase tracking-tight text-md">
+              <a className='opacity-50 underline hover:opacity-100' href={props.companyWebsite}><p>Visit website</p></a>
+              <a className='opacity-50 underline hover:opacity-100' href={`mailto:${props.companyEmail}`}><p>Contact Email</p></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <a href={props.howToApply}>
+          <button className="btn btn-teal mt-8">Apply</button>
+        </a>
+      </div>
+      </div>
+    </>
+  );
+};
+
+export default JobTemplate;

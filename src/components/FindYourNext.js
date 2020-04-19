@@ -11,7 +11,7 @@ const FindYourNext = () => {
     return (
         <div className='flex justify-center mt-8'>
             <div className='md:flex items-center'>
-                <div className='flex-col text-gray-800 font-bold text-5xl'>Find your next </div>
+                <div className='flex-col text-center text-gray-800 font-bold text-3xl md:text-5xl'>Find your next</div>
 
                 <div className="flex flex-col text-gray-800 text-center text-3xl  ml-2 font-mono" style={{borderBottom: '3px solid #54AF8E', width: 300}}>{nextWords[word]}</div>
             </div>

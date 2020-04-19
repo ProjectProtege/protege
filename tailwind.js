@@ -47,7 +47,8 @@ module.exports = {
         700: '#2a2b3a',
         800: '#252633',
         900: '#20202c',
-      }
+      },
+      error: '#E53E3E'
     },
     spacing: {
       px: '1px',
@@ -102,6 +103,7 @@ module.exports = {
     borderWidth: {
       default: '1px',
       '0': '0',
+      '1': '1px',
       '2': '2px',
       '4': '4px',
       '8': '8px',
