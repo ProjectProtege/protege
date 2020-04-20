@@ -85,7 +85,7 @@ const JobTemplate = ({ logo, props }) => {
     readLogo(logo);
 
     // Retrieve logo to display in live job posting
-    retrieveLogo();
+    //retrieveLogo();
   });
 
   function createMarkup(text) {

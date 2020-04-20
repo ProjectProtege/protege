@@ -11,9 +11,12 @@ const PostAJobForm = ({
   label,
   receivingJobData,
   recievingLogo2,
+  jobData,
   ...props
 }) => {
   const [fileValue, setFileValue] = useState(undefined);
+
+  console.log(jobData)
 
   function recievingLogo(logo) {
     setFileValue(logo);
@@ -24,17 +27,17 @@ const PostAJobForm = ({
     <div className="lg:w-3/5 mx-auto">
       <Formik
         initialValues={{
-          jobTitle: "",
-          roleFocus: "",
-          positionType: "",
-          jobDescription: "",
-          howToApply: "",
-          companyName: "",
-          companyWebsite: "",
-          companyEmail: "",
-          companyLogo: '',
-          companyDescription: "",
-          companyHQ: ""
+          jobTitle: jobData ? `${jobData.jobTitle}` : '',
+          roleFocus: jobData ? `${jobData.roleFocus}` : '',
+          positionType: jobData ? `${jobData.positionType}` : '',
+          jobDescription: jobData ? `${jobData.jobDescription}` : '',
+          howToApply: jobData ? `${jobData.howToApply}` : '',
+          companyName: jobData ? `${jobData.companyName}` : '',
+          companyWebsite: jobData ? `${jobData.companyWebsite}` : '',
+          companyEmail: jobData ? `${jobData.companyEmail}` : '',
+          companyLogo: jobData ? `${jobData.companyLogo}` : '',
+          companyDescription: jobData ? `${jobData.companyDescription}` : '',
+          companyHQ: jobData ? `${jobData.companyHQ}` : ''
         }}
         validationSchema={Yup.object({
           jobTitle: Yup.string().required("Job title is a required field."),
