@@ -45,6 +45,7 @@ const PostAJob = () => {
         companyName: data.jobData.companyName,
         companyWebsite: data.jobData.companyWebsite,
         companyHQ: data.jobData.companyHQ,
+        companyDescription: data.jobData.companyDescription,
         howToApply: data.jobData.howToApply,
         jobDescription: data.jobData.jobDescription,
         jobtitle: data.jobData.jobTitle,
