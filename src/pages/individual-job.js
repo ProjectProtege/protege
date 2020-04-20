@@ -27,10 +27,10 @@ const IndividualJobPage = () => {
   if(!job) return null
 
   return (
-    <div className="flex flex-col pt-32 mx-auto container justify-center">
+    <div className="flex flex-col pt-24 md:pt-32 px-2 mx-auto container justify-center">
       <div className="lg:w-3/5 mx-auto">
         <Link
-          className="flex items-center text-teal-600 mb-6"
+          className="flex items-center text-teal-600 mb-3 md:mb-6"
           to={ROUTES.JOB_BOARD}
         >
           <svg

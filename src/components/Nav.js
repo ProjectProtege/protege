@@ -39,7 +39,7 @@ const Nav = () => {
             <Link to={ROUTES.LEARNING}>Learning Resources</Link>
           </li>
           <li className="bg-teal-300 px-4 mt-3 mb-1 w-1/2 py-1 mx-auto font-bold">
-            <Link to={ROUTES.JOB_BOARD}>Post a Job</Link>
+            <Link to={ROUTES.POST_A_JOB}>Post a Job</Link>
           </li>
         </ul>
       </nav>
