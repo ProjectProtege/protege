@@ -85,7 +85,7 @@ const JobTemplate = ({ logo, props }) => {
     readLogo(logo);
 
     // Retrieve logo to display in live job posting
-    //retrieveLogo();
+    retrieveLogo();
   });
 
   function createMarkup(text) {
@@ -94,7 +94,7 @@ const JobTemplate = ({ logo, props }) => {
 
   return (
     <>
-      <div className="mx-auto" style={{ maxWidth: 960 }}>
+      <div className="mx-auto">
         <div className="md:flex justify-center">
           <div className="md:w-3/4 md:pr-12">
             <h2 className="text-blue-500 font-bold text-3xl">
@@ -128,12 +128,14 @@ const JobTemplate = ({ logo, props }) => {
           <div className="md:w-1/4 mt-8">
             <div className="bg-gray-200 p-4">
               {companyLogo ? (
-                <img
-                  id="companyLogo"
-                  className="mb-6 object-contain"
-                  src={companyLogo}
-                  alt={`${props.companyName} logo`}
-                />
+                <div className="w-full mb-6 md:w-1/2">
+                  <img
+                    id="companyLogo"
+                    className="w-full"
+                    src={companyLogo}
+                    alt={`${props.companyName} logo`}
+                  />
+                </div>
               ) : null}
 
               <h4 className="text-blue-500 font-bold text-lg mb-3">

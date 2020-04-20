@@ -55,9 +55,23 @@ const Home = () => {
             Latest Opportunities
           </h2>
 
-          <div>
+          <div
+            className='container'
+            animate={{
+              delay: 0.5,
+              opacity: [0,1],
+              transition: {
+                duration: .25,
+                when: "beforeChildren",
+                staggerChildren: 1
+              }
+            }}
+          >
             {jobs.slice(0, 6).map((job) => (
-              <JobCard key={job.id} job={job} />
+                <JobCard
+                  key={job.id}
+                  job={job}
+                />
             ))}
           </div>
         </div>

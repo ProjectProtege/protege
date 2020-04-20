@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import { storage } from '../firebase/firebase'
-
 const JobCard = ({ job }) => {
   const [logoUrl, setLogoUrl] = useState()
 
