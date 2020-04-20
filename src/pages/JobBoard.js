@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import JobCard from "../components/JobCard";
 import {db} from '../firebase/firebase'
 
-const JobBoard = ({location}) => {
+const JobBoard = ({location, match}) => {
   const [jobs, setJobs] = useState([])
 
   useEffect(() => {
@@ -78,7 +78,7 @@ const JobBoard = ({location}) => {
         {!jobFilter && (
           <React.Fragment>
             {jobs.map((job) => (
-              <JobCard key={job.id} job={job} />
+              <JobCard key={job.id} job={job}/>
             ))}
           </React.Fragment>
         )}
