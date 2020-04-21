@@ -27,7 +27,7 @@ const IndividualJobPage = () => {
   if(!job) return null
 
   return (
-    <div className="flex flex-col pt-24 md:pt-32 px-2 mx-auto container justify-center" style={{maxWidth: 960}}>
+    <div className="flex flex-col pt-24 md:pt-32 px-3 lg:px-0 mx-auto container justify-center lg:w-1/2">
         <Link
           className="flex items-center text-teal-600 mb-3 md:mb-6"
           to={ROUTES.JOB_BOARD}

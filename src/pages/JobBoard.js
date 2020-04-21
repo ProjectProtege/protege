@@ -47,31 +47,33 @@ const JobBoard = ({location, match}) => {
 
   return (
     <div className="container mx-auto pt-32 px-2 md:px-0">
-      <div className='w-full md:w-3/5 mx-auto'>
+      <div className='w-full lg:w-3/5 mx-auto'>
       <div className="flex justify-between mb-6">
         <h1 className="text-2xl font-semibold text-teal-600 mb-6">
           {jobFilter ? `${jobFilter} Jobs` : 'All Jobs'}
         </h1>
 
-        <div className="w-1/2 md:w-1/4">
+        <div className="w-1/2 md:w-1/4 relative">
           <label htmlFor="filter-by" className="sr-only">
             Filter
           </label>
 
-          <select
-            className="input rounded-full justify-end w-full cursor-pointer"
-            id="filter-by"
-            placeholder="Filter By"
-            onChange={event => setJobFilter(event.target.value)}
-            value={jobFilter}
-          >
-            <option value="">
-              All
-            </option>
-            <option value="Front-end">Front-end</option>
-            <option value="Back-end">Back-end</option>
-            <option value="Full-stack">Full-stack</option>
-          </select>
+          <div className='select-wrap'>
+            <select
+              className="input appearance-none rounded-full justify-end w-full cursor-pointer"
+              id="filter-by"
+              placeholder="Filter By"
+              onChange={event => setJobFilter(event.target.value)}
+              value={jobFilter}
+            >
+              <option value="">
+                All
+              </option>
+              <option value="Front-end">Front-end</option>
+              <option value="Back-end">Back-end</option>
+              <option value="Full-stack">Full-stack</option>
+            </select>
+          </div>
         </div>
       </div>
 

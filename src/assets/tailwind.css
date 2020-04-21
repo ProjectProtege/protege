@@ -31,6 +31,19 @@
   @apply text-error text-xs;
 }
 
+.select-wrap::after {
+  content: '▾';
+  position: absolute;
+  top: 50%;
+  margin-top: -18px;
+  right: 1rem;
+  z-index: 1;
+  color: #70d2b2;
+  line-height: 1;
+  font-size: 20px;
+  pointer-events: none; /* Don't interfere with clicks */
+}
+
 .quick-filter .submenu {
   transform: scale(0);
   opacity: 0;

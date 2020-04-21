@@ -111,22 +111,22 @@ const PostAJobForm = ({
                       Frontend, Backend, Full-Stack
                     </span>
 
-                    <Field
-                      id="role-focus"
-                      name="roleFocus"
-                      className="input"
-                      as="select"
-                    >
-                      <option value="" className="text-gray-300">
-                        Select One...
-                      </option>
+                      <Field
+                        id="role-focus"
+                        name="roleFocus"
+                        className="input"
+                        as="select"
+                      >
+                        <option value="" className="text-gray-300">
+                          Select One...
+                        </option>
 
-                      <option value="Front-end">Front-end</option>
+                        <option value="Front-end">Front-end</option>
 
-                      <option value="Back-end">Back-end</option>
+                        <option value="Back-end">Back-end</option>
 
-                      <option value="Full-stack">Full-Stack</option>
-                    </Field>
+                        <option value="Full-stack">Full-Stack</option>
+                      </Field>
 
                     <ErrorMessage
                       name="roleFocus"

@@ -157,7 +157,7 @@ const JobTemplate = ({ logo, props }) => {
                   <p className="opacity-75 hover:opacity-100">Contact email</p>
                 </a>
                 <a href={props.howToApply}>
-                  <button className="hidden md:visible btn btn-teal mt-8 w-full">Apply</button>
+                  <button className="hidden md:block btn btn-teal mt-8 w-full">Apply</button>
                 </a>
               </div>
             </div>
