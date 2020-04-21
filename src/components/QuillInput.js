@@ -4,7 +4,6 @@ import 'react-quill/dist/quill.snow.css';
 import '../assets/custom-quill.css';
 
 function QuillInput() {
-
   return (
     <ReactQuill />
   )
