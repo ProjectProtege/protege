@@ -1,39 +1,40 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { storage } from '../firebase/firebase'
+import { storage } from "../firebase/firebase";
 const JobCard = ({ job }) => {
-  const [logoUrl, setLogoUrl] = useState()
+  const [logoUrl, setLogoUrl] = useState();
 
   const months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'June',
-    'July',
-    'Aug',
-    'Sept',
-    'Oct',
-    'Nov',
-    'Dec'
-  ]
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "June",
+    "July",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
 
-  const postDate = job.postedAt.toDate()
+  const postDate = job.postedAt.toDate();
 
-  const formattedPostDate = `${months[postDate.getMonth()+1]} ${postDate.getDate()}`
+  const formattedPostDate = `${
+    months[postDate.getMonth() + 1]
+  } ${postDate.getDate()}`;
 
-  useEffect(() =>  {
+  useEffect(() => {
     storage
-      .ref('images')
+      .ref("images")
       .child(job.companyLogo)
       .getDownloadURL()
-      .then(url => {
-        setLogoUrl(url)
-      })
-    }, [job.companyLogo]
-  )
-  
+      .then((url) => {
+        setLogoUrl(url);
+      });
+  }, [job.companyLogo]);
+
   return (
     <Link
       to={`/job-board/${job.id}`}
@@ -43,7 +44,11 @@ const JobCard = ({ job }) => {
         className="hidden md:block shadow-md rounded-full p-2 md:w-1/6 overflow-hidden"
         style={{ width: 75, height: 75 }}
       >
-        <img src={logoUrl} alt={`${job.companyName} Logo`} className='h-full w-full'/>
+        <img
+          src={logoUrl}
+          alt={`${job.companyName} Logo`}
+          className="h-full w-full"
+        />
       </div>
 
       <div className="w-full md:w-11/12 flex justify-between md:pl-6">
@@ -58,15 +63,13 @@ const JobCard = ({ job }) => {
         </div>
 
         <div className="text-right flex flex-col justify-between">
-          <p className="text-teal-600 font-semibold">
-            {formattedPostDate}
-          </p>
+          <p className="text-teal-600 font-semibold">{formattedPostDate}</p>
 
           <p className="text-blue-100 text-sm">{job.companyHQ}</p>
         </div>
       </div>
     </Link>
-  )
+  );
 };
 
 export default JobCard;
