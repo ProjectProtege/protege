@@ -24,7 +24,7 @@
 /*--Input--*/
 
 .input {
-  @apply border border-gray-600 p-2;
+  @apply border border-blue-400 p-2;
 }
 
 .input-error {
@@ -56,4 +56,19 @@
   transform: scale(1);
   opacity: 1;
   visibility: visible;
+}
+
+
+/*-------Quill editor styles-----------------*/
+.ql-container {
+  min-height: 250px !important;
+}
+
+.ql-container.ql-snow,
+.ql-toolbar.ql-snow {
+  border: 1px solid #494a5b !important;
+}
+
+.ql-container.ql-snow {
+  border-top: 0px !important;
 }

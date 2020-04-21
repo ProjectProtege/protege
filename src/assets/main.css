@@ -8248,7 +8248,7 @@ video {
 
 .input {
   border-width: 1px;
-  border-color: #718096;
+  border-color: #494a5b;
   padding: 0.5rem;
 }
 
@@ -8282,6 +8282,21 @@ video {
   transform: scale(1);
   opacity: 1;
   visibility: visible;
+}
+
+/*-------Quill editor styles-----------------*/
+
+.ql-container {
+  min-height: 250px !important;
+}
+
+.ql-container.ql-snow,
+.ql-toolbar.ql-snow {
+  border: 1px solid #494a5b !important;
+}
+
+.ql-container.ql-snow {
+  border-top: 0px !important;
 }
 
 @media (min-width: 640px) {
