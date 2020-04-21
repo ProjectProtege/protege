@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import FindYourNext from "../components/FindYourNext";
 import JobCard from "../components/JobCard";
 import heroBG from "../assets/images/hero-bg-pattern.png";
-import mobileBG from "../assets/images/mobile-bg-pattern.png";
 import { db } from "../firebase/firebase";
 import { Link } from "react-router-dom";
 
@@ -42,8 +41,6 @@ const Home = () => {
         alt=""
         className="hidden md:block absolute top-0 left-0 w-full"
       />
-
-      <img src={mobileBG} alt="" className="fixed md:hidden w-full h-full" />
 
       <div className="relative pt-20 lg:pt-32 px-2">
         <FindYourNext />
