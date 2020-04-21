@@ -11,7 +11,7 @@ const Landing = () => (
 
         <h2 className="text-teal-600 font-bold text-3xl mb-12">Connecting Ambition</h2>
 
-        <p className="text-blue-400 text-lg">You can't teach amibtion, but you can hire it!<br />Remote job opportunities for junior developers.</p>
+        <p className="text-blue-400 text-lg">You can't teach ambition, but you can hire it!<br />Remote job opportunities for junior developers.</p>
       </div>
 
       <div>
