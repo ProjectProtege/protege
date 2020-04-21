@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import FindYourNext from "../components/FindYourNext";
 import JobCard from "../components/JobCard";
-import heroBG from "../assets/images/bg-pattern.png";
+import heroBG from "../assets/images/hero-bg-pattern.png";
 import mobileBG from '../assets/images/mobile-bg-pattern.png'
 import {db} from '../firebase/firebase'
 import { Link } from "react-router-dom";
