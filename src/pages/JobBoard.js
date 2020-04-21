@@ -10,6 +10,7 @@ const JobBoard = ({ location, match }) => {
       const querySnapshot = await db
         .collection("jobs")
         .where("approved", "==", true)
+        .orderBy('postedAt', 'desc')
         .get();
 
       const jobList = querySnapshot.docs.map((documentSnapshot) => {
