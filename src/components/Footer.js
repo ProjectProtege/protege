@@ -19,6 +19,8 @@ const Footer = () => (
             className="px-4 py-1 w-full md:w-2/5 my-3 md:my-0"
             id="email"
             autocomplete="off"
+            name="email"
+            required
           />
 
           <input type="hidden" name="form-name" value="email-list"/>
