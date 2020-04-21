@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { storage } from "../firebase/firebase";
+import { motion } from 'framer-motion'
+
+
 const JobCard = ({ job }) => {
   const [logoUrl, setLogoUrl] = useState();
 
@@ -41,9 +44,19 @@ const JobCard = ({ job }) => {
       className="flex mb-6 md:mb-12 px-3 md:px-6 py-4 bg-white shadow border-l-4 border-teal-500 transform hover:scale-105 hover:shadow-lg transition duration-150 ease-in-out"
     >
       <div
-        className="hidden md:block shadow-md rounded-full p-2 md:w-1/6 overflow-hidden"
+        className="hidden md:block shadow-md rounded-full p-2 md:w-1/6 overflow-hidden relative"
         style={{ width: 75, height: 75 }}
       >
+        <motion.div
+          style={{width: 75, height: 75}}
+          className="absolute bg-white"
+          animate={{
+            opacity: [1,0]
+          }}
+          transition={{
+            delay: .1
+          }}
+        />
         <img
           src={logoUrl}
           alt={`${job.companyName} Logo`}
