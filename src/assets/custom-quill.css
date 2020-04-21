@@ -1,0 +1,8 @@
+.ql-container {
+  min-height: 250px !important
+}
+
+.ql-container.ql-snow,
+.ql-toolbar.ql-snow {
+  border: 1px solid #cbd5e0 !important;
+}
