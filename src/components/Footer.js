@@ -5,7 +5,7 @@ import * as ROUTES from "../constants/routes";
 const Footer = () => (
   <footer className="mt-8">
     <div className="bg-gray-200 py-4 px-3 md:px-0 mb-6">
-      <form className="container mx-auto">
+      <form className="container mx-auto" name="email-list" method="post">
         <div className="flex flex-col md:flex-row justify-center items-center">
           <label
             className="text-blue-500 text-lg md:mr-6 font-bold text-center md:text-left"
@@ -18,7 +18,10 @@ const Footer = () => (
             type="text"
             className="px-4 py-1 w-full md:w-2/5 my-3 md:my-0"
             id="email"
+            autocomplete="off"
           />
+
+          <input type="hidden" name="form-name" value="email-list"/>
 
           <button type="submit" className="btn btn-blue w-full md:w-auto">
             Sign Up
