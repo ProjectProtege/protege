@@ -1,9 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import * as ROUTES from "../constants/routes";
+import { motion } from 'framer-motion'
 
 const Footer = () => (
-  <footer className="mt-8">
+  <motion.footer
+    className="mt-20"
+    animate={{
+      opacity:[0,1],
+      transition: {
+        delay: .5
+      }
+    }}
+  >
     <div className="bg-gray-200 py-4 px-3 md:px-0 mb-6">
       <form className="container mx-auto" name="email-list" method="post">
         <div className="flex flex-col md:flex-row justify-center items-center">
@@ -73,13 +82,13 @@ const Footer = () => (
             </li>
 
             <li className='mb-1'>
-              <Link className="text-blue-400 opacity-75 hover:opacity-100" to={ROUTES.JOB_BOARD}>
+              <Link className="text-blue-400 opacity-75 hover:opacity-100" to={ROUTES.LEARNING}>
                 Learning Resources
               </Link>
             </li>
 
             <li>
-              <Link className="text-blue-400 opacity-75 hover:opacity-100" to={ROUTES.JOB_BOARD}>Post a Job</Link>
+              <Link className="text-blue-400 opacity-75 hover:opacity-100" to={ROUTES.POST_A_JOB}>Post a Job</Link>
             </li>
           </ul>
 
@@ -93,7 +102,7 @@ const Footer = () => (
     <div className="m-4 flex-col mx-auto text-center text-gray-600 tracking-wide">
       Copyright 2020 © Protege.dev
     </div>
-  </footer>
+  </motion.footer>
 );
 
 export default Footer;

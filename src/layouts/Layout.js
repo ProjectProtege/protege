@@ -15,7 +15,9 @@ const Layout = ({children}) => (
       </div>
     </header>
 
-    <main className="relative flex-grow">
+    <main
+      className="relative flex-grow"
+    >
       {children}
     </main>
 
