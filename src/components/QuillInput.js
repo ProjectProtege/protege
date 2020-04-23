@@ -1,11 +1,9 @@
-import React from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import React from 'react'
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
 
 function QuillInput() {
-  return (
-    <ReactQuill />
-  )
+  return <ReactQuill />
 }
 
 export default QuillInput
