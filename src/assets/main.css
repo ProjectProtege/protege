@@ -8248,7 +8248,7 @@ video {
 
 .input {
   border-width: 1px;
-  border-color: #494a5b;
+  border-color: #868692;
   padding: 0.5rem;
 }
 
@@ -8257,14 +8257,26 @@ video {
   font-size: 0.75rem;
 }
 
+.input-select {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 100%;
+  cursor: pointer
+}
+
+.select-wrap {
+  position: relative;
+}
+
 .select-wrap::after {
   content: '▾';
   position: absolute;
   top: 50%;
-  margin-top: -18px;
+  margin-top: -10px;
   right: 1rem;
   z-index: 1;
-  color: #70d2b2;
+  color: #65bda0;
   line-height: 1;
   font-size: 20px;
   pointer-events: none; /* Don't interfere with clicks */
@@ -8292,7 +8304,7 @@ video {
 
 .ql-container.ql-snow,
 .ql-toolbar.ql-snow {
-  border: 1px solid #494a5b !important;
+  border: 1px solid #868692 !important;
 }
 
 .ql-container.ql-snow {

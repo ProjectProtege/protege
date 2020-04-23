@@ -111,10 +111,11 @@ const PostAJobForm = ({
                       Frontend, Backend, Full-Stack
                     </span>
 
+                    <div className='select-wrap'>
                       <Field
                         id="role-focus"
                         name="roleFocus"
-                        className="input"
+                        className="input input-select rounded-none"
                         as="select"
                       >
                         <option value="" className="text-gray-300">
@@ -127,6 +128,7 @@ const PostAJobForm = ({
 
                         <option value="Full-stack">Full-Stack</option>
                       </Field>
+                    </div>
 
                     <ErrorMessage
                       name="roleFocus"
@@ -147,19 +149,21 @@ const PostAJobForm = ({
                       Full-time, Part-time, or Contract?
                     </span>
 
-                    <Field
-                      id="position-type"
-                      name="positionType"
-                      className="input"
-                      as="select"
-                    >
-                      <option value="" className="text-gray-300">
-                        Select One...
-                      </option>
-                      <option value="Full-time">Full-time</option>
-                      <option value="Part-time">Part-time</option>
-                      <option value="Contract">contract</option>
-                    </Field>
+                    <div className='select-wrap'>
+                      <Field
+                        id="position-type"
+                        name="positionType"
+                        className="input input-select rounded-none"
+                        as="select"
+                      >
+                        <option value="" className="text-gray-300">
+                          Select One...
+                        </option>
+                        <option value="Full-time">Full-time</option>
+                        <option value="Part-time">Part-time</option>
+                        <option value="Contract">contract</option>
+                      </Field>
+                    </div>
 
                     <ErrorMessage
                       name="positionType"

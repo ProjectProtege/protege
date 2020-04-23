@@ -69,7 +69,7 @@ const JobBoard = ({ location, match }) => {
 
             <div className="select-wrap">
               <select
-                className="input appearance-none rounded-full justify-end w-full cursor-pointer"
+                className="input input-select rounded-none justify-end"
                 id="filter-by"
                 placeholder="Filter By"
                 onChange={(event) => setJobFilter(event.target.value)}
