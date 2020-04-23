@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {storage} from '../firebase/firebase'
 
 const JobTemplate = ({ logo, props }) => {
   const [companyLogo, setCompanyLogo] = useState(undefined);
@@ -12,6 +13,16 @@ const JobTemplate = ({ logo, props }) => {
         setCompanyLogo(reader.result);
       };
     }
+  }
+
+  function retrieveLogo() {
+    storage
+      .ref('images')
+      .child(props.companyLogo)
+      .getDownloadURL()
+      .then(url => {
+        setCompanyLogo(url)
+      })
   }
 
   const quillStyle = {
@@ -70,8 +81,11 @@ const JobTemplate = ({ logo, props }) => {
     var companyChildren = [...companyDesc.children];
     styleChildren(companyChildren);
 
-    // Setting Logo
+    // Setting Logo in new job post preview
     readLogo(logo);
+
+    // Retrieve logo to display in live job posting
+    retrieveLogo();
   });
 
   function createMarkup(text) {
@@ -80,64 +94,81 @@ const JobTemplate = ({ logo, props }) => {
 
   return (
     <>
-      <div className='mx-auto' style={{maxWidth: 960}}>
-      <div className="md:flex justify-center">
-        <div className="md:w-3/4 md:pr-12">
-          <h2 className="text-blue-500 font-bold text-3xl">
-            {props.jobTitle || "Position Title"}
-          </h2>
+      <div className="mx-auto">
+        <div className="md:flex justify-center">
+          <div className="md:w-3/4 md:pr-12">
+            <h2 className="text-blue-500 font-bold text-3xl">
+              {props.jobtitle}
+            </h2>
 
-          <div className="text-gray-600 uppercase tracking-tight text-md mb-6">
-            {props.roleFocus} • {props.positionType}
-          </div>
+            <div className="text-gray-600 uppercase tracking-tight text-md mb-6">
+              {props.roleFocus} • {props.positionType}
+            </div>
 
-          <h3 className="text-blue-500 font-bold text-2xl mb-4">Job Description</h3>
+            <h3 className="text-blue-500 font-bold text-2xl mb-4">
+              Job Description
+            </h3>
 
-          <div
-            id="jobDesc"
-            dangerouslySetInnerHTML={createMarkup(props.jobDescription)}
-            className='mb-6'
-          ></div>
+            <div
+              id="jobDesc"
+              dangerouslySetInnerHTML={createMarkup(props.jobDescription)}
+              className="mb-6"
+            ></div>
 
-          <h4 className="text-blue-500 font-bold text-2xl mb-4">
-            About {props.companyName}
-          </h4>
-
-          <div
-            className="mt-2 text-blue-300"
-            id="companyDesc"
-            dangerouslySetInnerHTML={createMarkup(props.companyDescription)}
-          ></div>
-        </div>
-        <div className="md:w-1/4 mt-16">
-          <div className='bg-gray-200 p-4'>
-
-            {logo ? (
-              <img
-                id="companyLogo"
-                className="mb-6 object-contain"
-                src={companyLogo}
-                alt={`${props.companyName} logo`}
-              />
-            ) : null}
-
-            <h4 className="text-blue-500 font-bold text-lg mb-3">
-              {props.companyName}
+            <h4 className="text-blue-500 font-bold text-2xl mb-4">
+              About {props.companyName}
             </h4>
 
-            <div className="text-blue-500 uppercase tracking-tight text-md">
-              <a className='opacity-50 underline hover:opacity-100' href={props.companyWebsite}><p>Visit website</p></a>
-              <a className='opacity-50 underline hover:opacity-100' href={`mailto:${props.companyEmail}`}><p>Contact Email</p></a>
+            <div
+              className="mt-2 text-blue-300"
+              id="companyDesc"
+              dangerouslySetInnerHTML={createMarkup(props.companyDescription)}
+            ></div>
+          </div>
+          <div className="md:w-1/4 mt-8">
+            <div className="bg-gray-200 p-4">
+              {companyLogo ? (
+                <div className="w-full mb-6 md:w-1/2">
+                  <img
+                    id="companyLogo"
+                    className="w-full"
+                    src={companyLogo}
+                    alt={`${props.companyName} logo`}
+                  />
+                </div>
+              ) : null}
+
+              <h4 className="text-blue-500 font-bold text-lg mb-3">
+                {props.companyName}
+              </h4>
+
+              <div className="uppercase text-blue-500 tracking-tight text-md">
+                <a
+                  className="underline"
+                  href={props.companyWebsite}
+                >
+                  <p className="opacity-75 hover:opacity-100">Visit website</p>
+                </a>
+
+                <a
+                  className="underline"
+                  href={`mailto:${props.companyEmail}`}
+                >
+                  <p className="opacity-75 hover:opacity-100">Contact email</p>
+                </a>
+                <a href={props.howToApply}>
+                  <button className="hidden md:block btn btn-teal mt-8 w-full">Apply</button>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div>
-        <a href={props.howToApply}>
-          <button className="btn btn-teal mt-8">Apply</button>
-        </a>
-      </div>
+        <div>
+          <a href={props.howToApply}>
+            <button className="btn btn-teal mt-8 w-full md:w-auto">Apply</button>
+          </a>
+        </div>
       </div>
     </>
   );

@@ -39,7 +39,7 @@ const Nav = () => {
             <Link to={ROUTES.LEARNING}>Learning Resources</Link>
           </li>
           <li className="bg-teal-300 px-4 mt-3 mb-1 w-1/2 py-1 mx-auto font-bold">
-            <Link to={ROUTES.JOB_BOARD}>Post a Job</Link>
+            <Link to={ROUTES.POST_A_JOB}>Post a Job</Link>
           </li>
         </ul>
       </nav>
@@ -52,7 +52,7 @@ const Nav = () => {
           <li className="menu-item mt-1 pr-4 lg:pr-10 opacity-75 hover:opacity-100">
             <Link
               to={ROUTES.JOB_BOARD}
-              className="pb-3 border-b-2 border-white hover:border-teal-500 "
+              className="pb-3 border-b-2 border-transparent transition-colors duration-75 hover:border-teal-500"
             >
               Find a Job
             </Link>
@@ -72,7 +72,7 @@ const Nav = () => {
               <li className="mb-3">
                 <Link
                   to={ROUTES.JOB_BOARD + "?f=Front-end"}
-                  className="submenu-item opacity-75 hover:opacity-100 border-b-2 border-white hover:border-teal-500 w-full pb-1"
+                  className="submenu-item opacity-75 hover:opacity-100 border-b-2 border-transparent transition-colors duration-75 hover:border-teal-500 w-full pb-1"
                   onClick={handleClick}
                 >
                   Front-end
@@ -81,7 +81,7 @@ const Nav = () => {
               <li className="mb-3">
                 <Link
                   to={ROUTES.JOB_BOARD + "?f=Back-end"}
-                  className="submenu-item opacity-75 hover:opacity-100 border-b-2 border-white hover:border-teal-500 w-full pb-1"
+                  className="submenu-item opacity-75 hover:opacity-100 border-b-2 border-transparent transition-colors duration-75 hover:border-teal-500 w-full pb-1"
                   onClick={handleClick}
                 >
                   Back-end
@@ -90,7 +90,7 @@ const Nav = () => {
               <li>
                 <Link
                   to={ROUTES.JOB_BOARD + "?f=Full-stack"}
-                  className="submenu-item opacity-75 hover:opacity-100 border-b-2 border-white hover:border-teal-500 w-full pb-1"
+                  className="submenu-item opacity-75 hover:opacity-100 border-b-2 border-transparent transition-colors duration-75 hover:border-teal-500 w-full pb-1"
                   onClick={handleClick}
                 >
                   Full-stack
@@ -102,7 +102,7 @@ const Nav = () => {
           <li className="menu-item mt-1 pr-4 lg:pr-10 opacity-75 hover:opacity-100">
             <Link
               to={ROUTES.LEARNING}
-              className="pb-3 border-b-2 border-white hover:border-teal-500 "
+              className="pb-3 border-b-2 border-transparent transition-colors duration-75 hover:border-teal-500 "
             >
               Learning Resources
             </Link>

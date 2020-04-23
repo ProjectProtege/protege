@@ -9,7 +9,7 @@ const LearningResources = () => (
       Learning Resources
     </h1>
 
-    <div className='mb-12'>
+    <div className="mb-12">
       <h2 className="text-lg mb-3 text-teal-600 font-semibold">Free</h2>
       <ul>
         <li className="underline mb-3 text-blue-300 hover:text-teal-600">
@@ -68,9 +68,7 @@ const LearningResources = () => (
         </li>
 
         <li className="underline mb-3 text-blue-300 hover:text-teal-600">
-          <a href="https://teamtreehouse.com/">
-            Team Treehouse
-          </a>
+          <a href="https://teamtreehouse.com/">Team Treehouse</a>
         </li>
       </ul>
     </div>

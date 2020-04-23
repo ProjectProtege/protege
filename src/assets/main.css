@@ -8239,8 +8239,8 @@ video {
 
 .btn:hover {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --transform-scale-x: 1.05;
-  --transform-scale-y: 1.05;
+  --transform-scale-x: 1.1;
+  --transform-scale-y: 1.1;
   transition-duration: 100ms;
 }
 
@@ -8248,13 +8248,26 @@ video {
 
 .input {
   border-width: 1px;
-  border-color: #718096;
+  border-color: #494a5b;
   padding: 0.5rem;
 }
 
 .input-error {
   color: #E53E3E;
   font-size: 0.75rem;
+}
+
+.select-wrap::after {
+  content: '▾';
+  position: absolute;
+  top: 50%;
+  margin-top: -18px;
+  right: 1rem;
+  z-index: 1;
+  color: #70d2b2;
+  line-height: 1;
+  font-size: 20px;
+  pointer-events: none; /* Don't interfere with clicks */
 }
 
 .quick-filter .submenu {
@@ -8269,6 +8282,21 @@ video {
   transform: scale(1);
   opacity: 1;
   visibility: visible;
+}
+
+/*-------Quill editor styles-----------------*/
+
+.ql-container {
+  min-height: 250px !important;
+}
+
+.ql-container.ql-snow,
+.ql-toolbar.ql-snow {
+  border: 1px solid #494a5b !important;
+}
+
+.ql-container.ql-snow {
+  border-top: 0px !important;
 }
 
 @media (min-width: 640px) {
