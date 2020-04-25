@@ -13,12 +13,5 @@ describe('my first test', () => {
         cy.get('input[type="text"]').type('fake@gmail.com')
         cy.get('input[type="hidden"]')
         cy.get('button[type="submit"]')
-        // cy.get('form').children()
     })
 })
-
-// cy.visit('')
-// cy.contains('')
-// cy.url().should('include')
-
-// cy.get('css-class').type('string').should('do something')
