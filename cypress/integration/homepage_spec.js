@@ -10,7 +10,7 @@ describe('my first test', () => {
         cy.contains('Find your next')
         cy.contains('Find a Job')
         cy.contains('Latest Opportunities')
-        cy.get('input[type="text"]').type('fake@gmail.com')
+        cy.get('input[type="text"]').type('fake@gmail.com').should('have.value', 'fake@gmail.com')
         cy.get('input[type="hidden"]')
         cy.get('button[type="submit"]')
     })
