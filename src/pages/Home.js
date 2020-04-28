@@ -61,7 +61,7 @@ const Home = () => {
             Latest Opportunities
           </h2>
 
-          <div className='container'>
+          <div data-cy='job-card-container' className='container'>
             {jobs.slice(0, 6).map((job) => (
               <JobCard key={job.id} job={job} />
             ))}
