@@ -8,7 +8,7 @@ const FindYourNext = () => {
   }, 2500)
 
   return (
-    <div className='flex justify-center mt-8'>
+    <div data-cy='find-your-next' className='flex justify-center mt-8'>
       <div className='md:flex items-center'>
         <div className='flex-col text-center text-blue-500 font-bold text-3xl md:text-5xl'>
           Find your next
