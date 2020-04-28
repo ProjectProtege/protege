@@ -13,7 +13,7 @@ const Footer = () => (
       },
     }}
   >
-    <div className='bg-gray-200 py-4 px-3 md:px-0 mb-6'>
+    <div data-cy='footer' className='bg-gray-200 py-4 px-3 md:px-0 mb-6'>
       <form className='container mx-auto' name='email-list' method='post'>
         <div className='flex flex-col md:flex-row justify-center items-center'>
           <label
@@ -24,6 +24,7 @@ const Footer = () => (
           </label>
 
           <input
+            data-cy='mailing-list-signup'
             type='text'
             className='px-4 py-1 w-full md:w-2/5 my-3 md:my-0'
             id='email'
@@ -34,7 +35,7 @@ const Footer = () => (
 
           <input type='hidden' name='form-name' value='email-list' />
 
-          <button type='submit' className='btn btn-blue w-full md:w-auto'>
+          <button data-cy='mailing-list-signup-button' type='submit' className='btn btn-blue w-full md:w-auto'>
             Sign Up
           </button>
         </div>
@@ -73,7 +74,7 @@ const Footer = () => (
           />
         </svg>
 
-        <div className='flex flex-col items-end'>
+        <div data-cy='footer-links' className='flex flex-col items-end'>
           <ul className='text-right mb-3'>
             <li className='mb-1'>
               <Link
