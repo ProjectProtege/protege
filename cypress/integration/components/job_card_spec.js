@@ -2,14 +2,9 @@ describe('job card', () => {
     beforeEach( () => {
         cy.visit('/')
     })
-    it('tests the job card', () => {
+    it('tests the job card container then each individual card', () => {
         cy.get("[data-cy='job-card-container']>a").should('have.length', 6)
             .each( (jobCard) => {
-                beforeEach( () => {
-                    cy.visit('/')
-                })
-                it('tests each individual card')
-                console.log(jobCard)
                 // slices specifically to the end of http://localhost:3000/job-board/{jobId}
                 const jobId = jobCard[0].href.slice(32)
                 cy.get(`[data-cy='job-card-image-${jobId}']`).should('have.attr', 'src')
@@ -19,6 +14,7 @@ describe('job card', () => {
                 cy.get(`[data-cy='job-card-formatted-date-${jobId}']`)
                 cy.get(`[data-cy='job-card-company-hq-${jobId}']`)
                 cy.get(`[data-cy='job-card-link-${jobId}']`).click()
+                cy.go('back')
             })
     })
 })
