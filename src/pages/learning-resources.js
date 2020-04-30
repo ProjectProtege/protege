@@ -56,7 +56,7 @@ const LearningResources = () => (
       <h2 className='text-lg mb-3 text-teal-600 font-semibold'>Paid</h2>
       <ul>
         <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
-          <a href='https://egghead.io/'>Egghead.io</a>
+          <a href='https://egghead.io/?rc=84jyz'>Egghead.io</a>
         </li>
 
         <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
