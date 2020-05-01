@@ -5,7 +5,7 @@ const FindYourNext = () => {
   const [word, setWord] = useState(0)
   setTimeout(() => {
     setWord((word + 1) % nextWords.length)
-  }, 2500)
+  }, 2000)
 
   return (
     <div className='flex justify-center mt-8'>
