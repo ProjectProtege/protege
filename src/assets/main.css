@@ -8262,7 +8262,7 @@ video {
      -moz-appearance: none;
           appearance: none;
   width: 100%;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .select-wrap {
@@ -8289,7 +8289,7 @@ video {
   visibility: hidden;
 }
 
-.quick-filter:hover .submenu, 
+.quick-filter:hover .submenu,
 .quick-filter:focus-within .submenu {
   transform: scale(1);
   opacity: 1;
@@ -8309,14 +8309,6 @@ video {
 
 .ql-container.ql-snow {
   border-top: 0px !important;
-}
-
-/*--Landing Page styles - to be deleted after launch --*/
-
-.landing-wrapper {
-  background-image: url(../assets/images/bg-pattern.png);
-  background-position: center;
-  background-size: cover;
 }
 
 @media (min-width: 640px) {

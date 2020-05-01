@@ -6,11 +6,7 @@ import JobBoard from '../pages/JobBoard'
 import LearningResources from '../pages/learning-resources'
 import Contact from '../pages/contact'
 import IndividualJobPage from '../pages/individual-job'
-<<<<<<< HEAD
 import PostAJob from '../pages/post-a-job'
-=======
-import Landing from '../pages/landing'
->>>>>>> master
 
 import * as ROUTES from '../constants/routes'
 
