@@ -5,24 +5,76 @@
 /*--Buttons--*/
 
 .btn {
-  @apply px-4 py-1 font-bold shadow transition-transform duration-200 transform uppercase
+  @apply px-4 py-1 font-bold shadow transition-transform duration-200 transform uppercase;
 }
 
 .btn-teal {
-  @apply bg-teal-300 text-blue-500
+  @apply bg-teal-300 text-blue-500;
 }
 
 .btn-blue {
-  @apply bg-blue-500 text-white
+  @apply bg-blue-500 text-white font-medium;
 }
 
 .btn:hover {
-  @apply shadow-md scale-105
+  @apply shadow-md scale-110 duration-100;
 }
 
-/*--Landing Page styles - to be deleted after launch --*/
-.landing-wrapper {
-  background-image: url(../assets/images/bg-pattern.png);
-  background-position: center;
-  background-size: cover;
+/*--Input--*/
+
+.input {
+  @apply border border-blue-100 p-2;
+}
+
+.input-error {
+  @apply text-error text-xs;
+}
+
+.input-select {
+  @apply appearance-none w-full cursor-pointer;
+}
+
+.select-wrap {
+  position: relative;
+}
+
+.select-wrap::after {
+  content: '▾';
+  position: absolute;
+  top: 50%;
+  margin-top: -10px;
+  right: 1rem;
+  z-index: 1;
+  color: #65bda0;
+  line-height: 1;
+  font-size: 20px;
+  pointer-events: none; /* Don't interfere with clicks */
+}
+
+.quick-filter .submenu {
+  transform: scale(0);
+  opacity: 0;
+  transition: 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  visibility: hidden;
+}
+
+.quick-filter:hover .submenu,
+.quick-filter:focus-within .submenu {
+  transform: scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+/*-------Quill editor styles-----------------*/
+.ql-container {
+  min-height: 250px !important;
+}
+
+.ql-container.ql-snow,
+.ql-toolbar.ql-snow {
+  border: 1px solid #868692 !important;
+}
+
+.ql-container.ql-snow {
+  border-top: 0px !important;
 }
