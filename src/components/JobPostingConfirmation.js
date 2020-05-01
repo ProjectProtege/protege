@@ -33,8 +33,8 @@ const JobPostingConfirmation = ({ props }) => {
         <li className='text-blue-500'>
           - If you fill the position and need the listing removed, simply email
           us at{' '}
-          <a className='font-bold' href='mailto:hey@protege.dev'>
-            hey@protege.dev
+          <a className='font-bold' href='mailto:protege.dev'>
+            protege.dev&amp;gmail.com
           </a>
         </li>
 
@@ -49,8 +49,8 @@ const JobPostingConfirmation = ({ props }) => {
 
         <li className='mt-2 text-blue-500'>
           - If you need to correct something on your listing, email{' '}
-          <a className='font-bold' href='mailto:hey@protege.dev'>
-            hey@protege.dev
+          <a className='font-bold' href='mailto:protege.dev'>
+            protege.dev&amp;gmail.com
           </a>{' '}
           with the company name, job title, and the changes needed.
         </li>

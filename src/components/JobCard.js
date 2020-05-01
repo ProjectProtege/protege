@@ -43,7 +43,7 @@ const JobCard = ({ job }) => {
       className='flex mb-6 md:mb-12 px-3 md:px-6 py-4 bg-white shadow border-l-4 border-teal-500 transform hover:scale-105 hover:shadow-lg transition duration-150 ease-in-out'
     >
       <div
-        className='hidden md:block shadow-md rounded-full p-2 md:w-1/6 overflow-hidden relative'
+        className='hidden md:flex flex-col shadow-md rounded-full p-2 md:w-1/6 overflow-hidden relative'
         style={{ width: 75, height: 75 }}
       >
         <motion.div
@@ -59,12 +59,12 @@ const JobCard = ({ job }) => {
         <img
           src={logoUrl}
           alt={`${job.companyName} Logo`}
-          className='h-full w-full'
+          className='my-auto w-full'
         />
       </div>
 
       <div className='w-full md:w-11/12 flex justify-between md:pl-6'>
-        <div className='flex flex-col w-10/12 justify-between'>
+        <div className='flex flex-col w-10/12 lg:w-8/12 justify-between'>
           <p className='text-sm text-blue-300'>{job.companyName}</p>
 
           <h3 className='md:-mt-1 text-blue-500 leading-tight text-lg md:text-xl font-bold'>
