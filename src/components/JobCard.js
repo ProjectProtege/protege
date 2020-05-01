@@ -64,7 +64,7 @@ const JobCard = ({ job }) => {
       </div>
 
       <div className='w-full md:w-11/12 flex justify-between md:pl-6'>
-        <div className='flex flex-col w-10/12 justify-between'>
+        <div className='flex flex-col w-10/12 lg:w-8/12 justify-between'>
           <p className='text-sm text-blue-300'>{job.companyName}</p>
 
           <h3 className='md:-mt-1 text-blue-500 leading-tight text-lg md:text-xl font-bold'>
