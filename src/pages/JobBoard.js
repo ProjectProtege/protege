@@ -84,7 +84,7 @@ const JobBoard = ({ location }) => {
           </div>
         </div>
 
-        <div className='mx-auto'>
+        <div data-cy='job-board-list' className='mx-auto'>
           {!jobFilter && (
             <React.Fragment>
               {jobs.map((job) => (
