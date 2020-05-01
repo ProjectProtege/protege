@@ -11,7 +11,7 @@ const Landing = () => (
 
         <h2 className="text-teal-600 font-bold text-3xl mb-12">Connecting Ambition</h2>
 
-        <p className="text-blue-400 text-lg">You can't teach amibtion, but you can hire it!<br />Remote job opportunities for junior developers.</p>
+        <p className="text-blue-400 text-lg">You can't teach ambition, but you can hire it!<br />Remote job opportunities for junior developers.</p>
       </div>
 
       <div>
@@ -20,7 +20,7 @@ const Landing = () => (
         <form name="email-list" method="post">
           <label for="email" className="sr-only">Email input</label>
 
-          <input className="w-1/2 lg:w-1/4 bg-gray-300 px-4 py-1" type="email" name="email" id="email" autocomplete="off"/>
+          <input className="w-1/2 lg:w-1/4 bg-gray-300 px-4 py-1" type="email" name="email" id="email" autocomplete="off" required/>
 
           <button className="btn btn-teal" type="submit">Sign Up</button>
 
