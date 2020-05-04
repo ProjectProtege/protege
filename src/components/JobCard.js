@@ -66,20 +66,43 @@ const JobCard = ({ job }) => {
       </div>
 
       <div className='w-full md:w-11/12 flex justify-between md:pl-6'>
-        <div className='flex flex-col w-10/12 justify-between'>
-          <p data-cy={`job-card-company-name-${job.id}`} className='text-sm text-blue-300'>{job.companyName}</p>
+        <div className='flex flex-col w-10/12 lg:w-8/12 justify-between'>
+          <p
+            data-cy={`job-card-company-name-${job.id}`}
+            className='text-sm text-blue-300'
+          >
+            {job.companyName}
+          </p>
 
-          <h3 data-cy={`job-card-job-title-${job.id}`} className='md:-mt-1 text-blue-500 leading-tight text-lg md:text-xl font-bold'>
+          <h3
+            data-cy={`job-card-job-title-${job.id}`}
+            className='md:-mt-1 text-blue-500 leading-tight text-lg md:text-xl font-bold'
+          >
             {job.jobTitle}
           </h3>
 
-          <p data-cy={`job-card-role-focus-${job.id}`} className='text-teal-700'>{job.roleFocus}</p>
+          <p
+            data-cy={`job-card-role-focus-${job.id}`}
+            className='text-teal-700'
+          >
+            {job.roleFocus}
+          </p>
         </div>
 
         <div className='text-right flex flex-col justify-between'>
-          <p data-cy={`job-card-formatted-date-${job.id}`} className='text-teal-600 font-semibold'>{formattedPostDate}</p>
+          <p
+            data-cy={`job-card-formatted-date-${job.id}`}
+            className='text-teal-600 font-semibold'
+          >
+            {formattedPostDate}
+          </p>
 
-          <p data-cy={`job-card-company-hq-${job.id}`} className='text-blue-100 text-sm'>{job.companyHQ}</p>
+          <p
+            data-cy={`job-card-company-hq-${job.id}`}
+            className='text-blue-100 text-sm'
+          >
+            {job.companyHQ}
+          </p>
         </div>
       </div>
     </Link>
