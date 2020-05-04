@@ -4,7 +4,7 @@ const StatusBar = (status) => {
   const fillOpacity = status.props
 
   return (
-    <div className='flex justify-center my-6'>
+    <div data-cy='status-bar' className='flex justify-center my-6'>
       <svg
         width='216'
         height='52'
@@ -30,12 +30,12 @@ const StatusBar = (status) => {
           <circle cx='14' cy='12' r='12' fill='#54AF8E' fillOpacity='0.5' />
         )}
         {fillOpacity >= 2 ? (
-          <circle cx='99' cy='12' r='12' fill='#54AF8E' />
+          <circle cx='99' cy='12' r='12' fill='#54AF8E'/>
         ) : (
           <circle cx='99' cy='12' r='12' fill='#54AF8E' fillOpacity='0.5' />
         )}
         {fillOpacity >= 3 ? (
-          <circle cx='192' cy='12' r='12' fill='#54AF8E' />
+          <circle cx='192' cy='12' r='12' fill='#54AF8E'/>
         ) : (
           <circle cx='192' cy='12' r='12' fill='#54AF8E' fillOpacity='0.5' />
         )}
