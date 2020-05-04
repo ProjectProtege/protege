@@ -52,7 +52,7 @@ const Footer = () => {
 
             <input
               data-cy='mailing-list-signup'
-              type='text'
+              type='email'
               className='px-4 py-1 w-full md:w-2/5 my-3 md:my-0'
               id='email'
               autoComplete='off'
@@ -60,8 +60,6 @@ const Footer = () => {
               name='email'
               required
             />
-
-            <input type='hidden' name='form-name' value='email-list' />
 
             <button
               data-cy='mailing-list-signup-button'
