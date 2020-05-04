@@ -17,7 +17,7 @@ const Nav = () => {
 
   return (
     <React.Fragment>
-      <nav className='md:hidden text-blue-500 text-right relative'>
+      <nav data-cy='mobile-nav' className='md:hidden text-blue-500 text-right relative'>
         <button
           className='nav-toggle relative md:hidden text-3xl p-3'
           onClick={() => setActive((oldActive) => !oldActive)}
@@ -45,6 +45,7 @@ const Nav = () => {
       </nav>
 
       <nav
+        data-cy='desktop-nav'
         className='hidden md:block text-blue-500 uppercase font-semibold'
         role='navigation'
       >
@@ -69,6 +70,7 @@ const Nav = () => {
               Quick Filter
             </Link>
             <ul
+              data-cy='quick-filter'
               className='submenu absolute mt-2 bg-white p-4 shadow-md rounded'
               aria-label='submenu'
             >

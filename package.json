@@ -27,7 +27,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
-    "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css"
+    "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
+    "cypress": "cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -46,6 +47,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.7.4",
+    "cypress": "^4.4.1",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-prettier": "^6.11.0",
