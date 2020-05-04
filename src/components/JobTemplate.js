@@ -97,60 +97,80 @@ const JobTemplate = ({ logo, props }) => {
       <div className='mx-auto'>
         <div className='md:flex justify-center'>
           <div className='md:w-3/4 md:pr-12'>
-            <h2 className='text-blue-500 font-bold text-3xl'>
+            <h2 
+              data-cy='job-title'
+              className='text-blue-500 font-bold text-3xl'>
               {props.jobtitle}
             </h2>
 
-            <div className='text-gray-600 uppercase tracking-tight text-md mb-6'>
+            <div 
+              data-cy='role-focus-and-position-type'
+              className='text-gray-600 uppercase tracking-tight text-md mb-6'>
               {props.roleFocus} • {props.positionType}
             </div>
 
-            <h3 className='text-blue-500 font-bold text-2xl mb-4'>
+            <h3 
+              data-cy='job-description-title'
+              className='text-blue-500 font-bold text-2xl mb-4'>
               Job Description
             </h3>
 
             <div
+              data-cy='job-description'
               id='jobDesc'
               dangerouslySetInnerHTML={createMarkup(props.jobDescription)}
               className='mb-6'
             ></div>
 
-            <h4 className='text-blue-500 font-bold text-2xl mb-4'>
+            <h4 
+              data-cy='company-description-title'
+              className='text-blue-500 font-bold text-2xl mb-4'>
               About {props.companyName}
             </h4>
 
             <div
+              data-cy='company-description'
               className='mt-2 text-blue-300'
               id='companyDesc'
               dangerouslySetInnerHTML={createMarkup(props.companyDescription)}
             ></div>
           </div>
           <div className='md:w-1/4 mt-8'>
-            <div className='bg-gray-200 p-4'>
-              {companyLogo ? (
-                <div className='w-full mb-6 md:w-1/2'>
-                  <img
-                    id='companyLogo'
-                    className='w-full'
-                    src={companyLogo}
-                    alt={`${props.companyName} logo`}
-                  />
-                </div>
-              ) : null}
+            <div 
+              className='bg-gray-200 p-4'>
+                {companyLogo ? (
+                  <div className='w-full mb-6 md:w-1/2'>
+                    <img
+                      data-cy='company-logo'
+                      id='companyLogo'
+                      className='w-full'
+                      src={companyLogo}
+                      alt={`${props.companyName} logo`}
+                    />
+                  </div>
+                ) : null}
 
-              <h4 className='text-blue-500 font-bold text-lg mb-3'>
-                {props.companyName}
-              </h4>
+            <h4 
+              data-cy='company-name-sidebar'
+              className='text-blue-500 font-bold text-lg mb-3'>
+              {props.companyName}
+            </h4>
 
               <div className='uppercase text-blue-500 tracking-tight text-md'>
-                <a className='underline' href={props.companyWebsite}>
+                <a 
+                  data-cy='company-website'
+                  className='underline' href={props.companyWebsite}>
                   <p className='opacity-75 hover:opacity-100'>Visit website</p>
                 </a>
 
-                <a className='underline' href={`mailto:${props.companyEmail}`}>
+                <a 
+                  data-cy='company-email'
+                  className='underline' href={`mailto:${props.companyEmail}`}>
                   <p className='opacity-75 hover:opacity-100'>Contact email</p>
                 </a>
-                <a href={props.howToApply}>
+                <a 
+                  data-cy='how-to-apply'
+                  href={props.howToApply}>
                   <button className='hidden md:block btn btn-teal mt-8 w-full'>
                     Apply
                   </button>
