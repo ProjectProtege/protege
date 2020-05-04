@@ -20,7 +20,6 @@
   @apply shadow-md scale-110 duration-100;
 }
 
-
 /*--Input--*/
 
 .input {
@@ -32,7 +31,7 @@
 }
 
 .input-select {
-  @apply appearance-none w-full cursor-pointer
+  @apply appearance-none w-full cursor-pointer;
 }
 
 .select-wrap {
@@ -59,13 +58,12 @@
   visibility: hidden;
 }
 
-.quick-filter:hover .submenu, 
+.quick-filter:hover .submenu,
 .quick-filter:focus-within .submenu {
   transform: scale(1);
   opacity: 1;
   visibility: visible;
 }
-
 
 /*-------Quill editor styles-----------------*/
 .ql-container {
