@@ -79,6 +79,8 @@ const GetInTouch = () => (
             ></textarea>
           </div>
 
+          <input type='hidden' name='form-name' value='contact' />
+
           <button type='submit' className='mt-6 btn btn-teal w-full md:w-32'>
             Send
           </button>
