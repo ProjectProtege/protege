@@ -67,7 +67,7 @@ const PostAJobForm = ({
         }}
       >
         {(formik) => (
-          <Form onSubmit={formik.handleSubmit}>
+          <Form data-cy='post-a-job-form' onSubmit={formik.handleSubmit}>
             <div className='shadow-md border-t-4 border-teal-500'>
               <h2
                 style={{ backgroundImage: `url(${backgroundImage})` }}
@@ -313,7 +313,7 @@ const PostAJobForm = ({
 
                     <div className='flex flex-col md:w-1/2 mb-3'>
                       <label
-                        htmlFor='companyEmail'
+                        htmlFor='companyLogo'
                         className='text-blue-500 font-bold mb-2'
                       >
                         Logo
@@ -364,7 +364,7 @@ const PostAJobForm = ({
 
                   <div className='flex flex-col'>
                     <label
-                      htmlFor='companyEmail'
+                      htmlFor='companyHQ'
                       className='text-blue-500 font-bold'
                     >
                       Company Headquarters
@@ -386,7 +386,7 @@ const PostAJobForm = ({
                 </div>
               </div>
             </div>
-            <button type='submit' className='mt-6 btn btn-teal w-32'>
+            <button data-cy='next-step-button' type='submit' className='mt-6 btn btn-teal w-32'>
               Next Step
             </button>
           </Form>
