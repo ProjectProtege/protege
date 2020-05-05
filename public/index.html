@@ -25,7 +25,13 @@
   </head>
 
   <body>
-    <form name="contact" netlify data-netlify-honeypot="bot-field" hidden>
+    <form
+      name="contact"
+      netlify
+      data-netlify-honeypot="bot-field"
+      hidden
+      action="/pages/thanks"
+    >
       <input type="text" name="name" id="name" />
       <input type="email" name="email" id="email" />
       <textarea name="comment" id="comment"></textarea>
