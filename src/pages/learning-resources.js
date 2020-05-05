@@ -5,7 +5,7 @@ const LearningResources = () => (
     className='container mx-auto pt-32 px-2 md:px-0 text-center'
     style={{ maxWidth: 680 }}
   >
-    <h1 className='text-2xl font-semibold text-teal-600 mb-6'>
+    <h1 className='text-2xl font-bold text-blue-500 mb-6'>
       Learning Resources
     </h1>
 
