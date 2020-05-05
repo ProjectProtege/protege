@@ -27,7 +27,8 @@ const GetInTouch = () => (
       >
         Get in Touch
       </h2>
-      <form name='contact' method='POST' data-netlify='true'>
+
+      <form name='contact' method='POST'>
         <div className='p-4'>
           <div className='md:flex mb-3'>
             <div className='flex flex-col md:w-1/2 md:mr-6 mb-3 md:mb-0'>
@@ -77,6 +78,7 @@ const GetInTouch = () => (
               required
             ></textarea>
           </div>
+
           <button type='submit' className='mt-6 btn btn-teal w-full md:w-32'>
             Send
           </button>
