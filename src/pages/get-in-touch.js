@@ -28,7 +28,7 @@ const GetInTouch = () => (
         Get in Touch
       </h2>
 
-      <form name='contact' method='POST'>
+      <form name='contact' method='POST' action='/thanks/'>
         <div className='p-4'>
           <div className='md:flex mb-3'>
             <div className='flex flex-col md:w-1/2 md:mr-6 mb-3 md:mb-0'>
