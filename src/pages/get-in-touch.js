@@ -1,7 +1,5 @@
 import React from 'react'
 import backgroundImage from '../assets/images/bg-pattern.png'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
-import * as Yup from 'yup'
 
 const GetInTouch = () => (
   <div
@@ -29,108 +27,61 @@ const GetInTouch = () => (
       >
         Get in Touch
       </h2>
+      <form name='contact' method='post' data-netlify='true'>
+        <div className='p-4'>
+          <div className='md:flex mb-3'>
+            <div className='flex flex-col md:w-1/2 md:mr-6 mb-3 md:mb-0'>
+              <label htmlFor='name' className='text-blue-500 font-bold mb-2'>
+                Name
+              </label>
 
-      <Formik
-        initialValues={{
-          name: '',
-          email: '',
-          comments: '',
-        }}
-        validationSchema={Yup.object({
-          name: Yup.string().required('You gotta let us know who you are!'),
-          email: Yup.string().required(
-            'What email can we follow up with you at?'
-          ),
-          comment: Yup.string().required(
-            'Oops! Looks like you forgot to leave your comment.'
-          ),
-        })}
-      >
-        {(formik) => (
-          <Form name='contact' method='post' data-netlify='true'>
-            <div className='p-4'>
-              <div className='md:flex mb-3'>
-                <div className='flex flex-col md:w-1/2 md:mr-6 mb-3 md:mb-0'>
-                  <label
-                    htmlFor='name'
-                    className='text-blue-500 font-bold mb-2'
-                  >
-                    Name
-                  </label>
-
-                  <Field
-                    id='name'
-                    name='name'
-                    className='input'
-                    title='name of the company'
-                    type='text'
-                  />
-
-                  <ErrorMessage
-                    name='name'
-                    component='span'
-                    className='input-error'
-                  />
-                </div>
-
-                <div className='flex flex-col md:w-1/2'>
-                  <label
-                    htmlFor='email'
-                    className='text-blue-500 font-bold mb-2'
-                  >
-                    Email
-                  </label>
-
-                  <Field
-                    id='email'
-                    name='email'
-                    className='input'
-                    title='url of the company'
-                    type='email'
-                  />
-
-                  <ErrorMessage
-                    name='email'
-                    component='span'
-                    className='input-error'
-                  />
-                </div>
-              </div>
-
-              <div className='flex flex-col'>
-                <label
-                  htmlFor='comment'
-                  className='text-blue-500 font-bold mb-2'
-                >
-                  Comment
-                </label>
-
-                <Field
-                  id='comment'
-                  name='comment'
-                  className='input'
-                  title='Users comment'
-                  type='text'
-                  as='textarea'
-                  rows='8'
-                />
-
-                <ErrorMessage
-                  name='comment'
-                  component='span'
-                  className='input-error'
-                />
-              </div>
-              <button
-                type='submit'
-                className='mt-6 btn btn-teal w-full md:w-32'
-              >
-                Send
-              </button>
+              <input
+                id='name'
+                name='name'
+                className='input'
+                title='Users name'
+                type='text'
+                required
+              />
             </div>
-          </Form>
-        )}
-      </Formik>
+
+            <div className='flex flex-col md:w-1/2'>
+              <label htmlFor='email' className='text-blue-500 font-bold mb-2'>
+                Email
+              </label>
+
+              <input
+                id='email'
+                name='email'
+                className='input'
+                title='Users email'
+                type='email'
+                required
+              />
+            </div>
+          </div>
+
+          <div className='flex flex-col'>
+            <label htmlFor='comment' className='text-blue-500 font-bold mb-2'>
+              Comment
+            </label>
+
+            <textarea
+              id='comment'
+              name='comment'
+              className='input'
+              title='Users comment'
+              type='text'
+              as='textarea'
+              rows='8'
+              required
+            ></textarea>
+          </div>
+          <button type='submit' className='mt-6 btn btn-teal w-full md:w-32'>
+            Send
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 )
