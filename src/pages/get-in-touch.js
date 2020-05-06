@@ -1,12 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import backgroundImage from '../assets/images/bg-pattern.png'
 
 const GetInTouch = () => {
   let history = useHistory()
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [comment, setComment] = useState('')
+
+  const encode = (data) => {
+    return Object.keys(data)
+      .map(
+        (key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key])
+      )
+      .join('&')
+  }
 
   function submitForm(e) {
-    history.push('/thanks')
+    const formData = { name, email, comment }
+    e.preventDefault()
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-type': 'application/x-www-form-urlencoded' },
+      body: encode({ 'form-name': 'contact', ...formData }),
+    }).then(history.push('/thanks'))
   }
 
   return (
@@ -36,7 +54,7 @@ const GetInTouch = () => {
           Get in Touch
         </h2>
 
-        <form name='contact' method='POST' onSubmit={submitForm}>
+        <form name='contact' onSubmit={submitForm}>
           <div className='p-4'>
             <div className='md:flex mb-3'>
               <div className='flex flex-col md:w-1/2 md:mr-6 mb-3 md:mb-0'>
@@ -51,6 +69,7 @@ const GetInTouch = () => {
                   title='Users name'
                   type='text'
                   required
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
 
@@ -66,6 +85,7 @@ const GetInTouch = () => {
                   title='Users email'
                   type='email'
                   required
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
             </div>
@@ -84,6 +104,7 @@ const GetInTouch = () => {
                 as='textarea'
                 rows='8'
                 required
+                onChange={(e) => setComment(e.target.value)}
               ></textarea>
             </div>
 
