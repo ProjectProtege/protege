@@ -17,7 +17,10 @@ const Nav = () => {
 
   return (
     <React.Fragment>
-      <nav data-cy='mobile-nav' className='md:hidden text-blue-500 text-right relative'>
+      <nav
+        data-cy='mobile-nav'
+        className='md:hidden text-blue-500 text-right relative'
+      >
         <button
           className='nav-toggle relative md:hidden text-3xl p-3'
           onClick={() => setActive((oldActive) => !oldActive)}
@@ -38,6 +41,11 @@ const Nav = () => {
           <li className='pt-3 pb-2 opacity-75 hover:opacity-100 border-b-2 border-gray-300'>
             <Link to={ROUTES.LEARNING}>Learning Resources</Link>
           </li>
+
+          <li className='pt-3 pb-2 opacity-75 hover:opacity-100 border-b-2 border-gray-300'>
+            <Link to={ROUTES.GET_IN_TOUCH}>Get in Touch</Link>
+          </li>
+
           <li className='bg-teal-300 px-4 mt-3 mb-1 w-1/2 py-1 mx-auto font-bold'>
             <Link to={ROUTES.POST_A_JOB}>Post a Job</Link>
           </li>
@@ -46,7 +54,7 @@ const Nav = () => {
 
       <nav
         data-cy='desktop-nav'
-        className='hidden md:block text-blue-500 uppercase font-semibold'
+        className='hidden md:block text-blue-500 text-sm uppercase font-semibold'
         role='navigation'
       >
         <ul className='flex justify-between'>
@@ -110,6 +118,15 @@ const Nav = () => {
               className='pb-3 border-b-2 border-transparent transition-colors duration-75 hover:border-teal-500 '
             >
               Learning Resources
+            </Link>
+          </li>
+
+          <li className='menu-item mt-1 pr-4 lg:pr-10 opacity-75 hover:opacity-100'>
+            <Link
+              to={ROUTES.GET_IN_TOUCH}
+              className='pb-3 border-b-2 border-transparent transition-colors duration-75 hover:border-teal-500 '
+            >
+              Get in Touch
             </Link>
           </li>
 
