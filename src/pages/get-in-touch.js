@@ -6,7 +6,6 @@ const GetInTouch = () => {
   let history = useHistory()
 
   function submitForm(e) {
-    e.preventDefault()
     history.push('/thanks')
   }
 
