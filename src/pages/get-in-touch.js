@@ -24,7 +24,11 @@ const GetInTouch = () => {
       method: 'POST',
       headers: { 'Content-type': 'application/x-www-form-urlencoded' },
       body: encode({ 'form-name': 'contact', ...formData }),
-    }).then(history.push('/thanks'))
+    })
+      .then((res) => {
+        history.push('/thanks')
+      })
+      .catch((err) => alert('Oops! Something went wrong'))
   }
 
   return (
@@ -54,7 +58,12 @@ const GetInTouch = () => {
           Get in Touch
         </h2>
 
-        <form name='contact' onSubmit={submitForm}>
+        <form
+          name='contact'
+          onSubmit={submitForm}
+          data-netlify-honeypot='bot-field'
+          data-netlify='true'
+        >
           <div className='p-4'>
             <div className='md:flex mb-3'>
               <div className='flex flex-col md:w-1/2 md:mr-6 mb-3 md:mb-0'>
