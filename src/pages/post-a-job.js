@@ -83,6 +83,7 @@ const PostAJob = () => {
         <>
           <div className='container mx-auto' style={{ maxWidth: 960 }}>
             <button
+              data-cy='edit-job-button'
               className='flex items-center mb-3 text-teal-600 text-lg font-bold'
               onClick={(e) => {
                 setStatus(1)
@@ -99,6 +100,7 @@ const PostAJob = () => {
             </button>
             <JobTemplate props={jobData} logo={companyLogo} />
             <button
+              data-cy='job-posting-approval-button'
               className='btn btn-blue mt-8'
               onClick={recievingTemplateApproval}
             >
