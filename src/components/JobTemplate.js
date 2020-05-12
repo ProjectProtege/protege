@@ -100,7 +100,7 @@ const JobTemplate = ({ logo, props }) => {
             <h2 
               data-cy='job-title'
               className='text-blue-500 font-bold text-3xl'>
-              {props.jobtitle}
+              {props.jobTitle}
             </h2>
 
             <div 
@@ -181,7 +181,7 @@ const JobTemplate = ({ logo, props }) => {
         </div>
 
         <div>
-          <a href={props.howToApply}>
+          <a data-cy='how-to-apply-bottom' href={props.howToApply}>
             <button className='btn btn-teal mt-8 w-full md:w-auto'>
               Apply
             </button>

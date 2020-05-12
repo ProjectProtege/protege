@@ -29,6 +29,7 @@ function LogoUpload({ recievingLogo }, props) {
         >
           {fileResult ? (
             <img
+              data-cy='company-logo-uploaded'
               className='h-full p-2 mx-auto my-auto'
               src={fileResult}
               alt='logo preview'
@@ -37,6 +38,7 @@ function LogoUpload({ recievingLogo }, props) {
             <span className='text-teal-500 mx-auto my-auto text-2xl'>+</span>
           )}
           <input
+            data-cy='company-logo-upload'
             onChange={handleLogoChange}
             id='companyLogo'
             name='companyLogo'
@@ -47,7 +49,7 @@ function LogoUpload({ recievingLogo }, props) {
         </label>
       </div>
       <div className='flex flex-col md:w-1/2'>
-        <span className='text-blue-200 text-xs tracking-tight'>
+        <span data-cy='logo-upload-fileName' className='text-blue-200 text-xs tracking-tight'>
           {fileName
             ? `Uploaded: ${fileName}`
             : 'Please provide a .png format of your companies logo to be displayed with your job opening listing.'}
