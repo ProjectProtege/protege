@@ -3,6 +3,7 @@ import PostAJobForm from '../components/form/PostAJobForm'
 import StatusBar from '../components/form/StatusBar'
 import JobTemplate from '../components/JobTemplate'
 import JobPostingConfirmation from '../components/JobPostingConfirmation'
+import { motion } from 'framer-motion'
 
 import { db, storage } from '../firebase/firebase'
 import firebase from 'firebase'
@@ -56,7 +57,18 @@ const PostAJob = () => {
   }
 
   return (
-    <div className='container mx-auto mt-24 md:mt-32 p-2'>
+    <motion.div
+      className='container mx-auto mt-24 md:mt-32 p-2'
+      animate={{
+        opacity: [0, 1],
+        y: [-10, 1],
+      }}
+      transition={{
+        delay: 0.15,
+        duration: 0.3,
+        ease: 'easeIn',
+      }}
+    >
       <h1 className='text-lg md:text-2xl text-blue-500 font-bold text-center leading-snug'>
         Inexperienced doesn’t mean incapable. <br />
         Fill your role with ambition.
@@ -65,10 +77,22 @@ const PostAJob = () => {
       <StatusBar props={status} />
 
       {status === 1 && !jobData && (
-        <PostAJobForm
-          recievingLogo2={recievingLogo2}
-          receivingJobData={receivingJobData}
-        />
+        <motion.div
+          animate={{
+            opacity: [0, 1],
+            y: [-5, 0],
+          }}
+          transition={{
+            delay: 0.25,
+            duration: 0.25,
+            ease: 'easeIn',
+          }}
+        >
+          <PostAJobForm
+            recievingLogo2={recievingLogo2}
+            receivingJobData={receivingJobData}
+          />
+        </motion.div>
       )}
 
       {status === 1 && jobData && (
@@ -81,7 +105,7 @@ const PostAJob = () => {
 
       {status === 2 && jobData && (
         <>
-          <div className='container mx-auto' style={{ maxWidth: 960 }}>
+          <div className='container mx-auto'>
             <button
               data-cy='edit-job-button'
               className='flex items-center mb-3 text-teal-600 text-lg font-bold'
@@ -111,7 +135,7 @@ const PostAJob = () => {
       )}
 
       {status === 3 && jobData && <JobPostingConfirmation props={jobData} />}
-    </div>
+    </motion.div>
   )
 }
 
