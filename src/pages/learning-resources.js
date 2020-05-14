@@ -1,9 +1,18 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 
 const LearningResources = () => (
-  <div
+  <motion.div
     className='container mx-auto pt-32 px-2 md:px-0 text-center'
     style={{ maxWidth: 680 }}
+    animate={{
+      opacity: [0, 1],
+      y: [-10, 0],
+    }}
+    transition={{
+      duration: 0.25,
+      ease: 'easeIn',
+    }}
   >
     <h1 className='text-2xl font-bold text-blue-500 mb-6'>
       Learning Resources
@@ -11,7 +20,15 @@ const LearningResources = () => (
 
     <div className='mb-12'>
       <h2 className='text-lg mb-3 text-teal-600 font-semibold'>Free</h2>
-      <ul>
+      <motion.ul
+        animate={{
+          y: [-5, 0],
+        }}
+        transition={{
+          delay: 0.1,
+          duration: 0.25,
+        }}
+      >
         <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
           <a href='https://www.freecodecamp.org/'>FreeCodeCamp</a>
         </li>
@@ -55,12 +72,20 @@ const LearningResources = () => (
             Level Up Financial Planning
           </a>
         </li>
-      </ul>
+      </motion.ul>
     </div>
 
     <div>
       <h2 className='text-lg mb-3 text-teal-600 font-semibold'>Paid</h2>
-      <ul>
+      <motion.ul
+        animate={{
+          y: [-5, 0],
+        }}
+        transition={{
+          delay: 0.2,
+          duration: 0.25,
+        }}
+      >
         <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
           <a href='https://egghead.io/?rc=84jyz'>Egghead.io</a>
         </li>
@@ -76,9 +101,9 @@ const LearningResources = () => (
         <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
           <a href='https://teamtreehouse.com/'>Team Treehouse</a>
         </li>
-      </ul>
+      </motion.ul>
     </div>
-  </div>
+  </motion.div>
 )
 
 export default LearningResources
