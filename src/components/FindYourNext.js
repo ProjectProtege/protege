@@ -1,12 +1,7 @@
 import React, { useState } from 'react'
+import Typewriter from 'typewriter-effect'
 
 const FindYourNext = () => {
-  const nextWords = ["10x'er", 'Opportunity', 'Blue Chip', 'Moment', 'Prospect']
-  const [word, setWord] = useState(0)
-  setTimeout(() => {
-    setWord((word + 1) % nextWords.length)
-  }, 2000)
-
   return (
     <div data-cy='find-your-next' className='flex justify-center mt-8'>
       <div className='md:flex items-center'>
@@ -18,7 +13,19 @@ const FindYourNext = () => {
           className='flex flex-col text-blue-500 text-center text-3xl  ml-2 font-mono'
           style={{ borderBottom: '3px solid #54AF8E', width: 300 }}
         >
-          {nextWords[word]}
+          <Typewriter
+            options={{
+              strings: [
+                "10x'er",
+                'Opportunity',
+                'Blue Chip',
+                'Moment',
+                'Prospect',
+              ],
+              autoStart: true,
+              loop: true,
+            }}
+          />
         </div>
       </div>
     </div>
