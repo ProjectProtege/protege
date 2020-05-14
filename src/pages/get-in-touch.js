@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import backgroundImage from '../assets/images/bg-pattern.png'
+import { motion } from 'framer-motion'
 
 const GetInTouch = () => {
   let history = useHistory()
@@ -32,9 +33,21 @@ const GetInTouch = () => {
   }
 
   return (
-    <div
+    <motion.div
       className='container mx-auto pt-32 px-2 md:px-0'
       style={{ maxWidth: 680 }}
+      initial={{
+        opacity: 0,
+        y: -10,
+      }}
+      animate={{
+        opacity: [0, 1],
+        y: [-10, 0],
+      }}
+      transition={{
+        duration: 0.3,
+        ease: 'easeIn',
+      }}
     >
       <h1 className='text-2xl font-bold text-blue-500 mb-3'>
         We'd love to hear from you!
@@ -50,7 +63,20 @@ const GetInTouch = () => {
         people we’re trying to serve!
       </p>
 
-      <div className='shadow-md border-t-4 border-teal-500'>
+      <motion.div
+        className='shadow-md border-t-4 border-teal-500'
+        initial={{
+          opacity: 0,
+          y: -5,
+        }}
+        animate={{
+          y: [-5, 0],
+          opacity: [0, 1],
+        }}
+        transition={{
+          delay: 0.15,
+        }}
+      >
         <h2
           style={{ backgroundImage: `url(${backgroundImage})` }}
           className='bg-cover text-blue-500 font-bold p-4 bg-blue-100 text-xl'
@@ -124,8 +150,8 @@ const GetInTouch = () => {
             </button>
           </div>
         </form>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   )
 }
 
