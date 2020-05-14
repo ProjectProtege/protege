@@ -139,10 +139,10 @@ const JobTemplate = ({ logo, props }) => {
               dangerouslySetInnerHTML={createMarkup(props.companyDescription)}
             ></div>
           </div>
-          <div className='md:w-1/4 mt-8'>
+          <div className='md:w-1/4 mt-8 text-center md:text-left'>
             <div className='bg-gray-200 p-4'>
               {companyLogo ? (
-                <div className='w-full mb-6 md:w-1/2 rounded-full overflow-hidden shadow-md'>
+                <div className='w-2/3 mx-auto md:mx-0 mb-6 md:w-1/2 bg-white p-4 rounded overflow-hidden shadow-md'>
                   <img
                     data-cy='company-logo'
                     id='companyLogo'

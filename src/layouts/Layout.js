@@ -6,7 +6,7 @@ import Logo from '../assets/images/protegeLogo.svg'
 import { motion } from 'framer-motion'
 
 const Layout = ({ children }) => (
-  <div className='min-h-screen flex flex-col'>
+  <div className='min-h-screen flex flex-col font-sans'>
     <motion.header
       className='py-2 absolute w-full md:px-3 z-50'
       initial={{
