@@ -66,6 +66,12 @@ const LearningResources = () => (
             James Quick Youtube
           </a>
         </li>
+  
+        <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
+          <a href='https://www.levelupfinancialplanning.com/videos/'>
+            Level Up Financial Planning
+          </a>
+        </li>
       </motion.ul>
     </div>
 
