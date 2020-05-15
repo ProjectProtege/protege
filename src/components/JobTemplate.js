@@ -101,7 +101,7 @@ const JobTemplate = ({ logo, props }) => {
               data-cy='job-title'
               className='text-blue-500 font-bold text-3xl'
             >
-              {props.jobTitle}
+              {props.jobtitle}
             </h2>
 
             <div
