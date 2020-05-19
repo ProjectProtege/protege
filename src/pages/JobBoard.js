@@ -69,7 +69,7 @@ const JobBoard = ({ location }) => {
             ease: 'easeIn',
           }}
         >
-          <h1 className='text-2xl font-semibold text-teal-600 mb-6'>
+          <h1 className='text-2xl font-medium text-teal-600 mb-6'>
             {jobFilter ? `${jobFilter} Jobs` : 'All Jobs'}
           </h1>
 

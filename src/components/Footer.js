@@ -44,7 +44,7 @@ const Footer = () => {
         >
           <div className='flex flex-col md:flex-row justify-center items-center'>
             <label
-              className='text-blue-500 text-lg md:mr-6 font-bold text-center md:text-left'
+              className='text-blue-500 text-lg md:mr-6 font-semibold text-center md:text-left'
               htmlFor='email'
             >
               Sign up for our mailing list!
