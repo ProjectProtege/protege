@@ -31,7 +31,7 @@ const Nav = () => {
         <ul
           className={`${
             active ? 'absolute' : 'hidden'
-          } mt-2 text-center uppercase right-0 font-semibold bg-white shadow-lg p-2 w-screen mx-auto`}
+          } mt-2 text-center uppercase right-0 font-medium bg-white shadow-lg p-2 w-screen mx-auto`}
           onClick={handleMobileClick}
         >
           <li className='py-3 opacity-75 hover:opacity-100 border-b-2 border-gray-300'>
@@ -54,7 +54,7 @@ const Nav = () => {
 
       <nav
         data-cy='desktop-nav'
-        className='hidden md:block text-blue-500 text-sm uppercase font-semibold'
+        className='hidden md:block text-blue-500 text-sm uppercase font-medium'
         role='navigation'
       >
         <ul className='flex justify-between'>

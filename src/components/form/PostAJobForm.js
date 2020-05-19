@@ -80,7 +80,7 @@ const PostAJobForm = ({
                 <div className='mb-3 flex flex-col'>
                   <label
                     htmlFor='job-title'
-                    className='text-blue-500 font-bold mb-2'
+                    className='text-blue-500 font-semibold mb-2'
                   >
                     Job Title
                   </label>
@@ -104,7 +104,7 @@ const PostAJobForm = ({
                   <div className='flex flex-col md:w-1/2 mb-3 md:mr-6'>
                     <label
                       htmlFor='role-focus'
-                      className='text-blue-500 font-bold'
+                      className='text-blue-500 font-semibold'
                     >
                       Role Focus
                     </label>
@@ -142,7 +142,7 @@ const PostAJobForm = ({
                   <div className='flex flex-col md:w-1/2 mb-3'>
                     <label
                       htmlFor='positionType'
-                      className='text-blue-500 font-bold'
+                      className='text-blue-500 font-semibold'
                     >
                       Position Type
                     </label>
@@ -178,7 +178,7 @@ const PostAJobForm = ({
                 <div className='flex flex-col mb-3'>
                   <label
                     htmlFor='job-description'
-                    className='text-blue-500 font-bold mb-2'
+                    className='text-blue-500 font-semibold mb-2'
                   >
                     Job Description
                   </label>
@@ -206,7 +206,7 @@ const PostAJobForm = ({
                 <div className='flex flex-col'>
                   <label
                     htmlFor='how-to-apply'
-                    className='text-blue-500 font-bold'
+                    className='text-blue-500 font-semibold'
                   >
                     How To Apply
                   </label>
@@ -245,7 +245,7 @@ const PostAJobForm = ({
                     <div className='flex flex-col md:w-1/2 md:mr-6 mb-3 md:mb-0'>
                       <label
                         htmlFor='companyName'
-                        className='text-blue-500 font-bold mb-2'
+                        className='text-blue-500 font-semibold mb-2'
                       >
                         Company Name
                       </label>
@@ -268,7 +268,7 @@ const PostAJobForm = ({
                     <div className='flex flex-col md:w-1/2'>
                       <label
                         htmlFor='companyWebsite'
-                        className='text-blue-500 font-bold mb-2'
+                        className='text-blue-500 font-semibold mb-2'
                       >
                         Company Website
                       </label>
@@ -292,7 +292,7 @@ const PostAJobForm = ({
                     <div className='flex flex-col md:w-1/2 md:mr-6 mb-3'>
                       <label
                         htmlFor='companyEmail'
-                        className='text-blue-500 font-bold mb-2'
+                        className='text-blue-500 font-semibold mb-2'
                       >
                         Email
                       </label>
@@ -314,7 +314,7 @@ const PostAJobForm = ({
                     <div className='flex flex-col md:w-1/2 mb-3'>
                       <label
                         htmlFor='companyLogo'
-                        className='text-blue-500 font-bold mb-2'
+                        className='text-blue-500 font-semibold mb-2'
                       >
                         Logo
                       </label>
@@ -337,7 +337,7 @@ const PostAJobForm = ({
                   <div className='flex flex-col mb-3'>
                     <label
                       htmlFor='companyDescription'
-                      className='text-blue-500 font-bold mb-2'
+                      className='text-blue-500 font-semibold mb-2'
                     >
                       Company Description
                     </label>
@@ -365,7 +365,7 @@ const PostAJobForm = ({
                   <div className='flex flex-col'>
                     <label
                       htmlFor='companyHQ'
-                      className='text-blue-500 font-bold'
+                      className='text-blue-500 font-semibold'
                     >
                       Company Headquarters
                     </label>
@@ -386,7 +386,11 @@ const PostAJobForm = ({
                 </div>
               </div>
             </div>
-            <button data-cy='next-step-button' type='submit' className='mt-6 btn btn-teal w-32'>
+            <button
+              data-cy='next-step-button'
+              type='submit'
+              className='mt-6 btn btn-teal w-32'
+            >
               Next Step
             </button>
           </Form>

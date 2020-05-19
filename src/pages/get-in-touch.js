@@ -49,7 +49,7 @@ const GetInTouch = () => {
         ease: 'easeIn',
       }}
     >
-      <h1 className='text-2xl font-bold text-blue-500 mb-3'>
+      <h1 className='text-2xl font-semibold text-blue-500 mb-3'>
         We'd love to hear from you!
       </h1>
 
@@ -93,7 +93,10 @@ const GetInTouch = () => {
           <div className='p-4'>
             <div className='md:flex mb-3'>
               <div className='flex flex-col md:w-1/2 md:mr-6 mb-3 md:mb-0'>
-                <label htmlFor='name' className='text-blue-500 font-bold mb-2'>
+                <label
+                  htmlFor='name'
+                  className='text-blue-500 font-semibold mb-2'
+                >
                   Name
                 </label>
 
@@ -109,7 +112,10 @@ const GetInTouch = () => {
               </div>
 
               <div className='flex flex-col md:w-1/2'>
-                <label htmlFor='email' className='text-blue-500 font-bold mb-2'>
+                <label
+                  htmlFor='email'
+                  className='text-blue-500 font-semibold mb-2'
+                >
                   Email
                 </label>
 
@@ -126,7 +132,10 @@ const GetInTouch = () => {
             </div>
 
             <div className='flex flex-col'>
-              <label htmlFor='comment' className='text-blue-500 font-bold mb-2'>
+              <label
+                htmlFor='comment'
+                className='text-blue-500 font-semibold mb-2'
+              >
                 Comment
               </label>
 

@@ -14,7 +14,7 @@ const LearningResources = () => (
       ease: 'easeIn',
     }}
   >
-    <h1 className='text-2xl font-bold text-blue-500 mb-6'>
+    <h1 className='text-2xl font-semibold text-blue-500 mb-6'>
       Learning Resources
     </h1>
 
@@ -66,7 +66,7 @@ const LearningResources = () => (
             James Quick Youtube
           </a>
         </li>
-  
+
         <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
           <a href='https://www.levelupfinancialplanning.com/videos/'>
             Level Up Financial Planning
