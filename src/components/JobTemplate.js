@@ -26,10 +26,10 @@ const JobTemplate = ({ logo, props }) => {
   }
 
   const quillStyle = {
-    h1: 'text-blue-500 font-bold text-xl',
-    h2: 'text-blue-500 font-bold text-lg',
-    h3: 'text-blue-500 font-bold text-md',
-    a: 'text-teal-600 font-bold',
+    h1: 'text-blue-500 font-semibold text-xl',
+    h2: 'text-blue-500 font-semibold text-lg',
+    h3: 'text-blue-500 font-semibold text-md',
+    a: 'text-teal-600 font-semibold',
     p: 'text-blue-300',
     ol: 'list-decimal list-inside',
     ul: 'list-disc list-inside',
@@ -113,7 +113,7 @@ const JobTemplate = ({ logo, props }) => {
 
             <h3
               data-cy='job-description-title'
-              className='text-blue-500 font-bold text-2xl mb-4'
+              className='text-blue-500 font-semibold text-2xl mb-4'
             >
               Job Description
             </h3>
@@ -127,7 +127,7 @@ const JobTemplate = ({ logo, props }) => {
 
             <h4
               data-cy='company-description-title'
-              className='text-blue-500 font-bold text-2xl mb-4'
+              className='text-blue-500 font-semibold text-2xl mb-4'
             >
               About {props.companyName}
             </h4>
@@ -155,7 +155,7 @@ const JobTemplate = ({ logo, props }) => {
 
               <h4
                 data-cy='company-name-sidebar'
-                className='text-blue-500 font-bold text-lg mb-3'
+                className='text-blue-500 font-semibold text-lg mb-3'
               >
                 {props.companyName}
               </h4>
@@ -167,14 +167,6 @@ const JobTemplate = ({ logo, props }) => {
                   href={props.companyWebsite}
                 >
                   <p className='opacity-75 hover:opacity-100'>Visit website</p>
-                </a>
-
-                <a
-                  data-cy='company-email'
-                  className='underline'
-                  href={`mailto:${props.companyEmail}`}
-                >
-                  <p className='opacity-75 hover:opacity-100'>Contact email</p>
                 </a>
                 <a data-cy='how-to-apply' href={props.howToApply}>
                   <button className='hidden md:block btn btn-teal mt-8 w-full'>
