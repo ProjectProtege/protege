@@ -63,8 +63,12 @@ const Home = () => {
         >
           <FindYourNext />
 
-          <div className='flex md:w-3/4 flex-col text-center mx-auto mt-6'>
-            <p className='tracking-wide lg:w-3/5 mx-auto text-lg text-blue-400 mb-6'>
+          <div className='flex md:w-3/4 flex-col text-center mx-auto mt-4'>
+            <p className='tracking-wide lg:w-1/2 mx-auto text-lg text-blue-400 mb-6'>
+              <span className='text-2xl'>
+                Remote jobs for junior developers.
+              </span>
+              <br />
               Looking for your next junior developer role? Look no further! Any
               jobs listed here are geared for those hungry to work and learn.
             </p>
