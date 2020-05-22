@@ -19,7 +19,7 @@ const Footer = () => {
       headers: { 'Content-type': 'application/json; charset=UTF-8' },
       body: JSON.stringify(dataToSend),
     }
-
+    setEmail('')
     await fetch(
       `https://api.convertkit.com/v3/tags/${tagId}/subscribe`,
       options
