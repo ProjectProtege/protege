@@ -19,11 +19,11 @@ const Footer = () => {
       headers: { 'Content-type': 'application/json; charset=UTF-8' },
       body: JSON.stringify(dataToSend),
     }
-    setEmail('')
     await fetch(
       `https://api.convertkit.com/v3/tags/${tagId}/subscribe`,
       options
     ).then(alert("You've been subscribed to the Protege.dev email!"))
+     setEmail('')
   }
 
   return (
@@ -51,6 +51,7 @@ const Footer = () => {
             </label>
 
             <input
+              value = {email}
               data-cy='mailing-list-signup'
               type='email'
               className='px-4 py-1 w-full md:w-2/5 my-3 md:my-0'
