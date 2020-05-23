@@ -24,7 +24,7 @@ const JobCard = ({ job }) => {
   const postDate = job.postedAt.toDate()
 
   const formattedPostDate = `${
-    months[postDate.getMonth() + 1]
+    months[postDate.getMonth()]
   } ${postDate.getDate()}`
 
   useEffect(() => {
