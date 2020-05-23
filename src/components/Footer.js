@@ -4,7 +4,7 @@ import * as ROUTES from '../constants/routes'
 import { motion } from 'framer-motion'
 
 const Footer = () => {
-  const [email, setEmail] = useState(undefined)
+  const [email, setEmail] = useState('')
 
   async function subscribeEmail(e) {
     e.preventDefault()
