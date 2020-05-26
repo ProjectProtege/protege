@@ -13,7 +13,6 @@ describe('Job Template', () => {
         cy.get("[data-cy='company-logo']").should('have.attr', 'src')
         cy.get("[data-cy='company-name-sidebar']")
         cy.get("[data-cy='company-website']").should('have.attr', 'href')
-        cy.get("[data-cy='company-email']")
         cy.get("[data-cy='how-to-apply']")
     })
 })
