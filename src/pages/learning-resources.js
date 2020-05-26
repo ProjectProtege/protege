@@ -101,6 +101,12 @@ const LearningResources = () => (
         <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
           <a href='https://teamtreehouse.com/'>Team Treehouse</a>
         </li>
+  
+    <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
+          <a href='https://adamlearns.com/'>
+            Adam Learns
+          </a>
+        </li>
       </motion.ul>
     </div>
   </motion.div>
