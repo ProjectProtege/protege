@@ -26,59 +26,33 @@ const JobTemplate = ({ logo, props }) => {
   }
 
   const quillStyle = {
-    h1: 'text-blue-500 font-semibold text-xl',
-    h2: 'text-blue-500 font-semibold text-lg',
-    h3: 'text-blue-500 font-semibold text-md',
-    a: 'text-teal-600 font-semibold',
-    p: 'text-blue-300',
-    ol: 'list-decimal list-inside',
-    ul: 'list-disc list-inside',
-    li: 'pl-2 text-blue-300',
+    H1: 'text-blue-500 font-semibold text-xl',
+    H2: 'text-blue-500 font-semibold text-lg',
+    H3: 'text-blue-500 font-semibold text-md',
+    A: 'text-teal-600 font-semibold',
+    P: 'text-blue-300',
+    OL: 'list-decimal list-inside',
+    UL: 'list-disc list-inside',
+    LI: 'pl-2 text-blue-300',
   }
 
   useEffect(() => {
     // Cleans up the text provided by QuillJS wysiwyg
     function styleChildren(children) {
       children.forEach((child) => {
-        if (child.tagName === 'H1') {
-          child.classList = quillStyle.h1
-        }
-        if (child.tagName === 'H2') {
-          child.classList = quillStyle.h2
-        }
-        if (child.tagName === 'H3') {
-          child.classList = quillStyle.h3
-        }
-        if (child.tagName === 'P') {
-          child.classList = quillStyle.p
-        }
-        if (child.tagName === 'A') {
-          child.classList = quillStyle.a
-        }
-        if (child.tagName === 'OL') {
-          child.classList = quillStyle.ol
-          let listItems = [...child.children]
-          listItems.forEach((listItem) => {
-            listItem.classList = quillStyle.li
-          })
-        }
-        if (child.tagName === 'UL') {
-          child.classList = quillStyle.ul
-          let listItems = [...child.children]
-          listItems.forEach((listItem) => {
-            listItem.classList = quillStyle.li
-          })
-        }
-        if (child.tagName === 'LI') {
-          child.classList = quillStyle.li
+        const childTag = child.tagName
+        child.classList = quillStyle[childTag]
+        if(child.hasChildren){
+          const grandChildren = [...child.children]
+          styleChildren(grandChildren)
         }
       })
     }
-    var jobDesc = document.getElementById('jobDesc')
-    var jobChildren = [...jobDesc.children]
+    const jobDescription = document.getElementById('jobDesc')
+    const jobChildren = [...jobDescription.children]
     styleChildren(jobChildren)
-    var companyDesc = document.getElementById('companyDesc')
-    var companyChildren = [...companyDesc.children]
+    const companyDescription = document.getElementById('companyDesc')
+    const companyChildren = [...companyDescription.children]
     styleChildren(companyChildren)
 
     // Setting Logo in new job post preview
