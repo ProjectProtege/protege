@@ -105,7 +105,7 @@ const PostAJob = () => {
 
       {status === 2 && jobData && (
         <>
-          <div className='container mx-auto'>
+          <div className='container mx-auto lg:w-3/5'>
             <button
               data-cy='edit-job-button'
               className='flex items-center mb-3 text-teal-600 text-lg font-bold'
