@@ -8,6 +8,7 @@ import Layout from '../layouts/Layout'
 
 import { db, storage } from '../firebase/firebase'
 import firebase from 'firebase'
+import TierSelect from '../components/form/TierSelect'
 
 const PostAJob = () => {
   const [status, setStatus] = useState(1)
@@ -71,10 +72,14 @@ const PostAJob = () => {
           ease: 'easeIn',
         }}
       >
-        <h1 className='text-lg md:text-2xl text-blue-500 font-bold text-center leading-snug'>
-          Inexperienced doesn’t mean incapable. <br />
-          Fill your role with ambition.
-        </h1>
+        {status === 1 && <TierSelect />}
+
+        {status !== 1 && (
+          <h1 className='text-lg md:text-2xl text-blue-500 font-bold text-center leading-snug'>
+            Inexperienced doesn’t mean incapable. <br />
+            Fill your role with ambition.
+          </h1>
+        )}
 
         <StatusBar props={status} />
 
