@@ -1,11 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TierSelectCard from './TierSelectCard'
 
 const TierSelect = () => {
+  const [tier, setTier] = useState()
+
+  function receivingClick(e) {
+    setTier(e)
+    console.log(e)
+  }
+
   return (
     <div className='mb-12'>
       <div className='mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-6'>
-        <TierSelectCard>
+        <TierSelectCard
+          value='Basic'
+          receivingClick={receivingClick}
+          tier={tier}
+        >
           <div className='col-span-1 text-center'>
             <div className='relative font-bold leading-none text-blue-500 text-5xl md:text-6xl'>
               <span className='text-2xl absolute mt-4 -ml-4'>$</span>75
@@ -23,7 +34,11 @@ const TierSelect = () => {
           </ul>
         </TierSelectCard>
 
-        <TierSelectCard>
+        <TierSelectCard
+          value='Advanced'
+          receivingClick={receivingClick}
+          tier={tier}
+        >
           <div className='col-span-1 text-center'>
             <div className='relative font-bold leading-none text-blue-500 text-5xl md:text-6xl'>
               <span className='text-2xl absolute mt-4 -ml-4'>$</span>125
@@ -39,7 +54,11 @@ const TierSelect = () => {
           </ul>
         </TierSelectCard>
 
-        <TierSelectCard>
+        <TierSelectCard
+          value='Premium'
+          receivingClick={receivingClick}
+          tier={tier}
+        >
           <div className='col-span-1 text-center'>
             <div className='relative font-bold leading-none text-blue-500 text-5xl md:text-6xl'>
               <span className='text-2xl absolute mt-4 -ml-4'>$</span>175

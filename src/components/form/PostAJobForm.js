@@ -16,8 +16,6 @@ const PostAJobForm = ({
 }) => {
   const [fileValue, setFileValue] = useState(undefined)
 
-  console.log(jobData)
-
   function recievingLogo(logo) {
     setFileValue(logo)
     recievingLogo2(logo)
