@@ -1,14 +1,20 @@
 import React, { useState } from 'react'
+import Layout from '../layouts/Layout'
+import { motion } from 'framer-motion'
+import { loadStripe } from '@stripe/stripe-js'
+
+//components
 import PostAJobForm from '../components/form/PostAJobForm'
 import StatusBar from '../components/form/StatusBar'
 import JobTemplate from '../components/JobTemplate'
 import JobPostingConfirmation from '../components/JobPostingConfirmation'
-import { motion } from 'framer-motion'
-import Layout from '../layouts/Layout'
+import TierSelect from '../components/form/TierSelect'
 
+//firebase
 import { db, storage } from '../firebase/firebase'
 import firebase from 'firebase'
-import TierSelect from '../components/form/TierSelect'
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY)
 
 const PostAJob = () => {
   const [status, setStatus] = useState(1)
@@ -56,6 +62,17 @@ const PostAJob = () => {
         roleFocus: data.jobData.roleFocus,
       })
     )
+  }
+
+  const handlePaymentClick = async (e) => {
+    //call backend to create session
+    const { sessionId } = await fetchCheckoutSession()
+
+    const stripe = await stripePromise
+
+    const { error } = await stripe.redirectToCheckout({
+      sessionId,
+    })
   }
 
   return (
@@ -133,9 +150,9 @@ const PostAJob = () => {
               <button
                 data-cy='job-posting-approval-button'
                 className='btn btn-blue mt-8'
-                onClick={recievingTemplateApproval}
+                onClick={handlePaymentClick}
               >
-                Approve
+                Proceed to Payment
               </button>
             </div>
           </>
