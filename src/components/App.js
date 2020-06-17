@@ -6,7 +6,7 @@ import LearningResources from '../pages/learning-resources'
 import GetInTouch from '../pages/get-in-touch'
 import IndividualJobPage from '../pages/individual-job'
 import PostAJob from '../pages/post-a-job'
-import Thanks from '../pages/thanks'
+import Thanks from '../pages/Thanks'
 
 import * as ROUTES from '../constants/routes'
 
