@@ -10,7 +10,7 @@ const TierSelect = () => {
   }
 
   return (
-    <div className='mb-12'>
+    <div>
       <div className='mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-6'>
         <TierSelectCard
           value='Basic'
@@ -75,10 +75,6 @@ const TierSelect = () => {
           </ul>
         </TierSelectCard>
       </div>
-
-      <h2 className='text-center mb-2 text-blue-100 tracking-wide'>
-        Select Your Tier
-      </h2>
     </div>
   )
 }

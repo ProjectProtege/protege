@@ -66,12 +66,12 @@ const PostAJob = () => {
 
   const handlePaymentClick = async (e) => {
     //call backend to create session
-    const { sessionId } = await fetchCheckoutSession()
+    // const { sessionId } = await fetchCheckoutSession()
 
     const stripe = await stripePromise
 
     const { error } = await stripe.redirectToCheckout({
-      sessionId,
+      // sessionId,
     })
   }
 
@@ -89,7 +89,15 @@ const PostAJob = () => {
           ease: 'easeIn',
         }}
       >
-        {status === 1 && <TierSelect />}
+        {status === 1 && (
+          <>
+            <TierSelect />
+
+            <p className='text-center mb-2 text-blue-100 tracking-wide'>
+              Select Your Tier
+            </p>
+          </>
+        )}
 
         {status !== 1 && (
           <h1 className='text-lg md:text-2xl text-blue-500 font-bold text-center leading-snug'>

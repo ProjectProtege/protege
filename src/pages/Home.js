@@ -6,6 +6,7 @@ import { db } from '../firebase/firebase'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Layout from '../layouts/Layout'
+import TierSelect from '../components/form/TierSelect'
 
 const Home = () => {
   const [jobs, setJobs] = useState([])
@@ -83,7 +84,7 @@ const Home = () => {
           </motion.div>
 
           <motion.div
-            className='mt-12 lg:pt-16 mx-auto min-h-screen'
+            className='mt-12 mb-32 lg:pt-16 mx-auto min-h-screen'
             style={{ maxWidth: 680 }}
             animate={{
               opacity: [0, 1],
@@ -105,6 +106,28 @@ const Home = () => {
               ))}
             </div>
           </motion.div>
+
+          <div className='flex flex-col items-center'>
+            <h2 className='text-center text-2xl text-blue-500 font-bold leading-normal mb-8'>
+              Broadcast to unmatched ambition,
+              <br />
+              <span className='text-teal-700 text-5xl tracking-wide'>
+                Affordably.
+              </span>
+            </h2>
+
+            <TierSelect />
+
+            <div className='mt-6 flex flex-col items-center'>
+              <h3 className='text-lg text-blue-300 text-center'>
+                Get started on your candidate search today.
+              </h3>
+
+              <Link to='/post-a-job'>
+                <button className='btn btn-teal mt-3'>Post a Job</button>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </Layout>
