@@ -77,7 +77,7 @@ const Footer = () => {
         </form>
       </div>
 
-      <div className='container mx-auto px-3'>
+      <div className='container mx-auto px-8'>
         <div className='flex justify-between'>
           <svg
             width='99'

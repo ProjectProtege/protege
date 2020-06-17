@@ -65,14 +65,15 @@ const PostAJob = () => {
   }
 
   const handlePaymentClick = async (e) => {
+    const options = {
+      method: 'GET',
+      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+    }
     //call backend to create session
-    // const { sessionId } = await fetchCheckoutSession()
-
-    const stripe = await stripePromise
-
-    const { error } = await stripe.redirectToCheckout({
-      // sessionId,
-    })
+    await fetch(
+      `https://us-central1-protege-dev-env.cloudfunctions.net/createStripeSession`,
+      options
+    ).then((res) => console.log(res))
   }
 
   return (
