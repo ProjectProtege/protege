@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { storage } from '../firebase/firebase'
 import { motion } from 'framer-motion'
+import JobCardImage from './JobCardImage'
 
 const JobCard = ({ job }) => {
   const [logoUrl, setLogoUrl] = useState()
@@ -57,12 +58,7 @@ const JobCard = ({ job }) => {
             delay: 0.1,
           }}
         />
-        <img
-          data-cy={`job-card-image-${job.id}`}
-          src={logoUrl}
-          alt={`${job.companyName} Logo`}
-          className='my-auto w-full'
-        />
+        <JobCardImage logoUrl={logoUrl} job={job}/>
       </div>
 
       <div className='w-full md:w-11/12 flex justify-between md:pl-6'>
