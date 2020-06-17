@@ -45,7 +45,7 @@ const Footer = () => {
           <div className='flex flex-col md:flex-row justify-center items-center'>
             <label
               className='text-blue-500 text-lg md:mr-6 font-semibold text-center md:text-left'
-              htmlFor='email'
+              htmlFor='newsletter-email'
             >
               Sign up for our mailing list!
             </label>
@@ -54,7 +54,7 @@ const Footer = () => {
               data-cy='mailing-list-signup'
               type='email'
               className='px-4 py-1 w-full md:w-2/5 my-3 md:my-0'
-              id='email'
+              id='newsletter-email'
               autoComplete='off'
               onBlur={(e) => setEmail(e.target.value)}
               name='email'
