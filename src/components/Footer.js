@@ -57,7 +57,7 @@ const Footer = () => {
               className='px-4 py-1 w-full md:w-2/5 my-3 md:my-0'
               id='email'
               autoComplete='off'
-              onBlur={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               name='email'
               required
             />
