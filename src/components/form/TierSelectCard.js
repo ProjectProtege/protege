@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
 
-const TierSelectCard = ({ children, value, receivingClick, tier }) => {
+const TierSelectCard = ({ children, value, receivingTierClick, tier }) => {
   const route = useLocation()
 
   return (
@@ -14,9 +14,16 @@ const TierSelectCard = ({ children, value, receivingClick, tier }) => {
       }
       ${tier === value ? 'border-teal-300 bg-gray-100 scale-105' : ''}`}
       onClick={(e) => {
-        receivingClick(value)
+        receivingTierClick(value)
       }}
     >
+      {route.pathname === '/' ? (
+        <div className='absolute bg-error px-4 py-2 z-10 text-white uppercase -rotate-15 transform text-sm font-semibold tracking-widest -ml-1 shadow'>
+          Free for now!
+        </div>
+      ) : (
+        ''
+      )}
       {children}
     </div>
   )
