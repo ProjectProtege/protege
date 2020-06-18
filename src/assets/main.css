@@ -6937,6 +6937,10 @@ video {
   --transform-rotate: 0;
 }
 
+.rotate-15{
+  --transform-rotate: 15deg;
+}
+
 .rotate-45{
   --transform-rotate: 45deg;
 }
@@ -6961,8 +6965,16 @@ video {
   --transform-rotate: -45deg;
 }
 
+.-rotate-15{
+  --transform-rotate: -15deg;
+}
+
 .hover\:rotate-0:hover{
   --transform-rotate: 0;
+}
+
+.hover\:rotate-15:hover{
+  --transform-rotate: 15deg;
 }
 
 .hover\:rotate-45:hover{
@@ -6989,8 +7001,16 @@ video {
   --transform-rotate: -45deg;
 }
 
+.hover\:-rotate-15:hover{
+  --transform-rotate: -15deg;
+}
+
 .focus\:rotate-0:focus{
   --transform-rotate: 0;
+}
+
+.focus\:rotate-15:focus{
+  --transform-rotate: 15deg;
 }
 
 .focus\:rotate-45:focus{
@@ -7015,6 +7035,10 @@ video {
 
 .focus\:-rotate-45:focus{
   --transform-rotate: -45deg;
+}
+
+.focus\:-rotate-15:focus{
+  --transform-rotate: -15deg;
 }
 
 .translate-x-0{
@@ -14682,6 +14706,10 @@ video {
     --transform-rotate: 0;
   }
 
+  .sm\:rotate-15{
+    --transform-rotate: 15deg;
+  }
+
   .sm\:rotate-45{
     --transform-rotate: 45deg;
   }
@@ -14706,8 +14734,16 @@ video {
     --transform-rotate: -45deg;
   }
 
+  .sm\:-rotate-15{
+    --transform-rotate: -15deg;
+  }
+
   .sm\:hover\:rotate-0:hover{
     --transform-rotate: 0;
+  }
+
+  .sm\:hover\:rotate-15:hover{
+    --transform-rotate: 15deg;
   }
 
   .sm\:hover\:rotate-45:hover{
@@ -14734,8 +14770,16 @@ video {
     --transform-rotate: -45deg;
   }
 
+  .sm\:hover\:-rotate-15:hover{
+    --transform-rotate: -15deg;
+  }
+
   .sm\:focus\:rotate-0:focus{
     --transform-rotate: 0;
+  }
+
+  .sm\:focus\:rotate-15:focus{
+    --transform-rotate: 15deg;
   }
 
   .sm\:focus\:rotate-45:focus{
@@ -14760,6 +14804,10 @@ video {
 
   .sm\:focus\:-rotate-45:focus{
     --transform-rotate: -45deg;
+  }
+
+  .sm\:focus\:-rotate-15:focus{
+    --transform-rotate: -15deg;
   }
 
   .sm\:translate-x-0{
@@ -22321,6 +22369,10 @@ video {
     --transform-rotate: 0;
   }
 
+  .md\:rotate-15{
+    --transform-rotate: 15deg;
+  }
+
   .md\:rotate-45{
     --transform-rotate: 45deg;
   }
@@ -22345,8 +22397,16 @@ video {
     --transform-rotate: -45deg;
   }
 
+  .md\:-rotate-15{
+    --transform-rotate: -15deg;
+  }
+
   .md\:hover\:rotate-0:hover{
     --transform-rotate: 0;
+  }
+
+  .md\:hover\:rotate-15:hover{
+    --transform-rotate: 15deg;
   }
 
   .md\:hover\:rotate-45:hover{
@@ -22373,8 +22433,16 @@ video {
     --transform-rotate: -45deg;
   }
 
+  .md\:hover\:-rotate-15:hover{
+    --transform-rotate: -15deg;
+  }
+
   .md\:focus\:rotate-0:focus{
     --transform-rotate: 0;
+  }
+
+  .md\:focus\:rotate-15:focus{
+    --transform-rotate: 15deg;
   }
 
   .md\:focus\:rotate-45:focus{
@@ -22399,6 +22467,10 @@ video {
 
   .md\:focus\:-rotate-45:focus{
     --transform-rotate: -45deg;
+  }
+
+  .md\:focus\:-rotate-15:focus{
+    --transform-rotate: -15deg;
   }
 
   .md\:translate-x-0{
@@ -29960,6 +30032,10 @@ video {
     --transform-rotate: 0;
   }
 
+  .lg\:rotate-15{
+    --transform-rotate: 15deg;
+  }
+
   .lg\:rotate-45{
     --transform-rotate: 45deg;
   }
@@ -29984,8 +30060,16 @@ video {
     --transform-rotate: -45deg;
   }
 
+  .lg\:-rotate-15{
+    --transform-rotate: -15deg;
+  }
+
   .lg\:hover\:rotate-0:hover{
     --transform-rotate: 0;
+  }
+
+  .lg\:hover\:rotate-15:hover{
+    --transform-rotate: 15deg;
   }
 
   .lg\:hover\:rotate-45:hover{
@@ -30012,8 +30096,16 @@ video {
     --transform-rotate: -45deg;
   }
 
+  .lg\:hover\:-rotate-15:hover{
+    --transform-rotate: -15deg;
+  }
+
   .lg\:focus\:rotate-0:focus{
     --transform-rotate: 0;
+  }
+
+  .lg\:focus\:rotate-15:focus{
+    --transform-rotate: 15deg;
   }
 
   .lg\:focus\:rotate-45:focus{
@@ -30038,6 +30130,10 @@ video {
 
   .lg\:focus\:-rotate-45:focus{
     --transform-rotate: -45deg;
+  }
+
+  .lg\:focus\:-rotate-15:focus{
+    --transform-rotate: -15deg;
   }
 
   .lg\:translate-x-0{
@@ -37599,6 +37695,10 @@ video {
     --transform-rotate: 0;
   }
 
+  .xl\:rotate-15{
+    --transform-rotate: 15deg;
+  }
+
   .xl\:rotate-45{
     --transform-rotate: 45deg;
   }
@@ -37623,8 +37723,16 @@ video {
     --transform-rotate: -45deg;
   }
 
+  .xl\:-rotate-15{
+    --transform-rotate: -15deg;
+  }
+
   .xl\:hover\:rotate-0:hover{
     --transform-rotate: 0;
+  }
+
+  .xl\:hover\:rotate-15:hover{
+    --transform-rotate: 15deg;
   }
 
   .xl\:hover\:rotate-45:hover{
@@ -37651,8 +37759,16 @@ video {
     --transform-rotate: -45deg;
   }
 
+  .xl\:hover\:-rotate-15:hover{
+    --transform-rotate: -15deg;
+  }
+
   .xl\:focus\:rotate-0:focus{
     --transform-rotate: 0;
+  }
+
+  .xl\:focus\:rotate-15:focus{
+    --transform-rotate: 15deg;
   }
 
   .xl\:focus\:rotate-45:focus{
@@ -37677,6 +37793,10 @@ video {
 
   .xl\:focus\:-rotate-45:focus{
     --transform-rotate: -45deg;
+  }
+
+  .xl\:focus\:-rotate-15:focus{
+    --transform-rotate: -15deg;
   }
 
   .xl\:translate-x-0{

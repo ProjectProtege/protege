@@ -12,6 +12,8 @@ const PostAJobForm = ({
   receivingJobData,
   recievingLogo2,
   jobData,
+  tier,
+  receivingTierError,
   ...props
 }) => {
   const [fileValue, setFileValue] = useState(undefined)
@@ -36,6 +38,7 @@ const PostAJobForm = ({
           companyLogo: jobData ? `${jobData.companyLogo}` : '',
           companyDescription: jobData ? `${jobData.companyDescription}` : '',
           companyHQ: jobData ? `${jobData.companyHQ}` : '',
+          tier: tier ? `${tier}` : '',
         }}
         validationSchema={Yup.object({
           jobTitle: Yup.string().required('Job title is a required field.'),
@@ -59,9 +62,11 @@ const PostAJobForm = ({
           companyHQ: Yup.string().required(
             'Please provide a location for your office headquarters.'
           ),
+          tier: Yup.string().required(),
         })}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(tier, values, { setSubmitting }) => {
           receivingJobData(values)
+          window.scrollTo(0, 0)
         }}
       >
         {(formik) => (

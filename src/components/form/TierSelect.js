@@ -1,20 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import TierSelectCard from './TierSelectCard'
 
-const TierSelect = () => {
-  const [tier, setTier] = useState()
-
-  function receivingClick(e) {
-    setTier(e)
-    console.log(e)
-  }
-
+const TierSelect = ({ receivingTierClick, tier, tierError }) => {
   return (
     <div>
       <div className='mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-6'>
         <TierSelectCard
-          value='Basic'
-          receivingClick={receivingClick}
+          value='price_1GuKFPLy9mbkpBNAI6XtSdqT'
+          receivingTierClick={receivingTierClick}
           tier={tier}
         >
           <div className='col-span-1 text-center'>
@@ -35,8 +28,8 @@ const TierSelect = () => {
         </TierSelectCard>
 
         <TierSelectCard
-          value='Advanced'
-          receivingClick={receivingClick}
+          value='price_1GuKGJLy9mbkpBNAscbNLnvy'
+          receivingTierClick={receivingTierClick}
           tier={tier}
         >
           <div className='col-span-1 text-center'>
@@ -55,8 +48,8 @@ const TierSelect = () => {
         </TierSelectCard>
 
         <TierSelectCard
-          value='Premium'
-          receivingClick={receivingClick}
+          value='price_1GuKGzLy9mbkpBNAdh96CXLs'
+          receivingTierClick={receivingTierClick}
           tier={tier}
         >
           <div className='col-span-1 text-center'>

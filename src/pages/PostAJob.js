@@ -14,7 +14,9 @@ import TierSelect from '../components/form/TierSelect'
 import { db, storage } from '../firebase/firebase'
 import firebase from 'firebase'
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY)
+const stripePromise = loadStripe(
+  'pk_test_51GuKERLy9mbkpBNAl2lCUjQDm0h47z63WWAGRI2gRyyRhRkEC2ofBmahdB2wtH19ZIFvXop3WmT2nxK7iafT0Jln00GL7DmYKr'
+)
 
 const PostAJob = () => {
   const [status, setStatus] = useState(1)
@@ -22,6 +24,18 @@ const PostAJob = () => {
   const [jobData, setJobData] = useState()
 
   const [companyLogo, setcompanyLogo] = useState(undefined)
+
+  const [tier, setTier] = useState('')
+
+  const [tierError, setTierError] = useState(false)
+
+  function receivingTierClick(e) {
+    setTier(e)
+  }
+
+  function receivingTierError(e) {
+    setTierError(e)
+  }
 
   function receivingJobData(e) {
     setJobData(e)
@@ -34,7 +48,6 @@ const PostAJob = () => {
 
   function recievingTemplateApproval(e) {
     setStatus(3)
-    console.log(companyLogo)
     sendJobToDB({ jobData, companyLogo })
   }
 
@@ -65,15 +78,13 @@ const PostAJob = () => {
   }
 
   const handlePaymentClick = async (e) => {
-    const options = {
-      method: 'GET',
-      headers: { 'Content-type': 'application/json; charset=UTF-8' },
-    }
-    //call backend to create session
-    await fetch(
-      `https://us-central1-protege-dev-env.cloudfunctions.net/createStripeSession`,
-      options
-    ).then((res) => console.log(res))
+    const stripe = await stripePromise
+    const { error } = await stripe.redirectToCheckout({
+      lineItems: [{ price: tier, quantity: 1 }],
+      mode: 'payment',
+      successUrl: 'http://localhost:3000/thanks',
+      cancelUrl: 'http://localhost:3000/',
+    })
   }
 
   return (
@@ -92,9 +103,13 @@ const PostAJob = () => {
       >
         {status === 1 && (
           <>
-            <TierSelect />
+            <TierSelect receivingTierClick={receivingTierClick} tier={tier} />
 
-            <p className='text-center mb-2 text-blue-100 tracking-wide'>
+            <p
+              className={`text-center mb-2 ${
+                tierError === true ? 'text-error' : 'text-blue-100'
+              } tracking-wide`}
+            >
               Select Your Tier
             </p>
           </>
@@ -124,6 +139,8 @@ const PostAJob = () => {
             <PostAJobForm
               recievingLogo2={recievingLogo2}
               receivingJobData={receivingJobData}
+              tier={tier}
+              receivingTierError={receivingTierError}
             />
           </motion.div>
         )}
