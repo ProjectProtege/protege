@@ -74,6 +74,20 @@ const LearningResources = () => (
               Level Up Financial Planning
             </a>
           </li>
+
+          <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
+            <a href='https://www.codecademy.com/'>Codecademy (Freemium)</a>
+          </li>
+
+          <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
+            <a href='https://www.youtube.com/user/TechGuyWeb'>Traversy Media</a>
+          </li>
+
+          <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
+            <a href='https://www.youtube.com/user/programmingwithmosh'>
+              Programming With Mosh
+            </a>
+          </li>
         </motion.ul>
       </div>
 
@@ -106,6 +120,14 @@ const LearningResources = () => (
 
           <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
             <a href='https://adamlearns.com/'>Adam Learns</a>
+          </li>
+
+          <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
+            <a href='https://udemy.com/'>Udemy</a>
+          </li>
+
+          <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
+            <a href='https://frontendmasters.com/'>Frontend Masters</a>
           </li>
         </motion.ul>
       </div>
