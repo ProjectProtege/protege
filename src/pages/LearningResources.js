@@ -32,59 +32,85 @@ const LearningResources = () => (
           }}
         >
           <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
-            <a href='https://www.freecodecamp.org/'>FreeCodeCamp</a>
+            <a href='https://www.freecodecamp.org/' target='_blank'>
+              FreeCodeCamp
+            </a>
           </li>
 
           <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
-            <a href='https://egghead.io/courses/the-beginner-s-guide-to-react'>
+            <a
+              href='https://egghead.io/courses/the-beginner-s-guide-to-react'
+              target='_blank'
+            >
               The Beginner's Guide to React
             </a>
           </li>
 
           <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
-            <a href='https://www.youtube.com/channel/UCyIe-61Y8C4_o-zZCtO4ETQ'>
+            <a
+              href='https://www.youtube.com/channel/UCyIe-61Y8C4_o-zZCtO4ETQ'
+              target='_blank'
+            >
               Devtips
             </a>
           </li>
 
           <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
-            <a href='https://www.youtube.com/user/QuentinWatt'>
+            <a href='https://www.youtube.com/user/QuentinWatt' target='_blank'>
               Quentin Watt Tutorials
             </a>
           </li>
 
           <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
-            <a href='https://www.youtube.com/user/wesbos'>Wes Bos Youtube</a>
+            <a href='https://www.youtube.com/user/wesbos' target='_blank'>
+              Wes Bos Youtube
+            </a>
           </li>
 
           <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
-            <a href='https://www.youtube.com/channel/UCyU5wkjgQYGRB0hIHMwm2Sg'>
+            <a
+              href='https://www.youtube.com/channel/UCyU5wkjgQYGRB0hIHMwm2Sg'
+              target='_blank'
+            >
               LevelUp Tutorials Youtube
             </a>
           </li>
 
           <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
-            <a href='https://www.youtube.com/channel/UC-T8W79DN6PBnzomelvqJYw'>
+            <a
+              href='https://www.youtube.com/channel/UC-T8W79DN6PBnzomelvqJYw'
+              target='_blank'
+            >
               James Quick Youtube
             </a>
           </li>
 
           <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
-            <a href='https://www.levelupfinancialplanning.com/videos/'>
+            <a
+              href='https://www.levelupfinancialplanning.com/videos/'
+              target='_blank'
+            >
               Level Up Financial Planning
             </a>
           </li>
 
           <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
-            <a href='https://www.codecademy.com/'>Codecademy (Freemium)</a>
+            <a href='https://www.codecademy.com/' target='_blank'>
+              Codecademy (Freemium)
+            </a>
           </li>
 
           <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
-            <a href='https://www.youtube.com/user/TechGuyWeb'>Traversy Media</a>
+            <a href='https://www.youtube.com/user/TechGuyWeb' target='_blank'>
+              Traversy Media
+            </a>
           </li>
 
           <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
-            <a href='https://www.youtube.com/user/programmingwithmosh'>
+            <a
+              href='https://www.youtube.com/user/programmingwithmosh'
+              target='_blank'
+            >
               Programming With Mosh
             </a>
           </li>
@@ -103,31 +129,45 @@ const LearningResources = () => (
           }}
         >
           <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
-            <a href='https://egghead.io/?rc=84jyz'>Egghead.io</a>
+            <a href='https://egghead.io/?rc=84jyz' target='_blank'>
+              Egghead.io
+            </a>
           </li>
 
           <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
-            <a href='https://wesbos.com/courses/'>Wes Bos Courses</a>
+            <a href='https://wesbos.com/courses/' target='_blank'>
+              Wes Bos Courses
+            </a>
           </li>
 
           <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
-            <a href='https://www.leveluptutorials.com/'>LevelUpTutorials</a>
+            <a href='https://www.leveluptutorials.com/' target='_blank'>
+              LevelUpTutorials
+            </a>
           </li>
 
           <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
-            <a href='https://teamtreehouse.com/'>Team Treehouse</a>
+            <a href='https://teamtreehouse.com/' target='_blank'>
+              Team Treehouse
+            </a>
           </li>
 
           <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
-            <a href='https://adamlearns.com/'>Adam Learns</a>
+            <a href='https://adamlearns.com/' target='_blank'>
+              Adam Learns
+            </a>
           </li>
 
           <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
-            <a href='https://udemy.com/'>Udemy</a>
+            <a href='https://udemy.com/' target='_blank'>
+              Udemy
+            </a>
           </li>
 
           <li className='underline mb-3 text-blue-300 hover:text-teal-600'>
-            <a href='https://frontendmasters.com/'>Frontend Masters</a>
+            <a href='https://frontendmasters.com/' target='_blank'>
+              Frontend Masters
+            </a>
           </li>
         </motion.ul>
       </div>

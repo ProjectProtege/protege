@@ -146,6 +146,7 @@ const Footer = () => {
             <a
               href='https://twitter.com/devprotege'
               className='text-teal-300 hover:text-teal-600 transition-colors ease-in-out duration-75 w-6'
+              target='_blank'
             >
               <svg
                 className='fill-current'
