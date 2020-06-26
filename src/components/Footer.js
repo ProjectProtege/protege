@@ -4,7 +4,7 @@ import * as ROUTES from '../constants/routes'
 import { motion } from 'framer-motion'
 
 const Footer = () => {
-  const [email, setEmail] = useState(undefined)
+  const [email, setEmail] = useState('')
 
   async function subscribeEmail(e) {
     e.preventDefault()
@@ -19,11 +19,11 @@ const Footer = () => {
       headers: { 'Content-type': 'application/json; charset=UTF-8' },
       body: JSON.stringify(dataToSend),
     }
-
     await fetch(
       `https://api.convertkit.com/v3/tags/${tagId}/subscribe`,
       options
     ).then(alert("You've been subscribed to the Protege.dev email!"))
+     setEmail('')
   }
 
   return (
@@ -51,12 +51,13 @@ const Footer = () => {
             </label>
 
             <input
+              value = {email}
               data-cy='mailing-list-signup'
               type='email'
               className='px-4 py-1 w-full md:w-2/5 my-3 md:my-0'
               id='newsletter-email'
               autoComplete='off'
-              onBlur={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               name='email'
               required
             />
