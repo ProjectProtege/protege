@@ -23,7 +23,7 @@ const Footer = () => {
       `https://api.convertkit.com/v3/tags/${tagId}/subscribe`,
       options
     ).then(alert("You've been subscribed to the Protege.dev email!"))
-     setEmail('')
+    setEmail('')
   }
 
   return (
@@ -51,7 +51,7 @@ const Footer = () => {
             </label>
 
             <input
-              value = {email}
+              value={email}
               data-cy='mailing-list-signup'
               type='email'
               className='px-4 py-1 w-full md:w-2/5 my-3 md:my-0'
@@ -137,7 +137,8 @@ const Footer = () => {
                 <a
                   className='text-blue-400 opacity-75 hover:opacity-100'
                   href={'https://github.com/drewclem/protege/issues'}
-                  target='_'
+                  target='_blank'
+                  rel='noopener noreferrer'
                 >
                   Contribute to Protege
                 </a>
@@ -148,6 +149,7 @@ const Footer = () => {
               href='https://twitter.com/devprotege'
               className='text-teal-300 hover:text-teal-600 transition-colors ease-in-out duration-75 w-6'
               target='_blank'
+              rel='noopener noreferrer'
             >
               <svg
                 className='fill-current'
