@@ -53,7 +53,7 @@ const Footer = () => {
             <input
               data-cy='mailing-list-signup'
               type='email'
-              className='px-4 py-1 w-full md:w-2/5 my-3 md:my-0'
+              className='px-4 py-1 w-full md:w-2/5 my-3 md:my-0 outline-none focus:shadow-outline'
               id='newsletter-email'
               autoComplete='off'
               onBlur={(e) => setEmail(e.target.value)}
