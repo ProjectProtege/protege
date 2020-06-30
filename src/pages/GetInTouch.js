@@ -105,7 +105,7 @@ const GetInTouch = () => {
                   <input
                     id='name'
                     name='name'
-                    className='input outline-none focus:shadow-outline'
+                    className='input'
                     title='Users name'
                     type='text'
                     required
@@ -124,7 +124,7 @@ const GetInTouch = () => {
                   <input
                     id='email'
                     name='email'
-                    className='input outline-none focus:shadow-outline'
+                    className='input'
                     title='Users email'
                     type='email'
                     required
@@ -144,7 +144,7 @@ const GetInTouch = () => {
                 <textarea
                   id='comment'
                   name='comment'
-                  className='input outline-none focus:shadow-outline'
+                  className='input'
                   title='Users comment'
                   type='text'
                   as='textarea'

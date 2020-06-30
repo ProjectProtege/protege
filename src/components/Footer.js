@@ -23,7 +23,7 @@ const Footer = () => {
       `https://api.convertkit.com/v3/tags/${tagId}/subscribe`,
       options
     ).then(alert("You've been subscribed to the Protege.dev email!"))
-     setEmail('')
+    setEmail('')
   }
 
   return (
@@ -51,10 +51,10 @@ const Footer = () => {
             </label>
 
             <input
-              value = {email}
+              value={email}
               data-cy='mailing-list-signup'
               type='email'
-              className='px-4 py-1 w-full md:w-2/5 my-3 md:my-0 outline-none focus:shadow-outline'
+              className='px-4 py-1 w-full md:w-2/5 my-3 md:my-0'
               id='newsletter-email'
               autoComplete='off'
               onChange={(e) => setEmail(e.target.value)}

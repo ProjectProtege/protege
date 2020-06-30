@@ -88,7 +88,7 @@ const PostAJobForm = ({
                   <Field
                     id='job-title'
                     name='jobTitle'
-                    className='input outline-none focus:shadow-outline'
+                    className='input'
                     type='text'
                     autoComplete='off'
                   ></Field>
@@ -117,7 +117,7 @@ const PostAJobForm = ({
                       <Field
                         id='role-focus'
                         name='roleFocus'
-                        className='input input-select rounded-none outline-none focus:shadow-outline'
+                        className='input input-select rounded-none'
                         as='select'
                       >
                         <option value='' className='text-gray-300'>
@@ -155,7 +155,7 @@ const PostAJobForm = ({
                       <Field
                         id='position-type'
                         name='positionType'
-                        className='input input-select rounded-none outline-none focus:shadow-outline'
+                        className='input input-select rounded-none'
                         as='select'
                       >
                         <option value='' className='text-gray-300'>
@@ -218,7 +218,7 @@ const PostAJobForm = ({
                   <Field
                     id='how-to-apply'
                     name='howToApply'
-                    className='input outline-none focus:shadow-outline'
+                    className='input'
                     type='text'
                   ></Field>
 
@@ -253,7 +253,7 @@ const PostAJobForm = ({
                       <Field
                         id='companyName'
                         name='companyName'
-                        className='input outline-none focus:shadow-outline'
+                        className='input'
                         title='name of the company'
                         type='text'
                       />
@@ -276,7 +276,7 @@ const PostAJobForm = ({
                       <Field
                         id='companyWebsite'
                         name='companyWebsite'
-                        className='input outline-none focus:shadow-outline'
+                        className='input'
                         title='url of the company'
                         type='url'
                       />
@@ -300,7 +300,7 @@ const PostAJobForm = ({
                       <Field
                         id='companyEmail'
                         name='companyEmail'
-                        className='input outline-none focus:shadow-outline'
+                        className='input'
                         type='email'
                       />
 
@@ -345,7 +345,7 @@ const PostAJobForm = ({
                     <Field
                       id='companyDescription'
                       name='companyDescription'
-                      className='input outline-none focus:shadow-outline'
+                      className='input'
                     >
                       {({ field }) => (
                         <ReactQuill
@@ -375,7 +375,7 @@ const PostAJobForm = ({
                       office?
                     </span>
 
-                    <Field id='companyHQ' name='companyHQ' className='input outline-none focus:shadow-outline' />
+                    <Field id='companyHQ' name='companyHQ' className='input' />
 
                     <ErrorMessage
                       name='companyHQ'
