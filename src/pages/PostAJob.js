@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import Layout from '../layouts/Layout'
 import { motion } from 'framer-motion'
 import { loadStripe } from '@stripe/stripe-js'
@@ -18,8 +19,10 @@ const stripePromise = loadStripe(
   'pk_test_51GuKERLy9mbkpBNAl2lCUjQDm0h47z63WWAGRI2gRyyRhRkEC2ofBmahdB2wtH19ZIFvXop3WmT2nxK7iafT0Jln00GL7DmYKr'
 )
 
-const PostAJob = () => {
-  const [status, setStatus] = useState(1)
+const PostAJob = ({ location }) => {
+  let history = useHistory()
+
+  const [status, setStatus] = useState()
 
   const [jobData, setJobData] = useState()
 
@@ -27,19 +30,24 @@ const PostAJob = () => {
 
   const [tier, setTier] = useState('')
 
-  const [tierError, setTierError] = useState(false)
+  const statusQueryParam = location.search
+    .replace('?', '')
+    .split('&')
+    .find((qs) => qs[0] === 's')
+
+  const initialStatusValue = parseInt(statusQueryParam.split('=')[1])
+
+  useEffect(() => {
+    setStatus(initialStatusValue)
+  }, [initialStatusValue])
 
   function receivingTierClick(e) {
     setTier(e)
   }
 
-  function receivingTierError(e) {
-    setTierError(e)
-  }
-
   function receivingJobData(e) {
     setJobData(e)
-    setStatus(2)
+    history.push('/post-a-job?s=2')
   }
 
   function recievingLogo2(logo) {
@@ -73,18 +81,29 @@ const PostAJob = () => {
         positionType: data.jobData.positionType,
         postedAt: postDate,
         roleFocus: data.jobData.roleFocus,
+        tier: tier,
       })
     )
   }
 
   const handlePaymentClick = async (e) => {
     const stripe = await stripePromise
-    const { error } = await stripe.redirectToCheckout({
-      lineItems: [{ price: tier, quantity: 1 }],
-      mode: 'payment',
-      successUrl: 'http://localhost:3000/thanks',
-      cancelUrl: 'http://localhost:3000/',
-    })
+
+    const { error } = await stripe
+      .redirectToCheckout({
+        lineItems: [{ price: tier, quantity: 1 }],
+        mode: 'payment',
+        successUrl: 'http://localhost:3000/post-a-job?s=3',
+        cancelUrl: 'http://localhost:3000/post-a-job',
+      })
+      .then(function result() {
+        if (error) {
+          alert(result.error.message)
+        } else {
+          console.log('success')
+          sendJobToDB({ jobData, companyLogo })
+        }
+      })
   }
 
   return (
@@ -105,11 +124,7 @@ const PostAJob = () => {
           <>
             <TierSelect receivingTierClick={receivingTierClick} tier={tier} />
 
-            <p
-              className={`text-center mb-2 ${
-                tierError === true ? 'text-error' : 'text-blue-100'
-              } tracking-wide`}
-            >
+            <p className={`text-center mb-2 text-blue-100 tracking-wide`}>
               Select Your Tier
             </p>
           </>
@@ -139,8 +154,6 @@ const PostAJob = () => {
             <PostAJobForm
               recievingLogo2={recievingLogo2}
               receivingJobData={receivingJobData}
-              tier={tier}
-              receivingTierError={receivingTierError}
             />
           </motion.div>
         )}
@@ -160,7 +173,7 @@ const PostAJob = () => {
                 data-cy='edit-job-button'
                 className='flex items-center mb-3 text-teal-600 text-lg font-bold'
                 onClick={(e) => {
-                  setStatus(1)
+                  history.push('/post-a-job?s=1')
                 }}
               >
                 <svg
@@ -184,7 +197,7 @@ const PostAJob = () => {
           </>
         )}
 
-        {status === 3 && jobData && <JobPostingConfirmation props={jobData} />}
+        {status === 3 && <JobPostingConfirmation />}
       </motion.div>
     </Layout>
   )
