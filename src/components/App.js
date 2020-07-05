@@ -5,6 +5,7 @@ import JobBoard from '../pages/JobBoard'
 import LearningResources from '../pages/LearningResources'
 import GetInTouch from '../pages/GetInTouch'
 import IndividualJobPage from '../pages/IndividualJob'
+import Contributors from '../pages/Contributors'
 import PostAJob from '../pages/PostAJob'
 import Thanks from '../pages/Thanks'
 
@@ -19,6 +20,7 @@ const App = () => (
       <Route path={ROUTES.GET_IN_TOUCH} component={GetInTouch} />
       <Route path={ROUTES.POST_A_JOB} component={PostAJob} />
       <Route path={ROUTES.LEARNING} component={LearningResources} />
+      <Route path={ROUTES.CONTRIBUTORS} component={Contributors} />
       <Route path={ROUTES.THANKS} component={Thanks} />
     </Switch>
   </Router>
