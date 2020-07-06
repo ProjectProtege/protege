@@ -220,7 +220,7 @@ const PostAJobForm = ({
                     name='howToApply'
                     className='input'
                     type='text'
-                    placeholder='https://'
+                    placeholder='http://'
                   ></Field>
 
                   <ErrorMessage
@@ -280,7 +280,7 @@ const PostAJobForm = ({
                         className='input'
                         title='url of the company'
                         type='url'
-                        placeholder='https://'
+                        placeholder='http://'
                       />
 
                       <ErrorMessage
