@@ -88,12 +88,12 @@ const Contributors = ()=>{
             <tr className='text-blue-200' id={contributor.id}>
               <td className="px-4 py-2">{contributor.name}</td>
               <td className="px-4 py-2">
-                <a href={"http://" + contributor.website} target="_blank" className="mb-3 text-blue-300 hover:text-teal-600">
+                <a href={"http://" + contributor.website} target="_blank" rel="noopener noreferrer" className="mb-3 text-blue-300 hover:text-teal-600">
                   {contributor.website}
                 </a>
               </td>
               <td className="px-4 py-2">
-                <a href={"http://twitter.com/"+contributor.twitter} target="_blank" className="mb-3 text-blue-300 hover:text-teal-600">
+                <a href={"http://twitter.com/"+contributor.twitter} target="_blank" rel="noopener noreferrer" className="mb-3 text-blue-300 hover:text-teal-600">
                   {contributor.twitter}
                 </a>
               </td>
