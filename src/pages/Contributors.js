@@ -56,11 +56,8 @@ const contributorsList = [
 ]
 
 const Contributors = () => {
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 6c24f2aef6db033757abe9504b76d326a5a729b1
   return (
     <Layout>
       <motion.div
@@ -102,54 +99,7 @@ const Contributors = () => {
           </a>
           &nbsp;and send in a PR! It's that easy!
         </p>
-<<<<<<< HEAD
         <ContributorsList />
-=======
-        <table className='table-fixed container'>
-          <tr className='text-teal-600'>
-            <th
-              scope='col'
-              className='text-left w-1/3 px-4 md:pr-4 md:pl-0 py-2'
-            >
-              Name
-            </th>
-            <th
-              scope='col'
-              className='text-left w-1/3 px-4 md:pr-4 md:pl-0 py-2'
-            >
-              Website
-            </th>
-            <th scope='col' className='text-left w-1/3 px-4 py-2'>
-              Twitter
-            </th>
-          </tr>
-          {contributorsList.map((contributor) => (
-            <tr className='text-blue-200' id={contributor.id}>
-              <td className='px-4 md:pr-4 md:pl-0 py-2'>{contributor.name}</td>
-              <td className='px-4 md:pr-4 md:pl-0 py-2'>
-                <a
-                  href={`https:// ` + contributor.website}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='mb-3 text-blue-300 hover:text-teal-600'
-                >
-                  {contributor.website}
-                </a>
-              </td>
-              <td className='px-4 py-2'>
-                <a
-                  href={'http://twitter.com/' + contributor.twitter}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='mb-3 text-blue-300 hover:text-teal-600'
-                >
-                  {contributor.twitter}
-                </a>
-              </td>
-            </tr>
-          ))}
-        </table>
->>>>>>> 6c24f2aef6db033757abe9504b76d326a5a729b1
       </motion.div>
     </Layout>
   )
