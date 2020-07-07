@@ -72,11 +72,11 @@ const Contributors = () => {
           ease: 'easeIn',
         }}
       >
-        <h1 className='text-2xl font-semibold text-blue-500 mb-3'>
+        <h1 className='text-2xl font-semibold text-blue-900 mb-3'>
           Protege.dev Contributors!
         </h1>
 
-        <p className='text-blue-200 mb-12'>
+        <p className='text-blue-600 mb-12'>
           Here are Protege, we're only as strong as the community that surrounds
           us and that we aim to serve.
           <br />
@@ -89,7 +89,7 @@ const Contributors = () => {
           <br />
           Want to join this list of awesomeness? Check our repo for any&nbsp;
           <a
-            className='underline mb-3 text-blue-300 hover:text-teal-600'
+            className='underline mb-3 text-blue-900 hover:text-teal-600'
             href='https://github.com/drewclem/protege/issues'
           >
             Active Issues
