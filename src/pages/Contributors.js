@@ -213,9 +213,9 @@ const IndividualContributor = (props) => {
         </div>
         <div className='flex flex-col ml-6 items-start'>
           {name ? (
-            <span className='font-semibold mb-2 text-blue-500'>{name}</span>
+            <span className='font-semibold mb-2 text-blue-900'>{name}</span>
           ) : (
-            <span className='font-semibold mb-2 text-blue-500'>
+            <span className='font-semibold mb-2 text-blue-900'>
               {contributor.login}
             </span>
           )}
@@ -288,7 +288,7 @@ const IndividualContributor = (props) => {
               </a>
             )}
           </div>
-          <span className='text-blue-200'>
+          <span className='text-blue-500'>
             {contributions} {contributions > 1 ? 'Commits' : 'Commit'}
           </span>
         </div>
