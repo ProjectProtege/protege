@@ -19,7 +19,7 @@ const Nav = () => {
     <React.Fragment>
       <nav
         data-cy='mobile-nav'
-        className='md:hidden text-blue-500 text-right relative'
+        className='md:hidden text-blue-900 text-right relative'
       >
         <button
           className='nav-toggle relative md:hidden text-3xl p-3'
@@ -34,7 +34,6 @@ const Nav = () => {
           } mt-2 text-center uppercase right-0 font-medium bg-white shadow-lg p-2 w-screen mx-auto`}
           onClick={handleMobileClick}
         >
-
           <li className='pt-3 pb-2 opacity-75 hover:opacity-100 border-b-2 border-gray-300'>
             <Link to={ROUTES.LEARNING}>Learning Resources</Link>
           </li>
@@ -54,11 +53,10 @@ const Nav = () => {
 
       <nav
         data-cy='desktop-nav'
-        className='hidden md:block text-blue-500 text-sm uppercase font-medium'
+        className='hidden md:block text-blue-900 text-sm uppercase font-medium'
         role='navigation'
       >
         <ul className='flex justify-between'>
-
           <li
             className='menu-item quick-filter mt-1 pr-4 lg:pr-10 cursor-pointer'
             aria-haspopup='true'

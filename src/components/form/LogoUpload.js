@@ -49,7 +49,10 @@ function LogoUpload({ recievingLogo }, props) {
         </label>
       </div>
       <div className='flex flex-col md:w-1/2'>
-        <span data-cy='logo-upload-fileName' className='text-blue-200 text-xs tracking-tight'>
+        <span
+          data-cy='logo-upload-fileName'
+          className='text-blue-500 text-xs tracking-tight'
+        >
           {fileName
             ? `Uploaded: ${fileName}`
             : 'Please provide a .png format of your companies logo to be displayed with your job opening listing.'}
