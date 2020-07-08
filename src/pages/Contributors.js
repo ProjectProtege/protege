@@ -2,57 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../layouts/Layout'
 import { motion } from 'framer-motion'
 
-const contributorsList = [
-  {
-    id: 1,
-    name: 'Bryan Kegley',
-    website: '',
-    twitter: '@bkegley',
-  },
-  {
-    id: 2,
-    name: 'Bitmasher',
-    website: 'github.com/bitmasher',
-    twitter: '',
-  },
-  {
-    id: 3,
-    name: 'Josh Leikam',
-    website: 'joshleikam.com',
-    twitter: '@josh_leikam',
-  },
-  {
-    id: 4,
-    name: 'Otto Gutierrez',
-    website: 'ottogutierrez.com',
-    twitter: '@ThisIsOtto',
-  },
-  {
-    id: 5,
-    name: 'Sara McCombs',
-    website: 'theSaraMcCombs.com',
-    twitter: '@dino_momma',
-  },
-  {
-    id: 6,
-    name: 'Laurent',
-    website: 'www.laurentcodes.me',
-    twitter: '@laurentcodes',
-  },
-  {
-    id: 7,
-    name: 'Sean Washington',
-    website: 'seanwash.com',
-    twitter: '@seanwashbot',
-  },
-  {
-    id: 8,
-    name: 'Nick Queb',
-    website: 'kidqueb.com',
-    twitter: '@kidqueb',
-  },
-]
-
 const Contributors = () => {
   return (
     <Layout>
@@ -103,6 +52,41 @@ const Contributors = () => {
 
 export default Contributors
 
+const OGContributors = [{
+  "login": "BitMasher",
+  "id": 61257372,
+  "node_id": "MDQ6VXNlcjYxMjU3Mzcy",
+  "avatar_url": "https://avatars2.githubusercontent.com/u/61257372?v=4",
+  "url": "https://api.github.com/users/BitMasher",
+  "html_url": "https://github.com/BitMasher",
+  "name": null,
+  "blog": "",
+  "twitter_username": null,
+}, 
+{
+  "login": "bkegley",
+  "id": 24785958,
+  "node_id": "MDQ6VXNlcjI0Nzg1OTU4",
+  "avatar_url": "https://avatars1.githubusercontent.com/u/24785958?v=4",
+  "url": "https://api.github.com/users/bkegley",
+  "html_url": "https://github.com/bkegley",
+  "name": null,
+  "blog": "",
+  "twitter_username": null,
+},
+{
+  "login": "kidqueb",
+  "id": 884128,
+  "node_id": "MDQ6VXNlcjg4NDEyOA==",
+  "avatar_url": "https://avatars3.githubusercontent.com/u/884128?v=4",
+  "url": "https://api.github.com/users/kidqueb",
+  "html_url": "https://github.com/kidqueb",
+  "name": "Nick Quebbeman",
+  "blog": "http://kidqueb.com",
+  "twitter_username": null,
+}
+]
+
 const ContributorsList = () => {
   const [error, setError] = useState(null)
   const [isLoaded, setIsLoaded] = useState(false)
@@ -123,6 +107,7 @@ const ContributorsList = () => {
               html_url,
               contributions,
             } = contributor
+            console.log(url)
             return { url, id, avatar_url, login, html_url, contributions }
           })
           setContributors(simplifiedContributors)
@@ -157,6 +142,16 @@ const ContributorsList = () => {
                 contributions={contributions}
               />
             </div>
+          )
+        })}
+        {OGContributors.map( (OGContributor) => {
+          return (
+            <IndividualContributor 
+              key={OGContributor.id}
+              url={OGContributor.url}
+              contributor={OGContributor}
+              contributions={'Special'}
+            />
           )
         })}
       </div>
@@ -206,7 +201,7 @@ const IndividualContributor = (props) => {
     } = contributorData
     console.log(blog)
     return (
-      <div className='flex items-center px-4 py-6 mx-auto text-center bg-white shadow border-l-4 border-teal-500 transition duration-150 ease-in-out'>
+      <div className='flex items-center px-4 py-6 text-center bg-white shadow border-l-4 border-teal-500 transition duration-150 ease-in-out'>
         <div className='flex flex-col ml-2 items-center justify-between'>
           <img
             className='rounded-full h-24 w-24 mx-auto'
