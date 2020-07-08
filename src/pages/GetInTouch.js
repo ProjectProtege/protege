@@ -56,7 +56,7 @@ const GetInTouch = () => {
         </h1>
 
         <p className='text-blue-200 mb-12'>
-          Feeback? Complaints? Feature requests? Questions? We want to hear them
+          Feedback? Complaints? Feature requests? Questions? We want to hear them
           all!
           <br />
           <br />
