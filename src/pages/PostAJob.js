@@ -71,7 +71,7 @@ const PostAJob = () => {
           ease: 'easeIn',
         }}
       >
-        <h1 className='text-lg md:text-2xl text-blue-500 font-bold text-center leading-snug'>
+        <h1 className='text-lg md:text-2xl text-blue-900 font-bold text-center leading-snug'>
           Inexperienced doesn’t mean incapable. <br />
           Fill your role with ambition.
         </h1>

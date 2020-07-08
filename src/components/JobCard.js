@@ -58,7 +58,7 @@ const JobCard = ({ job }) => {
             delay: 0.1,
           }}
         />
-        <JobCardImage logoUrl={logoUrl} job={job}/>
+        <JobCardImage logoUrl={logoUrl} job={job} />
       </div>
 
       <div className='w-full md:w-11/12 flex justify-between md:pl-6'>
@@ -66,14 +66,14 @@ const JobCard = ({ job }) => {
           <div>
             <p
               data-cy={`job-card-company-name-${job.id}`}
-              className='text-sm text-blue-100 mb-1'
+              className='text-sm text-blue-500 mb-1'
             >
               {job.companyName}
             </p>
 
             <h3
               data-cy={`job-card-job-title-${job.id}`}
-              className='md:-mt-1 text-blue-500 leading-tight text-lg md:text-xl font-semibold'
+              className='md:-mt-1 text-blue-900 leading-tight text-lg md:text-xl font-semibold'
             >
               {job.jobTitle}
             </h3>

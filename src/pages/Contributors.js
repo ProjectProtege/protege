@@ -21,10 +21,11 @@ const Contributors = () => {
           ease: 'easeIn',
         }}
       >
-        <h1 className='text-2xl font-semibold text-blue-500 mb-3'>
+        <h1 className='text-2xl font-semibold text-blue-900 mb-3'>
           Protege.dev Contributors!
         </h1>
-        <p className='text-blue-200 mb-12'>
+
+        <p className='text-blue-600 mb-12'>
           Here are Protege, we're only as strong as the community that surrounds
           us and that we aim to serve.
           <br />
@@ -37,7 +38,7 @@ const Contributors = () => {
           <br />
           Want to join this list of awesomeness? Check our repo for any&nbsp;
           <a
-            className='underline mb-3 text-blue-300 hover:text-teal-600'
+            className='underline mb-3 text-blue-900 hover:text-teal-600'
             href='https://github.com/drewclem/protege/issues'
           >
             Active Issues
@@ -52,39 +53,40 @@ const Contributors = () => {
 
 export default Contributors
 
-const OGContributors = [{
-  "login": "BitMasher",
-  "id": 61257372,
-  "node_id": "MDQ6VXNlcjYxMjU3Mzcy",
-  "avatar_url": "https://avatars2.githubusercontent.com/u/61257372?v=4",
-  "url": "https://api.github.com/users/BitMasher",
-  "html_url": "https://github.com/BitMasher",
-  "name": null,
-  "blog": "",
-  "twitter_username": null,
-}, 
-{
-  "login": "bkegley",
-  "id": 24785958,
-  "node_id": "MDQ6VXNlcjI0Nzg1OTU4",
-  "avatar_url": "https://avatars1.githubusercontent.com/u/24785958?v=4",
-  "url": "https://api.github.com/users/bkegley",
-  "html_url": "https://github.com/bkegley",
-  "name": null,
-  "blog": "",
-  "twitter_username": null,
-},
-{
-  "login": "kidqueb",
-  "id": 884128,
-  "node_id": "MDQ6VXNlcjg4NDEyOA==",
-  "avatar_url": "https://avatars3.githubusercontent.com/u/884128?v=4",
-  "url": "https://api.github.com/users/kidqueb",
-  "html_url": "https://github.com/kidqueb",
-  "name": "Nick Quebbeman",
-  "blog": "http://kidqueb.com",
-  "twitter_username": null,
-}
+const OGContributors = [
+  {
+    login: 'BitMasher',
+    id: 61257372,
+    node_id: 'MDQ6VXNlcjYxMjU3Mzcy',
+    avatar_url: 'https://avatars2.githubusercontent.com/u/61257372?v=4',
+    url: 'https://api.github.com/users/BitMasher',
+    html_url: 'https://github.com/BitMasher',
+    name: null,
+    blog: '',
+    twitter_username: null,
+  },
+  {
+    login: 'bkegley',
+    id: 24785958,
+    node_id: 'MDQ6VXNlcjI0Nzg1OTU4',
+    avatar_url: 'https://avatars1.githubusercontent.com/u/24785958?v=4',
+    url: 'https://api.github.com/users/bkegley',
+    html_url: 'https://github.com/bkegley',
+    name: null,
+    blog: '',
+    twitter_username: null,
+  },
+  {
+    login: 'kidqueb',
+    id: 884128,
+    node_id: 'MDQ6VXNlcjg4NDEyOA==',
+    avatar_url: 'https://avatars3.githubusercontent.com/u/884128?v=4',
+    url: 'https://api.github.com/users/kidqueb',
+    html_url: 'https://github.com/kidqueb',
+    name: 'Nick Quebbeman',
+    blog: 'http://kidqueb.com',
+    twitter_username: null,
+  },
 ]
 
 const ContributorsList = () => {
@@ -144,9 +146,9 @@ const ContributorsList = () => {
             </div>
           )
         })}
-        {OGContributors.map( (OGContributor) => {
+        {OGContributors.map((OGContributor) => {
           return (
-            <IndividualContributor 
+            <IndividualContributor
               key={OGContributor.id}
               url={OGContributor.url}
               contributor={OGContributor}
@@ -211,9 +213,9 @@ const IndividualContributor = (props) => {
         </div>
         <div className='flex flex-col ml-6 items-start'>
           {name ? (
-            <span className='font-semibold mb-2 text-blue-500'>{name}</span>
+            <span className='font-semibold mb-2 text-blue-900'>{name}</span>
           ) : (
-            <span className='font-semibold mb-2 text-blue-500'>
+            <span className='font-semibold mb-2 text-blue-900'>
               {contributor.login}
             </span>
           )}
@@ -286,7 +288,7 @@ const IndividualContributor = (props) => {
               </a>
             )}
           </div>
-          <span className='text-blue-200'>
+          <span className='text-blue-500'>
             {contributions} {contributions > 1 ? 'Commits' : 'Commit'}
           </span>
         </div>
