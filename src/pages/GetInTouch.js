@@ -55,9 +55,9 @@ const GetInTouch = () => {
           We'd love to hear from you!
         </h1>
 
-
         <p className='text-blue-600 mb-12'>
-          Feeback? Complaints? Feature requests? Questions? We want to hear them all!
+          Feedback? Complaints? Feature requests? Questions? We want to hear
+          them all!
           <br />
           <br />
           Our goal is to make Protege.dev the best place for junior developers
