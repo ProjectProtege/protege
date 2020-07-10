@@ -35,27 +35,31 @@ const Nav = () => {
           onClick={handleMobileClick}
         >
           <li className='pt-3 pb-2 border-b-2 border-gray-300'>
-            <NavLink 
+            <NavLink
               className='hover:opacity-100 opacity-75 '
               to={ROUTES.LEARNING}
-              activeClassName="opacity-100">
+              activeClassName='opacity-100'
+            >
               Learning Resources
             </NavLink>
           </li>
 
           <li className='pt-3 pb-2 border-b-2 border-gray-300'>
-            <NavLink 
+            <NavLink
               className='opacity-75 hover:opacity-100'
               to={ROUTES.GET_IN_TOUCH}
-              activeClassName='opacity-100'>
-              Get in Touch</NavLink>
+              activeClassName='opacity-100'
+            >
+              Get in Touch
+            </NavLink>
           </li>
 
           <li className='pt-3 pb-2 border-b-2 border-gray-300'>
             <NavLink
-              className='opacity-75 hover:opacity-100' 
+              className='opacity-75 hover:opacity-100'
               to={ROUTES.CONTRIBUTORS}
-              activeClassName='opacity-100'>
+              activeClassName='opacity-100'
+            >
               Contributors
             </NavLink>
           </li>
@@ -78,7 +82,7 @@ const Nav = () => {
             <NavLink
               to='/job-board'
               className='opacity-75 pb-3 hover:opacity-100 border-b-2 border-transparent'
-              activeClassName="border-teal-500"
+              activeClassName='border-teal-500'
             >
               Find a Job
             </NavLink>
@@ -121,7 +125,7 @@ const Nav = () => {
             <NavLink
               to={ROUTES.LEARNING}
               className='pb-3 border-b-2 border-transparent transition-colors duration-75 hover:border-teal-500 '
-              activeClassName="border-teal-500"
+              activeClassName='border-teal-500'
             >
               Learning Resources
             </NavLink>
@@ -131,7 +135,7 @@ const Nav = () => {
             <NavLink
               to={ROUTES.GET_IN_TOUCH}
               className='pb-3 border-b-2 border-transparent transition-colors duration-75 hover:border-teal-500 '
-              activeClassName="border-teal-500"
+              activeClassName='border-teal-500'
             >
               Get in Touch
             </NavLink>
@@ -141,7 +145,7 @@ const Nav = () => {
             <NavLink
               to={ROUTES.CONTRIBUTORS}
               className='pb-3 border-b-2 border-transparent transition-colors duration-75 hover:border-teal-500 '
-              activeClassName="border-teal-500"
+              activeClassName='border-teal-500'
             >
               Contributors
             </NavLink>
