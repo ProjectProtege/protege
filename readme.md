@@ -28,6 +28,8 @@ To keep in line with this workflow, your process for submitting a PR should foll
 5. Leave a short message in the PR explaining in slightly more detail what the PR accomplishes.
 
 6. If your PR touches multiple parts, consider adding a bullet list of accomplishments, example below
-    `• adds new component x for data handling`
-    `• updates component y to use component x`
-    `• refactors component y for code reusability`
+    ~~~
+    * adds new component x for data handling
+    * updates component y to use component x
+    * refactors component y for code reusability
+    ~~~
