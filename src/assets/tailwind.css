@@ -22,6 +22,14 @@
   @apply shadow-md scale-110 duration-100;
 }
 
+.btn-disabled {
+  @apply opacity-50
+}
+
+.btn-disabled:hover {
+  @apply shadow scale-100 cursor-not-allowed
+}
+
 /*--Input--*/
 
 .input {
