@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { storage } from '../firebase/firebase'
+import { useLocation } from 'react-router-dom'
 
 const JobTemplate = ({ logo, props }) => {
+  let { pathname } = useLocation()
+  const isDisabled = pathname.indexOf('/job-board/') !== 0
+
   const [companyLogo, setCompanyLogo] = useState(undefined)
 
   function readLogo(logo) {
@@ -143,7 +147,9 @@ const JobTemplate = ({ logo, props }) => {
                   <p className='opacity-75 hover:opacity-100'>Visit website</p>
                 </a>
                 <a data-cy='how-to-apply' href={props.howToApply}>
-                  <button className='hidden md:block btn btn-teal mt-8 w-full'>
+                  <button
+                    disabled={isDisabled}
+                    className={'hidden md:block btn btn-teal mt-8 w-full' + (isDisabled ? ' btn-disabled' : '')}>
                     Apply
                   </button>
                 </a>
@@ -154,7 +160,9 @@ const JobTemplate = ({ logo, props }) => {
 
         <div>
           <a data-cy='how-to-apply-bottom' href={props.howToApply}>
-            <button className='btn btn-teal mt-8 w-full md:w-auto'>
+            <button
+              disabled={isDisabled}
+              className={'btn btn-teal mt-8 w-full md:w-auto' + (isDisabled ? ' btn-disabled' : '')}>
               Apply
             </button>
           </a>
