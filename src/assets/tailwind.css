@@ -23,11 +23,11 @@
 }
 
 .btn-disabled {
-  @apply opacity-50
+  @apply opacity-50;
 }
 
 .btn-disabled:hover {
-  @apply shadow scale-100 cursor-not-allowed
+  @apply shadow scale-100;
 }
 
 /*--Input--*/
