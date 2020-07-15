@@ -11,21 +11,29 @@
 }
 
 .btn-teal {
-  @apply bg-teal-300 text-blue-500;
+  @apply bg-teal-300 text-blue-900;
 }
 
 .btn-blue {
-  @apply bg-blue-500 text-white font-medium;
+  @apply bg-blue-900 text-white font-medium;
 }
 
 .btn:hover {
   @apply shadow-md scale-110 duration-100;
 }
 
+.btn-disabled {
+  @apply opacity-50;
+}
+
+.btn-disabled:hover {
+  @apply shadow scale-100 cursor-default;
+}
+
 /*--Input--*/
 
 .input {
-  @apply border border-blue-100 p-2 outline-none;
+  @apply border border-blue-400 p-2 outline-none;
 }
 
 .input:focus {
