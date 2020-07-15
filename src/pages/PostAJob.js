@@ -124,7 +124,7 @@ const PostAJob = ({ location }) => {
           <>
             <TierSelect receivingTierClick={receivingTierClick} tier={tier} />
 
-            <p className={`text-center mb-2 text-blue-100 tracking-wide`}>
+            <p className={`text-center mb-2 text-blue-400 tracking-wide`}>
               Select Your Tier
             </p>
           </>
