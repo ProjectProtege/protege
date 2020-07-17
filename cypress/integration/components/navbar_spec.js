@@ -2,7 +2,7 @@ describe('navbar test', () => {
     // tests that every link works, should probably add some tests around which one is showing / hidden at different screensizes
     it('tests the mobile nav', () => {
         cy.visit('/')
-        cy.get('[data-cy=mobile-nav]>ul>li>a').should('have.length', 4)
+        cy.get('[data-cy=mobile-nav]>ul>li>a').should('have.length', 5)
             .each( (item) => {
                 cy.visit(item[0].href)
             })
