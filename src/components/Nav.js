@@ -36,6 +36,16 @@ const Nav = () => {
         >
           <li className='pt-3 pb-2 border-b-2 border-gray-300'>
             <NavLink
+              to='/job-board'
+              className='hover:opacity-100 opacity-75 '
+              activeClassName='opacity-100'
+            >
+              Find a Job
+            </NavLink>
+          </li>
+
+          <li className='pt-3 pb-2 border-b-2 border-gray-300'>
+            <NavLink
               className='hover:opacity-100 opacity-75 '
               to={ROUTES.LEARNING}
               activeClassName='opacity-100'
