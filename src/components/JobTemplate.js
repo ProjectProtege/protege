@@ -45,8 +45,9 @@ const JobTemplate = ({ logo, props }) => {
     function styleChildren(children) {
       children.forEach((child) => {
         const childTag = child.tagName
+        child.style = ''
         child.classList = quillStyle[childTag]
-        if (child.hasChildren) {
+        if (child.hasChildNodes()) {
           const grandChildren = [...child.children]
           styleChildren(grandChildren)
         }
