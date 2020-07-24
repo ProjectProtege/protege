@@ -6,7 +6,7 @@ describe('post a job form', () => {
     it('tests the form exists with all expected fields', () => {
         cy.get("[data-cy='status-bar']>svg>circle").first().should('not.have.attr', 'fill-opacity')
         cy.get("[data-cy='post-a-job-form']")
-        cy.get('input[name="jobTitle"]')
+        cy.get('input[name="jobtitle"]')
         cy.get('select[name="roleFocus"]')
         cy.get('select[name="positionType"]')
         // Quill Input
@@ -25,7 +25,7 @@ describe('post a job form', () => {
         cy.get('.input-error').should('have.length', 10)
     })
     it('tests inputs all the form fields', () => {
-        cy.get('input[name="jobTitle"]').type('Junior Developer').should('value', 'Junior Developer')
+        cy.get('input[name="jobtitle"]').type('Junior Developer').should('value', 'Junior Developer')
         cy.get('select[name="roleFocus"]').select('Front-end').should('value', 'Front-end')
         cy.get('select[name="positionType"]').select('Full-time').should('value', 'Full-time')
         // Quill Input
