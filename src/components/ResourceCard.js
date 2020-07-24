@@ -5,7 +5,7 @@ const ResourceCard = (props) => {
 
   return (
     <div className='p-4'>
-      <div className=' max-w-xs rounded overflow-hidden shadow-lg'>
+      <div className='max-w-xs rounded overflow-hidden shadow-lg'>
         <a
             href={'http://' + resourceurl}
             target='_blank'

@@ -28,11 +28,20 @@ const LearningResources = (url) => (
           duration: 0.25,
         }}
       >
-        <div className='relative max-w-lg mx-auto lg:max-w-7xl xl:max-w-6xl'>
-          <h1 className='text-2xl font-semibold text-blue-900 mb-6'>
-            Learning Resources
-          </h1>
-          <div className='flex flex-row flex-wrap'>
+      
+      <div class="relative justify-between max-w-7xl mx-auto">
+        <div class="text-center">
+          <h2 class="text-3xl leading-9 tracking-tight font-extrabold text-blue-900 sm:text-4xl sm:leading-10">
+            From the blog
+          </h2>
+          <p class="mt-3 max-w-md mx-auto text-xl leading-7 text-blue-700 sm:mt-4">
+            We've pulled some of the best free, and paid, resources together to help support your journey. 
+          </p>
+          <p class="mt-3 max-w-md mx-auto text-xl leading-7 text-blue-700 sm:mt-4">
+            Got a resource you think we should add to the list? @ us!
+          </p>
+        </div>
+          <div className='flex flex-row flex-wrap justify-center'>
             <ResourceCard
               title='FreeCodeCamp'
               resourceimg='freecodecamp.jpg'
