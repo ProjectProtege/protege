@@ -27,7 +27,6 @@ const PostAJob = () => {
 
   function recievingTemplateApproval(e) {
     setStatus(3)
-    console.log(companyLogo)
     sendJobToDB({ jobData, companyLogo })
   }
 

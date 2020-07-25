@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function LogoUpload({ recievingLogo }, props) {
+function LogoUpload({ recievingLogo, ...props }) {
   const [fileResult, setFileResult] = useState(undefined)
   const [fileName, setFileName] = useState('')
 
@@ -15,6 +15,7 @@ function LogoUpload({ recievingLogo }, props) {
       reader.onloadend = () => {
         setFileName(file.name)
         setFileResult(reader.result)
+        props.setFieldValue('companyLogo', file)
         recievingLogo(file)
       }
     }
@@ -44,7 +45,7 @@ function LogoUpload({ recievingLogo }, props) {
             name='companyLogo'
             className='hidden'
             type='file'
-            accept='image/*'
+            accept='image/png'
           ></input>
         </label>
       </div>
@@ -55,7 +56,7 @@ function LogoUpload({ recievingLogo }, props) {
         >
           {fileName
             ? `Uploaded: ${fileName}`
-            : 'Please provide a .png format of your companies logo to be displayed with your job opening listing.'}
+            : "Please provide a .png format of your company's logo to be displayed with your job opening listing."}
         </span>
       </div>
     </div>

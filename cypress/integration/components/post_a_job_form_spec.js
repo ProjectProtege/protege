@@ -22,7 +22,7 @@ describe('post a job form', () => {
     })
     it('tests the form for error messages', () => {
         cy.get("[data-cy='next-step-button']").click()
-        cy.get('.input-error').should('have.length', 10)
+        cy.get('.input-error').should('have.length', 11)
     })
     it('tests inputs all the form fields', () => {
         cy.get('input[name="jobtitle"]').type('Junior Developer').should('value', 'Junior Developer')
@@ -39,7 +39,7 @@ describe('post a job form', () => {
         // Logo Upload
         cy.fixture('SnakeholeLoungeLogo.png').then( fileContent => {
             cy.get("[data-cy='company-logo-upload']").upload(
-                { fileContent, fileName: 'SnakeholeLoungeLogo.png', mimeType: 'image/*' },
+                { fileContent, fileName: 'SnakeholeLoungeLogo.png', mimeType: 'image/png' },
                 { subjectType: 'input' }
             )
             cy.get("[data-cy='company-logo-uploaded']").should('have.attr', 'src')
