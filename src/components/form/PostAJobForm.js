@@ -16,8 +16,6 @@ const PostAJobForm = ({
 }) => {
   const [fileValue, setFileValue] = useState(undefined)
 
-  console.log(jobData)
-
   function recievingLogo(logo) {
     setFileValue(logo)
     recievingLogo2(logo)
@@ -27,7 +25,7 @@ const PostAJobForm = ({
     <div className='lg:w-3/5 mx-auto'>
       <Formik
         initialValues={{
-          jobTitle: jobData ? `${jobData.jobTitle}` : '',
+          jobtitle: jobData ? `${jobData.jobtitle}` : '',
           roleFocus: jobData ? `${jobData.roleFocus}` : '',
           positionType: jobData ? `${jobData.positionType}` : '',
           jobDescription: jobData ? `${jobData.jobDescription}` : '',
@@ -40,7 +38,7 @@ const PostAJobForm = ({
           companyHQ: jobData ? `${jobData.companyHQ}` : '',
         }}
         validationSchema={Yup.object({
-          jobTitle: Yup.string().required('Job title is a required field.'),
+          jobtitle: Yup.string().required('Job title is a required field.'),
           roleFocus: Yup.string().required('Please select a focus area.'),
           positionType: Yup.string().required('Please select a position type.'),
           jobDescription: Yup.string().required(
@@ -87,14 +85,14 @@ const PostAJobForm = ({
 
                   <Field
                     id='job-title'
-                    name='jobTitle'
+                    name='jobtitle'
                     className='input'
                     type='text'
                     autoComplete='off'
                   ></Field>
 
                   <ErrorMessage
-                    name='jobTitle'
+                    name='jobtitle'
                     component='span'
                     className='input-error'
                   />
