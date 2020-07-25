@@ -4,7 +4,7 @@ const ResourceCard = (props) => {
   const { title, resourceimg, description, resourceurl, tag } = props
 
   return (
-    <div className='p-4'>
+    <div className='p-4 sm:p-2'>
       <div className='max-w-xs rounded overflow-hidden shadow-lg'>
         <a
             href={'http://' + resourceurl}
@@ -13,7 +13,7 @@ const ResourceCard = (props) => {
           > 
             <img
             className='w-full'
-            src={require(`../assets/images/${resourceimg}`)}
+            src={require(`../assets/images/resources/${resourceimg}`)}
             alt='Resource screenshot of website'
             /> 
         </a>
