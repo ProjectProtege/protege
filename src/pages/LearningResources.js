@@ -82,7 +82,7 @@ const LearningResources = (url) => (
 
         <ResourceCard
           title='Wes Bos Youtube'
-          resourceimg='wesbos.jpg'
+          resourceimg='wesbos-youtube.jpg'
           tag='free'
           description='A full Stack JavaScript developer from Canada I create free + premium courses and do a twice-weekly podcast called Syntax. HTML, CSS, JavaScript and WordPress web development tutorials! '
           resourceurl='youtube.com/user/wesbos'
@@ -152,7 +152,7 @@ const LearningResources = (url) => (
           />
           <ResourceCard
             title='Wes Bos Courses'
-            resourceimg='wesbos-youtube.jpg'
+            resourceimg='wesbos.jpg'
             tag='paid'
             description='I&#39;m a full Stack JavaScript developer from Canada. I create free + premium courses and do a twice-weekly podcast called Syntax. You can read more about me here, but stick around if you like CSS, JavaScript, mediocre jokes, learning new things or BBQ Tips'
             resourceurl='wesbos.com/courses'
