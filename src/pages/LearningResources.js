@@ -48,7 +48,7 @@ const LearningResources = (url) => (
         </h3>
       </div>
 
-      <div className='content-center flex grid-flow-col flex-wrap'>
+      <div className='content-center flex grid-flow-col flex-wrap justify-center'>
         <ResourceCard
           title='FreeCodeCamp'
           resourceImage='freecodecamp.jpg'
@@ -142,7 +142,7 @@ const LearningResources = (url) => (
           </h3>
         </div>
 
-        <div className='content-center flex grid-flow-col flex-wrap'>
+        <div className='content-center flex grid-flow-col flex-wrap justify-center'>
           <ResourceCard
             title='Egghead.io'
             resourceImage='egghead.jpg'
