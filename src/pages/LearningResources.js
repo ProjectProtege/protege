@@ -1,27 +1,51 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
+import * as ROUTES from '../constants/routes'
 import Layout from '../layouts/Layout'
 import ResourceCard from '../components/ResourceCard'
 
 const LearningResources = (url) => (
   <Layout>
-    <div className='container m-auto max-w-screen-xl align-middle mt-32 sm:max-w-screen-lg'>
+    <motion.div 
+    className='container m-auto max-w-screen-xl align-middle mt-32 sm:max-w-screen-lg'
+    initial={{
+          opacity: 0,
+          y: -10,
+        }}
+        animate={{
+          opacity: [0, 1],
+          y: [-10, 0],
+        }}
+        transition={{
+          duration: 0.3,
+          ease: 'easeIn',
+        }}>
       <div class='relative px-12 text-center mx-auto my-10 sm:px-40 lg:px-32'>
         <h2 class='text-2xl leading tracking-tight font-extrabold text-blue-900 sm:leading-10 sm:text-3xl'>
           Learning Resources
         </h2>
-        <p className='text-base mb-2 text-blue-700 sm:mt-4 sm:px-12 sm:text-base md:text-base'> We've pulled some of the best free, and paid, resources together to help support your journey.
+        <p className='text-base mb-2 text-blue-700 sm:mt-4 sm:px-12 sm:text-base md:text-base'>
+          {' '}
+          We've pulled some of the best free, and paid, resources together to
+          help support your journey.
         </p>
-        <p className='text-base text-blue-700 sm:mt-4 sm:text-base md:text-base'> Got a resource you think we should add to the list?{' '}
-          <a className='underline' href={'https://twitter.com/DevProtege'}>
-            {' '}
+        <p className='text-base text-blue-700 sm:mt-4 sm:text-base md:text-base'>
+          {' '}
+          Got a resource you think we should add to the list?{' '}
+          <Link
+            to={ROUTES.GET_IN_TOUCH}
+            className='underline mb-3 text-blue-900 hover:text-teal-600'
+          >
             Reach out!
-          </a>
+          </Link>
         </p>
       </div>
 
       <div className='container justify-start my-4 px-8 border-b-1'>
-        <h3 className='text-xl text-blue-900 sm:text-2xl md:text-3xl'>Free Resources</h3>
+        <h3 className='text-xl text-blue-900 sm:text-2xl md:text-3xl'>
+          Free Resources
+        </h3>
       </div>
 
       <div className='content-center flex grid-flow-col flex-wrap'>
@@ -113,7 +137,9 @@ const LearningResources = (url) => (
         />
 
         <div className='container justify-start my-4 px-8 border-b-1'>
-          <h3 className='text-xl text-blue-900 sm:text-2xl md:text-3xl'>Paid Resources</h3>
+          <h3 className='text-xl text-blue-900 sm:text-2xl md:text-3xl'>
+            Paid Resources
+          </h3>
         </div>
 
         <div className='content-center flex grid-flow-col flex-wrap'>
@@ -172,7 +198,7 @@ const LearningResources = (url) => (
           />
         </div>
       </div>
-    </div>
+    </motion.div>
   </Layout>
 )
 
