@@ -1,25 +1,25 @@
 import React from 'react'
 
 const ResourceCard = (props) => {
-  const { title, resourceimg, description, resourceurl, tag } = props
+  const { title, resourceImage, description, resourceUrl, tag } = props
 
   return (
     <div className='p-4 sm:p-2'>
       <div className='max-w-xs rounded overflow-hidden shadow-lg'>
         <a
-            href={'http://' + resourceurl}
+            href={'http://' + resourceUrl}
             target='_blank'
             rel='noopener noreferrer'
           > 
             <img
             className='w-full'
-            src={require(`../assets/images/resources/${resourceimg}`)}
+            src={require(`../assets/images/resources/${resourceImage}`)}
             alt='Resource screenshot of website'
             /> 
         </a>
         <div className='px-6 py-4'>
           <a
-            href={'http://' + resourceurl}
+            href={'http://' + resourceUrl}
             target='_blank'
             rel='noopener noreferrer'
           >

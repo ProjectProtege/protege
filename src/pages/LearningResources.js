@@ -51,89 +51,89 @@ const LearningResources = (url) => (
       <div className='content-center flex grid-flow-col flex-wrap'>
         <ResourceCard
           title='FreeCodeCamp'
-          resourceimg='freecodecamp.jpg'
+          resourceImage='freecodecamp.jpg'
           tag='free'
           description='A nonprofit community that helps you learn to code by building projects. Learn to code by completing coding challenges and building projects. Earn verified certifications along the way.'
-          resourceurl='freecodecamp.org'
+          resourceUrl='freecodecamp.org'
         />
         <ResourceCard
           title='The Beginner&#39;s Guide to React'
-          resourceimg='beg-guide-react.jpg'
+          resourceImage='beg-guide-react.jpg'
           tag='free'
           description='This course is for React newbies and anyone looking to build a solid foundation. It’s designed to teach you everything you need to start building web applications in React right away.'
-          resourceurl='egghead.io/courses/the-beginner-s-guide-to-react'
+          resourceUrl='egghead.io/courses/the-beginner-s-guide-to-react'
         />
 
         <ResourceCard
           title='Devtips'
-          resourceimg='devtips.jpg'
+          resourceImage='devtips.jpg'
           tag='free'
           description='DevTips is a weekly show for YOU who want to be inspired and learn about programming. Hosted by David and MPJ - two notorious bug generators and teachers.'
-          resourceurl='youtube.com/c/DevTipsForDesigners'
+          resourceUrl='youtube.com/c/DevTipsForDesigners'
         />
 
         <ResourceCard
           title='Quentin Watt'
-          resourceimg='quentin.jpg'
+          resourceImage='quentin.jpg'
           tag='free'
           description='Learn how to code JavaScript, and PHP using popular frameworks like Vue.js and Laravel. Aimed at equipping you with the skills you need to develop your career. '
-          resourceurl='youtube.com/user/QuentinWatt'
+          resourceUrl='youtube.com/user/QuentinWatt'
         />
 
         <ResourceCard
           title='Wes Bos Youtube'
-          resourceimg='wesbos-youtube.jpg'
+          resourceImage='wesbos-youtube.jpg'
           tag='free'
           description='A full Stack JavaScript developer from Canada I create free + premium courses and do a twice-weekly podcast called Syntax. HTML, CSS, JavaScript and WordPress web development tutorials! '
-          resourceurl='youtube.com/user/wesbos'
+          resourceUrl='youtube.com/user/wesbos'
         />
 
         <ResourceCard
           title='LevelUp Tutorials Youtube'
-          resourceimg='level-up.jpg'
+          resourceImage='level-up.jpg'
           tag='free'
           description='Level Up Tutorials sets how to help fix a major problem in learning technologies. Videos created for Level Up Tutorials are aimed to be accessible and easy to follow while maintaining high production values.'
-          resourceurl='youtube.com/channel/UCyU5wkjgQYGRB0hIHMwm2Sg'
+          resourceUrl='youtube.com/channel/UCyU5wkjgQYGRB0hIHMwm2Sg'
         />
 
         <ResourceCard
           title='James Quick Youtube'
-          resourceimg='jamesquick.jpg'
+          resourceImage='jamesquick.jpg'
           tag='free'
           description='Want to learn more about Web Development, Design, and Tools?  Then, youre in the right place! I LEARN the newest techniques in Web Development, Design, and Tools. I BUILD projects for myself and others.'
-          resourceurl='youtube.com/channel/UC-T8W79DN6PBnzomelvqJYw'
+          resourceUrl='youtube.com/channel/UC-T8W79DN6PBnzomelvqJYw'
         />
 
         <ResourceCard
           title='Level Up Financial Planning'
-          resourceimg='levelup-fin.jpg'
+          resourceImage='levelup-fin.jpg'
           tag='free'
           description='Fee only financial planner (fiduciary) virtually out of Fort Collins. Lucas can help you achieve confidence to take Your Financial Confidence to the Next Level.'
-          resourceurl='levelupfinancialplanning.com/videos/'
+          resourceUrl='levelupfinancialplanning.com/videos/'
         />
 
         <ResourceCard
           title='Codecademy (Freemium)'
-          resourceimg='codecademy.jpg'
+          resourceImage='codecademy.jpg'
           tag='free'
           description='Committed to building the best learning experience inside and out, making Codecademy the best place for our team to learn, teach, and create the online learning experience of the future.'
-          resourceurl='codecademy.com'
+          resourceUrl='codecademy.com'
         />
 
         <ResourceCard
           title='Traversy Media'
-          resourceimg='traversy.jpg'
+          resourceImage='traversy.jpg'
           tag='free'
           description='Traversy Media features the best online web development and programming tutorials for all of the latest web technologies including Node.js, Angular 2, React.js, PHP, Rails, HTML, CSS and much more.'
-          resourceurl='youtube.com/user/TechGuyWeb'
+          resourceUrl='youtube.com/user/TechGuyWeb'
         />
 
         <ResourceCard
           title='Programming With Mosh'
-          resourceimg='mosh.jpg'
+          resourceImage='mosh.jpg'
           tag='free'
           description='I train professional software engineers that companies love to hire. Javascript, React, React Native, Node, Angular, Python, C Sharp'
-          resourceurl='youtube.com/user/programmingwithmosh'
+          resourceUrl='youtube.com/user/programmingwithmosh'
         />
 
         <div className='container justify-start my-4 px-8 border-b-1'>
@@ -145,56 +145,56 @@ const LearningResources = (url) => (
         <div className='content-center flex grid-flow-col flex-wrap'>
           <ResourceCard
             title='Egghead.io'
-            resourceimg='egghead.jpg'
+            resourceImage='egghead.jpg'
             tag='paid'
             description='Learn the best JavaScript tools and frameworks from industry pros. Egghead is a group of working web development professionals and open source contributors that provide concise, information dense video courses on the best tools in the industry.'
-            resourceurl='egghead.io/?rc=84jyz'
+            resourceUrl='egghead.io/?rc=84jyz'
           />
           <ResourceCard
             title='Wes Bos Courses'
-            resourceimg='wesbos.jpg'
+            resourceImage='wesbos.jpg'
             tag='paid'
             description='I&#39;m a full Stack JavaScript developer from Canada. I create free + premium courses and do a twice-weekly podcast called Syntax. You can read more about me here, but stick around if you like CSS, JavaScript, mediocre jokes, learning new things or BBQ Tips'
-            resourceurl='wesbos.com/courses'
+            resourceUrl='wesbos.com/courses'
           />
           <ResourceCard
             title='LevelUp Tutorials'
-            resourceimg='levelup.jpg'
+            resourceImage='levelup.jpg'
             tag='paid'
             description='Level Up Tutorials sets how to help fix a major problem in learning technologies. The lack of in-depth, basic tutorials that teach more than just what to type when. Level Up Tutorials are aimed to be accessible and easy to follow while maintaining high production values.'
-            resourceurl='leveluptutorials.com'
+            resourceUrl='leveluptutorials.com'
           />
 
           <ResourceCard
             title='Team Treehouse'
-            resourceimg='treehouse.jpg'
+            resourceImage='treehouse.jpg'
             tag='paid'
             description='Our mission is to diversify the tech industry through accessible education and apprenticeship, unlocking the door to opportunity and empowering people to achieve their dreams. We will do this by training and placing people from all backgrounds into apprenticeships. '
-            resourceurl='teamtreehouse.com'
+            resourceUrl='teamtreehouse.com'
           />
 
           <ResourceCard
             title='Adam Learns'
-            resourceimg='adam-learns.jpg'
+            resourceImage='adam-learns.jpg'
             tag='paid'
             description='A premium library of learning material that is created in front of a live audience. Watch courses live on Twitch and influence the decision-making process, access videos, course notes and code repositories—all the material to get started quickly.'
-            resourceurl='adamlearns.com'
+            resourceUrl='adamlearns.com'
           />
 
           <ResourceCard
             title='Udemy'
-            resourceimg='udemy.jpg'
+            resourceImage='udemy.jpg'
             tag='paid'
             description='Udemy is the leading global marketplace for teaching and learning, connecting millions of students to the skills they need to succeed. Udemy is helping individuals reach their goals and pursue their dreams.'
-            resourceurl='udemy.com'
+            resourceUrl='udemy.com'
           />
 
           <ResourceCard
             title='Frontend Masters'
-            resourceimg='frontendmasters.jpg'
+            resourceImage='frontendmasters.jpg'
             tag='paid'
             description='Advance your skills with in-depth, modern JavaScript and front-end engineering courses. Start with the Front End Bootcamp, or dive into popular frameworks such as: React, Vue, Angular, and more.'
-            resourceurl='frontendmasters.com'
+            resourceUrl='frontendmasters.com'
           />
         </div>
       </div>
