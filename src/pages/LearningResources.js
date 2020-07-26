@@ -8,7 +8,7 @@ const LearningResources = (url) => (
     <div className='container m-auto max-w-screen-xl align-middle mt-32 sm:max-w-screen-lg'>
       <div class='relative px-12 text-center mx-auto my-10 sm:px-40 lg:px-32'>
         <h2 class='text-2xl leading tracking-tight font-extrabold text-blue-900 sm:leading-10 sm:text-3xl'>
-          Lerning Resources
+          Learning Resources
         </h2>
         <p className='text-base mb-2 text-blue-700 sm:mt-4 sm:px-12 sm:text-base md:text-base'> We've pulled some of the best free, and paid, resources together to help support your journey.
         </p>
