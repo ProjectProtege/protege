@@ -6,9 +6,11 @@ import { db } from '../firebase/firebase'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Layout from '../layouts/Layout'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 const Home = () => {
   const [jobs, setJobs] = useState([])
+  const [loading] = useState(true)
 
   useEffect(() => {
     ;(async function retrieveJobs() {
@@ -75,6 +77,8 @@ const Home = () => {
                 Any jobs listed here are geared for those hungry to work and
                 learn.
               </p>
+
+              <LoadingSpinner loading={loading}/>
 
               <button className='btn btn-teal mx-auto'>
                 <Link to='/job-board'>Find a Job</Link>
