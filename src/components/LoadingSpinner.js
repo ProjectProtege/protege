@@ -12,7 +12,7 @@ const LoadingSpinner = ({loading}) => {
         <div className="sweet-loading">
             <ClipLoader
                 css={override}
-                size={100}
+                size={50}
                 color={"#54AF8E"}
                 loading={loading}
             />
