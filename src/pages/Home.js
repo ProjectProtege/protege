@@ -10,7 +10,7 @@ import LoadingSpinner from '../components/LoadingSpinner'
 
 const Home = () => {
   const [jobs, setJobs] = useState([])
-  const [loading] = useState(true)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     ;(async function retrieveJobs() {
@@ -35,6 +35,7 @@ const Home = () => {
         }
       })
       setJobs(jobList)
+      setLoading(false)
     })()
   }, [])
 
@@ -78,8 +79,6 @@ const Home = () => {
                 learn.
               </p>
 
-              <LoadingSpinner loading={loading}/>
-
               <button className='btn btn-teal mx-auto'>
                 <Link to='/job-board'>Find a Job</Link>
               </button>
@@ -102,6 +101,8 @@ const Home = () => {
             <h2 className='text-center text-2xl text-blue-900 font-semibold mb-8'>
               Latest Opportunities
             </h2>
+
+            <LoadingSpinner loading={loading}/>
 
             <div data-cy='job-card-container' className='container'>
               {jobs.slice(0, 6).map((job, index) => (
