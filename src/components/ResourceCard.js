@@ -5,17 +5,17 @@ const ResourceCard = (props) => {
 
   return (
     <div className='p-4 sm:p-2'>
-      <div className='max-w-xs rounded overflow-hidden shadow-lg'>
+      <div className='max-w-xs rounded overflow-hidden shadow-md hover:shadow-lg hover:scale-105 transform transition duration-150 ease-in-out cursor-pointer'>
         <a
-            href={'http://' + resourceUrl}
-            target='_blank'
-            rel='noopener noreferrer'
-          > 
-            <img
+          href={'http://' + resourceUrl}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <img
             className='w-full'
             src={require(`../assets/images/resources/${resourceImage}`)}
             alt='Resource screenshot of website'
-            /> 
+          />
         </a>
         <div className='px-6 py-4'>
           <a
@@ -31,7 +31,7 @@ const ResourceCard = (props) => {
         </div>
       </div>
       <div className='px-6 py-4'>
-        <span className='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2'>
+        <span className='inline-block bg-teal-100 rounded-full px-3 py-1 text-sm font-semibold text-teal-900'>
           #{tag}
         </span>
       </div>

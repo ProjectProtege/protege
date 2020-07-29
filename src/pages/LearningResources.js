@@ -7,20 +7,21 @@ import ResourceCard from '../components/ResourceCard'
 
 const LearningResources = (url) => (
   <Layout>
-    <motion.div 
-    className='container m-auto max-w-screen-xl align-middle mt-32 sm:max-w-screen-lg'
-    initial={{
-          opacity: 0,
-          y: -10,
-        }}
-        animate={{
-          opacity: [0, 1],
-          y: [-10, 0],
-        }}
-        transition={{
-          duration: 0.3,
-          ease: 'easeIn',
-        }}>
+    <motion.div
+      className='container m-auto max-w-screen-xl align-middle mt-32 sm:max-w-screen-lg'
+      initial={{
+        opacity: 0,
+        y: -10,
+      }}
+      animate={{
+        opacity: [0, 1],
+        y: [-10, 0],
+      }}
+      transition={{
+        duration: 0.3,
+        ease: 'easeIn',
+      }}
+    >
       <div class='relative px-12 text-center mx-auto my-10 sm:px-40 lg:px-32'>
         <h2 class='text-2xl leading tracking-tight font-extrabold text-blue-900 sm:leading-10 sm:text-3xl'>
           Learning Resources
@@ -42,8 +43,8 @@ const LearningResources = (url) => (
         </p>
       </div>
 
-      <div className='container justify-start my-4 px-8 border-b-1'>
-        <h3 className='text-xl text-blue-900 sm:text-2xl md:text-3xl'>
+      <div className='container mx-auto text-center md:text-left my-4 px-8'>
+        <h3 className='text-2xl font-bold text-blue-900 md:text-3xl'>
           Free Resources
         </h3>
       </div>
@@ -56,6 +57,7 @@ const LearningResources = (url) => (
           description='A nonprofit community that helps you learn to code by building projects. Learn to code by completing coding challenges and building projects. Earn verified certifications along the way.'
           resourceUrl='freecodecamp.org'
         />
+
         <ResourceCard
           title='The Beginner&#39;s Guide to React'
           resourceImage='beg-guide-react.jpg'
@@ -136,8 +138,8 @@ const LearningResources = (url) => (
           resourceUrl='youtube.com/user/programmingwithmosh'
         />
 
-        <div className='container justify-start my-4 px-8 border-b-1'>
-          <h3 className='text-xl text-blue-900 sm:text-2xl md:text-3xl'>
+        <div className='container mx-auto text-center md:text-left my-4 px-8'>
+          <h3 className='text-2xl font-bold text-blue-900 md:text-3xl'>
             Paid Resources
           </h3>
         </div>
