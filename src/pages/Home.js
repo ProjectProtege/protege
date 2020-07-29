@@ -6,9 +6,11 @@ import { db } from '../firebase/firebase'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Layout from '../layouts/Layout'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 const Home = () => {
   const [jobs, setJobs] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     ;(async function retrieveJobs() {
@@ -33,6 +35,7 @@ const Home = () => {
         }
       })
       setJobs(jobList)
+      setLoading(false)
     })()
   }, [])
 
@@ -98,6 +101,8 @@ const Home = () => {
             <h2 className='text-center text-2xl text-blue-900 font-semibold mb-8'>
               Latest Opportunities
             </h2>
+
+            <LoadingSpinner loading={loading}/>
 
             <div data-cy='job-card-container' className='container'>
               {jobs.slice(0, 6).map((job, index) => (
