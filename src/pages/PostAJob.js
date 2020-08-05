@@ -20,6 +20,9 @@ const stripePromise = loadStripe(
 )
 
 const PostAJob = ({ location }) => {
+
+  const tierQueryParam = findParam('t') ? findParam('t').split('=')[1] : 'price_1GuKGJLy9mbkpBNAscbNLnvy'
+
   let history = useHistory()
 
   const [status, setStatus] = useState()
@@ -28,20 +31,25 @@ const PostAJob = ({ location }) => {
 
   const [companyLogo, setcompanyLogo] = useState(undefined)
 
-  const [tier, setTier] = useState('')
+  const [tier, setTier] = useState(tierQueryParam)
 
-  const statusQueryParam = location.search
+  const statusQueryParam = findParam('s')
+    
+  const initialStatusValue = parseInt(statusQueryParam.split('=')[1])
+
+  function findParam(letter){
+    return location.search
     .replace('?', '')
     .split('&')
-    .find((qs) => qs[0] === 's')
-
-  const initialStatusValue = parseInt(statusQueryParam.split('=')[1])
+    .find((qs) => qs[0] === letter)
+  }
 
   useEffect(() => {
     setStatus(initialStatusValue)
   }, [initialStatusValue])
 
   function receivingTierClick(e) {
+    console.log('when is this cliked?', e)
     setTier(e)
   }
 
@@ -93,8 +101,8 @@ const PostAJob = ({ location }) => {
       .redirectToCheckout({
         lineItems: [{ price: tier, quantity: 1 }],
         mode: 'payment',
-        successUrl: 'http://localhost:3000/post-a-job?s=3',
-        cancelUrl: 'http://localhost:3000/post-a-job',
+        successUrl: `${process.env.REACT_APP_BASE_URL}/post-a-job?s=3`,
+        cancelUrl: `${process.env.REACT_APP_BASE_URL}/post-a-job?s=1`,
       })
       .then(function result() {
         if (error) {

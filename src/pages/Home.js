@@ -11,6 +11,11 @@ import TierSelect from '../components/form/TierSelect'
 const Home = () => {
   const [jobs, setJobs] = useState([])
 
+  const [tier, setTier] = useState('price_1GuKGJLy9mbkpBNAscbNLnvy')
+  function receivingTierClick(e) {
+    setTier(e)
+  }
+
   useEffect(() => {
     ;(async function retrieveJobs() {
       const querySnapshot = await db
@@ -116,14 +121,14 @@ const Home = () => {
               </span>
             </h2>
 
-            <TierSelect />
+            <TierSelect receivingTierClick={receivingTierClick} tier={tier} />
 
             <div className='mt-6 flex flex-col items-center'>
               <h3 className='text-lg text-blue-300 text-center'>
                 Get started on your candidate search today.
               </h3>
 
-              <Link to='/post-a-job?s=1'>
+              <Link to={`/post-a-job?s=1&t=${tier}`}>
                 <button className='btn btn-teal mt-3'>Post a Job</button>
               </Link>
             </div>
