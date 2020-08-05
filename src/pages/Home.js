@@ -123,7 +123,7 @@ const Home = () => {
                 Get started on your candidate search today.
               </h3>
 
-              <Link to='/post-a-job'>
+              <Link to='/post-a-job?s=1'>
                 <button className='btn btn-teal mt-3'>Post a Job</button>
               </Link>
             </div>
