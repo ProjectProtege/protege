@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { storage } from '../firebase/firebase'
+import { storage } from '../../firebase/firebase'
 import { useLocation } from 'react-router-dom'
 
 const JobTemplate = ({ logo, props }) => {
@@ -152,7 +152,11 @@ const JobTemplate = ({ logo, props }) => {
                 <a data-cy='how-to-apply' href={props.howToApply}>
                   <button
                     disabled={isPreview}
-                    className={'hidden md:block btn btn-teal mt-8 w-full' + (isPreview ? ' btn-disabled' : '')}>
+                    className={
+                      'hidden md:block btn btn-teal mt-8 w-full' +
+                      (isPreview ? ' btn-disabled' : '')
+                    }
+                  >
                     Apply
                   </button>
                 </a>
@@ -165,7 +169,11 @@ const JobTemplate = ({ logo, props }) => {
           <a data-cy='how-to-apply-bottom' href={props.howToApply}>
             <button
               disabled={isPreview}
-              className={'btn btn-teal mt-8 w-full md:w-auto' + (isPreview ? ' btn-disabled' : '')}>
+              className={
+                'btn btn-teal mt-8 w-full md:w-auto' +
+                (isPreview ? ' btn-disabled' : '')
+              }
+            >
               Apply
             </button>
           </a>

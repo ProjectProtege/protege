@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { storage } from '../firebase/firebase'
+import { storage } from '../../firebase/firebase'
 import { motion } from 'framer-motion'
 import JobCardImage from './JobCardImage'
 

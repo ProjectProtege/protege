@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import PostAJobForm from '../components/form/PostAJobForm'
 import StatusBar from '../components/form/StatusBar'
-import JobTemplate from '../components/JobTemplate'
-import JobPostingConfirmation from '../components/JobPostingConfirmation'
+import JobTemplate from '../components/job/JobTemplate'
+import JobPostingConfirmation from '../components/job/JobPostingConfirmation'
 import { motion } from 'framer-motion'
 import Layout from '../layouts/Layout'
 

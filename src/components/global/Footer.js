@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import * as ROUTES from '../constants/routes'
+import * as ROUTES from '../../constants/routes'
 import { motion } from 'framer-motion'
 
 const Footer = () => {
@@ -149,7 +149,7 @@ const Footer = () => {
               className='text-teal-300 hover:text-teal-600 transition-colors ease-in-out duration-75 w-6'
               target='_blank'
               rel='noopener noreferrer'
-              aria-label="Follow Protege on Twitter"
+              aria-label='Follow Protege on Twitter'
             >
               <svg
                 className='fill-current'

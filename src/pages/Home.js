@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import FindYourNext from '../components/FindYourNext'
-import JobCard from '../components/JobCard'
+import FindYourNext from '../components/home/FindYourNext'
+import JobCard from '../components/job/JobCard'
 import heroBG from '../assets/images/hero-bg-pattern.png'
 import { db } from '../firebase/firebase'
 import { Link } from 'react-router-dom'
@@ -102,7 +102,7 @@ const Home = () => {
               Latest Opportunities
             </h2>
 
-            <LoadingSpinner loading={loading}/>
+            <LoadingSpinner loading={loading} />
 
             <div data-cy='job-card-container' className='container'>
               {jobs.slice(0, 6).map((job, index) => (
