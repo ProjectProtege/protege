@@ -8261,7 +8261,7 @@ video {
 
 .input {
   border-width: 1px;
-  border-color: #999eaf;
+  border-color: #c2c5cf;
   padding: 0.5rem;
   outline: 0;
 }
@@ -8322,11 +8322,14 @@ video {
 
 .ql-container.ql-snow,
 .ql-toolbar.ql-snow {
-  border: 1px solid #868692 !important;
+  border-width: 1px;
+  border-color: #c2c5cf;
+  padding: 0.5rem;
+  outline: 0;
 }
 
 .ql-container.ql-snow {
-  border-top: 0px !important;
+  border-top-width: 0;
 }
 
 @media (min-width: 640px){

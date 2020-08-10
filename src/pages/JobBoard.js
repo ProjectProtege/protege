@@ -102,36 +102,38 @@ const JobBoard = ({ location }) => {
 
           <LoadingSpinner loading={loading} />
 
-          <motion.div
-            data-cy='job-board-list'
-            className='mx-auto'
-            animate={{
-              opacity: [0, 1],
-              y: [-10, 0],
-            }}
-            transition={{
-              ease: 'easeIn',
-              type: 'spring',
-              duration: 0.25,
-              delay: 0.075,
-            }}
-          >
-            {!jobFilter && (
-              <React.Fragment>
-                {jobs.map((job) => (
-                  <JobCard key={job.id} job={job} />
-                ))}
-              </React.Fragment>
-            )}
+          {!loading && (
+            <motion.div
+              data-cy='job-board-list'
+              className='mx-auto'
+              animate={{
+                opacity: [0, 1],
+                y: [-10, 0],
+              }}
+              transition={{
+                ease: 'easeIn',
+                type: 'spring',
+                duration: 0.25,
+                delay: 0.075,
+              }}
+            >
+              {!jobFilter && (
+                <React.Fragment>
+                  {jobs.map((job) => (
+                    <JobCard key={job.id} job={job} />
+                  ))}
+                </React.Fragment>
+              )}
 
-            {jobFilter && (
-              <React.Fragment>
-                {filteredJobs(jobs, jobFilter).map((job) => (
-                  <JobCard key={job.id} job={job} />
-                ))}
-              </React.Fragment>
-            )}
-          </motion.div>
+              {jobFilter && (
+                <React.Fragment>
+                  {filteredJobs(jobs, jobFilter).map((job) => (
+                    <JobCard key={job.id} job={job} />
+                  ))}
+                </React.Fragment>
+              )}
+            </motion.div>
+          )}
         </div>
       </div>
     </Layout>

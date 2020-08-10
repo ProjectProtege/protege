@@ -2,6 +2,7 @@ import React, { useCallback, useContext } from 'react'
 import { withRouter, Redirect } from 'react-router'
 import { auth } from '../firebase/firebase'
 import { AuthContext } from '../firebase/auth'
+import { motion } from 'framer-motion'
 
 import heroBG from '../assets/images/bg-image.jpg'
 import ProtegeLogo from '../assets/images/protegeLogo.svg'
@@ -30,14 +31,28 @@ const SignIn = ({ history }) => {
   }
   return (
     <div className='relative flex flex-col h-screen justify-center overflow-hidden'>
-      <img
+      <motion.img
+        animate={{
+          opacity: [0, 1],
+        }}
         src={heroBG}
         alt=''
         className='absolute w-full h-full object-cover object-center'
         style={{ zIndex: '-1' }}
       />
 
-      <div className='bg-white p-10 mx-auto shadow-md'>
+      <motion.div
+        animate={{
+          y: [-30, 10, -2, 0],
+          opacity: [0, 1],
+        }}
+        transition={{
+          delay: 0.3,
+          duration: 0.5,
+          ease: 'easeIn',
+        }}
+        className='bg-white p-10 mx-auto shadow-md'
+      >
         <img src={ProtegeLogo} alt='Protege.dev Logo' className='mb-6' />
 
         <h1 className='sr-only'>Sign In</h1>
@@ -61,7 +76,7 @@ const SignIn = ({ history }) => {
             Sign In
           </button>
         </form>
-      </div>
+      </motion.div>
     </div>
   )
 }

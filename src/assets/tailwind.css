@@ -33,7 +33,7 @@
 /*--Input--*/
 
 .input {
-  @apply border border-blue-400 p-2 outline-none;
+  @apply border border-blue-200 p-2 outline-none;
 }
 
 .input:focus {
@@ -86,9 +86,9 @@
 
 .ql-container.ql-snow,
 .ql-toolbar.ql-snow {
-  border: 1px solid #868692 !important;
+  @apply border border-blue-200 p-2 outline-none;
 }
 
 .ql-container.ql-snow {
-  border-top: 0px !important;
+  @apply border-t-0;
 }
