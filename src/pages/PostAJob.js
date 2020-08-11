@@ -16,12 +16,12 @@ import { db, storage } from '../firebase/firebase'
 import firebase from 'firebase'
 
 const stripePromise = loadStripe(
-  'pk_test_51GuKERLy9mbkpBNAl2lCUjQDm0h47z63WWAGRI2gRyyRhRkEC2ofBmahdB2wtH19ZIFvXop3WmT2nxK7iafT0Jln00GL7DmYKr'
+  process.env.REACT_APP_STRIPE_API_KEY
 )
 
 const PostAJob = ({ location }) => {
 
-  const tierQueryParam = findParam('t') ? findParam('t').split('=')[1] : 'price_1GuKGJLy9mbkpBNAscbNLnvy'
+  const tierQueryParam = findParam('t') ? findParam('t').split('=')[1] : process.env.REACT_APP_ADVANCED_PLAN
 
   let history = useHistory()
 
@@ -49,7 +49,6 @@ const PostAJob = ({ location }) => {
   }, [initialStatusValue])
 
   function receivingTierClick(e) {
-    console.log('when is this cliked?', e)
     setTier(e)
   }
 
