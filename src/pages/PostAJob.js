@@ -33,9 +33,9 @@ const PostAJob = ({ location }) => {
 
   const [tier, setTier] = useState(tierQueryParam)
 
-  const statusQueryParam = findParam('s')
+  const statusQueryParam = findParam('s') ? parseInt(findParam('s').split('=')[1]) : 1
     
-  const initialStatusValue = parseInt(statusQueryParam.split('=')[1])
+  const initialStatusValue = statusQueryParam
 
   function findParam(letter){
     return location.search
