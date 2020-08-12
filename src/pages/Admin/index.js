@@ -69,18 +69,18 @@ const Admin = () => {
     <AdminLayout>
       <div className='max-w-7xl mx-auto px-8 py-12'>
         <h1 className='text-2xl font-medium text-blue-900 mb-6'>Dashboard</h1>
-        <div>
+        <div class='mb-20'>
           <h2 className='text-xl font-medium text-teal-600 mb-6'>
             Approval pending
           </h2>
-          <div className='px-5 py-3 justify-between grid grid-cols-12 gap-4 mb-4'>
-            <p className='text-blue-400 font-light col-span-4'>Job Title</p>
+          <div className='px-5 py-3 justify-between grid grid-cols-12 gap-4 mb-4 text-blue-200 font-light'>
+            <p className='col-span-4'>Job Title</p>
 
-            <p className='text-blue-400 font-light col-span-3'>Company</p>
+            <p className='col-span-3'>Company</p>
 
-            <p className='text-blue-400 font-light col-span-2'>Date Posted</p>
+            <p className='col-span-2'>Date Posted</p>
 
-            <p className='text-blue-400 font-light col-span-2'>Status</p>
+            <p className='col-span-2'>Status</p>
 
             <span className='col-span-1'></span>
           </div>
@@ -93,14 +93,14 @@ const Admin = () => {
 
         <div>
           <h2 className='text-xl font-medium text-teal-600 mb-6'>Approved</h2>
-          <div className='px-5 py-3 justify-between grid grid-cols-12 gap-4 mb-4'>
-            <p className='text-blue-400 font-light col-span-4'>Job Title</p>
+          <div className='px-5 py-3 justify-between grid grid-cols-12 gap-4 mb-4 text-blue-200 font-light'>
+            <p className='col-span-4'>Job Title</p>
 
-            <p className='text-blue-400 font-light col-span-3'>Company</p>
+            <p className='col-span-3'>Company</p>
 
-            <p className='text-blue-400 font-light col-span-2'>Date Posted</p>
+            <p className='col-span-2'>Date Posted</p>
 
-            <p className='text-blue-400 font-light col-span-2'>Status</p>
+            <p className='col-span-2'>Status</p>
 
             <span className='col-span-1'></span>
           </div>

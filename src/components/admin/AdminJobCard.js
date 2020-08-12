@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 
 const AdminJobCard = ({ job }) => {
   const months = [
@@ -55,10 +55,12 @@ const AdminJobCard = ({ job }) => {
         {job.approved === true ? 'Active' : 'Inactive'}
       </p>
 
-      <FontAwesomeIcon
-        icon={faWindowClose}
-        className='text-blue-400 font-light col-span-1'
-      />
+      <button>
+        <FontAwesomeIcon
+          icon={faTimesCircle}
+          className='text-error opacity-50 hover:opacity-100 transition ease-in-out duration-150 col-span-1'
+        />
+      </button>
     </li>
   )
 }
