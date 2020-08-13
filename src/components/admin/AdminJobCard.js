@@ -1,8 +1,8 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+import { faTimesCircle, faEdit } from '@fortawesome/free-solid-svg-icons'
 
-const AdminJobCard = ({ job }) => {
+const AdminJobCard = ({ job, onclick }) => {
   const months = [
     'Jan',
     'Feb',
@@ -24,8 +24,15 @@ const AdminJobCard = ({ job }) => {
     months[postDate.getMonth()]
   }. ${postDate.getDate()}`
 
+  function handleClick(e) {
+    onclick(job.id)
+  }
+
   return (
-    <li className='bg-white px-5 py-3 shadow mb-6 rounded justify-between grid grid-cols-12 gap-4'>
+    <li
+      className='bg-white px-5 py-3 shadow mb-6 rounded justify-between grid grid-cols-12 gap-4'
+      onClick={handleClick}
+    >
       <p
         className='text-blue-900 font-bold col-span-4 truncate'
         data-cy={`job-card-job-title-${job.id}`}
@@ -49,18 +56,30 @@ const AdminJobCard = ({ job }) => {
 
       <p
         className={`font-light rounded-full px-2 ${
-          job.approved === true ? 'text-teal-700' : 'text-error opacity-75'
-        } col-span-2`}
+          job.status === 'active'
+            ? 'text-teal-700'
+            : job.status === 'inactive'
+            ? 'text-error opacity-75'
+            : 'text-gray-500'
+        } col-span-2 capitalize`}
       >
-        {job.approved === true ? 'Active' : 'Inactive'}
+        {job.status}
       </p>
 
-      <button>
-        <FontAwesomeIcon
-          icon={faTimesCircle}
-          className='text-error opacity-50 hover:opacity-100 transition ease-in-out duration-150 col-span-1'
-        />
-      </button>
+      <div className='col-span-1 flex justify-end'>
+        <button>
+          <FontAwesomeIcon
+            icon={faEdit}
+            className='text-teal-900 opacity-50 hover:opacity-100 transition ease-in-out duration-150 mr-6'
+          />
+        </button>
+        <button>
+          <FontAwesomeIcon
+            icon={faTimesCircle}
+            className='text-error opacity-50 hover:opacity-100 transition ease-in-out duration-150'
+          />
+        </button>
+      </div>
     </li>
   )
 }

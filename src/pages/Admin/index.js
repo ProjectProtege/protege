@@ -3,11 +3,14 @@ import { db } from '../../firebase/firebase'
 
 import AdminLayout from '../../layouts/AdminLayout'
 import AdminJobCard from '../../components/admin/AdminJobCard'
+import AdminReviewJob from '../../components/admin/AdminReviewJob'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 const Admin = () => {
   const [activeJobs, setActiveJobs] = useState([])
   const [inactiveJobs, setInactiveJobs] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [editJob, setEditJob] = useState()
 
   useEffect(() => {
     ;(async function retrieveJobs() {
@@ -24,16 +27,13 @@ const Admin = () => {
         return {
           id: doc.id,
           jobTitle: job.jobtitle,
-          roleFocus: job.roleFocus,
-          companyHQ: job.companyHQ,
           companyName: job.companyName,
           postedAt: job.postedAt,
-          companyLogo: job.companyLogo,
           approved: job.approved,
+          status: job.status,
         }
       })
       setActiveJobs(jobList)
-      setLoading(false)
     })()
   }, [])
 
@@ -52,63 +52,74 @@ const Admin = () => {
         return {
           id: doc.id,
           jobTitle: job.jobtitle,
-          roleFocus: job.roleFocus,
-          companyHQ: job.companyHQ,
           companyName: job.companyName,
           postedAt: job.postedAt,
-          companyLogo: job.companyLogo,
           approved: job.approved,
+          status: job.status,
         }
       })
       setInactiveJobs(jobList)
-      setLoading(false)
     })()
   }, [])
 
+  function onItemClick(id) {
+    setEditJob(id)
+  }
+
   return (
     <AdminLayout>
-      <div className='max-w-7xl mx-auto px-8 py-12'>
-        <h1 className='text-2xl font-medium text-blue-900 mb-6'>Dashboard</h1>
-        <div class='mb-20'>
-          <h2 className='text-xl font-medium text-teal-600 mb-6'>
-            Approval pending
-          </h2>
-          <div className='px-5 py-3 justify-between grid grid-cols-12 gap-4 mb-4 text-blue-200 font-light'>
-            <p className='col-span-4'>Job Title</p>
+      <div className={`max-w-7xl  ${editJob ? 'flex flex-row' : null}`}>
+        <div className={`${editJob ? 'w-1/2 shadow-md' : 'w-full'} px-8 py-12`}>
+          <h1 className='text-2xl font-medium text-blue-900 mb-6'>Dashboard</h1>
 
-            <p className='col-span-3'>Company</p>
+          <div className='mb-20'>
+            <h2 className='text-xl font-medium text-teal-600 mb-6'>
+              Approval pending
+            </h2>
+            <div className='px-5 py-3 justify-between grid grid-cols-12 gap-4 mb-4 text-blue-200 font-light'>
+              <p className='col-span-4'>Job Title</p>
 
-            <p className='col-span-2'>Date Posted</p>
+              <p className='col-span-3'>Company</p>
 
-            <p className='col-span-2'>Status</p>
+              <p className='col-span-2'>Date Posted</p>
 
-            <span className='col-span-1'></span>
+              <p className='col-span-2'>Status</p>
+
+              <span className='col-span-1'></span>
+            </div>
+            <ul>
+              {inactiveJobs.map((job) => (
+                <AdminJobCard key={job.id} job={job} onclick={onItemClick} />
+              ))}
+            </ul>
           </div>
-          <ul>
-            {inactiveJobs.map((job) => (
-              <AdminJobCard key={job.id} job={job} />
-            ))}
-          </ul>
+
+          <div>
+            <h2 className='text-xl font-medium text-teal-600 mb-6'>Approved</h2>
+            <div className='px-5 py-3 justify-between grid grid-cols-12 gap-4 mb-4 text-blue-200 font-light'>
+              <p className='col-span-4'>Job Title</p>
+
+              <p className='col-span-3'>Company</p>
+
+              <p className='col-span-2'>Date Posted</p>
+
+              <p className='col-span-2'>Status</p>
+
+              <span className='col-span-1'></span>
+            </div>
+
+            <ul>
+              {activeJobs.map((job) => (
+                <AdminJobCard key={job.id} job={job} onclick={onItemClick} />
+              ))}
+            </ul>
+          </div>
         </div>
 
-        <div>
-          <h2 className='text-xl font-medium text-teal-600 mb-6'>Approved</h2>
-          <div className='px-5 py-3 justify-between grid grid-cols-12 gap-4 mb-4 text-blue-200 font-light'>
-            <p className='col-span-4'>Job Title</p>
+        <div className={`${editJob ? 'w-1/2' : null} px-8 py-12`}>
+          <FontAwesomeIcon icon={faTimes} onClick={(e) => setEditJob('')} />
 
-            <p className='col-span-3'>Company</p>
-
-            <p className='col-span-2'>Date Posted</p>
-
-            <p className='col-span-2'>Status</p>
-
-            <span className='col-span-1'></span>
-          </div>
-          <ul>
-            {activeJobs.map((job) => (
-              <AdminJobCard key={job.id} job={job} />
-            ))}
-          </ul>
+          {editJob ? <AdminReviewJob id={editJob} /> : null}
         </div>
       </div>
     </AdminLayout>

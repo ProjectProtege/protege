@@ -8,7 +8,7 @@ const AdminLayout = ({ children }) => {
     <div className='flex'>
       <AdminHeader />
 
-      <main class='flex-1 relative z-0 ml-64'>{children}</main>
+      <main className='flex-1 relative z-0 ml-64'>{children}</main>
     </div>
   )
 }

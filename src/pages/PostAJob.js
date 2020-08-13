@@ -40,6 +40,7 @@ const PostAJob = () => {
     uploadTask.then(
       db.collection('jobs').doc().set({
         approved: false,
+        status: 'active',
         companyEmail: data.jobData.companyEmail,
         companyLogo: logoFileName,
         companyName: data.jobData.companyName,
