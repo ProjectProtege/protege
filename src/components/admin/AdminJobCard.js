@@ -1,28 +1,28 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimesCircle, faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faEdit } from '@fortawesome/free-solid-svg-icons'
 
 const AdminJobCard = ({ job, onclick }) => {
   const months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
+    'Jan.',
+    'Feb.',
+    'Mar.',
+    'Apr.',
     'May',
     'June',
     'July',
-    'Aug',
-    'Sept',
-    'Oct',
-    'Nov',
-    'Dec',
+    'Aug.',
+    'Sept.',
+    'Oct.',
+    'Nov.',
+    'Dec.',
   ]
 
   const postDate = job.postedAt.toDate()
 
   const formattedPostDate = `${
     months[postDate.getMonth()]
-  }. ${postDate.getDate()}`
+  } ${postDate.getDate()}, ${postDate.getFullYear()}`
 
   function handleClick(e) {
     onclick(job.id)
@@ -30,7 +30,7 @@ const AdminJobCard = ({ job, onclick }) => {
 
   return (
     <li
-      className='bg-white px-5 py-3 shadow mb-6 rounded justify-between grid grid-cols-12 gap-4'
+      className='bg-white px-5 py-3 shadow mb-6 border-l-2 border-teal-500 justify-between grid grid-cols-12 gap-4 cursor-pointer'
       onClick={handleClick}
     >
       <p
@@ -41,14 +41,14 @@ const AdminJobCard = ({ job, onclick }) => {
       </p>
 
       <p
-        className='text-blue-400 font-light col-span-3'
+        className='text-blue-400 font-light col-span-3 truncate'
         data-cy={`job-card-company-name-${job.id}`}
       >
         {job.companyName}
       </p>
 
       <p
-        className='text-blue-400 font-light col-span-2'
+        className='text-blue-400 font-light col-span-2 truncate'
         data-cy={`job-card-formatted-date-${job.id}`}
       >
         {formattedPostDate}
@@ -61,7 +61,7 @@ const AdminJobCard = ({ job, onclick }) => {
             : job.status === 'inactive'
             ? 'text-error opacity-75'
             : 'text-gray-500'
-        } col-span-2 capitalize`}
+        } col-span-2 capitalize truncate`}
       >
         {job.status}
       </p>
@@ -70,12 +70,12 @@ const AdminJobCard = ({ job, onclick }) => {
         <button>
           <FontAwesomeIcon
             icon={faEdit}
-            className='text-teal-900 opacity-50 hover:opacity-100 transition ease-in-out duration-150 mr-6'
+            className='text-teal-900 opacity-50 hover:opacity-100 transition ease-in-out duration-150 mr-3'
           />
         </button>
         <button>
           <FontAwesomeIcon
-            icon={faTimesCircle}
+            icon={faTimes}
             className='text-error opacity-50 hover:opacity-100 transition ease-in-out duration-150'
           />
         </button>

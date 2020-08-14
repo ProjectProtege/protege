@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { db } from '../../firebase/firebase'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes, faEdit } from '@fortawesome/free-solid-svg-icons'
 
 import JobTemplate from '../job/JobTemplate'
 
@@ -11,12 +13,8 @@ const AdminReviewJob = ({ id }) => {
       const docRef = db.collection('jobs').doc(id)
 
       docRef.get().then(function (res) {
-        console.log(res)
-
         if (res.exists) {
           setJob(res.data())
-          console.log(id, 'job id')
-          console.log(res.data())
         } else {
           return null
         }
@@ -28,6 +26,42 @@ const AdminReviewJob = ({ id }) => {
 
   return (
     <div>
+      <div className='mb-4 p-3 bg-gray-100 grid grid-cols-3'>
+        <div className='flex flex-row items-center'>
+          <label className='font-display text-blue-600 text-sm mr-3'>
+            Approved
+          </label>
+          <input type='checkbox'></input>
+        </div>
+
+        <div className='flex flex-row items-center'>
+          <label className='font-display text-blue-600 text-sm mr-3'>
+            Status
+          </label>
+          <select className='w-full'>
+            <option value='active' selected>
+              Active
+            </option>
+            <option value='inactive'>Inactive</option>
+            <option value='filled'>Filled</option>
+          </select>
+        </div>
+
+        <div className='col-span-1 flex justify-end'>
+          <button>
+            <FontAwesomeIcon
+              icon={faEdit}
+              className='text-teal-900 opacity-50 hover:opacity-100 transition ease-in-out duration-150 mr-6'
+            />
+          </button>
+          <button>
+            <FontAwesomeIcon
+              icon={faTimes}
+              className='text-error opacity-50 hover:opacity-100 transition ease-in-out duration-150'
+            />
+          </button>
+        </div>
+      </div>
       <JobTemplate props={job} />
     </div>
   )

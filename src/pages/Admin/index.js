@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { db } from '../../firebase/firebase'
+import { motion } from 'framer-motion'
+import '../../assets/admin.css'
 
 import AdminLayout from '../../layouts/AdminLayout'
 import AdminJobCard from '../../components/admin/AdminJobCard'
 import AdminReviewJob from '../../components/admin/AdminReviewJob'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 
 const Admin = () => {
   const [activeJobs, setActiveJobs] = useState([])
   const [inactiveJobs, setInactiveJobs] = useState([])
   const [editJob, setEditJob] = useState()
+  const [hasJob, setHasJob] = useState(false)
 
   useEffect(() => {
     ;(async function retrieveJobs() {
@@ -64,12 +67,18 @@ const Admin = () => {
 
   function onItemClick(id) {
     setEditJob(id)
+    setHasJob(true)
   }
 
   return (
     <AdminLayout>
-      <div className={`max-w-7xl  ${editJob ? 'flex flex-row' : null}`}>
-        <div className={`${editJob ? 'w-1/2 shadow-md' : 'w-full'} px-8 py-12`}>
+      <div className={`max-w-7xl flex flex-row`}>
+        <motion.div
+          data-hasjob={hasJob}
+          className={`admin-joblist px-8 py-12 h-screen overflow-auto ${
+            hasJob ? 'shadow-md' : null
+          }`}
+        >
           <h1 className='text-2xl font-medium text-blue-900 mb-6'>Dashboard</h1>
 
           <div className='mb-20'>
@@ -81,7 +90,7 @@ const Admin = () => {
 
               <p className='col-span-3'>Company</p>
 
-              <p className='col-span-2'>Date Posted</p>
+              <p className='col-span-2'>Date</p>
 
               <p className='col-span-2'>Status</p>
 
@@ -89,7 +98,12 @@ const Admin = () => {
             </div>
             <ul>
               {inactiveJobs.map((job) => (
-                <AdminJobCard key={job.id} job={job} onclick={onItemClick} />
+                <AdminJobCard
+                  key={job.id}
+                  job={job}
+                  onclick={onItemClick}
+                  className='hover:cursor-pointer'
+                />
               ))}
             </ul>
           </div>
@@ -101,7 +115,7 @@ const Admin = () => {
 
               <p className='col-span-3'>Company</p>
 
-              <p className='col-span-2'>Date Posted</p>
+              <p className='col-span-2'>Date</p>
 
               <p className='col-span-2'>Status</p>
 
@@ -114,13 +128,24 @@ const Admin = () => {
               ))}
             </ul>
           </div>
-        </div>
+        </motion.div>
 
-        <div className={`${editJob ? 'w-1/2' : null} px-8 py-12`}>
-          <FontAwesomeIcon icon={faTimes} onClick={(e) => setEditJob('')} />
-
-          {editJob ? <AdminReviewJob id={editJob} /> : null}
-        </div>
+        {editJob ? (
+          <div
+            data-hasjob={hasJob}
+            className={`admin-jobedit w-1/2 px-8 py-12 h-screen overflow-auto`}
+          >
+            <FontAwesomeIcon
+              icon={faTimesCircle}
+              onClick={(e) => {
+                setEditJob('')
+                setHasJob(false)
+              }}
+              className='cursor-pointer text-teal-700 opacity-75 transform hover:rotate-180 hover:opacity-100 duration-150 mb-3'
+            />
+            <AdminReviewJob id={editJob} />{' '}
+          </div>
+        ) : null}
       </div>
     </AdminLayout>
   )

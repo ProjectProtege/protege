@@ -1,0 +1,19 @@
+.admin-joblist {
+  width: 100%;
+  transition: 150ms ease-in-out;
+}
+
+.admin-joblist[data-hasjob='true'] {
+  width: 50%;
+}
+
+.admin-jobedit {
+  width: 0;
+  opacity: 0;
+  transition: 300ms ease-in-out;
+}
+
+.admin-jobedit[data-hasjob='true'] {
+  width: 50%;
+  opacity: 1;
+}

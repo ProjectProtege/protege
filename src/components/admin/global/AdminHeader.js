@@ -8,7 +8,7 @@ import Logo from '../../../assets/images/protegeLogo.svg'
 
 const AdminHeader = () => {
   return (
-    <header className='bg-gray-200 h-screen flex flex-col p-6 w-64 fixed'>
+    <header className='bg-gray-200 h-screen flex flex-col p-6 w-56 fixed'>
       <Link to='/admin' className='mb-12 w-3/4'>
         <img src={Logo} alt='Protege.dev Logo' />
       </Link>

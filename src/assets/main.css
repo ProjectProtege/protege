@@ -8206,6 +8206,10 @@ video {
   transition-duration: 1000ms;
 }
 
+body::-webkit-scrollbar-track {
+  background: red;
+}
+
 /*--Buttons--*/
 
 .btn {
