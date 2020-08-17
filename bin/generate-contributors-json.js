@@ -2,6 +2,9 @@
 const fs = require('fs')
 const path = require('path')
 const fetch = require('node-fetch')
+const util = require('util')
+const { writeFile } = fs.promises
+const mkdir = util.promisify(fs.mkdir)
 const dataFolder = path.resolve(__dirname, '../src/data')
 
 // The OG contributors
@@ -44,41 +47,46 @@ const OGContributors = [
   },
 ]
 
+/**
+ * Generates a list of contributors based on their GitHub information.
+ */
 async function generateContributorsJson() {
-  console.log('waiting for GitHub API to respond...')
+  console.log('🟡 Waiting for GitHub API to respond...')
 
-  const response = await fetch(
-    'https://api.github.com/repos/drewclem/protege/contributors'
-  )
-  const rawContributors = await response.json()
+  try {
+    const response = await fetch(
+      'https://api.github.com/repos/drewclem/protege/contributors'
+    )
+    const rawContributors = await response.json()
 
-  console.log(
-    'Received the list of contributors for the https://github.com/drewclem/protege repository'
-  )
+    console.log(
+      '✅ Received the list of contributors for the repository https://github.com/drewclem/protege.'
+    )
 
-  const individualContributorInfos = await Promise.all(
-    rawContributors.map((url) => url)
-  )
+    const individualContributorInfos = await Promise.all(
+      rawContributors.map((url) => url)
+    )
 
-  console.log('Received additional information for contributors')
+    console.log('✅ Received additional information for contributors')
 
-  const contributors = rawContributors.map((contributor, index) => {
-    return { ...contributor, ...individualContributorInfos[index] }
-  })
+    const contributors = rawContributors.map((contributor, index) => {
+      return { ...contributor, ...individualContributorInfos[index] }
+    })
 
-  fs.mkdirSync(dataFolder, { recursive: true })
+    await mkdir(dataFolder, { recursive: true })
+    await writeFile(
+      path.resolve(dataFolder, 'contributors.json'),
+      JSON.stringify(contributors.concat(OGContributors))
+    )
+    console.log('✅ Created contributors.json file')
+  } catch (error) {
+    console.error(
+      '🔴 There was an issue creating the contributors.json file.',
+      error
+    )
 
-  fs.writeFile(
-    path.resolve(dataFolder, 'contributors.json'),
-    JSON.stringify(contributors.concat(OGContributors)),
-    (error) => {
-      if (error) {
-        throw error
-      }
-
-      console.log('contributors.json file has been generated')
-    }
-  )
+    process.exit(1) // See https://node.readthedocs.io/en/latest/api/process
+  }
 }
 
 generateContributorsJson()
