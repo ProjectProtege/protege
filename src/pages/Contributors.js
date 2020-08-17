@@ -52,7 +52,7 @@ const Contributors = () => {
           </a>
           &nbsp;and send in a PR! It's that easy!
         </p>
-        <ContributorsList />
+        <ContributorsList contributors={contributors} />
       </motion.div>
     </Layout>
   )
@@ -60,21 +60,20 @@ const Contributors = () => {
 
 export default Contributors
 
-const ContributorsList = () => {
+const ContributorsList = ({ contributors }) => {
   return (
     <ul className='grid md:grid-cols-2 row-gap-5 gap-5'>
-      {contributors.map((contributor) => {
-        const { id, login } = contributor
+      {contributors
+        .filter(({ login }) => login !== 'ImgBotApp')
+        .map((contributor) => {
+          const { id } = contributor
 
-        if (login === 'ImgBotApp') {
-          return null
-        }
-        return (
-          <li>
-            <IndividualContributor key={id} contributor={contributor} />
-          </li>
-        )
-      })}
+          return (
+            <li key={id}>
+              <IndividualContributor contributor={contributor} />
+            </li>
+          )
+        })}
     </ul>
   )
 }
