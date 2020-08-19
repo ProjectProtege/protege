@@ -28,17 +28,25 @@ const AdminReviewJob = ({ id }) => {
     <div>
       <div className='mb-4 p-3 bg-gray-100 grid grid-cols-3'>
         <div className='flex flex-row items-center'>
-          <label className='font-display text-blue-600 text-sm mr-3'>
-            Approved
+          <label className='approval-toggle font-display text-blue-600 text-sm mr-3'>
+            <input type='checkbox' checked={job.approved}></input>
+            <span class='publish-dot round shadow-inner'></span>
           </label>
-          <input type='checkbox'></input>
         </div>
 
-        <div className='flex flex-row items-center'>
+        <div className='flex flex-row items-center select-wrap'>
           <label className='font-display text-blue-600 text-sm mr-3'>
             Status
           </label>
-          <select className='w-full'>
+          <select
+            className={`w-full appearance-none pl-4 pr-1 py-1 rounded-full shadow-inner focus:outline-none ${
+              job.status === 'active'
+                ? 'text-teal-700'
+                : job.status === 'inactive'
+                ? 'text-error opacity-75'
+                : 'text-blue-800'
+            }`}
+          >
             <option value='active' selected>
               Active
             </option>
@@ -62,6 +70,7 @@ const AdminReviewJob = ({ id }) => {
           </button>
         </div>
       </div>
+
       <JobTemplate props={job} />
     </div>
   )

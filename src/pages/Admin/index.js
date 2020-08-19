@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { db } from '../../firebase/firebase'
 import { motion } from 'framer-motion'
-import '../../assets/admin.css'
+import '../../assets/css/admin.css'
 
 import AdminLayout from '../../layouts/AdminLayout'
 import AdminJobCard from '../../components/admin/AdminJobCard'
