@@ -7,6 +7,7 @@ import JobTemplate from '../job/JobTemplate'
 
 const AdminReviewJob = ({ id }) => {
   const [job, setJob] = useState()
+  const [approval, setApproval] = useState()
 
   useEffect(() => {
     ;(async function getJob() {
@@ -15,12 +16,29 @@ const AdminReviewJob = ({ id }) => {
       docRef.get().then(function (res) {
         if (res.exists) {
           setJob(res.data())
+          setApproval(res.data().approved)
         } else {
           return null
         }
       })
     })()
   }, [id])
+
+  function updateApprovalStatus() {
+    setApproval(!approval)
+    const docRef = db.collection('jobs').doc(id)
+
+    return docRef
+      .update({
+        approved: !approval,
+      })
+      .then(() => {
+        console.log('listing approval', job.approved)
+      })
+      .catch((err) => {
+        alert('Oops!', err)
+      })
+  }
 
   if (!job) return null
 
@@ -29,8 +47,12 @@ const AdminReviewJob = ({ id }) => {
       <div className='mb-4 p-3 bg-gray-100 grid grid-cols-3'>
         <div className='flex flex-row items-center'>
           <label className='approval-toggle font-display text-blue-600 text-sm mr-3'>
-            <input type='checkbox' checked={job.approved}></input>
-            <span class='publish-dot round shadow-inner'></span>
+            <input
+              type='checkbox'
+              checked={approval}
+              onChange={updateApprovalStatus}
+            ></input>
+            <span className='publish-dot round shadow-inner'></span>
           </label>
         </div>
 
@@ -46,10 +68,9 @@ const AdminReviewJob = ({ id }) => {
                 ? 'text-error opacity-75'
                 : 'text-blue-800'
             }`}
+            defaultValue='active'
           >
-            <option value='active' selected>
-              Active
-            </option>
+            <option value='active'>Active</option>
             <option value='inactive'>Inactive</option>
             <option value='filled'>Filled</option>
           </select>
