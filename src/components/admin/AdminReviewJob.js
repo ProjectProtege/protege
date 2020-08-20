@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { db } from '../../firebase/firebase'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faEdit } from '@fortawesome/free-solid-svg-icons'
 
 import JobTemplate from '../job/JobTemplate'
 
-const AdminReviewJob = ({ id }) => {
+const AdminReviewJob = ({ id, receivingEdit }) => {
+  const docRef = db.collection('jobs').doc(id)
+  let history = useHistory()
+
   const [job, setJob] = useState()
   const [approval, setApproval] = useState()
+  const [status, setStatus] = useState()
 
   useEffect(() => {
     ;(async function getJob() {
@@ -17,6 +22,7 @@ const AdminReviewJob = ({ id }) => {
         if (res.exists) {
           setJob(res.data())
           setApproval(res.data().approved)
+          setStatus(res.data().status)
         } else {
           return null
         }
@@ -26,18 +32,37 @@ const AdminReviewJob = ({ id }) => {
 
   function updateApprovalStatus() {
     setApproval(!approval)
-    const docRef = db.collection('jobs').doc(id)
 
-    return docRef
+    docRef
       .update({
         approved: !approval,
       })
       .then(() => {
         console.log('listing approval', job.approved)
+        history.push('/sign-in') /*this is hacky --- make it better */
       })
       .catch((err) => {
         alert('Oops!', err)
       })
+
+    receivingEdit(id)
+  }
+
+  function updateJobStatus(e) {
+    setStatus(e.target.value)
+
+    docRef
+      .update({
+        status: e.target.value,
+      })
+      .then(() => {
+        console.log('Status Updated')
+      })
+      .catch((err) => {
+        alert('Oops!', err)
+      })
+
+    receivingEdit(id)
   }
 
   if (!job) return null
@@ -62,13 +87,14 @@ const AdminReviewJob = ({ id }) => {
           </label>
           <select
             className={`w-full appearance-none pl-4 pr-1 py-1 rounded-full shadow-inner focus:outline-none ${
-              job.status === 'active'
+              status === 'active'
                 ? 'text-teal-700'
-                : job.status === 'inactive'
+                : status === 'inactive'
                 ? 'text-error opacity-75'
                 : 'text-blue-800'
             }`}
-            defaultValue='active'
+            defaultValue={job.status}
+            onChange={updateJobStatus}
           >
             <option value='active'>Active</option>
             <option value='inactive'>Inactive</option>

@@ -14,6 +14,7 @@ const Admin = () => {
   const [inactiveJobs, setInactiveJobs] = useState([])
   const [editJob, setEditJob] = useState()
   const [hasJob, setHasJob] = useState(false)
+  const [recentEdit, setRecentEdit] = useState()
 
   useEffect(() => {
     ;(async function retrieveJobs() {
@@ -68,6 +69,10 @@ const Admin = () => {
   function onItemClick(id) {
     setEditJob(id)
     setHasJob(true)
+  }
+
+  function receivingEdit(id) {
+    setRecentEdit(id)
   }
 
   return (
@@ -143,7 +148,7 @@ const Admin = () => {
               }}
               className='cursor-pointer text-teal-700 opacity-75 transform hover:rotate-180 hover:opacity-100 duration-150 mb-3'
             />
-            <AdminReviewJob id={editJob} />{' '}
+            <AdminReviewJob id={editJob} receivingEdit={receivingEdit} />{' '}
           </div>
         ) : null}
       </div>
