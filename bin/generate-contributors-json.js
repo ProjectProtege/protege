@@ -63,14 +63,23 @@ async function generateContributorsJson() {
       '✅ Received the list of contributors for the repository https://github.com/drewclem/protege.'
     )
 
+    const individualContributorResponses = await Promise.all(
+      rawContributors.map(({ url }) => fetch(url))
+    )
+
     const individualContributorInfos = await Promise.all(
-      rawContributors.map((url) => url)
+      individualContributorResponses.map((response) => response.json())
     )
 
     console.log('✅ Received additional information for contributors')
 
     const contributors = rawContributors.map((contributor, index) => {
-      return { ...contributor, ...individualContributorInfos[index] }
+      const fullContributorProfileInfo = {
+        ...contributor,
+        ...individualContributorInfos[index],
+      }
+
+      return fullContributorProfileInfo
     })
 
     await mkdir(dataFolder, { recursive: true })
