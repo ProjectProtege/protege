@@ -7,7 +7,7 @@ import { motion } from 'framer-motion'
 import Layout from '../layouts/Layout'
 
 import { db, storage } from '../firebase/firebase'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 
 const PostAJob = () => {
   const [status, setStatus] = useState(1)
