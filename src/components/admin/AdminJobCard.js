@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faEdit } from '@fortawesome/free-solid-svg-icons'
 
 const AdminJobCard = ({ job, onclick }) => {
+  const [status, setStatus] = useState('')
+
+  useEffect(() => {
+    setStatus(job.status)
+  }, [job.status])
+
   const months = [
     'Jan.',
     'Feb.',
@@ -56,14 +62,14 @@ const AdminJobCard = ({ job, onclick }) => {
 
       <p
         className={`font-light rounded-full px-2 ${
-          job.status === 'active'
+          status === 'active'
             ? 'text-teal-700'
-            : job.status === 'inactive'
+            : status === 'inactive'
             ? 'text-error opacity-75'
             : 'text-gray-500'
         } col-span-2 capitalize truncate`}
       >
-        {job.status}
+        {status}
       </p>
 
       <div className='col-span-1 flex justify-end'>

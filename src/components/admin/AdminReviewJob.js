@@ -39,7 +39,6 @@ const AdminReviewJob = ({ id, receivingEdit }) => {
       })
       .then(() => {
         console.log('listing approval', job.approved)
-        history.push('/sign-in') /*this is hacky --- make it better */
       })
       .catch((err) => {
         alert('Oops!', err)
@@ -57,6 +56,7 @@ const AdminReviewJob = ({ id, receivingEdit }) => {
       })
       .then(() => {
         console.log('Status Updated')
+        history.push('/admin')
       })
       .catch((err) => {
         alert('Oops!', err)

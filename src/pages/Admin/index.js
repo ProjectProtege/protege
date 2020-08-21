@@ -6,6 +6,7 @@ import '../../assets/css/admin.css'
 import AdminLayout from '../../layouts/AdminLayout'
 import AdminJobCard from '../../components/admin/AdminJobCard'
 import AdminReviewJob from '../../components/admin/AdminReviewJob'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 
@@ -17,53 +18,11 @@ const Admin = () => {
   const [recentEdit, setRecentEdit] = useState()
 
   useEffect(() => {
-    ;(async function retrieveJobs() {
-      const querySnapshot = await db
-        .collection('jobs')
-        .where('approved', '==', true)
-        .orderBy('postedAt', 'desc')
-        .get()
-
-      const jobList = querySnapshot.docs.map((documentSnapshot) => {
-        let doc = documentSnapshot
-        let job = documentSnapshot.data()
-
-        return {
-          id: doc.id,
-          jobTitle: job.jobtitle,
-          companyName: job.companyName,
-          postedAt: job.postedAt,
-          approved: job.approved,
-          status: job.status,
-        }
-      })
-      setActiveJobs(jobList)
-    })()
+    retrieveInactiveJobs()
   }, [])
 
   useEffect(() => {
-    ;(async function retrieveJobs() {
-      const querySnapshot = await db
-        .collection('jobs')
-        .where('approved', '==', false)
-        .orderBy('postedAt', 'desc')
-        .get()
-
-      const jobList = querySnapshot.docs.map((documentSnapshot) => {
-        let doc = documentSnapshot
-        let job = documentSnapshot.data()
-
-        return {
-          id: doc.id,
-          jobTitle: job.jobtitle,
-          companyName: job.companyName,
-          postedAt: job.postedAt,
-          approved: job.approved,
-          status: job.status,
-        }
-      })
-      setInactiveJobs(jobList)
-    })()
+    retrieveActiveJobs()
   }, [])
 
   function onItemClick(id) {
@@ -71,16 +30,66 @@ const Admin = () => {
     setHasJob(true)
   }
 
-  function receivingEdit(id) {
+  async function retrieveInactiveJobs() {
+    const querySnapshot = await db
+      .collection('jobs')
+      .where('approved', '==', false)
+      .orderBy('postedAt', 'desc')
+      .get()
+
+    const jobList = querySnapshot.docs.map((documentSnapshot) => {
+      let doc = documentSnapshot
+      let job = documentSnapshot.data()
+
+      return {
+        id: doc.id,
+        jobTitle: job.jobtitle,
+        companyName: job.companyName,
+        postedAt: job.postedAt,
+        approved: job.approved,
+        status: job.status,
+      }
+    })
+    setInactiveJobs(jobList)
+  }
+
+  async function retrieveActiveJobs() {
+    const querySnapshot = await db
+      .collection('jobs')
+      .where('approved', '==', true)
+      .orderBy('postedAt', 'desc')
+      .get()
+
+    const jobList = querySnapshot.docs.map((documentSnapshot) => {
+      let doc = documentSnapshot
+      let job = documentSnapshot.data()
+
+      return {
+        id: doc.id,
+        jobTitle: job.jobtitle,
+        companyName: job.companyName,
+        postedAt: job.postedAt,
+        approved: job.approved,
+        status: job.status,
+      }
+    })
+    setActiveJobs(jobList)
+  }
+
+  async function receivingEdit(id) {
     setRecentEdit(id)
+    retrieveInactiveJobs()
+    await retrieveActiveJobs()
+
+    setRecentEdit('')
   }
 
   return (
     <AdminLayout>
       <div className={`max-w-7xl flex flex-row`}>
-        <motion.div
+        <div
           data-hasjob={hasJob}
-          className={`admin-joblist px-8 py-12 h-screen overflow-auto ${
+          className={`admin-joblist px-8 py-12  h-screen overflow-y-auto overflow-x-hidden ${
             hasJob ? 'shadow-md' : null
           }`}
         >
@@ -133,7 +142,7 @@ const Admin = () => {
               ))}
             </ul>
           </div>
-        </motion.div>
+        </div>
 
         {editJob ? (
           <div
