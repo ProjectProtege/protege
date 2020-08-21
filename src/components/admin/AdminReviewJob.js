@@ -56,7 +56,6 @@ const AdminReviewJob = ({ id, receivingEdit }) => {
       })
       .then(() => {
         console.log('Status Updated')
-        history.push('/admin')
       })
       .catch((err) => {
         alert('Oops!', err)

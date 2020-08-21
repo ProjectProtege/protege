@@ -76,12 +76,10 @@ const Admin = () => {
     setActiveJobs(jobList)
   }
 
-  async function receivingEdit(id) {
+  function receivingEdit(id) {
     setRecentEdit(id)
     retrieveInactiveJobs()
-    await retrieveActiveJobs()
-
-    setRecentEdit('')
+    retrieveActiveJobs()
   }
 
   return (
