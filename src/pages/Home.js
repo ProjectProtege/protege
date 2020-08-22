@@ -11,7 +11,7 @@ import TierSelect from '../components/form/TierSelect'
 const Home = () => {
   const [jobs, setJobs] = useState([])
 
-  const [tier, setTier] = useState('price_1GuKGJLy9mbkpBNAscbNLnvy')
+  const [tier, setTier] = useState(process.env.REACT_APP_ADVANCED_PLAN)
   function receivingTierClick(e) {
     setTier(e)
   }
