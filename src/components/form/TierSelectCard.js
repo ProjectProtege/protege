@@ -18,7 +18,7 @@ const TierSelectCard = ({ children, value, receivingTierClick, tier }) => {
       }}
     >
       {route.pathname === '/' ? (
-        <div className='absolute bg-error px-4 py-2 z-10 text-white uppercase -rotate-15 transform text-sm font-semibold tracking-widest -ml-1 shadow'>
+        <div className='hidden absolute bg-error px-4 py-2 z-10 text-white uppercase -rotate-15 transform text-sm font-semibold tracking-widest -ml-1 shadow'>
           Free for now!
         </div>
       ) : (
