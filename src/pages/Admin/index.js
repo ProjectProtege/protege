@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { db } from '../../firebase/firebase'
-import { motion } from 'framer-motion'
 import '../../assets/css/admin.css'
 
 import AdminLayout from '../../layouts/AdminLayout'
@@ -19,16 +18,8 @@ const Admin = () => {
 
   useEffect(() => {
     retrieveInactiveJobs()
-  }, [])
-
-  useEffect(() => {
     retrieveActiveJobs()
   }, [])
-
-  function onItemClick(id) {
-    setEditJob(id)
-    setHasJob(true)
-  }
 
   async function retrieveInactiveJobs() {
     const querySnapshot = await db
@@ -76,10 +67,16 @@ const Admin = () => {
     setActiveJobs(jobList)
   }
 
+  function onItemClick(id) {
+    setEditJob(id)
+    setHasJob(true)
+    setRecentEdit('')
+  }
+
   function receivingEdit(id) {
     setRecentEdit(id)
-    retrieveInactiveJobs()
     retrieveActiveJobs()
+    retrieveInactiveJobs()
   }
 
   return (
@@ -152,6 +149,7 @@ const Admin = () => {
               onClick={(e) => {
                 setEditJob('')
                 setHasJob(false)
+                setRecentEdit('')
               }}
               className='cursor-pointer text-teal-700 opacity-75 transform hover:rotate-180 hover:opacity-100 duration-150 mb-3'
             />

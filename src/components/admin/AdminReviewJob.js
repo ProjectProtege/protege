@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import { db } from '../../firebase/firebase'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faEdit } from '@fortawesome/free-solid-svg-icons'
@@ -8,7 +7,7 @@ import JobTemplate from '../job/JobTemplate'
 
 const AdminReviewJob = ({ id, receivingEdit }) => {
   const docRef = db.collection('jobs').doc(id)
-  let history = useHistory()
+  const timeStamp = new Date()
 
   const [job, setJob] = useState()
   const [approval, setApproval] = useState()
@@ -30,10 +29,10 @@ const AdminReviewJob = ({ id, receivingEdit }) => {
     })()
   }, [id])
 
-  function updateApprovalStatus() {
+  async function updateApprovalStatus() {
     setApproval(!approval)
 
-    docRef
+    await docRef
       .update({
         approved: !approval,
       })
@@ -44,13 +43,13 @@ const AdminReviewJob = ({ id, receivingEdit }) => {
         alert('Oops!', err)
       })
 
-    receivingEdit(id)
+    receivingEdit(`${id}-${timeStamp.getUTCMilliseconds()}`)
   }
 
-  function updateJobStatus(e) {
+  async function updateJobStatus(e) {
     setStatus(e.target.value)
 
-    docRef
+    await docRef
       .update({
         status: e.target.value,
       })
@@ -61,7 +60,7 @@ const AdminReviewJob = ({ id, receivingEdit }) => {
         alert('Oops!', err)
       })
 
-    receivingEdit(id)
+    receivingEdit(`${id}-${timeStamp.getUTCMilliseconds()}`)
   }
 
   if (!job) return null
