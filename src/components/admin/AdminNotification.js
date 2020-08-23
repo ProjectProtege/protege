@@ -17,13 +17,14 @@ const AdminNotification = ({ notificationId, notificationRes }) => {
       className={`absolute text-blue-500 top-0 right-0 bg-white px-6 py-3 border-l-2 border-teal-600 shadow-md  mt-4 mr-12 ${
         notificationRes ? 'border-teal-600' : 'border-error'
       }`}
+      initial={{ y: -200 }}
       animate={{
         y: [-200, 10, 0, 0, -200],
       }}
       transition={{
-        times: [0, 0.2, 0.3, 0.9, 1],
+        times: [0, 0.2, 0.25, 0.9, 1],
         duration: 3,
-        type: 'spring',
+        ease: 'easeInOut',
       }}
       key={id}
     >

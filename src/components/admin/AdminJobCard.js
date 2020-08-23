@@ -11,7 +11,7 @@ const AdminJobCard = ({ job, i, onclick }) => {
       opacity: 1,
       y: 0,
       transition: {
-        delay: i * 0.1,
+        delay: i * 0.2,
         ease: 'easeInOut',
         duration: 0.2,
       },

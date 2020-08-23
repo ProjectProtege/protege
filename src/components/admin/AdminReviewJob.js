@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { db } from '../../firebase/firebase'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faEdit } from '@fortawesome/free-solid-svg-icons'
+import { motion } from 'framer-motion'
 
 import JobTemplate from '../job/JobTemplate'
 
