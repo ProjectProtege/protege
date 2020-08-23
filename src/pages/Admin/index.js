@@ -1,20 +1,37 @@
 import React, { useEffect, useState } from 'react'
 import { db } from '../../firebase/firebase'
 import '../../assets/css/admin.css'
+import { motion } from 'framer-motion'
 
 import AdminLayout from '../../layouts/AdminLayout'
 import AdminJobCard from '../../components/admin/AdminJobCard'
 import AdminReviewJob from '../../components/admin/AdminReviewJob'
+import AdminNotification from '../../components/admin/AdminNotification'
+import LoadingSpinner from '../../components/LoadingSpinner'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 
 const Admin = () => {
+  const [loading, setLoading] = useState(true)
   const [activeJobs, setActiveJobs] = useState([])
   const [inactiveJobs, setInactiveJobs] = useState([])
   const [editJob, setEditJob] = useState()
   const [hasJob, setHasJob] = useState(false)
   const [recentEdit, setRecentEdit] = useState()
+  const [notificationRes, setNotificationRes] = useState(false)
+  const [notificationId, setNotificationId] = useState()
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delay: 0.25,
+      },
+    },
+  }
 
   useEffect(() => {
     retrieveInactiveJobs()
@@ -65,22 +82,37 @@ const Admin = () => {
       }
     })
     setActiveJobs(jobList)
+    setLoading(false)
   }
 
   function onItemClick(id) {
     setEditJob(id)
     setHasJob(true)
     setRecentEdit('')
+    setNotificationRes(false)
   }
 
-  function receivingEdit(id) {
-    setRecentEdit(id)
+  function receivingEdit(res) {
+    setRecentEdit(res)
     retrieveActiveJobs()
     retrieveInactiveJobs()
+    setNotificationRes(false)
+  }
+
+  function receivingNotification(id, res) {
+    setNotificationId(id)
+    setNotificationRes(res)
   }
 
   return (
     <AdminLayout>
+      {notificationId && (
+        <AdminNotification
+          notificationId={notificationId}
+          notificationRes={notificationRes}
+        />
+      )}
+
       <div className={`max-w-7xl flex flex-row`}>
         <div
           data-hasjob={hasJob}
@@ -105,16 +137,17 @@ const Admin = () => {
 
               <span className='col-span-1'></span>
             </div>
-            <ul>
-              {inactiveJobs.map((job) => (
+            <motion.ul variants={container} initial='hidden' animate='show'>
+              {inactiveJobs.map((job, i) => (
                 <AdminJobCard
                   key={job.id}
                   job={job}
+                  i={i}
                   onclick={onItemClick}
                   className='hover:cursor-pointer'
                 />
               ))}
-            </ul>
+            </motion.ul>
           </div>
 
           <div>
@@ -130,12 +163,17 @@ const Admin = () => {
 
               <span className='col-span-1'></span>
             </div>
-
-            <ul>
-              {activeJobs.map((job) => (
-                <AdminJobCard key={job.id} job={job} onclick={onItemClick} />
+            <motion.ul variants={container} initial='hidden' animate='show'>
+              {activeJobs.map((job, i) => (
+                <AdminJobCard
+                  key={job.id}
+                  job={job}
+                  i={i}
+                  onclick={onItemClick}
+                  className='hover:cursor-pointer'
+                />
               ))}
-            </ul>
+            </motion.ul>
           </div>
         </div>
 
@@ -144,16 +182,24 @@ const Admin = () => {
             data-hasjob={hasJob}
             className={`admin-jobedit w-1/2 px-8 py-12 h-screen overflow-auto`}
           >
-            <FontAwesomeIcon
-              icon={faTimesCircle}
+            <button
+              className='focus:outline-none'
               onClick={(e) => {
                 setEditJob('')
                 setHasJob(false)
                 setRecentEdit('')
               }}
-              className='cursor-pointer text-teal-700 opacity-75 transform hover:rotate-180 hover:opacity-100 duration-150 mb-3'
-            />
-            <AdminReviewJob id={editJob} receivingEdit={receivingEdit} />{' '}
+            >
+              <FontAwesomeIcon
+                icon={faTimesCircle}
+                className='text-teal-700 opacity-75 transform hover:rotate-180 hover:opacity-100 duration-150 mb-3'
+              />
+            </button>
+            <AdminReviewJob
+              id={editJob}
+              receivingEdit={receivingEdit}
+              receivingNotification={receivingNotification}
+            />{' '}
           </div>
         ) : null}
       </div>

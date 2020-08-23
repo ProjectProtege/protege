@@ -5,13 +5,15 @@ import { faTimes, faEdit } from '@fortawesome/free-solid-svg-icons'
 
 import JobTemplate from '../job/JobTemplate'
 
-const AdminReviewJob = ({ id, receivingEdit }) => {
+const AdminReviewJob = ({ id, receivingEdit, receivingNotification }) => {
   const docRef = db.collection('jobs').doc(id)
   const timeStamp = new Date()
+  const uuid = `${id}-${timeStamp.getUTCMilliseconds()}`
 
   const [job, setJob] = useState()
   const [approval, setApproval] = useState()
   const [status, setStatus] = useState()
+  const [updating, setUpdating] = useState(false)
 
   useEffect(() => {
     ;(async function getJob() {
@@ -37,16 +39,16 @@ const AdminReviewJob = ({ id, receivingEdit }) => {
         approved: !approval,
       })
       .then(() => {
-        console.log('listing approval', job.approved)
+        receivingEdit(uuid)
+        receivingNotification(uuid, true)
       })
       .catch((err) => {
-        alert('Oops!', err)
+        receivingNotification(err, false)
       })
-
-    receivingEdit(`${id}-${timeStamp.getUTCMilliseconds()}`)
   }
 
   async function updateJobStatus(e) {
+    setUpdating(true)
     setStatus(e.target.value)
 
     await docRef
@@ -54,13 +56,13 @@ const AdminReviewJob = ({ id, receivingEdit }) => {
         status: e.target.value,
       })
       .then(() => {
-        console.log('Status Updated')
+        receivingEdit(uuid, true)
+        receivingNotification(uuid, true)
+        setUpdating(false)
       })
       .catch((err) => {
-        alert('Oops!', err)
+        receivingNotification(err, false)
       })
-
-    receivingEdit(`${id}-${timeStamp.getUTCMilliseconds()}`)
   }
 
   if (!job) return null
@@ -69,7 +71,7 @@ const AdminReviewJob = ({ id, receivingEdit }) => {
     <div>
       <div className='mb-4 p-3 bg-gray-100 grid grid-cols-3'>
         <div className='flex flex-row items-center'>
-          <label className='approval-toggle font-display text-blue-600 text-sm mr-3'>
+          <label className='approval-toggle font-display text-blue-600 text-sm mr-3 flex'>
             <input
               type='checkbox'
               checked={approval}
@@ -79,18 +81,21 @@ const AdminReviewJob = ({ id, receivingEdit }) => {
           </label>
         </div>
 
-        <div className='flex flex-row items-center select-wrap'>
+        <div className={`flex flex-row items-center select-wrap `}>
           <label className='font-display text-blue-600 text-sm mr-3'>
             Status
           </label>
           <select
             className={`w-full appearance-none pl-4 pr-1 py-1 rounded-full shadow-inner focus:outline-none ${
+              updating ? 'opacity-50 pointer-events-none' : ''
+            } ${
               status === 'active'
                 ? 'text-teal-700'
                 : status === 'inactive'
                 ? 'text-error opacity-75'
                 : 'text-blue-800'
-            }`}
+            }
+            `}
             defaultValue={job.status}
             onChange={updateJobStatus}
           >
@@ -107,7 +112,7 @@ const AdminReviewJob = ({ id, receivingEdit }) => {
               className='text-teal-900 opacity-50 hover:opacity-100 transition ease-in-out duration-150 mr-6'
             />
           </button>
-          <button>
+          <button onClick={() => receivingNotification('test test', false)}>
             <FontAwesomeIcon
               icon={faTimes}
               className='text-error opacity-50 hover:opacity-100 transition ease-in-out duration-150'
