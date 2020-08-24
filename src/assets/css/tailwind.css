@@ -41,7 +41,7 @@
 }
 
 .input-error {
-  @apply text-error text-xs;
+  @apply text-error-full text-xs;
 }
 
 .input-select {

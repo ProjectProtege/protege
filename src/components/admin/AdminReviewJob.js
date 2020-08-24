@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { db } from '../../firebase/firebase'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faEdit } from '@fortawesome/free-solid-svg-icons'
-import { motion } from 'framer-motion'
 
 import JobTemplate from '../job/JobTemplate'
 
-const AdminReviewJob = ({ id, receivingEdit, receivingNotification }) => {
+const AdminReviewJob = ({
+  id,
+  receivingEdit,
+  receivingNotification,
+  deleteJobForever,
+}) => {
   const docRef = db.collection('jobs').doc(id)
   const timeStamp = new Date()
   const uuid = `${id}-${timeStamp.getUTCMilliseconds()}`
@@ -93,7 +97,7 @@ const AdminReviewJob = ({ id, receivingEdit, receivingNotification }) => {
               status === 'active'
                 ? 'text-teal-700'
                 : status === 'inactive'
-                ? 'text-error opacity-75'
+                ? 'text-error-full'
                 : 'text-blue-800'
             }
             `}
@@ -113,10 +117,19 @@ const AdminReviewJob = ({ id, receivingEdit, receivingNotification }) => {
               className='text-teal-900 opacity-50 hover:opacity-100 transition ease-in-out duration-150 mr-6'
             />
           </button>
-          <button onClick={() => receivingNotification('test test', false)}>
+          <button
+            onClick={(e) => {
+              if (
+                window.confirm(
+                  'This is a permanent and destructive action. Are you sure?'
+                )
+              )
+                deleteJobForever(id)
+            }}
+          >
             <FontAwesomeIcon
               icon={faTimes}
-              className='text-error opacity-50 hover:opacity-100 transition ease-in-out duration-150'
+              className='text-error-full opacity-50 hover:opacity-100 transition ease-in-out duration-150'
             />
           </button>
         </div>

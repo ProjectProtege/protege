@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { motion, AnimatePresence } from 'framer-motion'
 
-const AdminJobCard = ({ job, i, onclick }) => {
+const AdminJobCard = ({ job, i, onclick, deleteJobForever }) => {
   const [status, setStatus] = useState('')
 
   const variants = {
@@ -59,7 +59,7 @@ const AdminJobCard = ({ job, i, onclick }) => {
         whileTap={{ scale: 0.99 }}
       >
         <p
-          className='text-blue-900 font-bold col-span-4 truncate'
+          className='text-blue-900 font-bold col-span-5 truncate'
           data-cy={`job-card-job-title-${job.id}`}
         >
           {job.jobTitle}
@@ -72,38 +72,27 @@ const AdminJobCard = ({ job, i, onclick }) => {
           {job.companyName}
         </p>
 
-        <p
-          className='text-blue-400 font-light col-span-2 truncate'
-          data-cy={`job-card-formatted-date-${job.id}`}
-        >
-          {formattedPostDate}
-        </p>
+        <div className='col-span-2 flex'>
+          <p
+            className={`font-light rounded-full px-4 shadow-inner ${
+              status === 'active'
+                ? 'text-teal-900 bg-teal-100'
+                : status === 'inactive'
+                ? 'text-error-full bg-error-50'
+                : 'text-gray-500'
+            } capitalize truncate`}
+          >
+            {status}
+          </p>
+        </div>
 
-        <p
-          className={`font-light rounded-full px-2 ${
-            status === 'active'
-              ? 'text-teal-700'
-              : status === 'inactive'
-              ? 'text-error opacity-75'
-              : 'text-gray-500'
-          } col-span-2 capitalize truncate`}
-        >
-          {status}
-        </p>
-
-        <div className='col-span-1 flex justify-end'>
-          <button>
-            <FontAwesomeIcon
-              icon={faEdit}
-              className='text-teal-900 opacity-50 hover:opacity-100 transition ease-in-out duration-150 mr-3'
-            />
-          </button>
-          <button>
-            <FontAwesomeIcon
-              icon={faTimes}
-              className='text-error opacity-50 hover:opacity-100 transition ease-in-out duration-150'
-            />
-          </button>
+        <div className='col-span-2 flex justify-end'>
+          <p
+            className='text-blue-400 font-light truncate'
+            data-cy={`job-card-formatted-date-${job.id}`}
+          >
+            {formattedPostDate}
+          </p>
         </div>
       </motion.li>
     </AnimatePresence>

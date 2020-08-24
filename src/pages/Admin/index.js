@@ -7,13 +7,11 @@ import AdminLayout from '../../layouts/AdminLayout'
 import AdminJobCard from '../../components/admin/AdminJobCard'
 import AdminReviewJob from '../../components/admin/AdminReviewJob'
 import AdminNotification from '../../components/admin/AdminNotification'
-import LoadingSpinner from '../../components/LoadingSpinner'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 
 const Admin = () => {
-  const [loading, setLoading] = useState(true)
   const [activeJobs, setActiveJobs] = useState([])
   const [inactiveJobs, setInactiveJobs] = useState([])
   const [editJob, setEditJob] = useState()
@@ -82,7 +80,25 @@ const Admin = () => {
       }
     })
     setActiveJobs(jobList)
-    setLoading(false)
+  }
+
+  async function deleteJobForever(id) {
+    const docDeleteRef = await db.collection('jobs').doc(id)
+
+    return docDeleteRef
+      .delete()
+      .then(() => {
+        setNotificationId(id)
+        setNotificationRes(true)
+        setHasJob(false)
+        setEditJob('')
+        retrieveActiveJobs()
+        retrieveInactiveJobs()
+      })
+      .catch((err) => {
+        setNotificationId(id)
+        setNotificationRes(false)
+      })
   }
 
   function onItemClick(id) {
@@ -127,13 +143,12 @@ const Admin = () => {
               Approval pending
             </h2>
             <div className='px-5 py-3 justify-between grid grid-cols-12 gap-4 mb-4 text-blue-200 font-light'>
-              <p className='col-span-4'>Job Title</p>
-
+              <p className='col-span-5'>Job Title</p>
               <p className='col-span-3'>Company</p>
-
-              <p className='col-span-2'>Date</p>
-
               <p className='col-span-2'>Status</p>
+              <div className='col-span-2 flex justify-end pr-2'>
+                <p className='col-span-2'>Post Date</p>
+              </div>
 
               <span className='col-span-1'></span>
             </div>
@@ -144,6 +159,7 @@ const Admin = () => {
                   job={job}
                   i={i}
                   onclick={onItemClick}
+                  deleteJobForever={deleteJobForever}
                   className='hover:cursor-pointer'
                 />
               ))}
@@ -153,13 +169,12 @@ const Admin = () => {
           <div>
             <h2 className='text-xl font-medium text-teal-600 mb-6'>Approved</h2>
             <div className='px-5 py-3 justify-between grid grid-cols-12 gap-4 mb-4 text-blue-200 font-light'>
-              <p className='col-span-4'>Job Title</p>
-
+              <p className='col-span-5'>Job Title</p>
               <p className='col-span-3'>Company</p>
-
-              <p className='col-span-2'>Date</p>
-
               <p className='col-span-2'>Status</p>
+              <div className='col-span-2 flex justify-end pr-2'>
+                <p className='col-span-2'>Post Date</p>
+              </div>
 
               <span className='col-span-1'></span>
             </div>
@@ -170,6 +185,7 @@ const Admin = () => {
                   job={job}
                   i={i}
                   onclick={onItemClick}
+                  deleteJobForever={deleteJobForever}
                   className='hover:cursor-pointer'
                 />
               ))}
@@ -184,7 +200,7 @@ const Admin = () => {
           >
             <button
               className='focus:outline-none'
-              onClick={(e) => {
+              onClick={() => {
                 setEditJob('')
                 setHasJob(false)
                 setRecentEdit('')
@@ -199,6 +215,7 @@ const Admin = () => {
               id={editJob}
               receivingEdit={receivingEdit}
               receivingNotification={receivingNotification}
+              deleteJobForever={deleteJobForever}
             />{' '}
           </div>
         ) : null}
