@@ -54,10 +54,6 @@
   transition: 0.3s;
 }
 
-:before {
-  background-color: #65bda0;
-}
-
 .publish-dot.round {
   border-radius: 34px;
 }

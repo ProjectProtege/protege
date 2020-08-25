@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { storage } from '../../firebase/firebase'
 import { useLocation } from 'react-router-dom'
 
-const JobTemplate = ({ logo, props, location }) => {
+const JobTemplate = ({ logo, props }) => {
   let { pathname } = useLocation()
   const isPreview = pathname.indexOf('/job-board/') !== 0
 

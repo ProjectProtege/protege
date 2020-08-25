@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faEdit } from '@fortawesome/free-solid-svg-icons'
 
 import JobTemplate from '../job/JobTemplate'
+import AdminJobEdit from '../admin/AdminJobEdit'
+import AdminNotification from '../admin/AdminNotification'
 
 const AdminReviewJob = ({
   id,
@@ -19,22 +21,27 @@ const AdminReviewJob = ({
   const [approval, setApproval] = useState()
   const [status, setStatus] = useState()
   const [updating, setUpdating] = useState(false)
+  const [editJob, setEditJob] = useState(false)
+  const [notificationRes, setNotificationRes] = useState(false)
+  const [notificationId, setNotificationId] = useState()
 
   useEffect(() => {
-    ;(async function getJob() {
-      const docRef = db.collection('jobs').doc(id)
-
-      docRef.get().then(function (res) {
-        if (res.exists) {
-          setJob(res.data())
-          setApproval(res.data().approved)
-          setStatus(res.data().status)
-        } else {
-          return null
-        }
-      })
-    })()
+    retrieveJob(id)
   }, [id])
+
+  async function retrieveJob(id) {
+    const docRef = db.collection('jobs').doc(id)
+
+    docRef.get().then(function (res) {
+      if (res.exists) {
+        setJob(res.data())
+        setApproval(res.data().approved)
+        setStatus(res.data().status)
+      } else {
+        return null
+      }
+    })
+  }
 
   async function updateApprovalStatus() {
     setApproval(!approval)
@@ -70,10 +77,29 @@ const AdminReviewJob = ({
       })
   }
 
+  function receivingCancel() {
+    setEditJob('')
+  }
+
+  function editNotification(uid, res, id) {
+    setNotificationId(uid)
+    setNotificationRes(res)
+
+    if (res === true) {
+      retrieveJob(id)
+    }
+  }
+
   if (!job) return null
 
   return (
     <div>
+      {notificationId && (
+        <AdminNotification
+          notificationId={notificationId}
+          notificationRes={notificationRes}
+        />
+      )}
       <div className='mb-4 p-3 bg-gray-100 grid grid-cols-3'>
         <div className='flex flex-row items-center'>
           <label className='approval-toggle font-display text-blue-600 text-sm mr-3 flex'>
@@ -111,7 +137,7 @@ const AdminReviewJob = ({
         </div>
 
         <div className='col-span-1 flex justify-end'>
-          <button>
+          <button onClick={() => setEditJob(id)}>
             <FontAwesomeIcon
               icon={faEdit}
               className='text-teal-900 opacity-50 hover:opacity-100 transition ease-in-out duration-150 mr-6'
@@ -136,6 +162,15 @@ const AdminReviewJob = ({
       </div>
 
       <JobTemplate props={job} />
+
+      {editJob && (
+        <AdminJobEdit
+          jobData={job}
+          id={id}
+          receivingCancel={receivingCancel}
+          editNotification={editNotification}
+        />
+      )}
     </div>
   )
 }

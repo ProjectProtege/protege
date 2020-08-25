@@ -55,8 +55,9 @@ const PostAJobForm = ({
           companyDescription: Yup.string().required(
             'Please give a brief description of the company and culture.'
           ),
-          companyLogo: Yup.mixed().required('Please provide a .png format image of your company logo')
-            .test(file => file && file.type === 'image/png'),
+          companyLogo: Yup.mixed()
+            .required('Please provide a .png format image of your company logo')
+            .test((file) => file && file.type === 'image/png'),
           companyHQ: Yup.string().required(
             'Please provide a location for your office headquarters.'
           ),
