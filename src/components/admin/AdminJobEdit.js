@@ -76,6 +76,7 @@ const AdminEditJob = ({ id, jobData, receivingCancel, editNotification }) => {
               .update({
                 companyEmail: values.companyEmail,
                 companyHQ: values.companyHQ,
+                companyDescription: values.companyDescription,
                 companyName: values.companyName,
                 companyWebsite: values.companyWebsite,
                 howToApply: values.howToApply,
