@@ -2,17 +2,6 @@
   "name": "protege-client",
   "version": "0.1.0",
   "private": true,
-  "description": "Remote jobs for junior developers.",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/drewclem/protege.git"
-  },
-  "author": "Drew Clements",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/drewclem/protege/issues"
-  },
-  "homepage": "https://github.com/drewclem/protege#readme",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
