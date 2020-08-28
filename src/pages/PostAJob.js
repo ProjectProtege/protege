@@ -15,10 +15,6 @@ import TierSelect from '../components/form/TierSelect'
 import { db, storage } from '../firebase/firebase'
 import firebase from 'firebase'
 
-const stripePromise = loadStripe(
-  process.env.REACT_APP_STRIPE_API_KEY
-)
-
 const PostAJob = ({ location }) => {
 
   const tierQueryParam = findParam('t') ? findParam('t').split('=')[1] : process.env.REACT_APP_ADVANCED_PLAN
@@ -94,7 +90,9 @@ const PostAJob = ({ location }) => {
   }
 
   const handlePaymentClick = async (e) => {
-    const stripe = await stripePromise
+    const stripe = await loadStripe(
+      process.env.REACT_APP_STRIPE_API_KEY
+    )
 
     const { error } = await stripe
       .redirectToCheckout({
