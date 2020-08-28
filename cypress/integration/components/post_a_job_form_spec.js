@@ -6,7 +6,7 @@ describe('post a job form', () => {
     it('tests the form exists with all expected fields', () => {
         cy.get("[data-cy='status-bar']>svg>circle").first().should('not.have.attr', 'fill-opacity')
         cy.get("[data-cy='post-a-job-form']")
-        cy.get('input[name="jobTitle"]')
+        cy.get('input[name="jobtitle"]')
         cy.get('select[name="roleFocus"]')
         cy.get('select[name="positionType"]')
         // Quill Input
@@ -22,10 +22,10 @@ describe('post a job form', () => {
     })
     it('tests the form for error messages', () => {
         cy.get("[data-cy='next-step-button']").click()
-        cy.get('.input-error').should('have.length', 10)
+        cy.get('.input-error').should('have.length', 11)
     })
     it('tests inputs all the form fields', () => {
-        cy.get('input[name="jobTitle"]').type('Junior Developer').should('value', 'Junior Developer')
+        cy.get('input[name="jobtitle"]').type('Junior Developer').should('value', 'Junior Developer')
         cy.get('select[name="roleFocus"]').select('Front-end').should('value', 'Front-end')
         cy.get('select[name="positionType"]').select('Full-time').should('value', 'Full-time')
         // Quill Input
@@ -39,7 +39,7 @@ describe('post a job form', () => {
         // Logo Upload
         cy.fixture('SnakeholeLoungeLogo.png').then( fileContent => {
             cy.get("[data-cy='company-logo-upload']").upload(
-                { fileContent, fileName: 'SnakeholeLoungeLogo.png', mimeType: 'image/*' },
+                { fileContent, fileName: 'SnakeholeLoungeLogo.png', mimeType: 'image/png' },
                 { subjectType: 'input' }
             )
             cy.get("[data-cy='company-logo-uploaded']").should('have.attr', 'src')

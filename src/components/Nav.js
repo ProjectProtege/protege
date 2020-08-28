@@ -1,8 +1,6 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import * as ROUTES from '../constants/routes'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 const Nav = () => {
   const [active, setActive] = React.useState(false)
@@ -25,7 +23,26 @@ const Nav = () => {
           className='nav-toggle relative md:hidden text-3xl p-3'
           onClick={() => setActive((oldActive) => !oldActive)}
         >
-          <FontAwesomeIcon icon={faBars} />
+          <svg
+            style={{
+              overflow: 'visible',
+              width: `0.875em`,
+              display: `inline-block`,
+              fontSize: `inherit`,
+              height: `1em`,
+              verticalAlign: `-0.125em`,
+            }}
+            aria-hidden='true'
+            focusable='false'
+            role='img'
+            xmlns='http://www.w3.org/2000/svg'
+            viewBox='0 0 448 512'
+          >
+            <path
+              fill='currentColor'
+              d='M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z'
+            ></path>
+          </svg>
         </button>
 
         <ul
@@ -34,6 +51,16 @@ const Nav = () => {
           } mt-2 text-center uppercase right-0 font-medium bg-white shadow-lg p-2 w-screen mx-auto`}
           onClick={handleMobileClick}
         >
+          <li className='pt-3 pb-2 border-b-2 border-gray-300'>
+            <NavLink
+              to='/job-board'
+              className='hover:opacity-100 opacity-75 '
+              activeClassName='opacity-100'
+            >
+              Find a Job
+            </NavLink>
+          </li>
+
           <li className='pt-3 pb-2 border-b-2 border-gray-300'>
             <NavLink
               className='hover:opacity-100 opacity-75 '

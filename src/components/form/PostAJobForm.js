@@ -25,7 +25,7 @@ const PostAJobForm = ({
     <div className='lg:w-3/5 mx-auto'>
       <Formik
         initialValues={{
-          jobTitle: jobData ? `${jobData.jobTitle}` : '',
+          jobtitle: jobData ? `${jobData.jobtitle}` : '',
           roleFocus: jobData ? `${jobData.roleFocus}` : '',
           positionType: jobData ? `${jobData.positionType}` : '',
           jobDescription: jobData ? `${jobData.jobDescription}` : '',
@@ -38,7 +38,7 @@ const PostAJobForm = ({
           companyHQ: jobData ? `${jobData.companyHQ}` : '',
         }}
         validationSchema={Yup.object({
-          jobTitle: Yup.string().required('Job title is a required field.'),
+          jobtitle: Yup.string().required('Job title is a required field.'),
           roleFocus: Yup.string().required('Please select a focus area.'),
           positionType: Yup.string().required('Please select a position type.'),
           jobDescription: Yup.string().required(
@@ -55,7 +55,9 @@ const PostAJobForm = ({
           companyDescription: Yup.string().required(
             'Please give a brief description of the company and culture.'
           ),
-          companyLogo: Yup.mixed(),
+          companyLogo: Yup.mixed()
+            .required('Please provide a .png format image of your company logo')
+            .test((file) => file && file.type === 'image/png'),
           companyHQ: Yup.string().required(
             'Please provide a location for your office headquarters.'
           ),
@@ -86,14 +88,14 @@ const PostAJobForm = ({
 
                   <Field
                     id='job-title'
-                    name='jobTitle'
+                    name='jobtitle'
                     className='input'
                     type='text'
                     autoComplete='off'
                   ></Field>
 
                   <ErrorMessage
-                    name='jobTitle'
+                    name='jobtitle'
                     component='span'
                     className='input-error'
                   />
@@ -140,7 +142,7 @@ const PostAJobForm = ({
 
                   <div className='flex flex-col md:w-1/2 mb-3'>
                     <label
-                      htmlFor='positionType'
+                      htmlFor='position-type'
                       className='text-blue-900 font-semibold'
                     >
                       Position Type
@@ -326,6 +328,7 @@ const PostAJobForm = ({
                         component={LogoUpload}
                         recievingLogo={recievingLogo}
                         value={fileValue}
+                        setFieldValue={formik.setFieldValue}
                       />
 
                       <ErrorMessage

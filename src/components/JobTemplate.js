@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'
 
 const JobTemplate = ({ logo, props }) => {
   let { pathname } = useLocation()
-  const isDisabled = pathname.indexOf('/job-board/') !== 0
+  const isPreview = pathname.indexOf('/job-board/') !== 0
 
   const [companyLogo, setCompanyLogo] = useState(undefined)
 
@@ -45,8 +45,9 @@ const JobTemplate = ({ logo, props }) => {
     function styleChildren(children) {
       children.forEach((child) => {
         const childTag = child.tagName
+        child.style = ''
         child.classList = quillStyle[childTag]
-        if (child.hasChildren) {
+        if (child.hasChildNodes()) {
           const grandChildren = [...child.children]
           styleChildren(grandChildren)
         }
@@ -59,11 +60,13 @@ const JobTemplate = ({ logo, props }) => {
     const companyChildren = [...companyDescription.children]
     styleChildren(companyChildren)
 
-    // Setting Logo in new job post preview
-    readLogo(logo)
-
-    // Retrieve logo to display in live job posting
-    retrieveLogo()
+    if (isPreview) {
+      // Setting Logo in new job post preview
+      readLogo(logo)
+    } else {
+      // Retrieve logo to display in live job posting
+      retrieveLogo()
+    }
   })
 
   function createMarkup(text) {
@@ -148,8 +151,8 @@ const JobTemplate = ({ logo, props }) => {
                 </a>
                 <a data-cy='how-to-apply' href={props.howToApply}>
                   <button
-                    disabled={isDisabled}
-                    className={'hidden md:block btn btn-teal mt-8 w-full' + (isDisabled ? ' btn-disabled' : '')}>
+                    disabled={isPreview}
+                    className={'hidden md:block btn btn-teal mt-8 w-full' + (isPreview ? ' btn-disabled' : '')}>
                     Apply
                   </button>
                 </a>
@@ -161,8 +164,8 @@ const JobTemplate = ({ logo, props }) => {
         <div>
           <a data-cy='how-to-apply-bottom' href={props.howToApply}>
             <button
-              disabled={isDisabled}
-              className={'btn btn-teal mt-8 w-full md:w-auto' + (isDisabled ? ' btn-disabled' : '')}>
+              disabled={isPreview}
+              className={'btn btn-teal mt-8 w-full md:w-auto' + (isPreview ? ' btn-disabled' : '')}>
               Apply
             </button>
           </a>

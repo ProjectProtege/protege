@@ -3,9 +3,11 @@ import JobCard from '../components/JobCard'
 import { db } from '../firebase/firebase'
 import { motion } from 'framer-motion'
 import Layout from '../layouts/Layout'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 const JobBoard = ({ location }) => {
   const [jobs, setJobs] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     ;(async function retrieveJobs() {
@@ -30,6 +32,7 @@ const JobBoard = ({ location }) => {
         }
       })
       setJobs(jobList)
+      setLoading(false)
     })()
   }, [])
 
@@ -79,7 +82,7 @@ const JobBoard = ({ location }) => {
               <label htmlFor='filter-by' className='sr-only'>
                 Filter
               </label>
-
+            
               <div className='select-wrap'>
                 <select
                   className='input input-select rounded-none justify-end'
@@ -95,8 +98,11 @@ const JobBoard = ({ location }) => {
                 </select>
               </div>
             </div>
+            
           </motion.div>
 
+          <LoadingSpinner loading={loading}/>
+          
           <motion.div
             data-cy='job-board-list'
             className='mx-auto'

@@ -150,6 +150,7 @@ const Footer = () => {
               className='text-teal-300 hover:text-teal-600 transition-colors ease-in-out duration-75 w-6'
               target='_blank'
               rel='noopener noreferrer'
+              aria-label="Follow Protege on Twitter"
             >
               <svg
                 className='fill-current'

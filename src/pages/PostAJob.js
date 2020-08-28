@@ -13,7 +13,7 @@ import TierSelect from '../components/form/TierSelect'
 
 //firebase
 import { db, storage } from '../firebase/firebase'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 
 const PostAJob = ({ location }) => {
 
@@ -80,7 +80,7 @@ const PostAJob = ({ location }) => {
         companyDescription: data.jobData.companyDescription,
         howToApply: data.jobData.howToApply,
         jobDescription: data.jobData.jobDescription,
-        jobtitle: data.jobData.jobTitle,
+        jobtitle: data.jobData.jobtitle,
         positionType: data.jobData.positionType,
         postedAt: postDate,
         roleFocus: data.jobData.roleFocus,
