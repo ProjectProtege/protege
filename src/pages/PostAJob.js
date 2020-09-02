@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import Layout from '../layouts/Layout'
 import { motion } from 'framer-motion'
 import { loadStripe } from '@stripe/stripe-js'
+import { v4 as uuidv4 } from 'uuid'
 
 //components
+import Layout from '../layouts/Layout'
 import PostAJobForm from '../components/form/PostAJobForm'
 import StatusBar from '../components/form/StatusBar'
 import JobTemplate from '../components/JobTemplate'
@@ -16,8 +17,9 @@ import { db, storage } from '../firebase/firebase'
 import firebase from 'firebase/app'
 
 const PostAJob = ({ location }) => {
-
-  const tierQueryParam = findParam('t') ? findParam('t').split('=')[1] : process.env.REACT_APP_ADVANCED_PLAN
+  const tierQueryParam = findParam('t')
+    ? findParam('t').split('=')[1]
+    : process.env.REACT_APP_ADVANCED_PLAN
 
   let history = useHistory()
 
@@ -29,15 +31,17 @@ const PostAJob = ({ location }) => {
 
   const [tier, setTier] = useState(tierQueryParam)
 
-  const statusQueryParam = findParam('s') ? parseInt(findParam('s').split('=')[1]) : 1
-    
+  const statusQueryParam = findParam('s')
+    ? parseInt(findParam('s').split('=')[1])
+    : 1
+
   const initialStatusValue = statusQueryParam
 
-  function findParam(letter){
+  function findParam(letter) {
     return location.search
-    .replace('?', '')
-    .split('&')
-    .find((qs) => qs[0] === letter)
+      .replace('?', '')
+      .split('&')
+      .find((qs) => qs[0] === letter)
   }
 
   useEffect(() => {
@@ -57,42 +61,42 @@ const PostAJob = ({ location }) => {
     setcompanyLogo(logo)
   }
 
-  function recievingTemplateApproval(e) {
-    setStatus(3)
-    sendJobToDB({ jobData, companyLogo })
-  }
-
-  function sendJobToDB(data) {
+  async function sendJobToDB(data) {
     const logoFileName = `${new Date().getTime()}${data.companyLogo.name}`
 
     const postDate = firebase.firestore.Timestamp.fromDate(new Date())
 
     const uploadTask = storage.ref(`images/${logoFileName}`).put(companyLogo)
 
-    uploadTask.then(
-      db.collection('jobs').doc().set({
-        approved: false,
-        companyEmail: data.jobData.companyEmail,
-        companyLogo: logoFileName,
-        companyName: data.jobData.companyName,
-        companyWebsite: data.jobData.companyWebsite,
-        companyHQ: data.jobData.companyHQ,
-        companyDescription: data.jobData.companyDescription,
-        howToApply: data.jobData.howToApply,
-        jobDescription: data.jobData.jobDescription,
-        jobtitle: data.jobData.jobtitle,
-        positionType: data.jobData.positionType,
-        postedAt: postDate,
-        roleFocus: data.jobData.roleFocus,
-        tier: tier,
-      })
-    )
+    const uid = uuidv4()
+
+    uploadTask
+      .then(
+        await db.collection('jobs').doc(uid).set({
+          approved: false,
+          companyEmail: data.jobData.companyEmail,
+          companyLogo: logoFileName,
+          companyName: data.jobData.companyName,
+          companyWebsite: data.jobData.companyWebsite,
+          companyHQ: data.jobData.companyHQ,
+          companyDescription: data.jobData.companyDescription,
+          howToApply: data.jobData.howToApply,
+          jobDescription: data.jobData.jobDescription,
+          jobtitle: data.jobData.jobtitle,
+          paid: false,
+          positionType: data.jobData.positionType,
+          postedAt: postDate,
+          roleFocus: data.jobData.roleFocus,
+          tier: tier,
+        })
+      )
+      .then(localStorage.setItem('Job ID', uid))
   }
 
   const handlePaymentClick = async (e) => {
-    const stripe = await loadStripe(
-      process.env.REACT_APP_STRIPE_API_KEY
-    )
+    const stripe = await loadStripe(process.env.REACT_APP_STRIPE_API_KEY)
+
+    sendJobToDB({ jobData, companyLogo })
 
     const { error } = await stripe
       .redirectToCheckout({
@@ -106,7 +110,6 @@ const PostAJob = ({ location }) => {
           alert(result.error.message)
         } else {
           console.log('success')
-          sendJobToDB({ jobData, companyLogo })
         }
       })
   }
