@@ -41,6 +41,26 @@
     "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
     "cypress": "cypress open"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.json": [
+      "prettier --write"
+    ],
+    "*.md": [
+      "prettier --write --prose-wrap always"
+    ],
+    "*.css": [
+      "prettier --write"
+    ]
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -68,6 +88,8 @@
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.13",
     "node-fetch": "^2.6.0",
     "postcss-cli": "^7.1.0",
     "prettier": "^2.0.5",
