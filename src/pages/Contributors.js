@@ -10,6 +10,18 @@ function blogLinkFormatter(url) {
 }
 
 const Contributors = () => {
+  const filteredContributors = contributors.reduce(
+    (allContributors, contributor) => {
+      allContributors[
+        ['drewclem', 'pickleat'].includes(contributor.login)
+          ? 'founders'
+          : 'regular'
+      ].push(contributor)
+      return allContributors
+    },
+    { founders: [], regular: [] }
+  )
+
   return (
     <Layout>
       <motion.div
@@ -52,7 +64,10 @@ const Contributors = () => {
           </a>
           &nbsp;and send in a PR! It's that easy!
         </p>
-        <ContributorsList contributors={contributors} />
+        <ContributorsList contributors={filteredContributors.regular} />
+
+        <h3 className='text-xl font-semibold text-blue-900 mb-3'>Founders</h3>
+        <ContributorsList contributors={filteredContributors.founders} />
       </motion.div>
     </Layout>
   )
