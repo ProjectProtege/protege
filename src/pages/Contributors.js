@@ -66,7 +66,7 @@ const Contributors = () => {
         </p>
         <ContributorsList contributors={filteredContributors.regular} />
 
-        <h3 className='text-xl font-semibold text-blue-900 mb-3'>Founders</h3>
+        <h3 className='text-xl font-semibold text-blue-900 mt-16 mb-3'>Founders</h3>
         <ContributorsList contributors={filteredContributors.founders} />
       </motion.div>
     </Layout>
