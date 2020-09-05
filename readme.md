@@ -11,6 +11,8 @@ Getting a local environment set up is fairly simple.
 
 And you're good to go!
 
+For Windows users, run the project from [PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell?view=powershell-7) or use the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) (WSL)
+
 # Submitting a PR
 
 Before we get too far, we'd like to say thank you for considering contributing to Protegé.dev!
@@ -28,8 +30,8 @@ To keep in line with this workflow, your process for submitting a PR should foll
 5. Leave a short message in the PR explaining in slightly more detail what the PR accomplishes.
 
 6. If your PR touches multiple parts, consider adding a bullet list of accomplishments, example below
-    ~~~
-    * adds new component x for data handling
-    * updates component y to use component x
-    * refactors component y for code reusability
-    ~~~
+   ```
+   * adds new component x for data handling
+   * updates component y to use component x
+   * refactors component y for code reusability
+   ```
