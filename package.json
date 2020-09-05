@@ -93,6 +93,6 @@
     "node-fetch": "^2.6.0",
     "postcss-cli": "^7.1.0",
     "prettier": "^2.0.5",
-    "tailwindcss": "^1.2.0"
+    "tailwindcss": "^1.7.6"
   }
 }

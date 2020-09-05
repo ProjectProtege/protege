@@ -1,0 +1,92 @@
+module.exports = {
+  future: {
+    removeDeprecatedGapUtilities: true,
+  },
+  purge: {
+    enabled: true,
+    content: [
+    './src/components/form/*.js',
+    './src/components/*.js',
+    './src/layouts/*.js',
+    './src/pages/*.js',
+  ]},
+  prefix: '',
+  important: false,
+  separator: ':',
+  theme: {
+    screens: {
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1440px',
+    },
+    colors: {
+      transparent: 'transparent',
+
+      black: '#000',
+      white: '#fff',
+
+      gray: {
+        100: '#f7fafc',
+        200: '#edf2f7',
+        300: '#e2e8f0',
+        400: '#cbd5e0',
+        500: '#a0aec0',
+        600: '#718096',
+        700: '#4a5568',
+        800: '#2d3748',
+        900: '#1a202c',
+      },
+      teal: {
+        100: '#a9e4d1',
+        200: '#9be0c9',
+        300: '#9EE0CA',
+        400: '#7ed7ba',
+        500: '#70d2b2',
+        600: '#65bda0',
+        700: '#5aa88e',
+        800: '#4e937d',
+        900: '#437e6b',
+      },
+      blue: {
+        100: '#d6d8df',
+        200: '#c2c5cf',
+        300: '#adb1bf',
+        400: '#999eaf',
+        500: '#55556D',
+        600: '#70778f',
+        700: '#5b637f',
+        800: '#47506f',
+        900: '#323c5f',
+      },
+      error: '#E53E3E',
+    },
+    fontFamily: {
+      sans: [
+        'Hind',
+        'system-ui',
+        '-apple-system',
+        'BlinkMacSystemFont',
+        '"Segoe UI"',
+        'Roboto',
+        '"Helvetica Neue"',
+        'Arial',
+        '"Noto Sans"',
+        'sans-serif',
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+        '"Noto Color Emoji"',
+      ],
+      serif: ['Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
+      mono: [
+        'Menlo',
+        'Monaco',
+        'Consolas',
+        '"Liberation Mono"',
+        '"Courier New"',
+        'monospace',
+      ],
+    },
+  }
+}
