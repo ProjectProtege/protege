@@ -31,7 +31,7 @@
   },
   "scripts": {
     "get-contributors": "bin/generate-contributors-json.js",
-    "prestart": "npm run get-contributors",
+    "prestart": "cp src/data/contributors.dev.json src/data/contributors.json",
     "start": "npm run watch:css && react-scripts start",
     "prebuild": "npm run get-contributors",
     "build": "npm run build:css && react-scripts build",
