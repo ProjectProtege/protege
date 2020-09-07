@@ -91,7 +91,7 @@ const Nav = () => {
             </NavLink>
           </li>
           <li className='bg-teal-300 px-4 mt-3 mb-1 w-1/2 py-1 mx-auto font-bold'>
-            <Link to={ROUTES.POST_A_JOB}>Post a Job</Link>
+            <Link to={ROUTES.POST_A_JOB + `?s=1`}>Post a Job</Link>
           </li>
         </ul>
       </nav>
@@ -179,7 +179,7 @@ const Nav = () => {
           </li>
 
           <li className='btn btn-teal'>
-            <Link to={ROUTES.POST_A_JOB}>Post a Job</Link>
+            <Link to={ROUTES.POST_A_JOB + `?s=1`}>Post a Job</Link>
           </li>
         </ul>
       </nav>

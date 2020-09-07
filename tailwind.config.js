@@ -1,4 +1,16 @@
 module.exports = {
+  future: {
+    removeDeprecatedGapUtilities: true,
+  },
+  purge: {
+    enabled: true,
+    content: [
+      './src/components/form/*.js',
+      './src/components/*.js',
+      './src/layouts/*.js',
+      './src/pages/*.js',
+    ],
+  },
   prefix: '',
   important: false,
   separator: ':',
@@ -480,6 +492,7 @@ module.exports = {
       '95': '.95',
       '100': '1',
       '105': '1.05',
+      '107': '1.07',
       '110': '1.1',
       '125': '1.25',
       '150': '1.5',
@@ -488,7 +501,9 @@ module.exports = {
       '-180': '-180deg',
       '-90': '-90deg',
       '-45': '-45deg',
+      '-15': '-15deg',
       '0': '0',
+      '15': '15deg',
       '45': '45deg',
       '90': '90deg',
       '180': '180deg',
