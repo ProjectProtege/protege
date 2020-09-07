@@ -1,4 +1,16 @@
 module.exports = {
+  future: {
+    removeDeprecatedGapUtilities: true,
+  },
+  purge: {
+    enabled: true,
+    content: [
+      './src/components/form/*.js',
+      './src/components/*.js',
+      './src/layouts/*.js',
+      './src/pages/*.js',
+    ],
+  },
   prefix: '',
   important: false,
   separator: ':',
