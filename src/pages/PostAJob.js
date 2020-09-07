@@ -131,7 +131,7 @@ const PostAJob = ({ location }) => {
       >
         {status === 1 && (
           <>
-            <div className='container mx-auto lg:w-4/5 mb-12 flex flex-col items-center'>
+            <div className='container mx-auto lg:w-4/5 xl:w-7/12 mb-12 flex flex-col items-center'>
               <h3 className='text-xl font-bold text-blue-900 mb-3'>
                 What qualifies as a junior remote job opportunity on Protegé?
               </h3>
@@ -143,7 +143,7 @@ const PostAJob = ({ location }) => {
                 fits within our requirements here at Protegé.
               </p>
 
-              <ul className='leading-loose text-blue-800 mb-3 text-sm lg:text-base'>
+              <ul className='leading-loose text-blue-800 mb-4 text-sm lg:text-base'>
                 <li>
                   <span className='text-teal-600 absolute w-5 h-5 lg:mt-1'>
                     <Check />
@@ -168,7 +168,7 @@ const PostAJob = ({ location }) => {
                 </li>
               </ul>
 
-              <p className='text-xs text-blue-600 lg:text-center lg:w-3/4 opacity-75'>
+              <p className='text-xs text-blue-600 lg:text-center lg:w-3/4 xl:w-full opacity-75'>
                 Protegé.dev is a curated job board tailored towards junior
                 developers. Each listing is reviewed, and approved or denied
                 before going live. If your listing is denied, we'll contact you
