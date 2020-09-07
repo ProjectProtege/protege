@@ -1,5 +1,10 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom'
 import Home from '../pages/Home'
 import JobBoard from '../pages/JobBoard'
 import LearningResources from '../pages/LearningResources'
@@ -8,6 +13,7 @@ import IndividualJobPage from '../pages/IndividualJob'
 import Contributors from '../pages/Contributors'
 import PostAJob from '../pages/PostAJob'
 import Thanks from '../pages/Thanks'
+import NotFound from '../pages/NotFound'
 
 import * as ROUTES from '../constants/routes'
 
@@ -22,6 +28,9 @@ const App = () => (
       <Route path={ROUTES.LEARNING} component={LearningResources} />
       <Route path={ROUTES.CONTRIBUTORS} component={Contributors} />
       <Route path={ROUTES.THANKS} component={Thanks} />
+      <Route path={ROUTES.NOT_FOUND} component={NotFound} />
+
+      <Redirect to={ROUTES.NOT_FOUND} />
     </Switch>
   </Router>
 )
