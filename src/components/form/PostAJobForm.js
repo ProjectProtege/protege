@@ -62,8 +62,9 @@ const PostAJobForm = ({
             'Please provide a location for your office headquarters.'
           ),
         })}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values) => {
           receivingJobData(values)
+          window.scrollTo(0, 0)
         }}
       >
         {(formik) => (

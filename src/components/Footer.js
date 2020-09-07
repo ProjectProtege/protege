@@ -78,7 +78,7 @@ const Footer = () => {
         </form>
       </div>
 
-      <div className='container mx-auto px-3'>
+      <div className='container mx-auto px-8'>
         <div className='flex justify-between'>
           <svg
             width='99'
@@ -137,7 +137,8 @@ const Footer = () => {
                 <a
                   className='text-blue-800 opacity-75 hover:opacity-100'
                   href={'https://github.com/drewclem/protege/issues'}
-                  target='_'
+                  target='_blank'
+                  rel='noopener noreferrer'
                 >
                   Contribute to Protege
                 </a>
