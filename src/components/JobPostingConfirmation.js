@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { db } from '../firebase/firebase'
 
 const JobPostingConfirmation = ({ props }) => {
+  useEffect(() => {
+    const jobId = localStorage.getItem('Job ID')
+
+    if (jobId) {
+      const docRef = db.collection('jobs').doc(jobId)
+
+      docRef.update({
+        paid: true,
+      })
+    }
+  }, [])
   return (
     <div className='lg:w-3/5 mx-auto'>
       <h2 className='text-center text-blue-900 font-bold text-2xl'>
