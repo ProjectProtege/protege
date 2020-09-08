@@ -139,8 +139,10 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className='flex flex-row justify-center tracking-wide m-6'>
-        <p className='mr-12 text-blue-600'>Copyright 2020 © Protege.dev</p>
+      <div className='flex flex-col  items-center lg:flex-row justify-center tracking-wide m-6'>
+        <p className='lg:mr-12 mb-4 lg:mb-0 text-blue-600'>
+          Copyright 2020 © Protege.dev
+        </p>
         <a
           href='https://stripe.com'
           className='text-blue-300 hover:text-blue-900 transition ease-in-out duration-150 -mt-1'

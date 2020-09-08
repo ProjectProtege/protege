@@ -4,6 +4,7 @@ import * as ROUTES from '../constants/routes'
 import JobTemplate from '../components/JobTemplate'
 import { db } from '../firebase/firebase'
 import Layout from '../layouts/Layout'
+import { motion } from 'framer-motion'
 
 import BackArrow from '../assets/images/svg/back-arrow'
 
@@ -30,7 +31,18 @@ const IndividualJobPage = () => {
 
   return (
     <Layout>
-      <div className='flex flex-col pt-24 md:pt-32 px-3 lg:px-0 mx-auto container justify-center lg:w-1/2'>
+      <motion.div
+        animate={{
+          opacity: [0, 1],
+          y: [-10, 1],
+        }}
+        transition={{
+          delay: 0.15,
+          duration: 0.3,
+          ease: 'easeIn',
+        }}
+        className='flex flex-col pt-24 md:pt-32 px-3 lg:px-0 mx-auto container justify-center lg:w-1/2'
+      >
         <Link
           className='flex items-center text-teal-600 mb-3 md:mb-6'
           to={ROUTES.JOB_BOARD}
@@ -42,7 +54,7 @@ const IndividualJobPage = () => {
         </Link>
 
         <JobTemplate props={job} />
-      </div>
+      </motion.div>
     </Layout>
   )
 }
