@@ -22,8 +22,8 @@ const LearningResources = (url) => (
         ease: 'easeIn',
       }}
     >
-      <div class='relative px-12 text-center mx-auto my-10 sm:px-40 lg:px-32'>
-        <h2 class='text-2xl leading tracking-tight font-extrabold text-blue-900 sm:leading-10 sm:text-3xl'>
+      <div className='relative px-12 text-center mx-auto my-10 sm:px-40 lg:px-32'>
+        <h2 className='text-2xl leading tracking-tight font-extrabold text-blue-900 sm:leading-10 sm:text-3xl'>
           Learning Resources
         </h2>
         <p className='text-base mb-2 text-blue-700 sm:mt-4 sm:px-12 sm:text-base md:text-base'>
