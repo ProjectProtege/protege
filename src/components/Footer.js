@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 
 import GrayLogo from '../assets/images/svg/protege-logo-mark-gray'
 import TwitterIcon from '../assets/images/svg/twitter-brands'
+import StripeIcon from '../assets/images/svg/Stripe'
 
 const Footer = () => {
   const [email, setEmail] = useState('')
@@ -138,8 +139,14 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className='m-4 flex-col mx-auto text-center text-blue-600 tracking-wide'>
-        Copyright 2020 © Protege.dev
+      <div className='flex flex-row justify-center tracking-wide m-6'>
+        <p className='mr-12 text-blue-600'>Copyright 2020 © Protege.dev</p>
+        <a
+          href='https://stripe.com'
+          className='text-blue-300 hover:text-blue-900 transition ease-in-out duration-150 -mt-1'
+        >
+          <StripeIcon className='text-blue-200' />
+        </a>
       </div>
     </motion.footer>
   )

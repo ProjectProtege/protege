@@ -18,11 +18,8 @@ const IndividualJobPage = () => {
     const docRef = db.collection('jobs').doc(id)
 
     docRef.get().then(function (res) {
-      console.log(res)
-
       if (res.exists) {
         setJob(res.data())
-        console.log(res.data())
       } else {
         return null
       }
