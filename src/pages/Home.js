@@ -45,6 +45,17 @@ const Home = () => {
     })()
   }, [])
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delay: 0.25,
+      },
+    },
+  }
+
   return (
     <Layout variant='home'>
       <div>
@@ -101,20 +112,25 @@ const Home = () => {
             transition={{
               delay: 0.3,
               duration: 0.15,
-              staggerChildren: 0.2,
             }}
           >
             <h2 className='text-center text-2xl text-blue-900 font-semibold mb-8'>
               Latest Opportunities
             </h2>
 
-            <LoadingSpinner loading={loading}/>
+            <LoadingSpinner loading={loading} />
 
-            <div data-cy='job-card-container' className='container'>
-              {jobs.slice(0, 6).map((job, index) => (
-                <JobCard key={job.id} job={job} />
+            <motion.div
+              data-cy='job-card-container'
+              className='container'
+              variants={container}
+              initial='hidden'
+              animate='show'
+            >
+              {jobs.slice(0, 6).map((job, i) => (
+                <JobCard key={job.id} job={job} i={i} />
               ))}
-            </div>
+            </motion.div>
           </motion.div>
 
           <div className='flex flex-col items-center'>
