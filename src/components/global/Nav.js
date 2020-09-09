@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import * as ROUTES from '../constants/routes'
-import HeaderHamburger from '../assets/images/svg/HeaderHamburger'
+import * as ROUTES from '../../constants/routes'
+
+import MenuIcon from '../../assets/images/svg/menu-icon'
 
 const Nav = () => {
   const [active, setActive] = React.useState(false)
@@ -21,10 +22,10 @@ const Nav = () => {
         className='md:hidden text-blue-900 text-right relative'
       >
         <button
-          className='nav-toggle relative md:hidden text-3xl p-3'
+          className='nav-toggle relative md:hidden h-6 w-6 mr-2'
           onClick={() => setActive((oldActive) => !oldActive)}
         >
-          <HeaderHamburger />
+          <MenuIcon />
         </button>
 
         <ul
@@ -73,7 +74,7 @@ const Nav = () => {
             </NavLink>
           </li>
           <li className='bg-teal-300 px-4 mt-3 mb-1 w-1/2 py-1 mx-auto font-bold'>
-            <Link to={ROUTES.POST_A_JOB + `?s=1`}>Post a Job</Link>
+            <Link to={ROUTES.POST_A_JOB}>Post a Job</Link>
           </li>
         </ul>
       </nav>
@@ -161,7 +162,7 @@ const Nav = () => {
           </li>
 
           <li className='btn btn-teal'>
-            <Link to={ROUTES.POST_A_JOB + `?s=1`}>Post a Job</Link>
+            <Link to={ROUTES.POST_A_JOB}>Post a Job</Link>
           </li>
         </ul>
       </nav>

@@ -60,7 +60,10 @@ module.exports = {
         800: '#47506f',
         900: '#323c5f',
       },
-      error: '#E53E3E',
+      error: {
+        full: '#E53E3E',
+        50: '#f3d3d3',
+      },
     },
     spacing: {
       px: '1px',
@@ -642,6 +645,8 @@ module.exports = {
     transitionTimingFunction: ['responsive'],
     transitionDuration: ['responsive'],
   },
-  corePlugins: {},
+  corePlugins: {
+    accessibility: true,
+  },
   plugins: [],
 }

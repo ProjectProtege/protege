@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useRouteMatch } from 'react-router-dom'
 import * as ROUTES from '../constants/routes'
-import JobTemplate from '../components/JobTemplate'
+import JobTemplate from '../components/job/JobTemplate'
 import { db } from '../firebase/firebase'
 import Layout from '../layouts/Layout'
 import { motion } from 'framer-motion'

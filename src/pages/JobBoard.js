@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import JobCard from '../components/JobCard'
+import JobCard from '../components/job/JobCard'
 import { db } from '../firebase/firebase'
 import { motion } from 'framer-motion'
 import Layout from '../layouts/Layout'
