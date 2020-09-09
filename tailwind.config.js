@@ -13,7 +13,7 @@ module.exports = {
       './src/components/job/*.js',
       './src/components/*.js',
       './src/layouts/*.js',
-      './src/pages/admin/*.js',
+      './src/pages/Admin/*.js',
       './src/pages/*.js',
     ],
   },
