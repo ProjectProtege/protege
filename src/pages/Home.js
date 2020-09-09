@@ -34,6 +34,7 @@ const Home = () => {
           id: doc.id,
           jobTitle: job.jobtitle,
           roleFocus: job.roleFocus,
+          status: job.status,
           companyHQ: job.companyHQ,
           companyName: job.companyName,
           postedAt: job.postedAt,
@@ -44,6 +45,14 @@ const Home = () => {
       setLoading(false)
     })()
   }, [])
+
+  function activeJobs(jobs) {
+    const activeJobs = jobs.filter((job) => {
+      return job.status !== 'inactive'
+    })
+
+    return activeJobs
+  }
 
   const container = {
     hidden: { opacity: 0 },
@@ -127,9 +136,11 @@ const Home = () => {
               initial='hidden'
               animate='show'
             >
-              {jobs.slice(0, 6).map((job, i) => (
-                <JobCard key={job.id} job={job} i={i} />
-              ))}
+              {activeJobs(jobs)
+                .slice(0, 6)
+                .map((job, i) => (
+                  <JobCard key={job.id} job={job} i={i} />
+                ))}
             </motion.div>
           </motion.div>
 
