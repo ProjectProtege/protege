@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import * as ROUTES from '../../constants/routes'
 import { motion } from 'framer-motion'
 
-import GrayLogo from '../assets/images/svg/protege-logo-mark-gray'
-import TwitterIcon from '../assets/images/svg/twitter-brands'
-import StripeIcon from '../assets/images/svg/Stripe'
+import GrayLogo from '../../assets/images/svg/protege-logo-mark-gray'
+import TwitterIcon from '../../assets/images/svg/twitter-brands'
+import StripeIcon from '../../assets/images/svg/Stripe'
 
 const Footer = () => {
   const [email, setEmail] = useState('')

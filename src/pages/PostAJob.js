@@ -8,8 +8,8 @@ import { v4 as uuidv4 } from 'uuid'
 import Layout from '../layouts/Layout'
 import PostAJobForm from '../components/form/PostAJobForm'
 import StatusBar from '../components/form/StatusBar'
-import JobTemplate from '../components/JobTemplate'
-import JobPostingConfirmation from '../components/JobPostingConfirmation'
+import JobTemplate from '../components/job/JobTemplate'
+import JobPostingConfirmation from '../components/job/JobPostingConfirmation'
 import TierSelect from '../components/form/TierSelect'
 import Check from '../assets/images/svg/check-solid.js'
 import BackArrow from '../assets/images/svg/back-arrow'
@@ -76,7 +76,7 @@ const PostAJob = ({ location }) => {
       .then(
         await db.collection('jobs').doc(uid).set({
           approved: false,
-        status: 'active',
+          status: 'active',
           companyEmail: data.jobData.companyEmail,
           companyLogo: logoFileName,
           companyName: data.jobData.companyName,

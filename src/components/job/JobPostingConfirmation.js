@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { db } from '../firebase/firebase'
+import { db } from '../../firebase/firebase'
 
 const JobPostingConfirmation = ({ props }) => {
   useEffect(() => {

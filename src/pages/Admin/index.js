@@ -8,7 +8,7 @@ import AdminJobCard from '../../components/admin/AdminJobCard'
 import AdminReviewJob from '../../components/admin/AdminReviewJob'
 import AdminNotification from '../../components/admin/AdminNotification'
 
-import CloseIcon from '../../assets/images/svgs/close-icon'
+import CloseIcon from '../../assets/images/svg/close-icon'
 
 const Admin = () => {
   const [activeJobs, setActiveJobs] = useState([])

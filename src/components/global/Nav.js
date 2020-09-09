@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import * as ROUTES from '../../constants/routes'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+
+import MenuIcon from '../../assets/images/svg/menu-icon'
 
 const Nav = () => {
   const [active, setActive] = React.useState(false)
@@ -22,10 +22,10 @@ const Nav = () => {
         className='md:hidden text-blue-900 text-right relative'
       >
         <button
-          className='nav-toggle relative md:hidden text-3xl p-3'
+          className='nav-toggle relative md:hidden h-6 w-6 mr-2'
           onClick={() => setActive((oldActive) => !oldActive)}
         >
-          <FontAwesomeIcon icon={faBars} />
+          <MenuIcon />
         </button>
 
         <ul

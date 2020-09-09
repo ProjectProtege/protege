@@ -5,8 +5,8 @@ import JobTemplate from '../job/JobTemplate'
 import AdminJobEdit from '../admin/AdminJobEdit'
 import AdminNotification from '../admin/AdminNotification'
 
-import Edit from '../../assets/images/svgs/edit-icon'
-import DeleteForever from '../../assets/images/svgs/delete-forever-icon'
+import Edit from '../../assets/images/svg/edit-icon'
+import DeleteForever from '../../assets/images/svg/delete-forever-icon'
 
 const AdminReviewJob = ({
   id,

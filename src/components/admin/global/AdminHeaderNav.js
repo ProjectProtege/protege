@@ -1,8 +1,8 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-import ListIcon from '../../../assets/images/svgs/list-icon'
-import AnalyticsIcon from '../../../assets/images/svgs/analytics-icon'
+import ListIcon from '../../../assets/images/svg/list-icon'
+import AnalyticsIcon from '../../../assets/images/svg/analytics-icon'
 
 const AdminHeaderNav = () => {
   return (
