@@ -10,39 +10,41 @@ const JobBoard = ({ location }) => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    ;(async function retrieveJobs() {
-      let activeJobs
-
-      const querySnapshot = await db
-        .collection('jobs')
-        .where('approved', '==', true)
-        .orderBy('postedAt', 'desc')
-        .get()
-
-      const jobList = querySnapshot.docs.map((documentSnapshot) => {
-        let doc = documentSnapshot
-        let job = documentSnapshot.data()
-
-        return {
-          id: doc.id,
-          jobTitle: job.jobtitle,
-          roleFocus: job.roleFocus,
-          status: job.status,
-          companyHQ: job.companyHQ,
-          companyName: job.companyName,
-          postedAt: job.postedAt,
-          companyLogo: job.companyLogo,
-        }
-      })
-
-      activeJobs = jobList.filter((job) => {
-        return job.status !== 'inactive'
-      })
-
-      setJobs(activeJobs)
-      setLoading(false)
-    })()
+    retrieveJobs()
   }, [])
+
+  async function retrieveJobs() {
+    let activeJobs
+
+    const querySnapshot = await db
+      .collection('jobs')
+      .where('approved', '==', true)
+      .orderBy('postedAt', 'desc')
+      .get()
+
+    const jobList = querySnapshot.docs.map((documentSnapshot) => {
+      let doc = documentSnapshot
+      let job = documentSnapshot.data()
+
+      return {
+        id: doc.id,
+        jobTitle: job.jobtitle,
+        roleFocus: job.roleFocus,
+        status: job.status,
+        companyHQ: job.companyHQ,
+        companyName: job.companyName,
+        postedAt: job.postedAt,
+        companyLogo: job.companyLogo,
+      }
+    })
+
+    activeJobs = jobList.filter((job) => {
+      return job.status !== 'inactive'
+    })
+
+    setJobs(activeJobs)
+    setLoading(false)
+  }
 
   function filteredJobs(jobs, jobFilter) {
     const filteredJobs = jobs.filter((job) => {
