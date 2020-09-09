@@ -8,8 +8,7 @@ import AdminJobCard from '../../components/admin/AdminJobCard'
 import AdminReviewJob from '../../components/admin/AdminReviewJob'
 import AdminNotification from '../../components/admin/AdminNotification'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+import CloseIcon from '../../assets/images/svgs/close-icon'
 
 const Admin = () => {
   const [activeJobs, setActiveJobs] = useState([])
@@ -142,7 +141,7 @@ const Admin = () => {
             <h2 className='text-xl font-medium text-teal-600 mb-6'>
               Approval pending
             </h2>
-            <div className='px-5 py-3 justify-between grid grid-cols-12 gap-4 mb-4 text-blue-200 font-light'>
+            <div className='px-5 py-3 justify-between grid grid-cols-12 gap-4 mb-2 text-blue-200 font-light'>
               <p className='col-span-5'>Job Title</p>
               <p className='col-span-3'>Company</p>
               <p className='col-span-2'>Status</p>
@@ -168,7 +167,7 @@ const Admin = () => {
 
           <div>
             <h2 className='text-xl font-medium text-teal-600 mb-6'>Approved</h2>
-            <div className='px-5 py-3 justify-between grid grid-cols-12 gap-4 mb-4 text-blue-200 font-light'>
+            <div className='px-5 py-3 justify-between grid grid-cols-12 gap-4 mb-2 text-blue-200 font-light'>
               <p className='col-span-5'>Job Title</p>
               <p className='col-span-3'>Company</p>
               <p className='col-span-2'>Status</p>
@@ -199,17 +198,14 @@ const Admin = () => {
             className={`admin-jobedit w-1/2 px-8 py-12 h-screen overflow-auto`}
           >
             <button
-              className='focus:outline-none'
+              className='focus:outline-none text-teal-700 opacity-75 transform hover:rotate-180 hover:opacity-100 duration-150 mb-3 w-4 h-4'
               onClick={() => {
                 setEditJob('')
                 setHasJob(false)
                 setRecentEdit('')
               }}
             >
-              <FontAwesomeIcon
-                icon={faTimesCircle}
-                className='text-teal-700 opacity-75 transform hover:rotate-180 hover:opacity-100 duration-150 mb-3'
-              />
+              <CloseIcon />
             </button>
             <AdminReviewJob
               id={editJob}

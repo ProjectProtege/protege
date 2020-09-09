@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { db } from '../../firebase/firebase'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes, faEdit } from '@fortawesome/free-solid-svg-icons'
 
 import JobTemplate from '../job/JobTemplate'
 import AdminJobEdit from '../admin/AdminJobEdit'
 import AdminNotification from '../admin/AdminNotification'
+
+import Edit from '../../assets/images/svgs/edit-icon'
+import DeleteForever from '../../assets/images/svgs/delete-forever-icon'
 
 const AdminReviewJob = ({
   id,
@@ -136,12 +137,12 @@ const AdminReviewJob = ({
           </select>
         </div>
 
-        <div className='col-span-1 flex justify-end'>
-          <button onClick={() => setEditJob(id)}>
-            <FontAwesomeIcon
-              icon={faEdit}
-              className='text-teal-900 opacity-50 hover:opacity-100 transition ease-in-out duration-150 mr-6'
-            />
+        <div className='col-span-1 flex justify-end items-center'>
+          <button
+            onClick={() => setEditJob(id)}
+            className='w-4 h-4 text-teal-900 opacity-50 hover:opacity-100 transition ease-in-out duration-150 mr-6'
+          >
+            <Edit />
           </button>
           <button
             onClick={(e) => {
@@ -152,11 +153,9 @@ const AdminReviewJob = ({
               )
                 deleteJobForever(id)
             }}
+            className='w-3 h-3 text-error-full opacity-50 hover:opacity-100 transition ease-in-out duration-150'
           >
-            <FontAwesomeIcon
-              icon={faTimes}
-              className='text-error-full opacity-50 hover:opacity-100 transition ease-in-out duration-150'
-            />
+            <DeleteForever />
           </button>
         </div>
       </div>

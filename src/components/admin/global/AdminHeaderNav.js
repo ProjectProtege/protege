@@ -1,8 +1,8 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faList, faChartLine } from '@fortawesome/free-solid-svg-icons'
+import ListIcon from '../../../assets/images/svgs/list-icon'
+import AnalyticsIcon from '../../../assets/images/svgs/analytics-icon'
 
 const AdminHeaderNav = () => {
   return (
@@ -14,8 +14,10 @@ const AdminHeaderNav = () => {
             className='text-xl text-blue-900 opacity-75 hover:opacity-100 transition ease-in-out duration-150 flex items-center'
             activeClassName='opacity-100'
           >
-            <FontAwesomeIcon className='mr-3' icon={faList} />
-            <span className='text-base pt-px'>Job Listings</span>
+            <span className='w-4 h-4 mr-3 text-blue-300'>
+              <ListIcon />
+            </span>
+            <span className='text-base pt-px font-medium'>Job Listings</span>
           </NavLink>
         </li>
         <li className='bg-gray-100 px-6 py-2 rounded mb-3'>
@@ -24,7 +26,9 @@ const AdminHeaderNav = () => {
             className='text-xl text-blue-900 opacity-75 hover:opacity-100 transition ease-in-out duration-150 flex items-center'
             activeClassName='opacity-100'
           >
-            <FontAwesomeIcon className='mr-3' icon={faChartLine} />
+            <span className='w-4 h-4 mr-3 text-blue-300 font-medium'>
+              <AnalyticsIcon />
+            </span>
             <span className='text-base pt-px'>Analytics</span>
           </NavLink>
         </li>
