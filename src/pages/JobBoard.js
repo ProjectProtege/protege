@@ -11,6 +11,8 @@ const JobBoard = ({ location }) => {
 
   useEffect(() => {
     ;(async function retrieveJobs() {
+      let activeJobs
+
       const querySnapshot = await db
         .collection('jobs')
         .where('approved', '==', true)
@@ -25,13 +27,19 @@ const JobBoard = ({ location }) => {
           id: doc.id,
           jobTitle: job.jobtitle,
           roleFocus: job.roleFocus,
+          status: job.status,
           companyHQ: job.companyHQ,
           companyName: job.companyName,
           postedAt: job.postedAt,
           companyLogo: job.companyLogo,
         }
       })
-      setJobs(jobList)
+
+      activeJobs = jobList.filter((job) => {
+        return job.status !== 'inactive'
+      })
+
+      setJobs(activeJobs)
       setLoading(false)
     })()
   }, [])
