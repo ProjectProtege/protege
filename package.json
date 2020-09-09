@@ -31,10 +31,9 @@
     "yup": "^0.28.3"
   },
   "scripts": {
-    "get-contributors": "bin/generate-contributors-json.js",
-    "prestart": "npm run get-contributors",
+    "prestart": "cpy src/data/contributors.dev.json src/data  --rename=contributors.json",
     "start": "npm run watch:css && react-scripts start",
-    "prebuild": "npm run get-contributors",
+    "prebuild": "cross-env bin/generate-contributors-json.js",
     "build": "npm run build:css && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -79,6 +78,8 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.7.4",
+    "cpy-cli": "^3.1.1",
+    "cross-env": "^7.0.2",
     "cypress": "^4.4.1",
     "cypress-file-upload": "^3.5.3",
     "eslint": "^6.8.0",
