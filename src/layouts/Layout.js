@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Nav from '../components/Nav'
-import Footer from '../components/Footer'
+import Nav from '../components/global/Nav'
+import Footer from '../components/global/Footer'
 import Logo from '../assets/images/protegeLogo.svg'
 import { motion } from 'framer-motion'
 

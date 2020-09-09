@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { storage } from '../firebase/firebase'
+import { storage } from '../../firebase/firebase'
 import { useLocation } from 'react-router-dom'
 
 const JobTemplate = ({ logo, props }) => {
@@ -7,6 +7,7 @@ const JobTemplate = ({ logo, props }) => {
   const isPreview = pathname.indexOf('/job-board/') !== 0
 
   const [companyLogo, setCompanyLogo] = useState(undefined)
+  const [isAdmin, setIsAdmin] = useState(false)
 
   function readLogo(logo) {
     let reader = new FileReader()
@@ -67,7 +68,15 @@ const JobTemplate = ({ logo, props }) => {
       // Retrieve logo to display in live job posting
       retrieveLogo()
     }
+
+    checkAdmin()
   })
+
+  function checkAdmin() {
+    if (pathname === '/admin') {
+      setIsAdmin(true)
+    }
+  }
 
   function createMarkup(text) {
     return { __html: text }
@@ -77,7 +86,7 @@ const JobTemplate = ({ logo, props }) => {
     <>
       <div className='mx-auto container'>
         <div className='md:flex justify-center'>
-          <div className='md:w-3/4 md:pr-12'>
+          <div className={`${isAdmin ? 'w-full' : 'md:w-3/4'} md:pr-12`}>
             <h2
               data-cy='job-title'
               className='text-blue-900 font-bold text-3xl'
@@ -120,52 +129,65 @@ const JobTemplate = ({ logo, props }) => {
               dangerouslySetInnerHTML={createMarkup(props.companyDescription)}
             ></div>
           </div>
-          <div className='md:w-1/4 mt-8 text-center md:text-left'>
-            <div className='bg-gray-200 p-4'>
-              {companyLogo ? (
-                <div className='w-2/3 mx-auto md:mx-0 mb-6 md:w-1/2 bg-white p-4 rounded overflow-hidden shadow-md'>
-                  <img
-                    data-cy='company-logo'
-                    id='companyLogo'
-                    className='w-full'
-                    src={companyLogo}
-                    alt={`${props.companyName} logo`}
-                  />
-                </div>
-              ) : null}
 
-              <h4
-                data-cy='company-name-sidebar'
-                className='text-blue-900 font-semibold text-lg mb-3'
-              >
-                {props.companyName}
-              </h4>
+          {!isAdmin ? (
+            <div className='md:w-1/4 mt-8 text-center md:text-left'>
+              <div className='bg-gray-200 p-4'>
+                {companyLogo ? (
+                  <div className='w-2/3 mx-auto md:mx-0 mb-6 md:w-1/2 bg-white p-4 rounded overflow-hidden shadow-md'>
+                    <img
+                      data-cy='company-logo'
+                      id='companyLogo'
+                      className='w-full'
+                      src={companyLogo}
+                      alt={`${props.companyName} logo`}
+                    />
+                  </div>
+                ) : null}
 
-              <div className='uppercase text-blue-900 tracking-tight text-md'>
-                <a
-                  data-cy='company-website'
-                  className='underline'
-                  href={props.companyWebsite}
+                <h4
+                  data-cy='company-name-sidebar'
+                  className='text-blue-900 font-semibold text-lg mb-3'
                 >
-                  <p className='opacity-75 hover:opacity-100'>Visit website</p>
-                </a>
-                <a data-cy='how-to-apply' href={props.howToApply}>
-                  <button
-                    disabled={isPreview}
-                    className={'hidden md:block btn btn-teal mt-8 w-full' + (isPreview ? ' btn-disabled' : '')}>
-                    Apply
-                  </button>
-                </a>
+                  {props.companyName}
+                </h4>
+
+                <div className='uppercase text-blue-900 tracking-tight text-md'>
+                  <a
+                    data-cy='company-website'
+                    className='underline'
+                    href={props.companyWebsite}
+                  >
+                    <p className='opacity-75 hover:opacity-100'>
+                      Visit website
+                    </p>
+                  </a>
+                  <a data-cy='how-to-apply' href={props.howToApply}>
+                    <button
+                      disabled={isPreview}
+                      className={
+                        'hidden md:block btn btn-teal mt-8 w-full' +
+                        (isPreview ? ' btn-disabled' : '')
+                      }
+                    >
+                      Apply
+                    </button>
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
+          ) : null}
         </div>
 
         <div>
           <a data-cy='how-to-apply-bottom' href={props.howToApply}>
             <button
               disabled={isPreview}
-              className={'btn btn-teal mt-8 w-full md:w-auto' + (isPreview ? ' btn-disabled' : '')}>
+              className={
+                'btn btn-teal mt-8 w-full md:w-auto' +
+                (isPreview ? ' btn-disabled' : '')
+              }
+            >
               Apply
             </button>
           </a>

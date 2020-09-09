@@ -5,9 +5,15 @@ module.exports = {
   purge: {
     enabled: true,
     content: [
+      './src/components/admin/*.js',
+      './src/components/admin/global/*.js',
       './src/components/form/*.js',
+      './src/components/global/*.js',
+      './src/components/home/*.js',
+      './src/components/job/*.js',
       './src/components/*.js',
       './src/layouts/*.js',
+      './src/pages/Admin/*.js',
       './src/pages/*.js',
     ],
   },
@@ -60,7 +66,10 @@ module.exports = {
         800: '#47506f',
         900: '#323c5f',
       },
-      error: '#E53E3E',
+      error: {
+        full: '#E53E3E',
+        50: '#f3d3d3',
+      },
     },
     spacing: {
       px: '1px',
@@ -642,6 +651,8 @@ module.exports = {
     transitionTimingFunction: ['responsive'],
     transitionDuration: ['responsive'],
   },
-  corePlugins: {},
+  corePlugins: {
+    accessibility: true,
+  },
   plugins: [],
 }
