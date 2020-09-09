@@ -5,9 +5,15 @@ module.exports = {
   purge: {
     enabled: true,
     content: [
+      './src/components/admin/*.js',
+      './src/components/admin/global/*.js',
       './src/components/form/*.js',
+      './src/components/global/*.js',
+      './src/components/home/*.js',
+      './src/components/job/*.js',
       './src/components/*.js',
       './src/layouts/*.js',
+      './src/pages/admin/*.js',
       './src/pages/*.js',
     ],
   },
