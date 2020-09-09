@@ -59,6 +59,17 @@ const JobBoard = ({ location }) => {
     setJobFilter(initialFilterValue)
   }, [initialFilterValue])
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delay: 0.25,
+      },
+    },
+  }
+
   return (
     <Layout>
       <div className='container mx-auto pt-32 px-2 md:px-0 min-h-screen'>
@@ -102,38 +113,29 @@ const JobBoard = ({ location }) => {
 
           <LoadingSpinner loading={loading} />
 
-          {!loading && (
-            <motion.div
-              data-cy='job-board-list'
-              className='mx-auto'
-              animate={{
-                opacity: [0, 1],
-                y: [-10, 0],
-              }}
-              transition={{
-                ease: 'easeIn',
-                type: 'spring',
-                duration: 0.25,
-                delay: 0.075,
-              }}
-            >
-              {!jobFilter && (
-                <React.Fragment>
-                  {jobs.map((job) => (
-                    <JobCard key={job.id} job={job} />
-                  ))}
-                </React.Fragment>
-              )}
+          <motion.div
+            data-cy='job-board-list'
+            className='mx-auto'
+            variants={container}
+            initial='hidden'
+            animate='show'
+          >
+            {!jobFilter && (
+              <React.Fragment>
+                {jobs.map((job, i) => (
+                  <JobCard key={job.id} job={job} i={i} />
+                ))}
+              </React.Fragment>
+            )}
 
-              {jobFilter && (
-                <React.Fragment>
-                  {filteredJobs(jobs, jobFilter).map((job) => (
-                    <JobCard key={job.id} job={job} />
-                  ))}
-                </React.Fragment>
-              )}
-            </motion.div>
-          )}
+            {jobFilter && (
+              <React.Fragment>
+                {filteredJobs(jobs, jobFilter).map((job, i) => (
+                  <JobCard key={job.id} job={job} i={i} />
+                ))}
+              </React.Fragment>
+            )}
+          </motion.div>
         </div>
       </div>
     </Layout>

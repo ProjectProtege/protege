@@ -6,15 +6,15 @@ import Logo from '../assets/images/protegeLogo.svg'
 import { motion } from 'framer-motion'
 
 const Layout = ({ children, variant }) => {
-  let variantClassName = 'py-2 absolute w-full md:px-3 z-50 bg-white shadow-md'
+  let variantClassName = 'py-2 absolute w-full md:px-8 z-50 bg-white shadow-md'
 
   switch (variant) {
     case 'home':
-      variantClassName = 'py-2 absolute w-full md:px-3 z-50'
+      variantClassName = 'py-2 absolute w-full md:px-8 z-50'
       break
 
     default:
-      variantClassName = 'py-2 absolute w-full md:px-3 z-50 bg-white shadow'
+      variantClassName = 'py-2 absolute w-full md:px-8 z-50 bg-white shadow'
       break
   }
 

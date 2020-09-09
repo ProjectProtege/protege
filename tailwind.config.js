@@ -1,4 +1,16 @@
 module.exports = {
+  future: {
+    removeDeprecatedGapUtilities: true,
+  },
+  purge: {
+    enabled: true,
+    content: [
+      './src/components/form/*.js',
+      './src/components/*.js',
+      './src/layouts/*.js',
+      './src/pages/*.js',
+    ],
+  },
   prefix: '',
   important: false,
   separator: ':',
@@ -29,7 +41,7 @@ module.exports = {
       teal: {
         100: '#a9e4d1',
         200: '#9be0c9',
-        300: '#8ddbc1',
+        300: '#9EE0CA',
         400: '#7ed7ba',
         500: '#70d2b2',
         600: '#65bda0',
@@ -42,7 +54,7 @@ module.exports = {
         200: '#c2c5cf',
         300: '#adb1bf',
         400: '#999eaf',
-        500: '#848a9f',
+        500: '#55556D',
         600: '#70778f',
         700: '#5b637f',
         800: '#47506f',
@@ -483,6 +495,7 @@ module.exports = {
       '95': '.95',
       '100': '1',
       '105': '1.05',
+      '107': '1.07',
       '110': '1.1',
       '125': '1.25',
       '150': '1.5',
@@ -491,7 +504,9 @@ module.exports = {
       '-180': '-180deg',
       '-90': '-90deg',
       '-45': '-45deg',
+      '-15': '-15deg',
       '0': '0',
+      '15': '15deg',
       '45': '45deg',
       '90': '90deg',
       '180': '180deg',

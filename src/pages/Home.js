@@ -6,11 +6,17 @@ import { db } from '../firebase/firebase'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Layout from '../layouts/Layout'
+import TierSelect from '../components/form/TierSelect'
 import LoadingSpinner from '../components/LoadingSpinner'
 
 const Home = () => {
   const [jobs, setJobs] = useState([])
   const [loading, setLoading] = useState(true)
+
+  const [tier, setTier] = useState(process.env.REACT_APP_ADVANCED_PLAN)
+  function receivingTierClick(e) {
+    setTier(e)
+  }
 
   useEffect(() => {
     ;(async function retrieveJobs() {
@@ -38,6 +44,17 @@ const Home = () => {
       setLoading(false)
     })()
   }, [])
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delay: 0.25,
+      },
+    },
+  }
 
   return (
     <Layout variant='home'>
@@ -86,7 +103,7 @@ const Home = () => {
           </motion.div>
 
           <motion.div
-            className='mt-12 lg:pt-16 mx-auto min-h-screen'
+            className='mt-12 mb-32 lg:pt-16 mx-auto min-h-screen'
             style={{ maxWidth: 680 }}
             animate={{
               opacity: [0, 1],
@@ -95,7 +112,6 @@ const Home = () => {
             transition={{
               delay: 0.3,
               duration: 0.15,
-              staggerChildren: 0.2,
             }}
           >
             <h2 className='text-center text-2xl text-blue-900 font-semibold mb-8'>
@@ -104,12 +120,40 @@ const Home = () => {
 
             <LoadingSpinner loading={loading} />
 
-            <div data-cy='job-card-container' className='container'>
-              {jobs.slice(0, 6).map((job, index) => (
-                <JobCard key={job.id} job={job} />
+            <motion.div
+              data-cy='job-card-container'
+              className='container'
+              variants={container}
+              initial='hidden'
+              animate='show'
+            >
+              {jobs.slice(0, 6).map((job, i) => (
+                <JobCard key={job.id} job={job} i={i} />
               ))}
-            </div>
+            </motion.div>
           </motion.div>
+
+          <div className='flex flex-col items-center'>
+            <h2 className='text-center text-2xl text-blue-500 font-bold leading-normal mb-8'>
+              Broadcast to unmatched ambition,
+              <br />
+              <span className='text-teal-700 text-5xl tracking-wide'>
+                Affordably.
+              </span>
+            </h2>
+
+            <TierSelect receivingTierClick={receivingTierClick} tier={tier} />
+
+            <div className='mt-6 flex flex-col items-center'>
+              <h3 className='text-lg text-blue-300 text-center'>
+                Get started on your candidate search today.
+              </h3>
+
+              <Link to={`/post-a-job?s=1&t=${tier}`}>
+                <button className='btn btn-teal mt-3'>Post a Job</button>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </Layout>

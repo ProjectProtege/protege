@@ -2,7 +2,18 @@
   "name": "protege-client",
   "version": "0.1.0",
   "private": true,
+  "description": "Remote jobs for junior developers.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drewclem/protege.git"
+  },
+  "author": "Drew Clements",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/drewclem/protege/issues"
+  },
   "dependencies": {
+    "@stripe/stripe-js": "^1.7.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -20,13 +31,35 @@
     "yup": "^0.28.3"
   },
   "scripts": {
+    "prestart": "cpy src/data/contributors.dev.json src/data  --rename=contributors.json",
     "start": "npm run watch:css && react-scripts start",
+    "prebuild": "cross-env bin/generate-contributors-json.js",
     "build": "npm run build:css && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:css": "postcss src/assets/css/tailwind.css -o src/assets/css/main.css",
     "watch:css": "postcss src/assets/css/tailwind.css -o src/assets/css/main.css",
     "cypress": "cypress open"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.json": [
+      "prettier --write"
+    ],
+    "*.md": [
+      "prettier --write --prose-wrap always"
+    ],
+    "*.css": [
+      "prettier --write"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,6 +78,8 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.7.4",
+    "cpy-cli": "^3.1.1",
+    "cross-env": "^7.0.2",
     "cypress": "^4.4.1",
     "cypress-file-upload": "^3.5.3",
     "eslint": "^6.8.0",
@@ -55,8 +90,11 @@
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.13",
+    "node-fetch": "^2.6.0",
     "postcss-cli": "^7.1.0",
     "prettier": "^2.0.5",
-    "tailwindcss": "^1.2.0"
+    "tailwindcss": "^1.7.6"
   }
 }

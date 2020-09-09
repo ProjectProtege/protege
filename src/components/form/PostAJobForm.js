@@ -62,8 +62,9 @@ const PostAJobForm = ({
             'Please provide a location for your office headquarters.'
           ),
         })}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values) => {
           receivingJobData(values)
+          window.scrollTo(0, 0)
         }}
       >
         {(formik) => (
@@ -141,7 +142,7 @@ const PostAJobForm = ({
 
                   <div className='flex flex-col md:w-1/2 mb-3'>
                     <label
-                      htmlFor='positionType'
+                      htmlFor='position-type'
                       className='text-blue-900 font-semibold'
                     >
                       Position Type
