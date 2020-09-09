@@ -131,7 +131,7 @@ const Admin = () => {
       <div className={`max-w-7xl flex flex-row`}>
         <div
           data-hasjob={hasJob}
-          className={`admin-joblist px-8 py-12  h-screen overflow-y-auto overflow-x-hidden ${
+          className={`admin-joblist px-8 py-12 h-screen overflow-y-auto overflow-x-hidden ${
             hasJob ? 'shadow-md' : null
           }`}
         >
