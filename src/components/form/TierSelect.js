@@ -64,7 +64,6 @@ const TierSelect = ({ receivingTierClick, tier, tierError }) => {
           <ul className='text-blue-500 text-sm leading-6 col-span-2'>
             <li>All basic &amp; advanced plus ++</li>
             <li>'Why we hire' feature on homepage</li>
-            <li>Podcast shoutout</li>
           </ul>
         </TierSelectCard>
       </div>
