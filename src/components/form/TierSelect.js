@@ -6,7 +6,7 @@ const TierSelect = ({ receivingTierClick, tier, tierError }) => {
     <div>
       <div className='mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-6'>
         <TierSelectCard
-          value='price_1HPoZgLy9mbkpBNAQFf37Cjq'
+          value={process.env.REACT_APP_BASIC_PLAN}
           receivingTierClick={receivingTierClick}
           tier={tier}
         >
@@ -28,7 +28,7 @@ const TierSelect = ({ receivingTierClick, tier, tierError }) => {
         </TierSelectCard>
 
         <TierSelectCard
-          value='price_1HPoZbLy9mbkpBNAh0K1IIcj'
+          value={process.env.REACT_APP_ADVANCED_PLAN}
           receivingTierClick={receivingTierClick}
           tier={tier}
         >
@@ -48,7 +48,7 @@ const TierSelect = ({ receivingTierClick, tier, tierError }) => {
         </TierSelectCard>
 
         <TierSelectCard
-          value='price_1HPoZQLy9mbkpBNAarKJX9Ac'
+          value={process.env.REACT_APP_PREMIUM_PLAN}
           receivingTierClick={receivingTierClick}
           tier={tier}
         >
