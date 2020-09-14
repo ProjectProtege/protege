@@ -43,8 +43,8 @@ const Admin = () => {
       .get()
 
     const jobList = querySnapshot.docs.map((documentSnapshot) => {
-      let doc = documentSnapshot
-      let job = documentSnapshot.data()
+      const doc = documentSnapshot
+      const job = documentSnapshot.data()
 
       return {
         id: doc.id,
@@ -66,8 +66,8 @@ const Admin = () => {
       .get()
 
     const jobList = querySnapshot.docs.map((documentSnapshot) => {
-      let doc = documentSnapshot
-      let job = documentSnapshot.data()
+      const doc = documentSnapshot
+      const job = documentSnapshot.data()
 
       return {
         id: doc.id,
@@ -128,7 +128,7 @@ const Admin = () => {
         />
       )}
 
-      <div className={`max-w-7xl flex flex-row`}>
+      <div className='max-w-7xl flex flex-row'>
         <div
           data-hasjob={hasJob}
           className={`admin-joblist px-8 py-12 h-screen overflow-y-auto overflow-x-hidden ${
@@ -149,7 +149,7 @@ const Admin = () => {
                 <p className='col-span-2'>Post Date</p>
               </div>
 
-              <span className='col-span-1'></span>
+              <span className='col-span-1' />
             </div>
             <motion.ul variants={container} initial='hidden' animate='show'>
               {inactiveJobs.map((job, i) => (
@@ -175,7 +175,7 @@ const Admin = () => {
                 <p className='col-span-2'>Post Date</p>
               </div>
 
-              <span className='col-span-1'></span>
+              <span className='col-span-1' />
             </div>
             <motion.ul variants={container} initial='hidden' animate='show'>
               {activeJobs.map((job, i) => (
@@ -195,10 +195,11 @@ const Admin = () => {
         {editJob ? (
           <div
             data-hasjob={hasJob}
-            className={`admin-jobedit w-1/2 px-8 py-12 h-screen overflow-auto`}
+            className='admin-jobedit w-1/2 px-8 py-12 h-screen overflow-auto'
           >
             <button
               className='focus:outline-none text-teal-700 opacity-75 transform hover:rotate-180 hover:opacity-100 duration-150 mb-3 w-4 h-4'
+              type='button'
               onClick={() => {
                 setEditJob('')
                 setHasJob(false)

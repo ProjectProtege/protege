@@ -1,8 +1,8 @@
 import React, { useCallback, useContext } from 'react'
-import { withRouter, Redirect } from 'react-router'
+import { withRouter, Redirect } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import { auth } from '../firebase/firebase'
 import { AuthContext } from '../firebase/auth'
-import { motion } from 'framer-motion'
 
 import heroBG from '../assets/images/bg-image.jpg'
 import ProtegeLogo from '../assets/images/protegeLogo.svg'
@@ -59,17 +59,20 @@ const SignIn = ({ history }) => {
 
         <form onSubmit={handleSignIn}>
           <div className='flex flex-col mb-3'>
-            <label for='email' className='text-blue-900 font-semibold mb-2'>
+            <label htmlFor='email' className='text-blue-900 font-semibold mb-2'>
               Email
             </label>
-            <input type='text' name='email' className='input'></input>
+            <input type='text' name='email' className='input' />
           </div>
 
           <div className='flex flex-col mb-6'>
-            <label for='password' className='text-blue-900 font-semibold mb-2'>
+            <label
+              htmlFor='password'
+              className='text-blue-900 font-semibold mb-2'
+            >
               Password
             </label>
-            <input type='password' name='password' className='input'></input>
+            <input type='password' name='password' className='input' />
           </div>
 
           <button type='submit' className='btn btn-teal w-full'>

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
 import JobCard from '../components/job/JobCard'
 import { db } from '../firebase/firebase'
-import { motion } from 'framer-motion'
-import Layout from '../layouts/Layout'
 import LoadingSpinner from '../components/LoadingSpinner'
 
 const JobBoard = ({ location }) => {
@@ -81,74 +80,72 @@ const JobBoard = ({ location }) => {
   }
 
   return (
-    <Layout>
-      <div className='container mx-auto pt-32 px-2 md:px-0 min-h-screen'>
-        <div className='w-full lg:w-3/5 mx-auto'>
-          <motion.div
-            className='flex justify-between mb-6'
-            animate={{
-              y: [-10, 0],
-              opacity: [0, 1],
-            }}
-            transition={{
-              duration: 0.2,
-              ease: 'easeIn',
-            }}
-          >
-            <h1 className='text-2xl font-medium text-teal-600 mb-6'>
-              {jobFilter ? `${jobFilter} Jobs` : 'All Jobs'}
-            </h1>
+    <div className='container mx-auto pt-32 px-2 md:px-0 min-h-screen'>
+      <div className='w-full lg:w-3/5 mx-auto'>
+        <motion.div
+          className='flex justify-between mb-6'
+          animate={{
+            y: [-10, 0],
+            opacity: [0, 1],
+          }}
+          transition={{
+            duration: 0.2,
+            ease: 'easeIn',
+          }}
+        >
+          <h1 className='text-2xl font-medium text-teal-600 mb-6'>
+            {jobFilter ? `${jobFilter} Jobs` : 'All Jobs'}
+          </h1>
 
-            <div className='w-1/2 md:w-1/4 relative'>
-              <label htmlFor='filter-by' className='sr-only'>
-                Filter
-              </label>
+          <div className='w-1/2 md:w-1/4 relative'>
+            <label htmlFor='filter-by' className='sr-only'>
+              Filter
+            </label>
 
-              <div className='select-wrap'>
-                <select
-                  className='input input-select rounded-none justify-end'
-                  id='filter-by'
-                  placeholder='Filter By'
-                  onChange={(event) => setJobFilter(event.target.value)}
-                  value={jobFilter}
-                >
-                  <option value=''>All</option>
-                  <option value='Front-end'>Front-end</option>
-                  <option value='Back-end'>Back-end</option>
-                  <option value='Full-stack'>Full-stack</option>
-                </select>
-              </div>
+            <div className='select-wrap'>
+              <select
+                className='input input-select rounded-none justify-end'
+                id='filter-by'
+                placeholder='Filter By'
+                onChange={(event) => setJobFilter(event.target.value)}
+                value={jobFilter}
+              >
+                <option value=''>All</option>
+                <option value='Front-end'>Front-end</option>
+                <option value='Back-end'>Back-end</option>
+                <option value='Full-stack'>Full-stack</option>
+              </select>
             </div>
-          </motion.div>
+          </div>
+        </motion.div>
 
-          <LoadingSpinner loading={loading} />
+        <LoadingSpinner loading={loading} />
 
-          <motion.div
-            data-cy='job-board-list'
-            className='mx-auto'
-            variants={container}
-            initial='hidden'
-            animate='show'
-          >
-            {!jobFilter && (
-              <React.Fragment>
-                {jobs.map((job, i) => (
-                  <JobCard key={job.id} job={job} i={i} />
-                ))}
-              </React.Fragment>
-            )}
+        <motion.div
+          data-cy='job-board-list'
+          className='mx-auto'
+          variants={container}
+          initial='hidden'
+          animate='show'
+        >
+          {!jobFilter && (
+            <>
+              {jobs.map((job, i) => (
+                <JobCard key={job.id} job={job} i={i} />
+              ))}
+            </>
+          )}
 
-            {jobFilter && (
-              <React.Fragment>
-                {filteredJobs(jobs, jobFilter).map((job, i) => (
-                  <JobCard key={job.id} job={job} i={i} />
-                ))}
-              </React.Fragment>
-            )}
-          </motion.div>
-        </div>
+          {jobFilter && (
+            <>
+              {filteredJobs(jobs, jobFilter).map((job, i) => (
+                <JobCard key={job.id} job={job} i={i} />
+              ))}
+            </>
+          )}
+        </motion.div>
       </div>
-    </Layout>
+    </div>
   )
 }
 
