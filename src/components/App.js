@@ -29,7 +29,13 @@ const App = () => (
   <AuthProvider>
     <Router>
       <Layout>
-        <Suspense fallback={<LoadingSpinner />}>
+        <Suspense
+          fallback={
+            <div className='flex h-screen w-screen items-center justify-center'>
+              <LoadingSpinner />
+            </div>
+          }
+        >
           <Switch>
             <Route exact path={ROUTES.HOME} component={Home} />
             <Route path={`/job-board/:id`} component={IndividualJobPage} />
