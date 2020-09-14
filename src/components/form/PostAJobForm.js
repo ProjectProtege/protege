@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import backgroundImage from '../../assets/images/bg-pattern.png'
 import * as Yup from 'yup'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import ReactQuill from 'react-quill'
+import backgroundImage from '../../assets/images/bg-pattern.png'
 import 'react-quill/dist/quill.snow.css'
 import LogoUpload from './LogoUpload'
 
