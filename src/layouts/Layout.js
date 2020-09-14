@@ -1,28 +1,22 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import Nav from '../components/global/Nav'
 import Footer from '../components/global/Footer'
 import Logo from '../assets/images/protegeLogo.svg'
-import { motion } from 'framer-motion'
 
-const Layout = ({ children, variant }) => {
-  let variantClassName = 'py-2 absolute w-full md:px-8 z-50 bg-white shadow-md'
-
-  switch (variant) {
-    case 'home':
-      variantClassName = 'py-2 absolute w-full md:px-8 z-50'
-      break
-
-    default:
-      variantClassName = 'py-2 absolute w-full md:px-8 z-50 bg-white shadow'
-      break
-  }
+const Layout = ({ children }) => {
+  const location = useLocation().pathname
 
   return (
     <div className='min-h-screen flex flex-col font-sans'>
       <motion.header
-        className={`${variant} ${variantClassName}`}
-        initial={variant === 'home' ? { y: -100 } : { y: 0 }}
+        className={`py-2 absolute w-full md:px-8 z-50 ${
+          location !== '/' ? 'bg-white shadow' : null
+        } ${
+          location === '/admin' || location === '/sign-in' ? 'hidden' : null
+        }`}
+        initial={{ y: -100 }}
         animate={{
           y: 0,
         }}
