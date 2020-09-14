@@ -3,20 +3,19 @@ import { useHistory } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { loadStripe } from '@stripe/stripe-js'
 import { v4 as uuidv4 } from 'uuid'
+import firebase from 'firebase/app'
+import { db, storage } from '../firebase/firebase'
 
-//components
-import Layout from '../layouts/Layout'
+// components
 import PostAJobForm from '../components/form/PostAJobForm'
 import StatusBar from '../components/form/StatusBar'
 import JobTemplate from '../components/job/JobTemplate'
 import JobPostingConfirmation from '../components/job/JobPostingConfirmation'
 import TierSelect from '../components/form/TierSelect'
-import Check from '../assets/images/svg/check-solid.js'
+import Check from '../assets/images/svg/check-solid'
 import BackArrow from '../assets/images/svg/back-arrow'
 
-//firebase
-import { db, storage } from '../firebase/firebase'
-import firebase from 'firebase/app'
+// firebase
 
 const PostAJob = ({ location }) => {
   const tierQueryParam = findParam('t')
@@ -118,138 +117,136 @@ const PostAJob = ({ location }) => {
   }
 
   return (
-    <Layout>
-      <motion.div
-        className='container mx-auto mt-24 md:mt-32 p-2'
-        animate={{
-          opacity: [0, 1],
-          y: [-10, 1],
-        }}
-        transition={{
-          delay: 0.15,
-          duration: 0.3,
-          ease: 'easeIn',
-        }}
-      >
-        {status === 1 && (
-          <>
-            <div className='container mx-auto lg:w-4/5 xl:w-7/12 mb-12 flex flex-col items-center'>
-              <h3 className='text-xl font-bold text-blue-900 mb-3'>
-                What qualifies as a junior remote job opportunity on Protegé?
-              </h3>
+    <motion.div
+      className='container mx-auto mt-24 md:mt-32 p-2'
+      animate={{
+        opacity: [0, 1],
+        y: [-10, 1],
+      }}
+      transition={{
+        delay: 0.15,
+        duration: 0.3,
+        ease: 'easeIn',
+      }}
+    >
+      {status === 1 && (
+        <>
+          <div className='container mx-auto lg:w-4/5 xl:w-7/12 mb-12 flex flex-col items-center'>
+            <h3 className='text-xl font-bold text-blue-900 mb-3'>
+              What qualifies as a junior remote job opportunity on Protegé?
+            </h3>
 
-              <p className='text-blue-700 text-sm lg:text-base lg:leading-relaxed mb-4 lg:text-center'>
-                Our mission is to help those early in their tech career find
-                their next opporunities to thrive. Below is a list we've
-                provided to help you determine if the role you're hiring for
-                fits within our requirements here at Protegé.
-              </p>
-
-              <ul className='leading-loose text-blue-800 mb-4 text-sm lg:text-base'>
-                <li>
-                  <span className='text-teal-600 absolute w-5 h-5 lg:mt-1'>
-                    <Check />
-                  </span>
-                  <p className='pl-8 lg:pl-10'>The job must be fully remote.</p>
-                </li>
-                <li>
-                  <span className='text-teal-600 absolute w-5 h-5 lg:mt-1'>
-                    <Check />
-                  </span>
-                  <p className='pl-8 lg:pl-10'>
-                    Do not require 3 (or more) years experience.
-                  </p>
-                </li>
-                <li>
-                  <span className='text-teal-600 absolute w-5 h-5 lg:mt-1'>
-                    <Check />
-                  </span>
-                  <p className='pl-8 lg:pl-10'>
-                    Do not require a 4 year degree (or equivalent experience).
-                  </p>
-                </li>
-              </ul>
-
-              <p className='text-xs text-blue-600 lg:text-center lg:w-3/4 xl:w-full opacity-75'>
-                Protegé.dev is a curated job board tailored towards junior
-                developers. Each listing is reviewed, and approved or denied
-                before going live. If your listing is denied, we'll contact you
-                through email with suggested edits.
-              </p>
-            </div>
-
-            <TierSelect receivingTierClick={receivingTierClick} tier={tier} />
-
-            <p className={`text-center mb-2 text-blue-400 tracking-wide`}>
-              Select Your Tier
+            <p className='text-blue-700 text-sm lg:text-base lg:leading-relaxed mb-4 lg:text-center'>
+              Our mission is to help those early in their tech career find their
+              next opporunities to thrive. Below is a list we've provided to
+              help you determine if the role you're hiring for fits within our
+              requirements here at Protegé.
             </p>
-          </>
-        )}
 
-        {status !== 1 && (
-          <h1 className='text-lg md:text-2xl text-blue-500 font-bold text-center leading-snug'>
-            Inexperienced doesn’t mean incapable. <br />
-            Fill your role with ambition.
-          </h1>
-        )}
+            <ul className='leading-loose text-blue-800 mb-4 text-sm lg:text-base'>
+              <li>
+                <span className='text-teal-600 absolute w-5 h-5 lg:mt-1'>
+                  <Check />
+                </span>
+                <p className='pl-8 lg:pl-10'>The job must be fully remote.</p>
+              </li>
+              <li>
+                <span className='text-teal-600 absolute w-5 h-5 lg:mt-1'>
+                  <Check />
+                </span>
+                <p className='pl-8 lg:pl-10'>
+                  Do not require 3 (or more) years experience.
+                </p>
+              </li>
+              <li>
+                <span className='text-teal-600 absolute w-5 h-5 lg:mt-1'>
+                  <Check />
+                </span>
+                <p className='pl-8 lg:pl-10'>
+                  Do not require a 4 year degree (or equivalent experience).
+                </p>
+              </li>
+            </ul>
 
-        <StatusBar props={status} />
+            <p className='text-xs text-blue-600 lg:text-center lg:w-3/4 xl:w-full opacity-75'>
+              Protegé.dev is a curated job board tailored towards junior
+              developers. Each listing is reviewed, and approved or denied
+              before going live. If your listing is denied, we'll contact you
+              through email with suggested edits.
+            </p>
+          </div>
 
-        {status === 1 && !jobData && (
-          <motion.div
-            animate={{
-              opacity: [0, 1],
-              y: [-5, 0],
-            }}
-            transition={{
-              delay: 0.25,
-              duration: 0.25,
-              ease: 'easeIn',
-            }}
-          >
-            <PostAJobForm
-              recievingLogo2={recievingLogo2}
-              receivingJobData={receivingJobData}
-            />
-          </motion.div>
-        )}
+          <TierSelect receivingTierClick={receivingTierClick} tier={tier} />
 
-        {status === 1 && jobData && (
+          <p className={`text-center mb-2 text-blue-400 tracking-wide`}>
+            Select Your Tier
+          </p>
+        </>
+      )}
+
+      {status !== 1 && (
+        <h1 className='text-lg md:text-2xl text-blue-500 font-bold text-center leading-snug'>
+          Inexperienced doesn’t mean incapable. <br />
+          Fill your role with ambition.
+        </h1>
+      )}
+
+      <StatusBar props={status} />
+
+      {status === 1 && !jobData && (
+        <motion.div
+          animate={{
+            opacity: [0, 1],
+            y: [-5, 0],
+          }}
+          transition={{
+            delay: 0.25,
+            duration: 0.25,
+            ease: 'easeIn',
+          }}
+        >
           <PostAJobForm
             recievingLogo2={recievingLogo2}
             receivingJobData={receivingJobData}
-            jobData={jobData}
           />
-        )}
+        </motion.div>
+      )}
 
-        {status === 2 && jobData && (
-          <>
-            <div className='container mx-auto lg:w-3/5'>
-              <button
-                data-cy='edit-job-button'
-                className='flex items-center mb-3 text-teal-600 text-lg font-bold'
-                onClick={(e) => {
-                  history.push('/post-a-job?s=1')
-                }}
-              >
-                <BackArrow />
-                Edit
-              </button>
-              <JobTemplate props={jobData} logo={companyLogo} />
-              <button
-                data-cy='job-posting-approval-button'
-                className='btn btn-blue mt-8'
-                onClick={handlePaymentClick}
-              >
-                Proceed to Payment
-              </button>
-            </div>
-          </>
-        )}
+      {status === 1 && jobData && (
+        <PostAJobForm
+          recievingLogo2={recievingLogo2}
+          receivingJobData={receivingJobData}
+          jobData={jobData}
+        />
+      )}
 
-        {status === 3 && <JobPostingConfirmation />}
-      </motion.div>
-    </Layout>
+      {status === 2 && jobData && (
+        <>
+          <div className='container mx-auto lg:w-3/5'>
+            <button
+              data-cy='edit-job-button'
+              className='flex items-center mb-3 text-teal-600 text-lg font-bold'
+              onClick={(e) => {
+                history.push('/post-a-job?s=1')
+              }}
+            >
+              <BackArrow />
+              Edit
+            </button>
+            <JobTemplate props={jobData} logo={companyLogo} />
+            <button
+              data-cy='job-posting-approval-button'
+              className='btn btn-blue mt-8'
+              onClick={handlePaymentClick}
+            >
+              Proceed to Payment
+            </button>
+          </div>
+        </>
+      )}
+
+      {status === 3 && <JobPostingConfirmation />}
+    </motion.div>
   )
 }
 
