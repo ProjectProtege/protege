@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { storage } from '../../firebase/firebase'
 import { motion } from 'framer-motion'
+import { storage } from '../../firebase/firebase'
 import JobCardImage from './JobCardImage'
 
 const JobCard = ({ job, i }) => {
@@ -23,7 +24,7 @@ const JobCard = ({ job, i }) => {
   ]
 
   const variants = {
-    show: (i) => ({
+    show: () => ({
       opacity: 1,
       y: 0,
       transition: {
@@ -114,6 +115,22 @@ const JobCard = ({ job, i }) => {
       </motion.div>
     </Link>
   )
+}
+
+JobCard.propTypes = {
+  i: PropTypes.number.isRequired,
+  job: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    companyName: PropTypes.string.isRequired,
+    companyLogo: PropTypes.string.isRequired,
+    jobTitle: PropTypes.string.isRequired,
+    roleFocus: PropTypes.string.isRequired,
+    postedAt: PropTypes.shape({
+      nanoseconds: PropTypes.number.isRequired,
+      seconds: PropTypes.number.isRequired,
+      toDate: PropTypes.func.isRequired,
+    }),
+  }).isRequired,
 }
 
 export default JobCard

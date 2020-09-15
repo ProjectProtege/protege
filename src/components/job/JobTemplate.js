@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { storage } from '../../firebase/firebase'
+import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
+import { storage } from '../../firebase/firebase'
 
 const JobTemplate = ({ logo, props }) => {
-  let { pathname } = useLocation()
+  const { pathname } = useLocation()
   const isPreview = pathname.indexOf('/job-board/') !== 0
 
   const [companyLogo, setCompanyLogo] = useState(undefined)
   const [isAdmin, setIsAdmin] = useState(false)
 
   function readLogo(logo) {
-    let reader = new FileReader()
-    let file = logo
+    const reader = new FileReader()
+    const file = logo
     if (file) {
       reader.readAsDataURL(file)
       reader.onloadend = () => {
@@ -39,6 +40,12 @@ const JobTemplate = ({ logo, props }) => {
     OL: 'list-decimal list-inside',
     UL: 'list-disc list-inside',
     LI: 'pl-2 text-blue-700',
+  }
+
+  function checkAdmin() {
+    if (pathname === '/admin') {
+      setIsAdmin(true)
+    }
   }
 
   useEffect(() => {
@@ -71,12 +78,6 @@ const JobTemplate = ({ logo, props }) => {
 
     checkAdmin()
   })
-
-  function checkAdmin() {
-    if (pathname === '/admin') {
-      setIsAdmin(true)
-    }
-  }
 
   function createMarkup(text) {
     return { __html: text }
@@ -113,7 +114,7 @@ const JobTemplate = ({ logo, props }) => {
               id='jobDesc'
               dangerouslySetInnerHTML={createMarkup(props.jobDescription)}
               className='mb-6'
-            ></div>
+            />
 
             <h4
               data-cy='company-description-title'
@@ -127,7 +128,7 @@ const JobTemplate = ({ logo, props }) => {
               className='mt-2 text-blue-300'
               id='companyDesc'
               dangerouslySetInnerHTML={createMarkup(props.companyDescription)}
-            ></div>
+            />
           </div>
 
           {!isAdmin ? (
@@ -165,10 +166,9 @@ const JobTemplate = ({ logo, props }) => {
                   <a data-cy='how-to-apply' href={props.howToApply}>
                     <button
                       disabled={isPreview}
-                      className={
-                        'hidden md:block btn btn-teal mt-8 w-full' +
-                        (isPreview ? ' btn-disabled' : '')
-                      }
+                      className={`hidden md:block btn btn-teal mt-8 w-full
+                        ${isPreview ? ' btn-disabled' : ''}`}
+                      type='button'
                     >
                       Apply
                     </button>
@@ -183,10 +183,11 @@ const JobTemplate = ({ logo, props }) => {
           <a data-cy='how-to-apply-bottom' href={props.howToApply}>
             <button
               disabled={isPreview}
-              className={
-                'btn btn-teal mt-8 w-full md:w-auto' +
-                (isPreview ? ' btn-disabled' : '')
+              className={`btn btn-teal mt-8 w-full md:w-auto ${
+                isPreview ? ' btn-disabled' : ''
               }
+              `}
+              type='button'
             >
               Apply
             </button>
