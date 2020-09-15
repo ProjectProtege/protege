@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { db } from '../../firebase/firebase'
 
 import JobTemplate from '../job/JobTemplate'
-import AdminJobEdit from '../admin/AdminJobEdit'
-import AdminNotification from '../admin/AdminNotification'
+import AdminJobEdit from './AdminJobEdit'
+import AdminNotification from './AdminNotification'
 
 import Edit from '../../assets/images/svg/edit-icon'
 import DeleteForever from '../../assets/images/svg/delete-forever-icon'
@@ -26,68 +27,65 @@ const AdminReviewJob = ({
   const [notificationRes, setNotificationRes] = useState(false)
   const [notificationId, setNotificationId] = useState()
 
-  useEffect(() => {
-    retrieveJob(id)
-  }, [id])
+  async function retrieveJob() {
+    try {
+      const res = await docRef.get()
 
-  async function retrieveJob(id) {
-    const docRef = db.collection('jobs').doc(id)
-
-    docRef.get().then(function (res) {
       if (res.exists) {
         setJob(res.data())
         setApproval(res.data().approved)
         setStatus(res.data().status)
-      } else {
-        return null
       }
-    })
+    } catch (err) {
+      alert(err)
+    }
   }
+
+  useEffect(() => {
+    retrieveJob(id)
+  }, [id])
 
   async function updateApprovalStatus() {
     setApproval(!approval)
 
-    await docRef
-      .update({
+    try {
+      await docRef.update({
         approved: !approval,
       })
-      .then(() => {
-        receivingEdit(uuid)
-        receivingNotification(uuid, true)
-      })
-      .catch((err) => {
-        receivingNotification(err, false)
-      })
+
+      receivingEdit(uuid)
+      receivingNotification(uuid, true)
+    } catch (err) {
+      receivingNotification(err, false)
+    }
   }
 
   async function updateJobStatus(e) {
     setUpdating(true)
     setStatus(e.target.value)
 
-    await docRef
-      .update({
+    try {
+      await docRef.update({
         status: e.target.value,
       })
-      .then(() => {
-        receivingEdit(uuid, true)
-        receivingNotification(uuid, true)
-        setUpdating(false)
-      })
-      .catch((err) => {
-        receivingNotification(err, false)
-      })
+      receivingEdit(uuid, true)
+      receivingNotification(uuid, true)
+      setUpdating(false)
+    } catch (err) {
+      receivingNotification(err, false)
+    }
   }
 
   function receivingCancel() {
     setEditJob('')
   }
 
-  function editNotification(uid, res, id) {
+  function editNotification(uid, res, editId) {
     setNotificationId(uid)
     setNotificationRes(res)
 
     if (res === true) {
-      retrieveJob(id)
+      retrieveJob(editId)
     }
   }
 
@@ -108,25 +106,24 @@ const AdminReviewJob = ({
               type='checkbox'
               checked={approval}
               onChange={updateApprovalStatus}
-            ></input>
-            <span className='publish-dot round shadow-inner'></span>
+            />
+            <span className='publish-dot round shadow-inner' />
           </label>
         </div>
 
         <div className={`flex flex-row items-center select-wrap `}>
-          <label className='font-display text-blue-600 text-sm mr-3'>
+          <label
+            htmlFor='job-select'
+            className='font-display text-blue-600 text-sm mr-3'
+          >
             Status
           </label>
           <select
+            id='job-select'
             className={`w-full appearance-none pl-4 pr-1 py-1 rounded-full shadow-inner focus:outline-none ${
               updating ? 'opacity-50 pointer-events-none' : ''
-            } ${
-              status === 'active'
-                ? 'text-teal-700'
-                : status === 'inactive'
-                ? 'text-error-full'
-                : 'text-blue-800'
-            }
+            } ${status === 'active' ? 'text-teal-700' : null}
+                ${status === 'inactive' ? 'text-error-full' : 'text-blue-800'}
             `}
             defaultValue={job.status}
             onChange={updateJobStatus}
@@ -141,11 +138,13 @@ const AdminReviewJob = ({
           <button
             onClick={() => setEditJob(id)}
             className='w-4 h-4 text-teal-900 opacity-50 hover:opacity-100 transition ease-in-out duration-150 mr-6'
+            type='button'
           >
             <Edit />
           </button>
           <button
-            onClick={(e) => {
+            type='button'
+            onClick={() => {
               if (
                 window.confirm(
                   'This is a permanent and destructive action. Are you sure?'
@@ -172,6 +171,13 @@ const AdminReviewJob = ({
       )}
     </div>
   )
+}
+
+AdminReviewJob.propTypes = {
+  id: PropTypes.number.isRequired,
+  receivingEdit: PropTypes.func.isRequired,
+  receivingNotification: PropTypes.func.isRequired,
+  deleteJobForever: PropTypes.func.isRequired,
 }
 
 export default AdminReviewJob

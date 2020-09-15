@@ -104,11 +104,12 @@ AdminJobCard.propTypes = {
     id: PropTypes.number.isRequired,
     approved: PropTypes.bool.isRequired,
     companyName: PropTypes.string.isRequired,
-    jobtitle: PropTypes.string.isRequired,
+    jobTitle: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
     postedAt: PropTypes.shape({
       nanoseconds: PropTypes.number.isRequired,
       seconds: PropTypes.number.isRequired,
+      toDate: PropTypes.func.isRequired,
     }),
   }).isRequired,
   onclick: PropTypes.func.isRequired,
