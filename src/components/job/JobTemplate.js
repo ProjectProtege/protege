@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
@@ -10,9 +11,9 @@ const JobTemplate = ({ logo, props }) => {
   const [companyLogo, setCompanyLogo] = useState(undefined)
   const [isAdmin, setIsAdmin] = useState(false)
 
-  function readLogo(logo) {
+  function readLogo(logoFile) {
     const reader = new FileReader()
-    const file = logo
+    const file = logoFile
     if (file) {
       reader.readAsDataURL(file)
       reader.onloadend = () => {
@@ -52,15 +53,18 @@ const JobTemplate = ({ logo, props }) => {
     // Cleans up the text provided by QuillJS wysiwyg
     function styleChildren(children) {
       children.forEach((child) => {
+        const el = child
         const childTag = child.tagName
-        child.style = ''
-        child.classList = quillStyle[childTag]
+
+        el.style = ''
+        el.classList = quillStyle[childTag]
         if (child.hasChildNodes()) {
           const grandChildren = [...child.children]
           styleChildren(grandChildren)
         }
       })
     }
+
     const jobDescription = document.getElementById('jobDesc')
     const jobChildren = [...jobDescription.children]
     styleChildren(jobChildren)
@@ -99,7 +103,8 @@ const JobTemplate = ({ logo, props }) => {
               data-cy='role-focus-and-position-type'
               className='text-blue-600 uppercase tracking-tight text-md mb-6'
             >
-              {props.roleFocus} • {props.positionType}
+              {props.roleFocus} •
+{props.positionType}
             </div>
 
             <h3
@@ -120,7 +125,8 @@ const JobTemplate = ({ logo, props }) => {
               data-cy='company-description-title'
               className='text-blue-900 font-semibold text-2xl mb-4'
             >
-              About {props.companyName}
+              About
+              {props.companyName}
             </h4>
 
             <div
@@ -196,6 +202,29 @@ const JobTemplate = ({ logo, props }) => {
       </div>
     </>
   )
+}
+
+JobTemplate.propTypes = {
+  logo: PropTypes.shape({}),
+  props: PropTypes.shape({}).isRequired,
+  howToApply: PropTypes.string,
+  companyName: PropTypes.string,
+  companyWebsite: PropTypes.string,
+  companyLogo: PropTypes.string,
+  roleFocus: PropTypes.string,
+  jobtitle: PropTypes.string,
+  positionType: PropTypes.string,
+}
+
+JobTemplate.defaultProps = {
+  logo: null,
+  howToApply: '',
+  companyName: '',
+  companyWebsite: '',
+  companyLogo: '',
+  roleFocus: '',
+  jobtitle: '',
+  positionType: '',
 }
 
 export default JobTemplate

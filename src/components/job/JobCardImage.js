@@ -1,27 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const JobCardImage = ({ logoUrl, job }) => {
-  if (logoUrl) {
-    return (
-      <img
-        data-cy={`job-card-image-${job.id}`}
-        src={logoUrl}
-        alt={`${job.companyName} Logo`}
-        className='my-auto w-full'
-      />
-    )
-  } else {
-    return null
-  }
+const JobCardImage = ({ job, logoUrl }) => {
+  return (
+    <img
+      data-cy={`job-card-image-${job.id}`}
+      src={logoUrl}
+      alt={`${job.companyName} Logo`}
+      className='my-auto w-full'
+    />
+  )
 }
 
 JobCardImage.propTypes = {
-  logoUrl: PropTypes.func.isRequired,
+  logoUrl: PropTypes.string,
   job: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     companyName: PropTypes.string.isRequired,
   }).isRequired,
+}
+
+JobCardImage.defaultProps = {
+  logoUrl: '',
 }
 
 export default JobCardImage
