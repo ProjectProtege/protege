@@ -1,10 +1,18 @@
-/* eslint-disable react/destructuring-assignment */
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import { storage } from '../../firebase/firebase'
 
 const JobTemplate = ({ logo, props }) => {
+  const {
+    jobtitle,
+    roleFocus,
+    howToApply,
+    companyName,
+    companyWebsite,
+    positionType,
+  } = props
+
   const { pathname } = useLocation()
   const isPreview = pathname.indexOf('/job-board/') !== 0
 
@@ -25,7 +33,7 @@ const JobTemplate = ({ logo, props }) => {
   function retrieveLogo() {
     storage
       .ref('images')
-      .child(props.companyLogo)
+      .child(companyLogo)
       .getDownloadURL()
       .then((url) => {
         setCompanyLogo(url)
@@ -96,15 +104,16 @@ const JobTemplate = ({ logo, props }) => {
               data-cy='job-title'
               className='text-blue-900 font-bold text-3xl'
             >
-              {props.jobtitle}
+              {jobtitle}
             </h2>
 
             <div
               data-cy='role-focus-and-position-type'
               className='text-blue-600 uppercase tracking-tight text-md mb-6'
             >
-              {props.roleFocus} •
-{props.positionType}
+              {roleFocus}
+              <span>•</span>
+              {positionType}
             </div>
 
             <h3
@@ -117,7 +126,7 @@ const JobTemplate = ({ logo, props }) => {
             <div
               data-cy='job-description'
               id='jobDesc'
-              dangerouslySetInnerHTML={createMarkup(props.jobDescription)}
+              dangerouslySetInnerHTML={createMarkup(jobDescription)}
               className='mb-6'
             />
 
@@ -126,14 +135,14 @@ const JobTemplate = ({ logo, props }) => {
               className='text-blue-900 font-semibold text-2xl mb-4'
             >
               About
-              {props.companyName}
+              {companyName}
             </h4>
 
             <div
               data-cy='company-description'
               className='mt-2 text-blue-300'
               id='companyDesc'
-              dangerouslySetInnerHTML={createMarkup(props.companyDescription)}
+              dangerouslySetInnerHTML={createMarkup(companyDescription)}
             />
           </div>
 
@@ -147,7 +156,7 @@ const JobTemplate = ({ logo, props }) => {
                       id='companyLogo'
                       className='w-full'
                       src={companyLogo}
-                      alt={`${props.companyName} logo`}
+                      alt={`${companyName} logo`}
                     />
                   </div>
                 ) : null}
@@ -156,20 +165,20 @@ const JobTemplate = ({ logo, props }) => {
                   data-cy='company-name-sidebar'
                   className='text-blue-900 font-semibold text-lg mb-3'
                 >
-                  {props.companyName}
+                  {companyName}
                 </h4>
 
                 <div className='uppercase text-blue-900 tracking-tight text-md'>
                   <a
                     data-cy='company-website'
                     className='underline'
-                    href={props.companyWebsite}
+                    href={companyWebsite}
                   >
                     <p className='opacity-75 hover:opacity-100'>
                       Visit website
                     </p>
                   </a>
-                  <a data-cy='how-to-apply' href={props.howToApply}>
+                  <a data-cy='how-to-apply' href={howToApply}>
                     <button
                       disabled={isPreview}
                       className={`hidden md:block btn btn-teal mt-8 w-full
@@ -186,7 +195,7 @@ const JobTemplate = ({ logo, props }) => {
         </div>
 
         <div>
-          <a data-cy='how-to-apply-bottom' href={props.howToApply}>
+          <a data-cy='how-to-apply-bottom' href={howToApply}>
             <button
               disabled={isPreview}
               className={`btn btn-teal mt-8 w-full md:w-auto ${
@@ -210,7 +219,6 @@ JobTemplate.propTypes = {
   howToApply: PropTypes.string,
   companyName: PropTypes.string,
   companyWebsite: PropTypes.string,
-  companyLogo: PropTypes.string,
   roleFocus: PropTypes.string,
   jobtitle: PropTypes.string,
   positionType: PropTypes.string,
@@ -221,7 +229,6 @@ JobTemplate.defaultProps = {
   howToApply: '',
   companyName: '',
   companyWebsite: '',
-  companyLogo: '',
   roleFocus: '',
   jobtitle: '',
   positionType: '',
