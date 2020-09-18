@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { motion } from 'framer-motion'
 
 const AdminNotification = ({ notificationId, notificationRes }) => {
@@ -7,9 +8,11 @@ const AdminNotification = ({ notificationId, notificationRes }) => {
 
   useEffect(() => {
     setId(notificationId)
-    notificationRes
-      ? setMessage('Update Successful!')
-      : setMessage('Oops! Something went wrong.')
+    if (notificationRes) {
+      setMessage('Update Successful!')
+    } else {
+      setMessage('Oops! Something went wrong.')
+    }
   }, [notificationId, notificationRes])
 
   return (
@@ -31,6 +34,11 @@ const AdminNotification = ({ notificationId, notificationRes }) => {
       <p>{message}</p>
     </motion.div>
   )
+}
+
+AdminNotification.propTypes = {
+  notificationId: PropTypes.func.isRequired,
+  notificationRes: PropTypes.func.isRequired,
 }
 
 export default AdminNotification

@@ -11,12 +11,8 @@ const Nav = () => {
     return e.target.blur()
   }
 
-  function handleMobileClick() {
-    setActive(false)
-  }
-
   return (
-    <React.Fragment>
+    <>
       <nav
         data-cy='mobile-nav'
         className='md:hidden text-blue-900 text-right relative'
@@ -24,6 +20,7 @@ const Nav = () => {
         <button
           className='nav-toggle relative md:hidden h-6 w-6 mr-2'
           onClick={() => setActive((oldActive) => !oldActive)}
+          type='button'
         >
           <MenuIcon />
         </button>
@@ -32,7 +29,6 @@ const Nav = () => {
           className={`${
             active ? 'absolute' : 'hidden'
           } mt-2 text-center uppercase right-0 font-medium bg-white shadow-lg p-2 w-screen mx-auto`}
-          onClick={handleMobileClick}
         >
           <li className='pt-3 pb-2 border-b-2 border-gray-300'>
             <NavLink
@@ -103,7 +99,7 @@ const Nav = () => {
             >
               <li className='mb-3'>
                 <Link
-                  to={ROUTES.JOB_BOARD + '?f=Front-end'}
+                  to={`${ROUTES.JOB_BOARD}?f=Front-end`}
                   className='submenu-item opacity-75 hover:opacity-100 border-b-2 border-transparent transition-colors duration-75 hover:border-teal-500 w-full pb-1'
                   onClick={handleClick}
                 >
@@ -112,7 +108,7 @@ const Nav = () => {
               </li>
               <li className='mb-3'>
                 <Link
-                  to={ROUTES.JOB_BOARD + '?f=Back-end'}
+                  to={`${ROUTES.JOB_BOARD}?f=Back-end`}
                   className='submenu-item opacity-75 hover:opacity-100 border-b-2 border-transparent transition-colors duration-75 hover:border-teal-500 w-full pb-1'
                   onClick={handleClick}
                 >
@@ -121,7 +117,7 @@ const Nav = () => {
               </li>
               <li>
                 <Link
-                  to={ROUTES.JOB_BOARD + '?f=Full-stack'}
+                  to={`${ROUTES.JOB_BOARD}?f=Full-stack`}
                   className='submenu-item opacity-75 hover:opacity-100 border-b-2 border-transparent transition-colors duration-75 hover:border-teal-500 w-full pb-1'
                   onClick={handleClick}
                 >
@@ -166,7 +162,7 @@ const Nav = () => {
           </li>
         </ul>
       </nav>
-    </React.Fragment>
+    </>
   )
 }
 

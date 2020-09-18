@@ -18,6 +18,7 @@ const AdminHeader = () => {
       <button
         onClick={() => auth.signOut()}
         className='bg-teal-500 w-full py-2 text-white text-xs uppercase'
+        type='button'
       >
         Sign Out
       </button>
