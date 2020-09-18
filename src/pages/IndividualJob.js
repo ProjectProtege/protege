@@ -17,11 +17,9 @@ const IndividualJobPage = () => {
   useEffect(() => {
     const docRef = db.collection('jobs').doc(id)
 
-    docRef.get().then(function (res) {
+    docRef.get().then((res) => {
       if (res.exists) {
         setJob(res.data())
-      } else {
-        return null
       }
     })
   }, [id])

@@ -5,11 +5,13 @@ import { storage } from '../../firebase/firebase'
 
 const JobTemplate = ({ logo, props }) => {
   const {
-    jobtitle,
-    roleFocus,
     howToApply,
+    jobDescription,
+    companyDescription,
     companyName,
     companyWebsite,
+    roleFocus,
+    jobtitle,
     positionType,
   } = props
 
@@ -33,7 +35,7 @@ const JobTemplate = ({ logo, props }) => {
   function retrieveLogo() {
     storage
       .ref('images')
-      .child(companyLogo)
+      .child(props.companyLogo)
       .getDownloadURL()
       .then((url) => {
         setCompanyLogo(url)
@@ -73,11 +75,14 @@ const JobTemplate = ({ logo, props }) => {
       })
     }
 
-    const jobDescription = document.getElementById('jobDesc')
-    const jobChildren = [...jobDescription.children]
+    const jobDescriptionParent = document.getElementById('jobDesc')
+
+    const jobChildren = [...jobDescriptionParent.children]
     styleChildren(jobChildren)
-    const companyDescription = document.getElementById('companyDesc')
-    const companyChildren = [...companyDescription.children]
+
+    const companyDescriptionParent = document.getElementById('companyDesc')
+
+    const companyChildren = [...companyDescriptionParent.children]
     styleChildren(companyChildren)
 
     if (isPreview) {
@@ -135,7 +140,7 @@ const JobTemplate = ({ logo, props }) => {
               className='text-blue-900 font-semibold text-2xl mb-4'
             >
               About
-              {companyName}
+              {props.companyName}
             </h4>
 
             <div
@@ -219,9 +224,12 @@ JobTemplate.propTypes = {
   howToApply: PropTypes.string,
   companyName: PropTypes.string,
   companyWebsite: PropTypes.string,
+  companyLogo: PropTypes.string,
   roleFocus: PropTypes.string,
   jobtitle: PropTypes.string,
   positionType: PropTypes.string,
+  jobDescription: PropTypes.string,
+  companyDescription: PropTypes.string,
 }
 
 JobTemplate.defaultProps = {
@@ -229,9 +237,12 @@ JobTemplate.defaultProps = {
   howToApply: '',
   companyName: '',
   companyWebsite: '',
+  companyLogo: '',
   roleFocus: '',
   jobtitle: '',
   positionType: '',
+  jobDescription: '',
+  companyDescription: '',
 }
 
 export default JobTemplate
