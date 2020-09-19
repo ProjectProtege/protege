@@ -1,4 +1,6 @@
+/* eslint-disable global-require */
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const ResourceCard = (props) => {
   const { title, resourceImage, description, resourceUrl, tag } = props
@@ -7,19 +9,20 @@ const ResourceCard = (props) => {
     <div className='p-4 sm:p-2'>
       <div className='max-w-xs rounded overflow-hidden shadow-md hover:shadow-lg hover:scale-105 transform transition duration-150 ease-in-out cursor-pointer'>
         <a
-          href={'http://' + resourceUrl}
+          href={`http://${resourceUrl}`}
           target='_blank'
           rel='noopener noreferrer'
         >
           <img
             className='w-full'
+            // eslint-disable-next-line import/no-dynamic-require
             src={require(`../assets/images/resources/${resourceImage}`)}
             alt='Resource screenshot of website'
           />
         </a>
         <div className='px-6 py-4'>
           <a
-            href={'http://' + resourceUrl}
+            href={`http://${resourceUrl}`}
             target='_blank'
             rel='noopener noreferrer'
           >
@@ -32,11 +35,19 @@ const ResourceCard = (props) => {
       </div>
       <div className='px-6 py-4'>
         <span className='inline-block bg-teal-100 rounded-full px-3 py-1 text-sm font-semibold text-teal-900'>
-          #{tag}
+          {`#${tag}`}
         </span>
       </div>
     </div>
   )
+}
+
+ResourceCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  resourceImage: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  resourceUrl: PropTypes.string.isRequired,
+  tag: PropTypes.string.isRequired,
 }
 
 export default ResourceCard
