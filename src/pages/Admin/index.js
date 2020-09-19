@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import { db } from '../../firebase/firebase'
 import '../../assets/css/admin.css'
-import { motion } from 'framer-motion'
 
 import AdminLayout from '../../layouts/AdminLayout'
 import AdminJobCard from '../../components/admin/AdminJobCard'
@@ -15,7 +15,6 @@ const Admin = () => {
   const [inactiveJobs, setInactiveJobs] = useState([])
   const [editJob, setEditJob] = useState()
   const [hasJob, setHasJob] = useState(false)
-  const [recentEdit, setRecentEdit] = useState()
   const [notificationRes, setNotificationRes] = useState(false)
   const [notificationId, setNotificationId] = useState()
 
@@ -29,11 +28,6 @@ const Admin = () => {
       },
     },
   }
-
-  useEffect(() => {
-    retrieveInactiveJobs()
-    retrieveActiveJobs()
-  }, [])
 
   async function retrieveInactiveJobs() {
     const querySnapshot = await db
@@ -81,6 +75,11 @@ const Admin = () => {
     setActiveJobs(jobList)
   }
 
+  useEffect(() => {
+    retrieveInactiveJobs()
+    retrieveActiveJobs()
+  }, [])
+
   async function deleteJobForever(id) {
     const docDeleteRef = await db.collection('jobs').doc(id)
 
@@ -97,18 +96,17 @@ const Admin = () => {
       .catch((err) => {
         setNotificationId(id)
         setNotificationRes(false)
+        console.log(err)
       })
   }
 
   function onItemClick(id) {
     setEditJob(id)
     setHasJob(true)
-    setRecentEdit('')
     setNotificationRes(false)
   }
 
-  function receivingEdit(res) {
-    setRecentEdit(res)
+  function receivingEdit() {
     retrieveActiveJobs()
     retrieveInactiveJobs()
     setNotificationRes(false)
@@ -203,7 +201,6 @@ const Admin = () => {
               onClick={() => {
                 setEditJob('')
                 setHasJob(false)
-                setRecentEdit('')
               }}
             >
               <CloseIcon />
@@ -213,7 +210,7 @@ const Admin = () => {
               receivingEdit={receivingEdit}
               receivingNotification={receivingNotification}
               deleteJobForever={deleteJobForever}
-            />{' '}
+            />
           </div>
         ) : null}
       </div>
