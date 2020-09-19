@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { motion } from 'framer-motion'
@@ -18,17 +19,24 @@ import BackArrow from '../assets/images/svg/back-arrow'
 // firebase
 
 const PostAJob = ({ location }) => {
-  const tierQueryParam = findParam('t')
-    ? findParam('t').split('=')[1]
-    : process.env.REACT_APP_ADVANCED_PLAN
-
-  let history = useHistory()
+  const history = useHistory()
 
   const [status, setStatus] = useState()
 
   const [jobData, setJobData] = useState()
 
   const [companyLogo, setcompanyLogo] = useState(undefined)
+
+  function findParam(letter) {
+    return location.search
+      .replace('?', '')
+      .split('&')
+      .find((qs) => qs[0] === letter)
+  }
+
+  const tierQueryParam = findParam('t')
+    ? findParam('t').split('=')[1]
+    : process.env.REACT_APP_ADVANCED_PLAN
 
   const [tier, setTier] = useState(tierQueryParam)
 
@@ -37,13 +45,6 @@ const PostAJob = ({ location }) => {
     : 1
 
   const initialStatusValue = statusQueryParam
-
-  function findParam(letter) {
-    return location.search
-      .replace('?', '')
-      .split('&')
-      .find((qs) => qs[0] === letter)
-  }
 
   useEffect(() => {
     setStatus(initialStatusValue)
@@ -89,7 +90,7 @@ const PostAJob = ({ location }) => {
           positionType: data.jobData.positionType,
           postedAt: postDate,
           roleFocus: data.jobData.roleFocus,
-          tier: tier,
+          tier,
         })
       )
       .then(localStorage.setItem('Job ID', uid))
@@ -178,7 +179,7 @@ const PostAJob = ({ location }) => {
 
           <TierSelect receivingTierClick={receivingTierClick} tier={tier} />
 
-          <p className={`text-center mb-2 text-blue-400 tracking-wide`}>
+          <p className='text-center mb-2 text-blue-400 tracking-wide'>
             Select Your Tier
           </p>
         </>
@@ -186,7 +187,8 @@ const PostAJob = ({ location }) => {
 
       {status !== 1 && (
         <h1 className='text-lg md:text-2xl text-blue-500 font-bold text-center leading-snug'>
-          Inexperienced doesn’t mean incapable. <br />
+          Inexperienced doesn’t mean incapable.
+          <br />
           Fill your role with ambition.
         </h1>
       )}
@@ -229,6 +231,7 @@ const PostAJob = ({ location }) => {
               onClick={(e) => {
                 history.push('/post-a-job?s=1')
               }}
+              type='button'
             >
               <BackArrow />
               Edit
@@ -238,6 +241,7 @@ const PostAJob = ({ location }) => {
               data-cy='job-posting-approval-button'
               className='btn btn-blue mt-8'
               onClick={handlePaymentClick}
+              type='button'
             >
               Proceed to Payment
             </button>

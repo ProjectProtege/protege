@@ -7,7 +7,7 @@ const NotFound = () => (
     style={{ maxWidth: 680 }}
   >
     <h1 className='text-2xl font-bold text-blue-500 mb-3'>
-      Oops, we didn't find that page!
+      Oops, we didn&apos;t find that page!
     </h1>
 
     <Link to='/' className='text-teal-700 underline'>

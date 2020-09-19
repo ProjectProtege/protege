@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import * as ROUTES from '../constants/routes'
 import ResourceCard from '../components/ResourceCard'
 
-const LearningResources = (url) => (
+const LearningResources = () => (
   <motion.div
     className='container m-auto max-w-screen-xl align-middle mt-32 sm:max-w-screen-lg'
     initial={{
@@ -26,12 +26,12 @@ const LearningResources = (url) => (
       </h2>
       <p className='text-base mb-2 text-blue-700 sm:mt-4 sm:px-12 sm:text-base md:text-base'>
         {' '}
-        We've pulled some of the best free, and paid, resources together to help
-        support your journey.
+        We&apos;ve pulled some of the best free, and paid, resources together to
+        help support your journey.
       </p>
       <p className='text-base text-blue-700 sm:mt-4 sm:text-base md:text-base'>
         {' '}
-        Got a resource you think we should add to the list?{' '}
+        Got a resource you think we should add to the list?&nbsp;
         <Link
           to={ROUTES.GET_IN_TOUCH}
           className='underline mb-3 text-blue-900 hover:text-teal-600'

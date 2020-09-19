@@ -18,7 +18,7 @@ const Landing = () => (
         </h2>
 
         <p className='text-blue-400 text-lg'>
-          You can't teach amibtion, but you can hire it!
+          You can&apos;t teach amibtion, but you can hire it!
           <br />
           Remote job opportunities for junior developers.
         </p>
@@ -30,7 +30,7 @@ const Landing = () => (
         </p>
 
         <form name='email-list' method='post'>
-          <label for='email' className='sr-only'>
+          <label htmlFor='email' className='sr-only'>
             Email input
           </label>
 
@@ -39,7 +39,7 @@ const Landing = () => (
             type='email'
             name='email'
             id='email'
-            autocomplete='off'
+            autoComplete='off'
           />
 
           <button className='btn btn-teal' type='submit'>

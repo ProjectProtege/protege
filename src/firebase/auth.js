@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { auth } from '../firebase/firebase'
+import PropTypes from 'prop-types'
+import { auth } from './firebase'
 import LoadingSpinner from '../components/LoadingSpinner'
 
 export const AuthContext = React.createContext()
@@ -28,4 +29,8 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   )
+}
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 }
