@@ -7,7 +7,7 @@ import backgroundImage from '../../assets/images/bg-pattern.png'
 import 'react-quill/dist/quill.snow.css'
 import LogoUpload from './LogoUpload'
 
-const PostAJobForm = ({ label, receivingJobData, recievingLogo2, jobData }) => {
+const PostAJobForm = ({ receivingJobData, recievingLogo2, jobData }) => {
   const [fileValue, setFileValue] = useState(undefined)
 
   function recievingLogo(logo) {
@@ -400,7 +400,6 @@ const PostAJobForm = ({ label, receivingJobData, recievingLogo2, jobData }) => {
 }
 
 PostAJobForm.propTypes = {
-  label: PropTypes.string.isRequired,
   receivingJobData: PropTypes.func.isRequired,
   recievingLogo2: PropTypes.func.isRequired,
   jobData: PropTypes.shape({
