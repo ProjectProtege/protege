@@ -1,21 +1,22 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
-function LogoUpload({ recievingLogo, ...props }) {
+function LogoUpload({ recievingLogo, setFieldValue }) {
   const [fileResult, setFileResult] = useState(undefined)
   const [fileName, setFileName] = useState('')
 
   const handleLogoChange = (e) => {
     e.preventDefault()
 
-    let reader = new FileReader()
-    let file = e.target.files[0]
+    const reader = new FileReader()
+    const file = e.target.files[0]
 
     if (file) {
       reader.readAsDataURL(file)
       reader.onloadend = () => {
         setFileName(file.name)
         setFileResult(reader.result)
-        props.setFieldValue('companyLogo', file)
+        setFieldValue('companyLogo', file)
         recievingLogo(file)
       }
     }
@@ -46,7 +47,7 @@ function LogoUpload({ recievingLogo, ...props }) {
             className='hidden'
             type='file'
             accept='image/png'
-          ></input>
+          />
         </label>
       </div>
       <div className='flex flex-col md:w-1/2'>
@@ -62,4 +63,10 @@ function LogoUpload({ recievingLogo, ...props }) {
     </div>
   )
 }
+
+LogoUpload.propTypes = {
+  recievingLogo: PropTypes.func.isRequired,
+  setFieldValue: PropTypes.func.isRequired,
+}
+
 export default LogoUpload
