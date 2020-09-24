@@ -19,17 +19,17 @@ const PostAJobForm = ({ receivingJobData, recievingLogo2, jobData }) => {
     <div className='lg:w-3/5 mx-auto'>
       <Formik
         initialValues={{
-          jobtitle: jobData ? `${jobData.jobtitle}` : '',
-          roleFocus: jobData ? `${jobData.roleFocus}` : '',
-          positionType: jobData ? `${jobData.positionType}` : '',
-          jobDescription: jobData ? `${jobData.jobDescription}` : '',
-          howToApply: jobData ? `${jobData.howToApply}` : '',
-          companyName: jobData ? `${jobData.companyName}` : '',
-          companyWebsite: jobData ? `${jobData.companyWebsite}` : '',
-          companyEmail: jobData ? `${jobData.companyEmail}` : '',
-          companyLogo: jobData ? `${jobData.companyLogo}` : '',
-          companyDescription: jobData ? `${jobData.companyDescription}` : '',
-          companyHQ: jobData ? `${jobData.companyHQ}` : '',
+          jobtitle: jobData.jobtitle,
+          roleFocus: jobData.roleFocus,
+          positionType: jobData.positionType,
+          jobDescription: jobData.jobDescription,
+          howToApply: jobData.howToApply,
+          companyName: jobData.companyName,
+          companyWebsite: jobData.companyWebsite,
+          companyEmail: jobData.companyEmail,
+          companyLogo: jobData.companyLogo,
+          companyDescription: jobData.companyDescription,
+          companyHQ: jobData.companyHQ,
         }}
         validationSchema={Yup.object({
           jobtitle: Yup.string().required('Job title is a required field.'),
@@ -418,19 +418,7 @@ PostAJobForm.propTypes = {
 }
 
 PostAJobForm.defaultProps = {
-  jobData: PropTypes.shape({
-    jobtitle: '',
-    roleFocus: '',
-    positionType: '',
-    jobDescription: '',
-    howToApply: '',
-    companyName: '',
-    companyWebsite: '',
-    companyEmail: '',
-    companyLogo: '',
-    companyDescription: '',
-    companyHQ: '',
-  }),
+  jobData: {},
 }
 
 export default PostAJobForm
