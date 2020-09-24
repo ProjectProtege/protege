@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable no-alert */
 /* eslint-disable radix */
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'

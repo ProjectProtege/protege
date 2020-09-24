@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, { useCallback, useContext } from 'react'
 import { withRouter, Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'

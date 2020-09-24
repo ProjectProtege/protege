@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { db } from '../../firebase/firebase'

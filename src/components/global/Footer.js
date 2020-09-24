@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
@@ -117,7 +118,7 @@ const Footer = () => {
               <li>
                 <a
                   className='text-blue-800 opacity-75 hover:opacity-100'
-                  href={'https://github.com/drewclem/protege/issues'}
+                  href='https://github.com/drewclem/protege/issues'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
