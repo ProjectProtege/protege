@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import * as ROUTES from '../../constants/routes'
 
@@ -9,6 +9,7 @@ import TwitterIcon from '../../assets/images/svg/twitter-brands'
 import StripeIcon from '../../assets/images/svg/Stripe'
 
 const Footer = () => {
+  const location = useLocation().pathname
   const [userEmail, setUserEmail] = useState('')
 
   async function subscribeEmail(e) {
@@ -33,7 +34,9 @@ const Footer = () => {
 
   return (
     <motion.footer
-      className='mt-20'
+      className={`mt-20 ${
+        location === '/admin' || location === '/sign-in' ? 'hidden' : null
+      }`}
       animate={{
         opacity: [0, 1],
         transition: {
