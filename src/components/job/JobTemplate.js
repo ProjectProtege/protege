@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
@@ -139,8 +140,8 @@ const JobTemplate = ({ logo, props }) => {
               data-cy='company-description-title'
               className='text-blue-900 font-semibold text-2xl mb-4'
             >
-              About
-              {props.companyName}
+              About&nbsp;
+              {companyName}
             </h4>
 
             <div
