@@ -26,8 +26,8 @@ const Home = () => {
         .get()
 
       const jobList = querySnapshot.docs.map((documentSnapshot) => {
-        let doc = documentSnapshot
-        let job = documentSnapshot.data()
+        const doc = documentSnapshot
+        const job = documentSnapshot.data()
 
         return {
           id: doc.id,
@@ -45,12 +45,12 @@ const Home = () => {
     })()
   }, [])
 
-  function activeJobs(jobs) {
-    const activeJobs = jobs.filter((job) => {
+  function activeJobs(jobsList) {
+    const active = jobsList.filter((job) => {
       return job.status !== 'inactive'
     })
 
-    return activeJobs
+    return active
   }
 
   const container = {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import * as Yup from 'yup'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import ReactQuill from 'react-quill'
@@ -6,14 +7,7 @@ import backgroundImage from '../../assets/images/bg-pattern.png'
 import 'react-quill/dist/quill.snow.css'
 import LogoUpload from './LogoUpload'
 
-const PostAJobForm = ({
-  id,
-  label,
-  receivingJobData,
-  recievingLogo2,
-  jobData,
-  ...props
-}) => {
+const PostAJobForm = ({ receivingJobData, recievingLogo2, jobData }) => {
   const [fileValue, setFileValue] = useState(undefined)
 
   function recievingLogo(logo) {
@@ -92,7 +86,7 @@ const PostAJobForm = ({
                     className='input'
                     type='text'
                     autoComplete='off'
-                  ></Field>
+                  />
 
                   <ErrorMessage
                     name='jobtitle'
@@ -222,7 +216,7 @@ const PostAJobForm = ({
                     className='input'
                     type='text'
                     placeholder='http://'
-                  ></Field>
+                  />
 
                   <ErrorMessage
                     name='howToApply'
@@ -403,6 +397,40 @@ const PostAJobForm = ({
       </Formik>
     </div>
   )
+}
+
+PostAJobForm.propTypes = {
+  receivingJobData: PropTypes.func.isRequired,
+  recievingLogo2: PropTypes.func.isRequired,
+  jobData: PropTypes.shape({
+    jobtitle: PropTypes.string,
+    roleFocus: PropTypes.string,
+    positionType: PropTypes.string,
+    jobDescription: PropTypes.string,
+    howToApply: PropTypes.string,
+    companyName: PropTypes.string,
+    companyWebsite: PropTypes.string,
+    companyEmail: PropTypes.string,
+    companyLogo: PropTypes.string,
+    companyDescription: PropTypes.string,
+    companyHQ: PropTypes.string,
+  }),
+}
+
+PostAJobForm.defaultProps = {
+  jobData: {
+    jobtitle: '',
+    roleFocus: '',
+    positionType: '',
+    jobDescription: '',
+    howToApply: '',
+    companyName: '',
+    companyWebsite: '',
+    companyEmail: '',
+    companyLogo: '',
+    companyDescription: '',
+    companyHQ: '',
+  },
 }
 
 export default PostAJobForm

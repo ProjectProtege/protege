@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import { motion } from 'framer-motion'
 import Nav from '../components/global/Nav'
 import Footer from '../components/global/Footer'
@@ -39,6 +40,10 @@ const Layout = ({ children }) => {
       <Footer />
     </div>
   )
+}
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
 }
 
 export default Layout

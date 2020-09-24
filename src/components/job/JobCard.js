@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { storage } from '../../firebase/firebase'
 import { motion } from 'framer-motion'
+import { storage } from '../../firebase/firebase'
 import JobCardImage from './JobCardImage'
 
 const JobCard = ({ job, i }) => {
   const [logoUrl, setLogoUrl] = useState()
+  const [loading, setLoading] = useState(true)
 
   const months = [
     'Jan',
@@ -23,7 +25,7 @@ const JobCard = ({ job, i }) => {
   ]
 
   const variants = {
-    show: (i) => ({
+    show: () => ({
       opacity: 1,
       y: 0,
       transition: {
@@ -48,6 +50,7 @@ const JobCard = ({ job, i }) => {
       .getDownloadURL()
       .then((url) => {
         setLogoUrl(url)
+        setLoading(false)
       })
   }, [job.companyLogo])
 
@@ -63,15 +66,11 @@ const JobCard = ({ job, i }) => {
           className='hidden md:flex flex-col shadow-md rounded-full p-2 md:w-1/6 overflow-hidden relative'
           style={{ width: 75, height: 75 }}
         >
-          <motion.div
+          <div
             style={{ width: 75, height: 75 }}
-            className='absolute bg-white'
-            animate={{
-              opacity: [1, 0],
-            }}
-            transition={{
-              delay: 0.1,
-            }}
+            className={`absolute bg-white transition ease-out duration-300 ${
+              loading ? 'opacity-100' : 'opacity-0'
+            }`}
           />
           <JobCardImage logoUrl={logoUrl} job={job} />
         </div>
@@ -114,6 +113,22 @@ const JobCard = ({ job, i }) => {
       </motion.div>
     </Link>
   )
+}
+
+JobCard.propTypes = {
+  i: PropTypes.number.isRequired,
+  job: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    companyName: PropTypes.string.isRequired,
+    companyLogo: PropTypes.string.isRequired,
+    jobTitle: PropTypes.string.isRequired,
+    roleFocus: PropTypes.string.isRequired,
+    postedAt: PropTypes.shape({
+      nanoseconds: PropTypes.number.isRequired,
+      seconds: PropTypes.number.isRequired,
+      toDate: PropTypes.func.isRequired,
+    }),
+  }).isRequired,
 }
 
 export default JobCard

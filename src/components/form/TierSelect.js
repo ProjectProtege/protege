@@ -1,7 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import TierSelectCard from './TierSelectCard'
 
-const TierSelect = ({ receivingTierClick, tier, tierError }) => {
+const TierSelect = ({ receivingTierClick, tier }) => {
   return (
     <div>
       <div className='mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-6'>
@@ -12,7 +13,8 @@ const TierSelect = ({ receivingTierClick, tier, tierError }) => {
         >
           <div className='col-span-1 text-center'>
             <div className='relative font-bold leading-none text-blue-900 text-5xl md:text-6xl'>
-              <span className='text-2xl absolute mt-4 -ml-4'>$</span>75
+              <span className='text-2xl absolute mt-4 -ml-4'>$</span>
+              75
             </div>
 
             <p className='text-teal-700 text-lg md:text-xl -mt-2 md:mb-4'>
@@ -34,7 +36,8 @@ const TierSelect = ({ receivingTierClick, tier, tierError }) => {
         >
           <div className='col-span-1 text-center'>
             <div className='relative font-bold leading-none text-blue-900 text-5xl md:text-6xl'>
-              <span className='text-2xl absolute mt-4 -ml-4'>$</span>125
+              <span className='text-2xl absolute mt-4 -ml-4'>$</span>
+              125
             </div>
             <p className='text-teal-700 text-lg md:text-xl -mt-2 md:mb-4'>
               Advanced
@@ -54,7 +57,8 @@ const TierSelect = ({ receivingTierClick, tier, tierError }) => {
         >
           <div className='col-span-1 text-center'>
             <div className='relative font-bold leading-none text-blue-900 text-5xl md:text-6xl'>
-              <span className='text-2xl absolute mt-4 -ml-4'>$</span>175
+              <span className='text-2xl absolute mt-4 -ml-4'>$</span>
+              175
             </div>
             <p className='text-teal-700 text-lg md:text-xl -mt-2 md:mb-4'>
               Premium
@@ -63,12 +67,17 @@ const TierSelect = ({ receivingTierClick, tier, tierError }) => {
 
           <ul className='text-blue-500 text-sm leading-6 col-span-2'>
             <li>All basic &amp; advanced plus ++</li>
-            <li>'Why we hire' feature on homepage</li>
+            <li>&apos;Why we hire&apos; feature on homepage</li>
           </ul>
         </TierSelectCard>
       </div>
     </div>
   )
+}
+
+TierSelect.propTypes = {
+  receivingTierClick: PropTypes.func.isRequired,
+  tier: PropTypes.string.isRequired,
 }
 
 export default TierSelect

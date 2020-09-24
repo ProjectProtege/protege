@@ -1,14 +1,16 @@
+/* eslint-disable no-alert */
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import * as ROUTES from '../../constants/routes'
+import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import * as ROUTES from '../../constants/routes'
 
 import GrayLogo from '../../assets/images/svg/protege-logo-mark-gray'
 import TwitterIcon from '../../assets/images/svg/twitter-brands'
 import StripeIcon from '../../assets/images/svg/Stripe'
 
 const Footer = () => {
-  const [email, setEmail] = useState('')
+  const location = useLocation().pathname
+  const [userEmail, setUserEmail] = useState('')
 
   async function subscribeEmail(e) {
     e.preventDefault()
@@ -16,7 +18,7 @@ const Footer = () => {
     const tagId = 1446683
     const dataToSend = {
       api_key: process.env.REACT_APP_CONVERTKIT_KEY,
-      email: email,
+      email: userEmail,
     }
     const options = {
       method: 'POST',
@@ -27,12 +29,14 @@ const Footer = () => {
       `https://api.convertkit.com/v3/tags/${tagId}/subscribe`,
       options
     ).then(alert("You've been subscribed to the Protege.dev email!"))
-    setEmail('')
+    setUserEmail('')
   }
 
   return (
     <motion.footer
-      className='mt-20'
+      className={`mt-20 ${
+        location === '/admin' || location === '/sign-in' ? 'hidden' : null
+      }`}
       animate={{
         opacity: [0, 1],
         transition: {
@@ -55,13 +59,13 @@ const Footer = () => {
             </label>
 
             <input
-              value={email}
+              value={userEmail}
               data-cy='mailing-list-signup'
               type='email'
               className='px-4 py-1 w-full md:w-2/5 my-3 md:my-0'
               id='newsletter-email'
               autoComplete='off'
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setUserEmail(e.target.value)}
               name='email'
               required
             />
@@ -117,7 +121,7 @@ const Footer = () => {
               <li>
                 <a
                   className='text-blue-800 opacity-75 hover:opacity-100'
-                  href={'https://github.com/drewclem/protege/issues'}
+                  href='https://github.com/drewclem/protege/issues'
                   target='_blank'
                   rel='noopener noreferrer'
                 >

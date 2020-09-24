@@ -1,4 +1,8 @@
+/* eslint-disable no-console */
+/* eslint-disable no-alert */
+/* eslint-disable radix */
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { loadStripe } from '@stripe/stripe-js'
@@ -18,17 +22,24 @@ import BackArrow from '../assets/images/svg/back-arrow'
 // firebase
 
 const PostAJob = ({ location }) => {
-  const tierQueryParam = findParam('t')
-    ? findParam('t').split('=')[1]
-    : process.env.REACT_APP_ADVANCED_PLAN
-
-  let history = useHistory()
+  const history = useHistory()
 
   const [status, setStatus] = useState()
 
   const [jobData, setJobData] = useState()
 
   const [companyLogo, setcompanyLogo] = useState(undefined)
+
+  function findParam(letter) {
+    return location.search
+      .replace('?', '')
+      .split('&')
+      .find((qs) => qs[0] === letter)
+  }
+
+  const tierQueryParam = findParam('t')
+    ? findParam('t').split('=')[1]
+    : process.env.REACT_APP_ADVANCED_PLAN
 
   const [tier, setTier] = useState(tierQueryParam)
 
@@ -37,13 +48,6 @@ const PostAJob = ({ location }) => {
     : 1
 
   const initialStatusValue = statusQueryParam
-
-  function findParam(letter) {
-    return location.search
-      .replace('?', '')
-      .split('&')
-      .find((qs) => qs[0] === letter)
-  }
 
   useEffect(() => {
     setStatus(initialStatusValue)
@@ -89,13 +93,13 @@ const PostAJob = ({ location }) => {
           positionType: data.jobData.positionType,
           postedAt: postDate,
           roleFocus: data.jobData.roleFocus,
-          tier: tier,
+          tier,
         })
       )
       .then(localStorage.setItem('Job ID', uid))
   }
 
-  const handlePaymentClick = async (e) => {
+  const handlePaymentClick = async () => {
     const stripe = await loadStripe(process.env.REACT_APP_STRIPE_API_KEY)
 
     sendJobToDB({ jobData, companyLogo })
@@ -138,9 +142,9 @@ const PostAJob = ({ location }) => {
 
             <p className='text-blue-700 text-sm lg:text-base lg:leading-relaxed mb-4 lg:text-center'>
               Our mission is to help those early in their tech career find their
-              next opporunities to thrive. Below is a list we've provided to
-              help you determine if the role you're hiring for fits within our
-              requirements here at Protegé.
+              next opporunities to thrive. Below is a list we&apos;ve provided
+              to help you determine if the role you&apos;re hiring for fits
+              within our requirements here at Protegé.
             </p>
 
             <ul className='leading-loose text-blue-800 mb-4 text-sm lg:text-base'>
@@ -171,14 +175,14 @@ const PostAJob = ({ location }) => {
             <p className='text-xs text-blue-600 lg:text-center lg:w-3/4 xl:w-full opacity-75'>
               Protegé.dev is a curated job board tailored towards junior
               developers. Each listing is reviewed, and approved or denied
-              before going live. If your listing is denied, we'll contact you
-              through email with suggested edits.
+              before going live. If your listing is denied, we&apos;ll contact
+              you through email with suggested edits.
             </p>
           </div>
 
           <TierSelect receivingTierClick={receivingTierClick} tier={tier} />
 
-          <p className={`text-center mb-2 text-blue-400 tracking-wide`}>
+          <p className='text-center mb-2 text-blue-400 tracking-wide'>
             Select Your Tier
           </p>
         </>
@@ -186,7 +190,8 @@ const PostAJob = ({ location }) => {
 
       {status !== 1 && (
         <h1 className='text-lg md:text-2xl text-blue-500 font-bold text-center leading-snug'>
-          Inexperienced doesn’t mean incapable. <br />
+          Inexperienced doesn’t mean incapable.
+          <br />
           Fill your role with ambition.
         </h1>
       )}
@@ -226,9 +231,10 @@ const PostAJob = ({ location }) => {
             <button
               data-cy='edit-job-button'
               className='flex items-center mb-3 text-teal-600 text-lg font-bold'
-              onClick={(e) => {
+              onClick={() => {
                 history.push('/post-a-job?s=1')
               }}
+              type='button'
             >
               <BackArrow />
               Edit
@@ -238,6 +244,7 @@ const PostAJob = ({ location }) => {
               data-cy='job-posting-approval-button'
               className='btn btn-blue mt-8'
               onClick={handlePaymentClick}
+              type='button'
             >
               Proceed to Payment
             </button>
@@ -248,6 +255,10 @@ const PostAJob = ({ location }) => {
       {status === 3 && <JobPostingConfirmation />}
     </motion.div>
   )
+}
+
+PostAJob.propTypes = {
+  location: PropTypes.func.isRequired,
 }
 
 export default PostAJob

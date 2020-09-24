@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { motion } from 'framer-motion'
 import JobCard from '../components/job/JobCard'
 import { db } from '../firebase/firebase'
@@ -8,13 +9,7 @@ const JobBoard = ({ location }) => {
   const [jobs, setJobs] = useState([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    retrieveJobs()
-  }, [])
-
   async function retrieveJobs() {
-    let activeJobs
-
     const querySnapshot = await db
       .collection('jobs')
       .where('approved', '==', true)
@@ -22,8 +17,8 @@ const JobBoard = ({ location }) => {
       .get()
 
     const jobList = querySnapshot.docs.map((documentSnapshot) => {
-      let doc = documentSnapshot
-      let job = documentSnapshot.data()
+      const doc = documentSnapshot
+      const job = documentSnapshot.data()
 
       return {
         id: doc.id,
@@ -37,20 +32,27 @@ const JobBoard = ({ location }) => {
       }
     })
 
-    activeJobs = jobList.filter((job) => {
+    const active = jobList.filter((job) => {
       return job.status !== 'inactive'
     })
 
-    setJobs(activeJobs)
+    setJobs(active)
     setLoading(false)
   }
 
-  function filteredJobs(jobs, jobFilter) {
-    const filteredJobs = jobs.filter((job) => {
+  /**
+   * Retrieves all active jobs from firebase
+   */
+  useEffect(() => {
+    retrieveJobs()
+  }, [])
+
+  function filteredJobs(jobList, jobFilter) {
+    const filtered = jobList.filter((job) => {
       return job.roleFocus === jobFilter
     })
 
-    return filteredJobs
+    return filtered
   }
 
   const filterQueryParam = location.search
@@ -147,6 +149,10 @@ const JobBoard = ({ location }) => {
       </div>
     </div>
   )
+}
+
+JobBoard.propTypes = {
+  location: PropTypes.func.isRequired,
 }
 
 export default JobBoard

@@ -1,5 +1,7 @@
+/* eslint-disable no-console */
 import React from 'react'
 import * as Yup from 'yup'
+import PropTypes from 'prop-types'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { motion, AnimatePresence } from 'framer-motion'
 import ReactQuill from 'react-quill'
@@ -91,6 +93,7 @@ const AdminEditJob = ({ id, jobData, receivingCancel, editNotification }) => {
               })
               .catch((err) => {
                 editNotification(uuid, false, id)
+                console.log(err)
               })
           }}
         >
@@ -102,7 +105,7 @@ const AdminEditJob = ({ id, jobData, receivingCancel, editNotification }) => {
                     Edit Job
                   </h2>
 
-                  <button onClick={() => receivingCancel()}>
+                  <button onClick={() => receivingCancel()} type='button'>
                     <p className='text-error-full opacity-50 hover:opacity-100 transition ease-in-out duration-150'>
                       Cancel
                     </p>
@@ -124,7 +127,7 @@ const AdminEditJob = ({ id, jobData, receivingCancel, editNotification }) => {
                       className='input'
                       type='text'
                       autoComplete='off'
-                    ></Field>
+                    />
 
                     <ErrorMessage
                       name='jobtitle'
@@ -254,7 +257,7 @@ const AdminEditJob = ({ id, jobData, receivingCancel, editNotification }) => {
                       className='input'
                       type='text'
                       placeholder='http://'
-                    ></Field>
+                    />
 
                     <ErrorMessage
                       name='howToApply'
@@ -401,6 +404,28 @@ const AdminEditJob = ({ id, jobData, receivingCancel, editNotification }) => {
       </motion.div>
     </AnimatePresence>
   )
+}
+
+AdminEditJob.propTypes = {
+  id: PropTypes.number.isRequired,
+  jobData: PropTypes.shape({
+    jobtitle: PropTypes.string,
+    roleFocus: PropTypes.string,
+    positionType: PropTypes.string,
+    jobDescription: PropTypes.string,
+    howToApply: PropTypes.string,
+    companyName: PropTypes.string,
+    companyWebsite: PropTypes.string,
+    companyEmail: PropTypes.string,
+    companyDescription: PropTypes.string,
+    companyHQ: PropTypes.string,
+  }),
+  receivingCancel: PropTypes.func.isRequired,
+  editNotification: PropTypes.func.isRequired,
+}
+
+AdminEditJob.defaultProps = {
+  jobData: {},
 }
 
 export default AdminEditJob

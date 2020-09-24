@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { motion, AnimatePresence } from 'framer-motion'
 
-const AdminJobCard = ({ job, i, onclick, deleteJobForever }) => {
+const AdminJobCard = ({ job, i, onclick }) => {
   const [status, setStatus] = useState('')
 
   const variants = {
-    show: (i) => ({
+    show: () => ({
       opacity: 1,
       y: 0,
       transition: {
@@ -42,7 +43,7 @@ const AdminJobCard = ({ job, i, onclick, deleteJobForever }) => {
     months[postDate.getMonth()]
   } ${postDate.getDate()}, ${postDate.getFullYear()}`
 
-  function handleClick(e) {
+  function handleClick() {
     onclick(job.id)
   }
 
@@ -73,11 +74,12 @@ const AdminJobCard = ({ job, i, onclick, deleteJobForever }) => {
         <div className='col-span-2 flex'>
           <p
             className={`font-light rounded-full px-4 shadow-inner ${
-              status === 'active'
-                ? 'text-teal-900 bg-teal-100'
-                : status === 'inactive'
+              status === 'active' ? 'text-teal-900 bg-teal-100' : null
+            } ${
+              status === 'inactive'
                 ? 'text-error-full bg-error-50'
                 : 'text-gray-500'
+            }
             } capitalize truncate`}
           >
             {status}
@@ -95,6 +97,23 @@ const AdminJobCard = ({ job, i, onclick, deleteJobForever }) => {
       </motion.li>
     </AnimatePresence>
   )
+}
+
+AdminJobCard.propTypes = {
+  job: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    approved: PropTypes.bool.isRequired,
+    companyName: PropTypes.string.isRequired,
+    jobTitle: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    postedAt: PropTypes.shape({
+      nanoseconds: PropTypes.number.isRequired,
+      seconds: PropTypes.number.isRequired,
+      toDate: PropTypes.func.isRequired,
+    }),
+  }).isRequired,
+  onclick: PropTypes.func.isRequired,
+  i: PropTypes.number.isRequired,
 }
 
 export default AdminJobCard

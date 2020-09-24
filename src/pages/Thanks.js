@@ -14,7 +14,7 @@ const Thanks = () => (
       We appreciate your input and the team will review it soon.
       <br />
       <br />
-      We'll reach out if we have any follow up!
+      We&apos;ll reach out if we have any follow up!
     </p>
 
     <Link to='/' className='text-teal-700 underline'>

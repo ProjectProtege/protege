@@ -1,17 +1,29 @@
 import React, { useEffect, useState } from 'react'
-import { storage } from '../../firebase/firebase'
+import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
+import { storage } from '../../firebase/firebase'
 
 const JobTemplate = ({ logo, props }) => {
-  let { pathname } = useLocation()
+  const {
+    howToApply,
+    jobDescription,
+    companyDescription,
+    companyName,
+    companyWebsite,
+    roleFocus,
+    jobtitle,
+    positionType,
+  } = props
+
+  const { pathname } = useLocation()
   const isPreview = pathname.indexOf('/job-board/') !== 0
 
   const [companyLogo, setCompanyLogo] = useState(undefined)
   const [isAdmin, setIsAdmin] = useState(false)
 
-  function readLogo(logo) {
-    let reader = new FileReader()
-    let file = logo
+  function readLogo(logoFile) {
+    const reader = new FileReader()
+    const file = logoFile
     if (file) {
       reader.readAsDataURL(file)
       reader.onloadend = () => {
@@ -41,24 +53,36 @@ const JobTemplate = ({ logo, props }) => {
     LI: 'pl-2 text-blue-700',
   }
 
+  function checkAdmin() {
+    if (pathname === '/admin') {
+      setIsAdmin(true)
+    }
+  }
+
   useEffect(() => {
     // Cleans up the text provided by QuillJS wysiwyg
     function styleChildren(children) {
       children.forEach((child) => {
+        const el = child
         const childTag = child.tagName
-        child.style = ''
-        child.classList = quillStyle[childTag]
+
+        el.style = ''
+        el.classList = quillStyle[childTag]
         if (child.hasChildNodes()) {
           const grandChildren = [...child.children]
           styleChildren(grandChildren)
         }
       })
     }
-    const jobDescription = document.getElementById('jobDesc')
-    const jobChildren = [...jobDescription.children]
+
+    const jobDescriptionParent = document.getElementById('jobDesc')
+
+    const jobChildren = [...jobDescriptionParent.children]
     styleChildren(jobChildren)
-    const companyDescription = document.getElementById('companyDesc')
-    const companyChildren = [...companyDescription.children]
+
+    const companyDescriptionParent = document.getElementById('companyDesc')
+
+    const companyChildren = [...companyDescriptionParent.children]
     styleChildren(companyChildren)
 
     if (isPreview) {
@@ -71,12 +95,6 @@ const JobTemplate = ({ logo, props }) => {
 
     checkAdmin()
   })
-
-  function checkAdmin() {
-    if (pathname === '/admin') {
-      setIsAdmin(true)
-    }
-  }
 
   function createMarkup(text) {
     return { __html: text }
@@ -91,14 +109,16 @@ const JobTemplate = ({ logo, props }) => {
               data-cy='job-title'
               className='text-blue-900 font-bold text-3xl'
             >
-              {props.jobtitle}
+              {jobtitle}
             </h2>
 
             <div
               data-cy='role-focus-and-position-type'
               className='text-blue-600 uppercase tracking-tight text-md mb-6'
             >
-              {props.roleFocus} • {props.positionType}
+              {roleFocus}
+              <span>•</span>
+              {positionType}
             </div>
 
             <h3
@@ -111,23 +131,24 @@ const JobTemplate = ({ logo, props }) => {
             <div
               data-cy='job-description'
               id='jobDesc'
-              dangerouslySetInnerHTML={createMarkup(props.jobDescription)}
+              dangerouslySetInnerHTML={createMarkup(jobDescription)}
               className='mb-6'
-            ></div>
+            />
 
             <h4
               data-cy='company-description-title'
               className='text-blue-900 font-semibold text-2xl mb-4'
             >
-              About {props.companyName}
+              About
+              {props.companyName}
             </h4>
 
             <div
               data-cy='company-description'
               className='mt-2 text-blue-300'
               id='companyDesc'
-              dangerouslySetInnerHTML={createMarkup(props.companyDescription)}
-            ></div>
+              dangerouslySetInnerHTML={createMarkup(companyDescription)}
+            />
           </div>
 
           {!isAdmin ? (
@@ -140,7 +161,7 @@ const JobTemplate = ({ logo, props }) => {
                       id='companyLogo'
                       className='w-full'
                       src={companyLogo}
-                      alt={`${props.companyName} logo`}
+                      alt={`${companyName} logo`}
                     />
                   </div>
                 ) : null}
@@ -149,26 +170,25 @@ const JobTemplate = ({ logo, props }) => {
                   data-cy='company-name-sidebar'
                   className='text-blue-900 font-semibold text-lg mb-3'
                 >
-                  {props.companyName}
+                  {companyName}
                 </h4>
 
                 <div className='uppercase text-blue-900 tracking-tight text-md'>
                   <a
                     data-cy='company-website'
                     className='underline'
-                    href={props.companyWebsite}
+                    href={companyWebsite}
                   >
                     <p className='opacity-75 hover:opacity-100'>
                       Visit website
                     </p>
                   </a>
-                  <a data-cy='how-to-apply' href={props.howToApply}>
+                  <a data-cy='how-to-apply' href={howToApply}>
                     <button
                       disabled={isPreview}
-                      className={
-                        'hidden md:block btn btn-teal mt-8 w-full' +
-                        (isPreview ? ' btn-disabled' : '')
-                      }
+                      className={`hidden md:block btn btn-teal mt-8 w-full
+                        ${isPreview ? ' btn-disabled' : ''}`}
+                      type='button'
                     >
                       Apply
                     </button>
@@ -180,13 +200,14 @@ const JobTemplate = ({ logo, props }) => {
         </div>
 
         <div>
-          <a data-cy='how-to-apply-bottom' href={props.howToApply}>
+          <a data-cy='how-to-apply-bottom' href={howToApply}>
             <button
               disabled={isPreview}
-              className={
-                'btn btn-teal mt-8 w-full md:w-auto' +
-                (isPreview ? ' btn-disabled' : '')
+              className={`btn btn-teal mt-8 w-full md:w-auto ${
+                isPreview ? ' btn-disabled' : ''
               }
+              `}
+              type='button'
             >
               Apply
             </button>
@@ -195,6 +216,33 @@ const JobTemplate = ({ logo, props }) => {
       </div>
     </>
   )
+}
+
+JobTemplate.propTypes = {
+  logo: PropTypes.shape({}),
+  props: PropTypes.shape({}).isRequired,
+  howToApply: PropTypes.string,
+  companyName: PropTypes.string,
+  companyWebsite: PropTypes.string,
+  companyLogo: PropTypes.string,
+  roleFocus: PropTypes.string,
+  jobtitle: PropTypes.string,
+  positionType: PropTypes.string,
+  jobDescription: PropTypes.string,
+  companyDescription: PropTypes.string,
+}
+
+JobTemplate.defaultProps = {
+  logo: null,
+  howToApply: '',
+  companyName: '',
+  companyWebsite: '',
+  companyLogo: '',
+  roleFocus: '',
+  jobtitle: '',
+  positionType: '',
+  jobDescription: '',
+  companyDescription: '',
 }
 
 export default JobTemplate

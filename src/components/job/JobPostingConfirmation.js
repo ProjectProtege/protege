@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { db } from '../../firebase/firebase'
 
-const JobPostingConfirmation = ({ props }) => {
+const JobPostingConfirmation = () => {
   useEffect(() => {
     const jobId = localStorage.getItem('Job ID')
 
@@ -28,11 +28,11 @@ const JobPostingConfirmation = ({ props }) => {
       </p>
 
       <p className='mt-8  text-blue-900'>
-        Thank you, again, for choosing to post with{' '}
-        <span className='text-teal-600 font-bold'>Protege.dev</span>. We
-        strongly believe that companies will have a greater ROI from their hires
-        when they have the flexibility to bring someone on whose ambition and
-        drive outweigh their experience.
+        Thank you, again, for choosing to post with&nbsp;
+        <span className='text-teal-600 font-bold'>Protege.dev</span>
+        .We strongly believe that companies will have a greater ROI from their
+        hires when they have the flexibility to bring someone on whose ambition
+        and drive outweigh their experience.
       </p>
 
       <p className='mt-8  text-blue-900'>
@@ -44,14 +44,14 @@ const JobPostingConfirmation = ({ props }) => {
       <ul className='mt-8 list-inside'>
         <li className='text-blue-900'>
           - If you fill the position and need the listing removed, simply email
-          us at{' '}
+          us at&nbsp;
           <a className='font-bold' href='mailto:protege.dev@gmail.com'>
             protege.dev@gmail.com
           </a>
         </li>
 
         <li className='mt-2 text-blue-900'>
-          - Be sure to announce your new posting on Twitter and tag{' '}
+          - Be sure to announce your new posting on Twitter and tag&nbsp;
           <a className='font-bold' href='https://twitter.com/devprotege'>
             @DevProtege
           </a>
@@ -60,18 +60,19 @@ const JobPostingConfirmation = ({ props }) => {
         </li>
 
         <li className='mt-2 text-blue-900'>
-          - If you need to correct something on your listing, email{' '}
+          - If you need to correct something on your listing, email&nbsp;
           <a className='font-bold' href='mailto:protege.dev@gmail.com'>
             protege.dev@gmail.com
-          </a>{' '}
-          with the company name, job title, and the changes needed.
+          </a>
+          &nbsp; with the company name, job title, and the changes needed.
         </li>
       </ul>
 
-      <button className='btn btn-teal mt-12'>
+      <button className='btn btn-teal mt-12' type='button'>
         <Link to='/'>Back to homepage</Link>
       </button>
     </div>
   )
 }
+
 export default JobPostingConfirmation
