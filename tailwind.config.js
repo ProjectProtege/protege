@@ -12,6 +12,7 @@ module.exports = {
       './src/components/home/*.js',
       './src/components/job/*.js',
       './src/components/*.js',
+      './src/components/contributors/*.js',
       './src/layouts/*.js',
       './src/pages/Admin/*.js',
       './src/pages/*.js',

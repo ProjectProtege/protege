@@ -1,5 +1,7 @@
+/* eslint-disable no-alert */
 import React, { useCallback, useContext } from 'react'
 import { withRouter, Redirect } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import { motion } from 'framer-motion'
 import { auth } from '../firebase/firebase'
 import { AuthContext } from '../firebase/auth'
@@ -82,6 +84,10 @@ const SignIn = ({ history }) => {
       </motion.div>
     </div>
   )
+}
+
+SignIn.propTypes = {
+  history: PropTypes.func.isRequired,
 }
 
 export default withRouter(SignIn)
