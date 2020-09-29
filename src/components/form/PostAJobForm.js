@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import * as Yup from 'yup'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
@@ -9,10 +9,24 @@ import LogoUpload from './LogoUpload'
 
 const PostAJobForm = ({ receivingJobData, recievingLogo2, jobData }) => {
   const [fileValue, setFileValue] = useState(undefined)
+  const [linkType, setLinkType] = useState('url')
+  const [placeholder, setPlaceholder] = useState('')
 
   function recievingLogo(logo) {
     setFileValue(logo)
     recievingLogo2(logo)
+  }
+
+  useEffect(() => {
+    if (linkType === 'url') {
+      setPlaceholder('http://')
+    } else {
+      setPlaceholder('mailto:')
+    }
+  }, [linkType])
+
+  function handleChange(e) {
+    setLinkType(e.target.value)
   }
 
   return (
@@ -210,12 +224,37 @@ const PostAJobForm = ({ receivingJobData, recievingLogo2, jobData }) => {
                     Email Address or link to 3rd party application page
                   </span>
 
+                  <div className='text-sm mb-3 text-blue-600'>
+                    <label className='mr-6'>
+                      <input
+                        type='radio'
+                        name='link-type'
+                        className='mr-2'
+                        value='url'
+                        checked={linkType === 'url'}
+                        onChange={handleChange}
+                      />
+                      URL
+                    </label>
+                    <label>
+                      <input
+                        type='radio'
+                        name='link-type'
+                        className='mr-2'
+                        value='email'
+                        checked={linkType === 'email'}
+                        onChange={handleChange}
+                      />
+                      Email
+                    </label>
+                  </div>
+
                   <Field
                     id='how-to-apply'
                     name='howToApply'
                     className='input'
                     type='text'
-                    placeholder='http://'
+                    placeholder={placeholder}
                   />
 
                   <ErrorMessage
