@@ -1,0 +1,18 @@
+# This GitHub action posts an automated message to new pull requests when they are created
+
+name: Create Comment
+on:
+  issues:
+    types: [opened]
+jobs:
+  comment:
+    name: Comment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Automatic Comment
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            Thanks so much for submitting an issue! We have received it, will review it soon and follow up.
+            For our contibution guidelines, please check out our [contributors guide](https://github.com/drewclem/protege/blob/develop/CONTRIBUTING.md).
