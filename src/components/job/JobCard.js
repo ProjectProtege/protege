@@ -60,10 +60,10 @@ const JobCard = ({ job, i }) => {
         variants={variants}
         custom={i}
         animate='show'
-        className='flex mb-6 md:mb-12 px-3 md:px-6 py-4 bg-white shadow border-l-4 border-teal-500 transform hover:scale-105 hover:shadow-lg transition duration-150 ease-in-out'
+        className='flex px-3 py-4 mb-6 transition duration-150 ease-in-out transform bg-white border-l-4 border-teal-500 shadow md:mb-12 md:px-6 hover:scale-105 hover:shadow-lg'
       >
         <div
-          className='hidden md:flex flex-col shadow-md rounded-full p-2 md:w-1/6 overflow-hidden relative'
+          className='relative flex-col hidden p-2 overflow-hidden rounded-full shadow-md md:flex md:w-1/6'
           style={{ width: 75, height: 75 }}
         >
           <div
@@ -75,19 +75,19 @@ const JobCard = ({ job, i }) => {
           <JobCardImage logoUrl={logoUrl} job={job} />
         </div>
 
-        <div className='w-full md:w-11/12 flex justify-between md:pl-6'>
-          <div className='flex flex-col w-10/12 lg:w-8/12 justify-between'>
+        <div className='flex justify-between w-full md:w-11/12 md:pl-6'>
+          <div className='flex flex-col justify-between w-10/12 lg:w-8/12'>
             <div>
               <p
                 data-cy={`job-card-company-name-${job.id}`}
-                className='text-sm text-blue-500 mb-1'
+                className='mb-1 text-sm text-blue-700'
               >
                 {job.companyName}
               </p>
 
               <h3
                 data-cy={`job-card-job-title-${job.id}`}
-                className='md:-mt-1 text-blue-900 leading-tight text-lg md:text-xl font-semibold'
+                className='text-lg font-semibold leading-tight text-blue-900 md:-mt-1 md:text-xl'
               >
                 {job.jobTitle}
               </h3>
@@ -95,16 +95,16 @@ const JobCard = ({ job, i }) => {
 
             <p
               data-cy={`job-card-role-focus-${job.id}`}
-              className='text-teal-700'
+              className='text-teal-900'
             >
               {job.roleFocus}
             </p>
           </div>
 
-          <div className='text-right flex items-center'>
+          <div className='flex items-center text-right'>
             <p
               data-cy={`job-card-formatted-date-${job.id}`}
-              className='text-teal-600 font-semibold md:text-lg'
+              className='font-semibold text-teal-900 md:text-lg'
             >
               {formattedPostDate}
             </p>
