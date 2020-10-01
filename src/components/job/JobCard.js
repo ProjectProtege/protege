@@ -85,12 +85,12 @@ const JobCard = ({ job, i }) => {
                 {job.companyName}
               </p>
 
-              <h3
+              <h2
                 data-cy={`job-card-job-title-${job.id}`}
                 className='text-lg font-semibold leading-tight text-blue-900 md:-mt-1 md:text-xl'
               >
                 {job.jobTitle}
-              </h3>
+              </h2>
             </div>
 
             <p
