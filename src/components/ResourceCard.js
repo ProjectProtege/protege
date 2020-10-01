@@ -7,7 +7,7 @@ const ResourceCard = (props) => {
 
   return (
     <div className='p-4 sm:p-2'>
-      <div className='max-w-xs rounded overflow-hidden shadow-md hover:shadow-lg hover:scale-105 transform transition duration-150 ease-in-out cursor-pointer'>
+      <div className='max-w-xs overflow-hidden transition duration-150 ease-in-out transform rounded shadow-md cursor-pointer hover:shadow-lg hover:scale-105'>
         <a
           href={`http://${resourceUrl}`}
           target='_blank'
@@ -17,7 +17,7 @@ const ResourceCard = (props) => {
             className='w-full'
             // eslint-disable-next-line import/no-dynamic-require
             src={require(`../assets/images/resources/${resourceImage}`)}
-            alt='Resource screenshot of website'
+            alt={`${title} screenshot of website`}
           />
         </a>
         <div className='px-6 py-4'>
@@ -26,15 +26,15 @@ const ResourceCard = (props) => {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <div className='font-bold text-xl mb-2 text-blue-900'>{title}</div>
+            <div className='mb-2 text-xl font-bold text-blue-900'>{title}</div>
           </a>
-          <p className='text-blue-700 overflow-hidden text-base '>
+          <p className='overflow-hidden text-base text-blue-700 '>
             {description}
           </p>
         </div>
       </div>
       <div className='px-6 py-4'>
-        <span className='inline-block bg-teal-100 rounded-full px-3 py-1 text-sm font-semibold text-teal-900'>
+        <span className='inline-block px-3 py-1 text-sm font-semibold text-blue-900 bg-teal-100 rounded-full'>
           {`#${tag}`}
         </span>
       </div>
