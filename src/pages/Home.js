@@ -76,10 +76,10 @@ const Home = () => {
         }}
         src={heroBG}
         alt=''
-        className='hidden md:block absolute top-0 left-0 w-full'
+        className='absolute top-0 left-0 hidden w-full md:block'
       />
 
-      <div className='relative pt-20 lg:pt-32 px-2'>
+      <div className='relative px-2 pt-20 lg:pt-32'>
         <motion.div
           animate={{
             opacity: [0, 1],
@@ -92,9 +92,9 @@ const Home = () => {
         >
           <FindYourNext />
 
-          <div className='flex md:w-3/4 flex-col text-center mx-auto mt-4'>
-            <p className='md:tracking-wide lg:w-3/4 xl:w-1/2 mx-auto md:text-lg text-blue-700 mb-6'>
-              <span className='md:text-2xl font-medium'>
+          <div className='flex flex-col mx-auto mt-4 text-center md:w-3/4'>
+            <p className='mx-auto mb-6 text-blue-700 md:tracking-wide lg:w-3/4 xl:w-1/2 md:text-lg'>
+              <span className='font-medium md:text-2xl'>
                 Remote jobs for junior developers.
               </span>
               <br />
@@ -102,14 +102,14 @@ const Home = () => {
               jobs listed here are geared for those hungry to work and learn.
             </p>
 
-            <button className='btn btn-teal mx-auto' type='button'>
+            <button className='mx-auto btn btn-teal' type='button'>
               <Link to='/job-board'>Find a Job</Link>
             </button>
           </div>
         </motion.div>
 
         <motion.div
-          className='mt-12 mb-32 lg:pt-16 mx-auto min-h-screen'
+          className='min-h-screen mx-auto mt-12 mb-32 lg:pt-16'
           style={{ maxWidth: 680 }}
           animate={{
             opacity: [0, 1],
@@ -120,7 +120,7 @@ const Home = () => {
             duration: 0.15,
           }}
         >
-          <h2 className='text-center text-2xl text-blue-900 font-semibold mb-8'>
+          <h2 className='mb-8 text-2xl font-semibold text-center text-blue-900'>
             Latest Opportunities
           </h2>
 
@@ -142,23 +142,23 @@ const Home = () => {
         </motion.div>
 
         <div className='flex flex-col items-center'>
-          <h2 className='text-center text-2xl text-blue-500 font-bold leading-normal mb-8'>
+          <h2 className='mb-8 text-2xl font-bold leading-normal text-center text-blue-500'>
             Broadcast to unmatched ambition,
             <br />
-            <span className='text-teal-700 text-5xl tracking-wide'>
+            <span className='text-5xl tracking-wide text-teal-800'>
               Affordably.
             </span>
           </h2>
 
           <TierSelect receivingTierClick={receivingTierClick} tier={tier} />
 
-          <div className='mt-6 flex flex-col items-center'>
-            <h3 className='text-lg text-blue-300 text-center'>
+          <div className='flex flex-col items-center mt-6'>
+            <h3 className='text-lg text-center text-blue-700'>
               Get started on your candidate search today.
             </h3>
 
             <Link to={`/post-a-job?s=1&t=${tier}`}>
-              <button className='btn btn-teal mt-3' type='button'>
+              <button className='mt-3 btn btn-teal' type='button'>
                 Post a Job
               </button>
             </Link>
