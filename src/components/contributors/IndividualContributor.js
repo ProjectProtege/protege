@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 const IndividualContributor = ({ props }) => {
   const {
     name,
+    login,
     twitter_username,
     avatar_url,
     blog,
@@ -23,33 +24,32 @@ const IndividualContributor = ({ props }) => {
   }
 
   return (
-    <div className='flex items-center px-4 py-6 text-center bg-white shadow border-l-4 border-teal-500 transition duration-150 ease-in-out'>
-      <div className='flex flex-col ml-2 items-center justify-between'>
+    <div className='flex items-center px-4 py-6 text-center transition duration-150 ease-in-out bg-white border-l-4 border-teal-500 shadow'>
+      <div className='flex flex-col items-center justify-between ml-2'>
         <img
-          className='rounded-full h-24 w-24 mx-auto'
+          className='w-24 h-24 mx-auto rounded-full'
           src={avatar_url}
-          alt={`${name} avatar`}
+          alt={`${name || login} avatar`}
           loading='lazy'
         />
       </div>
-      <div className='flex flex-col ml-6 items-start'>
+      <div className='flex flex-col items-start ml-6'>
         {name ? (
-          <span className='font-semibold mb-2 text-blue-900'>{name}</span>
+          <span className='mb-2 font-semibold text-blue-900'>{name}</span>
         ) : (
-          <span className='font-semibold mb-2 text-blue-900'>
-            {props.login}
-          </span>
+          <span className='mb-2 font-semibold text-blue-900'>{login}</span>
         )}
         <div className='flex items-center mb-2'>
           {twitter_username && (
             <a
               href={`https://twitter.com/${twitter_username}`}
-              className='flex mr-4 items-center text-teal-500 hover:text-teal-800 transition-colors ease-in-out duration-75 w-auto'
+              className='flex items-center w-auto mr-4 text-teal-500 transition-colors duration-75 ease-in-out hover:text-teal-800'
               target='_blank'
               rel='noopener noreferrer'
+              aria-label={`${name || login}'s twitter`}
             >
               <svg
-                className='fill-current flex-shrink w-4'
+                className='flex-shrink w-4 fill-current'
                 aria-hidden='true'
                 focusable='false'
                 data-prefix='fab'
@@ -70,9 +70,10 @@ const IndividualContributor = ({ props }) => {
             className='mr-4 text-teal-500 hover:text-teal-800'
             target='_blank'
             rel='noopener noreferrer'
+            aria-label={`${name || login}'s GitHub`}
           >
             <svg
-              className='fill-current flex-shrink w-4'
+              className='flex-shrink w-4 fill-current'
               aria-hidden='true'
               focusable='false'
               data-prefix='fab'
@@ -91,9 +92,10 @@ const IndividualContributor = ({ props }) => {
             <a
               href={blogLinkFormatter(blog)}
               className='text-teal-500 hover:text-teal-800'
+              aria-label={`${name || login}'s blog`}
             >
               <svg
-                className='fill-current flex-shrink w-4'
+                className='flex-shrink w-4 fill-current'
                 aria-hidden='true'
                 focusable='false'
                 data-prefix='fab'
@@ -109,7 +111,7 @@ const IndividualContributor = ({ props }) => {
             </a>
           )}
         </div>
-        <span className='text-blue-500'>
+        <span className='text-blue-700'>
           {contributions}
           &nbsp;
           {contributions > 1 ? 'Commits' : 'Commit'}
@@ -122,6 +124,7 @@ const IndividualContributor = ({ props }) => {
 IndividualContributor.propTypes = {
   props: PropTypes.shape({}).isRequired,
   name: PropTypes.string,
+  login: PropTypes.string,
   twitter_username: PropTypes.string,
   avatar_url: PropTypes.string,
   blog: PropTypes.string,
@@ -131,6 +134,7 @@ IndividualContributor.propTypes = {
 
 IndividualContributor.defaultProps = {
   name: 'PropTypes.string',
+  login: 'PropTypes.string',
   twitter_username: 'PropTypes.string',
   avatar_url: 'PropTypes.string',
   blog: 'PropTypes.string',
