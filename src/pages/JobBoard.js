@@ -82,8 +82,8 @@ const JobBoard = ({ location }) => {
   }
 
   return (
-    <div className='container mx-auto pt-32 px-2 md:px-0 min-h-screen'>
-      <div className='w-full lg:w-3/5 mx-auto'>
+    <div className='container min-h-screen px-2 pt-32 mx-auto md:px-0'>
+      <div className='w-full mx-auto lg:w-3/5'>
         <motion.div
           className='flex justify-between mb-6'
           animate={{
@@ -95,18 +95,18 @@ const JobBoard = ({ location }) => {
             ease: 'easeIn',
           }}
         >
-          <h1 className='text-2xl font-medium text-teal-600 mb-6'>
+          <h1 className='mb-6 text-2xl font-medium text-teal-800'>
             {jobFilter ? `${jobFilter} Jobs` : 'All Jobs'}
           </h1>
 
-          <div className='w-1/2 md:w-1/4 relative'>
+          <div className='relative w-1/2 md:w-1/4'>
             <label htmlFor='filter-by' className='sr-only'>
               Filter
             </label>
 
             <div className='select-wrap'>
               <select
-                className='input input-select rounded-none justify-end'
+                className='justify-end rounded-none input input-select'
                 id='filter-by'
                 placeholder='Filter By'
                 onChange={(event) => setJobFilter(event.target.value)}
