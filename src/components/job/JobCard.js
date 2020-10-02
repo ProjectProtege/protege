@@ -95,7 +95,7 @@ const JobCard = ({ job, i }) => {
 
             <p
               data-cy={`job-card-role-focus-${job.id}`}
-              className='text-teal-900'
+              className='text-teal-700'
             >
               {job.roleFocus}
             </p>
@@ -104,7 +104,7 @@ const JobCard = ({ job, i }) => {
           <div className='flex items-center text-right'>
             <p
               data-cy={`job-card-formatted-date-${job.id}`}
-              className='font-semibold text-teal-900 md:text-lg'
+              className='font-semibold text-teal-700 md:text-lg'
             >
               {formattedPostDate}
             </p>
