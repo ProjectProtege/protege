@@ -12,7 +12,7 @@ const GetInTouch = () => {
   const encode = (data) => {
     return Object.keys(data)
       .map(
-        (key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key])
+        (key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
       )
       .join('&')
   }
@@ -24,7 +24,7 @@ const GetInTouch = () => {
     fetch('/', {
       method: 'POST',
       headers: { 'Content-type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'contact', ...formData }),
+      body: encode({ 'form-name': 'contact', formData }),
     })
       .then((res) => {
         history.push('/thanks')
@@ -34,7 +34,7 @@ const GetInTouch = () => {
 
   return (
     <motion.div
-      className='container mx-auto pt-32 px-2 md:px-0'
+      className='container px-2 pt-32 mx-auto md:px-0'
       style={{ maxWidth: 680 }}
       initial={{
         opacity: 0,
@@ -49,11 +49,11 @@ const GetInTouch = () => {
         ease: 'easeIn',
       }}
     >
-      <h1 className='text-2xl font-semibold text-blue-900 mb-3'>
+      <h1 className='mb-3 text-2xl font-semibold text-blue-900'>
         We&apos;d love to hear from you!
       </h1>
 
-      <p className='text-blue-600 mb-12'>
+      <p className='mb-12 text-blue-700'>
         Feedback? Complaints? Feature requests? Questions? We want to hear them
         all!
         <br />
@@ -64,7 +64,7 @@ const GetInTouch = () => {
       </p>
 
       <motion.div
-        className='shadow-md border-t-4 border-teal-500'
+        className='border-t-4 border-teal-500 shadow-md'
         initial={{
           opacity: 0,
           y: -5,
@@ -79,7 +79,7 @@ const GetInTouch = () => {
       >
         <h2
           style={{ backgroundImage: `url(${backgroundImage})` }}
-          className='bg-cover text-blue-900 font-bold p-4 bg-blue-100 text-xl'
+          className='p-4 text-xl font-bold text-blue-900 bg-blue-100 bg-cover'
         >
           Get in Touch
         </h2>
@@ -91,11 +91,11 @@ const GetInTouch = () => {
           data-netlify='true'
         >
           <div className='p-4'>
-            <div className='md:flex mb-3'>
-              <div className='flex flex-col md:w-1/2 md:mr-6 mb-3 md:mb-0'>
+            <div className='mb-3 md:flex'>
+              <div className='flex flex-col mb-3 md:w-1/2 md:mr-6 md:mb-0'>
                 <label
                   htmlFor='name'
-                  className='text-blue-900 font-semibold mb-2'
+                  className='mb-2 font-semibold text-blue-900'
                 >
                   Name
                 </label>
@@ -114,7 +114,7 @@ const GetInTouch = () => {
               <div className='flex flex-col md:w-1/2'>
                 <label
                   htmlFor='email'
-                  className='text-blue-900 font-semibold mb-2'
+                  className='mb-2 font-semibold text-blue-900'
                 >
                   Email
                 </label>
@@ -134,7 +134,7 @@ const GetInTouch = () => {
             <div className='flex flex-col'>
               <label
                 htmlFor='comment'
-                className='text-blue-900 font-semibold mb-2'
+                className='mb-2 font-semibold text-blue-900'
               >
                 Comment
               </label>
@@ -154,7 +154,7 @@ const GetInTouch = () => {
 
             <input type='hidden' name='form-name' value='contact' />
 
-            <button type='submit' className='mt-6 btn btn-teal w-full md:w-32'>
+            <button type='submit' className='w-full mt-6 btn btn-teal md:w-32'>
               Send
             </button>
           </div>

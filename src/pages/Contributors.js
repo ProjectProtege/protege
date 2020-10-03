@@ -19,7 +19,7 @@ const Contributors = () => {
 
   return (
     <motion.div
-      className='container mx-auto pt-32 px-2 md:px-0'
+      className='container px-2 pt-32 mx-auto md:px-0'
       style={{ maxWidth: 680 }}
       initial={{
         opacity: 0,
@@ -34,11 +34,11 @@ const Contributors = () => {
         ease: 'easeIn',
       }}
     >
-      <h1 className='text-2xl font-semibold text-blue-900 mb-3'>
+      <h1 className='mb-3 text-2xl font-semibold text-blue-900'>
         Protege.dev Contributors!
       </h1>
 
-      <p className='text-blue-600 mb-12'>
+      <p className='mb-12 text-blue-700'>
         Here are Protege, we&apos;re only as strong as the community that
         surrounds us and that we aim to serve.
         <br />
@@ -52,7 +52,7 @@ const Contributors = () => {
         <br />
         Want to join this list of awesomeness? Check our repo for any&nbsp;
         <a
-          className='underline mb-3 text-blue-900 hover:text-teal-600'
+          className='mb-3 text-blue-900 underline hover:text-teal-600'
           href='https://github.com/drewclem/protege/issues'
         >
           Active Issues
@@ -61,9 +61,9 @@ const Contributors = () => {
       </p>
       <ContributorsList contributors={filteredContributors.regular} />
 
-      <h3 className='text-xl font-semibold text-blue-900 mt-16 mb-3'>
+      <h2 className='mt-16 mb-3 text-xl font-semibold text-blue-900'>
         Founders
-      </h3>
+      </h2>
       <ContributorsList contributors={filteredContributors.founders} />
     </motion.div>
   )
