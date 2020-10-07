@@ -55,6 +55,7 @@ const Nav = () => {
               className='opacity-75 hover:opacity-100'
               to={ROUTES.GET_IN_TOUCH}
               activeClassName='opacity-100'
+              onClick={handleClick}
             >
               Get in Touch
             </NavLink>
@@ -65,6 +66,7 @@ const Nav = () => {
               className='opacity-75 hover:opacity-100'
               to={ROUTES.CONTRIBUTORS}
               activeClassName='opacity-100'
+              onClick={handleClick}
             >
               Contributors
             </NavLink>
@@ -89,6 +91,7 @@ const Nav = () => {
               to='/job-board'
               className='opacity-75 pb-3 hover:opacity-100 border-b-2 border-transparent'
               activeClassName='border-teal-500'
+              onClick={handleClick}
             >
               Find a Job
             </NavLink>

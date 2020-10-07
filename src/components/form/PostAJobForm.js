@@ -201,6 +201,7 @@ const PostAJobForm = ({ receivingJobData, recievingLogo2, jobData }) => {
                       <ReactQuill
                         value={field.value}
                         onChange={field.onChange(field.name)}
+                        modules={{ keyboard: { bindings: { tab: false } } }}
                       />
                     )}
                   </Field>
@@ -388,6 +389,7 @@ const PostAJobForm = ({ receivingJobData, recievingLogo2, jobData }) => {
                         <ReactQuill
                           value={field.value}
                           onChange={field.onChange(field.name)}
+                          modules={{ keyboard: { bindings: { tab: false } } }}
                         />
                       )}
                     </Field>
