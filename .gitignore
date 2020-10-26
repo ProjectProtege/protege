@@ -26,3 +26,5 @@ src/assets/main.css
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+src/assets/css/main.css
+src/data/contributors.json
