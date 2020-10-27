@@ -17,7 +17,7 @@ Before we get too far, we'd like to say thank you for considering contributing t
 
 We use [Atlassian's Git Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows) model for version control on Protegé.
 
-What that means is that we have a Master branch, a Develop branch, and then feature/feature-name or hotfix/hotfix-name branches for development of the platform.
+What that means is that we have a Main branch, a Develop branch, and then feature/feature-name or hotfix/hotfix-name branches for development of the platform.
 
 To keep in line with this workflow, your process for submitting a PR should follow the steps below.
 
