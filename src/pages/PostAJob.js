@@ -237,7 +237,7 @@ const PostAJob = ({ location }) => {
               type='button'
             >
               <BackArrow />
-              Edit
+              <span className='pl-2 mt-1 font-medium'>Edit</span>
             </button>
             <JobTemplate props={jobData} logo={companyLogo} />
             <button
