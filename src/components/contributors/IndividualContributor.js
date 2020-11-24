@@ -24,7 +24,7 @@ const IndividualContributor = ({ props }) => {
   }
 
   return (
-    <div className='flex items-center px-4 py-6 text-center transition duration-150 ease-in-out bg-white border-l-4 border-teal-500 shadow'>
+    <div className='flex items-center px-4 py-6 text-center md:text-left transition duration-150 ease-in-out bg-white border-l-4 border-teal-500 shadow'>
       <div className='flex flex-col items-center justify-between ml-2'>
         <img
           className='w-24 h-24 mx-auto rounded-full'
