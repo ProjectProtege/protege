@@ -1,13 +1,14 @@
 /* eslint-disable global-require */
+/* eslint-disable react/forbid-prop-types */
 import React from 'react'
 import PropTypes from 'prop-types'
 
 const ResourceCard = ({ resource }) => {
   return (
-    <div className='p-4 sm:p-2'>
+    <div className='flex flex-grow justify-center'>
       <div className='max-w-xs overflow-hidden transition duration-150 ease-in-out transform rounded shadow-md cursor-pointer hover:shadow-lg hover:scale-105'>
         <a
-          href={`http://${resource.resourceUrl}`}
+          href={`https://${resource.resourceUrl}`}
           target='_blank'
           rel='noopener noreferrer'
         >
@@ -18,9 +19,10 @@ const ResourceCard = ({ resource }) => {
             alt={`${resource.title} screenshot of website`}
           />
         </a>
+
         <div className='px-6 py-4'>
           <a
-            href={`http://${resource.resourceUrl}`}
+            href={`https://${resource.resourceUrl}`}
             target='_blank'
             rel='noopener noreferrer'
           >
@@ -38,10 +40,12 @@ const ResourceCard = ({ resource }) => {
 }
 
 ResourceCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  resourceImage: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  resourceUrl: PropTypes.string.isRequired,
+  resource: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    resourceImage: PropTypes.string.isRequired,
+    resourceUrl: PropTypes.string.isRequired,
+  }).isRequired,
 }
 
 export default ResourceCard

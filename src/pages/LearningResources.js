@@ -6,6 +6,7 @@ import ResourceCard from '../components/ResourceCard'
 
 const freeResources = [
   {
+    id: 1,
     title: 'FreeCodeCamp',
     resourceImage: 'freecodecamp.jpg',
     description:
@@ -13,6 +14,7 @@ const freeResources = [
     resourceUrl: 'freecodecamp.org',
   },
   {
+    id: 2,
     title: "The Beginner's Guide to React",
     resourceImage: 'beg-guide-react.jpg',
     description:
@@ -20,6 +22,7 @@ const freeResources = [
     resourceUrl: 'egghead.io/courses/the-beginner-s-guide-to-react',
   },
   {
+    id: 3,
     title: 'Devtips',
     resourceImage: 'devtips.jpg',
     description:
@@ -27,6 +30,7 @@ const freeResources = [
     resourceUrl: 'youtube.com/c/DevTipsForDesigners',
   },
   {
+    id: 4,
     title: 'Quentin Watts Tutorials',
     resourceImage: 'quentin.jpg',
     description:
@@ -34,6 +38,7 @@ const freeResources = [
     resourceUrl: 'youtube.com/user/QuentinWatt',
   },
   {
+    id: 5,
     title: 'Wes Bos Youtube',
     resourceImage: 'wesbos-youtube.jpg',
     description:
@@ -41,6 +46,7 @@ const freeResources = [
     resourceUrl: 'youtube.com/user/wesbos',
   },
   {
+    id: 6,
     title: 'LevelUp Tutorials Youtube',
     resourceImage: 'level-up.jpg',
     description:
@@ -48,6 +54,7 @@ const freeResources = [
     resourceUrl: 'youtube.com/channel/UCyU5wkjgQYGRB0hIHMwm2Sg',
   },
   {
+    id: 7,
     title: 'James Quick Youtube',
     resourceImage: 'jamesquick.jpg',
     description:
@@ -55,6 +62,7 @@ const freeResources = [
     resourceUrl: 'youtube.com/channel/UC-T8W79DN6PBnzomelvqJYw',
   },
   {
+    id: 8,
     title: 'Level Up Financial Planning',
     resourceImage: 'levelup-fin.jpg',
     description:
@@ -62,6 +70,7 @@ const freeResources = [
     resourceUrl: 'levelupfinancialplanning.com/videos/',
   },
   {
+    id: 9,
     title: 'Codecademy (Freemium)',
     resourceImage: 'codecademy.jpg',
     description:
@@ -69,6 +78,7 @@ const freeResources = [
     resourceUrl: 'codecademy.com',
   },
   {
+    id: 10,
     title: 'Traversy Media',
     resourceImage: 'traversy.jpg',
     description:
@@ -76,6 +86,7 @@ const freeResources = [
     resourceUrl: 'youtube.com/user/TechGuyWeb',
   },
   {
+    id: 11,
     title: 'Programming With Mosh',
     resourceImage: 'mosh.jpg',
     description:
@@ -86,6 +97,7 @@ const freeResources = [
 
 const paidResources = [
   {
+    id: 1,
     title: 'Egghead.io',
     resourceImage: 'egghead.jpg',
     description:
@@ -93,6 +105,7 @@ const paidResources = [
     resourceUrl: 'egghead.io/?rc=84jyz',
   },
   {
+    id: 2,
     title: 'Wes Bos Courses',
     resourceImage: 'wesbos.jpg',
     description:
@@ -100,6 +113,7 @@ const paidResources = [
     resourceUrl: 'wesbos.com/courses',
   },
   {
+    id: 3,
     title: 'LevelUp Tutorials',
     resourceImage: 'levelup.jpg',
     description:
@@ -107,6 +121,7 @@ const paidResources = [
     resourceUrl: 'leveluptutorials.com',
   },
   {
+    id: 4,
     title: 'Team Treehouse',
     resourceImage: 'treehouse.jpg',
     description:
@@ -114,6 +129,7 @@ const paidResources = [
     resourceUrl: 'teamtreehouse.com',
   },
   {
+    id: 5,
     title: 'Adam Learns',
     resourceImage: 'adam-learns.jpg',
     description:
@@ -121,6 +137,7 @@ const paidResources = [
     resourceUrl: 'adamlearns.com',
   },
   {
+    id: 6,
     title: 'Udemy',
     resourceImage: 'udemy.jpg',
     description:
@@ -128,6 +145,7 @@ const paidResources = [
     resourceUrl: 'udemy.com',
   },
   {
+    id: 7,
     title: 'Frontend Masters',
     resourceImage: 'frontendmasters.jpg',
     description:
@@ -174,78 +192,28 @@ const LearningResources = () => (
     </div>
 
     <div className='container mx-auto text-center md:text-left my-4 px-8'>
-      <h3 className='text-2xl font-bold text-blue-900 md:text-3xl'>
-        Free Resources
-      </h3>
-    </div>
+      <div>
+        <h3 className='text-2xl font-bold text-blue-900 md:text-3xl mb-6'>
+          Free Resources
+        </h3>
 
-    <div className='content-center flex grid-flow-col flex-wrap justify-center'>
-      {freeResources.map((resource) => (
-        <ResourceCard props={resource} />
-      ))}
-    </div>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 '>
+          {freeResources.map((resource) => (
+            <ResourceCard resource={resource} key={resource.id} />
+          ))}
+        </div>
+      </div>
 
-    <div>
-      <div className='container mx-auto text-center md:text-left my-4 px-8'>
-        <h3 className='text-2xl font-bold text-blue-900 md:text-3xl'>
+      <div className='mt-20'>
+        <h3 className='text-2xl font-bold text-blue-900 md:text-3xl mb-6'>
           Paid Resources
         </h3>
       </div>
 
-      <div className='content-center flex grid-flow-col flex-wrap justify-center'>
-        <ResourceCard
-          title='Egghead.io'
-          resourceImage='egghead.jpg'
-          tag='paid'
-          description='Learn the best JavaScript tools and frameworks from industry pros. Egghead is a group of working web development professionals and open source contributors that provide concise, information dense video courses on the best tools in the industry.'
-          resourceUrl='egghead.io/?rc=84jyz'
-        />
-        <ResourceCard
-          title='Wes Bos Courses'
-          resourceImage='wesbos.jpg'
-          tag='paid'
-          description='I&#39;m a full Stack JavaScript developer from Canada. I create free + premium courses and do a twice-weekly podcast called Syntax. You can read more about me here, but stick around if you like CSS, JavaScript, mediocre jokes, learning new things or BBQ Tips'
-          resourceUrl='wesbos.com/courses'
-        />
-        <ResourceCard
-          title='LevelUp Tutorials'
-          resourceImage='levelup.jpg'
-          tag='paid'
-          description='Level Up Tutorials sets how to help fix a major problem in learning technologies. The lack of in-depth, basic tutorials that teach more than just what to type when. Level Up Tutorials are aimed to be accessible and easy to follow while maintaining high production values.'
-          resourceUrl='leveluptutorials.com'
-        />
-
-        <ResourceCard
-          title='Team Treehouse'
-          resourceImage='treehouse.jpg'
-          tag='paid'
-          description='Our mission is to diversify the tech industry through accessible education and apprenticeship, unlocking the door to opportunity and empowering people to achieve their dreams. We will do this by training and placing people from all backgrounds into apprenticeships. '
-          resourceUrl='teamtreehouse.com'
-        />
-
-        <ResourceCard
-          title='Adam Learns'
-          resourceImage='adam-learns.jpg'
-          tag='paid'
-          description='A premium library of learning material that is created in front of a live audience. Watch courses live on Twitch and influence the decision-making process, access videos, course notes and code repositories—all the material to get started quickly.'
-          resourceUrl='adamlearns.com'
-        />
-
-        <ResourceCard
-          title='Udemy'
-          resourceImage='udemy.jpg'
-          tag='paid'
-          description='Udemy is the leading global marketplace for teaching and learning, connecting millions of students to the skills they need to succeed. Udemy is helping individuals reach their goals and pursue their dreams.'
-          resourceUrl='udemy.com'
-        />
-
-        <ResourceCard
-          title='Frontend Masters'
-          resourceImage='frontendmasters.jpg'
-          tag='paid'
-          description='Advance your skills with in-depth, modern JavaScript and front-end engineering courses. Start with the Front End Bootcamp, or dive into popular frameworks such as: React, Vue, Angular, and more.'
-          resourceUrl='frontendmasters.com'
-        />
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
+        {paidResources.map((resource) => (
+          <ResourceCard resource={resource} key={resource.id} />
+        ))}
       </div>
     </div>
   </motion.div>

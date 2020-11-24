@@ -11,7 +11,9 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    'prettier/prettier': ['error'],
+    'prettier/prettier': ['error', {
+      "endOfLine": "auto",
+    }],
     'react/jsx-filename-extension': [1, { extensions: ['.js'] }],
     'no-nest-ternary': 0,
     'jsx-a11y/label-has-associated-control': [
