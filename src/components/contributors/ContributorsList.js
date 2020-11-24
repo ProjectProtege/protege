@@ -4,9 +4,15 @@ import PropTypes from 'prop-types'
 
 import IndividualContributor from './IndividualContributor'
 
-const ContributorsList = ({ contributors }) => {
+const ContributorsList = ({ contributors, isFounders }) => {
   return (
-    <ul className='grid gap-5 row-gap-5 md:grid-cols-2'>
+    <ul
+      className={`grid gap-5 ${
+        isFounders
+          ? 'grid-cols-2'
+          : 'sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
+      }`}
+    >
       {contributors
         .filter(({ login }) => login !== 'ImgBotApp')
         .map((contributor) => {
@@ -23,6 +29,7 @@ const ContributorsList = ({ contributors }) => {
 
 ContributorsList.propTypes = {
   contributors: PropTypes.array.isRequired,
+  isFounders: PropTypes.bool.isRequired,
 }
 
 export default ContributorsList
