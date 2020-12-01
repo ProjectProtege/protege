@@ -226,7 +226,7 @@ const PostAJobForm = ({ receivingJobData, recievingLogo2, jobData }) => {
                   </span>
 
                   <div className='text-sm mb-3 text-blue-600'>
-                    <label className='mr-6'>
+                    <label className='mr-6 text-blue-800'>
                       <input
                         type='radio'
                         name='link-type'
@@ -237,7 +237,7 @@ const PostAJobForm = ({ receivingJobData, recievingLogo2, jobData }) => {
                       />
                       URL
                     </label>
-                    <label>
+                    <label className=' text-blue-800'>
                       <input
                         type='radio'
                         name='link-type'

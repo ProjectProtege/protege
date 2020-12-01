@@ -136,9 +136,12 @@ const PostAJob = ({ location }) => {
       {status === 1 && (
         <>
           <div className='container mx-auto lg:w-4/5 xl:w-7/12 mb-12 flex flex-col items-center'>
-            <h3 className='text-xl font-bold text-blue-900 mb-3'>
+            <h1 class='mb-3 text-2xl font-semibold text-blue-900'>
+              Post a Job
+            </h1>
+            <h2 className='text-xl font-bold text-blue-900 mb-3'>
               What qualifies as a junior remote job opportunity on Protegé?
-            </h3>
+            </h2>
 
             <p className='text-blue-700 text-sm lg:text-base lg:leading-relaxed mb-4 lg:text-center'>
               Our mission is to help those early in their tech career find their
@@ -172,7 +175,7 @@ const PostAJob = ({ location }) => {
               </li>
             </ul>
 
-            <p className='text-xs text-blue-600 lg:text-center lg:w-3/4 xl:w-full opacity-75'>
+            <p className='text-xs text-blue-900 lg:text-center lg:w-3/4 xl:w-full opacity-75'>
               Protegé.dev is a curated job board tailored towards junior
               developers. Each listing is reviewed, and approved or denied
               before going live. If your listing is denied, we&apos;ll contact
@@ -182,18 +185,18 @@ const PostAJob = ({ location }) => {
 
           <TierSelect receivingTierClick={receivingTierClick} tier={tier} />
 
-          <p className='text-center mb-2 text-blue-400 tracking-wide'>
+          <p className='text-center mb-2 text-teal-900 tracking-wide'>
             Select Your Tier
           </p>
         </>
       )}
 
       {status !== 1 && (
-        <h1 className='text-lg md:text-2xl text-blue-500 font-bold text-center leading-snug'>
+        <h2 className='text-lg md:text-2xl text-blue-500 font-bold text-center leading-snug'>
           Inexperienced doesn’t mean incapable.
           <br />
           Fill your role with ambition.
-        </h1>
+        </h2>
       )}
 
       <StatusBar props={status} />
