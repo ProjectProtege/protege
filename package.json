@@ -1,6 +1,9 @@
 {
   "name": "protege-client",
   "version": "0.1.0",
+  "workspaces": [
+    "protege"
+  ],
   "private": true,
   "description": "Remote jobs for junior developers.",
   "repository": {
