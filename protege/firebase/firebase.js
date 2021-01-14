@@ -15,7 +15,9 @@ export const config = {
   measurementId: process.env.MEASUREMENT_ID,
 }
 
-firebase.initializeApp(config)
+if (!firebase.apps.length) {
+  firebase.initializeApp(config)
+}
 // firebase.analytics()
 
 const db = firebase.firestore()
