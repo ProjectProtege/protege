@@ -9,7 +9,7 @@ const GlobalHeader = () => {
   const [active, setActive] = useState(false)
 
   return (
-    <header className='relative container flex justify-between items-center py-6 px-6 xl:px-0'>
+    <header className='relative container flex justify-between items-center py-6 px-6 xl:px-0 z-50'>
       <Link href='/' className='w-1/4 lg:w-1/6 h-auto'>
         <a>
           <span>
@@ -45,6 +45,15 @@ const GlobalHeader = () => {
         <ul className='bg-white w-full h-screen shadow-xl ml-2'>
           <li className='py-4 px-6 border-b border-gray-300'>
             <NavLink
+              href='/'
+              className='hover:opacity-100 opacity-75 '
+              activeClassName='opacity-100'
+            >
+              Home
+            </NavLink>
+          </li>
+          <li className='py-4 px-6 border-b border-gray-300'>
+            <NavLink
               href='/job-board'
               className='hover:opacity-100 opacity-75 '
               activeClassName='opacity-100'
@@ -57,7 +66,7 @@ const GlobalHeader = () => {
             <NavLink
               exact
               className='hover:opacity-100 opacity-75 '
-              href='/'
+              href='/learning-resources'
               activeClassName='opacity-100'
             >
               Learning Resources
@@ -67,7 +76,7 @@ const GlobalHeader = () => {
           <li className='py-4 px-6 border-b border-gray-300'>
             <NavLink
               className='opacity-75 hover:opacity-100'
-              href='/'
+              href='/get-in-touch'
               activeClassName='opacity-100'
             >
               Get in Touch
@@ -77,14 +86,14 @@ const GlobalHeader = () => {
           <li className='py-4 px-6 border-b border-gray-300'>
             <NavLink
               className='opacity-75 hover:opacity-100'
-              href='/'
+              href='/contributors'
               activeClassName='opacity-100'
             >
               Contributors
             </NavLink>
           </li>
           <li className='bg-teal-300 text-blue-900 ml-6 px-3 w-1/2 text-center py-2 mt-4 font-bold uppercase'>
-            <NavLink href='/'>Post a Job</NavLink>
+            <NavLink href='/post-a-job'>Post a Job</NavLink>
           </li>
         </ul>
       </nav>
