@@ -1,12 +1,18 @@
-import { useState } from 'react'
+import { useUi } from 'store/store'
 import Link from 'next/link'
+
 import NavLink from 'components/global/NavLink'
-import MenuIcon from 'components/global/MenuIcon'
 import CloseIcon from 'components/global/CloseIcon'
-import Logo from 'components/global/ProtegeLogo'
+import MenuIcon from 'assets/images/MenuIcon'
+import Logo from 'assets/images/ProtegeLogo'
 
 const GlobalHeader = () => {
-  const [active, setActive] = useState(false)
+  const isNavOpen = useUi((s) => s.isNavOpen)
+  const setIsNavOpen = useUi((s) => s.setIsNavOpen)
+
+  function toggleNav() {
+    setIsNavOpen(!isNavOpen)
+  }
 
   return (
     <header className='relative container flex justify-between items-center py-6 px-6 xl:px-0 z-50'>
@@ -21,7 +27,7 @@ const GlobalHeader = () => {
       <button
         className='absolute right-0  mr-4 lg:hidden h-12 w-12 text-blue-900  p-2'
         aria-label='navigation'
-        onClick={() => setActive((oldActive) => !oldActive)}
+        onClick={toggleNav}
         type='button'
       >
         <MenuIcon />
@@ -30,13 +36,13 @@ const GlobalHeader = () => {
       <nav
         data-cy='mobile-nav'
         className={`${
-          active ? 'translate-0' : 'translate-x-full'
+          isNavOpen ? 'translate-0' : 'translate-x-full'
         } lg:hidden absolute w-screen max-w-md top-0 right-0 flex flex-row transform transition duration-150 ease-in-out`}
       >
         <button
           className='lg:hidden h-12 w-12 text-blue-900 bg-white rounded-full p-1 shadow-md ml-2 mt-8'
           aria-label='navigation'
-          onClick={() => setActive((oldActive) => !oldActive)}
+          onClick={toggleNav}
           type='button'
         >
           <CloseIcon />
@@ -123,7 +129,7 @@ const GlobalHeader = () => {
               <li className='mb-3'>
                 <NavLink
                   href='/'
-                  className='submenu-item opacity-75 hover:opacity-100 border-b border-transparent transition-colors duration-75 hover:border-teal-500 w-full pb-1'
+                  className='submenu-item opacity-75 hover:opacity-100 border-b border-transparent   duration-75 hover:border-teal-500 w-full pb-1'
                 >
                   Front-end
                 </NavLink>
@@ -131,7 +137,7 @@ const GlobalHeader = () => {
               <li className='mb-3'>
                 <NavLink
                   href='/'
-                  className='submenu-item opacity-75 hover:opacity-100 border-b border-transparent transition-colors duration-75 hover:border-teal-500 w-full pb-1'
+                  className='submenu-item opacity-75 hover:opacity-100 border-b border-transparent   duration-75 hover:border-teal-500 w-full pb-1'
                 >
                   Back-end
                 </NavLink>
@@ -139,7 +145,7 @@ const GlobalHeader = () => {
               <li>
                 <NavLink
                   href='/'
-                  className='submenu-item opacity-75 hover:opacity-100 border-b border-transparent transition-colors duration-75 hover:border-teal-500 w-full pb-1'
+                  className='submenu-item opacity-75 hover:opacity-100 border-b border-transparent   duration-75 hover:border-teal-500 w-full pb-1'
                 >
                   Full-stack
                 </NavLink>
@@ -150,7 +156,7 @@ const GlobalHeader = () => {
           <li className='menu-item mt-1 pr-4 lg:pr-10 opacity-75 hover:opacity-100'>
             <NavLink
               href='/learning-resources'
-              className='pb-3 border-b-2 transition-colors duration-75 hover:border-teal-500 '
+              className='pb-3 border-b-2   duration-75 hover:border-teal-500 '
               activeClassName='border-teal-500'
               inactiveClassName='border-transparent'
             >
@@ -161,7 +167,7 @@ const GlobalHeader = () => {
           <li className='menu-item mt-1 pr-4 lg:pr-10 opacity-75 hover:opacity-100'>
             <NavLink
               href='/get-in-touch'
-              className='pb-3 border-b-2 transition-colors duration-75 hover:border-teal-500 '
+              className='pb-3 border-b-2   duration-75 hover:border-teal-500 '
               activeClassName='border-teal-500'
               inactiveClassName='border-transparent'
             >
@@ -172,7 +178,7 @@ const GlobalHeader = () => {
           <li className='menu-item mt-1 pr-4 lg:pr-10 opacity-75 hover:opacity-100'>
             <NavLink
               href='/contributors'
-              className='pb-3 border-b-2 transition-colors duration-75 hover:border-teal-500 '
+              className='pb-3 border-b-2   duration-75 hover:border-teal-500 '
               activeClassName='border-teal-500'
               inactiveClassName='border-transparent'
             >
