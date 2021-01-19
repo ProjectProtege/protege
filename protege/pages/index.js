@@ -1,10 +1,14 @@
 import Link from 'next/link'
+import { useJobs } from 'store/jobs_store'
 
 import FindYourNext from 'components/home/FindYourNext'
 
 // import { db } from 'firebase/firebase'
 
 const Home = () => {
+  const jobs = useJobs((s) => s.jobs)
+  const setJobs = useJobs((s) => s.setJobs)
+
   return (
     <div>
       <img

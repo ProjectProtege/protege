@@ -10,7 +10,7 @@
   "dependencies": {
     "@emotion/react": "^11.1.4",
     "autoprefixer": "^10.2.1",
-    "firebase": "^8.2.2",
+    "firebase-admin": "^9.4.2",
     "next": "10.0.5",
     "postcss": "^8.2.4",
     "prop-types": "^15.7.2",

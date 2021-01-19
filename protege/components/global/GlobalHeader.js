@@ -1,4 +1,4 @@
-import { useUi } from 'store/store'
+import { useUi } from 'store/ui_store'
 import Link from 'next/link'
 
 import NavLink from 'components/global/NavLink'
@@ -15,7 +15,7 @@ const GlobalHeader = () => {
   }
 
   return (
-    <header className='relative container flex justify-between items-center py-6 px-6 xl:px-0 z-50'>
+    <header className='relative container flex justify-between items-center py-6 px-6 xl:px-0'>
       <Link href='/' className='w-1/4 lg:w-1/6 h-auto'>
         <a>
           <span>
@@ -37,7 +37,7 @@ const GlobalHeader = () => {
         data-cy='mobile-nav'
         className={`${
           isNavOpen ? 'translate-0' : 'translate-x-full'
-        } lg:hidden absolute w-screen max-w-md top-0 right-0 flex flex-row transform transition duration-150 ease-in-out`}
+        } lg:hidden fixed w-screen max-w-md top-0 right-0 flex flex-row transform transition duration-150 ease-in-out z-50`}
       >
         <button
           className='lg:hidden h-12 w-12 text-blue-900 bg-white rounded-full p-1 shadow-md ml-2 mt-8'
