@@ -26,7 +26,17 @@ const GlobalFooter = () => {
     await fetch(
       `https://api.convertkit.com/v3/tags/${tagId}/subscribe`,
       options
-    ).then(alert("You've been subscribed to the Protege.dev email!"))
+    )
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Network reponse was not ok')
+        }
+        return res.blob()
+      })
+      .catch((err) => {
+        alert('There was a problem with your fetch operation', err)
+      })
+
     setUserEmail('')
   }
 
