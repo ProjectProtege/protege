@@ -15,7 +15,7 @@ const GlobalFooter = () => {
 
     const tagId = 1446683
     const dataToSend = {
-      api_key: process.env.REACT_APP_CONVERTKIT_KEY,
+      api_key: process.env.CONVERTKIT_KEY,
       email: userEmail,
     }
     const options = {
@@ -35,12 +35,6 @@ const GlobalFooter = () => {
       className={`bg-white mt-20 ${
         location === '/admin' || location === '/sign-in' ? 'hidden' : null
       }`}
-      animate={{
-        opacity: [0, 1],
-        transition: {
-          delay: 0.5,
-        },
-      }}
     >
       <div data-cy='footer' className='px-3 py-4 mb-6 bg-gray-200 md:px-0'>
         <form

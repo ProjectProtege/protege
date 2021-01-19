@@ -15,7 +15,7 @@ const GlobalHeader = () => {
   }
 
   return (
-    <header className='relative container flex justify-between items-center py-6 px-6 xl:px-0'>
+    <header className='relative container flex justify-between items-center py-6 px-6 xl:px-2'>
       <Link href='/' className='w-1/4 lg:w-1/6 h-auto'>
         <a>
           <span>
@@ -106,7 +106,7 @@ const GlobalHeader = () => {
 
       <nav
         data-cy='desktop-nav'
-        className='hidden lg:block text-blue-900 text-sm uppercase font-medium'
+        className='hidden lg:block text-blue-900 text-sm uppercase font-medium z-50'
         role='navigation'
       >
         <ul className='flex justify-between'>
