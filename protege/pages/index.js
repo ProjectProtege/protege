@@ -1,13 +1,29 @@
+import { useEffect } from 'react'
 import Link from 'next/link'
+import axios from 'axios'
 import { useJobs } from 'store/jobs_store'
 
 import FindYourNext from 'components/home/FindYourNext'
+import JobCard from 'components/job/JobCard'
 
 // import { db } from 'firebase/firebase'
 
 const Home = () => {
   const jobs = useJobs((s) => s.jobs)
   const setJobs = useJobs((s) => s.setJobs)
+
+  useEffect(async () => {
+    const res = await axios.get('/api/entries')
+    setJobs(res.data.entriesData)
+  }, [])
+
+  function activeJobs(jobList) {
+    const active = jobList.filter((job) => {
+      return job.status !== 'inactive'
+    })
+
+    return active
+  }
 
   return (
     <div>
@@ -38,6 +54,23 @@ const Home = () => {
               <a>Find a Job</a>
             </Link>
           </button>
+        </div>
+      </section>
+
+      <section
+        className='min-h-screen mx-auto mt-12 mb-32 lg:pt-16'
+        style={{ maxWidth: 680 }}
+      >
+        <h2 className='mb-8 text-2xl font-semibold text-center text-blue-900'>
+          Latest Opportunities
+        </h2>
+
+        <div data-cy='job-card-container' className='container'>
+          {activeJobs(jobs)
+            .slice(0, 6)
+            .map((job, i) => (
+              <JobCard key={job.id} job={job} i={i} />
+            ))}
         </div>
       </section>
     </div>

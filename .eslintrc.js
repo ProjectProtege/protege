@@ -7,7 +7,7 @@ module.exports = {
   ],
   plugins: ['react', 'prettier'],
   parserOptions: {
-    ecmaVersion: 2017,
+    parser: 'babel-eslint',
     sourceType: 'module',
   },
   rules: {
