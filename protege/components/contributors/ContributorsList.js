@@ -29,7 +29,11 @@ const ContributorsList = ({ contributors, isFounders }) => {
 
 ContributorsList.propTypes = {
   contributors: PropTypes.array.isRequired,
-  isFounders: PropTypes.bool.isRequired,
+  isFounders: PropTypes.bool,
+}
+
+ContributorsList.defaultProps = {
+  isFounders: false,
 }
 
 export default ContributorsList

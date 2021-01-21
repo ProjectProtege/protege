@@ -14,24 +14,30 @@ const GlobalFooter = () => {
     e.preventDefault()
 
     const tagId = 1446683
+
     const dataToSend = {
       api_key: process.env.CONVERTKIT_KEY,
       email: userEmail,
     }
+
     const options = {
       method: 'POST',
       headers: { 'Content-type': 'application/json; charset=UTF-8' },
       body: JSON.stringify(dataToSend),
     }
+
     await fetch(
       `https://api.convertkit.com/v3/tags/${tagId}/subscribe`,
       options
     )
       .then((res) => {
         if (!res.ok) {
-          throw new Error('Network reponse was not ok')
+          throw new Error('Network reponse was not ok').then(
+            alert('Oops! something went wrong.')
+          )
+        } else {
+          alert("Congrats! You've successfully subscribed!")
         }
-        return res.blob()
       })
       .catch((err) => {
         alert('There was a problem with your fetch operation', err)
