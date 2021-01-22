@@ -1,4 +1,4 @@
-import * as firebase from 'firebase/app'
+import firebase from 'firebase/app'
 import 'firebase/analytics'
 import 'firebase/firestore'
 import 'firebase/storage'
@@ -18,6 +18,25 @@ const config = {
 firebase.initializeApp(config)
 firebase.analytics()
 
+const app = firebase.app()
 export const db = firebase.firestore()
 export const storage = firebase.storage()
 export const auth = firebase.auth()
+
+if (process.env.NODE_ENV === 'development') {
+  // eslint-disable-next-line no-console
+  console.info(
+    '%c testing locally -- hitting local firestore and auth emulators',
+    'color: #a974d9;'
+  )
+  db.useEmulator('localhost', 8080)
+  auth.useEmulator('http://localhost:9099/')
+}
+
+if (app.name) {
+  // eslint-disable-next-line no-console
+  console.info('%c Firebase Mode Activated!', 'color: green')
+} else {
+  // eslint-disable-next-line no-console
+  console.error('Firebase not working. Check firebase/firebase.js file.')
+}

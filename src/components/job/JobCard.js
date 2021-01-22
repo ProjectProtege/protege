@@ -9,20 +9,20 @@ const JobCard = ({ job, i }) => {
   const [logoUrl, setLogoUrl] = useState()
   const [loading, setLoading] = useState(true)
 
-  const months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'June',
-    'July',
-    'Aug',
-    'Sept',
-    'Oct',
-    'Nov',
-    'Dec',
-  ]
+  // const months = [
+  //   'Jan',
+  //   'Feb',
+  //   'Mar',
+  //   'Apr',
+  //   'May',
+  //   'June',
+  //   'July',
+  //   'Aug',
+  //   'Sept',
+  //   'Oct',
+  //   'Nov',
+  //   'Dec',
+  // ]
 
   const variants = {
     show: () => ({
@@ -37,11 +37,12 @@ const JobCard = ({ job, i }) => {
     hidden: { opacity: 0, y: 10 },
   }
 
-  const postDate = job.postedAt.toDate()
+  // TODO: Fix blocking error
+  // const postDate = job.postedAt.toDate()
 
-  const formattedPostDate = `${
-    months[postDate.getMonth()]
-  } ${postDate.getDate()}`
+  // const formattedPostDate = `${
+  //   months[postDate.getMonth()]
+  // } ${postDate.getDate()}`
 
   useEffect(() => {
     storage
@@ -106,7 +107,8 @@ const JobCard = ({ job, i }) => {
               data-cy={`job-card-formatted-date-${job.id}`}
               className='font-semibold text-teal-700 md:text-lg'
             >
-              {formattedPostDate}
+              {/* TODO: Fix blocking error */}
+              {/* {formattedPostDate} */}
             </p>
           </div>
         </div>
