@@ -19,6 +19,7 @@ const Nav = () => {
       >
         <button
           className='nav-toggle relative md:hidden h-6 w-6 mr-2'
+          aria-label='navigation'
           onClick={() => setActive((oldActive) => !oldActive)}
           type='button'
         >
