@@ -133,13 +133,13 @@ IndividualContributor.propTypes = {
 }
 
 IndividualContributor.defaultProps = {
-  name: 'PropTypes.string',
-  login: 'PropTypes.string',
-  twitter_username: 'PropTypes.string',
-  avatar_url: 'PropTypes.string',
-  blog: 'PropTypes.string',
-  html_url: 'PropTypes.string',
-  contributions: 'PropTypes.string',
+  name: '',
+  login: '',
+  twitter_username: '',
+  avatar_url: '',
+  blog: '',
+  html_url: '',
+  contributions: '',
 }
 
 export default IndividualContributor

@@ -6,10 +6,22 @@ export default async (req, res) => {
       .collection('jobs')
       .orderBy('postedAt', 'desc')
       .get()
-    const entriesData = entries.docs.map((entry) => ({
-      // id: entry.id,
-      ...entry.data(),
-    }))
+
+    const entriesData = entries.docs.map((documentSnapshot) => {
+      const entry = documentSnapshot.data()
+      const doc = documentSnapshot
+
+      return {
+        id: doc.id,
+        jobTitle: entry.jobtitle,
+        roleFocus: entry.roleFocus,
+        status: entry.status,
+        companyHQ: entry.companyHQ,
+        companyName: entry.companyName,
+        postedAt: entry.postedAt,
+        companyLogo: entry.companyLogo,
+      }
+    })
 
     res.status(200).json({ entriesData })
   } catch (err) {

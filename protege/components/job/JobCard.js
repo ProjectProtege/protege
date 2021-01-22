@@ -36,11 +36,9 @@ const JobCard = ({ job, i }) => {
     hidden: { opacity: 0, y: 10 },
   }
 
-  const postDate = new Date(job.postedAt.nanoseconds)
+  const postDate = new Date(job.postedAt)
 
-  const formattedPostDate = `${
-    months[postDate.getMonth()]
-  } ${postDate.getDate()}`
+  const formattedPostDate = `${postDate}`
 
   // useEffect(() => {
   //   storage
@@ -124,11 +122,7 @@ JobCard.propTypes = {
     companyLogo: PropTypes.string.isRequired,
     jobTitle: PropTypes.string.isRequired,
     roleFocus: PropTypes.string.isRequired,
-    postedAt: PropTypes.shape({
-      nanoseconds: PropTypes.number.isRequired,
-      seconds: PropTypes.number.isRequired,
-      toDate: PropTypes.func.isRequired,
-    }),
+    postedAt: PropTypes.shape({}),
   }).isRequired,
 }
 
