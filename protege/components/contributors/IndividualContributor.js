@@ -79,7 +79,7 @@ const IndividualContributor = ({ props }) => {
               aria-hidden='true'
               focusable='false'
               data-prefix='fab'
-              data-icon='twitter'
+              data-icon='github'
               role='img'
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 40 40'
@@ -101,7 +101,7 @@ const IndividualContributor = ({ props }) => {
                 aria-hidden='true'
                 focusable='false'
                 data-prefix='fab'
-                data-icon='twitter'
+                data-icon='globe'
                 role='img'
                 viewBox='0 0 40 40'
               >
