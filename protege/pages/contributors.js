@@ -15,7 +15,7 @@ const Contributors = () => {
   )
 
   return (
-    <div className='container px-2 mx-auto md:px-0'>
+    <div className='container mx-auto'>
       <div className='mx-auto' style={{ maxWidth: 680 }}>
         <h1 className='mb-3 text-2xl font-semibold text-blue-900'>
           Protege.dev Contributors!

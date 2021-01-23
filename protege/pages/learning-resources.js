@@ -5,7 +5,7 @@ import ResourceCard from 'components/learning-resources/ResourceCard'
 const LearningResources = () => {
   return (
     <section className='container m-auto max-w-screen-xl align-middle sm:max-w-screen-lg'>
-      <div className='relative px-12 text-center mx-auto my-10 sm:px-40 lg:px-32'>
+      <div className='relative px-12 text-center mx-auto mb-12 sm:px-40 lg:px-32'>
         <h1 className='text-2xl leading tracking-tight font-extrabold text-blue-900 sm:leading-10 sm:text-3xl'>
           Learning Resources
         </h1>
@@ -18,7 +18,9 @@ const LearningResources = () => {
         <p className='text-base text-blue-700 sm:mt-4 sm:text-base md:text-base'>
           Got a resource you think we should add to the list?&nbsp;
           <Link href='/get-in-touch'>
-            <a className='underline mb-3 text-teal-800'>Reach out!</a>
+            <a className='underline mb-3 text-blue-900 hover:text-teal-700'>
+              Reach out!
+            </a>
           </Link>
         </p>
       </div>

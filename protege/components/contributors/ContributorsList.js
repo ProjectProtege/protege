@@ -9,7 +9,7 @@ const ContributorsList = ({ contributors, isFounders }) => {
     <ul
       className={`grid gap-5 ${
         isFounders
-          ? 'grid-cols-2'
+          ? 'md:grid-cols-2'
           : 'sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
       }`}
     >

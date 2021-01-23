@@ -24,22 +24,24 @@ const IndividualContributor = ({ props }) => {
   }
 
   return (
-    <div className='flex items-center px-4 py-6 text-center md:text-left transition duration-150 ease-in-out bg-white border-l-4 border-teal-500 shadow'>
-      <div className='flex flex-col items-center justify-between ml-2'>
+    <div className='grid grid-cols-3 gap-4 px-4 py-6 text-center md:text-left transition duration-150 ease-in-out bg-white border-l-4 border-teal-500 shadow'>
+      <div className='cols-span-1'>
         <img
-          className='w-24 h-24 mx-auto rounded-full'
+          className='mx-auto rounded-full'
           src={avatar_url}
           alt={`${name || login} avatar`}
           loading='lazy'
         />
       </div>
-      <div className='flex flex-col items-start ml-6'>
+      <div className='col-span-2 truncate'>
         {name ? (
-          <span className='mb-2 font-semibold text-blue-900'>{name}</span>
+          <span className='mb-2 font-semibold text-blue-900 truncate'>
+            {name}
+          </span>
         ) : (
           <span className='mb-2 font-semibold text-blue-900'>{login}</span>
         )}
-        <div className='flex items-center mb-2'>
+        <div className='flex items-center my-2'>
           {twitter_username && (
             <a
               href={`https://twitter.com/${twitter_username}`}

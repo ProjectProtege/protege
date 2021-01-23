@@ -7,7 +7,6 @@ const NavLink = (props) => {
   const {
     href,
     as,
-    exact,
     className,
     activeClassName,
     inactiveClassName,
@@ -28,7 +27,6 @@ const NavLink = (props) => {
 NavLink.propTypes = {
   href: PropTypes.string,
   as: PropTypes.string,
-  exact: PropTypes.bool,
   className: PropTypes.string,
   activeClassName: PropTypes.string,
   inactiveClassName: PropTypes.string,
@@ -38,7 +36,6 @@ NavLink.propTypes = {
 NavLink.defaultProps = {
   href: '',
   as: '',
-  exact: false,
   className: '',
   activeClassName: '',
   inactiveClassName: '',

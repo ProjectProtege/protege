@@ -1,10 +1,14 @@
 import PropTypes from 'prop-types'
 import { useUi } from 'store/ui_store'
+import { useRouter } from 'next/router'
+
 import GlobalHeader from 'components/global/GlobalHeader'
 import GlobalFooter from 'components/global/GlobalFooter'
 
 const GlobalLayout = ({ children }) => {
   const isNavOpen = useUi((s) => s.isNavOpen)
+
+  const location = useRouter().pathname
 
   return (
     <div className='flex flex-col flex-1 min-h-screen overflow-x-hidden'>
@@ -16,7 +20,13 @@ const GlobalLayout = ({ children }) => {
         }`}
       />
 
-      <main className='container flex-grow px-6 xl:px-0'>{children}</main>
+      <main
+        className={`container flex-grow px-6 xl:px-0 ${
+          location !== '/' ? 'mt-12' : ''
+        }`}
+      >
+        {children}
+      </main>
 
       <GlobalFooter />
     </div>
