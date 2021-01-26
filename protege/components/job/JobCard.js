@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 // import { storage } from '../../firebase/firebase'
 import JobCardImage from './JobCardImage'
 
-const JobCard = ({ job, i }) => {
+const JobCard = ({ job }) => {
   const [logoUrl, setLogoUrl] = useState()
   const [loading, setLoading] = useState(true)
 
@@ -23,22 +23,11 @@ const JobCard = ({ job, i }) => {
     'Dec',
   ]
 
-  const variants = {
-    show: () => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.2,
-        ease: 'easeInOut',
-        duration: 0.2,
-      },
-    }),
-    hidden: { opacity: 0, y: 10 },
-  }
-
   const postDate = new Date(job.postedAt)
 
-  const formattedPostDate = `${postDate}`
+  const formattedPostDate = `${
+    months[postDate.getMonth()]
+  } ${postDate.getDate()}`
 
   // useEffect(() => {
   //   storage
@@ -54,12 +43,7 @@ const JobCard = ({ job, i }) => {
   return (
     <Link data-cy={`job-card-link-${job.id}`} href={`/job-board/${job.id}`}>
       <a>
-        <div
-          variants={variants}
-          custom={i}
-          animate='show'
-          className='flex px-3 py-4 mb-6 transition duration-150 ease-in-out transform bg-white border-l-4 border-teal-500 shadow md:mb-12 md:px-6 hover:shadow-md'
-        >
+        <div className='flex px-3 py-4 mb-6 transition duration-150 ease-in-out transform bg-white border-l-4 border-teal-500 shadow md:mb-12 md:px-6 hover:shadow-md'>
           <div
             className='relative flex-col hidden p-2 overflow-hidden rounded-full shadow-md md:flex md:w-1/6'
             style={{ width: 75, height: 75 }}
@@ -115,14 +99,13 @@ const JobCard = ({ job, i }) => {
 }
 
 JobCard.propTypes = {
-  i: PropTypes.number.isRequired,
   job: PropTypes.shape({
     id: PropTypes.string.isRequired,
     companyName: PropTypes.string.isRequired,
     companyLogo: PropTypes.string.isRequired,
     jobTitle: PropTypes.string.isRequired,
     roleFocus: PropTypes.string.isRequired,
-    postedAt: PropTypes.shape({}),
+    postedAt: PropTypes.string.isRequired,
   }).isRequired,
 }
 

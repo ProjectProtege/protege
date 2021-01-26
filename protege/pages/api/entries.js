@@ -1,4 +1,4 @@
-import db from 'utils/db'
+import { db } from 'utils/db'
 
 export default async (req, res) => {
   try {
@@ -18,7 +18,7 @@ export default async (req, res) => {
         status: entry.status,
         companyHQ: entry.companyHQ,
         companyName: entry.companyName,
-        postedAt: entry.postedAt,
+        postedAt: entry.postedAt.toDate(),
         companyLogo: entry.companyLogo,
       }
     })
