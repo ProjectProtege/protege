@@ -1,6 +1,9 @@
 {
   "name": "protege-client",
   "version": "0.1.0",
+  "workspaces": [
+    "protege"
+  ],
   "private": true,
   "description": "Remote jobs for junior developers.",
   "repository": {
@@ -84,6 +87,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.7.4",
+    "babel-eslint": "^10.1.0",
     "cpy-cli": "^3.1.1",
     "cross-env": "^7.0.2",
     "cypress": "^3.0.0",

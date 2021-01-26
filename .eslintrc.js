@@ -7,13 +7,20 @@ module.exports = {
   ],
   plugins: ['react', 'prettier'],
   parserOptions: {
-    ecmaVersion: 2017,
+    parser: 'babel-eslint',
     sourceType: 'module',
   },
   rules: {
-    'prettier/prettier': ['error', {
-      "endOfLine": "auto",
-    }],
+    'react/react-in-jsx-scope': 'off',
+    'jsx-a11y/anchor-is-valid': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'prefer-default-export': 'off',
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
     'react/jsx-filename-extension': [1, { extensions: ['.js'] }],
     'no-nest-ternary': 0,
     'jsx-a11y/label-has-associated-control': [
@@ -35,5 +42,12 @@ module.exports = {
   },
   env: {
     browser: true,
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        paths: ['./', './src', './protege'],
+      },
+    },
   },
 }
