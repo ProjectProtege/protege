@@ -1,6 +1,4 @@
-import { useEffect } from 'react'
 import Link from 'next/link'
-import axios from 'axios'
 import { useJobs } from 'store/jobs_store'
 
 import FindYourNext from 'components/home/FindYourNext'
@@ -10,12 +8,6 @@ import JobCard from 'components/job/JobCard'
 
 const Home = () => {
   const jobs = useJobs((s) => s.jobs)
-  const setJobs = useJobs((s) => s.setJobs)
-
-  useEffect(async () => {
-    const res = await axios.get('/api/entries')
-    setJobs(res.data.entriesData)
-  }, [])
 
   function activeJobs(jobList) {
     const active = jobList.filter((job) => {

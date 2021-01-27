@@ -22,7 +22,7 @@ const GlobalLayout = ({ children }) => {
 
       <main
         className={`container flex-grow px-6 xl:px-0 ${
-          location !== '/' ? 'mt-12' : ''
+          location !== '/' ? 'mt-20' : ''
         }`}
       >
         {children}

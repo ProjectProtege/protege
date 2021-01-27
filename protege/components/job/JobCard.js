@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
-// import { storage } from '../../firebase/firebase'
+import { storage } from 'utils/db'
 import JobCardImage from './JobCardImage'
 
 const JobCard = ({ job }) => {
-  const [logoUrl, setLogoUrl] = useState()
+  const [logoUrl, setLogoUrl] = useState('')
   const [loading, setLoading] = useState(true)
 
   const months = [
@@ -29,16 +29,17 @@ const JobCard = ({ job }) => {
     months[postDate.getMonth()]
   } ${postDate.getDate()}`
 
-  // useEffect(() => {
-  //   storage
-  //     .ref('images')
-  //     .child(job.companyLogo)
-  //     .getDownloadURL()
-  //     .then((url) => {
-  //       setLogoUrl(url)
-  //       setLoading(false)
-  //     })
-  // }, [job.companyLogo])
+  storage
+    .ref('images')
+    .child(job.companyLogo)
+    .getDownloadURL()
+    .then((url) => {
+      setLogoUrl(url)
+      setLoading(false)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 
   return (
     <Link data-cy={`job-card-link-${job.id}`} href={`/job-board/${job.id}`}>
@@ -50,7 +51,7 @@ const JobCard = ({ job }) => {
           >
             <div
               style={{ width: 75, height: 75 }}
-              className={`absolute bg-white transition ease-out duration-300 ${
+              className={`absolute bg-white transition ease-in-out duration-300 ${
                 loading ? 'opacity-100' : 'opacity-0'
               }`}
             />

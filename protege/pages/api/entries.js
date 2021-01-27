@@ -1,5 +1,7 @@
 import { db } from 'utils/db'
 
+global.XMLHttpRequest = require('xhr2')
+
 export default async (req, res) => {
   try {
     const entries = await db

@@ -20,6 +20,7 @@
     "react-spinners": "^0.10.4",
     "tailwindcss": "^2.0.2",
     "typewriter-effect": "^2.17.0",
+    "xhr2": "^0.2.0",
     "zustand": "^3.3.1"
   }
 }

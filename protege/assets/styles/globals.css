@@ -45,7 +45,7 @@
 }
 
 .input-select {
-  @apply appearance-none w-full cursor-pointer;
+  @apply appearance-none w-full pl-4 cursor-pointer;
 }
 
 .select-wrap {
