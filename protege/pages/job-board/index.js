@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useJobs } from 'store/jobs_store'
 
-import JobCard from '../components/job/JobCard'
+import JobCard from '../../components/job/JobCard'
 // import LoadingSpinner from '../components/LoadingSpinner'
 
 const JobBoard = () => {

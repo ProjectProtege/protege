@@ -6,7 +6,7 @@ import { db } from '../firebase/firebase'
 import LoadingSpinner from '../components/LoadingSpinner'
 
 const JobBoard = ({ location }) => {
-  const [jobs, setJobs] = useState([])
+  const [jobs, setJobs] = useState({})
   const [loading, setLoading] = useState(true)
 
   async function retrieveJobs() {

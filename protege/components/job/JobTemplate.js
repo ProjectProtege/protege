@@ -1,10 +1,12 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/no-danger */
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
-import { useLocation } from 'react-router-dom'
-import { storage } from '../../firebase/firebase'
 
 const JobTemplate = ({ logo, props }) => {
+  const router = useRouter()
+
   const {
     howToApply,
     jobDescription,
@@ -16,8 +18,8 @@ const JobTemplate = ({ logo, props }) => {
     positionType,
   } = props
 
-  const { pathname } = useLocation()
-  const isPreview = pathname.indexOf('/job-board/') !== 0
+  // const { pathname } = useLocation()
+  const isPreview = router.route === '/job-board/'
 
   const [companyLogo, setCompanyLogo] = useState(undefined)
   const [isAdmin, setIsAdmin] = useState(false)
@@ -33,15 +35,15 @@ const JobTemplate = ({ logo, props }) => {
     }
   }
 
-  function retrieveLogo() {
-    storage
-      .ref('images')
-      .child(props.companyLogo)
-      .getDownloadURL()
-      .then((url) => {
-        setCompanyLogo(url)
-      })
-  }
+  // function retrieveLogo() {
+  //   storage
+  //     .ref('images')
+  //     .child(companyLogo)
+  //     .getDownloadURL()
+  //     .then((url) => {
+  //       setCompanyLogo(url)
+  //     })
+  // }
 
   const quillStyle = {
     H1: 'text-blue-900 font-semibold text-xl',
@@ -55,7 +57,7 @@ const JobTemplate = ({ logo, props }) => {
   }
 
   function checkAdmin() {
-    if (pathname === '/admin') {
+    if (router.route === '/admin') {
       setIsAdmin(true)
     }
   }
@@ -91,7 +93,7 @@ const JobTemplate = ({ logo, props }) => {
       readLogo(logo)
     } else {
       // Retrieve logo to display in live job posting
-      retrieveLogo()
+      // retrieveLogo()
     }
 
     checkAdmin()
@@ -225,7 +227,6 @@ JobTemplate.propTypes = {
   howToApply: PropTypes.string,
   companyName: PropTypes.string,
   companyWebsite: PropTypes.string,
-  companyLogo: PropTypes.string,
   roleFocus: PropTypes.string,
   jobtitle: PropTypes.string,
   positionType: PropTypes.string,
@@ -234,11 +235,10 @@ JobTemplate.propTypes = {
 }
 
 JobTemplate.defaultProps = {
-  logo: null,
+  logo: {},
   howToApply: '',
   companyName: '',
   companyWebsite: '',
-  companyLogo: '',
   roleFocus: '',
   jobtitle: '',
   positionType: '',
