@@ -1,35 +1,32 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import { useState, useEffect } from 'react'
 import { useJobs } from 'store/jobs_store'
+import { useRouter } from 'next/router'
 
 import JobCard from '../../components/job/JobCard'
 // import LoadingSpinner from '../components/LoadingSpinner'
 
 const JobBoard = () => {
+  const router = useRouter()
+  const filterParam = router.query
+
+  const initialFilterParam = Object.keys(filterParam).length
+    ? filterParam.filter
+    : ''
+
+  const [jobFilter, setJobFilter] = useState(initialFilterParam)
   const jobs = useJobs((s) => s.jobs)
 
-  // function filteredJobs(jobList, jobFilter) {
-  //   const filtered = jobList.filter((job) => {
-  //     return job.roleFocus === jobFilter
-  //   })
+  function filteredJobs(jobList, filter) {
+    const filtered = jobList.filter((job) => {
+      return job.roleFocus === filter
+    })
 
-  //   return filtered
-  // }
+    return filtered
+  }
 
-  // const filterQueryParam = location.search
-  //   .replace('?', '')
-  //   .split('&')
-  //   .find((qs) => qs[0] === 'f')
-
-  // const initialFilterValue = filterQueryParam
-  //   ? filterQueryParam.split('=')[1]
-  //   : ''
-
-  // const [jobFilter, setJobFilter] = useState(initialFilterValue)
-
-  // useEffect(() => {
-  //   setJobFilter(initialFilterValue)
-  // }, [initialFilterValue])
+  useEffect(() => {
+    setJobFilter(jobFilter)
+  }, [])
 
   return (
     <div className='container '>
@@ -51,8 +48,8 @@ const JobBoard = () => {
                 className='justify-end rounded-full input input-select'
                 id='filter-by'
                 placeholder='Filter By'
-                // onChange={(event) => setJobFilter(event.target.value)}
-                // value={jobFilter}
+                onChange={(event) => setJobFilter(event.target.value)}
+                value={jobFilter}
               >
                 <option value=''>All</option>
                 <option value='Front-end'>Front-end</option>
@@ -66,10 +63,7 @@ const JobBoard = () => {
         {/* <LoadingSpinner loading={loading} /> */}
 
         <div data-cy='job-board-list' className='mx-auto'>
-          {jobs.map((job, i) => (
-            <JobCard key={job.id} job={job} i={i} />
-          ))}
-          {/* {!jobFilter && (
+          {!jobFilter && (
             <>
               {jobs.map((job, i) => (
                 <JobCard key={job.id} job={job} i={i} />
@@ -83,15 +77,11 @@ const JobBoard = () => {
                 <JobCard key={job.id} job={job} i={i} />
               ))}
             </>
-          )} */}
+          )}
         </div>
       </div>
     </div>
   )
-}
-
-JobBoard.propTypes = {
-  location: PropTypes.func.isRequired,
 }
 
 export default JobBoard

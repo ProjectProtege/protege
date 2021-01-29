@@ -11,7 +11,7 @@ const GlobalHeader = () => {
   const isNavOpen = useUi((s) => s.isNavOpen)
   const setIsNavOpen = useUi((s) => s.setIsNavOpen)
 
-  const location = useRouter().pathname
+  const location = useRouter().route
 
   function toggleNav() {
     setIsNavOpen(!isNavOpen)
@@ -58,7 +58,7 @@ const GlobalHeader = () => {
             <li className='py-4 px-6 border-b border-gray-300'>
               <NavLink
                 href='/'
-                className='hover:opacity-100 opacity-75 '
+                className='hover:opacity-100 opacity-75'
                 activeClassName='opacity-100'
               >
                 Home
@@ -67,7 +67,7 @@ const GlobalHeader = () => {
             <li className='py-4 px-6 border-b border-gray-300'>
               <NavLink
                 href='/job-board'
-                className='hover:opacity-100 opacity-75 '
+                className='hover:opacity-100 opacity-75'
                 activeClassName='opacity-100'
               >
                 Find a Job
@@ -76,7 +76,7 @@ const GlobalHeader = () => {
 
             <li className='py-4 px-6 border-b border-gray-300'>
               <NavLink
-                className='hover:opacity-100 opacity-75 '
+                className='hover:opacity-100 opacity-75'
                 href='/learning-resources'
                 activeClassName='opacity-100'
               >
@@ -130,7 +130,7 @@ const GlobalHeader = () => {
               >
                 <li className='mb-3'>
                   <NavLink
-                    href='/'
+                    href='/job-board?filter=Front-end'
                     className='submenu-item opacity-75 hover:opacity-100 border-b border-transparent   duration-75 hover:border-teal-500 w-full pb-1'
                   >
                     Front-end
@@ -138,7 +138,7 @@ const GlobalHeader = () => {
                 </li>
                 <li className='mb-3'>
                   <NavLink
-                    href='/'
+                    href='/job-board?filter=Back-end'
                     className='submenu-item opacity-75 hover:opacity-100 border-b border-transparent   duration-75 hover:border-teal-500 w-full pb-1'
                   >
                     Back-end
@@ -146,7 +146,7 @@ const GlobalHeader = () => {
                 </li>
                 <li>
                   <NavLink
-                    href='/'
+                    href='/job-board?filter=Full-stack'
                     className='submenu-item opacity-75 hover:opacity-100 border-b border-transparent   duration-75 hover:border-teal-500 w-full pb-1'
                   >
                     Full-stack
