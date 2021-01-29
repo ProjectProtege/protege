@@ -24,7 +24,7 @@ const IndividualContributor = ({ props }) => {
   }
 
   return (
-    <div className='grid grid-cols-3 gap-4 px-4 py-6 text-center md:text-left transition duration-150 ease-in-out bg-white border-l-4 border-teal-500 shadow'>
+    <div className='grid grid-cols-2 md:grid-cols-3 gap-6 px-4 py-6 text-center md:text-left transition duration-150 ease-in-out bg-white border-l-4 border-teal-500 shadow'>
       <div className='cols-span-1'>
         <img
           className='mx-auto rounded-full'
@@ -33,13 +33,11 @@ const IndividualContributor = ({ props }) => {
           loading='lazy'
         />
       </div>
-      <div className='col-span-2 truncate'>
+      <div className='col-span-1 md:col-span-2 flex items-start flex-col justify-center truncate'>
         {name ? (
-          <span className='mb-2 font-semibold text-blue-900 truncate'>
-            {name}
-          </span>
+          <span className='font-semibold text-blue-900 truncate'>{name}</span>
         ) : (
-          <span className='mb-2 font-semibold text-blue-900'>{login}</span>
+          <span className='font-semibold text-blue-900 truncate'>{login}</span>
         )}
         <div className='flex items-center my-2'>
           {twitter_username && (

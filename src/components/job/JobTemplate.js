@@ -133,7 +133,7 @@ const JobTemplate = ({ logo, props }) => {
               data-cy='job-description'
               id='jobDesc'
               dangerouslySetInnerHTML={createMarkup(jobDescription)}
-              className='mb-6'
+              className='rich-text-content mb-6'
             />
 
             <h4
@@ -146,7 +146,7 @@ const JobTemplate = ({ logo, props }) => {
 
             <div
               data-cy='company-description'
-              className='mt-2 text-blue-300'
+              className='rich-text-content mt-2 text-blue-300'
               id='companyDesc'
               dangerouslySetInnerHTML={createMarkup(companyDescription)}
             />

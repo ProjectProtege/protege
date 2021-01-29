@@ -107,7 +107,7 @@ const JobTemplate = ({ logo, props }) => {
     <>
       <div className='mx-auto container'>
         <div className='md:flex justify-center'>
-          <div className={`${isAdmin ? 'w-full' : 'md:w-3/4'} md:pr-12`}>
+          <div className={`${isAdmin ? 'w-full' : 'md:w-3/4'} md:pr-16`}>
             <h2
               data-cy='job-title'
               className='text-blue-900 font-bold text-3xl'
@@ -135,7 +135,7 @@ const JobTemplate = ({ logo, props }) => {
               data-cy='job-description'
               id='jobDesc'
               dangerouslySetInnerHTML={createMarkup(jobDescription)}
-              className='mb-6'
+              className='rich-text-content mb-6'
             />
 
             <h4
@@ -148,7 +148,7 @@ const JobTemplate = ({ logo, props }) => {
 
             <div
               data-cy='company-description'
-              className='mt-2 text-blue-300'
+              className='rich-text-content mt-2 text-blue-300'
               id='companyDesc'
               dangerouslySetInnerHTML={createMarkup(companyDescription)}
             />

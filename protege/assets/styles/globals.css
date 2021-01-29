@@ -92,3 +92,12 @@
 .ql-container.ql-snow {
   @apply border-t-0;
 }
+
+.rich-text-content h1,
+.rich-text-content h2,
+.rich-text-content h3,
+.rich-text-content h4,
+.rich-text-content h5,
+.rich-text-content h6 {
+  @apply mt-6 mb-4;
+}
