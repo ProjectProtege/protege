@@ -136,7 +136,7 @@ const PostAJob = ({ location }) => {
       {status === 1 && (
         <>
           <div className='container mx-auto lg:w-4/5 xl:w-7/12 mb-12 flex flex-col items-center'>
-            <h1 class='mb-3 text-2xl font-semibold text-blue-900'>
+            <h1 className='mb-3 text-2xl font-semibold text-blue-900'>
               Post a Job
             </h1>
             <h2 className='text-xl font-bold text-blue-900 mb-3'>

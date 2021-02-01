@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import FormCard from 'components/global/FormCard'
 
 const GetInTouch = () => {
   const router = useRouter()
@@ -46,16 +47,7 @@ const GetInTouch = () => {
         people we’re trying to serve!
       </p>
 
-      <div className='border-t-4 border-teal-500 shadow-md'>
-        <h2
-          style={{
-            backgroundImage: `url(/bg-pattern.png)`,
-          }}
-          className='p-4 text-xl font-bold text-blue-900 bg-blue-100 bg-cover'
-        >
-          Get in Touch
-        </h2>
-
+      <FormCard title='Get in touch'>
         <form
           name='contact'
           onSubmit={submitForm}
@@ -131,7 +123,7 @@ const GetInTouch = () => {
             </button>
           </div>
         </form>
-      </div>
+      </FormCard>
     </div>
   )
 }
