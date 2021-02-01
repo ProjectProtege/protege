@@ -59,7 +59,7 @@ const JobCard = ({ job }) => {
           </div>
 
           <div className='flex justify-between w-full md:w-11/12 md:pl-6'>
-            <div className='flex flex-col justify-between w-10/12 lg:w-8/12'>
+            <div className='flex flex-col justify-between'>
               <div>
                 <p
                   data-cy={`job-card-company-name-${job.id}`}
@@ -70,7 +70,7 @@ const JobCard = ({ job }) => {
 
                 <h2
                   data-cy={`job-card-job-title-${job.id}`}
-                  className='text-lg font-semibold leading-tight text-blue-900 md:-mt-1 md:text-xl'
+                  className='font-semibold leading-tight text-blue-900 md:-mt-1 text-xl capitalize'
                 >
                   {job.jobTitle}
                 </h2>
@@ -87,7 +87,7 @@ const JobCard = ({ job }) => {
             <div className='flex items-center text-right'>
               <p
                 data-cy={`job-card-formatted-date-${job.id}`}
-                className='font-semibold text-teal-700 md:text-lg'
+                className='font-semibold text-teal-700 text-'
               >
                 {formattedPostDate}
               </p>
