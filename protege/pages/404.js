@@ -6,10 +6,10 @@ export default function Custom404() {
   const router = useRouter()
   return (
     <div
-      className='container flex flex-col md:pt-6 md:pb-32 -mt-10'
+      className='container flex flex-col md:flex-row md:pt-6 md:pb-32 -mt-10 md:mt-0'
       style={{ maxWidth: 960 }}
     >
-      <div className='w-3/4 mx-auto md:w-1/2 md:mr-24'>
+      <div className='w-3/4 md:w-1/2 mx-auto  md:mr-24'>
         <Unicorn alt='A stylized unicorn image' className='w-full h-auto' />
       </div>
 
