@@ -12,15 +12,18 @@
     "autoprefixer": "^10.2.1",
     "axios": "^0.21.1",
     "firebase": "^8.2.4",
+    "formik": "^2.2.6",
     "next": "10.0.5",
     "postcss": "^8.2.4",
     "prop-types": "^15.7.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-quill": "^1.3.5",
     "react-spinners": "^0.10.4",
     "tailwindcss": "^2.0.2",
     "typewriter-effect": "^2.17.0",
     "xhr2": "^0.2.0",
+    "yup": "^0.32.8",
     "zustand": "^3.3.1"
   }
 }

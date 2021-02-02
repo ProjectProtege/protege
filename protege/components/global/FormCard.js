@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 
-const FormCard = ({ title, children }) => {
+const FormCard = ({ title, children, className }) => {
   return (
-    <div className='border-t-4 border-teal-500 shadow-md'>
+    <div className={`border-t-4 border-teal-500 shadow-md ${className}`}>
       <h2
         style={{
           backgroundImage: `url(/bg-pattern.png)`,
@@ -19,7 +19,12 @@ const FormCard = ({ title, children }) => {
 
 FormCard.propTypes = {
   title: PropTypes.string.isRequired,
+  className: PropTypes.string,
   children: PropTypes.func.isRequired,
+}
+
+FormCard.defaultProps = {
+  className: '',
 }
 
 export default FormCard
