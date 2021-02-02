@@ -1,13 +1,16 @@
 import Link from 'next/link'
 import { useJobs } from 'store/jobs_store'
+import { useForm } from 'store/job-post_store'
 
 import FindYourNext from 'components/home/FindYourNext'
 import JobCard from 'components/job/JobCard'
+import TierSelect from 'components/form/TierSelect'
 
 // import { db } from 'firebase/firebase'
 
 const Home = () => {
   const jobs = useJobs((s) => s.jobs)
+  const tier = useForm((s) => s.tier)
 
   function activeJobs(jobList) {
     const active = jobList.filter((job) => {
@@ -65,6 +68,32 @@ const Home = () => {
             ))}
         </div>
       </section>
+
+      <div className='flex flex-col items-center'>
+        <h2 className='mb-8 text-2xl font-bold leading-normal text-center text-blue-500'>
+          Broadcast to unmatched ambition,
+          <br />
+          <span className='text-5xl tracking-wide text-teal-800'>
+            Affordably.
+          </span>
+        </h2>
+
+        <TierSelect />
+
+        <div className='flex flex-col items-center mt-6'>
+          <h3 className='text-lg text-center text-blue-700'>
+            Get started on your candidate search today.
+          </h3>
+
+          <Link href={`/post-a-job?s=1&t=${tier}`}>
+            <a>
+              <button className='mt-3 btn btn-teal' type='button'>
+                Post a Job
+              </button>
+            </a>
+          </Link>
+        </div>
+      </div>
     </div>
   )
 }

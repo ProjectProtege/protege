@@ -9,5 +9,8 @@ module.exports = {
     MESSAGING_SENDER_ID: process.env.MESSAGING_SENDER_ID,
     APP_ID: process.env.APP_ID,
     MEASUREMENT_ID: process.env.MEASUREMENT_ID,
+    BASIC_PLAN: process.env.BASIC_PLAN,
+    ADVANCED_PLAN: process.env.ADVANCED_PLAN,
+    PREMIUM_PLAN: process.env.PREMIUM_PLAN,
   },
 }
