@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router'
-import { useForm } from 'store/job-post_store'
+import { useJobForm } from 'store/job-post_store'
 import PropTypes from 'prop-types'
 
 const TierSelectCard = ({ children, value }) => {
   const route = useRouter()
-  const setTier = useForm((s) => s.setTier)
-  const tier = useForm((s) => s.tier)
+  const setTier = useJobForm((s) => s.setTier)
+  const tier = useJobForm((s) => s.tier)
 
   return (
     <button

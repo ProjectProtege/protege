@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import create from 'zustand'
 
-export const useForm = create((set) => ({
+export const useJobForm = create((set) => ({
   status: 1,
   form: {
     approved: false,

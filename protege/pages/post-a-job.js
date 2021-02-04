@@ -1,4 +1,4 @@
-import { useForm } from 'store/job-post_store'
+import { useJobForm } from 'store/job-post_store'
 
 import Check from 'assets/images/icons/check-solid'
 import TierSelect from 'components/form/TierSelect'
@@ -6,8 +6,8 @@ import StatusBar from 'components/form/StatusBar'
 import PostAJobForm from 'components/form/PostAJobForm'
 
 const PostAJob = () => {
-  const status = useForm((s) => s.status)
-  const jobData = useForm((s) => s.form)
+  const status = useJobForm((s) => s.status)
+  const jobData = useJobForm((s) => s.form)
 
   return (
     <div className='container'>

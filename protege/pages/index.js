@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useJobs } from 'store/jobs_store'
-import { useForm } from 'store/job-post_store'
+import { useJobForm } from 'store/job-post_store'
 
 import FindYourNext from 'components/home/FindYourNext'
 import JobCard from 'components/job/JobCard'
@@ -10,7 +10,7 @@ import TierSelect from 'components/form/TierSelect'
 
 const Home = () => {
   const jobs = useJobs((s) => s.jobs)
-  const tier = useForm((s) => s.tier)
+  const tier = useJobForm((s) => s.tier)
 
   function activeJobs(jobList) {
     const active = jobList.filter((job) => {
