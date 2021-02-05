@@ -37,7 +37,7 @@
 /*--Input--*/
 
 .input {
-  @apply border border-blue-200 p-2 outline-none;
+  @apply border border-blue-200 p-2;
 }
 
 .input-error {
@@ -80,7 +80,8 @@
 }
 
 /*-------Quill editor styles-----------------*/
-.ql-container {
+.ql-container,
+.ql-editor {
   min-height: 250px !important;
 }
 

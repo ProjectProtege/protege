@@ -44,11 +44,9 @@ const Home = () => {
             jobs listed here are geared for those hungry to work and learn.
           </p>
 
-          <button className='mx-auto btn btn-teal' type='button'>
-            <Link href='/job-board'>
-              <a>Find a Job</a>
-            </Link>
-          </button>
+          <Link href='/job-board'>
+            <a class='mx-auto btn btn-teal'>Find a Job</a>
+          </Link>
         </div>
       </section>
 

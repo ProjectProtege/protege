@@ -27,7 +27,7 @@ function LogoUpload({ recievingLogo, setFieldValue }) {
       <div className='flex flex-col md:w-1/2 md:pr-3'>
         <label
           htmlFor='companyLogo'
-          className='h-24 w-full mb-2 border flex border-dashed border-blue-300 text-center cursor-pointer'
+          className='h-24 w-full mb-2 border flex border-dashed border-blue-300 text-center cursor-pointer focus-within:outline-teal'
         >
           {fileResult ? (
             <img
@@ -44,9 +44,8 @@ function LogoUpload({ recievingLogo, setFieldValue }) {
             onChange={handleLogoChange}
             id='companyLogo'
             name='companyLogo'
-            className='hidden'
             type='file'
-            accept='image/png'
+            accept='image/png, image/jpeg, image/jpg'
           />
         </label>
       </div>
@@ -57,7 +56,7 @@ function LogoUpload({ recievingLogo, setFieldValue }) {
         >
           {fileName
             ? `Uploaded: ${fileName}`
-            : "Please provide a .png format of your company's logo to be displayed with your job opening listing."}
+            : "Please provide a .png, .jpeg, or .jpg format of your company's logo to be displayed with your job opening listing."}
         </span>
       </div>
     </div>

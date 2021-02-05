@@ -13,6 +13,10 @@ const GlobalHeader = () => {
 
   const location = useRouter().route
 
+  useRouter().events.on('routeChangeComplete', (url) => {
+    setIsNavOpen(false)
+  })
+
   function toggleNav() {
     setIsNavOpen(!isNavOpen)
   }
@@ -115,7 +119,7 @@ const GlobalHeader = () => {
           role='navigation'
         >
           <ul className='flex justify-between'>
-            <li className='menu-item quick-filter mt-1 pr-4 lg:pr-10 cursor-pointer'>
+            <li className='menu-item quick-filter  pr-4 lg:pr-10 cursor-pointer'>
               <NavLink
                 href='/job-board'
                 className='opacity-75 pb-3 hover:opacity-100 border-b-2 border-transparent'
@@ -155,7 +159,7 @@ const GlobalHeader = () => {
               </ul>
             </li>
 
-            <li className='menu-item mt-1 pr-4 lg:pr-10 opacity-75 hover:opacity-100'>
+            <li className='menu-item  pr-4 lg:pr-10 opacity-75 hover:opacity-100'>
               <NavLink
                 href='/learning-resources'
                 className='pb-3 border-b-2   duration-75 hover:border-teal-500 '
@@ -166,7 +170,7 @@ const GlobalHeader = () => {
               </NavLink>
             </li>
 
-            <li className='menu-item mt-1 pr-4 lg:pr-10 opacity-75 hover:opacity-100'>
+            <li className='menu-item  pr-4 lg:pr-10 opacity-75 hover:opacity-100'>
               <NavLink
                 href='/get-in-touch'
                 className='pb-3 border-b-2   duration-75 hover:border-teal-500 '
@@ -177,7 +181,7 @@ const GlobalHeader = () => {
               </NavLink>
             </li>
 
-            <li className='menu-item mt-1 pr-4 lg:pr-10 opacity-75 hover:opacity-100'>
+            <li className='menu-item  pr-4 lg:pr-10 opacity-75 hover:opacity-100'>
               <NavLink
                 href='/contributors'
                 className='pb-3 border-b-2   duration-75 hover:border-teal-500 '
@@ -188,8 +192,10 @@ const GlobalHeader = () => {
               </NavLink>
             </li>
 
-            <li className='btn btn-teal'>
-              <NavLink href='/post-a-job'>Post a Job</NavLink>
+            <li>
+              <NavLink href='/post-a-job' className='btn btn-teal'>
+                Post a Job
+              </NavLink>
             </li>
           </ul>
         </nav>

@@ -28,6 +28,8 @@ function LogoUpload({ recievingLogo, setFieldValue }) {
         <label
           htmlFor='companyLogo'
           className='h-24 w-full mb-2 border flex border-dashed border-blue-300 text-center cursor-pointer'
+          // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+          tabIndex={0}
         >
           {fileResult ? (
             <img
@@ -44,9 +46,8 @@ function LogoUpload({ recievingLogo, setFieldValue }) {
             onChange={handleLogoChange}
             id='companyLogo'
             name='companyLogo'
-            className='hidden'
             type='file'
-            accept='image/png'
+            accept='image'
           />
         </label>
       </div>

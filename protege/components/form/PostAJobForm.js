@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import PropTypes from 'prop-types'
 import { useJobForm } from 'store/job-post_store'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { DevTool } from '@hookform/devtools'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
-// const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 import 'react-quill/dist/quill.snow.css'
 import FormCard from 'components/global/FormCard'
 import LogoUpload from './LogoUpload'
@@ -178,7 +178,7 @@ const PostAJobForm = ({ jobData }) => {
               </div>
             </div>
 
-            {/* <div className='flex flex-col mb-3'>
+            <div className='flex flex-col mb-3'>
               <label
                 htmlFor='job-description'
                 className='text-blue-900 font-semibold mb-2'
@@ -186,14 +186,22 @@ const PostAJobForm = ({ jobData }) => {
                 Job Description
               </label>
 
-              {({ field }) => (
-                <ReactQuill
-                  value={field.value}
-                  onChange={field.onChange(field.name)}
-                  modules={{ keyboard: { bindings: { tab: false } } }}
-                />
-              )}
-            </div> */}
+              <Controller
+                name='jobDescription'
+                control={control}
+                render={({ value, onChange }) => (
+                  <ReactQuill
+                    value={value}
+                    onChange={onChange}
+                    modules={{ keyboard: { bindings: { tab: false } } }}
+                  />
+                )}
+              />
+
+              <p name='jobDescription' component='span' className='input-error'>
+                {errors.jobDescription && errors.jobDescription.message}
+              </p>
+            </div>
 
             <div className='flex flex-col'>
               <label
@@ -340,7 +348,7 @@ const PostAJobForm = ({ jobData }) => {
               </div>
             </div>
 
-            {/* <div className='flex flex-col mb-3'>
+            <div className='flex flex-col mb-3'>
               <label
                 htmlFor='companyDescription'
                 className='text-blue-900 font-semibold mb-2'
@@ -348,26 +356,26 @@ const PostAJobForm = ({ jobData }) => {
                 Company Description
               </label>
 
-              <Field
-                id='companyDescription'
+              <Controller
                 name='companyDescription'
-                className='input'
-              >
-                {({ field }) => (
+                control={control}
+                render={({ value, onChange }) => (
                   <ReactQuill
-                    value={field.value}
-                    onChange={field.onChange(field.name)}
+                    value={value}
+                    onChange={onChange}
                     modules={{ keyboard: { bindings: { tab: false } } }}
                   />
                 )}
-              </Field>
+              />
 
-              <ErrorMessage
+              <p
                 name='companyDescription'
                 component='span'
                 className='input-error'
-              />
-            </div> */}
+              >
+                {errors.companyDescription && errors.companyDescription.message}
+              </p>
+            </div>
 
             <div className='flex flex-col'>
               <label
@@ -402,7 +410,7 @@ const PostAJobForm = ({ jobData }) => {
           Next Step
         </button>
 
-        <DevTool control={control} />
+        {/* <DevTool control={control} /> */}
       </form>
     </div>
   )
