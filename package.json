@@ -51,11 +51,6 @@
     "watch:css": "postcss src/assets/css/tailwind.css -o src/assets/css/main.css",
     "cypress": "cypress open"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.{js,jsx}": [
       "prettier --write",

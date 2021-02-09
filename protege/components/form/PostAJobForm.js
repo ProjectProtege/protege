@@ -340,7 +340,7 @@ const PostAJobForm = ({ jobData }) => {
                   Logo
                 </label>
 
-                <LogoUpload />
+                <LogoUpload register={register} />
 
                 <p name='companyLogo' component='span' className='input-error'>
                   {errors.companyLogo && errors.companyLogo.message}
@@ -410,7 +410,7 @@ const PostAJobForm = ({ jobData }) => {
           Next Step
         </button>
 
-        {/* <DevTool control={control} /> */}
+        <DevTool control={control} />
       </form>
     </div>
   )

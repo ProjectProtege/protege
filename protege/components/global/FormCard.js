@@ -20,7 +20,7 @@ const FormCard = ({ title, children, className }) => {
 FormCard.propTypes = {
   title: PropTypes.string.isRequired,
   className: PropTypes.string,
-  children: PropTypes.func.isRequired,
+  children: PropTypes.shape({}).isRequired,
 }
 
 FormCard.defaultProps = {
