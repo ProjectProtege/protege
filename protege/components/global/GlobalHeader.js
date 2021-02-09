@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useUi } from 'store/ui_store'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -8,14 +9,23 @@ import MenuIcon from 'assets/images/MenuIcon'
 import Logo from 'assets/images/ProtegeLogo'
 
 const GlobalHeader = () => {
+  const router = useRouter()
   const isNavOpen = useUi((s) => s.isNavOpen)
   const setIsNavOpen = useUi((s) => s.setIsNavOpen)
 
   const location = useRouter().route
 
-  useRouter().events.on('routeChangeComplete', (url) => {
-    setIsNavOpen(false)
-  })
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setIsNavOpen(false)
+    }
+
+    router.events.on('routeChangeStart', handleRouteChange)
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange)
+    }
+  }, [])
 
   function toggleNav() {
     setIsNavOpen(!isNavOpen)
