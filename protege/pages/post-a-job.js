@@ -1,13 +1,42 @@
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { useJobForm } from 'store/job-post_store'
+import PropTypes from 'prop-types'
 
 import Check from 'assets/images/icons/check-solid'
 import TierSelect from 'components/form/TierSelect'
 import StatusBar from 'components/form/StatusBar'
 import PostAJobForm from 'components/form/PostAJobForm'
+import JobTemplate from 'components/job/JobTemplate'
+import BackArrow from 'assets/images/icons/back-arrow'
 
-const PostAJob = () => {
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      query: context.query,
+    },
+  }
+}
+
+const PostAJob = ({ query }) => {
+  const router = useRouter()
+
   const status = useJobForm((s) => s.status)
+  const setStatus = useJobForm((s) => s.setStatus)
   const jobData = useJobForm((s) => s.form)
+  const companyLogoFile = useJobForm((s) => s.companyLogoFile)
+
+  useEffect(() => {
+    // eslint-disable-next-line radix
+    const queryStatus = parseInt(query.status)
+    if (!Number.isNaN(queryStatus)) {
+      setStatus(queryStatus)
+    }
+  }, [query])
+
+  function handlePaymentClick() {
+    console.log('bazinga')
+  }
 
   return (
     <div className='container'>
@@ -84,8 +113,43 @@ const PostAJob = () => {
           <PostAJobForm jobData={jobData} />
         </div>
       )}
+
+      {status === 2 && jobData && (
+        <>
+          <div className='container mx-auto lg:w-3/5'>
+            <button
+              data-cy='edit-job-button'
+              className='flex items-center mb-3 text-teal-600 text-lg font-bold'
+              onClick={() => {
+                router.push('/post-a-job?status=1')
+              }}
+              type='button'
+            >
+              <BackArrow />
+              <span className='pl-2 font-medium'>Edit</span>
+            </button>
+
+            <JobTemplate props={jobData} logo={companyLogoFile} />
+
+            <button
+              data-cy='job-posting-approval-button'
+              className='btn btn-blue mt-8'
+              onClick={handlePaymentClick}
+              type='button'
+            >
+              Proceed to Payment
+            </button>
+          </div>
+        </>
+      )}
     </div>
   )
+}
+
+PostAJob.propTypes = {
+  query: PropTypes.shape({
+    status: PropTypes.string,
+  }).isRequired,
 }
 
 export default PostAJob

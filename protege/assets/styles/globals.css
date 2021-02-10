@@ -41,7 +41,7 @@
 }
 
 .input-error {
-  @apply text-error-full text-xs;
+  @apply text-error-full text-xs mt-2;
 }
 
 .input-select {

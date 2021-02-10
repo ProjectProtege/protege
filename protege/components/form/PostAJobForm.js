@@ -1,6 +1,10 @@
+// React/Next imports
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import PropTypes from 'prop-types'
+
+// Lib imports
 import { useJobForm } from 'store/job-post_store'
 import { useForm, Controller } from 'react-hook-form'
 import { DevTool } from '@hookform/devtools'
@@ -8,10 +12,19 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 import 'react-quill/dist/quill.snow.css'
+
+// Custom component imports
 import FormCard from 'components/global/FormCard'
 import LogoUpload from './LogoUpload'
 
 const PostAJobForm = ({ jobData }) => {
+  const router = useRouter()
+
+  // Form and Status state from zustand
+  const setForm = useJobForm((s) => s.setForm)
+  const setStatus = useJobForm((s) => s.setStatus)
+
+  // Form validation schema
   const Schema = Yup.object().shape({
     jobtitle: Yup.string().required('Job title is a required field.'),
     roleFocus: Yup.string().required('Please select a focus area.'),
@@ -28,14 +41,15 @@ const PostAJobForm = ({ jobData }) => {
     companyDescription: Yup.string().required(
       'Please give a brief description of the company and culture.'
     ),
-    companyLogo: Yup.mixed()
-      .required('Please provide a .png format image of your company logo')
-      .test((file) => file && file.type === 'image/png'),
+    companyLogo: Yup.mixed().required(
+      'Please provide a .png format image of your company logo'
+    ),
     companyHQ: Yup.string().required(
       'Please provide a location for your office headquarters.'
     ),
   })
 
+  // react-hook-form
   const { register, handleSubmit, control, errors } = useForm({
     resolver: yupResolver(Schema),
     mode: 'onChange',
@@ -54,8 +68,7 @@ const PostAJobForm = ({ jobData }) => {
     },
   })
 
-  const setForm = useJobForm((s) => s.form)
-  const [fileValue, setFileValue] = useState(undefined)
+  // used for 'How to apply' toggle
   const [linkType, setLinkType] = useState('url')
   const [placeholder, setPlaceholder] = useState('')
 
@@ -64,6 +77,7 @@ const PostAJobForm = ({ jobData }) => {
     // recievingLogo2(logo)
   }
 
+  // toggling placeholder for 'How to apply'
   useEffect(() => {
     if (linkType === 'url') {
       setPlaceholder('http://')
@@ -72,12 +86,28 @@ const PostAJobForm = ({ jobData }) => {
     }
   }, [linkType])
 
+  // updating value of 'How to apply' radio buttons
   function handleChange(e) {
     setLinkType(e.target.value)
   }
 
-  function handleFormEntry() {
-    console.log('bazinga')
+  // Form submission event
+  function handleFormEntry(data) {
+    setForm({
+      companyDescription: data.companyDescription,
+      companyEmail: data.companyEmail,
+      companyHQ: data.companyHQ,
+      companyLogo: data.companyLogo[0].name,
+      companyName: data.companyName,
+      companyWebsite: data.companyWebsite,
+      howToApply: data.howToApply,
+      jobDescription: data.jobDescription,
+      jobtitle: data.jobtitle,
+      positionType: data.positionType,
+      roleFocus: data.roleFocus,
+    })
+    setStatus(2)
+    router.push('/post-a-job?status=2')
   }
 
   return (
@@ -102,7 +132,12 @@ const PostAJobForm = ({ jobData }) => {
                 autoComplete='off'
               />
 
-              <p name='jobtitle' component='span' className='input-error'>
+              <p
+                name='jobtitle'
+                component='span'
+                className='input-error'
+                role='alert'
+              >
                 {errors.jobtitle && errors.jobtitle.message}
               </p>
             </div>
@@ -139,7 +174,12 @@ const PostAJobForm = ({ jobData }) => {
                   </select>
                 </div>
 
-                <p name='roleFocus' component='span' className='input-error'>
+                <p
+                  name='roleFocus'
+                  component='span'
+                  className='input-error'
+                  role='alert'
+                >
                   {errors.roleFocus && errors.roleFocus.message}
                 </p>
               </div>
@@ -172,7 +212,12 @@ const PostAJobForm = ({ jobData }) => {
                   </select>
                 </div>
 
-                <p name='positionType' component='span' className='input-error'>
+                <p
+                  name='positionType'
+                  component='span'
+                  className='input-error'
+                  role='alert'
+                >
                   {errors.positionType && errors.positionType.message}
                 </p>
               </div>
@@ -198,7 +243,12 @@ const PostAJobForm = ({ jobData }) => {
                 )}
               />
 
-              <p name='jobDescription' component='span' className='input-error'>
+              <p
+                name='jobDescription'
+                component='span'
+                className='input-error'
+                role='alert'
+              >
                 {errors.jobDescription && errors.jobDescription.message}
               </p>
             </div>
@@ -249,7 +299,12 @@ const PostAJobForm = ({ jobData }) => {
                 placeholder={placeholder}
               />
 
-              <p name='howToApply' component='span' className='input-error'>
+              <p
+                name='howToApply'
+                component='span'
+                className='input-error'
+                role='alert'
+              >
                 {errors.howToApply && errors.howToApply.message}
               </p>
             </div>
@@ -276,7 +331,12 @@ const PostAJobForm = ({ jobData }) => {
                   type='text'
                 />
 
-                <p name='companyName' component='span' className='input-error'>
+                <p
+                  name='companyName'
+                  component='span'
+                  className='input-error'
+                  role='alert'
+                >
                   {errors.companyName && errors.companyName.message}
                 </p>
               </div>
@@ -303,6 +363,7 @@ const PostAJobForm = ({ jobData }) => {
                   name='companyWebsite'
                   component='span'
                   className='input-error'
+                  role='alert'
                 >
                   {errors.companyWebsite && errors.companyWebsite.message}
                 </p>
@@ -326,7 +387,12 @@ const PostAJobForm = ({ jobData }) => {
                   ref={register}
                 />
 
-                <p name='companyEmail' component='span' className='input-error'>
+                <p
+                  name='companyEmail'
+                  component='span'
+                  className='input-error'
+                  role='alert'
+                >
                   {errors.companyEmail && errors.companyEmail.message}
                 </p>
               </div>
@@ -342,7 +408,12 @@ const PostAJobForm = ({ jobData }) => {
 
                 <LogoUpload register={register} />
 
-                <p name='companyLogo' component='span' className='input-error'>
+                <p
+                  name='companyLogo'
+                  component='span'
+                  className='input-error'
+                  role='alert'
+                >
                   {errors.companyLogo && errors.companyLogo.message}
                 </p>
               </div>
@@ -372,6 +443,7 @@ const PostAJobForm = ({ jobData }) => {
                 name='companyDescription'
                 component='span'
                 className='input-error'
+                role='alert'
               >
                 {errors.companyDescription && errors.companyDescription.message}
               </p>
@@ -396,7 +468,12 @@ const PostAJobForm = ({ jobData }) => {
                 ref={register}
               />
 
-              <p name='companyHQ' component='span' className='input-error'>
+              <p
+                name='companyHQ'
+                component='span'
+                className='input-error'
+                role='alert'
+              >
                 {errors.companyHQ && errors.companyHQ.message}
               </p>
             </div>

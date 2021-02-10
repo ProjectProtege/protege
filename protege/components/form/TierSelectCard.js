@@ -7,6 +7,10 @@ const TierSelectCard = ({ children, value }) => {
   const setTier = useJobForm((s) => s.setTier)
   const tier = useJobForm((s) => s.tier)
 
+  function handleClick() {
+    setTier(value)
+  }
+
   return (
     <button
       className={`p-6 md:p-8 shadow rounded text-left md:text-center cursor-pointer border-t-8 border-gray-300  transform ease-in-out duration-150 bg-white mx-auto mb-4 grid grid-cols-3 md:grid-cols-1 w-full
@@ -16,9 +20,7 @@ const TierSelectCard = ({ children, value }) => {
           : ''
       }
       ${tier === value ? 'border-teal-300 bg-gray-100 scale-105' : ''}`}
-      onClick={() => {
-        setTier(value)
-      }}
+      onClick={handleClick}
       type='button'
     >
       {route.route === '/' ? (

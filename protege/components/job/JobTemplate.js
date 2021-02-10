@@ -5,7 +5,14 @@ import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 
 const JobTemplate = ({ logo, props }) => {
+  const [isPreview, setIsPreview] = useState(false)
   const router = useRouter()
+
+  function checkPreview() {
+    if (router.route !== '/job-board') {
+      setIsPreview(true)
+    }
+  }
 
   const {
     howToApply,
@@ -18,9 +25,6 @@ const JobTemplate = ({ logo, props }) => {
     positionType,
   } = props
 
-  // const { pathname } = useLocation()
-  const isPreview = router.route === '/job-board/'
-
   const [companyLogo, setCompanyLogo] = useState(undefined)
   const [isAdmin, setIsAdmin] = useState(false)
 
@@ -32,6 +36,7 @@ const JobTemplate = ({ logo, props }) => {
       reader.onloadend = () => {
         setCompanyLogo(reader.result)
       }
+      console.log(file)
     }
   }
 
@@ -63,6 +68,7 @@ const JobTemplate = ({ logo, props }) => {
   }
 
   useEffect(() => {
+    checkPreview()
     // Cleans up the text provided by QuillJS wysiwyg
     function styleChildren(children) {
       children.forEach((child) => {
@@ -97,7 +103,7 @@ const JobTemplate = ({ logo, props }) => {
     }
 
     checkAdmin()
-  })
+  }, [])
 
   function createMarkup(text) {
     return { __html: text }

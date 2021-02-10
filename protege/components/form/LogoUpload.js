@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
+import { useJobForm } from 'store/job-post_store'
+
 export default function LogoUpload({ register }) {
+  const setCompanyLogoFile = useJobForm((s) => s.setCompanyLogoFile)
+
   const [fileResult, setFileResult] = useState(undefined)
   const [fileName, setFileName] = useState('')
 
@@ -14,9 +18,8 @@ export default function LogoUpload({ register }) {
       reader.onloadend = () => {
         setFileName(file.name)
         setFileResult(reader.result)
+        setCompanyLogoFile(file)
       }
-
-      console.log(file)
     }
   }
 
@@ -41,8 +44,8 @@ export default function LogoUpload({ register }) {
             ref={register}
             data-cy='company-logo-upload'
             className='absolute w-full h-full cursor-pointer opacity-0'
-            onChange={handleLogoChange}
             id='companyLogo'
+            onChange={handleLogoChange}
             name='companyLogo'
             type='file'
             accept='image/png, image/jpeg, image/jpg'
@@ -50,7 +53,7 @@ export default function LogoUpload({ register }) {
           />
         </label>
       </div>
-      <div className='flex flex-col md:w-1/2'>
+      <div className='flex flex-col md:flex-row md:w-1/2'>
         <span
           data-cy='logo-upload-fileName'
           className='text-blue-500 text-xs tracking-tight'
