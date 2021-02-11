@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
+import { useJobForm } from 'store/job-post_store'
 import PropTypes from 'prop-types'
 
-import { useJobForm } from 'store/job-post_store'
-
 export default function LogoUpload({ register }) {
-  const setCompanyLogoFile = useJobForm((s) => s.setCompanyLogoFile)
-
   const [fileResult, setFileResult] = useState(undefined)
   const [fileName, setFileName] = useState('')
+  const setCompanyLogoFile = useJobForm((s) => s.setCompanyLogoFile)
 
   const handleLogoChange = (e) => {
     const reader = new FileReader()

@@ -5,14 +5,9 @@ import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 
 const JobTemplate = ({ logo, props }) => {
-  const [isPreview, setIsPreview] = useState(false)
   const router = useRouter()
 
-  function checkPreview() {
-    if (router.route !== '/job-board') {
-      setIsPreview(true)
-    }
-  }
+  const isPreview = router.pathname.indexOf('/job-board/') !== 0
 
   const {
     howToApply,
@@ -36,7 +31,6 @@ const JobTemplate = ({ logo, props }) => {
       reader.onloadend = () => {
         setCompanyLogo(reader.result)
       }
-      console.log(file)
     }
   }
 
@@ -62,13 +56,10 @@ const JobTemplate = ({ logo, props }) => {
   }
 
   function checkAdmin() {
-    if (router.route === '/admin') {
-      setIsAdmin(true)
-    }
+    return router.pathname === '/admin' ? setIsAdmin(true) : setIsAdmin(false)
   }
 
   useEffect(() => {
-    checkPreview()
     // Cleans up the text provided by QuillJS wysiwyg
     function styleChildren(children) {
       children.forEach((child) => {
@@ -94,12 +85,8 @@ const JobTemplate = ({ logo, props }) => {
     const companyChildren = [...companyDescriptionParent.children]
     styleChildren(companyChildren)
 
-    if (isPreview) {
-      // Setting Logo in new job post preview
+    if (isPreview && logo !== null) {
       readLogo(logo)
-    } else {
-      // Retrieve logo to display in live job posting
-      // retrieveLogo()
     }
 
     checkAdmin()

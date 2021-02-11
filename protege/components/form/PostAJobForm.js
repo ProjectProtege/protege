@@ -17,12 +17,13 @@ import 'react-quill/dist/quill.snow.css'
 import FormCard from 'components/global/FormCard'
 import LogoUpload from './LogoUpload'
 
-const PostAJobForm = ({ jobData }) => {
+const PostAJobForm = ({ jobData, receivingLogo }) => {
   const router = useRouter()
 
   // Form and Status state from zustand
   const setForm = useJobForm((s) => s.setForm)
   const setStatus = useJobForm((s) => s.setStatus)
+  const companyLogoFile = useJobForm((s) => s.companyLogoFile)
 
   // Form validation schema
   const Schema = Yup.object().shape({
@@ -62,7 +63,6 @@ const PostAJobForm = ({ jobData }) => {
       companyName: jobData ? `${jobData.companyName}` : '',
       companyWebsite: jobData ? `${jobData.companyWebsite}` : '',
       companyEmail: jobData ? `${jobData.companyEmail}` : '',
-      companyLogo: jobData ? `${jobData.companyLogo}` : '',
       companyDescription: jobData ? `${jobData.companyDescription}` : '',
       companyHQ: jobData ? `${jobData.companyHQ}` : '',
     },
@@ -89,6 +89,10 @@ const PostAJobForm = ({ jobData }) => {
   // updating value of 'How to apply' radio buttons
   function handleChange(e) {
     setLinkType(e.target.value)
+  }
+
+  function receivingLogo2(logo) {
+    receivingLogo(logo)
   }
 
   // Form submission event
@@ -406,7 +410,10 @@ const PostAJobForm = ({ jobData }) => {
                   Logo
                 </label>
 
-                <LogoUpload register={register} />
+                <LogoUpload
+                  register={register}
+                  receivingLogo2={receivingLogo2}
+                />
 
                 <p
                   name='companyLogo'
@@ -487,13 +494,14 @@ const PostAJobForm = ({ jobData }) => {
           Next Step
         </button>
 
-        <DevTool control={control} />
+        {/* <DevTool control={control} /> */}
       </form>
     </div>
   )
 }
 
 PostAJobForm.propTypes = {
+  receivingLogo: PropTypes.func.isRequired,
   jobData: PropTypes.shape({
     jobtitle: PropTypes.string,
     roleFocus: PropTypes.string,

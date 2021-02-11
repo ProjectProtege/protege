@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useJobForm } from 'store/job-post_store'
 import PropTypes from 'prop-types'
