@@ -67,7 +67,7 @@ const PostAJob = ({ location }) => {
   }
 
   async function sendJobToDB(data) {
-    const logoFileName = `${new Date().getTime()}${data.companyLogo.name}`
+    const logoFileName = `${new Date().getTime()}${data.companyLogo}`
 
     const postDate = firebase.firestore.Timestamp.fromDate(new Date())
 
@@ -108,8 +108,8 @@ const PostAJob = ({ location }) => {
       .redirectToCheckout({
         lineItems: [{ price: tier, quantity: 1 }],
         mode: 'payment',
-        successUrl: `${process.env.REACT_APP_BASE_URL}/post-a-job?s=3`,
-        cancelUrl: `${process.env.REACT_APP_BASE_URL}/post-a-job?s=1`,
+        successUrl: `${process.env.REACT_APP_BASE_URL}/post-a-job?status=3`,
+        cancelUrl: `${process.env.REACT_APP_BASE_URL}/post-a-job?status=1`,
       })
       .then(function result() {
         if (error) {

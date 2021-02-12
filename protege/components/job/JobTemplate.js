@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
+import { storage } from 'utils/db'
 
 const JobTemplate = ({ logo, props }) => {
   const router = useRouter()
@@ -18,9 +19,10 @@ const JobTemplate = ({ logo, props }) => {
     roleFocus,
     jobtitle,
     positionType,
+    companyLogo,
   } = props
 
-  const [companyLogo, setCompanyLogo] = useState(undefined)
+  const [companyLogoFile, setCompanyLogoFile] = useState(undefined)
   const [isAdmin, setIsAdmin] = useState(false)
 
   function readLogo(logoFile) {
@@ -29,20 +31,21 @@ const JobTemplate = ({ logo, props }) => {
     if (file) {
       reader.readAsDataURL(file)
       reader.onloadend = () => {
-        setCompanyLogo(reader.result)
+        setCompanyLogoFile(reader.result)
       }
     }
   }
 
-  // function retrieveLogo() {
-  //   storage
-  //     .ref('images')
-  //     .child(companyLogo)
-  //     .getDownloadURL()
-  //     .then((url) => {
-  //       setCompanyLogo(url)
-  //     })
-  // }
+  function retrieveLogo() {
+    // console.log('safe')
+    storage
+      .ref('images')
+      .child(props.companyLogo)
+      .getDownloadURL()
+      .then((url) => {
+        setCompanyLogoFile(url)
+      })
+  }
 
   const quillStyle = {
     H1: 'text-blue-900 font-semibold text-xl',
@@ -87,6 +90,8 @@ const JobTemplate = ({ logo, props }) => {
 
     if (isPreview && logo !== null) {
       readLogo(logo)
+    } else {
+      retrieveLogo()
     }
 
     checkAdmin()
@@ -156,7 +161,7 @@ const JobTemplate = ({ logo, props }) => {
                       data-cy='company-logo'
                       id='companyLogo'
                       className='w-full'
-                      src={companyLogo}
+                      src={companyLogoFile}
                       alt={`${companyName} logo`}
                     />
                   </div>
@@ -225,9 +230,11 @@ JobTemplate.propTypes = {
   positionType: PropTypes.string,
   jobDescription: PropTypes.string,
   companyDescription: PropTypes.string,
+  companyLogo: PropTypes.string,
 }
 
 JobTemplate.defaultProps = {
+  companyLogo: '',
   logo: {},
   howToApply: '',
   companyName: '',

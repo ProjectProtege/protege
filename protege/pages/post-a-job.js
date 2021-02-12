@@ -13,6 +13,7 @@ import TierSelect from 'components/form/TierSelect'
 import StatusBar from 'components/form/StatusBar'
 import PostAJobForm from 'components/form/PostAJobForm'
 import JobTemplate from 'components/job/JobTemplate'
+import JobPostingConfirmation from 'components/job/JobPostingConfirmation'
 import BackArrow from 'assets/images/icons/back-arrow'
 
 export async function getServerSideProps(context) {
@@ -41,7 +42,7 @@ const PostAJob = ({ query }) => {
   }, [query])
 
   async function sendJobtoDB(data) {
-    const logoFileName = `${new Date().getTime()}${data.companyLogo}`
+    const logoFileName = `${new Date().getTime()}-${data.companyLogoFile.name}`
 
     const postDate = firebase.firestore.Timestamp.fromDate(new Date())
 
@@ -52,24 +53,28 @@ const PostAJob = ({ query }) => {
     const uid = uuidv4()
 
     uploadTask.then(
-      await db.collection('jobs').doc(uid).set({
-        approved: false,
-        status: 'active',
-        companyEmail: data.jobData.companyEmail,
-        companyLogo: logoFileName,
-        companyName: data.jobData.companyName,
-        companyWebsite: data.jobData.companyWebsite,
-        companyHQ: data.jobData.companyHQ,
-        companyDescription: data.jobData.companyDescription,
-        howToApply: data.jobData.howToApply,
-        jobDescription: data.jobData.jobDescription,
-        jobtitle: data.jobData.jobtitle,
-        paid: false,
-        positionType: data.jobData.positionType,
-        postedAt: postDate,
-        roleFocus: data.jobData.roleFocus,
-        tier,
-      })
+      await db
+        .collection('jobs')
+        .doc(uid)
+        .set({
+          approved: false,
+          status: 'active',
+          companyEmail: data.jobData.companyEmail,
+          companyLogo: logoFileName,
+          companyName: data.jobData.companyName,
+          companyWebsite: data.jobData.companyWebsite,
+          companyHQ: data.jobData.companyHQ,
+          companyDescription: data.jobData.companyDescription,
+          howToApply: data.jobData.howToApply,
+          jobDescription: data.jobData.jobDescription,
+          jobtitle: data.jobData.jobtitle,
+          paid: false,
+          positionType: data.jobData.positionType,
+          postedAt: postDate,
+          roleFocus: data.jobData.roleFocus,
+          tier,
+        })
+        .then(localStorage.setItem('Job ID', uid))
     )
   }
 
@@ -82,8 +87,8 @@ const PostAJob = ({ query }) => {
       .redirectToCheckout({
         lineItems: [{ price: tier, quantity: 1 }],
         mode: 'payment',
-        successUrl: `${process.env.BASE_URL}/post-a-job?s=3`,
-        cancelUrl: `${process.env.BASE_URL}/post-a-job?s=1`,
+        successUrl: `${process.env.BASE_URL}/post-a-job?status=3`,
+        cancelUrl: `${process.env.BASE_URL}/post-a-job?status=1`,
       })
       .then(function result() {
         if (error) {
@@ -162,7 +167,7 @@ const PostAJob = ({ query }) => {
         </>
       )}
 
-      {status === 3 && <div>hey</div>}
+      {status === 3 && <JobPostingConfirmation />}
     </div>
   )
 }

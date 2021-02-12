@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { db } from '../../firebase/firebase'
+import Link from 'next/link'
+import { db } from 'utils/db'
 
 const JobPostingConfirmation = () => {
   useEffect(() => {
@@ -69,7 +69,9 @@ const JobPostingConfirmation = () => {
       </ul>
 
       <button className='btn btn-teal mt-12' type='button'>
-        <Link to='/'>Back to homepage</Link>
+        <Link href='/'>
+          <a>Back to homepage</a>
+        </Link>
       </button>
     </div>
   )

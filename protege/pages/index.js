@@ -14,7 +14,9 @@ const Home = () => {
 
   function activeJobs(jobList) {
     const active = jobList.filter((job) => {
-      return job.status !== 'inactive'
+      return (
+        job.status !== 'inactive' && job.paid === true && job.approved === true
+      )
     })
 
     return active
@@ -45,7 +47,7 @@ const Home = () => {
           </p>
 
           <Link href='/job-board'>
-            <a class='mx-auto btn btn-teal'>Find a Job</a>
+            <a className='mx-auto btn btn-teal'>Find a Job</a>
           </Link>
         </div>
       </section>
