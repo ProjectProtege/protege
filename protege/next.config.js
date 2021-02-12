@@ -12,5 +12,7 @@ module.exports = {
     BASIC_PLAN: process.env.BASIC_PLAN,
     ADVANCED_PLAN: process.env.ADVANCED_PLAN,
     PREMIUM_PLAN: process.env.PREMIUM_PLAN,
+    STRIPE_API_KEY: process.env.STRIPE_API_KEY,
+    BASE_URL: process.env.BASE_URL,
   },
 }

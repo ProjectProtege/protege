@@ -17,7 +17,7 @@ import 'react-quill/dist/quill.snow.css'
 import FormCard from 'components/global/FormCard'
 import LogoUpload from './LogoUpload'
 
-const PostAJobForm = ({ jobData, receivingLogo }) => {
+const PostAJobForm = ({ jobData }) => {
   const router = useRouter()
 
   // Form and Status state from zustand
@@ -501,7 +501,6 @@ const PostAJobForm = ({ jobData, receivingLogo }) => {
 }
 
 PostAJobForm.propTypes = {
-  receivingLogo: PropTypes.func.isRequired,
   jobData: PropTypes.shape({
     jobtitle: PropTypes.string,
     roleFocus: PropTypes.string,
