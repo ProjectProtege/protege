@@ -1,4 +1,7 @@
 module.exports = {
+  images: {
+    domains: ['static.files-simplefileupload.com'],
+  },
   env: {
     CONVERTKIT_KEY: process.env.CONVERTKIT_KEY,
     API_KEY: process.env.API_KEY,
@@ -14,5 +17,6 @@ module.exports = {
     PREMIUM_PLAN: process.env.PREMIUM_PLAN,
     STRIPE_API_KEY: process.env.STRIPE_API_KEY,
     BASE_URL: process.env.BASE_URL,
+    SIMPLE_FILE_API_KEY: process.env.SIMPLE_FILE_API_KEY,
   },
 }

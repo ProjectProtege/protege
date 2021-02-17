@@ -15,10 +15,12 @@ import 'react-quill/dist/quill.snow.css'
 
 // Custom component imports
 import FormCard from 'components/global/FormCard'
+import SimpleFileUpload from 'react-simple-file-upload'
 import LogoUpload from './LogoUpload'
 
 const PostAJobForm = ({ jobData }) => {
   const router = useRouter()
+  const [logo, setLogo] = useState('')
 
   // Form and Status state from zustand
   const setForm = useJobForm((s) => s.setForm)
@@ -42,9 +44,9 @@ const PostAJobForm = ({ jobData }) => {
     companyDescription: Yup.string().required(
       'Please give a brief description of the company and culture.'
     ),
-    companyLogo: Yup.mixed().required(
-      'Please provide a .png format image of your company logo'
-    ),
+    // companyLogo: Yup.mixed().required(
+    //   'Please provide a .png format image of your company logo'
+    // ),
     companyHQ: Yup.string().required(
       'Please provide a location for your office headquarters.'
     ),
@@ -55,16 +57,17 @@ const PostAJobForm = ({ jobData }) => {
     resolver: yupResolver(Schema),
     mode: 'onChange',
     defaultValues: {
-      jobtitle: jobData ? `${jobData.jobtitle}` : '',
-      roleFocus: jobData ? `${jobData.roleFocus}` : '',
-      positionType: jobData ? `${jobData.positionType}` : '',
-      jobDescription: jobData ? `${jobData.jobDescription}` : '',
-      howToApply: jobData ? `${jobData.howToApply}` : '',
-      companyName: jobData ? `${jobData.companyName}` : '',
-      companyWebsite: jobData ? `${jobData.companyWebsite}` : '',
-      companyEmail: jobData ? `${jobData.companyEmail}` : '',
-      companyDescription: jobData ? `${jobData.companyDescription}` : '',
-      companyHQ: jobData ? `${jobData.companyHQ}` : '',
+      jobtitle: jobData.jobtitle,
+      roleFocus: jobData.roleFocus,
+      positionType: jobData.positionType,
+      jobDescription: jobData.jobDescription,
+      howToApply: jobData.howToApply,
+      companyName: jobData.companyName,
+      companyLogo: jobData.companyLogo,
+      companyWebsite: jobData.companyWebsite,
+      companyEmail: jobData.companyEmail,
+      companyDescription: jobData.companyDescription,
+      companyHQ: jobData.companyHQ,
     },
   })
 
@@ -101,7 +104,7 @@ const PostAJobForm = ({ jobData }) => {
       companyDescription: data.companyDescription,
       companyEmail: data.companyEmail,
       companyHQ: data.companyHQ,
-      companyLogo: data.companyLogo[0].name,
+      companyLogo: logo,
       companyName: data.companyName,
       companyWebsite: data.companyWebsite,
       howToApply: data.howToApply,
@@ -112,6 +115,10 @@ const PostAJobForm = ({ jobData }) => {
     })
     setStatus(2)
     router.push('/post-a-job?status=2')
+  }
+
+  function handleLogoUpload(url) {
+    setLogo(url)
   }
 
   return (
@@ -410,10 +417,44 @@ const PostAJobForm = ({ jobData }) => {
                   Logo
                 </label>
 
-                <LogoUpload
+                <div className='md:grid grid-cols-2 gap-4'>
+                  <div class='mb-2 md:mb-0'>
+                    <Controller
+                      name='companyLogo'
+                      control={control}
+                      render={({ value, onChange }) => (
+                        <SimpleFileUpload
+                          apiKey={process.env.SIMPLE_FILE_API_KEY}
+                          preview={true}
+                          onSuccess={handleLogoUpload}
+                          value={logo}
+                        />
+                      )}
+                    />
+                    <a
+                      href='https://simplefileupload.com'
+                      className='text-blue-400'
+                      style={{ fontSize: '10px' }}
+                    >
+                      Powered by:{' '}
+                      <span className='underline'>Simple File Upload</span>
+                    </a>
+                  </div>
+
+                  <span
+                    data-cy='logo-upload-fileName'
+                    className='text-blue-500 text-xs tracking-tight'
+                  >
+                    Please provide a .jpg, .jpeg, or .png format of your
+                    company's logo to be displayed with your job opening
+                    listing.
+                  </span>
+                </div>
+
+                {/* <LogoUpload
                   register={register}
                   receivingLogo2={receivingLogo2}
-                />
+                /> */}
 
                 <p
                   name='companyLogo'

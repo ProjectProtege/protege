@@ -42,40 +42,39 @@ const PostAJob = ({ query }) => {
   }, [query])
 
   async function sendJobtoDB(data) {
-    const logoFileName = `${new Date().getTime()}-${data.companyLogoFile.name}`
+    // const logoFileName = `${new Date().getTime()}-${data.companyLogoFile.name}`
 
     const postDate = firebase.firestore.Timestamp.fromDate(new Date())
 
-    const uploadTask = storage
-      .ref(`images/${logoFileName}`)
-      .put(companyLogoFile)
+    // const uploadTask = storage
+    //   .ref(`images/${logoFileName}`)
+    //   .put(companyLogoFile)
 
     const uid = uuidv4()
 
-    uploadTask.then(
-      await db
-        .collection('jobs')
-        .doc(uid)
-        .set({
-          approved: false,
-          status: 'active',
-          companyEmail: data.jobData.companyEmail,
-          companyLogo: logoFileName,
-          companyName: data.jobData.companyName,
-          companyWebsite: data.jobData.companyWebsite,
-          companyHQ: data.jobData.companyHQ,
-          companyDescription: data.jobData.companyDescription,
-          howToApply: data.jobData.howToApply,
-          jobDescription: data.jobData.jobDescription,
-          jobtitle: data.jobData.jobtitle,
-          paid: false,
-          positionType: data.jobData.positionType,
-          postedAt: postDate,
-          roleFocus: data.jobData.roleFocus,
-          tier,
-        })
-        .then(localStorage.setItem('Job ID', uid))
-    )
+    // uploadTask.then(
+    await db
+      .collection('jobs')
+      .doc(uid)
+      .set({
+        approved: false,
+        status: 'active',
+        companyEmail: data.jobData.companyEmail,
+        companyLogo: data.jobData.companyLogo,
+        companyName: data.jobData.companyName,
+        companyWebsite: data.jobData.companyWebsite,
+        companyHQ: data.jobData.companyHQ,
+        companyDescription: data.jobData.companyDescription,
+        howToApply: data.jobData.howToApply,
+        jobDescription: data.jobData.jobDescription,
+        jobtitle: data.jobData.jobtitle,
+        paid: false,
+        positionType: data.jobData.positionType,
+        postedAt: postDate,
+        roleFocus: data.jobData.roleFocus,
+        tier,
+      })
+      .then(localStorage.setItem('Job ID', uid))
   }
 
   const handlePaymentClick = async () => {

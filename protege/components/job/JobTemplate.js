@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 import { storage } from 'utils/db'
+import Image from 'next/image'
 
 const JobTemplate = ({ logo, props }) => {
   const router = useRouter()
@@ -22,19 +23,19 @@ const JobTemplate = ({ logo, props }) => {
     companyLogo,
   } = props
 
-  const [companyLogoFile, setCompanyLogoFile] = useState(undefined)
+  // const [companyLogoFile, setCompanyLogoFile] = useState(undefined)
   const [isAdmin, setIsAdmin] = useState(false)
 
-  function readLogo(logoFile) {
-    const reader = new FileReader()
-    const file = logoFile
-    if (file) {
-      reader.readAsDataURL(file)
-      reader.onloadend = () => {
-        setCompanyLogoFile(reader.result)
-      }
-    }
-  }
+  // function readLogo(logoFile) {
+  //   const reader = new FileReader()
+  //   const file = logoFile
+  //   if (file) {
+  //     reader.readAsDataURL(file)
+  //     reader.onloadend = () => {
+  //       setCompanyLogoFile(reader.result)
+  //     }
+  //   }
+  // }
 
   function retrieveLogo() {
     // console.log('safe')
@@ -88,11 +89,11 @@ const JobTemplate = ({ logo, props }) => {
     const companyChildren = [...companyDescriptionParent.children]
     styleChildren(companyChildren)
 
-    if (isPreview && logo !== null) {
-      readLogo(logo)
-    } else {
-      retrieveLogo()
-    }
+    // if (isPreview && logo !== null) {
+    //   readLogo(logo)
+    // } else {
+    //   retrieveLogo()
+    // }
 
     checkAdmin()
   }, [])
@@ -156,13 +157,16 @@ const JobTemplate = ({ logo, props }) => {
             <div className='md:w-1/4 mt-8 text-center md:text-left'>
               <div className='bg-gray-200 p-4'>
                 {companyLogo ? (
-                  <div className='w-2/3 mx-auto md:mx-0 mb-6 md:w-1/2 bg-white p-4 rounded overflow-hidden shadow-md'>
-                    <img
+                  <div className='relative w-2/3 md:w-auto mx-auto md:mx-0 mb-6 bg-white p-4 rounded overflow-hidden shadow-md'>
+                    <Image
                       data-cy='company-logo'
                       id='companyLogo'
-                      className='w-full'
-                      src={companyLogoFile}
+                      className='rounded-full'
+                      src={companyLogo}
                       alt={`${companyName} logo`}
+                      width={500}
+                      height={500}
+                      quality={100}
                     />
                   </div>
                 ) : null}

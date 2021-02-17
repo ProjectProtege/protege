@@ -102,3 +102,11 @@
 .rich-text-content h6 {
   @apply mt-6 mb-4;
 }
+
+iframe[title*='Simple File Upload'] {
+  @apply w-full;
+}
+
+iframe[title*='Simple File Upload'] #widget .dropzone {
+  @apply border rounded-none !important;
+}
