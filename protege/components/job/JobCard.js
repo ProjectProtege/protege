@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
-import JobCardImage from './JobCardImage'
+import Image from 'next/image'
 
 const JobCard = ({ job }) => {
   const months = [
@@ -28,12 +28,20 @@ const JobCard = ({ job }) => {
   return (
     <Link data-cy={`job-card-link-${job.id}`} href={`/job-board/${job.id}`}>
       <a>
-        <div className='flex px-3 py-4 mb-6 transition duration-150 ease-in-out transform bg-white border-l-4 border-teal-500 shadow md:mb-12 md:px-6 hover:shadow-md'>
+        <div className='flex px-3 py-4 mb-6 transition duration-150 ease-in-out transform bg-white border-l-4 border-teal-500 shadow md:mb-12 md:px-6 hover:shadow-md items-center'>
           <div
-            className='relative flex-col hidden p-2 overflow-hidden rounded-full shadow-md md:flex md:w-1/6'
+            className='hidden md:flex bg-white shadow-md overflow-hidden rounded-full justify-center items-center'
             style={{ width: 75, height: 75 }}
           >
-            <JobCardImage logoUrl={job.companyLogo} job={job} />
+            <Image
+              data-cy={`job-card-image-${job.id}`}
+              src={job.companyLogo}
+              alt={`${job.companyName} Logo`}
+              layout='fixed'
+              width={60}
+              height={60}
+              quality={100}
+            />
           </div>
 
           <div className='flex justify-between w-full md:w-11/12 md:pl-6'>
@@ -41,7 +49,7 @@ const JobCard = ({ job }) => {
               <div>
                 <p
                   data-cy={`job-card-company-name-${job.id}`}
-                  className='mb-1 text-sm text-blue-700'
+                  className='mb-1 text-sm text-blue-600'
                 >
                   {job.companyName}
                 </p>

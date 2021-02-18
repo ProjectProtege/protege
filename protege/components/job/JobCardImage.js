@@ -1,13 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Image from 'next/image'
 
 const JobCardImage = ({ job, logoUrl }) => {
   return (
-    <img
+    <Image
       data-cy={`job-card-image-${job.id}`}
       src={logoUrl}
       alt={`${job.companyName} Logo`}
-      className='my-auto w-full'
+      layout='responsive'
+      width={60}
+      height={60}
+      quality={25}
     />
   )
 }

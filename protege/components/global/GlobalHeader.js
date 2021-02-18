@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useUi } from 'store/ui_store'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import Image from 'next/image'
 
 import NavLink from 'components/global/NavLink'
 import CloseIcon from 'components/global/CloseIcon'
@@ -39,7 +40,13 @@ const GlobalHeader = () => {
         <Link href='/' className='w-1/4 lg:w-1/6 h-auto'>
           <a>
             <span>
-              <Logo className='w-full' />
+              <Image
+                src='/images/protegeLogo.svg'
+                layout='fixed'
+                quality={100}
+                width={230}
+                height={60}
+              />
             </span>
           </a>
         </Link>
