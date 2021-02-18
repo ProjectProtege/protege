@@ -45,10 +45,6 @@ const JobCard = ({ job }) => {
             className='relative flex-col hidden p-2 overflow-hidden rounded-full shadow-md md:flex md:w-1/6'
             style={{ width: 75, height: 75 }}
           >
-            <div
-              style={{ width: 75, height: 75 }}
-              className='absolute bg-white transition ease-in-out duration-300'
-            />
             <JobCardImage logoUrl={job.companyLogo} job={job} />
           </div>
 
