@@ -1,13 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
-import { storage } from 'utils/db'
 import JobCardImage from './JobCardImage'
 
 const JobCard = ({ job }) => {
-  const [logoUrl, setLogoUrl] = useState('')
-  const [loading, setLoading] = useState(true)
-
   const months = [
     'Jan',
     'Feb',
@@ -29,17 +25,17 @@ const JobCard = ({ job }) => {
     months[postDate.getMonth()]
   } ${postDate.getDate()}`
 
-  storage
-    .ref('images')
-    .child(job.companyLogo)
-    .getDownloadURL()
-    .then((url) => {
-      setLogoUrl(url)
-      setLoading(false)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+  // storage
+  //   .ref('images')
+  //   .child(job.companyLogo)
+  //   .getDownloadURL()
+  //   .then((url) => {
+  //     setLogoUrl(url)
+  //     setLoading(false)
+  //   })
+  //   .catch((error) => {
+  //     console.log(error)
+  //   })
 
   return (
     <Link data-cy={`job-card-link-${job.id}`} href={`/job-board/${job.id}`}>
@@ -51,11 +47,9 @@ const JobCard = ({ job }) => {
           >
             <div
               style={{ width: 75, height: 75 }}
-              className={`absolute bg-white transition ease-in-out duration-300 ${
-                loading ? 'opacity-100' : 'opacity-0'
-              }`}
+              className='absolute bg-white transition ease-in-out duration-300'
             />
-            <JobCardImage logoUrl={logoUrl} job={job} />
+            <JobCardImage logoUrl={job.companyLogo} job={job} />
           </div>
 
           <div className='flex justify-between w-full md:w-11/12 md:pl-6'>

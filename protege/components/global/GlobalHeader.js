@@ -132,7 +132,7 @@ const GlobalHeader = () => {
             <li className='menu-item quick-filter  pr-4 lg:pr-10 cursor-pointer'>
               <NavLink
                 href='/job-board'
-                className='opacity-75 pb-3 hover:opacity-100 border-b-2 border-transparent'
+                className='opacity-75 py-3 hover:opacity-100 border-b-2 border-transparent'
                 activeClassName='border-teal-500'
               >
                 Find a Job
@@ -172,7 +172,7 @@ const GlobalHeader = () => {
             <li className='menu-item  pr-4 lg:pr-10 opacity-75 hover:opacity-100'>
               <NavLink
                 href='/learning-resources'
-                className='pb-3 border-b-2   duration-75 hover:border-teal-500 '
+                className='py-3 border-b-2   duration-75 hover:border-teal-500 '
                 activeClassName='border-teal-500'
                 inactiveClassName='border-transparent'
               >
@@ -183,7 +183,7 @@ const GlobalHeader = () => {
             <li className='menu-item  pr-4 lg:pr-10 opacity-75 hover:opacity-100'>
               <NavLink
                 href='/get-in-touch'
-                className='pb-3 border-b-2   duration-75 hover:border-teal-500 '
+                className='py-3 border-b-2   duration-75 hover:border-teal-500 '
                 activeClassName='border-teal-500'
                 inactiveClassName='border-transparent'
               >
@@ -194,7 +194,7 @@ const GlobalHeader = () => {
             <li className='menu-item  pr-4 lg:pr-10 opacity-75 hover:opacity-100'>
               <NavLink
                 href='/contributors'
-                className='pb-3 border-b-2   duration-75 hover:border-teal-500 '
+                className='py-3 border-b-2   duration-75 hover:border-teal-500 '
                 activeClassName='border-teal-500'
                 inactiveClassName='border-transparent'
               >

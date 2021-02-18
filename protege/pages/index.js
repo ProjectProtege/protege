@@ -86,11 +86,7 @@ const Home = () => {
           </h3>
 
           <Link href={`/post-a-job?s=1&t=${tier}`}>
-            <a>
-              <button className='mt-3 btn btn-teal' type='button'>
-                Post a Job
-              </button>
-            </a>
+            <a className='mt-3 btn btn-teal'>Post a Job</a>
           </Link>
         </div>
       </div>
