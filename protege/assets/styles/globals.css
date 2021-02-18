@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('./quill-content.css');
+@import url('./buttons.css');
+@import url('./inputs.css');
+
 *:hover {
   @apply transition ease-in-out duration-150;
 }
@@ -14,63 +18,6 @@ input:focus,
 select:focus,
 textarea:focus {
   @apply outline-none ring ring-1 ring-teal rounded;
-}
-
-/*--Buttons--*/
-
-.btn {
-  @apply px-4 py-1 font-semibold shadow transition-transform duration-200 transform uppercase;
-}
-
-.btn-teal {
-  @apply bg-teal-300 text-blue-900;
-}
-
-.btn-blue {
-  @apply bg-blue-900 text-white font-medium;
-}
-
-.btn:hover {
-  @apply shadow-md scale-105 duration-100;
-}
-
-.btn-disabled {
-  @apply opacity-50;
-}
-
-.btn-disabled:hover {
-  @apply shadow scale-100 cursor-default;
-}
-
-/*--Input--*/
-
-.input {
-  @apply border border-blue-200 p-2;
-}
-
-.input-error {
-  @apply text-error-full text-xs mt-2;
-}
-
-.input-select {
-  @apply appearance-none w-full pl-4 cursor-pointer;
-}
-
-.select-wrap {
-  position: relative;
-}
-
-.select-wrap::after {
-  content: '▾';
-  position: absolute;
-  top: 50%;
-  margin-top: -10px;
-  right: 1rem;
-  z-index: 1;
-  color: #65bda0;
-  line-height: 1;
-  font-size: 20px;
-  pointer-events: none; /* Don't interfere with clicks */
 }
 
 .quick-filter .submenu {
@@ -85,72 +32,6 @@ textarea:focus {
   transform: scale(1);
   opacity: 1;
   visibility: visible;
-}
-
-/*-------Quill editor styles-----------------*/
-.ql-container,
-.ql-editor {
-  min-height: 250px !important;
-}
-
-.ql-container.ql-snow,
-.ql-toolbar.ql-snow {
-  @apply border border-blue-200 p-2;
-}
-
-.ql-container.ql-snow {
-  @apply border-t-0;
-}
-
-.rich-text-content {
-  @apply text-blue-900 leading-relaxed;
-}
-
-.rich-text-content h1,
-.rich-text-content h2,
-.rich-text-content h3,
-.rich-text-content h4,
-.rich-text-content h5,
-.rich-text-content h6 {
-  @apply mt-6 mb-4;
-}
-
-.rich-text-content h1,
-.rich-text-content h2,
-.rich-text-content h3,
-.rich-text-content h4,
-.rich-text-content h5 {
-  @apply font-bold;
-}
-
-.rich-text-content h1 {
-  @apply text-xl;
-}
-
-.rich-text-content h2 {
-  @apply text-lg;
-}
-
-.rich-text-content p,
-.rich-text-content ul,
-.rich-text-content li {
-  @apply text-blue-700;
-}
-
-.rich-text-content li {
-  @apply pl-2;
-}
-
-.rich-text-content ul {
-  @apply list-disc list-inside;
-}
-
-.rich-text-content ol {
-  @apply list-decimal list-inside;
-}
-
-.rich-text-content a {
-  @apply text-teal-700 underline;
 }
 
 /*---- Simple File Upload styles -----*/

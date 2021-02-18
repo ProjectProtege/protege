@@ -1,0 +1,25 @@
+/*--Buttons--*/
+
+.btn {
+  @apply px-4 py-1 font-semibold shadow transition-transform duration-200 transform uppercase;
+}
+
+.btn-teal {
+  @apply bg-teal-300 text-blue-900;
+}
+
+.btn-blue {
+  @apply bg-blue-900 text-white font-medium;
+}
+
+.btn:hover {
+  @apply shadow-md scale-105 duration-100;
+}
+
+.btn-disabled {
+  @apply opacity-50;
+}
+
+.btn-disabled:hover {
+  @apply shadow scale-100 cursor-default;
+}
