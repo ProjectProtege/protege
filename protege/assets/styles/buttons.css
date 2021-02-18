@@ -17,7 +17,7 @@
 }
 
 .btn-disabled {
-  @apply opacity-50;
+  @apply opacity-50 pointer-events-none;
 }
 
 .btn-disabled:hover {

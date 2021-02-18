@@ -138,22 +138,19 @@ const JobTemplate = ({ props }) => {
                 <div className='uppercase text-blue-900 tracking-tight text-md'>
                   <a
                     data-cy='company-website'
-                    className='underline'
+                    className='underline opacity-75 hover:opacity-100'
                     href={companyWebsite}
                   >
-                    <p className='opacity-75 hover:opacity-100'>
-                      Visit website
-                    </p>
+                    Visit website
                   </a>
-                  <a data-cy='how-to-apply' href={howToApply}>
-                    <button
-                      disabled={isPreview}
-                      className={`hidden md:block btn btn-teal mt-8 w-full
+                  <a
+                    data-cy='how-to-apply'
+                    href={howToApply}
+                    className={`hidden text-center md:block btn btn-teal mt-8 w-full
                         ${isPreview ? ' btn-disabled' : ''}`}
-                      type='button'
-                    >
-                      Apply
-                    </button>
+                    tabIndex={isPreview ? -1 : 0}
+                  >
+                    Apply
                   </a>
                 </div>
               </div>
@@ -161,18 +158,17 @@ const JobTemplate = ({ props }) => {
           ) : null}
         </div>
 
-        <div>
-          <a data-cy='how-to-apply-bottom' href={howToApply}>
-            <button
-              disabled={isPreview}
-              className={`btn btn-teal mt-8 w-full md:w-auto ${
-                isPreview ? ' btn-disabled' : ''
-              }
+        <div className='mt-8'>
+          <a
+            data-cy='how-to-apply-bottom'
+            href={howToApply}
+            className={`btn btn-teal w-full md:w-auto px-6 py-1 ${
+              isPreview ? ' btn-disabled' : ''
+            }
               `}
-              type='button'
-            >
-              Apply
-            </button>
+            tabIndex={isPreview ? -1 : 0}
+          >
+            Apply
           </a>
         </div>
       </div>
