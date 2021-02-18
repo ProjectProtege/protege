@@ -6,6 +6,12 @@ module.exports = {
       center: true,
     },
     extend: {
+      ringWidth: {
+        DEFAULT: '2px',
+      },
+      ringColor: {
+        teal: '#70d2b2',
+      },
       colors: {
         transparent: 'transparent',
 

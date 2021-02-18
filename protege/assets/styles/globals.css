@@ -8,6 +8,14 @@
   @apply transition ease-in-out duration-150;
 }
 
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  @apply outline-none ring ring-1 ring-teal rounded;
+}
+
 /*--Buttons--*/
 
 .btn {
@@ -87,7 +95,7 @@
 
 .ql-container.ql-snow,
 .ql-toolbar.ql-snow {
-  @apply border border-blue-200 p-2 outline-none;
+  @apply border border-blue-200 p-2;
 }
 
 .ql-container.ql-snow {
