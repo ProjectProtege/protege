@@ -5,6 +5,7 @@ import Link from 'next/link'
 import GrayLogo from 'assets/images/protege-logo-mark-gray'
 import TwitterIcon from 'assets/images/TwitterBrands'
 import StripeIcon from 'assets/images/Stripe'
+import Image from 'next/image'
 
 const GlobalFooter = () => {
   const location = useRouter().pathname
@@ -96,7 +97,14 @@ const GlobalFooter = () => {
 
       <div className='container px-8 mx-auto'>
         <div className='flex justify-between'>
-          <GrayLogo />
+          <Image
+            src='/images/protegeLogoGray.svg'
+            layout='fixed'
+            width={99}
+            height={119}
+            alt='Protege.dev Logo'
+            quality={25}
+          />
 
           <div data-cy='footer-links' className='flex flex-col items-end'>
             <ul className='mb-3 text-right'>
@@ -137,7 +145,7 @@ const GlobalFooter = () => {
 
             <a
               href='https://twitter.com/devprotege'
-              className='w-6 text-teal-300  -colors duration-75   hover:text-teal-600'
+              className='w-6 text-teal-300 -colors duration-75 hover:text-teal-600 focus:text-teal-600'
               target='_blank'
               rel='noopener noreferrer'
               aria-label='Follow Protege on Twitter'
@@ -154,7 +162,7 @@ const GlobalFooter = () => {
         </p>
         <a
           href='https://stripe.com'
-          className='-mt-1 text-blue-300       hover:text-blue-900'
+          className='-mt-1 text-blue-300 hover:text-blue-900 focus:text-blue-900'
           aria-label='Stripe'
         >
           <StripeIcon className='text-blue-200' />

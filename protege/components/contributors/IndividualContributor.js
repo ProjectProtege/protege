@@ -39,7 +39,7 @@ const IndividualContributor = ({ props }) => {
         ) : (
           <span className='font-semibold text-blue-900 truncate'>{login}</span>
         )}
-        <div className='flex items-center my-2'>
+        <div className='flex items-center my-2 pl-1'>
           {twitter_username && (
             <a
               href={`https://twitter.com/${twitter_username}`}
