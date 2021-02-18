@@ -6,7 +6,7 @@ import { useJobForm } from 'store/job-post_store'
 import PropTypes from 'prop-types'
 import { loadStripe } from '@stripe/stripe-js'
 import firebase from 'firebase/app'
-import { db, storage } from 'utils/db'
+import { db } from 'utils/db'
 import { v4 as uuidv4 } from 'uuid'
 
 import TierSelect from 'components/form/TierSelect'
@@ -42,17 +42,10 @@ const PostAJob = ({ query }) => {
   }, [query])
 
   async function sendJobtoDB(data) {
-    // const logoFileName = `${new Date().getTime()}-${data.companyLogoFile.name}`
-
     const postDate = firebase.firestore.Timestamp.fromDate(new Date())
-
-    // const uploadTask = storage
-    //   .ref(`images/${logoFileName}`)
-    //   .put(companyLogoFile)
 
     const uid = uuidv4()
 
-    // uploadTask.then(
     await db
       .collection('jobs')
       .doc(uid)

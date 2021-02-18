@@ -118,7 +118,7 @@ const GlobalHeader = () => {
               </NavLink>
             </li>
             <li className='bg-teal-300 text-blue-900 ml-6 px-3 w-1/2 text-center py-2 mt-4 font-bold uppercase'>
-              <NavLink href='/post-a-job'>Post a Job</NavLink>
+              <NavLink href='/post-a-job?status=1'>Post a Job</NavLink>
             </li>
           </ul>
         </nav>
@@ -203,7 +203,7 @@ const GlobalHeader = () => {
             </li>
 
             <li>
-              <NavLink href='/post-a-job' className='btn btn-teal'>
+              <NavLink href='/post-a-job?status=1' className='btn btn-teal'>
                 Post a Job
               </NavLink>
             </li>

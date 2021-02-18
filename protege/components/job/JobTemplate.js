@@ -3,10 +3,9 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
-import { storage } from 'utils/db'
 import Image from 'next/image'
 
-const JobTemplate = ({ logo, props }) => {
+const JobTemplate = ({ props }) => {
   const router = useRouter()
 
   const isPreview = router.pathname.indexOf('/job-board/') !== 0
@@ -23,41 +22,7 @@ const JobTemplate = ({ logo, props }) => {
     companyLogo,
   } = props
 
-  // const [companyLogoFile, setCompanyLogoFile] = useState(undefined)
   const [isAdmin, setIsAdmin] = useState(false)
-
-  // function readLogo(logoFile) {
-  //   const reader = new FileReader()
-  //   const file = logoFile
-  //   if (file) {
-  //     reader.readAsDataURL(file)
-  //     reader.onloadend = () => {
-  //       setCompanyLogoFile(reader.result)
-  //     }
-  //   }
-  // }
-
-  function retrieveLogo() {
-    // console.log('safe')
-    storage
-      .ref('images')
-      .child(props.companyLogo)
-      .getDownloadURL()
-      .then((url) => {
-        setCompanyLogoFile(url)
-      })
-  }
-
-  const quillStyle = {
-    H1: 'text-blue-900 font-semibold text-xl',
-    H2: 'text-blue-900 font-semibold text-lg',
-    H3: 'text-blue-900 font-semibold text-md',
-    A: 'text-teal-600 font-semibold',
-    P: 'text-blue-700',
-    OL: 'list-decimal list-inside',
-    UL: 'list-disc list-inside',
-    LI: 'pl-2 text-blue-700',
-  }
 
   function checkAdmin() {
     return router.pathname === '/admin' ? setIsAdmin(true) : setIsAdmin(false)
@@ -68,10 +33,8 @@ const JobTemplate = ({ logo, props }) => {
     function styleChildren(children) {
       children.forEach((child) => {
         const el = child
-        const childTag = child.tagName
 
         el.style = ''
-        el.classList = quillStyle[childTag]
         if (child.hasChildNodes()) {
           const grandChildren = [...child.children]
           styleChildren(grandChildren)
@@ -88,12 +51,6 @@ const JobTemplate = ({ logo, props }) => {
 
     const companyChildren = [...companyDescriptionParent.children]
     styleChildren(companyChildren)
-
-    // if (isPreview && logo !== null) {
-    //   readLogo(logo)
-    // } else {
-    //   retrieveLogo()
-    // }
 
     checkAdmin()
   }, [])
@@ -119,7 +76,7 @@ const JobTemplate = ({ logo, props }) => {
               className='text-blue-600 uppercase tracking-tight text-md mb-6'
             >
               {roleFocus}
-              <span>•</span>
+              <span> • </span>
               {positionType}
             </div>
 

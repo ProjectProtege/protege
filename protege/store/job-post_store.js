@@ -21,7 +21,7 @@ export const useJobForm = create((set) => ({
     roleFocus: '',
   },
   companyLogoFile: {},
-  tier: 1,
+  tier: 'price_1GuKFPLy9mbkpBNAI6XtSdqT',
   setStatus: (status) => set({ status }),
   setForm: (form) => set({ form }),
   setTier: (tier) => set({ tier }),

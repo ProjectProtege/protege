@@ -85,7 +85,7 @@ const Home = () => {
             Get started on your candidate search today.
           </h3>
 
-          <Link href={`/post-a-job?s=1&t=${tier}`}>
+          <Link href={`/post-a-job?status=1&tier=${tier}`}>
             <a className='mt-3 btn btn-teal'>Post a Job</a>
           </Link>
         </div>

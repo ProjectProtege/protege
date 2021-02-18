@@ -26,6 +26,7 @@ export default async (req, res) => {
         companyDescription: entry.companyDescription,
         howToApply: entry.howToApply,
         companyWebsite: entry.companyWebsite,
+        positionType: entry.positionType,
         paid: entry.paid,
         approved: entry.approved,
       }

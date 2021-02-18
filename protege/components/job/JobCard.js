@@ -25,18 +25,6 @@ const JobCard = ({ job }) => {
     months[postDate.getMonth()]
   } ${postDate.getDate()}`
 
-  // storage
-  //   .ref('images')
-  //   .child(job.companyLogo)
-  //   .getDownloadURL()
-  //   .then((url) => {
-  //     setLogoUrl(url)
-  //     setLoading(false)
-  //   })
-  //   .catch((error) => {
-  //     console.log(error)
-  //   })
-
   return (
     <Link data-cy={`job-card-link-${job.id}`} href={`/job-board/${job.id}`}>
       <a>
