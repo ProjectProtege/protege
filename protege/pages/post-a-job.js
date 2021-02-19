@@ -113,7 +113,6 @@ const PostAJob = ({ query }) => {
           </p>
         </>
       )}
-
       {status !== 1 && (
         <h2 className='text-lg md:text-2xl text-blue-500 font-bold text-center leading-snug'>
           Inexperienced doesn’t mean incapable.
@@ -121,15 +120,12 @@ const PostAJob = ({ query }) => {
           Fill your role with ambition.
         </h2>
       )}
-
       <StatusBar props={status} />
-
       {status === 1 && Object.keys(jobData).length && (
         <div>
           <PostAJobForm jobData={jobData} />
         </div>
       )}
-
       {status === 2 && jobData && (
         <>
           <div className='container mx-auto lg:w-3/5'>
@@ -158,7 +154,6 @@ const PostAJob = ({ query }) => {
           </div>
         </>
       )}
-
       {status === 3 && <JobPostingConfirmation />}
     </div>
   )

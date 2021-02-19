@@ -7,16 +7,18 @@ import PropTypes from 'prop-types'
 // Lib imports
 import { useJobForm } from 'store/job-post_store'
 import { useForm, Controller } from 'react-hook-form'
-import { DevTool } from '@hookform/devtools'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 import 'react-quill/dist/quill.snow.css'
 
 // Custom component imports
 import FormCard from 'components/global/FormCard'
-import SimpleFileUpload from 'react-simple-file-upload'
 import LogoUpload from './LogoUpload'
+
+const SimpleFileUpload = dynamic(() => import('react-simple-file-upload'), {
+  ssr: false,
+})
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
 const PostAJobForm = ({ jobData }) => {
   const router = useRouter()
@@ -94,9 +96,9 @@ const PostAJobForm = ({ jobData }) => {
     setLinkType(e.target.value)
   }
 
-  function receivingLogo2(logo) {
-    receivingLogo(logo)
-  }
+  // function receivingLogo2(logo) {
+  //   receivingLogo(logo)
+  // }
 
   // Form submission event
   function handleFormEntry(data) {
@@ -419,17 +421,11 @@ const PostAJobForm = ({ jobData }) => {
 
                 <div className='md:grid grid-cols-2 gap-4'>
                   <div class='mb-2 md:mb-0'>
-                    <Controller
-                      name='companyLogo'
-                      control={control}
-                      render={({ value, onChange }) => (
-                        <SimpleFileUpload
-                          apiKey={process.env.SIMPLE_FILE_API_KEY}
-                          preview={true}
-                          onSuccess={handleLogoUpload}
-                          value={logo}
-                        />
-                      )}
+                    <SimpleFileUpload
+                      apiKey={process.env.SIMPLE_FILE_API_KEY}
+                      preview={true}
+                      onSuccess={handleLogoUpload}
+                      value={logo}
                     />
                     <a
                       href='https://simplefileupload.com'
@@ -534,8 +530,6 @@ const PostAJobForm = ({ jobData }) => {
         >
           Next Step
         </button>
-
-        {/* <DevTool control={control} /> */}
       </form>
     </div>
   )
