@@ -6,6 +6,15 @@ module.exports = {
       center: true,
     },
     extend: {
+      fontFamily: {
+        sans: [
+          'Nunito',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"Segoe UI"',
+        ],
+      },
       ringWidth: {
         DEFAULT: '2px',
       },

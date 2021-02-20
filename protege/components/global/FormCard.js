@@ -2,7 +2,9 @@ import PropTypes from 'prop-types'
 
 const FormCard = ({ title, children, className }) => {
   return (
-    <div className={`border-t-4 border-teal-500 shadow-md ${className}`}>
+    <div
+      className={`border-t-4 border-teal-500 shadow-md rounded-md ${className}`}
+    >
       <h2
         style={{
           backgroundImage: `url(/bg-pattern.png)`,

@@ -173,7 +173,7 @@ const PostAJobForm = ({ jobData }) => {
                     id='role-focus'
                     name='roleFocus'
                     ref={register}
-                    className='input input-select rounded-none'
+                    className='input input-select '
                   >
                     <option value='' className='text-gray-300'>
                       Select One...
@@ -213,7 +213,7 @@ const PostAJobForm = ({ jobData }) => {
                   <select
                     id='position-type'
                     name='positionType'
-                    className='input input-select rounded-none'
+                    className='input input-select '
                     ref={register}
                   >
                     <option value='' className='text-gray-300'>

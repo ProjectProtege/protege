@@ -27,7 +27,7 @@ const JobCard = ({ job }) => {
 
   return (
     <Link data-cy={`job-card-link-${job.id}`} href={`/job-board/${job.id}`}>
-      <a className='flex px-3 py-4 mb-6 transition duration-150 ease-in-out transform bg-white border-l-4 border-teal-500 shadow md:mb-12 md:px-6 hover:shadow-md items-center'>
+      <a className='flex px-3 py-4 mb-6 transition duration-150 ease-in-out transform bg-white border-l-4 border-teal-500 shadow md:mb-12 md:px-6 hover:shadow-md items-center rounded-md'>
         <div
           className='hidden md:flex bg-white shadow-md overflow-hidden rounded-full justify-center items-center'
           style={{ width: 75, height: 75 }}

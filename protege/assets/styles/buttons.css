@@ -1,7 +1,7 @@
 /*--Buttons--*/
 
 .btn {
-  @apply px-4 py-1 font-semibold shadow transition-transform duration-200 transform uppercase;
+  @apply px-4 py-1 font-semibold shadow transition-transform duration-200 transform uppercase rounded-md;
 }
 
 .btn-teal {

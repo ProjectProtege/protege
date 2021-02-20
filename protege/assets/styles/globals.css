@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -18,6 +18,15 @@ input:focus,
 select:focus,
 textarea:focus {
   @apply outline-none ring ring-1 ring-teal rounded;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-bold;
 }
 
 .quick-filter .submenu {

@@ -1,7 +1,7 @@
 /*--Input--*/
 
 .input {
-  @apply border border-blue-200 p-2;
+  @apply border border-blue-200 p-2 rounded;
 }
 
 .input-error {
