@@ -18,6 +18,7 @@ const JobPostingConfirmation = () => {
         })
     }
   }, [])
+
   return (
     <div className='lg:w-3/5 mx-auto'>
       <h2 className='text-center text-blue-900 font-bold text-2xl'>
