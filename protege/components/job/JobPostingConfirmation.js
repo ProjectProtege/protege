@@ -9,9 +9,13 @@ const JobPostingConfirmation = () => {
     if (jobId) {
       const docRef = db.collection('jobs').doc(jobId)
 
-      docRef.update({
-        paid: true,
-      })
+      docRef
+        .update({
+          paid: true,
+        })
+        .then(() => {
+          localStorage.removeItem('Job ID')
+        })
     }
   }, [])
   return (
