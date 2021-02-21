@@ -5,7 +5,6 @@ import Link from 'next/link'
 import GrayLogo from 'assets/images/protege-logo-mark-gray'
 import TwitterIcon from 'assets/images/TwitterBrands'
 import StripeIcon from 'assets/images/Stripe'
-import Image from 'next/image'
 
 const GlobalFooter = () => {
   const location = useRouter().pathname
@@ -97,14 +96,7 @@ const GlobalFooter = () => {
 
       <div className='container px-8 mx-auto'>
         <div className='flex justify-between'>
-          <Image
-            src='/images/protegeLogoGray.svg'
-            layout='fixed'
-            width={99}
-            height={119}
-            alt='Protege.dev Logo'
-            quality={25}
-          />
+          <GrayLogo />
 
           <div data-cy='footer-links' className='flex flex-col items-end'>
             <ul className='mb-3 text-right'>

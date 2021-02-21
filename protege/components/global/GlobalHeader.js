@@ -2,11 +2,11 @@ import { useEffect } from 'react'
 import { useUi } from 'store/ui_store'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import Image from 'next/image'
 
 import NavLink from 'components/global/NavLink'
 import CloseIcon from 'components/global/CloseIcon'
 import MenuIcon from 'assets/images/MenuIcon'
+import Logo from 'assets/images/ProtegeLogo'
 
 const GlobalHeader = () => {
   const router = useRouter()
@@ -39,13 +39,7 @@ const GlobalHeader = () => {
         <Link href='/' className='w-1/4 lg:w-1/6 h-auto'>
           <a>
             <span>
-              <Image
-                src='/images/protegeLogo.svg'
-                layout='fixed'
-                quality={100}
-                width={230}
-                height={60}
-              />
+              <Logo className='w-full' />
             </span>
           </a>
         </Link>

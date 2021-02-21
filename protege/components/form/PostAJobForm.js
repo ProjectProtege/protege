@@ -420,7 +420,7 @@ const PostAJobForm = ({ jobData }) => {
                 </label>
 
                 <div className='md:grid grid-cols-2 gap-4'>
-                  <div class='mb-2 md:mb-0'>
+                  <div className='mb-2 md:mb-0'>
                     <SimpleFileUpload
                       apiKey={process.env.SIMPLE_FILE_API_KEY}
                       preview={true}

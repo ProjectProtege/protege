@@ -2,7 +2,6 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react'
 import PropTypes from 'prop-types'
-import Image from 'next/image'
 
 const ResourceCard = ({ resource }) => {
   return (
@@ -13,16 +12,14 @@ const ResourceCard = ({ resource }) => {
           target='_blank'
           rel='noopener noreferrer'
         >
-          <Image
-            className='w-full'
-            // eslint-disable-next-line import/no-dynamic-require
-            src={`/resources/${resource.resourceImage}`}
-            srcSet={`/resources/${resource.resourceImage}`}
-            layout='responsive'
-            width={500}
-            height={290}
-            alt={`${resource.title} screenshot of website`}
-          />
+          <div className='h-48 overflow-hidden'>
+            <img
+              className='w-full'
+              // eslint-disable-next-line import/no-dynamic-require
+              src={`/resources/${resource.resourceImage}`}
+              alt={`${resource.title} screenshot of website`}
+            />
+          </div>
           <div className='px-6 py-4'>
             <div className='mb-2 text-xl font-bold text-blue-900'>
               {resource.title}

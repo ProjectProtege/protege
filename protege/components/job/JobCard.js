@@ -1,7 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
-import Image from 'next/image'
 
 const JobCard = ({ job }) => {
   const months = [
@@ -32,14 +31,11 @@ const JobCard = ({ job }) => {
           className='hidden md:flex bg-white shadow-md overflow-hidden rounded-full justify-center items-center'
           style={{ width: 75, height: 75 }}
         >
-          <Image
+          <img
             data-cy={`job-card-image-${job.id}`}
             src={job.companyLogo}
             alt={`${job.companyName} Logo`}
-            layout='fixed'
-            width={60}
-            height={60}
-            quality={100}
+            className='my-auto w-full'
           />
         </div>
 
