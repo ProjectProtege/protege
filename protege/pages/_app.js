@@ -3,12 +3,18 @@
 import GlobalLayout from 'layouts/GlobalLayout'
 import 'assets/styles/globals.css'
 import { useEffect } from 'react'
-// import axios from 'axios'
-import { db } from 'utils/db'
+import { db, analytics } from 'utils/db'
 import { useJobs } from 'store/jobs_store'
 
 function MyApp({ Component, pageProps }) {
   const setJobs = useJobs((s) => s.setJobs)
+
+  // TODO: Get analytics working again!!
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production') {
+      analytics()
+    }
+  }, [])
 
   useEffect(async () => {
     try {

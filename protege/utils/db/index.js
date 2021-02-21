@@ -17,11 +17,16 @@ const config = {
 
 if (!firebase.apps.length) {
   firebase.initializeApp(config)
-  firebase.analytics()
 } else {
   firebase.app()
 }
 
+// eslint-disable-next-line prefer-destructuring
+const analytics = firebase.analytics
+
+export { analytics }
+
 export const db = firebase.firestore()
 export const storage = firebase.storage()
 export const auth = firebase.auth()
+// export const analytics = firebase.analytics()
