@@ -64,10 +64,7 @@ const JobTemplate = ({ props }) => {
       <div className='mx-auto container'>
         <div className='md:flex justify-center'>
           <div className={`${isAdmin ? 'w-full' : 'md:w-3/4'} md:pr-16`}>
-            <h2
-              data-cy='job-title'
-              className='text-blue-900 font-bold text-3xl'
-            >
+            <h2 data-cy='job-title' className='text-blue-900 text-3xl'>
               {jobtitle}
             </h2>
 
@@ -82,7 +79,7 @@ const JobTemplate = ({ props }) => {
 
             <h3
               data-cy='job-description-title'
-              className='text-blue-900 font-semibold text-2xl mb-4'
+              className='text-blue-900 text-2xl mb-4'
             >
               Job Description
             </h3>
@@ -96,7 +93,7 @@ const JobTemplate = ({ props }) => {
 
             <h4
               data-cy='company-description-title'
-              className='text-blue-900 font-semibold text-2xl mb-4'
+              className='text-blue-900 text-2xl mb-4'
             >
               About&nbsp;
               {companyName}
@@ -130,7 +127,7 @@ const JobTemplate = ({ props }) => {
 
                 <h4
                   data-cy='company-name-sidebar'
-                  className='text-blue-900 font-semibold text-lg mb-3'
+                  className='text-blue-900 text-lg mb-3'
                 >
                   {companyName}
                 </h4>

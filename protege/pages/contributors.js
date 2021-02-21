@@ -17,7 +17,7 @@ const Contributors = () => {
   return (
     <div className='container mx-auto'>
       <div className='mx-auto' style={{ maxWidth: 680 }}>
-        <h1 className='mb-3 text-2xl font-semibold text-blue-900'>
+        <h1 className='mb-3 text-2xl text-blue-900'>
           Protege.dev Contributors!
         </h1>
 
@@ -46,9 +46,7 @@ const Contributors = () => {
       <ContributorsList contributors={filteredContributors.regular} />
 
       <div className='mx-auto' style={{ maxWidth: 680 }}>
-        <h2 className='mt-16 mb-3 text-xl font-semibold text-blue-900'>
-          Founders
-        </h2>
+        <h2 className='mt-16 mb-3 text-xl text-blue-900'>Founders</h2>
         <ContributorsList
           contributors={filteredContributors.founders}
           isFounders

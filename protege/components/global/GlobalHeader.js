@@ -7,7 +7,6 @@ import Image from 'next/image'
 import NavLink from 'components/global/NavLink'
 import CloseIcon from 'components/global/CloseIcon'
 import MenuIcon from 'assets/images/MenuIcon'
-import Logo from 'assets/images/ProtegeLogo'
 
 const GlobalHeader = () => {
   const router = useRouter()
@@ -124,15 +123,17 @@ const GlobalHeader = () => {
                 Contributors
               </NavLink>
             </li>
-            <li className='bg-teal-300 text-blue-900 ml-6 px-3 w-1/2 text-center py-2 mt-4 font-bold uppercase'>
-              <NavLink href='/post-a-job?status=1'>Post a Job</NavLink>
+            <li className='py-4 px-6 border-b border-gray-300'>
+              <Link href='/post-a-job?status=1'>
+                <a className='btn btn-teal'>Post a Job</a>
+              </Link>
             </li>
           </ul>
         </nav>
 
         <nav
           data-cy='desktop-nav'
-          className='hidden lg:block text-blue-900 text-sm uppercase font-medium z-50'
+          className='hidden lg:block text-blue-900 text-sm uppercase font-semibold z-50'
           role='navigation'
         >
           <ul className='flex justify-between'>
@@ -210,9 +211,9 @@ const GlobalHeader = () => {
             </li>
 
             <li>
-              <NavLink href='/post-a-job?status=1' className='btn btn-teal'>
-                Post a Job
-              </NavLink>
+              <Link href='/post-a-job?status=1'>
+                <a className='btn btn-teal'>Post a Job</a>
+              </Link>
             </li>
           </ul>
         </nav>

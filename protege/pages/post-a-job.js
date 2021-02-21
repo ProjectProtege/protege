@@ -114,7 +114,7 @@ const PostAJob = ({ query }) => {
         </>
       )}
       {status !== 1 && (
-        <h2 className='text-lg md:text-2xl text-blue-500 font-bold text-center leading-snug'>
+        <h2 className='text-lg md:text-2xl text-blue-500 text-center leading-snug'>
           Inexperienced doesn’t mean incapable.
           <br />
           Fill your role with ambition.
@@ -138,7 +138,7 @@ const PostAJob = ({ query }) => {
               type='button'
             >
               <BackArrow />
-              <span className='pl-2 font-medium'>Edit</span>
+              <span className='pl-2 font-semibold'>Edit</span>
             </button>
 
             <JobTemplate props={jobData} logo={companyLogoFile} />

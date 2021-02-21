@@ -24,7 +24,7 @@ const IndividualContributor = ({ props }) => {
   }
 
   return (
-    <div className='grid grid-cols-2 md:grid-cols-3 gap-6 px-4 py-6 text-center md:text-left transition duration-150 ease-in-out bg-white border-l-4 border-teal-500 shadow'>
+    <div className='grid grid-cols-2 md:grid-cols-3 gap-6 px-4 py-6 text-center md:text-left rounded-md transition duration-150 ease-in-out bg-white border-l-4 border-teal-500 shadow'>
       <div className='cols-span-1'>
         <img
           className='mx-auto rounded-full'

@@ -21,7 +21,7 @@ const JobPostingConfirmation = () => {
 
   return (
     <div className='lg:w-3/5 mx-auto'>
-      <h2 className='text-center text-blue-900 font-bold text-2xl'>
+      <h2 className='text-center text-blue-900 text-2xl'>
         Thank you for posting with Protege.dev!
       </h2>
 
@@ -44,7 +44,7 @@ const JobPostingConfirmation = () => {
         Don’t believe us? Junior developers built this!
       </p>
 
-      <h3 className='mt-8 text-blue-900 font-bold text-2xl'>Next Steps:</h3>
+      <h3 className='mt-8 text-blue-900 text-2xl'>Next Steps:</h3>
 
       <ul className='mt-8 list-inside'>
         <li className='text-blue-900'>

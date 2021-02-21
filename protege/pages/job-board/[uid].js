@@ -34,7 +34,7 @@ const Entry = ({ params }) => {
       <Link href='/job-board'>
         <a className='w-3/4 md:w-1/3 text-teal-600 hover:text-teal-800 mb-3 md:mb-6'>
           <BackArrow className='inline-block -mt-1' />
-          <span data-cy='back-to-job-list' className='pl-2 font-medium'>
+          <span data-cy='back-to-job-list' className='pl-2 font-semibold'>
             Back to Job List
           </span>
         </a>

@@ -14,7 +14,7 @@ export default function Custom404() {
       </div>
 
       <div className='md:w-1/2'>
-        <h1 className=' text-blue-900 font-bold text-10xl'>404</h1>
+        <h1 className=' text-blue-900 text-10xl'>404</h1>
 
         <div>
           <p className='text-sm leading-loose text-blue-600 mb-4'>

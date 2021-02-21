@@ -11,7 +11,7 @@ const GlobalLayout = ({ children }) => {
   const location = useRouter().pathname
 
   return (
-    <div className='flex flex-col flex-1 min-h-screen overflow-x-hidden'>
+    <div className='flex flex-col flex-1 min-h-screen overflow-x-hidden text-blue-900'>
       <GlobalHeader />
 
       <div

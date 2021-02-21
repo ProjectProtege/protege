@@ -33,7 +33,7 @@ const GetInTouch = () => {
 
   return (
     <div className='container' style={{ maxWidth: 680 }}>
-      <h1 className='mb-3 text-2xl font-semibold text-blue-900'>
+      <h1 className='mb-3 text-2xl text-blue-900'>
         We&apos;d love to hear from you!
       </h1>
 

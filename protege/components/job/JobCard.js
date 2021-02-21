@@ -48,14 +48,14 @@ const JobCard = ({ job }) => {
             <div>
               <p
                 data-cy={`job-card-company-name-${job.id}`}
-                className='mb-1 text-sm text-blue-600'
+                className='mb-1 text-sm text-blue-400'
               >
                 {job.companyName}
               </p>
 
               <h2
                 data-cy={`job-card-job-title-${job.id}`}
-                className='font-semibold leading-tight text-blue-900 md:-mt-1 text-xl capitalize'
+                className='leading-tight text-blue-900 md:-mt-1 text-xl xl:text-2xl capitalize'
               >
                 {job.jobTitle}
               </h2>
@@ -72,7 +72,7 @@ const JobCard = ({ job }) => {
           <div className='flex items-center text-right'>
             <p
               data-cy={`job-card-formatted-date-${job.id}`}
-              className='font-semibold text-teal-700 text-'
+              className='font-bold text-teal-700 text-lg'
             >
               {formattedPostDate}
             </p>

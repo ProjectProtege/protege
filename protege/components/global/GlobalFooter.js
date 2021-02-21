@@ -71,7 +71,7 @@ const GlobalFooter = () => {
               value={userEmail}
               data-cy='mailing-list-signup'
               type='email'
-              className='w-full px-4 py-1 my-3 md:w-2/5 md:my-0'
+              className='w-full px-4 py-1 my-3 md:w-2/5 md:my-0 rounded-l-md'
               id='newsletter-email'
               autoComplete='off'
               onChange={(e) => setUserEmail(e.target.value)}
@@ -82,7 +82,7 @@ const GlobalFooter = () => {
             <button
               data-cy='mailing-list-signup-button'
               type='submit'
-              className='w-full btn btn-blue md:w-auto'
+              className='w-full bg-blue-900 text-white rounded-r-md px-4 py-1 font-semibold shadow transition-transform duration-200 transform uppercase md:w-auto'
             >
               Sign Up
             </button>

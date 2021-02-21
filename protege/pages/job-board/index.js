@@ -32,11 +32,9 @@ const JobBoard = () => {
     <div className='container '>
       <div className='w-full mx-auto lg:w-3/5'>
         <div className='flex justify-between items-center mb-6'>
-          {/* <h1 className='mb-6 text-2xl font-medium text-teal-800'>
+          <h1 className='mb-6 text-2xl text-teal-800'>
             {jobFilter ? `${jobFilter} Jobs` : 'All Jobs'}
-          </h1> */}
-
-          <h1 className='text-2xl font-medium text-teal-800'>Jobs</h1>
+          </h1>
 
           <div className='relative w-1/2 md:w-1/4'>
             <label htmlFor='filter-by' className='sr-only'>

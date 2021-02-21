@@ -37,7 +37,7 @@ const Home = () => {
         <FindYourNext />
 
         <div className='flex flex-col mx-auto mt-12 text-center md:w-3/4 text-blue-900 md:tracking-wide lg:w-3/4 xl:w-1/2 md:text-lg'>
-          <h2 className='font-medium md:text-2xl mb-4'>
+          <h2 className='font-semibold md:text-2xl mb-4'>
             Remote jobs for junior developers.
           </h2>
 
@@ -56,7 +56,7 @@ const Home = () => {
         className='min-h-screen mx-auto mt-12 mb-32 lg:pt-16'
         style={{ maxWidth: 680 }}
       >
-        <h2 className='mb-8 text-2xl font-semibold text-center text-blue-900'>
+        <h2 className='mb-8 text-2xl text-center text-blue-900'>
           Latest Opportunities
         </h2>
 
@@ -70,7 +70,7 @@ const Home = () => {
       </section>
 
       <div className='flex flex-col items-center'>
-        <h2 className='mb-8 text-2xl font-bold leading-normal text-center text-blue-500'>
+        <h2 className='mb-8 text-2xl leading-normal text-center text-blue-500'>
           Broadcast to unmatched ambition,
           <br />
           <span className='text-5xl tracking-wide text-teal-800'>
