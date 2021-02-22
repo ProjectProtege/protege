@@ -56,15 +56,26 @@ const LearningResources = ({ learningResources }) => {
 }
 
 LearningResources.propTypes = {
-  learningResources: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      resourceImage: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      resourceUrl: PropTypes.string.isRequired,
-    })
-  ),
+  learningResources: PropTypes.shape({
+    free: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        resourceImage: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        resourceUrl: PropTypes.string.isRequired,
+      })
+    ),
+    paid: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        resourceImage: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        resourceUrl: PropTypes.string.isRequired,
+      })
+    ),
+  }),
 }
 
 export async function getStaticProps() {
