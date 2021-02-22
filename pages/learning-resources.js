@@ -1,16 +1,17 @@
+import PropTypes from 'prop-types'
 import Link from 'next/link'
 import resources from 'data/learning-resources.json'
 import ResourceCard from 'components/learning-resources/ResourceCard'
 
-const LearningResources = () => {
+const LearningResources = ({ learningResources }) => {
   return (
-    <section className='container m-auto max-w-screen-xl align-middle sm:max-w-screen-lg'>
-      <div className='relative text-center mx-auto mb-12 sm:px-40 lg:px-32'>
-        <h1 className='text-2xl leading tracking-tight text-blue-900 sm:leading-10 sm:text-3xl'>
+    <section className='container max-w-screen-xl m-auto align-middle sm:max-w-screen-lg'>
+      <div className='relative mx-auto mb-12 text-center sm:px-40 lg:px-32'>
+        <h1 className='text-2xl tracking-tight text-blue-900 leading sm:leading-10 sm:text-3xl'>
           Learning Resources
         </h1>
 
-        <p className='text-base mb-2 text-blue-700 sm:mt-4 sm:px-12 sm:text-base md:text-base'>
+        <p className='mb-2 text-base text-blue-700 sm:mt-4 sm:px-12 sm:text-base md:text-base'>
           We&apos;ve pulled some of the best free, and paid, resources together
           to help support your journey.
         </p>
@@ -18,40 +19,71 @@ const LearningResources = () => {
         <p className='text-base text-blue-700 sm:mt-4 sm:text-base md:text-base'>
           Got a resource you think we should add to the list?&nbsp;
           <Link href='/get-in-touch'>
-            <a className='underline mb-3 text-blue-900 hover:text-teal-700'>
+            <a className='mb-3 text-blue-900 underline hover:text-teal-700'>
               Reach out!
             </a>
           </Link>
         </p>
       </div>
 
-      <div className='container mx-auto text-center md:text-left my-4'>
+      <div className='container mx-auto my-4 text-center md:text-left'>
         <div>
-          <h3 className='text-2xl text-blue-900 md:text-3xl mb-6'>
+          <h3 className='mb-6 text-2xl text-blue-900 md:text-3xl'>
             Free Resources
           </h3>
 
-          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 '>
-            {resources.free.map((resource) => (
+          <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 '>
+            {learningResources.free.map((resource) => (
               <ResourceCard resource={resource} key={resource.id} />
             ))}
           </div>
         </div>
 
         <div className='mt-20'>
-          <h3 className='text-2xl text-blue-900 md:text-3xl mb-6'>
+          <h3 className='mb-6 text-2xl text-blue-900 md:text-3xl'>
             Paid Resources
           </h3>
         </div>
 
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
-          {resources.paid.map((resource) => (
+        <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3'>
+          {learningResources.paid.map((resource) => (
             <ResourceCard resource={resource} key={resource.id} />
           ))}
         </div>
       </div>
     </section>
   )
+}
+
+LearningResources.propTypes = {
+  learningResources: PropTypes.shape({
+    free: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        resourceImage: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        resourceUrl: PropTypes.string.isRequired,
+      })
+    ),
+    paid: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        resourceImage: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        resourceUrl: PropTypes.string.isRequired,
+      })
+    ),
+  }),
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      learningResources: resources,
+    },
+  }
 }
 
 export default LearningResources
