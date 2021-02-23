@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import GrayLogo from 'assets/images/protege-logo-mark-gray'
+import LogoMark from 'assets/images/protege-logo-mark-gray'
 import TwitterIcon from 'assets/images/TwitterBrands'
 import StripeIcon from 'assets/images/Stripe'
 
@@ -96,7 +96,7 @@ const GlobalFooter = () => {
 
       <div className='container px-8 mx-auto'>
         <div className='flex justify-between'>
-          <GrayLogo />
+          <LogoMark className='w-1/6' />
 
           <div data-cy='footer-links' className='flex flex-col items-end'>
             <ul className='mb-3 text-right'>
@@ -150,7 +150,7 @@ const GlobalFooter = () => {
 
       <div className='flex flex-col items-center justify-center m-6 tracking-wide lg:flex-row'>
         <p className='mb-4 text-blue-700 lg:mr-12 lg:mb-0'>
-          Copyright 2020 © Protege.dev
+          Copyright {new Date().getFullYear()} © Protege.dev
         </p>
         <a
           href='https://stripe.com'
