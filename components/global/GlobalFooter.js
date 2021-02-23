@@ -96,7 +96,9 @@ const GlobalFooter = () => {
 
       <div className='container px-8 mx-auto'>
         <div className='flex justify-between'>
-          <LogoMark className='w-1/6' />
+          <div className='w-24'>
+            <LogoMark />
+          </div>
 
           <div data-cy='footer-links' className='flex flex-col items-end'>
             <ul className='mb-3 text-right'>
