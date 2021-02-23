@@ -167,7 +167,7 @@ Contributors.propTypes = {
       blog: PropTypes.string,
       location: PropTypes.string,
       email: PropTypes.string,
-      hireable: PropTypes.string,
+      hireable: PropTypes.bool,
       bio: PropTypes.string,
       twitter_username: PropTypes.string,
       public_repos: PropTypes.number.isRequired,
