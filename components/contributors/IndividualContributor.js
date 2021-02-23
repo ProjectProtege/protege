@@ -2,7 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const IndividualContributor = ({ props }) => {
+const IndividualContributor = ({ contributor }) => {
   const {
     name,
     login,
@@ -11,7 +11,7 @@ const IndividualContributor = ({ props }) => {
     blog,
     html_url,
     contributions,
-  } = props
+  } = contributor
 
   function blogLinkFormatter(url) {
     let formattedUrl = url
@@ -122,24 +122,15 @@ const IndividualContributor = ({ props }) => {
 }
 
 IndividualContributor.propTypes = {
-  props: PropTypes.shape({}).isRequired,
-  name: PropTypes.string,
-  login: PropTypes.string,
-  twitter_username: PropTypes.string,
-  avatar_url: PropTypes.string,
-  blog: PropTypes.string,
-  html_url: PropTypes.string,
-  contributions: PropTypes.string,
-}
-
-IndividualContributor.defaultProps = {
-  name: '',
-  login: '',
-  twitter_username: '',
-  avatar_url: '',
-  blog: '',
-  html_url: '',
-  contributions: '',
+  contributor: PropTypes.shape({
+    name: PropTypes.string,
+    login: PropTypes.string.isRequired,
+    twitter_username: PropTypes.string,
+    avatar_url: PropTypes.string.isRequired,
+    blog: PropTypes.string,
+    html_url: PropTypes.string.isRequired,
+    contributions: PropTypes.number.isRequired,
+  }).isRequired,
 }
 
 export default IndividualContributor
