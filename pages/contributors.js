@@ -157,7 +157,7 @@ Contributors.propTypes = {
 export async function getStaticProps() {
   if (!process.env.GITHUB_TOKEN) {
     throw new Error(
-      `Missing the environment variable GITHUB_TOKEN. If this is happening for local development, ensure you've generated a token and included it in your .env file, e.g. GITHUB_TOKEN="some-token". To generate a personal access token, follow the steps in the GitHub documentation, https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token.`
+      `Missing the environment variable GITHUB_TOKEN. If this is happening for local development, ensure you've generated a token and included it in your .env file, e.g. GITHUB_TOKEN="some-token". To generate a personal access token, follow the steps in the GitHub documentation, https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token . For the scope of the token being created, select public_repo only from within the repo scope.`
     )
   }
 
