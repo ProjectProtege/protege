@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('./quill-content.css');
+@import url('./buttons.css');
+@import url('./inputs.css');
+
+*:hover {
+  @apply transition ease-in-out duration-150;
+}
+
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  @apply outline-none ring ring-1 ring-teal rounded;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-bold;
+}
+
+.quick-filter .submenu {
+  transform: scale(0);
+  opacity: 0;
+  transition: 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  visibility: hidden;
+}
+
+.quick-filter:hover .submenu,
+.quick-filter:focus-within .submenu {
+  transform: scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+/*---- Simple File Upload styles -----*/
+
+iframe[title*='Simple File Upload'] {
+  @apply w-full;
+}
+
+iframe[title*='Simple File Upload'] #widget .dropzone {
+  @apply border rounded-none !important;
+}
