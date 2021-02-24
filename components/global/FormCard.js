@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 const FormCard = ({ title, children, className }) => {
   return (
     <div
-      className={`border-t-4 border-teal-500 shadow-md rounded-md ${className}`}
+      className={`border-t-6 border-teal-500 shadow-md rounded-md ${className}`}
     >
       <h2
         style={{

@@ -52,49 +52,48 @@ const GlobalFooter = () => {
         location === '/admin' || location === '/sign-in' ? 'hidden' : null
       }`}
     >
-      <div data-cy='footer' className='px-3 py-4 mb-6 bg-gray-200 md:px-0'>
-        <form
-          className='container mx-auto'
-          name='email-list'
-          onSubmit={subscribeEmail}
-        >
-          <div className='flex flex-col items-center justify-center md:flex-row'>
-            <label
-              className='text-lg font-semibold text-center text-blue-900 md:mr-6 md:text-left'
-              htmlFor='newsletter-email'
-            >
-              Sign up for our mailing list!
-            </label>
+      <div data-cy='footer' className='py-4 mb-6 bg-gray-200'>
+        <div className='container px-8 mx-auto sm:max-w-screen-lg lg:px-0'>
+          <form name='email-list' onSubmit={subscribeEmail}>
+            <div className='flex flex-col items-center'>
+              <label
+                className='text-lg font-semibold text-blue-900 md:mr-6'
+                htmlFor='newsletter-email'
+              >
+                Sign up for our mailing list!
+              </label>
 
-            <input
-              value={userEmail}
-              data-cy='mailing-list-signup'
-              type='email'
-              className='w-full px-4 py-1 my-3 md:w-2/5 md:my-0 rounded-l-md'
-              id='newsletter-email'
-              autoComplete='off'
-              onChange={(e) => setUserEmail(e.target.value)}
-              name='email'
-              required
-            />
+              <p className='mb-3 text-sm text-blue-700'>
+                Stay up to date on new features and job opportunities.
+              </p>
 
-            <button
-              data-cy='mailing-list-signup-button'
-              type='submit'
-              className='w-full bg-blue-900 text-white rounded-r-md px-4 py-1 font-semibold shadow transition-transform duration-200 transform uppercase md:w-auto'
-            >
-              Sign Up
-            </button>
-          </div>
+              <div className='flex justify-center w-full md:w-1/2'>
+                <input
+                  value={userEmail}
+                  data-cy='mailing-list-signup'
+                  type='email'
+                  className='px-4 py-1 rounded-r-none md:w-2/3 rounded-l-md outline-teal'
+                  id='newsletter-email'
+                  autoComplete='off'
+                  onChange={(e) => setUserEmail(e.target.value)}
+                  name='email'
+                  required
+                />
 
-          <p className='mt-3 text-sm text-center text-blue-700'>
-            Stay up to date on improvements to Protege.dev and when new
-            opportunities arrive!
-          </p>
-        </form>
+                <button
+                  data-cy='mailing-list-signup-button'
+                  type='submit'
+                  className='rounded-l-none shadow rounded-r-md btn btn-blue'
+                >
+                  Sign Up
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
 
-      <div className='container px-8 mx-auto'>
+      <div className='container px-8 mx-auto sm:max-w-screen-lg lg:px-0'>
         <div className='flex justify-between'>
           <GrayLogo />
 
@@ -102,7 +101,7 @@ const GlobalFooter = () => {
             <ul className='mb-3 text-right'>
               <li className='mb-1'>
                 <Link href='/job-board'>
-                  <a className=' text-blue-900 opacity-75 hover:opacity-100 '>
+                  <a className='text-blue-900 opacity-75 hover:opacity-100'>
                     Find a Job
                   </a>
                 </Link>
@@ -110,7 +109,7 @@ const GlobalFooter = () => {
 
               <li className='mb-1'>
                 <Link href='/learning-resources'>
-                  <a className=' text-blue-900 opacity-75 hover:opacity-100 '>
+                  <a className='text-blue-900 opacity-75 hover:opacity-100'>
                     Learning Resources
                   </a>
                 </Link>
@@ -118,29 +117,29 @@ const GlobalFooter = () => {
 
               <li>
                 <Link href='/post-a-job'>
-                  <a className=' text-blue-900 opacity-75 hover:opacity-100 '>
+                  <a className='text-blue-900 opacity-75 hover:opacity-100'>
                     Post a Job
                   </a>
                 </Link>
               </li>
               <li>
                 <a
-                  className=' text-blue-900 opacity-75 hover:opacity-100 '
-                  href='https://github.com/drewclem/protege/issues'
+                  className='text-blue-900 opacity-75 hover:opacity-100'
+                  href='https://github.com/drewclem/protege#submitting-a-pr'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  Contribute to Protege
+                  Contribute to Protegé
                 </a>
               </li>
             </ul>
 
             <a
               href='https://twitter.com/devprotege'
-              className='w-6 text-teal-300 -colors duration-75 hover:text-teal-600 focus:text-teal-600'
+              className='w-6 text-teal-300 duration-75 -colors hover:text-teal-600 focus:text-teal-600'
               target='_blank'
               rel='noopener noreferrer'
-              aria-label='Follow Protege on Twitter'
+              aria-label='Follow Protegé on Twitter'
             >
               <TwitterIcon />
             </a>
@@ -150,7 +149,7 @@ const GlobalFooter = () => {
 
       <div className='flex flex-col items-center justify-center m-6 tracking-wide lg:flex-row'>
         <p className='mb-4 text-blue-700 lg:mr-12 lg:mb-0'>
-          Copyright 2020 © Protege.dev
+          Copyright 2020 © Protegé.dev
         </p>
         <a
           href='https://stripe.com'

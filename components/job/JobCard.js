@@ -26,16 +26,16 @@ const JobCard = ({ job }) => {
 
   return (
     <Link data-cy={`job-card-link-${job.id}`} href={`/job-board/${job.id}`}>
-      <a className='flex px-3 py-4 mb-6 transition duration-150 ease-in-out transform bg-white border-l-4 border-teal-500 shadow md:mb-12 md:px-6 hover:shadow-md items-center rounded-md'>
+      <a className='flex items-center px-3 py-4 mb-6 transition duration-150 ease-in-out transform bg-white border-teal-500 rounded-md shadow border-l-6 md:mb-12 md:px-6 hover:shadow-md'>
         <div
-          className='hidden md:flex bg-white shadow-md overflow-hidden rounded-full justify-center items-center'
+          className='items-center justify-center hidden overflow-hidden bg-white rounded-full shadow-md md:flex'
           style={{ width: 75, height: 75 }}
         >
           <img
             data-cy={`job-card-image-${job.id}`}
             src={job.companyLogo}
             alt={`${job.companyName} Logo`}
-            className='my-auto w-full'
+            className='w-full my-auto'
           />
         </div>
 
@@ -51,7 +51,7 @@ const JobCard = ({ job }) => {
 
               <h2
                 data-cy={`job-card-job-title-${job.id}`}
-                className='leading-tight text-blue-900 md:-mt-1 text-xl xl:text-2xl capitalize'
+                className='text-xl leading-tight text-blue-900 capitalize md:-mt-1 xl:text-2xl'
               >
                 {job.jobTitle}
               </h2>
@@ -68,7 +68,7 @@ const JobCard = ({ job }) => {
           <div className='flex items-center text-right'>
             <p
               data-cy={`job-card-formatted-date-${job.id}`}
-              className='font-bold text-teal-700 text-lg'
+              className='text-lg font-bold text-teal-700'
             >
               {formattedPostDate}
             </p>

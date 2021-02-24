@@ -32,17 +32,17 @@ const GetInTouch = () => {
   }
 
   return (
-    <div className='container' style={{ maxWidth: 680 }}>
+    <div className='container max-w-screen-xl m-auto align-middle sm:max-w-screen-lg'>
       <h1 className='mb-3 text-2xl text-blue-900'>
         We&apos;d love to hear from you!
       </h1>
 
-      <p className='mb-12 text-blue-700'>
+      <p className='mb-12 text-blue-700' style={{ maxWidth: 680 }}>
         Feedback? Complaints? Feature requests? Questions? We want to hear them
         all!
         <br />
         <br />
-        Our goal is to make Protege.dev the best place for junior developers to
+        Our goal is to make Protegé.dev the best place for junior developers to
         find remote work and the best way to do that is with input from you, the
         people we’re trying to serve!
       </p>
@@ -118,7 +118,10 @@ const GetInTouch = () => {
 
             <input type='hidden' name='form-name' value='contact' />
 
-            <button type='submit' className='w-full mt-6 btn btn-teal md:w-32'>
+            <button
+              type='submit'
+              className='w-full mt-6 btn btn-teal md:w-auto'
+            >
               Send
             </button>
           </div>

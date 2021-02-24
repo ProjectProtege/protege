@@ -6,12 +6,12 @@ import ResourceCard from 'components/learning-resources/ResourceCard'
 const LearningResources = ({ learningResources }) => {
   return (
     <section className='container max-w-screen-xl m-auto align-middle sm:max-w-screen-lg'>
-      <div className='relative mx-auto mb-12 text-center sm:px-40 lg:px-32'>
-        <h1 className='text-2xl tracking-tight text-blue-900 leading sm:leading-10 sm:text-3xl'>
+      <div className='mx-auto mb-12'>
+        <h1 className='text-2xl tracking-tight text-blue-900 leading sm:leading-10'>
           Learning Resources
         </h1>
 
-        <p className='mb-2 text-base text-blue-700 sm:mt-4 sm:px-12 sm:text-base md:text-base'>
+        <p className='mb-2 text-base text-blue-700 sm:mt-4 sm:text-base md:text-base'>
           We&apos;ve pulled some of the best free, and paid, resources together
           to help support your journey.
         </p>
@@ -28,11 +28,9 @@ const LearningResources = ({ learningResources }) => {
 
       <div className='container mx-auto my-4 text-center md:text-left'>
         <div>
-          <h3 className='mb-6 text-2xl text-blue-900 md:text-3xl'>
-            Free Resources
-          </h3>
+          <h3 className='mb-6 text-2xl text-blue-900'>Free Resources</h3>
 
-          <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 '>
+          <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 '>
             {learningResources.free.map((resource) => (
               <ResourceCard resource={resource} key={resource.id} />
             ))}
@@ -40,9 +38,7 @@ const LearningResources = ({ learningResources }) => {
         </div>
 
         <div className='mt-20'>
-          <h3 className='mb-6 text-2xl text-blue-900 md:text-3xl'>
-            Paid Resources
-          </h3>
+          <h3 className='mb-6 text-2xl text-blue-900'>Paid Resources</h3>
         </div>
 
         <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3'>
