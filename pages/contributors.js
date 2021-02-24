@@ -149,39 +149,13 @@ export default function Contributors({ contributors }) {
 Contributors.propTypes = {
   contributors: PropTypes.arrayOf(
     PropTypes.shape({
+      name: PropTypes.string,
       login: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
-      node_id: PropTypes.string.isRequired,
-      avatar_url: PropTypes.string.isRequired,
-      gravatar_id: PropTypes.string,
-      url: PropTypes.string.isRequired,
-      html_url: PropTypes.string.isRequired,
-      followers_url: PropTypes.string.isRequired,
-      following_url: PropTypes.string.isRequired,
-      gists_url: PropTypes.string.isRequired,
-      starred_url: PropTypes.string.isRequired,
-      subscriptions_url: PropTypes.string.isRequired,
-      organizations_url: PropTypes.string.isRequired,
-      repos_url: PropTypes.string.isRequired,
-      events_url: PropTypes.string.isRequired,
-      received_events_url: PropTypes.string,
-      type: PropTypes.string.isRequired,
-      site_admin: PropTypes.bool.isRequired,
-      contributions: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      company: PropTypes.string,
-      blog: PropTypes.string,
-      location: PropTypes.string,
-      email: PropTypes.string,
-      hireable: PropTypes.bool,
-      bio: PropTypes.string,
       twitter_username: PropTypes.string,
-      public_repos: PropTypes.number.isRequired,
-      public_gists: PropTypes.number.isRequired,
-      followers: PropTypes.number.isRequired,
-      following: PropTypes.number.isRequired,
-      created_at: PropTypes.string.isRequired,
-      updated_at: PropTypes.string.isRequired,
+      avatar_url: PropTypes.string.isRequired,
+      blog: PropTypes.string,
+      html_url: PropTypes.string.isRequired,
+      contributions: PropTypes.number.isRequired,
     })
   ).isRequired,
 }
@@ -189,7 +163,7 @@ Contributors.propTypes = {
 export async function getStaticProps() {
   if (!process.env.GITHUB_TOKEN) {
     throw new Error(
-      `Missing the environment variable GITHUB_TOKEN. If this is happening for local development, ensure you've generated a token and included it in your .env file, e.g. GITHUB_TOKEN="some-token". To generate a personal access token, follow the steps in the GitHub documentation, https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token.`
+      `Missing the environment variable GITHUB_TOKEN. If this is happening for local development, ensure you've generated a token and included it in your .env file, e.g. GITHUB_TOKEN="some-token". To generate a personal access token, follow the steps in the GitHub documentation, https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token . For the scope of the token being created, select public_repo only from within the repo scope.`
     )
   }
 
