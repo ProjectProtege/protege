@@ -60,16 +60,16 @@ const JobTemplate = ({ props }) => {
 
   return (
     <>
-      <div className='mx-auto container'>
-        <div className='md:flex justify-center'>
+      <div className='container mx-auto'>
+        <div className='justify-center md:flex'>
           <div className={`${isAdmin ? 'w-full' : 'md:w-3/4'} md:pr-16`}>
-            <h2 data-cy='job-title' className='text-blue-900 text-3xl'>
+            <h2 data-cy='job-title' className='text-3xl text-blue-900'>
               {jobtitle}
             </h2>
 
             <div
               data-cy='role-focus-and-position-type'
-              className='text-blue-600 uppercase tracking-tight text-md mb-6'
+              className='mb-6 tracking-tight text-blue-600 uppercase text-md'
             >
               {roleFocus}
               <span> • </span>
@@ -78,7 +78,7 @@ const JobTemplate = ({ props }) => {
 
             <h3
               data-cy='job-description-title'
-              className='text-blue-900 text-2xl mb-4'
+              className='mb-4 text-2xl text-blue-900'
             >
               Job Description
             </h3>
@@ -87,12 +87,12 @@ const JobTemplate = ({ props }) => {
               data-cy='job-description'
               id='jobDesc'
               dangerouslySetInnerHTML={createMarkup(jobDescription)}
-              className='rich-text-content mb-6'
+              className='mb-6 rich-text-content'
             />
 
             <h4
               data-cy='company-description-title'
-              className='text-blue-900 text-2xl mb-4'
+              className='mb-4 text-2xl text-blue-900'
             >
               About&nbsp;
               {companyName}
@@ -100,17 +100,17 @@ const JobTemplate = ({ props }) => {
 
             <div
               data-cy='company-description'
-              className='rich-text-content mt-2 text-blue-300'
+              className='mt-2 text-blue-300 rich-text-content'
               id='companyDesc'
               dangerouslySetInnerHTML={createMarkup(companyDescription)}
             />
           </div>
 
           {!isAdmin ? (
-            <div className='md:w-1/4 mt-8 text-center md:text-left'>
-              <div className='bg-gray-200 p-4'>
+            <div className='mt-8 text-center md:w-1/4 md:text-left'>
+              <div className='p-4 bg-gray-200'>
                 {companyLogo ? (
-                  <div className='relative w-2/3 md:w-auto mx-auto md:mx-0 mb-6 bg-white p-4 rounded overflow-hidden shadow-md'>
+                  <div className='relative w-2/3 p-4 mx-auto mb-6 overflow-hidden bg-white rounded shadow-md md:w-auto md:mx-0'>
                     <img
                       data-cy='company-logo'
                       id='companyLogo'
@@ -123,12 +123,12 @@ const JobTemplate = ({ props }) => {
 
                 <h4
                   data-cy='company-name-sidebar'
-                  className='text-blue-900 text-lg mb-3'
+                  className='mb-3 text-lg text-blue-900'
                 >
                   {companyName}
                 </h4>
 
-                <div className='uppercase text-blue-900 tracking-tight text-md'>
+                <div className='tracking-tight text-blue-900 text-md'>
                   <a
                     data-cy='company-website'
                     className='underline opacity-75 hover:opacity-100'
@@ -151,11 +151,11 @@ const JobTemplate = ({ props }) => {
           ) : null}
         </div>
 
-        <div className='mt-8'>
+        {/* <div className='mt-8'>
           <a
             data-cy='how-to-apply-bottom'
             href={howToApply}
-            className={`btn btn-teal w-full md:w-auto px-6 py-1 ${
+            className={`btn btn-teal w-full md:w-auto ${
               isPreview ? ' btn-disabled' : ''
             }
               `}
@@ -163,7 +163,7 @@ const JobTemplate = ({ props }) => {
           >
             Apply
           </a>
-        </div>
+        </div> */}
       </div>
     </>
   )

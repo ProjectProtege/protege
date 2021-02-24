@@ -12,8 +12,8 @@
   @apply transition ease-in-out duration-150;
 }
 
-a:focus,
-button:focus,
+/* a:focus, */
+/* button:focus, */
 input:focus,
 select:focus,
 textarea:focus {

@@ -24,7 +24,7 @@ const IndividualContributor = ({ props }) => {
   }
 
   return (
-    <div className='grid grid-cols-2 md:grid-cols-3 gap-6 px-4 py-6 text-center md:text-left rounded-md transition duration-150 ease-in-out bg-white border-l-4 border-teal-500 shadow'>
+    <div className='grid grid-cols-2 gap-6 px-4 py-6 text-center transition duration-150 ease-in-out bg-white border-teal-500 rounded-md shadow border-l-6 md:grid-cols-3 md:text-left '>
       <div className='cols-span-1'>
         <img
           className='mx-auto rounded-full'
@@ -33,13 +33,17 @@ const IndividualContributor = ({ props }) => {
           loading='lazy'
         />
       </div>
-      <div className='col-span-1 md:col-span-2 flex items-start flex-col justify-center truncate'>
+      <div className='flex flex-col items-start justify-center col-span-1 truncate md:col-span-2'>
         {name ? (
-          <span className='font-semibold text-blue-900 truncate'>{name}</span>
+          <span className='text-xl font-semibold text-blue-900 truncate'>
+            {name}
+          </span>
         ) : (
-          <span className='font-semibold text-blue-900 truncate'>{login}</span>
+          <span className='text-xl font-semibold text-blue-900 truncate'>
+            {login}
+          </span>
         )}
-        <div className='flex items-center my-2 pl-1'>
+        <div className='flex items-center my-2'>
           {twitter_username && (
             <a
               href={`https://twitter.com/${twitter_username}`}
@@ -49,7 +53,7 @@ const IndividualContributor = ({ props }) => {
               aria-label={`${name || login}'s twitter`}
             >
               <svg
-                className='flex-shrink w-4 fill-current'
+                className='flex-shrink w-5 fill-current'
                 aria-hidden='true'
                 focusable='false'
                 data-prefix='fab'
@@ -73,7 +77,7 @@ const IndividualContributor = ({ props }) => {
             aria-label={`${name || login}'s GitHub`}
           >
             <svg
-              className='flex-shrink w-4 fill-current'
+              className='flex-shrink w-5 fill-current'
               aria-hidden='true'
               focusable='false'
               data-prefix='fab'
@@ -95,7 +99,7 @@ const IndividualContributor = ({ props }) => {
               aria-label={`${name || login}'s blog`}
             >
               <svg
-                className='flex-shrink w-4 fill-current'
+                className='flex-shrink w-5 fill-current'
                 aria-hidden='true'
                 focusable='false'
                 data-prefix='fab'
