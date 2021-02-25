@@ -71,7 +71,7 @@ an environment where participants feel welcome and safe.
 
 Reports should be directed to *[Drew Clements](drewclementsdesign@gmail.com)*,
 _[Andy Pickle](pickleat@gmail.com)_, or _[Nick Taylor](nick@iamdeveloper.com)_,
-the Project Steward(s) for *[Protege.dev](https://protege.dev)*. It is the
+the Project Steward(s) for *[Protegé.dev](https://protege.dev)*. It is the
 Project Steward's duty to receive and address reported violations of the code of
 conduct.
 

@@ -95,7 +95,7 @@ const GlobalFooter = () => {
 
       <div className='container px-8 mx-auto sm:max-w-screen-lg lg:px-0'>
         <div className='flex justify-between'>
-          <div className='w-24'>
+          <div className='w-16'>
             <LogoMark />
           </div>
 
@@ -151,7 +151,7 @@ const GlobalFooter = () => {
 
       <div className='flex flex-col items-center justify-center m-6 tracking-wide lg:flex-row'>
         <p className='mb-4 text-blue-700 lg:mr-12 lg:mb-0'>
-          Copyright {new Date().getFullYear()} © Protege.dev
+          Copyright {new Date().getFullYear()} © Protegé.dev
         </p>
         <a
           href='https://stripe.com'

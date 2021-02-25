@@ -80,10 +80,10 @@ async function getContributors() {
 }
 
 /**
- * Renders a list of contributors to the Protege project.
+ * Renders a list of contributors to the Protegé project.
  *
  * @param {object} props
- * @param {object} props.contributors A list of contributors to the Protege repository.
+ * @param {object} props.contributors A list of contributors to the Protegé repository.
  */
 export default function Contributors({ contributors }) {
   const filteredContributors = contributors.reduce(
