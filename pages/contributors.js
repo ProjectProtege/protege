@@ -136,12 +136,13 @@ export default function Contributors({ contributors }) {
       </div>
 
       <ContributorsList contributors={filteredContributors.regular} />
-
-      <h2 className='mt-16 mb-3 text-xl text-blue-900'>Founders</h2>
-      <ContributorsList
-        contributors={filteredContributors.founders}
-        isFounders
-      />
+      <div className='mx-auto' style={{ maxWidth: 680 }}>
+        <h2 className='mt-16 mb-3 text-xl text-blue-900'>Founders</h2>
+        <ContributorsList
+          contributors={filteredContributors.founders}
+          isFounders
+        />
+      </div>
     </div>
   )
 }
