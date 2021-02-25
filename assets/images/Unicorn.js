@@ -80,7 +80,11 @@ const Unicorn = ({ className }) => {
 }
 
 Unicorn.propTypes = {
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
+}
+
+Unicorn.defaultProps = {
+  className: '',
 }
 
 export default Unicorn

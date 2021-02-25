@@ -32,9 +32,7 @@ const GlobalHeader = () => {
   }
 
   return (
-    <header
-      className={`${location !== '/' ? 'lg:bg-white lg:shadow' : ''} py-3 `}
-    >
+    <header className='py-3'>
       <div className='relative container flex justify-between items-center px-6 xl:px-2'>
         <Link href='/'>
           <a className='w-2/3 md:w-56'>

@@ -48,9 +48,7 @@ const GlobalFooter = () => {
 
   return (
     <footer
-      className={`bg-white mt-20 ${
-        location === '/admin' || location === '/sign-in' ? 'hidden' : null
-      }`}
+      className={`bg-white mt-20 ${location === '/admin' ? 'hidden' : null}`}
     >
       <div data-cy='footer' className='py-4 mb-6 bg-gray-200'>
         <div className='container px-8 mx-auto sm:max-w-screen-lg lg:px-0'>
