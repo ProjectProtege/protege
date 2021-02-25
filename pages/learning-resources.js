@@ -5,8 +5,8 @@ import ResourceCard from 'components/learning-resources/ResourceCard'
 
 const LearningResources = ({ learningResources }) => {
   return (
-    <section className='container max-w-screen-xl m-auto align-middle sm:max-w-screen-lg'>
-      <div className='mx-auto mb-12'>
+    <section className='container max-w-screen-xl mx-auto align-middle sm:max-w-screen-lg'>
+      <div className='mx-auto mb-12 text-center'>
         <h1 className='text-2xl tracking-tight text-blue-900 leading sm:leading-10'>
           Learning Resources
         </h1>

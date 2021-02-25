@@ -81,7 +81,7 @@ const GetInTouch = () => {
   }
 
   return (
-    <div className='container max-w-screen-xl m-auto align-middle sm:max-w-screen-lg'>
+    <div className='container' style={{ maxWidth: 680 }}>
       <h1 className='mb-3 text-2xl text-blue-900'>
         We&apos;d love to hear from you!
       </h1>
@@ -118,7 +118,7 @@ const GetInTouch = () => {
                   required
                   // onChange={(e) => setName(e.target.value)}
                 />
-                <p className='text-error-full'>
+                <p className='input-error'>
                   {errors.name && errors.name.message}
                 </p>
               </div>
@@ -141,7 +141,7 @@ const GetInTouch = () => {
                   required
                   // onChange={(e) => setEmail(e.target.value)}
                 />
-                <p className='text-error-full'>
+                <p className='input-error'>
                   {errors.email && errors.email.message}
                 </p>
               </div>
@@ -167,7 +167,7 @@ const GetInTouch = () => {
                 required
                 // onChange={(e) => setComment(e.target.value)}
               />
-              <p className='text-error-full'>
+              <p className='input-error'>
                 {errors.comment && errors.comment.message}
               </p>
             </div>
@@ -188,7 +188,7 @@ const GetInTouch = () => {
           </div>
         </FormCard>
       </form>
-      <DevTool control={control} />
+      {/* <DevTool control={control} /> */}
     </div>
   )
 }

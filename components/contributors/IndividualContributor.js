@@ -53,7 +53,7 @@ const IndividualContributor = ({ contributor }) => {
               aria-label={`${name || login}'s twitter`}
             >
               <svg
-                className='flex-shrink w-5 fill-current'
+                className='flex-shrink w-4 fill-current'
                 aria-hidden='true'
                 focusable='false'
                 data-prefix='fab'
@@ -77,7 +77,7 @@ const IndividualContributor = ({ contributor }) => {
             aria-label={`${name || login}'s GitHub`}
           >
             <svg
-              className='flex-shrink w-5 fill-current'
+              className='flex-shrink w-4 fill-current'
               aria-hidden='true'
               focusable='false'
               data-prefix='fab'
@@ -99,7 +99,7 @@ const IndividualContributor = ({ contributor }) => {
               aria-label={`${name || login}'s blog`}
             >
               <svg
-                className='flex-shrink w-5 fill-current'
+                className='flex-shrink w-4 fill-current'
                 aria-hidden='true'
                 focusable='false'
                 data-prefix='fab'

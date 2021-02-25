@@ -99,8 +99,8 @@ export default function Contributors({ contributors }) {
   )
 
   return (
-    <div className='container max-w-screen-xl m-auto align-middle sm:max-w-screen-lg'>
-      <div className='mx-auto'>
+    <div className='container mx-auto'>
+      <div className='mx-auto' style={{ maxWidth: 680 }}>
         <h1 className='mb-3 text-2xl text-blue-900'>
           Protegé.dev Contributors!
         </h1>
