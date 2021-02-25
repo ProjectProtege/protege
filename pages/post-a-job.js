@@ -95,12 +95,12 @@ const PostAJob = ({ query }) => {
     <div className='container'>
       {status === 1 && (
         <>
-          <div className='container max-w-screen-xl m-auto align-middle sm:max-w-screen-lg'>
+          <div className='container max-w-screen-xl m-auto align-middle sm:max-w-screen-lg text-center'>
             <h1 className='sr-only'>Post a Job</h1>
             <h1 className='mb-3 text-2xl text-blue-900'>
               Invest In a Junior Developer
             </h1>
-            <p className='mb-12 text-blue-900 opacity-75 lg:w-3/4'>
+            <p className='text-xs text-blue-900 lg:text-center lg:w-2/3 mx-auto mb-8 opacity-75'>
               Protegé.dev is a curated job board tailored towards junior
               developers. Each listing is reviewed, and approved or denied
               before going live. If your listing is denied, we&apos;ll contact

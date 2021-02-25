@@ -29,52 +29,54 @@ const JobBoard = () => {
   }, [])
 
   return (
-    <div className='container max-w-screen-xl m-auto align-middle sm:max-w-screen-lg'>
-      <div className='flex items-center justify-between mb-6'>
-        <h1 className='mb-6 text-2xl'>
-          {jobFilter ? `${jobFilter} Jobs` : 'All Jobs'}
-        </h1>
+    <div className='container '>
+      <div className='w-full mx-auto lg:w-3/5'>
+        <div className='flex justify-between items-center mb-6'>
+          <h1 className='mb-6 text-2xl'>
+            {jobFilter ? `${jobFilter} Jobs` : 'All Jobs'}
+          </h1>
 
-        <div className='relative w-1/2 md:w-1/4'>
-          <label htmlFor='filter-by' className='sr-only'>
-            Filter
-          </label>
+          <div className='relative w-1/2 md:w-1/4'>
+            <label htmlFor='filter-by' className='sr-only'>
+              Filter
+            </label>
 
-          <div className='select-wrap'>
-            <select
-              className='justify-end rounded-md input input-select'
-              id='filter-by'
-              placeholder='Filter By'
-              onChange={(event) => setJobFilter(event.target.value)}
-              value={jobFilter}
-            >
-              <option value=''>All</option>
-              <option value='Front-end'>Front-end</option>
-              <option value='Back-end'>Back-end</option>
-              <option value='Full-stack'>Full-stack</option>
-            </select>
+            <div className='select-wrap'>
+              <select
+                className='justify-end rounded-md input input-select'
+                id='filter-by'
+                placeholder='Filter By'
+                onChange={(event) => setJobFilter(event.target.value)}
+                value={jobFilter}
+              >
+                <option value=''>All</option>
+                <option value='Front-end'>Front-end</option>
+                <option value='Back-end'>Back-end</option>
+                <option value='Full-stack'>Full-stack</option>
+              </select>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* <LoadingSpinner loading={loading} /> */}
+        {/* <LoadingSpinner loading={loading} /> */}
 
-      <div data-cy='job-board-list' className='mx-auto'>
-        {!jobFilter && (
-          <>
-            {jobs.map((job, i) => (
-              <JobCard key={job.id} job={job} i={i} />
-            ))}
-          </>
-        )}
+        <div data-cy='job-board-list' className='mx-auto'>
+          {!jobFilter && (
+            <>
+              {jobs.map((job, i) => (
+                <JobCard key={job.id} job={job} i={i} />
+              ))}
+            </>
+          )}
 
-        {jobFilter && (
-          <>
-            {filteredJobs(jobs, jobFilter).map((job, i) => (
-              <JobCard key={job.id} job={job} i={i} />
-            ))}
-          </>
-        )}
+          {jobFilter && (
+            <>
+              {filteredJobs(jobs, jobFilter).map((job, i) => (
+                <JobCard key={job.id} job={job} i={i} />
+              ))}
+            </>
+          )}
+        </div>
       </div>
     </div>
   )
