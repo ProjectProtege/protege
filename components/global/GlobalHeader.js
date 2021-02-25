@@ -35,12 +35,10 @@ const GlobalHeader = () => {
     <header
       className={`${location !== '/' ? 'lg:bg-white lg:shadow' : ''} py-3 `}
     >
-      <div className='container relative flex items-center justify-between px-6 xl:px-2'>
-        <Link href='/' className='w-1/4 h-auto lg:w-1/6'>
-          <a>
-            <span>
-              <Logo className='w-full' />
-            </span>
+      <div className='relative container flex justify-between items-center px-6 xl:px-2'>
+        <Link href='/'>
+          <a className='w-2/3 md:w-64'>
+            <Logo className='w-full' />
           </a>
         </Link>
 
