@@ -9,7 +9,7 @@ const ContributorsList = ({ contributors, isFounders }) => {
     <ul
       className={`grid gap-5 ${
         isFounders
-          ? 'md:grid-cols-2'
+          ? 'sm:grid-cols-2 lg:grid-cols-3'
           : 'sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
       }`}
     >
@@ -19,7 +19,7 @@ const ContributorsList = ({ contributors, isFounders }) => {
           const { id } = contributor
           return (
             <li key={id}>
-              <IndividualContributor props={contributor} />
+              <IndividualContributor contributor={contributor} />
             </li>
           )
         })}
@@ -28,7 +28,17 @@ const ContributorsList = ({ contributors, isFounders }) => {
 }
 
 ContributorsList.propTypes = {
-  contributors: PropTypes.array.isRequired,
+  contributors: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      login: PropTypes.string.isRequired,
+      twitter_username: PropTypes.string,
+      avatar_url: PropTypes.string.isRequired,
+      blog: PropTypes.string,
+      html_url: PropTypes.string.isRequired,
+      contributions: PropTypes.number.isRequired,
+    })
+  ).isRequired,
   isFounders: PropTypes.bool,
 }
 

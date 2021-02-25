@@ -12,11 +12,11 @@
   @apply transition ease-in-out duration-150;
 }
 
-a:focus,
-button:focus,
-input:focus,
-select:focus,
-textarea:focus {
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
   @apply outline-none ring ring-1 ring-teal rounded;
 }
 

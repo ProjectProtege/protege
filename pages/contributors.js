@@ -102,40 +102,46 @@ export default function Contributors({ contributors }) {
     <div className='container mx-auto'>
       <div className='mx-auto' style={{ maxWidth: 680 }}>
         <h1 className='mb-3 text-2xl text-blue-900'>
-          Protege.dev Contributors!
+          Protegé.dev Contributors!
         </h1>
 
         <p className='mb-12 text-blue-700'>
-          Here are Protege, we&apos;re only as strong as the community that
+          Here at Protegé, we&apos;re only as strong as the community that
           surrounds us and that we aim to serve.
           <br />
           <br />
           Below is a list of amazing individuals from that community who have
-          personally donated their time efforts to improving our platform.
+          personally donated their time and efforts to improving our platform.
           We&apos;re incredibly grateful that anyone would take time out of
-          their day and lend us a helping hand and welcome any who want to aid
-          in our mission.
+          their day to lend us a helping hand and we welcome anyone who wants to
+          aid in our mission.
           <br />
           <br />
-          Want to join this list of awesomeness? Check our repo for any&nbsp;
+          Want to join this list of awesomeness? Check our repo for&nbsp;
           <a
             className='mb-3 text-blue-900 underline hover:text-teal-600'
             href='https://github.com/drewclem/protege/issues'
           >
-            Active Issues
+            active issues
           </a>
-          &nbsp;and send in a PR! It&apos;s that easy!
+          &nbsp;and&nbsp;
+          <a
+            className='mb-3 text-blue-900 underline hover:text-teal-600'
+            href='https://github.com/drewclem/protege#submitting-a-pr'
+          >
+            submit a pull request!
+          </a>{' '}
+          It&apos;s that easy!
         </p>
       </div>
+
       <ContributorsList contributors={filteredContributors.regular} />
 
-      <div className='mx-auto' style={{ maxWidth: 680 }}>
-        <h2 className='mt-16 mb-3 text-xl text-blue-900'>Founders</h2>
-        <ContributorsList
-          contributors={filteredContributors.founders}
-          isFounders
-        />
-      </div>
+      <h2 className='mt-16 mb-3 text-xl text-blue-900'>Founders</h2>
+      <ContributorsList
+        contributors={filteredContributors.founders}
+        isFounders
+      />
     </div>
   )
 }
@@ -143,39 +149,13 @@ export default function Contributors({ contributors }) {
 Contributors.propTypes = {
   contributors: PropTypes.arrayOf(
     PropTypes.shape({
+      name: PropTypes.string,
       login: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
-      node_id: PropTypes.string.isRequired,
-      avatar_url: PropTypes.string.isRequired,
-      gravatar_id: PropTypes.string,
-      url: PropTypes.string.isRequired,
-      html_url: PropTypes.string.isRequired,
-      followers_url: PropTypes.string.isRequired,
-      following_url: PropTypes.string.isRequired,
-      gists_url: PropTypes.string.isRequired,
-      starred_url: PropTypes.string.isRequired,
-      subscriptions_url: PropTypes.string.isRequired,
-      organizations_url: PropTypes.string.isRequired,
-      repos_url: PropTypes.string.isRequired,
-      events_url: PropTypes.string.isRequired,
-      received_events_url: PropTypes.string,
-      type: PropTypes.string.isRequired,
-      site_admin: PropTypes.bool.isRequired,
-      contributions: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      company: PropTypes.string,
-      blog: PropTypes.string,
-      location: PropTypes.string,
-      email: PropTypes.string,
-      hireable: PropTypes.bool,
-      bio: PropTypes.string,
       twitter_username: PropTypes.string,
-      public_repos: PropTypes.number.isRequired,
-      public_gists: PropTypes.number.isRequired,
-      followers: PropTypes.number.isRequired,
-      following: PropTypes.number.isRequired,
-      created_at: PropTypes.string.isRequired,
-      updated_at: PropTypes.string.isRequired,
+      avatar_url: PropTypes.string.isRequired,
+      blog: PropTypes.string,
+      html_url: PropTypes.string.isRequired,
+      contributions: PropTypes.number.isRequired,
     })
   ).isRequired,
 }
@@ -183,7 +163,7 @@ Contributors.propTypes = {
 export async function getStaticProps() {
   if (!process.env.GITHUB_TOKEN) {
     throw new Error(
-      `Missing the environment variable GITHUB_TOKEN. If this is happening for local development, ensure you've generated a token and included it in your .env file, e.g. GITHUB_TOKEN="some-token". To generate a personal access token, follow the steps in the GitHub documentation, https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token.`
+      `Missing the environment variable GITHUB_TOKEN. If this is happening for local development, ensure you've generated a token and included it in your .env file, e.g. GITHUB_TOKEN="some-token". To generate a personal access token, follow the steps in the GitHub documentation, https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token . For the scope of the token being created, select public_repo only from within the repo scope.`
     )
   }
 

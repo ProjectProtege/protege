@@ -95,10 +95,12 @@ const PostAJob = ({ query }) => {
     <div className='container'>
       {status === 1 && (
         <>
-          <div className='container lg:w-4/5 xl:w-7/12 mb-12 flex flex-col items-center'>
+          <div className='container max-w-screen-xl m-auto align-middle sm:max-w-screen-lg text-center'>
             <h1 className='sr-only'>Post a Job</h1>
-
-            <p className='text-xs text-blue-900 lg:text-center lg:w-3/4  opacity-75'>
+            <h1 className='mb-3 text-2xl text-blue-900'>
+              Invest In a Junior Developer
+            </h1>
+            <p className='text-xs text-blue-900 lg:text-center lg:w-2/3 mx-auto mb-8 opacity-75'>
               Protegé.dev is a curated job board tailored towards junior
               developers. Each listing is reviewed, and approved or denied
               before going live. If your listing is denied, we&apos;ll contact
@@ -108,13 +110,13 @@ const PostAJob = ({ query }) => {
 
           <TierSelect />
 
-          <p className='text-center mb-2 text-teal-900 tracking-wide'>
+          <p className='mb-2 tracking-wide text-center text-teal-900'>
             Select Your Tier
           </p>
         </>
       )}
       {status !== 1 && (
-        <h2 className='text-lg md:text-2xl text-blue-500 text-center leading-snug'>
+        <h2 className='text-lg leading-snug text-center text-blue-500 md:text-2xl'>
           Inexperienced doesn’t mean incapable.
           <br />
           Fill your role with ambition.
@@ -131,7 +133,7 @@ const PostAJob = ({ query }) => {
           <div className='container mx-auto lg:w-3/5'>
             <button
               data-cy='edit-job-button'
-              className='flex items-center mb-3 text-teal-600 text-lg font-bold'
+              className='flex items-center mb-3 text-lg font-bold text-teal-600'
               onClick={() => {
                 router.push('/post-a-job?status=1')
               }}
@@ -145,7 +147,7 @@ const PostAJob = ({ query }) => {
 
             <button
               data-cy='job-posting-approval-button'
-              className='btn btn-blue mt-8'
+              className='mt-8 btn btn-teal'
               onClick={handlePaymentClick}
               type='button'
             >

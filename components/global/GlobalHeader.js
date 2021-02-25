@@ -37,13 +37,13 @@ const GlobalHeader = () => {
     >
       <div className='relative container flex justify-between items-center px-6 xl:px-2'>
         <Link href='/'>
-          <a className='w-2/3 md:w-64'>
+          <a className='w-2/3 md:w-56'>
             <Logo className='w-full' />
           </a>
         </Link>
 
         <button
-          className='absolute right-0  mr-4 lg:hidden h-12 w-12 text-blue-900  p-2'
+          className='absolute right-0 w-12 h-12 p-2 mr-4 text-blue-900 lg:hidden'
           aria-label='navigation'
           onClick={toggleNav}
           type='button'
@@ -58,7 +58,7 @@ const GlobalHeader = () => {
           } lg:hidden fixed w-screen max-w-md top-0 right-0 flex flex-row transform transition duration-150 ease-in-out z-50`}
         >
           <button
-            className='lg:hidden h-12 w-12 text-blue-900 bg-white rounded-full p-1 shadow-md ml-2 mt-8'
+            className='flex items-center justify-center w-16 mt-8 ml-2 text-blue-900 bg-white rounded-full shadow-md h-14 lg:hidden'
             aria-label='navigation'
             onClick={toggleNav}
             type='button'
@@ -66,29 +66,29 @@ const GlobalHeader = () => {
             <CloseIcon />
           </button>
 
-          <ul className='bg-white w-full h-screen shadow-xl ml-2'>
-            <li className='py-4 px-6 border-b border-gray-300'>
+          <ul className='w-full h-screen ml-2 bg-white shadow-xl'>
+            <li className='px-6 py-4 border-b border-gray-300'>
               <NavLink
                 href='/'
-                className='hover:opacity-100 opacity-75'
+                className='opacity-75 hover:opacity-100'
                 activeClassName='opacity-100'
               >
                 Home
               </NavLink>
             </li>
-            <li className='py-4 px-6 border-b border-gray-300'>
+            <li className='px-6 py-4 border-b border-gray-300'>
               <NavLink
                 href='/job-board'
-                className='hover:opacity-100 opacity-75'
+                className='opacity-75 hover:opacity-100'
                 activeClassName='opacity-100'
               >
                 Find a Job
               </NavLink>
             </li>
 
-            <li className='py-4 px-6 border-b border-gray-300'>
+            <li className='px-6 py-4 border-b border-gray-300'>
               <NavLink
-                className='hover:opacity-100 opacity-75'
+                className='opacity-75 hover:opacity-100'
                 href='/learning-resources'
                 activeClassName='opacity-100'
               >
@@ -96,7 +96,7 @@ const GlobalHeader = () => {
               </NavLink>
             </li>
 
-            <li className='py-4 px-6 border-b border-gray-300'>
+            <li className='px-6 py-4 border-b border-gray-300'>
               <NavLink
                 className='opacity-75 hover:opacity-100'
                 href='/get-in-touch'
@@ -106,7 +106,7 @@ const GlobalHeader = () => {
               </NavLink>
             </li>
 
-            <li className='py-4 px-6 border-b border-gray-300'>
+            <li className='px-6 py-4 border-b border-gray-300'>
               <NavLink
                 className='opacity-75 hover:opacity-100'
                 href='/contributors'
@@ -115,7 +115,7 @@ const GlobalHeader = () => {
                 Contributors
               </NavLink>
             </li>
-            <li className='py-4 px-6 border-b border-gray-300'>
+            <li className='px-6 py-4 border-b border-gray-300'>
               <Link href='/post-a-job?status=1'>
                 <a className='btn btn-teal'>Post a Job</a>
               </Link>
@@ -125,27 +125,27 @@ const GlobalHeader = () => {
 
         <nav
           data-cy='desktop-nav'
-          className='hidden lg:block text-blue-900 text-sm uppercase font-semibold z-50'
+          className='z-50 hidden text-sm font-semibold text-blue-900 uppercase lg:block'
           role='navigation'
         >
           <ul className='flex justify-between'>
-            <li className='menu-item quick-filter  pr-4 lg:pr-10 cursor-pointer'>
+            <li className='pr-4 cursor-pointer menu-item quick-filter lg:pr-10'>
               <NavLink
                 href='/job-board'
-                className='opacity-75 py-3 hover:opacity-100 border-b-2 border-transparent'
+                className='py-3 border-b-2 border-transparent opacity-75 hover:opacity-100'
                 activeClassName='border-teal-500'
               >
                 Find a Job
               </NavLink>
               <ul
                 data-cy='quick-filter'
-                className='submenu absolute mt-2 bg-white p-4 shadow-md rounded'
+                className='absolute p-4 mt-2 bg-white rounded shadow-md submenu'
                 aria-label='submenu'
               >
                 <li className='mb-3'>
                   <NavLink
                     href='/job-board?filter=Front-end'
-                    className='submenu-item opacity-75 hover:opacity-100 border-b border-transparent   duration-75 hover:border-teal-500 w-full pb-1'
+                    className='w-full pb-1 duration-75 border-b border-transparent opacity-75 submenu-item hover:opacity-100 hover:border-teal-500'
                   >
                     Front-end
                   </NavLink>
@@ -153,7 +153,7 @@ const GlobalHeader = () => {
                 <li className='mb-3'>
                   <NavLink
                     href='/job-board?filter=Back-end'
-                    className='submenu-item opacity-75 hover:opacity-100 border-b border-transparent   duration-75 hover:border-teal-500 w-full pb-1'
+                    className='w-full pb-1 duration-75 border-b border-transparent opacity-75 submenu-item hover:opacity-100 hover:border-teal-500'
                   >
                     Back-end
                   </NavLink>
@@ -161,7 +161,7 @@ const GlobalHeader = () => {
                 <li>
                   <NavLink
                     href='/job-board?filter=Full-stack'
-                    className='submenu-item opacity-75 hover:opacity-100 border-b border-transparent   duration-75 hover:border-teal-500 w-full pb-1'
+                    className='w-full pb-1 duration-75 border-b border-transparent opacity-75 submenu-item hover:opacity-100 hover:border-teal-500'
                   >
                     Full-stack
                   </NavLink>
@@ -169,10 +169,10 @@ const GlobalHeader = () => {
               </ul>
             </li>
 
-            <li className='menu-item  pr-4 lg:pr-10 opacity-75 hover:opacity-100'>
+            <li className='pr-4 opacity-75 menu-item lg:pr-10 hover:opacity-100'>
               <NavLink
                 href='/learning-resources'
-                className='py-3 border-b-2   duration-75 hover:border-teal-500 '
+                className='py-3 duration-75 border-b-2 hover:border-teal-500 '
                 activeClassName='border-teal-500'
                 inactiveClassName='border-transparent'
               >
@@ -180,10 +180,10 @@ const GlobalHeader = () => {
               </NavLink>
             </li>
 
-            <li className='menu-item  pr-4 lg:pr-10 opacity-75 hover:opacity-100'>
+            <li className='pr-4 opacity-75 menu-item lg:pr-10 hover:opacity-100'>
               <NavLink
                 href='/get-in-touch'
-                className='py-3 border-b-2   duration-75 hover:border-teal-500 '
+                className='py-3 duration-75 border-b-2 hover:border-teal-500 '
                 activeClassName='border-teal-500'
                 inactiveClassName='border-transparent'
               >
@@ -191,10 +191,10 @@ const GlobalHeader = () => {
               </NavLink>
             </li>
 
-            <li className='menu-item  pr-4 lg:pr-10 opacity-75 hover:opacity-100'>
+            <li className='pr-4 opacity-75 menu-item lg:pr-10 hover:opacity-100'>
               <NavLink
                 href='/contributors'
-                className='py-3 border-b-2   duration-75 hover:border-teal-500 '
+                className='py-3 duration-75 border-b-2 hover:border-teal-500 '
                 activeClassName='border-teal-500'
                 inactiveClassName='border-transparent'
               >
