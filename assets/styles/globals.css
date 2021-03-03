@@ -14,10 +14,11 @@
 
 a:focus-visible,
 button:focus-visible,
+button:focus,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  @apply outline-none ring ring-1 ring-teal rounded;
+  @apply outline-none ring-1 ring-teal rounded;
 }
 
 h1,
