@@ -87,7 +87,7 @@ JobCard.propTypes = {
     companyLogo: PropTypes.string.isRequired,
     jobTitle: PropTypes.string.isRequired,
     roleFocus: PropTypes.string.isRequired,
-    postedAt: PropTypes.string.isRequired,
+    postedAt: PropTypes.instanceOf(Date).isRequired,
   }).isRequired,
 }
 
