@@ -5,7 +5,6 @@ import axios from 'axios'
 // import LoadingSpinner from 'components/LoadingSpinner'
 
 // React Hook Forms
-import { DevTool } from '@hookform/devtools'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
@@ -188,7 +187,6 @@ const GetInTouch = () => {
           </div>
         </FormCard>
       </form>
-      {/* <DevTool control={control} /> */}
     </div>
   )
 }
