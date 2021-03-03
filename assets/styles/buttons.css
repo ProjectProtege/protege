@@ -5,11 +5,11 @@
 }
 
 .btn-teal {
-  @apply bg-gradient-to-t from-teal-500 to-teal-200 text-blue-900;
+  @apply bg-gradient-to-r from-teal-500 to-teal-200 text-blue-900;
 }
 
 .btn-blue {
-  @apply bg-gradient-to-t from-blue-900 to-blue-800 text-white;
+  @apply bg-gradient-to-r from-blue-900 to-blue-800 text-white;
 }
 
 .btn:hover {
