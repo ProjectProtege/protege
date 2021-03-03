@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import firebase from 'firebase/app'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -10,12 +8,11 @@ import * as yup from 'yup'
 
 import { useAuth } from '../store/AuthContext'
 
-import FormCard from 'components/global/FormCard'
 import AccountGraphic from '../assets/images/AccountGraphic'
 
-const SignIn = () => {
+const ForgotPassword = () => {
   const router = useRouter()
-  const { signin } = useAuth()
+  const { resetPassword } = useAuth()
   const [loading, setLoading] = useState(true)
 
   const Schema = yup.object().shape({
@@ -23,13 +20,6 @@ const SignIn = () => {
       .string()
       .email('This must be a valid email address.')
       .required('Email is a required field.'),
-    password: yup
-      .string()
-      .required('Password is a required field.')
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/,
-        'Passwords must contain at least 8 characters, one uppercase, one lowercase, one number and one special case character.'
-      ),
   })
 
   const { register, handleSubmit, control, errors } = useForm({
@@ -37,16 +27,14 @@ const SignIn = () => {
     mode: 'onChange',
   })
 
-  const handleSignIn = async (data) => {
+  const handleResetPassword = async (data) => {
     setLoading(true)
     try {
-      await signin(data.email, data.password)
-      router.push('/dashboard')
-      console.log('Form data:', data)
-      console.log('sign in successful')
+      await resetPassword(data.email)
+      router.push('/signin')
       setLoading(false)
     } catch (error) {
-      console.log('Sign In Error:', error)
+      console.log('Reset Password Error:', error)
     }
     setLoading(false)
   }
@@ -55,7 +43,7 @@ const SignIn = () => {
     <div className='max-w-screen-xl py-12 mx-auto md:flex'>
       <div className='mb-12 md:w-1/3 md:mr-24 md:mb-0 md:mt-6'>
         <h1 className='mb-4 text-2xl'>Sign In</h1>
-        <form onSubmit={handleSubmit(handleSignIn)} className='mb-6'>
+        <form onSubmit={handleSubmit(handleResetPassword)} className='mb-6'>
           <div className='flex flex-col mb-3'>
             <label htmlFor='email' className='mb-2 '>
               Email
@@ -72,37 +60,14 @@ const SignIn = () => {
             </p>
           </div>
 
-          <div className='flex flex-col mb-6'>
-            <label htmlFor='password' className='mb-2 '>
-              Password
-            </label>
-            <input
-              id='password'
-              type='password'
-              name='password'
-              className='input'
-              ref={register}
-            />
-            <p className='input-error'>
-              {errors.password && errors.password.message}
-            </p>
-          </div>
-
           <button type='submit' className='w-full btn btn-teal'>
-            Sign In
+            Reset Password
           </button>
         </form>
 
         <div className='text-xs text-center '>
-          Don't have an account? Sign up{' '}
-          <Link href='/sign-up'>
-            <a className='text-teal-700 underline'>here.</a>
-          </Link>
-        </div>
-
-        <div className='text-xs text-center '>
-          <Link href='/forgot-password'>
-            <a className='text-teal-700 underline'>Forgot Password?</a>
+          <Link href='/sign-in'>
+            <a className='text-teal-700 underline'>Back to Sign in.</a>
           </Link>
         </div>
       </div>
@@ -112,4 +77,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default ForgotPassword

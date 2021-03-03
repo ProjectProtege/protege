@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import GlobalLayout from 'layouts/GlobalLayout'
+import { AuthProvider } from 'store/AuthContext'
 import 'assets/styles/globals.css'
 import { useEffect } from 'react'
 import { db, analytics } from 'utils/db'
@@ -53,9 +54,11 @@ function MyApp({ Component, pageProps }) {
   }, [])
 
   return (
-    <GlobalLayout>
-      <Component {...pageProps} />
-    </GlobalLayout>
+    <AuthProvider>
+      <GlobalLayout>
+        <Component {...pageProps} />
+      </GlobalLayout>
+    </AuthProvider>
   )
 }
 
