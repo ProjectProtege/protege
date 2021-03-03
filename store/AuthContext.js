@@ -1,5 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import firebase from 'firebase/app'
+import toast from 'react-hot-toast'
+
 import { auth } from '../utils/db/index'
 
 const AuthContext = React.createContext()
@@ -26,7 +28,7 @@ export function AuthProvider({ children }) {
     try {
       await auth.createUserWithEmailAndPassword(email, password)
     } catch (error) {
-      console.log('AuthContext Error:', error)
+      toast.error('AuthContext Error:', error)
     }
   }
 
@@ -39,10 +41,10 @@ export function AuthProvider({ children }) {
     return auth
       .signInWithPopup(provider)
       .then(() => {
-        console.log('Signed in with Google')
+        toast.success('Signed in with Google')
       })
       .catch(function (error) {
-        console.log('Error Signing in with Google')
+        toast.error('Error Signing in with Google')
       })
   }
 
@@ -51,10 +53,10 @@ export function AuthProvider({ children }) {
     return auth
       .signInWithPopup(provider)
       .then(() => {
-        console.log('Signed in with Facebook')
+        toast.success('Signed in with Facebook')
       })
       .catch(function (error) {
-        console.log('Error Signing in with Facebook')
+        toast.error('Error Signing in with Facebook')
       })
   }
 

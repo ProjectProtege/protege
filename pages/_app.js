@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
-
-import GlobalLayout from 'layouts/GlobalLayout'
-import { AuthProvider } from 'store/AuthContext'
-import 'assets/styles/globals.css'
 import { useEffect } from 'react'
-import { db, analytics } from 'utils/db'
+import { AuthProvider } from 'store/AuthContext'
+import { Toaster } from 'react-hot-toast'
+import GlobalLayout from 'layouts/GlobalLayout'
 import { useJobs } from 'store/jobs_store'
+import { db, analytics } from 'utils/db'
+import 'assets/styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
   const setJobs = useJobs((s) => s.setJobs)
@@ -56,6 +56,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <AuthProvider>
       <GlobalLayout>
+        <Toaster position='top-right' />
         <Component {...pageProps} />
       </GlobalLayout>
     </AuthProvider>

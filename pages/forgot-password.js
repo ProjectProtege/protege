@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import toast from 'react-hot-toast'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -31,10 +32,11 @@ const ForgotPassword = () => {
     setLoading(true)
     try {
       await resetPassword(data.email)
-      router.push('/signin')
+      router.push('/sign-in')
       setLoading(false)
+      toast.success('Success! Check your email for password reset link.')
     } catch (error) {
-      console.log('Reset Password Error:', error)
+      toast.error('Reset Password Error:', error)
     }
     setLoading(false)
   }
@@ -42,7 +44,7 @@ const ForgotPassword = () => {
   return (
     <div className='max-w-screen-xl py-12 mx-auto md:flex'>
       <div className='mb-12 md:w-1/3 md:mr-24 md:mb-0 md:mt-6'>
-        <h1 className='mb-4 text-2xl'>Sign In</h1>
+        <h1 className='mb-4 text-2xl'>Reset Password</h1>
         <form onSubmit={handleSubmit(handleResetPassword)} className='mb-6'>
           <div className='flex flex-col mb-3'>
             <label htmlFor='email' className='mb-2 '>

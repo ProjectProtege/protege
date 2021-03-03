@@ -3,6 +3,7 @@ import firebase from 'firebase/app'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import toast from 'react-hot-toast'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -45,8 +46,9 @@ const SignIn = () => {
       console.log('Form data:', data)
       console.log('sign in successful')
       setLoading(false)
+      toast.success('Sign In Successful.')
     } catch (error) {
-      console.log('Sign In Error:', error)
+      toast.error('Sign In Error:', error)
     }
     setLoading(false)
   }
