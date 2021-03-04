@@ -1,6 +1,7 @@
 const AccountTexts = {
   'en-us': {
     ACCOUNT_CREATE: 'Create an Account',
+    ACCOUNT_SIGN_IN: 'Already have an account? Sign in',
     ACCOUNT_SIGN_UP: "Don't have an account? Sign up",
     EMAIL: 'Email',
     EMAIL_REQUIRED: 'Email is a required field.',
