@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
 import firebase from 'firebase/app'
-import toast from 'react-hot-toast'
 
 import { auth } from '../utils/db/index'
 
@@ -25,11 +24,7 @@ export function AuthProvider({ children }) {
   }, [])
 
   const signup = async (email, password) => {
-    try {
-      await auth.createUserWithEmailAndPassword(email, password)
-    } catch (error) {
-      toast.error('AuthContext Error:', error)
-    }
+    await auth.createUserWithEmailAndPassword(email, password)
   }
 
   function signin(email, password) {
@@ -38,26 +33,17 @@ export function AuthProvider({ children }) {
 
   function signInWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider()
-    return auth
-      .signInWithPopup(provider)
-      .then(() => {
-        toast.success('Signed in with Google')
-      })
-      .catch(function (error) {
-        toast.error('Error Signing in with Google')
-      })
+    return auth.signInWithPopup(provider)
   }
 
   function signInWithFacebook() {
     var provider = new firebase.auth.FacebookAuthProvider()
-    return auth
-      .signInWithPopup(provider)
-      .then(() => {
-        toast.success('Signed in with Facebook')
-      })
-      .catch(function (error) {
-        toast.error('Error Signing in with Facebook')
-      })
+    return auth.signInWithPopup(provider)
+  }
+
+  function signInWithGithub() {
+    var provider = new firebase.auth.GithubAuthProvider()
+    return auth.signInWithPopup(provider)
   }
 
   function signout() {
@@ -82,6 +68,7 @@ export function AuthProvider({ children }) {
     signin,
     signInWithGoogle,
     signInWithFacebook,
+    signInWithGithub,
     signout,
     resetPassword,
     updateEmail,

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import toast from 'react-hot-toast'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -15,6 +14,8 @@ const ForgotPassword = () => {
   const router = useRouter()
   const { resetPassword } = useAuth()
   const [loading, setLoading] = useState(true)
+  const [success, setSuccess] = useState(null)
+  const [error, setError] = useState(null)
 
   const Schema = yup.object().shape({
     email: yup
@@ -32,11 +33,12 @@ const ForgotPassword = () => {
     setLoading(true)
     try {
       await resetPassword(data.email)
-      router.push('/sign-in')
+      setSuccess('Success! Check your email for password reset link.')
+      setError(null)
       setLoading(false)
-      toast.success('Success! Check your email for password reset link.')
     } catch (error) {
-      toast.error('Reset Password Error:', error)
+      setError(error.message)
+      setSuccess(null)
     }
     setLoading(false)
   }
@@ -65,6 +67,18 @@ const ForgotPassword = () => {
           <button type='submit' className='w-full btn btn-teal'>
             Reset Password
           </button>
+
+          {success ? (
+            <p className='p-3 mt-6 text-lg text-center text-teal-900 bg-teal-100 rounded-md'>
+              {success}
+            </p>
+          ) : null}
+
+          {error ? (
+            <p className='p-3 mt-6 text-lg text-center text-red-500 bg-red-100 rounded-md'>
+              {error}
+            </p>
+          ) : null}
         </form>
 
         <div className='text-xs text-center '>

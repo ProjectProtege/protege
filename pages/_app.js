@@ -56,7 +56,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <AuthProvider>
       <GlobalLayout>
-        <Toaster position='top-right' />
+        <Toaster position='top-center' />
         <Component {...pageProps} />
       </GlobalLayout>
     </AuthProvider>

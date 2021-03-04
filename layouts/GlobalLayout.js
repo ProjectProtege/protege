@@ -34,7 +34,7 @@ const GlobalLayout = ({ children }) => {
 }
 
 GlobalLayout.propTypes = {
-  children: PropTypes.shape({}).isRequired,
+  children: PropTypes.node.isRequired,
 }
 
 export default GlobalLayout
