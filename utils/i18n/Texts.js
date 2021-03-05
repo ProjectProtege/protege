@@ -7,7 +7,6 @@ const getText = (type, text) => {
   const cookies = new Cookies()
 
   let locale = cookies.get(AccountTexts['en-us'].LOCALE)
-  console.log(locale)
 
   if (locale === undefined) {
     locale = 'en-us'
