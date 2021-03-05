@@ -21,6 +21,7 @@ const GlobalHeader = () => {
   useEffect(() => {
     const handleRouteChange = () => {
       setIsNavOpen(false)
+      setIsUserMenuOpen(false)
     }
 
     router.events.on('routeChangeStart', handleRouteChange)
@@ -28,7 +29,7 @@ const GlobalHeader = () => {
     return () => {
       router.events.off('routeChangeStart', handleRouteChange)
     }
-  }, [])
+  }, [isUserMenuOpen, currentUser])
 
   const handleSignOut = async () => {
     try {
@@ -40,7 +41,7 @@ const GlobalHeader = () => {
   }
 
   return (
-    <header className='py-3'>
+    <header className='py-3 md:text-xs xl:text-base'>
       <div className='container relative flex items-center justify-between px-6 xl:px-2'>
         <Link href='/'>
           <a className='w-2/3 md:w-56'>
@@ -126,15 +127,58 @@ const GlobalHeader = () => {
                 <a className='btn btn-teal'>Post a Job</a>
               </Link>
             </li>
+            <li className='px-6 py-4'>
+              {currentUser ? (
+                <div className='absolute bottom-0 mb-12 text-lg'>
+                  <span class='text-xs mb-1'>Signed in as:</span>
+                  {/**
+                   * TODO: Swap this out with the user photo
+                   */}
+                  <p className='mb-4 text-lg font-bold'>
+                    {currentUser.displayName}
+                  </p>
+                  <ul>
+                    <li className='mb-2'>
+                      <Link href='/'>
+                        <a>View Profile</a>
+                      </Link>
+                    </li>
+                    <li className='mb-6'>
+                      <Link href='/'>
+                        <a>Edit Profile</a>
+                      </Link>
+                    </li>
+                    <li>
+                      <button className='underline' onClick={handleSignOut}>
+                        Sign Out
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              ) : (
+                <ul className='absolute bottom-0 mb-12'>
+                  <li className='mb-4'>
+                    <Link href='/sign-in'>
+                      <a className='btn btn-teal'>Sign In</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href='/sign-up'>
+                      <a>Sign Up</a>
+                    </Link>
+                  </li>
+                </ul>
+              )}
+            </li>
           </ul>
         </nav>
 
         <nav
           data-cy='desktop-nav'
-          className='z-50 flex flex-col hidden font-semibold text-blue-900 uppercase lg:block'
+          className='z-50 flex-col hidden font-semibold text-blue-900 uppercase lg:block'
           role='navigation'
         >
-          <ul className='flex items-center justify-between mb-4'>
+          <ul className='flex items-center justify-between'>
             <li className='pr-4 cursor-pointer menu-item quick-filter lg:pr-10'>
               <NavLink
                 href='/job-board'
@@ -208,13 +252,28 @@ const GlobalHeader = () => {
               </NavLink>
             </li>
 
-            <li className='pr-4 opacity-75 menu-item hover:opacity-100'>
+            <li className='menu-item'>
               <Link href='/post-a-job?status=1'>
                 <a className='btn btn-teal'>Post a Job</a>
               </Link>
             </li>
+          </ul>
 
-            {currentUser ? (
+          <ul className='absolute right-0 flex items-center mt-3 mr-6 space-x-6 text-xs xl:mt-6 xl:mr-2'>
+            {!currentUser ? (
+              <>
+                <li>
+                  <Link href='/sign-in'>
+                    <a className='opacity-75 hover:opacity-100'>Sign In</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href='/account-select'>
+                    <a className='opacity-75 hover:opacity-100'>Sign Up</a>
+                  </Link>
+                </li>
+              </>
+            ) : (
               <li>
                 <div className='hidden md:block'>
                   <div className='flex items-center'>
@@ -226,7 +285,7 @@ const GlobalHeader = () => {
                         fill='currentColor'
                         width='32px'
                         height='32px'
-                        className='w-8 h-8 cursor-pointer'
+                        className='w-6 h-6 cursor-pointer'
                         onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                       >
                         <path
@@ -239,48 +298,43 @@ const GlobalHeader = () => {
                   </div>
                 </div>
                 {isUserMenuOpen ? (
-                  <div
-                    className='absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5'
-                    role='menu'
-                    aria-orientation='vertical'
-                    aria-labelledby='user-menu'
-                  >
-                    <a
-                      href='#'
-                      className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
-                      role='menuitem'
+                  <>
+                    <div
+                      className='absolute right-0 z-50 p-2 mt-2 overflow-hidden origin-top-right bg-white rounded-md shadow-lg'
+                      role='menu'
+                      aria-orientation='vertical'
+                      aria-labelledby='user-menu'
                     >
-                      Your Profile
-                    </a>
+                      <a
+                        href='#'
+                        className='block px-4 py-1 text-sm text-blue-900 hover:bg-gray-100 whitespace-nowrap'
+                        role='menuitem'
+                      >
+                        Your Profile
+                      </a>
 
-                    <a
-                      href='#'
-                      className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
-                      role='menuitem'
-                      onClick={handleSignOut}
-                    >
-                      Sign out
-                    </a>
-                  </div>
+                      <button
+                        href='#'
+                        className='block w-full px-4 py-1 text-sm font-semibold text-left text-blue-900 uppercase hover:bg-gray-100 whitespace-nowrap'
+                        role='menuitem'
+                        onClick={handleSignOut}
+                      >
+                        Sign out
+                      </button>
+                    </div>
+                    {isUserMenuOpen ? (
+                      <div
+                        class='fixed bg-white opacity-0 inset-0 h-screen w-screen pointer-events-auto'
+                        onClick={() => {
+                          setIsUserMenuOpen(false)
+                        }}
+                      ></div>
+                    ) : null}
+                  </>
                 ) : null}
               </li>
-            ) : null}
+            )}
           </ul>
-
-          {!currentUser ? (
-            <ul className='flex items-center justify-end pr-5 space-x-3 text-xs'>
-              <li>
-                <Link href='/sign-in'>
-                  <a>Sign In</a>
-                </Link>
-              </li>
-              <li>
-                <Link href='/account-select'>
-                  <a>Sign Up</a>
-                </Link>
-              </li>
-            </ul>
-          ) : null}
         </nav>
       </div>
     </header>

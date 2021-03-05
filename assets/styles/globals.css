@@ -10,7 +10,7 @@
 @import url('./helpers.css');
 
 *:hover {
-  @apply transition ease-in-out duration-150;
+  @apply transition duration-150 ease-in-out;
 }
 
 a:focus-visible,
@@ -19,7 +19,7 @@ button:focus,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  @apply outline-none ring-1 ring-teal rounded;
+  @apply rounded outline-none ring ring-teal;
 }
 
 h1,

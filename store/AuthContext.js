@@ -21,7 +21,7 @@ export function AuthProvider({ children }) {
           uid: user.uid,
           displayName: user.displayName,
           email: user.email,
-          emailVerified: user.emailVerified
+          emailVerified: user.emailVerified,
         }
         setCurrentUser(userObject)
       }
@@ -31,24 +31,24 @@ export function AuthProvider({ children }) {
     return unsubscribe
   }, [])
 
-    // auth.onAuthStateChanged((user) => {
-    //   // console.log(user);
-    //   if (user) {
-    //     const userObject = {
-    //       uid: user.uid,
-    //       displayName: user.displayName,
-    //       email: user.email,
-    //       emailVerified: user.emailVerified
-    //     }
-    //     setCurrentUser(userObject)
-    //   }
-    //   setIsLoading(false)
-    // })
+  // auth.onAuthStateChanged((user) => {
+  //   // console.log(user);
+  //   if (user) {
+  //     const userObject = {
+  //       uid: user.uid,
+  //       displayName: user.displayName,
+  //       email: user.email,
+  //       emailVerified: user.emailVerified
+  //     }
+  //     setCurrentUser(userObject)
+  //   }
+  //   setIsLoading(false)
+  // })
 
   const signup = async (name, email, password) => {
     await auth.createUserWithEmailAndPassword(email, password)
     auth.currentUser.updateProfile({
-      displayName: name
+      displayName: name,
     })
   }
 
@@ -72,6 +72,7 @@ export function AuthProvider({ children }) {
   }
 
   function signout() {
+    setCurrentUser()
     return auth.signOut()
   }
 
