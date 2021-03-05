@@ -26,7 +26,7 @@ const Home = () => {
     <div>
       <img
         src='/hero-bg-pattern.png'
-        className='hidden lg:block absolute inset-0 w-full'
+        className='absolute inset-0 hidden w-full lg:block'
         alt=''
         style={{ zIndex: '-999999' }}
       />
@@ -36,8 +36,8 @@ const Home = () => {
       <section className='pt-12'>
         <FindYourNext />
 
-        <div className='flex flex-col mx-auto mt-12 text-center md:w-3/4 text-blue-900 md:tracking-wide lg:w-3/4 xl:w-1/2 md:text-lg'>
-          <h2 className='font-semibold md:text-2xl mb-4'>
+        <div className='flex flex-col mx-auto mt-12 text-center text-blue-900 md:w-3/4 md:tracking-wide lg:w-3/4 xl:w-1/2 md:text-lg'>
+          <h2 className='mb-4 font-semibold md:text-2xl'>
             Remote jobs for junior developers.
           </h2>
 
@@ -52,10 +52,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section
-        className='min-h-screen mx-auto mt-12 mb-32 lg:pt-16'
-        style={{ maxWidth: 680 }}
-      >
+      <section className='max-w-2xl min-h-screen mx-auto mt-12 mb-32 lg:pt-16max-w-2xl'>
         <h2 className='mb-8 text-2xl text-center text-blue-900'>
           Latest Opportunities
         </h2>

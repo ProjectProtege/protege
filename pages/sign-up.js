@@ -7,18 +7,29 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
-import { useAuth } from '../store/AuthContext'
-import getText from '@/utils/i18n/Texts'
+import { useAuth } from 'store/AuthContext'
+import getText from 'utils/i18n/Texts'
 
-import AccountDetails from '../assets/images/AccountDetails'
+import AccountDetails from '@/assets/images/AccountDetails'
 
-const SignUp = () => {
+const SignUp = ({ accountType }) => {
   const router = useRouter()
-  const { signup, signInWithGithub } = useAuth()
+  const { currentUser, signup, signInWithGithub } = useAuth()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  console.log(currentUser)
+  console.log('Account Type:', accountType)
+
+
+  if (currentUser !== undefined) {
+    const displayName = currentUser.displayName;
+    // console.log('If Statement:', currentUser)
+  }
 
   const Schema = yup.object().shape({
+    name: yup
+    .string()
+    .required(getText('ACCOUNT', 'NAME_REQUIRED')),
     email: yup
       .string()
       .email(getText('ACCOUNT', 'EMAIL_VALID'))
@@ -40,9 +51,13 @@ const SignUp = () => {
   const handleSignUp = async (data) => {
     setLoading(true)
     try {
-      await signup(data.email, data.password)
+      await signup(data.name, data.email, data.password)
       firebase.auth().currentUser.sendEmailVerification()
-      router.push('/dashboard')
+      if (accountType === 'company') {
+        router.push(`/company/${displayName}/edit-profile`)
+      } else {
+        router.push(`/candidate/${displayName}/edit-profile`)
+      }
       // console.log('Form data:', data)
       // console.log('sign up successful')
       setLoading(false)
@@ -55,7 +70,7 @@ const SignUp = () => {
   const handleSignInWithGithub = async () => {
     try {
       await signInWithGithub()
-      router.push('/dashboard')
+      router.push('/account-select')
     } catch (error) {
       setError(error.messge)
     }
@@ -73,8 +88,34 @@ const SignUp = () => {
           className='mb-6'
         >
           <div className='flex flex-col mb-3'>
+            {accountType === 'company' ? (
+              <label htmlFor='email' className='mb-2 '>
+                {getText('ACCOUNT', 'COMPANY_NAME')}
+              </label>
+            ) : (
+              <label htmlFor='email' className='mb-2 '>
+                {getText('ACCOUNT', 'NAME')}
+              </label>
+            )}
+            <input
+              id='name'
+              type='text'
+              name='name'
+              className='input'
+              ref={register}
+            />
+            <p className='input-error'>
+              {errors.name && errors.name.message}
+            </p>
+          </div>
+
+          <div className='flex flex-col mb-3'>
             <label htmlFor='email' className='mb-2 '>
-              {getText('ACCOUNT', 'EMAIL')}
+            {accountType === 'company' ? (
+              getText('ACCOUNT', 'EMAIL_COMPANY')
+            ) : (
+              getText('ACCOUNT', 'EMAIL')
+            )}
             </label>
             <input
               id='email'
@@ -146,5 +187,9 @@ const SignUp = () => {
     </div>
   )
 }
+
+SignUp.getInitialProps = ({ query: { accountType } }) => {
+  return { accountType };
+};
 
 export default SignUp
