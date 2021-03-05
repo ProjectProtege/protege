@@ -41,7 +41,7 @@ const GlobalHeader = () => {
   }
 
   return (
-    <header className='py-3 text-xs xl:text-base'>
+    <header className='py-3 md:text-xs xl:text-base'>
       <div className='container relative flex items-center justify-between px-6 xl:px-2'>
         <Link href='/'>
           <a className='w-2/3 md:w-56'>
@@ -126,6 +126,49 @@ const GlobalHeader = () => {
               <Link href='/post-a-job?status=1'>
                 <a className='btn btn-teal'>Post a Job</a>
               </Link>
+            </li>
+            <li className='px-6 py-4'>
+              {currentUser ? (
+                <div className='absolute bottom-0 mb-12 text-lg'>
+                  <span class='text-xs mb-1'>Signed in as:</span>
+                  {/**
+                   * TODO: Swap this out with the user photo
+                   */}
+                  <p className='mb-4 text-lg font-bold'>
+                    {currentUser.displayName}
+                  </p>
+                  <ul>
+                    <li className='mb-2'>
+                      <Link href='/'>
+                        <a>View Profile</a>
+                      </Link>
+                    </li>
+                    <li className='mb-6'>
+                      <Link href='/'>
+                        <a>Edit Profile</a>
+                      </Link>
+                    </li>
+                    <li>
+                      <button className='underline' onClick={handleSignOut}>
+                        Sign Out
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              ) : (
+                <ul className='absolute bottom-0 mb-12'>
+                  <li className='mb-4'>
+                    <Link href='/sign-in'>
+                      <a className='btn btn-teal'>Sign In</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href='/sign-up'>
+                      <a>Sign Up</a>
+                    </Link>
+                  </li>
+                </ul>
+              )}
             </li>
           </ul>
         </nav>
