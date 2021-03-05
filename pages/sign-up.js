@@ -17,19 +17,18 @@ const SignUp = ({ accountType }) => {
   const { currentUser, signup, signInWithGithub } = useAuth()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+
+  const [displayName, setDisplayName] = useState()
   console.log(currentUser)
-  console.log('Account Type:', accountType)
+  // console.log('Account Type:', accountType)
 
-
-  if (currentUser !== undefined) {
-    const displayName = currentUser.displayName;
-    // console.log('If Statement:', currentUser)
-  }
+  // if (currentUser !== undefined) {
+  //   const displayName = currentUser.displayName;
+  //   // console.log('If Statement:', currentUser)
+  // }
 
   const Schema = yup.object().shape({
-    name: yup
-    .string()
-    .required(getText('ACCOUNT', 'NAME_REQUIRED')),
+    name: yup.string().required(getText('ACCOUNT', 'NAME_REQUIRED')),
     email: yup
       .string()
       .email(getText('ACCOUNT', 'EMAIL_VALID'))
@@ -103,19 +102,16 @@ const SignUp = ({ accountType }) => {
               name='name'
               className='input'
               ref={register}
+              onChange={(e) => setDisplayName(e.target.value)}
             />
-            <p className='input-error'>
-              {errors.name && errors.name.message}
-            </p>
+            <p className='input-error'>{errors.name && errors.name.message}</p>
           </div>
 
           <div className='flex flex-col mb-3'>
             <label htmlFor='email' className='mb-2 '>
-            {accountType === 'company' ? (
-              getText('ACCOUNT', 'EMAIL_COMPANY')
-            ) : (
-              getText('ACCOUNT', 'EMAIL')
-            )}
+              {accountType === 'company'
+                ? getText('ACCOUNT', 'EMAIL_COMPANY')
+                : getText('ACCOUNT', 'EMAIL')}
             </label>
             <input
               id='email'
@@ -189,7 +185,7 @@ const SignUp = ({ accountType }) => {
 }
 
 SignUp.getInitialProps = ({ query: { accountType } }) => {
-  return { accountType };
-};
+  return { accountType }
+}
 
 export default SignUp
