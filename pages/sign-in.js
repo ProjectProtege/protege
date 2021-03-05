@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import firebase from 'firebase/app'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 

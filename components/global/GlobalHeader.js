@@ -21,6 +21,7 @@ const GlobalHeader = () => {
   useEffect(() => {
     const handleRouteChange = () => {
       setIsNavOpen(false)
+      setIsUserMenuOpen(false)
     }
 
     router.events.on('routeChangeStart', handleRouteChange)
@@ -28,7 +29,7 @@ const GlobalHeader = () => {
     return () => {
       router.events.off('routeChangeStart', handleRouteChange)
     }
-  }, [])
+  }, [isUserMenuOpen, currentUser])
 
   const handleSignOut = async () => {
     try {
@@ -40,7 +41,7 @@ const GlobalHeader = () => {
   }
 
   return (
-    <header className='py-3'>
+    <header className='py-3 text-xs xl:text-base'>
       <div className='container relative flex items-center justify-between px-6 xl:px-2'>
         <Link href='/'>
           <a className='w-2/3 md:w-56'>
@@ -131,7 +132,7 @@ const GlobalHeader = () => {
 
         <nav
           data-cy='desktop-nav'
-          className='z-50 flex-col hidden font-semibold text-blue-900 uppercase md:block'
+          className='z-50 flex-col hidden font-semibold text-blue-900 uppercase lg:block'
           role='navigation'
         >
           <ul className='flex items-center justify-between'>
@@ -215,17 +216,17 @@ const GlobalHeader = () => {
             </li>
           </ul>
 
-          <ul className='absolute right-0 flex items-center mt-6 mr-2 space-x-3 text-xs'>
+          <ul className='absolute right-0 flex items-center mt-3 mr-6 space-x-6 text-xs xl:mt-6 xl:mr-2'>
             {!currentUser ? (
               <>
                 <li>
                   <Link href='/sign-in'>
-                    <a>Sign In</a>
+                    <a className='opacity-75 hover:opacity-100'>Sign In</a>
                   </Link>
                 </li>
                 <li>
                   <Link href='/account-select'>
-                    <a>Sign Up</a>
+                    <a className='opacity-75 hover:opacity-100'>Sign Up</a>
                   </Link>
                 </li>
               </>
@@ -241,7 +242,7 @@ const GlobalHeader = () => {
                         fill='currentColor'
                         width='32px'
                         height='32px'
-                        className='w-8 h-8 cursor-pointer'
+                        className='w-6 h-6 cursor-pointer'
                         onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                       >
                         <path
@@ -263,24 +264,24 @@ const GlobalHeader = () => {
                     >
                       <a
                         href='#'
-                        className='block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100 whitespace-nowrap'
+                        className='block px-4 py-1 text-sm text-blue-900 hover:bg-gray-100 whitespace-nowrap'
                         role='menuitem'
                       >
                         Your Profile
                       </a>
 
-                      <a
+                      <button
                         href='#'
-                        className='block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100 whitespace-nowrap'
+                        className='block w-full px-4 py-1 text-sm font-semibold text-left text-blue-900 uppercase hover:bg-gray-100 whitespace-nowrap'
                         role='menuitem'
                         onClick={handleSignOut}
                       >
                         Sign out
-                      </a>
+                      </button>
                     </div>
                     {isUserMenuOpen ? (
                       <div
-                        class='fixed bg-white opacity-0 inset-0 h-screen w-screen'
+                        class='fixed bg-white opacity-0 inset-0 h-screen w-screen pointer-events-auto'
                         onClick={() => {
                           setIsUserMenuOpen(false)
                         }}
