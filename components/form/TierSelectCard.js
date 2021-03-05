@@ -15,7 +15,7 @@ const TierSelectCard = ({ children, value }) => {
     <button
       className={`overflow-hidden p-6 md:p-8 shadow rounded text-left md:text-center cursor-pointer transform ease-in-out duration-150 bg-white mx-auto mb-4 grid grid-cols-3 md:grid-cols-1 w-full
       ${
-        route.route === '/post-a-job'
+        route.pathname === '/post-a-job'
           ? 'hover:border-teal-300 hover:scale-107 hover:shadow-md'
           : ''
       }
@@ -28,8 +28,8 @@ const TierSelectCard = ({ children, value }) => {
           tier === value ? 'from-teal-500 to-teal-300' : ''
         }`}
       ></div>
-      {route.route === '/' ? (
-        <div className='hidden absolute bg-error px-4 py-2 z-10 text-white uppercase -rotate-15 transform text-sm font-semibold tracking-widest -ml-1 shadow'>
+      {route.pathname === '/' ? (
+        <div className='absolute z-10 hidden px-4 py-2 -ml-1 text-sm font-semibold tracking-widest text-white uppercase transform shadow bg-error -rotate-15'>
           Free for now!
         </div>
       ) : (
