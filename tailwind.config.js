@@ -87,6 +87,7 @@ module.exports = {
         '6xl': '4rem',
         '10xl': '10rem',
       },
+      scale: ['active', 'hover'],
     },
   },
   variants: {

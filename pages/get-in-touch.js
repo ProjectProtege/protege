@@ -80,12 +80,12 @@ const GetInTouch = () => {
   }
 
   return (
-    <div className='container' style={{ maxWidth: 680 }}>
+    <div className='container max-w-2xl'>
       <h1 className='mb-3 text-2xl text-blue-900'>
         We&apos;d love to hear from you!
       </h1>
 
-      <p className='mb-12 text-blue-700' style={{ maxWidth: 680 }}>
+      <p className='max-w-2xl mb-12 text-blue-700'>
         Feedback? Complaints? Feature requests? Questions? We want to hear them
         all!
         <br />

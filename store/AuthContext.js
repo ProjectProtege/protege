@@ -16,15 +16,40 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       // console.log(user);
-      setCurrentUser(user)
+      if (user) {
+        const userObject = {
+          uid: user.uid,
+          displayName: user.displayName,
+          email: user.email,
+          emailVerified: user.emailVerified
+        }
+        setCurrentUser(userObject)
+      }
       setIsLoading(false)
     })
     // onAuthStateChanged accepts a function as it's only arguement and returns the unsubscribe function below that will unsubscribe to function originally passed to onAuthStateChanged
     return unsubscribe
   }, [])
 
-  const signup = async (email, password) => {
+    // auth.onAuthStateChanged((user) => {
+    //   // console.log(user);
+    //   if (user) {
+    //     const userObject = {
+    //       uid: user.uid,
+    //       displayName: user.displayName,
+    //       email: user.email,
+    //       emailVerified: user.emailVerified
+    //     }
+    //     setCurrentUser(userObject)
+    //   }
+    //   setIsLoading(false)
+    // })
+
+  const signup = async (name, email, password) => {
     await auth.createUserWithEmailAndPassword(email, password)
+    auth.currentUser.updateProfile({
+      displayName: name
+    })
   }
 
   function signin(email, password) {

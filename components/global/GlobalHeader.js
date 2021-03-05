@@ -275,7 +275,7 @@ const GlobalHeader = () => {
                 </Link>
               </li>
               <li>
-                <Link href='/sign-up'>
+                <Link href='/account-select'>
                   <a>Sign Up</a>
                 </Link>
               </li>

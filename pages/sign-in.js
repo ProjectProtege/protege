@@ -11,8 +11,7 @@ import * as yup from 'yup'
 import { useAuth } from '@/store/AuthContext'
 import getText from '@/utils/i18n/Texts'
 
-import FormCard from 'components/global/FormCard'
-import AccountGraphic from '../assets/images/AccountGraphic'
+import AccountGraphic from '@/assets/images/AccountGraphic'
 
 const SignIn = () => {
   const router = useRouter()
@@ -122,7 +121,7 @@ const SignIn = () => {
         <div className='flex flex-col space-y-4'>
           <div className='text-xs text-center'>
             {getText('ACCOUNT', 'ACCOUNT_SIGN_UP')}{' '}
-            <Link href='/sign-up'>
+            <Link href='/account-select'>
               <a className='text-teal-700 underline'>
                 {getText('ACCOUNT', 'HERE')}
               </a>
