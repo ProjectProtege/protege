@@ -131,10 +131,10 @@ const GlobalHeader = () => {
 
         <nav
           data-cy='desktop-nav'
-          className='z-50 flex flex-col hidden font-semibold text-blue-900 uppercase lg:block'
+          className='z-50 flex-col hidden font-semibold text-blue-900 uppercase md:block'
           role='navigation'
         >
-          <ul className='flex items-center justify-between mb-4'>
+          <ul className='flex items-center justify-between'>
             <li className='pr-4 cursor-pointer menu-item quick-filter lg:pr-10'>
               <NavLink
                 href='/job-board'
@@ -208,13 +208,28 @@ const GlobalHeader = () => {
               </NavLink>
             </li>
 
-            <li className='pr-4 opacity-75 menu-item hover:opacity-100'>
+            <li className='menu-item'>
               <Link href='/post-a-job?status=1'>
                 <a className='btn btn-teal'>Post a Job</a>
               </Link>
             </li>
+          </ul>
 
-            {currentUser ? (
+          <ul className='absolute right-0 flex items-center mt-6 mr-2 space-x-3 text-xs'>
+            {!currentUser ? (
+              <>
+                <li>
+                  <Link href='/sign-in'>
+                    <a>Sign In</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href='/account-select'>
+                    <a>Sign Up</a>
+                  </Link>
+                </li>
+              </>
+            ) : (
               <li>
                 <div className='hidden md:block'>
                   <div className='flex items-center'>
@@ -239,48 +254,43 @@ const GlobalHeader = () => {
                   </div>
                 </div>
                 {isUserMenuOpen ? (
-                  <div
-                    className='absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5'
-                    role='menu'
-                    aria-orientation='vertical'
-                    aria-labelledby='user-menu'
-                  >
-                    <a
-                      href='#'
-                      className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
-                      role='menuitem'
+                  <>
+                    <div
+                      className='absolute right-0 z-50 p-2 mt-2 overflow-hidden origin-top-right bg-white rounded-md shadow-lg'
+                      role='menu'
+                      aria-orientation='vertical'
+                      aria-labelledby='user-menu'
                     >
-                      Your Profile
-                    </a>
+                      <a
+                        href='#'
+                        className='block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100 whitespace-nowrap'
+                        role='menuitem'
+                      >
+                        Your Profile
+                      </a>
 
-                    <a
-                      href='#'
-                      className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
-                      role='menuitem'
-                      onClick={handleSignOut}
-                    >
-                      Sign out
-                    </a>
-                  </div>
+                      <a
+                        href='#'
+                        className='block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100 whitespace-nowrap'
+                        role='menuitem'
+                        onClick={handleSignOut}
+                      >
+                        Sign out
+                      </a>
+                    </div>
+                    {isUserMenuOpen ? (
+                      <div
+                        class='fixed bg-white opacity-0 inset-0 h-screen w-screen'
+                        onClick={() => {
+                          setIsUserMenuOpen(false)
+                        }}
+                      ></div>
+                    ) : null}
+                  </>
                 ) : null}
               </li>
-            ) : null}
+            )}
           </ul>
-
-          {!currentUser ? (
-            <ul className='flex items-center justify-end pr-5 space-x-3 text-xs'>
-              <li>
-                <Link href='/sign-in'>
-                  <a>Sign In</a>
-                </Link>
-              </li>
-              <li>
-                <Link href='/account-select'>
-                  <a>Sign Up</a>
-                </Link>
-              </li>
-            </ul>
-          ) : null}
         </nav>
       </div>
     </header>
