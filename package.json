@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "emulators": "firebase emulators:start",
     "build": "next build",
     "start": "next start"
   },
@@ -14,7 +15,9 @@
     "@stripe/stripe-js": "^1.12.1",
     "autoprefixer": "^10.2.1",
     "axios": "^0.21.1",
+    "faker": "^5.4.0",
     "firebase": "^8.2.4",
+    "firebase-admin": "^9.5.0",
     "next": "10.0.5",
     "postcss": "^8.2.4",
     "prop-types": "^15.7.2",

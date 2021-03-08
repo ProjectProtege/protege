@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }) {
           status: entry.status,
           companyHQ: entry.companyHQ,
           companyName: entry.companyName,
-          postedAt: entry.postedAt.toDate(),
+          // postedAt: entry.postedAt.toDate(),
           companyLogo: entry.companyLogo,
           companyDescription: entry.companyDescription,
           howToApply: entry.howToApply,
@@ -49,7 +49,7 @@ function MyApp({ Component, pageProps }) {
 
       setJobs(entriesData)
     } catch (err) {
-      alert('Oops! Something went wrong.')
+      console.log('Oops! Something went wrong:', err.message)
     }
   }, [])
 

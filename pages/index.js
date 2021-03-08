@@ -6,8 +6,6 @@ import FindYourNext from 'components/home/FindYourNext'
 import JobCard from 'components/job/JobCard'
 import TierSelect from 'components/form/TierSelect'
 
-// import { db } from 'firebase/firebase'
-
 const Home = () => {
   const jobs = useJobs((s) => s.jobs)
   const tier = useJobForm((s) => s.tier)
