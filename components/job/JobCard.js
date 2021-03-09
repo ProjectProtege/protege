@@ -3,26 +3,27 @@ import Link from 'next/link'
 import PropTypes from 'prop-types'
 
 const JobCard = ({ job }) => {
-  const months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'June',
-    'July',
-    'Aug',
-    'Sept',
-    'Oct',
-    'Nov',
-    'Dec',
-  ]
+  // const months = [
+  //   'Jan',
+  //   'Feb',
+  //   'Mar',
+  //   'Apr',
+  //   'May',
+  //   'June',
+  //   'July',
+  //   'Aug',
+  //   'Sept',
+  //   'Oct',
+  //   'Nov',
+  //   'Dec',
+  // ]
 
-  const postDate = new Date(job.postedAt)
+  // TODO: Fix blocking error
+  // const postDate = job.postedAt.toDate()
 
-  const formattedPostDate = `${
-    months[postDate.getMonth()]
-  } ${postDate.getDate()}`
+  // const formattedPostDate = `${
+  //   months[postDate.getMonth()]
+  // } ${postDate.getDate()}`
 
   return (
     <Link data-cy={`job-card-link-${job.id}`} href={`/job-board/${job.id}`}>
@@ -71,7 +72,7 @@ const JobCard = ({ job }) => {
               data-cy={`job-card-formatted-date-${job.id}`}
               className='text-lg font-bold text-teal-700'
             >
-              {formattedPostDate}
+              {/* {formattedPostDate} */}
             </p>
           </div>
         </div>
