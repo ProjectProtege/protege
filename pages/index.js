@@ -29,7 +29,9 @@ const Home = () => {
         style={{ zIndex: '-999999' }}
       />
 
-      <h1 className='sr-only'>Home</h1>
+      <h1 className='sr-only'>
+        Protege.dev | Remote jobs for junior developers
+      </h1>
 
       <section className='pt-12'>
         <FindYourNext />
