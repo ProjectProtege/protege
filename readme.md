@@ -2,24 +2,24 @@
 
 Website at: [Protege](https://protege.dev)
 
-Here at Protegé, we use create-react-app on the front-end, Tailwind CSS for styling, and Google Firebase for the back-end.
-Getting a local environment set up is fairly simple.
+Here at Protegé, we use Next.js on the front-end, Tailwind CSS for styling, and Google Firebase for the back-end.
+Follow the steps below to set up your local environment.
 
 ## Setting up locally
 
 1. Fork the latest commit of the `Develop` branch
-2. Run `yarn` or `npm i` to install peer dependencies
+2. Run `yarn` to install peer dependencies
 
 ### Setting up Firebase Emulator
 
 1. Install JDK from [Oracle](https://www.oracle.com/java/technologies/javase-jdk15-downloads.html)
-2. Seed the Firebase emulator database by running `dbseed.js` in the root directory of the folder
 
 ### Running locally
 
 Complete steps in _Setting up locally_ and _Setting up firebase emulator_ first
 
 1. Run `yarn emulators` and `yarn dev` in separate terminals
+2. In a third terminal, seed the Firebase emulator database by running `node dbseed.js` in the root directory of the folder
 
 ## Submitting a PR
 
