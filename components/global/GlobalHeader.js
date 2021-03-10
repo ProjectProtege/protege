@@ -44,7 +44,7 @@ const GlobalHeader = () => {
     <header className='py-3 md:text-xs xl:text-base'>
       <div className='container relative flex items-center justify-between px-6 xl:px-2'>
         <Link href='/'>
-          <a className='w-2/3 md:w-56'>
+          <a className='w-56'>
             <Logo className='w-full' />
           </a>
         </Link>

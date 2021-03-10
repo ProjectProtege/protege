@@ -6,7 +6,7 @@
 
 @import url('./quill-content.css');
 @import url('./buttons.css');
-@import url('./inputs.css');
+@import url('./forms.css');
 @import url('./helpers.css');
 
 *:hover {
