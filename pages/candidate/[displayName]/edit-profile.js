@@ -115,7 +115,7 @@ const CandidateEditProfile = () => {
         <div className='w-full order-1 md:order-2'>
           <div className='flex items-center justify-between mb-6'>
             <h1 className='mb-3 text-lg text-blue-900'>Profile Info</h1>
-            <button className='btn btn-teal'>
+            <button type="submit" className='btn btn-teal'>
               {getText('ACCOUNT', 'SAVE')}
             </button>
           </div>
