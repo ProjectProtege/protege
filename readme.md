@@ -19,22 +19,18 @@ Getting a local environment set up is fairly simple. If something isn't clear, c
     - Name your app and select `Register app`. 
     - Copy your web app's Firebase configuration to the relevant items in the `.env.local.template` file included in this repository.
     - Rename `.env.local.template` to `.env.local`
-1. Seed the Firebase emulator database by running `dbseed.js` in the root directory of this repo. You can do this by running `node dbseed.js`.
 
 ### Building the Site
 1. Run in separate terminals
     - `yarn emulators` - launches the firebase emulator
+        - [http://localhost:4000](http://localhost:4000) for the emulator suite dashboard UI. Authentication and Firestore should both have "On" status
+        - [http://localhost:4000/firestore](http://localhost:4000/firestore) for database UI
     - `yarn dev` - builds the site
+2. Seed the Firebase emulator database by running `dbseed.js` in the root directory of this repo from another terminal session. You can do this by running `node dbseed.js`. This will populate the data with some test data.
+    - [http://localhost:3000/](http://localhost:3000/) to confirm jobs data on home, all jobs types, and individual jobs
 
 ### Notes
 - Not all of our APIs are currently configured for local use. At this time you will not be able to use stripe, newsletter, or file upload features. This readme will be updated to reflect the setup of these features if they become available for local testing.
-
-1. Run `yarn emulators` and `yarn dev` in separate terminal sessions
-    - [http://localhost:4000](http://localhost:4000) for the emulator suite dashboard UI. Authentication and Firestore should both have "On" status
-    - [http://localhost:4000/firestore](http://localhost:4000/firestore) for database UI
-
-3. In a third terminal session, seed the database by running `node dbseed.js` in the root directory of the folder
-    - [http://localhost:3000/](http://localhost:3000/) to confirm jobs data on home, all jobs types, and individual jobs
 
 ## Submitting a PR
 
