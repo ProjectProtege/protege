@@ -1,5 +1,3 @@
-## Website at: https://protege.dev
-
 # Getting started
 
 Here at Protegé, we use create-react-app on the front-end, Tailwind CSS for styling, and Google Firebase for the back-end.
@@ -31,7 +29,14 @@ Getting a local environment set up is fairly simple. If something isn't clear, c
 ### Notes
 - Not all of our APIs are currently configured for local use. At this time you will not be able to use stripe, newsletter, or file upload features. This readme will be updated to reflect the setup of these features if they become available for local testing.
 
-# Submitting a PR
+1. Run `yarn emulators` and `yarn dev` in separate terminal sessions
+    - [http://localhost:4000](http://localhost:4000) for the emulator suite dashboard UI. Authentication and Firestore should both have "On" status
+    - [http://localhost:4000/firestore](http://localhost:4000/firestore) for database UI
+
+3. In a third terminal session, seed the database by running `node dbseed.js` in the root directory of the folder
+    - [http://localhost:3000/](http://localhost:3000/) to confirm jobs data on home, all jobs types, and individual jobs
+
+## Submitting a PR
 
 Before we get too far, we'd like to say thank you for considering contributing to Protegé.dev!
 
@@ -48,8 +53,9 @@ To keep in line with this workflow, your process for submitting a PR should foll
 5. Leave a short message in the PR explaining in slightly more detail what the PR accomplishes.
 
 6. If your PR touches multiple parts, consider adding a bullet list of accomplishments, example below
-    ~~~
-    * adds new component x for data handling
-    * updates component y to use component x
-    * refactors component y for code reusability
-    ~~~
+
+   ```
+   * adds new component x for data handling
+   * updates component y to use component x
+   * refactors component y for code reusability
+   ```
