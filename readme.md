@@ -10,7 +10,8 @@ Getting a local environment set up is fairly simple. If something isn't clear, c
     - use the `Develop` branch as your base for changes
 2. Install JDK from [Oracle](https://www.oracle.com/java/technologies/javase-jdk15-downloads.html)
 3. Install [Node](https://nodejs.org/en/download/)
-4. Run `yarn` to install peer dependencies
+4. Install [firebase-cli](https://firebase.google.com/docs/cli)
+5. Run `yarn` to install peer dependencies
 
 ### Firebase Emulator
 1. Create a firebase project - You must create a firebase project to be able to access the site locally. This is because the project relies on firebase to be emulated for storage and other functions. You can read more about firebase [here](https://firebase.google.com/)
