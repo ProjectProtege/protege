@@ -130,7 +130,7 @@ const GlobalHeader = () => {
             <li className='px-6 py-4'>
               {currentUser ? (
                 <div className='absolute bottom-0 mb-12 text-lg'>
-                  <span class='text-xs mb-1'>Signed in as:</span>
+                  <span className='mb-1 text-xs'>Signed in as:</span>
                   {/**
                    * TODO: Swap this out with the user photo
                    */}
@@ -324,7 +324,7 @@ const GlobalHeader = () => {
                     </div>
                     {isUserMenuOpen ? (
                       <div
-                        class='fixed bg-white opacity-0 inset-0 h-screen w-screen pointer-events-auto'
+                        className='fixed inset-0 w-screen h-screen bg-white opacity-0 pointer-events-auto'
                         onClick={() => {
                           setIsUserMenuOpen(false)
                         }}

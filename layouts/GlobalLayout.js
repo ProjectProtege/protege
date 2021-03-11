@@ -5,10 +5,18 @@ import { useRouter } from 'next/router'
 import GlobalHeader from 'components/global/GlobalHeader'
 import GlobalFooter from 'components/global/GlobalFooter'
 
+import DashboardLayout from 'layouts/DashboardLayout'
+import GeneralLayout from 'layouts/GeneralLayout'
+import { useEffect } from 'react'
+
 const GlobalLayout = ({ children }) => {
   const isNavOpen = useUi((s) => s.isNavOpen)
 
   const location = useRouter().pathname
+
+  useEffect(() => {
+    console.log(location)
+  })
 
   return (
     <div className='flex flex-col flex-1 min-h-screen overflow-x-hidden text-blue-900 contianer'>
@@ -20,9 +28,13 @@ const GlobalLayout = ({ children }) => {
         }`}
       />
 
-      {children}
+      {location.includes('/company/') ? (
+        <DashboardLayout>{children}</DashboardLayout>
+      ) : (
+        <GeneralLayout>{children}</GeneralLayout>
+      )}
 
-      <GlobalFooter />
+      {location.includes('/company/') ? null : <GlobalFooter />}
     </div>
   )
 }

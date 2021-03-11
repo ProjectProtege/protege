@@ -1,16 +1,13 @@
 import PropTypes from 'prop-types'
 
-import GlobalLayout from './GlobalLayout'
 import DashboardBanner from 'assets/images/DashboardBanner'
 
 const DashboardLayout = ({ children }) => {
   return (
-    <GlobalLayout>
-      <div className='mt-8'>
-        <DashboardBanner />
-        {children}
-      </div>
-    </GlobalLayout>
+    <div className='relative pb-24 mt-8 bg-gray-100'>
+      <DashboardBanner />
+      <div className='max-w-4xl px-6 mx-auto lg:px-0'>{children}</div>
+    </div>
   )
 }
 

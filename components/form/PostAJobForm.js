@@ -124,14 +124,14 @@ const PostAJobForm = ({ jobData }) => {
   }
 
   return (
-    <div className='lg:w-3/5 mx-auto'>
+    <div className='mx-auto lg:w-3/5'>
       <form data-cy='post-a-job-form' onSubmit={handleSubmit(handleFormEntry)}>
         <FormCard title='About the Job' className='mb-16'>
           <div className='p-4'>
-            <div className='mb-3 flex flex-col'>
+            <div className='flex flex-col mb-3'>
               <label
                 htmlFor='job-title'
-                className='text-blue-900 font-semibold mb-2'
+                className='mb-2 font-semibold text-blue-900'
               >
                 Job Title
               </label>
@@ -156,15 +156,15 @@ const PostAJobForm = ({ jobData }) => {
             </div>
 
             <div className='md:flex'>
-              <div className='flex flex-col md:w-1/2 mb-3 md:mr-6'>
+              <div className='flex flex-col mb-3 md:w-1/2 md:mr-6'>
                 <label
                   htmlFor='role-focus'
-                  className='text-blue-900 font-semibold'
+                  className='font-semibold text-blue-900'
                 >
                   Role Focus
                 </label>
 
-                <span className='text-blue-500 text-xs mb-2 tracking-tight '>
+                <span className='mb-2 text-xs tracking-tight text-blue-500 '>
                   Frontend, Backend, Full-Stack
                 </span>
 
@@ -197,15 +197,15 @@ const PostAJobForm = ({ jobData }) => {
                 </p>
               </div>
 
-              <div className='flex flex-col md:w-1/2 mb-3'>
+              <div className='flex flex-col mb-3 md:w-1/2'>
                 <label
                   htmlFor='position-type'
-                  className='text-blue-900 font-semibold'
+                  className='font-semibold text-blue-900'
                 >
                   Position Type
                 </label>
 
-                <span className='text-blue-500 text-xs mb-2 tracking-tight '>
+                <span className='mb-2 text-xs tracking-tight text-blue-500 '>
                   Full-time, Part-time, or Contract?
                 </span>
 
@@ -239,7 +239,7 @@ const PostAJobForm = ({ jobData }) => {
             <div className='flex flex-col mb-3'>
               <label
                 htmlFor='job-description'
-                className='text-blue-900 font-semibold mb-2'
+                className='mb-2 font-semibold text-blue-900'
               >
                 Job Description
               </label>
@@ -269,16 +269,16 @@ const PostAJobForm = ({ jobData }) => {
             <div className='flex flex-col'>
               <label
                 htmlFor='how-to-apply'
-                className='text-blue-900 font-semibold'
+                className='font-semibold text-blue-900'
               >
                 How To Apply
               </label>
 
-              <span className='text-blue-500 text-xs tracking-tight mb-2'>
+              <span className='mb-2 text-xs tracking-tight text-blue-500'>
                 Email Address or link to 3rd party application page
               </span>
 
-              <div className='text-sm mb-3 text-blue-600'>
+              <div className='mb-3 text-sm text-blue-600'>
                 <label className='mr-6 text-blue-800'>
                   <input
                     type='radio'
@@ -290,7 +290,7 @@ const PostAJobForm = ({ jobData }) => {
                   />
                   URL
                 </label>
-                <label className=' text-blue-800'>
+                <label className='text-blue-800 '>
                   <input
                     type='radio'
                     name='linkType'
@@ -326,11 +326,11 @@ const PostAJobForm = ({ jobData }) => {
 
         <FormCard title='About the Company'>
           <div className='p-4'>
-            <div className='md:flex mb-3'>
-              <div className='flex flex-col md:w-1/2 md:mr-6 mb-3 md:mb-0'>
+            <div className='mb-3 md:flex'>
+              <div className='flex flex-col mb-3 md:w-1/2 md:mr-6 md:mb-0'>
                 <label
                   htmlFor='companyName'
-                  className='text-blue-900 font-semibold mb-2'
+                  className='mb-2 font-semibold text-blue-900'
                 >
                   Company Name
                 </label>
@@ -357,7 +357,7 @@ const PostAJobForm = ({ jobData }) => {
               <div className='flex flex-col md:w-1/2'>
                 <label
                   htmlFor='companyWebsite'
-                  className='text-blue-900 font-semibold mb-2'
+                  className='mb-2 font-semibold text-blue-900'
                 >
                   Company Website
                 </label>
@@ -384,10 +384,10 @@ const PostAJobForm = ({ jobData }) => {
             </div>
 
             <div className='md:flex'>
-              <div className='flex flex-col md:w-1/2 md:mr-6 mb-3'>
+              <div className='flex flex-col mb-3 md:w-1/2 md:mr-6'>
                 <label
                   htmlFor='companyEmail'
-                  className='text-blue-900 font-semibold mb-2'
+                  className='mb-2 font-semibold text-blue-900'
                 >
                   Email
                 </label>
@@ -410,16 +410,16 @@ const PostAJobForm = ({ jobData }) => {
                 </p>
               </div>
 
-              <div className='flex flex-col md:w-1/2 mb-3'>
+              <div className='flex flex-col mb-3 md:w-1/2'>
                 {/* TODO: Make this work */}
                 <label
                   htmlFor='companyLogo'
-                  className='text-blue-900 font-semibold mb-2'
+                  className='mb-2 font-semibold text-blue-900'
                 >
                   Logo
                 </label>
 
-                <div className='md:grid grid-cols-2 gap-4'>
+                <div className='grid-cols-2 gap-4 md:grid'>
                   <div className='mb-2 md:mb-0'>
                     <SimpleFileUpload
                       apiKey={process.env.SIMPLE_FILE_API_KEY}
@@ -439,7 +439,7 @@ const PostAJobForm = ({ jobData }) => {
 
                   <span
                     data-cy='logo-upload-fileName'
-                    className='text-blue-500 text-xs tracking-tight'
+                    className='text-xs tracking-tight text-blue-500'
                   >
                     Please provide a .jpg, .jpeg, or .png format of your
                     company's logo to be displayed with your job opening
@@ -466,7 +466,7 @@ const PostAJobForm = ({ jobData }) => {
             <div className='flex flex-col mb-3'>
               <label
                 htmlFor='companyDescription'
-                className='text-blue-900 font-semibold mb-2'
+                className='mb-2 font-semibold text-blue-900'
               >
                 Company Description
               </label>
@@ -496,12 +496,12 @@ const PostAJobForm = ({ jobData }) => {
             <div className='flex flex-col'>
               <label
                 htmlFor='companyHQ'
-                className='text-blue-900 font-semibold'
+                className='font-semibold text-blue-900'
               >
                 Company Headquarters
               </label>
 
-              <span className='text-blue-500 text-xs tracking-tight mb-2'>
+              <span className='mb-2 text-xs tracking-tight text-blue-500'>
                 These are remote job listings, but where is your main office?
               </span>
 
@@ -526,7 +526,7 @@ const PostAJobForm = ({ jobData }) => {
         <button
           data-cy='next-step-button'
           type='submit'
-          className='mt-6 btn btn-teal w-32'
+          className='w-32 mt-6 btn btn-teal'
         >
           Next Step
         </button>
