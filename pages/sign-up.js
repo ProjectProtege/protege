@@ -18,7 +18,7 @@ const SignUp = ({ accountType }) => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  const [displayName, setDisplayName] = useState()
+  const [displayName, setDisplayName] = useState("")
 
   const Schema = yup.object().shape({
     name: yup.string().required(getText('ACCOUNT', 'NAME_REQUIRED')),
