@@ -33,8 +33,15 @@ const CompanyEditProfile = ({ jobData }) => {
     // companyLogo: Yup.mixed().required(
     //   'Please provide a .png format image of your company logo'
     // ),
+    companyTimezone: Yup.string().required('Please select a timezone.'),
     companyHQ: Yup.string().required(
       'Please provide a location for your office headquarters.'
+    ),
+    companyTimeframeFrom: Yup.string().required(
+      'Please select a minimum timezone.'
+    ),
+    companyTimeframeTo: Yup.string().required(
+      'Please select a maximum timezone.'
     ),
   })
 
@@ -48,6 +55,8 @@ const CompanyEditProfile = ({ jobData }) => {
       companyEmail: jobData.companyEmail,
       companyDescription: jobData.companyDescription,
       companyHQ: jobData.companyHQ,
+      companyTimeframeFrom: jobData.companyTimeframeFrom,
+      companyTimeframeTo: jobData.companyTimeframeTo,
     },
   })
 
@@ -55,10 +64,17 @@ const CompanyEditProfile = ({ jobData }) => {
     setLogo(url)
   }
 
+  function handleFormEntry(data) {
+    console.log('do the thing')
+  }
+
   console.log(currentUser)
   return (
     <div>
-      <form className='relative z-30 p-8 mt-4 bg-white rounded-lg shadow-md lg:mt-16'>
+      <form
+        className='relative z-30 p-8 mt-4 bg-white rounded-lg shadow-md lg:mt-16'
+        onSubmit={handleSubmit(handleFormEntry)}
+      >
         <div className='mb-3 md:flex'>
           <div className='flex flex-col mb-3 md:w-1/2 md:mr-6 md:mb-0'>
             <label
@@ -179,11 +195,6 @@ const CompanyEditProfile = ({ jobData }) => {
               </span>
             </div>
 
-            {/* <LogoUpload
-                  register={register}
-                  receivingLogo2={receivingLogo2}
-                /> */}
-
             <p
               name='companyLogo'
               component='span'
@@ -225,9 +236,12 @@ const CompanyEditProfile = ({ jobData }) => {
           </p>
         </div>
 
-        <div className='md:flex'>
+        <div className='mb-6 md:flex'>
           <div className='flex flex-col mb-3 md:w-1/2 md:mr-6'>
-            <label htmlFor='role-focus' className='font-semibold text-blue-900'>
+            <label
+              htmlFor='companyTimezone'
+              className='font-semibold text-blue-900'
+            >
               Timezone
             </label>
 
@@ -237,8 +251,8 @@ const CompanyEditProfile = ({ jobData }) => {
 
             <div className='select-wrap'>
               <select
-                id='role-focus'
-                name='roleFocus'
+                id='companyTimezone'
+                name='companyTimezone'
                 ref={register}
                 className='input input-select '
               >
@@ -251,12 +265,12 @@ const CompanyEditProfile = ({ jobData }) => {
             </div>
 
             <p
-              name='roleFocus'
+              name='companyTimezone'
               component='span'
               className='input-error'
               role='alert'
             >
-              {errors.roleFocus && errors.roleFocus.message}
+              {errors.companyTimezone && errors.companyTimezone.message}
             </p>
           </div>
 
@@ -296,8 +310,8 @@ const CompanyEditProfile = ({ jobData }) => {
             Where can your candidates be based out of?
           </span>
 
-          <div className='flex'>
-            <div className='md:w-1/2 md:mr-6'>
+          <div className='md:flex'>
+            <div className='mb-3 md:w-1/2 md:mr-6 md:mb-0'>
               <label
                 htmlFor='timezone-from'
                 className='font-semibold text-blue-900'
@@ -308,7 +322,7 @@ const CompanyEditProfile = ({ jobData }) => {
               <div className='select-wrap'>
                 <select
                   id='timezone-from'
-                  name='roleFocus'
+                  name='companyTimeframeFrom'
                   ref={register}
                   className='input input-select '
                 >
@@ -319,6 +333,16 @@ const CompanyEditProfile = ({ jobData }) => {
                   <option value='UTC-05:00'>UTC-05:00 (New York)</option>
                 </select>
               </div>
+
+              <p
+                name='companyTimeframeFrom'
+                component='span'
+                className='input-error'
+                role='alert'
+              >
+                {errors.companyTimeframeFrom &&
+                  errors.companyTimeframeFrom.message}
+              </p>
             </div>
 
             <div className='md:w-1/2'>
@@ -332,7 +356,7 @@ const CompanyEditProfile = ({ jobData }) => {
               <div className='select-wrap'>
                 <select
                   id='timezone-to'
-                  name='roleFocus'
+                  name='companyTimeframeTo'
                   ref={register}
                   className='input input-select '
                 >
@@ -343,6 +367,15 @@ const CompanyEditProfile = ({ jobData }) => {
                   <option value='UTC-05:00'>UTC-05:00 (New York)</option>
                 </select>
               </div>
+
+              <p
+                name='companyTimeframeTo'
+                component='span'
+                className='input-error'
+                role='alert'
+              >
+                {errors.companyTimeframeTo && errors.companyTimeframeTo.message}
+              </p>
             </div>
           </div>
         </div>
@@ -367,6 +400,9 @@ CompanyEditProfile.propTypes = {
     companyLogo: PropTypes.string,
     companyDescription: PropTypes.string,
     companyHQ: PropTypes.string,
+    companyTimezone: PropTypes.string,
+    companyTimeframeFrom: PropTypes.string,
+    companyTimeframeTo: PropTypes.string,
   }),
 }
 
@@ -378,6 +414,9 @@ CompanyEditProfile.defaultProps = {
     companyLogo: '',
     companyDescription: '',
     companyHQ: '',
+    companyTimezone: '',
+    companyTimeframeFrom: '',
+    companyTimeframeTo: '',
   },
 }
 
