@@ -72,7 +72,7 @@ const CompanyEditProfile = ({ jobData }) => {
   return (
     <div>
       <form
-        className='relative z-30 p-8 mt-4 bg-white rounded-lg shadow-md lg:mt-16'
+        className='relative z-30 p-6 mt-4 bg-white rounded-lg shadow-md md:p-8 lg:mt-16'
         onSubmit={handleSubmit(handleFormEntry)}
       >
         <div className='mb-3 md:flex'>
