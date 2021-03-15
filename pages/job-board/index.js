@@ -8,6 +8,7 @@ import JobCard from '../../components/job/JobCard'
 const JobBoard = () => {
   const router = useRouter()
   const filterParam = router.query
+  const [activeJobs, setActiveJobs] = useState([])
 
   const initialFilterParam = Object.keys(filterParam).length
     ? filterParam.filter
@@ -18,10 +19,25 @@ const JobBoard = () => {
 
   function filteredJobs(jobList, filter) {
     const filtered = jobList.filter((job) => {
-      return job.roleFocus === filter
+      return (
+        job.roleFocus === filter &&
+        job.status !== 'inactive' &&
+        job.paid === true &&
+        job.approved === true
+      )
     })
 
     return filtered
+  }
+
+  function getActiveJobs(jobList) {
+    const active = jobList.filter((job) => {
+      return (
+        job.status !== 'inactive' && job.paid === true && job.approved === true
+      )
+    })
+
+    return active
   }
 
   useEffect(() => {
@@ -31,7 +47,7 @@ const JobBoard = () => {
   return (
     <div className='container '>
       <div className='w-full mx-auto lg:w-3/5'>
-        <div className='flex justify-between items-center mb-6'>
+        <div className='flex items-center justify-between mb-6'>
           <h1 className='mb-6 text-2xl'>
             {jobFilter ? `${jobFilter} Jobs` : 'All Jobs'}
           </h1>
@@ -63,7 +79,7 @@ const JobBoard = () => {
         <div data-cy='job-board-list' className='mx-auto'>
           {!jobFilter && (
             <>
-              {jobs.map((job, i) => (
+              {getActiveJobs(jobs).map((job, i) => (
                 <JobCard key={job.id} job={job} i={i} />
               ))}
             </>
