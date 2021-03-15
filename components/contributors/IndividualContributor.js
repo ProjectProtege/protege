@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import PropTypes from 'prop-types'
+import Image from 'next/image'
 
 const IndividualContributor = ({ contributor }) => {
   const {
@@ -24,17 +25,18 @@ const IndividualContributor = ({ contributor }) => {
   }
 
   return (
-    <div className='relative grid grid-cols-2 gap-6 pl-6 pr-4 py-6 text-center transition duration-150 ease-in-out bg-white rounded-md shadow md:grid-cols-3 md:text-left overflow-hidden'>
-      <div className='-mx-px w-2 h-full absolute left-0 bg-gradient-to-t from-teal-500 to-teal-300'></div>
-      <div className='cols-span-1'>
-        <img
-          className='mx-auto rounded-full'
-          src={avatar_url}
-          alt={`${name || login} avatar`}
-          loading='lazy'
-        />
+    <div className='relative grid grid-cols-3 gap-6 py-6 pl-6 pr-4 overflow-hidden text-center transition duration-150 ease-in-out bg-white rounded-md shadow md:text-left'>
+      <div className='absolute left-0 w-2 h-full -mx-px bg-gradient-to-t from-teal-500 to-teal-300'></div>
+      <div className='items-center col-span-1'>
+        <div className='relative w-20 h-20 mt-1 overflow-hidden rounded-full'>
+          <Image
+            src={avatar_url}
+            alt={`${name || login} avatar`}
+            layout='fill'
+          />
+        </div>
       </div>
-      <div className='flex flex-col items-start justify-center col-span-1 truncate md:col-span-2'>
+      <div className='flex flex-col items-start justify-center col-span-2 truncate'>
         {name ? (
           <span className='text-xl font-semibold text-blue-900 truncate'>
             {name}
