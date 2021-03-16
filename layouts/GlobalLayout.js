@@ -12,6 +12,10 @@ const GlobalLayout = ({ children }) => {
 
   return (
     <div className='flex flex-col flex-1 min-h-screen overflow-x-hidden text-blue-900'>
+      <div className='py-1 text-center text-white bg-red-500' role='alert'>
+        We&apos;re in the process of migrating services to give you a better
+        experience! Check back later if things seem a bit empty here.
+      </div>
       <GlobalHeader />
 
       <div

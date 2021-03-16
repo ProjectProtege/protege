@@ -1,5 +1,5 @@
 module.exports = {
-  purge: [],
+  purge: ['./components/**', './layouts/**', './pages/**', './assests/*'],
   darkMode: false, // or 'media' or 'class'
   theme: {
     container: {
