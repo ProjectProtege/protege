@@ -3,7 +3,6 @@ import { useJobs } from 'store/jobs_store'
 import { useRouter } from 'next/router'
 
 import JobCard from '../../components/job/JobCard'
-// import LoadingSpinner from '../components/LoadingSpinner'
 
 const JobBoard = () => {
   const router = useRouter()
