@@ -55,6 +55,24 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <meta
+          name='description'
+          content='Remote job opportunities for junior developers'
+        />
+        <link rel='apple-touch-icon' href='/protege-logo.png' />
+
+        <meta property='og:title' content='Protege.dev' />
+        <meta
+          property='og:description'
+          content='Remote Jobs for Junior Developers'
+        />
+        <meta property='og:image' content='/og-image.jpg' />
+
+        <meta name='twitter:card' content='summary' />
+        <meta name='twitter:image' content='/og-image.jpg' />
+
+        <title>Protege.dev | Remote Jobs for Junior Developers</title>
         <link rel='shortcut icon' href='/protege-logo.png'></link>
       </Head>
 
