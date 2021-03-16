@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-
+import Head from 'next/head'
 import GlobalLayout from 'layouts/GlobalLayout'
 import 'assets/styles/globals.css'
 import { useEffect } from 'react'
@@ -53,9 +53,15 @@ function MyApp({ Component, pageProps }) {
   }, [])
 
   return (
-    <GlobalLayout>
-      <Component {...pageProps} />
-    </GlobalLayout>
+    <>
+      <Head>
+        <link rel='shortcut icon' href='/protege-logo.png'></link>
+      </Head>
+
+      <GlobalLayout>
+        <Component {...pageProps} />
+      </GlobalLayout>
+    </>
   )
 }
 
