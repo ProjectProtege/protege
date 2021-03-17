@@ -84,6 +84,7 @@ const CompanyEditProfile = ({ jobData }) => {
         .collection('company')
         .doc(uid)
         .set({
+          accountType: 'company',
           companyEmail: data.companyEmail,
           companyLogo: logo,
           companyName: data.companyName,
