@@ -1,18 +1,20 @@
 // React/Next imports
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAuth } from 'store/AuthContext'
+import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import PropTypes from 'prop-types'
 
 // Lib imports
 import firebase from 'firebase/app'
-import { useJobForm } from 'store/job-post_store'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { db } from 'utils/db'
 import { v4 as uuidv4 } from 'uuid'
 import * as Yup from 'yup'
 import 'react-quill/dist/quill.snow.css'
+
+import timezones from 'data/timezones.json'
 
 // Custom component imports
 const SimpleFileUpload = dynamic(() => import('react-simple-file-upload'), {
@@ -21,10 +23,14 @@ const SimpleFileUpload = dynamic(() => import('react-simple-file-upload'), {
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
 const CompanyEditProfile = ({ jobData }) => {
+  const router = useRouter()
   const [logo, setLogo] = useState('')
   const { currentUser } = useAuth()
+  const [timezonesArray, setTimezonesArray] = useState([])
 
-  const setForm = useJobForm((s) => s.setForm)
+  useEffect(() => {
+    setTimezonesArray(timezones)
+  })
 
   const Schema = Yup.object().shape({
     companyName: Yup.string().required('Please enter a company name.'),
@@ -73,20 +79,27 @@ const CompanyEditProfile = ({ jobData }) => {
 
     const uid = uuidv4()
 
-    await db.collection('company').doc(uid).set({
-      companyEmail: data.companyEmail,
-      companyLogo: logo,
-      companyName: data.companyName,
-      companyWebsite: data.companyWebsite,
-      companyHQ: data.companyHQ,
-      companyDescription: data.companyDescription,
-      companyTimeframeFrom: data.companyTimeframeFrom,
-      companyTimeframeTo: data.companyTimeframeTo,
-      companyTimezone: data.companyTimezone,
-    })
+    try {
+      await db
+        .collection('company')
+        .doc(uid)
+        .set({
+          companyEmail: data.companyEmail,
+          companyLogo: logo,
+          companyName: data.companyName,
+          companyWebsite: data.companyWebsite,
+          companyHQ: data.companyHQ,
+          companyDescription: data.companyDescription,
+          companyTimeframeFrom: data.companyTimeframeFrom,
+          companyTimeframeTo: data.companyTimeframeTo,
+          companyTimezone: data.companyTimezone,
+        })
+        .then(router.push(`/company/${currentUser.displayName}`))
+    } catch {
+      alert("Oops! Something went wrong. That's our bad.")
+    }
   }
 
-  console.log(currentUser)
   return (
     <div>
       <form
@@ -278,7 +291,13 @@ const CompanyEditProfile = ({ jobData }) => {
                   Select One...
                 </option>
 
-                <option value='UTC-05:00'>UTC-05:00 (New York)</option>
+                {timezonesArray.map((timezone) => {
+                  return (
+                    <option value={timezone.text} className='text-gray-300'>
+                      {timezone.text}
+                    </option>
+                  )
+                })}
               </select>
             </div>
 
@@ -348,7 +367,13 @@ const CompanyEditProfile = ({ jobData }) => {
                     Select One...
                   </option>
 
-                  <option value='UTC-05:00'>UTC-05:00 (New York)</option>
+                  {timezonesArray.map((timezone) => {
+                    return (
+                      <option value={timezone.text} className='text-gray-300'>
+                        {timezone.text}
+                      </option>
+                    )
+                  })}
                 </select>
               </div>
 
@@ -382,7 +407,13 @@ const CompanyEditProfile = ({ jobData }) => {
                     Select One...
                   </option>
 
-                  <option value='UTC-05:00'>UTC-05:00 (New York)</option>
+                  {timezonesArray.map((timezone) => {
+                    return (
+                      <option value={timezone.text} className='text-gray-300'>
+                        {timezone.text}
+                      </option>
+                    )
+                  })}
                 </select>
               </div>
 
@@ -422,6 +453,7 @@ CompanyEditProfile.propTypes = {
     companyTimeframeFrom: PropTypes.string,
     companyTimeframeTo: PropTypes.string,
   }),
+  timezones: PropTypes.arrayOf({}).isRequired,
 }
 
 CompanyEditProfile.defaultProps = {
