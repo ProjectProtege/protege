@@ -5,9 +5,12 @@ import dynamic from 'next/dynamic'
 import PropTypes from 'prop-types'
 
 // Lib imports
+import firebase from 'firebase/app'
 import { useJobForm } from 'store/job-post_store'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { db } from 'utils/db'
+import { v4 as uuidv4 } from 'uuid'
 import * as Yup from 'yup'
 import 'react-quill/dist/quill.snow.css'
 
@@ -57,6 +60,7 @@ const CompanyEditProfile = ({ jobData }) => {
       companyHQ: jobData.companyHQ,
       companyTimeframeFrom: jobData.companyTimeframeFrom,
       companyTimeframeTo: jobData.companyTimeframeTo,
+      companyTimezone: jobData.companyTimezone,
     },
   })
 
@@ -64,8 +68,22 @@ const CompanyEditProfile = ({ jobData }) => {
     setLogo(url)
   }
 
-  function handleFormEntry(data) {
-    console.log('do the thing')
+  async function handleFormEntry(data) {
+    const postDate = firebase.firestore.Timestamp.fromDate(new Date())
+
+    const uid = uuidv4()
+
+    await db.collection('company').doc(uid).set({
+      companyEmail: data.companyEmail,
+      companyLogo: logo,
+      companyName: data.companyName,
+      companyWebsite: data.companyWebsite,
+      companyHQ: data.companyHQ,
+      companyDescription: data.companyDescription,
+      companyTimeframeFrom: data.companyTimeframeFrom,
+      companyTimeframeTo: data.companyTimeframeTo,
+      companyTimezone: data.companyTimezone,
+    })
   }
 
   console.log(currentUser)
