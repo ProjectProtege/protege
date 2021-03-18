@@ -259,7 +259,7 @@ const GlobalHeader = () => {
             </li>
           </ul>
 
-          <ul className='absolute right-0 flex items-center mt-3 mr-6 space-x-6 text-xs xl:mt-6 xl:mr-2'>
+          <ul className='absolute right-0 flex items-center mt-4 mr-6 space-x-6 text-xs xl:mr-2'>
             {!currentUser ? (
               <>
                 <li>
