@@ -41,8 +41,6 @@ const SignIn = () => {
     try {
       await signin(data.email, data.password)
       router.push('/dashboard')
-      // console.log('Form data:', data)
-      // console.log('sign in successful')
       setLoading(false)
     } catch (error) {
       setError(error.message)

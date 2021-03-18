@@ -17,8 +17,12 @@ const CompanyProfileMenu = () => {
     }
   }
 
+  const deleteAccount = () => {
+    console.log('delete')
+  }
+
   return (
-    <div className='relative flex flex-col order-2 p-6 space-y-4 bg-white rounded-md shadow-md md:w-1/5 md:order-1'>
+    <div className='relative flex flex-col order-2 p-6 space-y-4 bg-white rounded-md shadow-md md:order-1'>
       <div className='relative -ml-3' style={{ width: '106px' }}>
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -79,7 +83,12 @@ const CompanyProfileMenu = () => {
         >
           {getText('ACCOUNT', 'SIGN_OUT')}
         </li>
-        <li className='text-red-500'>{getText('ACCOUNT', 'DELETE_ACCOUNT')}</li>
+        <li
+          className='text-red-500 opacity-75 cursor-pointer hover:opacity-100'
+          onClick={deleteAccount}
+        >
+          {getText('ACCOUNT', 'DELETE_ACCOUNT')}
+        </li>
       </ul>
     </div>
   )

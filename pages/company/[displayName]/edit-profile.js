@@ -22,7 +22,7 @@ const SimpleFileUpload = dynamic(() => import('react-simple-file-upload'), {
 })
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
-const CompanyEditProfile = ({ jobData }) => {
+const CompanyEditProfile = ({ companyData }) => {
   const router = useRouter()
   const [logo, setLogo] = useState('')
   const { currentUser } = useAuth()
@@ -58,15 +58,19 @@ const CompanyEditProfile = ({ jobData }) => {
     resolver: yupResolver(Schema),
     mode: 'onChange',
     defaultValues: {
-      companyName: jobData.companyName,
-      companyLogo: jobData.companyLogo,
-      companyWebsite: jobData.companyWebsite,
-      companyEmail: jobData.companyEmail,
-      companyDescription: jobData.companyDescription,
-      companyHQ: jobData.companyHQ,
-      companyTimeframeFrom: jobData.companyTimeframeFrom,
-      companyTimeframeTo: jobData.companyTimeframeTo,
-      companyTimezone: jobData.companyTimezone,
+      companyName: currentUser.displayName
+        ? currentUser.displayName
+        : companyData.companyName,
+      companyLogo: companyData.companyLogo,
+      companyWebsite: companyData.companyWebsite,
+      companyEmail: currentUser.email
+        ? currentUser.email
+        : companyData.companyEmail,
+      companyDescription: companyData.companyDescription,
+      companyHQ: companyData.companyHQ,
+      companyTimeframeFrom: companyData.companyTimeframeFrom,
+      companyTimeframeTo: companyData.companyTimeframeTo,
+      companyTimezone: companyData.companyTimezone,
     },
   })
 
@@ -292,9 +296,13 @@ const CompanyEditProfile = ({ jobData }) => {
                   Select One...
                 </option>
 
-                {timezonesArray.map((timezone) => {
+                {timezonesArray.map((timezone, index) => {
                   return (
-                    <option value={timezone.text} className='text-gray-300'>
+                    <option
+                      key={index}
+                      value={timezone.text}
+                      className='text-gray-300'
+                    >
                       {timezone.text}
                     </option>
                   )
@@ -368,9 +376,13 @@ const CompanyEditProfile = ({ jobData }) => {
                     Select One...
                   </option>
 
-                  {timezonesArray.map((timezone) => {
+                  {timezonesArray.map((timezone, index) => {
                     return (
-                      <option value={timezone.text} className='text-gray-300'>
+                      <option
+                        key={index}
+                        value={timezone.text}
+                        className='text-gray-300'
+                      >
                         {timezone.text}
                       </option>
                     )
@@ -408,9 +420,13 @@ const CompanyEditProfile = ({ jobData }) => {
                     Select One...
                   </option>
 
-                  {timezonesArray.map((timezone) => {
+                  {timezonesArray.map((timezone, index) => {
                     return (
-                      <option value={timezone.text} className='text-gray-300'>
+                      <option
+                        key={index}
+                        value={timezone.text}
+                        className='text-gray-300'
+                      >
                         {timezone.text}
                       </option>
                     )
@@ -443,7 +459,7 @@ const CompanyEditProfile = ({ jobData }) => {
 }
 
 CompanyEditProfile.propTypes = {
-  jobData: PropTypes.shape({
+  companyData: PropTypes.shape({
     companyName: PropTypes.string,
     companyWebsite: PropTypes.string,
     companyEmail: PropTypes.string,
@@ -454,11 +470,11 @@ CompanyEditProfile.propTypes = {
     companyTimeframeFrom: PropTypes.string,
     companyTimeframeTo: PropTypes.string,
   }),
-  timezones: PropTypes.arrayOf({}).isRequired,
+  timezones: PropTypes.shape({}),
 }
 
 CompanyEditProfile.defaultProps = {
-  jobData: {
+  companyData: {
     companyName: '',
     companyWebsite: '',
     companyEmail: '',
@@ -469,6 +485,7 @@ CompanyEditProfile.defaultProps = {
     companyTimeframeFrom: '',
     companyTimeframeTo: '',
   },
+  timezones: {},
 }
 
 export default CompanyEditProfile

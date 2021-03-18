@@ -3,6 +3,8 @@ import firebase from 'firebase/app'
 
 import { auth } from '../utils/db/index'
 
+import { useAccountType } from 'store/account-type_store'
+
 const AuthContext = React.createContext()
 
 export function useAuth() {
@@ -10,12 +12,12 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
+  const accountType = useAccountType((s) => s.accountType)
   const [currentUser, setCurrentUser] = useState()
   const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      // console.log(user);
+  useEffect(async () => {
+    const unsubscribe = await auth.onAuthStateChanged((user) => {
       if (user) {
         const userObject = {
           uid: user.uid,
@@ -32,7 +34,6 @@ export function AuthProvider({ children }) {
   }, [])
 
   // auth.onAuthStateChanged((user) => {
-  //   // console.log(user);
   //   if (user) {
   //     const userObject = {
   //       uid: user.uid,
@@ -46,6 +47,7 @@ export function AuthProvider({ children }) {
   // })
 
   const signup = async (name, email, password) => {
+    console.log('name', name)
     await auth.createUserWithEmailAndPassword(email, password)
     auth.currentUser.updateProfile({
       displayName: name,

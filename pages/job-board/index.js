@@ -18,7 +18,12 @@ const JobBoard = () => {
 
   function filteredJobs(jobList, filter) {
     const filtered = jobList.filter((job) => {
-      return job.roleFocus === filter
+      return (
+        job.roleFocus === filter &&
+        job.status !== 'inactive' &&
+        job.paid === true &&
+        job.approved === true
+      )
     })
 
     return filtered
@@ -31,7 +36,7 @@ const JobBoard = () => {
   return (
     <div className='container '>
       <div className='w-full mx-auto lg:w-3/5'>
-        <div className='flex justify-between items-center mb-6'>
+        <div className='flex items-center justify-between mb-6'>
           <h1 className='mb-6 text-2xl'>
             {jobFilter ? `${jobFilter} Jobs` : 'All Jobs'}
           </h1>

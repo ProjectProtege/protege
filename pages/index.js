@@ -33,7 +33,7 @@ const Home = () => {
         Protege.dev | Remote jobs for junior developers
       </h1>
 
-      <section className='pt-12'>
+      <section>
         <FindYourNext />
 
         <div className='flex flex-col mx-auto mt-12 text-center text-blue-900 md:w-3/4 md:tracking-wide lg:w-3/4 xl:w-1/2 md:text-lg'>

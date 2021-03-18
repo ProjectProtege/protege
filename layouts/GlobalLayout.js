@@ -14,10 +14,6 @@ const GlobalLayout = ({ children }) => {
 
   const location = useRouter().pathname
 
-  useEffect(() => {
-    console.log(location)
-  })
-
   return (
     <div className='flex flex-col flex-1 min-h-screen overflow-x-hidden text-blue-900 contianer'>
       <GlobalHeader />
