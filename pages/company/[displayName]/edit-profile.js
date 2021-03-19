@@ -58,19 +58,15 @@ const CompanyEditProfile = ({ companyData }) => {
     resolver: yupResolver(Schema),
     mode: 'onChange',
     defaultValues: {
-      companyName: currentUser.displayName
-        ? currentUser.displayName
-        : companyData.companyName,
-      companyLogo: companyData.companyLogo,
-      companyWebsite: companyData.companyWebsite,
-      companyEmail: currentUser.email
-        ? currentUser.email
-        : companyData.companyEmail,
-      companyDescription: companyData.companyDescription,
-      companyHQ: companyData.companyHQ,
-      companyTimeframeFrom: companyData.companyTimeframeFrom,
-      companyTimeframeTo: companyData.companyTimeframeTo,
-      companyTimezone: companyData.companyTimezone,
+      companyName: currentUser.displayName ? currentUser.displayName : '',
+      companyLogo: '',
+      companyWebsite: '',
+      companyEmail: currentUser.email ? currentUser.email : '',
+      companyDescription: '',
+      companyHQ: '',
+      companyTimeframeFrom: '',
+      companyTimeframeTo: '',
+      companyTimezone: '',
     },
   })
 
