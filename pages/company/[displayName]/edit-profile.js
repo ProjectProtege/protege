@@ -28,6 +28,8 @@ const CompanyEditProfile = ({ companyData }) => {
   const { currentUser } = useAuth()
   const [timezonesArray, setTimezonesArray] = useState([])
 
+  const displayName = router.query.displayName
+
   useEffect(() => {
     setTimezonesArray(timezones)
   })
@@ -58,7 +60,7 @@ const CompanyEditProfile = ({ companyData }) => {
     resolver: yupResolver(Schema),
     mode: 'onChange',
     defaultValues: {
-      companyName: currentUser.displayName ? currentUser.displayName : '',
+      companyName: displayName,
       companyLogo: '',
       companyWebsite: '',
       companyEmail: currentUser.email ? currentUser.email : '',
