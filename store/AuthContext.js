@@ -24,6 +24,7 @@ export function AuthProvider({ children }) {
           displayName: user.displayName,
           email: user.email,
           emailVerified: user.emailVerified,
+          accountType: user.photoURL,
         }
         setCurrentUser(userObject)
       }
@@ -46,12 +47,21 @@ export function AuthProvider({ children }) {
   //   setIsLoading(false)
   // })
 
-  const signup = async (name, email, password) => {
-    console.log('name', name)
-    await auth.createUserWithEmailAndPassword(email, password)
-    auth.currentUser.updateProfile({
-      displayName: name,
-    })
+  const signup = async (name, email, password, accountType) => {
+    const user = await auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((user) => {
+        if (user) {
+          updateUserProfile({
+            displayName: name,
+            photoURL: accountType,
+          })
+        }
+      })
+  }
+
+  function updateUserProfile(data) {
+    return auth.currentUser.updateProfile(data)
   }
 
   function signin(email, password) {
