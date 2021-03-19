@@ -40,7 +40,11 @@ const SignIn = () => {
     setLoading(true)
     try {
       await signin(data.email, data.password)
-      router.push('/dashboard')
+      if (accountType === 'company') {
+        router.push(`/company/${displayName}/dashboard`)
+      } else {
+        router.push(`/candidate/${displayName}/dashboard`)
+      }
       // console.log('Form data:', data)
       // console.log('sign in successful')
       setLoading(false)
@@ -145,6 +149,10 @@ const SignIn = () => {
       <AccountGraphic className='md:w-2/3' />
     </div>
   )
+}
+
+SignIn.getInitialProps = ({ query: { accountType } }) => {
+  return { accountType }
 }
 
 export default SignIn

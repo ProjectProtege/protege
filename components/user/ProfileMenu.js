@@ -3,10 +3,10 @@ import { useAuth } from 'store/AuthContext'
 import getText from 'utils/i18n/Texts'
 
 const ProfileMenu = () => {
-  const { currentUser } = useAuth();
-    // if (currentUser) {
-    const displayNameUrl = currentUser.displayName.split(" ").join('%20')
-  // }
+  const { currentUser } = useAuth()
+  const displayNameUrl = currentUser.displayName.split(' ').join('%20')
+  console.log(currentUser)
+  console.log(displayNameUrl)
 
   const handleSignOut = async () => {
     try {
@@ -18,7 +18,7 @@ const ProfileMenu = () => {
   }
 
   return (
-    <div className='flex flex-col space-y-4 order-2 md:order-1'>
+    <>
       <div className='relative -ml-3' style={{ width: '106px' }}>
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -56,23 +56,27 @@ const ProfileMenu = () => {
       <ul className='flex flex-col space-y-3'>
         <li className='font-bold'>{currentUser.email}</li>
         <li>
-          <NavLink href={`/candidate/${displayNameUrl}/index`} activeClassName="text-teal-500">
+          <NavLink
+            href={`/candidate/${displayNameUrl}/`}
+            activeClassName='text-teal-500'
+          >
             {getText('ACCOUNT', 'VIEW_PROFILE')}
           </NavLink>
         </li>
         <li>
-          <NavLink href={`/candidate/${displayNameUrl}/edit-profile`} className="font-bold" activeClassName="text-teal-500">
+          <NavLink
+            href={`/candidate/${displayNameUrl}/edit-profile`}
+            activeClassName='text-teal-500 font-bold'
+          >
             {getText('ACCOUNT', 'EDIT_PROFILE')}
           </NavLink>
         </li>
         <li className='cursor-pointer' onClick={handleSignOut}>
           {getText('ACCOUNT', 'SIGN_OUT')}
         </li>
-        <li className='text-red-500'>
-          {getText('ACCOUNT', 'DELETE_ACCOUNT')}
-        </li>
+        <li className='text-red-500'>{getText('ACCOUNT', 'DELETE_ACCOUNT')}</li>
       </ul>
-    </div>
+    </>
   )
 }
 
