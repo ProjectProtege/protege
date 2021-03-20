@@ -115,8 +115,8 @@ const JobTemplate = ({ props }) => {
                     <Image
                       data-cy='company-logo'
                       id='companyLogo'
-                      height={100}
-                      width={100}
+                      layout='fill'
+                      objectFit='contain'
                       src={companyLogo}
                       alt={`${companyName} logo`}
                     />

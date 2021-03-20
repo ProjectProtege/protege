@@ -30,15 +30,15 @@ const JobCard = ({ job }) => {
       <a className='flex items-center px-3 py-4 mb-6 overflow-hidden transition duration-150 ease-in-out transform bg-white rounded-md shadow md:mb-12 md:px-6 hover:shadow-md'>
         <div class='absolute bg-gradient-to-t from-teal-500 to-teal-300 left-0 h-full w-1'></div>
         <div
-          className='items-center justify-center hidden overflow-hidden bg-white rounded-full shadow-md md:flex'
+          className='relative items-center justify-center hidden overflow-hidden bg-white rounded-full shadow-md md:flex'
           style={{ width: 75, height: 75 }}
         >
           <Image
             data-cy={`job-card-image-${job.id}`}
             src={job.companyLogo}
             alt={`${job.companyName} Logo`}
-            height={60}
-            width={60}
+            layout='fill'
+            objectFit='contain'
           />
         </div>
 
