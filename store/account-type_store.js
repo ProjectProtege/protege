@@ -1,6 +1,6 @@
 import create from 'zustand'
 
 export const useAccountType = create((set) => ({
-  accountType: (null),
+  accountType: null,
   setAccountType: (accountType) => set({ accountType }),
 }))

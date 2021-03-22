@@ -1,39 +1,30 @@
-import NavLink from 'components/global/NavLink'
-import { useAuth } from 'store/AuthContext'
-import getText from 'utils/i18n/Texts'
+import PropTypes from 'prop-types'
+import Image from 'next/image'
 
-const ProfileMenu = () => {
-  const { currentUser } = useAuth()
-  const displayNameUrl = currentUser.displayName.split(' ').join('%20')
-  console.log(currentUser)
-  console.log(displayNameUrl)
-
-  const handleSignOut = async () => {
-    try {
-      await signout()
-      router.push('/')
-    } catch (error) {
-      console.log('Sign Out Error:', error)
-    }
-  }
-
+const ProfileMenu = ({ avatar, children }) => {
   return (
-    <>
-      <div className='relative -ml-3' style={{ width: '106px' }}>
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          viewBox='0 0 20 20'
-          fill='currentColor'
-          width='106px'
-          height='106px'
-          className='text-gray-400'
-        >
-          <path
-            fillRule='evenodd'
-            d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z'
-            clipRule='evenodd'
-          />
-        </svg>
+    <div className='relative flex flex-col order-2 p-6 space-y-4 bg-white rounded-md shadow-md md:order-1'>
+      <div className='relative -ml-1' style={{ width: '106px' }}>
+        {avatar !== null ? (
+          <div className='relative w-24 h-24 overflow-hidden rounded-full'>
+            <Image src={avatar} layout='fill' objectFit='contain' />
+          </div>
+        ) : (
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            viewBox='0 0 20 20'
+            fill='currentColor'
+            width='106px'
+            height='106px'
+            className='text-gray-400'
+          >
+            <path
+              fillRule='evenodd'
+              d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z'
+              clipRule='evenodd'
+            />
+          </svg>
+        )}
 
         <div className='absolute bottom-0 flex items-center justify-center bg-teal-500 rounded-full right-3 w-7 h-7'>
           <svg
@@ -53,31 +44,17 @@ const ProfileMenu = () => {
         </div>
       </div>
 
-      <ul className='flex flex-col space-y-3'>
-        <li className='font-bold'>{currentUser.email}</li>
-        <li>
-          <NavLink
-            href={`/candidate/${displayNameUrl}/`}
-            activeClassName='text-teal-500'
-          >
-            {getText('ACCOUNT', 'VIEW_PROFILE')}
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            href={`/candidate/${displayNameUrl}/edit-profile`}
-            activeClassName='text-teal-500 font-bold'
-          >
-            {getText('ACCOUNT', 'EDIT_PROFILE')}
-          </NavLink>
-        </li>
-        <li className='cursor-pointer' onClick={handleSignOut}>
-          {getText('ACCOUNT', 'SIGN_OUT')}
-        </li>
-        <li className='text-red-500'>{getText('ACCOUNT', 'DELETE_ACCOUNT')}</li>
-      </ul>
-    </>
+      <ul className='flex flex-col space-y-3'>{children}</ul>
+    </div>
   )
+}
+
+ProfileMenu.proptypes = {
+  avatar: PropTypes.string,
+}
+
+ProfileMenu.defaultProps = {
+  avatar: null,
 }
 
 export default ProfileMenu

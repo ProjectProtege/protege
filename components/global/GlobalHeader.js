@@ -259,7 +259,7 @@ const GlobalHeader = () => {
             </li>
           </ul>
 
-          <ul className='absolute right-0 flex items-center mt-3 mr-6 space-x-6 text-xs xl:mt-6 xl:mr-2'>
+          <ul className='absolute right-0 flex items-center mt-4 mr-6 space-x-6 text-xs xl:mr-2'>
             {!currentUser ? (
               <>
                 <li>
@@ -306,7 +306,7 @@ const GlobalHeader = () => {
                       aria-labelledby='user-menu'
                     >
                       <a
-                        href='#'
+                        href={`/${currentUser.accountType}/${currentUser.displayName}`}
                         className='block px-4 py-1 text-sm text-blue-900 hover:bg-gray-100 whitespace-nowrap'
                         role='menuitem'
                       >

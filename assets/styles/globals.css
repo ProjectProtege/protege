@@ -54,3 +54,7 @@ iframe[title*='Simple File Upload'] {
 iframe[title*='Simple File Upload'] #widget .dropzone {
   @apply border rounded-none !important;
 }
+
+.z-bottom {
+  z-index: -99999;
+}

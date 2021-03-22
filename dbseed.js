@@ -26,7 +26,7 @@ function getSeedData() {
         howToApply: faker.internet.url(),
         jobDescription: faker.lorem.paragraph(),
         jobtitle: faker.name.jobTitle(),
-        paid: faker.random.boolean(),
+        paid: true,
         positionType: faker.random.arrayElement([
           'Full Time',
           'Part Time',

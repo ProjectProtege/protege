@@ -1,12 +1,50 @@
 import PropTypes from 'prop-types'
+import { useAuth } from 'store/AuthContext'
 import { useUi } from 'store/ui_store'
+import { useProfileInfo } from 'store/profile_info'
 import { useRouter } from 'next/router'
+import { auth, db } from '../utils/db/index'
 
 import GlobalHeader from 'components/global/GlobalHeader'
 import GlobalFooter from 'components/global/GlobalFooter'
 
+import DashboardLayout from 'layouts/DashboardLayout'
+import GeneralLayout from 'layouts/GeneralLayout'
+import { useEffect } from 'react'
+
 const GlobalLayout = ({ children }) => {
   const isNavOpen = useUi((s) => s.isNavOpen)
+  const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
+  const { currentUser } = useAuth()
+
+  useEffect(async () => {
+    if (currentUser !== null) {
+      const userProfileInfo = await db
+        .collection(currentUser.accountType)
+        .doc(currentUser.uid)
+        .get()
+        .then((doc) => {
+          console.log(doc.data())
+          const entry = doc.data()
+          if (doc.exists) {
+            return {
+              accountType: entry.accountType,
+              companyDescription: entry.companyDescription,
+              companyEmail: entry.companyEmail,
+              companyHQ: entry.companyHQ,
+              companyLogo: entry.companyLogo,
+              companyName: entry.companyName,
+              companyTimeframeFrom: entry.companyTimeframeFrom,
+              companyTimeframeTo: entry.companyTimeframeTo,
+              companyTimezone: entry.companyTimezone,
+              companyWebsite: entry.companyWebsite,
+              userUid: entry.userUid,
+            }
+          }
+        })
+      setProfileInfo(userProfileInfo)
+    }
+  }, [])
 
   const location = useRouter().pathname
 
@@ -20,15 +58,13 @@ const GlobalLayout = ({ children }) => {
         }`}
       />
 
-      <main
-        className={`container flex-grow px-6 xl:px-0 ${
-          location !== '/' ? 'mt-12' : ''
-        }`}
-      >
-        {children}
-      </main>
+      {location.includes('/company/') ? (
+        <DashboardLayout>{children}</DashboardLayout>
+      ) : (
+        <GeneralLayout>{children}</GeneralLayout>
+      )}
 
-      <GlobalFooter />
+      {location.includes('/company/') ? null : <GlobalFooter />}
     </div>
   )
 }
