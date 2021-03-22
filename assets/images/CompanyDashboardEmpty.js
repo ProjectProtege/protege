@@ -8,7 +8,7 @@ const CompanyEmptyDashboard = ({ className }) => {
       xmlns='http://www.w3.org/2000/svg'
       className={className}
     >
-      <g clip-path='url(#clip0)'>
+      <g clipPath='url(#clip0)'>
         <path
           opacity='0.1'
           d='M117.863 257.906C150.233 257.906 176.474 252.933 176.474 246.799C176.474 240.665 150.233 235.692 117.863 235.692C85.4935 235.692 59.2527 240.665 59.2527 246.799C59.2527 252.933 85.4935 257.906 117.863 257.906Z'
@@ -460,9 +460,9 @@ const CompanyEmptyDashboard = ({ className }) => {
           y2='144.303'
           gradientUnits='userSpaceOnUse'
         >
-          <stop stop-color='#808080' stop-opacity='0.25' />
-          <stop offset='0.54' stop-color='#808080' stop-opacity='0.12' />
-          <stop offset='1' stop-color='#808080' stop-opacity='0.1' />
+          <stop stopColor='#808080' stopOpacity='0.25' />
+          <stop offset='0.54' stopColor='#808080' stopOpacity='0.12' />
+          <stop offset='1' stopColor='#808080' stopOpacity='0.1' />
         </linearGradient>
         <clipPath id='clip0'>
           <rect width='336' height='263' fill='white' />
@@ -472,7 +472,7 @@ const CompanyEmptyDashboard = ({ className }) => {
   )
 }
 
-CompanyEmptyDashboard.PropTypes = {
+CompanyEmptyDashboard.propTypes = {
   className: PropTypes.string,
 }
 

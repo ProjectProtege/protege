@@ -1,6 +1,7 @@
 // React/Next imports
 import { useEffect, useState } from 'react'
 import { useAuth } from 'store/AuthContext'
+import { useProfileInfo } from 'store/profile_info'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import PropTypes from 'prop-types'
@@ -27,6 +28,7 @@ const CompanyEditProfile = ({ companyData }) => {
   const [logo, setLogo] = useState('')
   const { currentUser } = useAuth()
   const [timezonesArray, setTimezonesArray] = useState([])
+  const profileInfo = useProfileInfo((s) => s.profileInfo)
 
   const displayName = router.query.displayName
 
@@ -61,14 +63,14 @@ const CompanyEditProfile = ({ companyData }) => {
     mode: 'onChange',
     defaultValues: {
       companyName: displayName,
-      companyLogo: '',
-      companyWebsite: '',
+      companyLogo: profileInfo.companyLogo,
+      companyWebsite: profileInfo.companyWebsite,
       companyEmail: currentUser.email ? currentUser.email : '',
-      companyDescription: '',
-      companyHQ: '',
-      companyTimeframeFrom: '',
-      companyTimeframeTo: '',
-      companyTimezone: '',
+      companyDescription: profileInfo.companyDescription,
+      companyHQ: profileInfo.companyHQ,
+      companyTimeframeFrom: profileInfo.companyTimeframeFrom,
+      companyTimeframeTo: profileInfo.companyTimeframeTo,
+      companyTimezone: profileInfo.companyTimezone,
     },
   })
 
@@ -84,8 +86,8 @@ const CompanyEditProfile = ({ companyData }) => {
     try {
       await db
         .collection('company')
-        .doc(uid)
-        .set({
+        .doc(currentUser.uid)
+        .update({
           accountType: 'company',
           companyEmail: data.companyEmail,
           companyLogo: logo,
@@ -97,7 +99,7 @@ const CompanyEditProfile = ({ companyData }) => {
           companyTimeframeTo: data.companyTimeframeTo,
           companyTimezone: data.companyTimezone,
         })
-        .then(router.push(`/company/${currentUser.displayName}`))
+        .then(router.push(`/company/${displayName}`))
     } catch {
       alert("Oops! Something went wrong. That's our bad.")
     }
@@ -290,9 +292,11 @@ const CompanyEditProfile = ({ companyData }) => {
                 ref={register}
                 className='input input-select '
               >
-                <option value='' className='text-gray-300'>
-                  Select One...
-                </option>
+                {!profileInfo.companyTimezone && (
+                  <option value='' className='text-gray-300'>
+                    Select One...
+                  </option>
+                )}
 
                 {timezonesArray.map((timezone, index) => {
                   return (
@@ -370,9 +374,11 @@ const CompanyEditProfile = ({ companyData }) => {
                   ref={register}
                   className='input input-select '
                 >
-                  <option value='' className='text-gray-300'>
-                    Select One...
-                  </option>
+                  {!profileInfo.companyTimeframeFrom && (
+                    <option value='' className='text-gray-300'>
+                      Select One...
+                    </option>
+                  )}
 
                   {timezonesArray.map((timezone, index) => {
                     return (
@@ -414,9 +420,11 @@ const CompanyEditProfile = ({ companyData }) => {
                   ref={register}
                   className='input input-select '
                 >
-                  <option value='' className='text-gray-300'>
-                    Select One...
-                  </option>
+                  {!profileInfo.companyTimeframeTo && (
+                    <option value='' className='text-gray-300'>
+                      Select One...
+                    </option>
+                  )}
 
                   {timezonesArray.map((timezone, index) => {
                     return (

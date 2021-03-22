@@ -1,15 +1,69 @@
-import CompanyProfileMenu from 'components/user/CompanyProfileMenu'
+import ProfileMenu from 'components/user/ProfileMenu'
 import CompanyDashboardEmpty from 'assets/images/CompanyDashboardEmpty'
+import { useProfileInfo } from 'store/profile_info'
+import NavLink from 'components/global/NavLink'
+import { useAuth } from 'store/AuthContext'
+import getText from 'utils/i18n/Texts'
 
 const CompanyDashboard = () => {
+  const { currentUser } = useAuth()
   const activeListings = null
   const archivedListings = null
+  const profileInfo = useProfileInfo((s) => s.profileInfo)
+
+  const displayNameUrl = currentUser.displayName.split(' ').join('%20')
+
+  const handleSignOut = async () => {
+    try {
+      await signout()
+      router.push('/')
+    } catch (error) {
+      console.log('Sign Out Error:', error)
+    }
+  }
+
+  const deleteAccount = () => {
+    console.log('delete')
+  }
 
   return (
     <div className='grid-cols-5 gap-10 mt-6 md:grid md:mt-12'>
       <h1 className='sr-only'>Dashboard</h1>
       <aside className='col-span-1'>
-        <CompanyProfileMenu />
+        <ProfileMenu avatar={profileInfo.companyLogo}>
+          {' '}
+          <li className='text-lg font-bold'>{profileInfo.companyName}</li>
+          <li>
+            <NavLink
+              href={`/company/${displayNameUrl}/index`}
+              activeClassName='text-teal-500'
+              className='opacity-75 hover:opacity-100'
+            >
+              {getText('ACCOUNT', 'VIEW_PROFILE')}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              href={`/company/${displayNameUrl}/edit-profile`}
+              activeClassName='text-teal-500'
+              className='opacity-75 hover:opacity-100'
+            >
+              {getText('ACCOUNT', 'EDIT_PROFILE')}
+            </NavLink>
+          </li>
+          <li
+            className='opacity-75 cursor-pointer hover:opacity-100'
+            onClick={handleSignOut}
+          >
+            {getText('ACCOUNT', 'SIGN_OUT')}
+          </li>
+          <li
+            className='text-red-500 opacity-75 cursor-pointer hover:opacity-100'
+            onClick={deleteAccount}
+          >
+            {getText('ACCOUNT', 'DELETE_ACCOUNT')}
+          </li>
+        </ProfileMenu>
       </aside>
 
       <section className='relative col-span-4 mt-12 md:mt-32'>

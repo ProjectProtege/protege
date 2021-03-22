@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import firebase from 'firebase/app'
 
 import { auth } from '../utils/db/index'
+import { db } from 'utils/db'
 
 import { useAccountType } from 'store/account-type_store'
 
@@ -13,7 +14,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const accountType = useAccountType((s) => s.accountType)
-  const [currentUser, setCurrentUser] = useState()
+  const [currentUser, setCurrentUser] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(async () => {
@@ -50,11 +51,19 @@ export function AuthProvider({ children }) {
   const signup = async (name, email, password, accountType) => {
     const user = await auth
       .createUserWithEmailAndPassword(email, password)
-      .then((user) => {
-        if (user) {
+      .then(async (userCredential) => {
+        if (userCredential) {
           updateUserProfile({
             displayName: name,
             photoURL: accountType,
+          })
+
+          // Gets the uid for the users account object
+          const uid = userCredential.user.uid
+
+          // Creates document in appropriate collection with matching uid
+          await db.collection(accountType).doc(uid).set({
+            userUid: uid,
           })
         }
       })

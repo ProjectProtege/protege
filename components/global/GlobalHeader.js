@@ -306,7 +306,7 @@ const GlobalHeader = () => {
                       aria-labelledby='user-menu'
                     >
                       <a
-                        href='#'
+                        href={`/${currentUser.accountType}/${currentUser.displayName}`}
                         className='block px-4 py-1 text-sm text-blue-900 hover:bg-gray-100 whitespace-nowrap'
                         role='menuitem'
                       >
