@@ -71,9 +71,9 @@ function MyApp({ Component, pageProps }) {
 
         <meta name='twitter:card' content='summary_large_image' />
         <meta name='twitter:image' content='/og-image.jpg' />
-        <meta property='twitter:title' content='Protegé.dev' />
+        <meta name='twitter:title' content='Protegé.dev' />
         <meta
-          property='twitter:description'
+          name='twitter:description'
           content='Remote Jobs for Junior Developers'
         />
 
