@@ -11,7 +11,13 @@ const CompanyDashboard = () => {
   const archivedListings = null
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
-  const displayNameUrl = currentUser.displayName.split(' ').join('%20')
+  let displayNameUrl
+
+  if (currentUser && currentUser.accounttype === 'candidate') {
+    displayNameUrl = profileInfo.name.split(' ').join('%20')
+  } else if (currentUser.accountType === 'company') {
+    displayNameUrl = profileInfo.companyName.split(' ').join('%20')
+  }
 
   const handleSignOut = async () => {
     try {
@@ -36,7 +42,7 @@ const CompanyDashboard = () => {
           <li>
             <NavLink
               href={`/company/${displayNameUrl}/index`}
-              activeClassName='text-teal-500'
+              activeClassName='text-teal-700 opacity-100'
               className='opacity-75 hover:opacity-100'
             >
               {getText('ACCOUNT', 'VIEW_PROFILE')}
@@ -45,7 +51,7 @@ const CompanyDashboard = () => {
           <li>
             <NavLink
               href={`/company/${displayNameUrl}/edit-profile`}
-              activeClassName='text-teal-500'
+              activeClassName='text-teal-700 opacity-100'
               className='opacity-75 hover:opacity-100'
             >
               {getText('ACCOUNT', 'EDIT_PROFILE')}
