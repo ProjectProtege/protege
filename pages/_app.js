@@ -62,17 +62,22 @@ function MyApp({ Component, pageProps }) {
         />
         <link rel='apple-touch-icon' href='/protege-logo.png' />
 
-        <meta property='og:title' content='Protege.dev' />
+        <meta property='og:title' content='Protegé.dev' />
         <meta
           property='og:description'
           content='Remote Jobs for Junior Developers'
         />
         <meta property='og:image' content='/og-image.jpg' />
 
-        <meta name='twitter:card' content='summary' />
+        <meta name='twitter:card' content='summary_large_image' />
         <meta name='twitter:image' content='/og-image.jpg' />
+        <meta property='twitter:title' content='Protegé.dev' />
+        <meta
+          property='twitter:description'
+          content='Remote Jobs for Junior Developers'
+        />
 
-        <title>Protege.dev | Remote Jobs for Junior Developers</title>
+        <title>Protegé.dev | Remote Jobs for Junior Developers</title>
         <link rel='shortcut icon' href='/protege-logo.png'></link>
       </Head>
 
