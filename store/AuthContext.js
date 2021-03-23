@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import firebase from 'firebase/app'
+import { useRouter } from 'next/router'
 
 import { auth } from '../utils/db/index'
 import { db } from 'utils/db'
@@ -13,6 +14,7 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
+  const router = useRouter()
   const accountType = useAccountType((s) => s.accountType)
   const [currentUser, setCurrentUser] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -73,8 +75,14 @@ export function AuthProvider({ children }) {
     return auth.currentUser.updateProfile(data)
   }
 
-  function signin(email, password) {
-    return auth.signInWithEmailAndPassword(email, password)
+  async function signin(email, password) {
+    const signin = await auth
+      .signInWithEmailAndPassword(email, password)
+      .then((data) => {
+        const user = data.user
+        router.push(`/${user.photoURL}/${user.displayName}/dashboard`)
+      })
+    return signin
   }
 
   function signInWithGoogle() {

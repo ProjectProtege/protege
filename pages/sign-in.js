@@ -13,7 +13,7 @@ import AccountGraphic from '@/assets/images/AccountGraphic'
 
 const SignIn = () => {
   const router = useRouter()
-  const { signin, signInWithGithub } = useAuth()
+  const { currentUser, signin, signInWithGithub } = useAuth()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
@@ -39,9 +39,9 @@ const SignIn = () => {
   const handleSignIn = async (data) => {
     setLoading(true)
     try {
-      await signin(data.email, data.password)
-      router.push('/dashboard')
-      setLoading(false)
+      await signin(data.email, data.password).then(() => {
+        setLoading(false)
+      })
     } catch (error) {
       setError(error.message)
     }
