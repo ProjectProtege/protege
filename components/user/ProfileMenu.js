@@ -1,7 +1,16 @@
 import PropTypes from 'prop-types'
 import Image from 'next/image'
+import getText from 'utils/i18n/Texts'
 
 const ProfileMenu = ({ avatar, children }) => {
+  const handleSignOut = async () => {
+    try {
+      await signout()
+      router.push('/')
+    } catch (error) {
+      console.log('Sign Out Error:', error)
+    }
+  }
   return (
     <div className='relative flex flex-col order-2 p-6 space-y-4 bg-white rounded-md shadow-md md:order-1'>
       <div className='relative -ml-1' style={{ width: '106px' }}>
@@ -44,7 +53,13 @@ const ProfileMenu = ({ avatar, children }) => {
         </div>
       </div>
 
-      <ul className='flex flex-col space-y-3'>{children}</ul>
+      <ul className='flex flex-col space-y-3'>
+        {children}
+        <li className='cursor-pointer' onClick={handleSignOut}>
+          {getText('ACCOUNT', 'SIGN_OUT')}
+        </li>
+        <li className='text-red-500'>{getText('ACCOUNT', 'DELETE_ACCOUNT')}</li>
+      </ul>
     </div>
   )
 }
