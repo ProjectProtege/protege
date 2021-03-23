@@ -7,7 +7,6 @@ import PropTypes from 'prop-types'
 // Lib imports
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { v4 as uuidv4 } from 'uuid'
 import * as Yup from 'yup'
 import 'react-quill/dist/quill.snow.css'
 
