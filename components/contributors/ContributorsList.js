@@ -9,10 +9,12 @@ const ContributorsList = ({ contributors, isFounders }) => {
     <ul
       className={`grid gap-5 ${
         isFounders
-          ? 'md:grid-cols-2'
+          ? 'sm:grid-cols-2 lg:grid-cols-4'
           : 'sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
       }`}
     >
+      {isFounders ? <li className='hidden lg:block'></li> : null}
+
       {contributors
         .filter(({ login }) => login !== 'ImgBotApp')
         .map((contributor) => {
@@ -23,6 +25,8 @@ const ContributorsList = ({ contributors, isFounders }) => {
             </li>
           )
         })}
+
+      {isFounders ? <li className='hidden lg:block'></li> : null}
     </ul>
   )
 }
