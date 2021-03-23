@@ -1,21 +1,24 @@
 // React/Next imports
 import { useState, useEffect } from 'react'
-import { useAuth } from 'store/AuthContext'
-import { useProfileInfo } from 'store/profile_info'
 import { useRouter } from 'next/router'
-import NavLink from 'components/global/NavLink'
+import PropTypes from 'prop-types'
 
 // Lib Imports
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { db } from 'utils/db'
 import * as yup from 'yup'
+
+import { db } from 'utils/db'
+import { useAuth } from 'store/AuthContext'
+import { useProfileInfo } from 'store/profile_info'
+import NavLink from 'components/global/NavLink'
+
 import getText from 'utils/i18n/Texts'
 import ProfileMenu from 'components/user/ProfileMenu'
 
 import timezones from 'data/timezones.json'
 
-const CandidateEditProfile = () => {
+const CandidateEditProfile = ({ candidateData }) => {
   const router = useRouter()
   const { currentUser } = useAuth()
   const [loading, setLoading] = useState(true)
@@ -23,7 +26,10 @@ const CandidateEditProfile = () => {
   const [timezonesArray, setTimezonesArray] = useState([])
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
-  const displayNameUrl = router.query.displayName
+  console.log('Profile Info:', profileInfo)
+  console.log('Current User:', currentUser)
+
+  let displayName = router.query.displayName
 
   useEffect(() => {
     setTimezonesArray(timezones)
@@ -72,7 +78,7 @@ const CandidateEditProfile = () => {
 
   const handleProfileForm = (data) => {
     setLoading(true)
-    db.collection('candidate')
+    db.collection('candidates')
       .doc(currentUser.uid)
       .update({
         accountType: 'candidate',
@@ -94,7 +100,7 @@ const CandidateEditProfile = () => {
       })
       .then(() => {
         console.log('Document successfully written!')
-        router.push(`/candidate/${currentUser.displayName}/dashboard`)
+        router.push(`/candidate/${displayName}/dashboard`)
       })
       .catch((error) => {
         console.error('Error writing document: ', error)
@@ -107,10 +113,10 @@ const CandidateEditProfile = () => {
         <div className='flex flex-col justify-between space-y-6 md:space-x-24 md:space-y-0 md:flex-row'>
           <div className='flex flex-col order-2 space-y-4 md:order-1'>
             <ProfileMenu>
-              <li className='font-bold'>{currentUser.email}</li>
+              <li className='font-bold'>{displayName}</li>
               <li>
                 <NavLink
-                  href={`/candidate/${displayNameUrl}/`}
+                  href={`/candidate/${displayName}/`}
                   activeClassName='text-teal-500'
                 >
                   {getText('ACCOUNT', 'VIEW_PROFILE')}
@@ -118,7 +124,7 @@ const CandidateEditProfile = () => {
               </li>
               <li>
                 <NavLink
-                  href={`/candidate/${displayNameUrl}/edit-profile`}
+                  href={`/candidate/${displayName}/edit-profile`}
                   activeClassName='text-teal-500 font-bold'
                 >
                   {getText('ACCOUNT', 'EDIT_PROFILE')}
@@ -445,6 +451,46 @@ const CandidateEditProfile = () => {
       </div>
     </>
   )
+}
+
+CandidateEditProfile.propTypes = {
+  candidateData: PropTypes.shape({
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    email: PropTypes.string,
+    portfolio: PropTypes.string,
+    social_dev: PropTypes.string,
+    social_github: PropTypes.string,
+    social_linkedin: PropTypes.string,
+    social_twitter: PropTypes.string,
+    hideInfo: PropTypes.boolean,
+    timezone: PropTypes.string,
+    timeframe_from: PropTypes.string,
+    timeframe_to: PropTypes.string,
+    question1: PropTypes.string,
+    question2: PropTypes.string,
+    question3: PropTypes.string,
+  }),
+}
+
+CandidateEditProfile.defaultProps = {
+  candidateData: {
+    firstName: '',
+    lastName: '',
+    email: '',
+    portfolio: '',
+    social_dev: '',
+    social_github: '',
+    social_linkedin: '',
+    social_twitter: '',
+    hideInfo: false,
+    timezone: '',
+    timeframe_from: '',
+    timeframe_to: '',
+    question1: '',
+    question2: '',
+    question3: '',
+  },
 }
 
 export default CandidateEditProfile

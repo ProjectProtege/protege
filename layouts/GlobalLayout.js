@@ -20,7 +20,9 @@ const GlobalLayout = ({ children }) => {
   useEffect(async () => {
     if (currentUser !== null) {
       const userProfileInfo = await db
-        .collection(currentUser.accountType)
+        .collection(
+          currentUser.accountType === 'candidate' ? 'candidates' : 'companies'
+        )
         .doc(currentUser.uid)
         .get()
         .then((doc) => {

@@ -64,9 +64,14 @@ export function AuthProvider({ children }) {
           const uid = userCredential.user.uid
 
           // Creates document in appropriate collection with matching uid
-          await db.collection(accountType).doc(uid).set({
-            userUid: uid,
-          })
+          await db
+            .collection(
+              accountType === 'candidate' ? 'candidates' : 'companies'
+            )
+            .doc(uid)
+            .set({
+              userUid: uid,
+            })
         }
       })
   }

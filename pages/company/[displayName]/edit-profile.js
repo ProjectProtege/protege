@@ -1,19 +1,21 @@
 // React/Next imports
 import { useEffect, useState } from 'react'
-import { useAuth } from 'store/AuthContext'
-import { useProfileInfo } from 'store/profile_info'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import PropTypes from 'prop-types'
 
 // Lib imports
-import firebase from 'firebase/app'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { db } from 'utils/db'
 import { v4 as uuidv4 } from 'uuid'
 import * as Yup from 'yup'
 import 'react-quill/dist/quill.snow.css'
+
+import { db } from 'utils/db'
+import { useAuth } from 'store/AuthContext'
+import { useProfileInfo } from 'store/profile_info'
+
+import getText from 'utils/i18n/Texts'
 
 import timezones from 'data/timezones.json'
 
@@ -25,10 +27,15 @@ const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
 const CompanyEditProfile = ({ companyData }) => {
   const router = useRouter()
-  const [logo, setLogo] = useState('')
   const { currentUser } = useAuth()
+  const [logo, setLogo] = useState('')
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
   const [timezonesArray, setTimezonesArray] = useState([])
   const profileInfo = useProfileInfo((s) => s.profileInfo)
+
+  console.log('Profile Info:', profileInfo)
+  console.log('Current User:', currentUser)
 
   const displayName = router.query.displayName
 
@@ -81,7 +88,7 @@ const CompanyEditProfile = ({ companyData }) => {
   async function handleFormEntry(data) {
     try {
       await db
-        .collection('company')
+        .collection('companies')
         .doc(currentUser.uid)
         .update({
           accountType: 'company',
