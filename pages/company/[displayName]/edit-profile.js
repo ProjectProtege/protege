@@ -79,10 +79,6 @@ const CompanyEditProfile = ({ companyData }) => {
   }
 
   async function handleFormEntry(data) {
-    const postDate = firebase.firestore.Timestamp.fromDate(new Date())
-
-    const uid = uuidv4()
-
     try {
       await db
         .collection('company')
@@ -101,7 +97,7 @@ const CompanyEditProfile = ({ companyData }) => {
         })
         .then(router.push(`/company/${displayName}`))
     } catch {
-      alert("Oops! Something went wrong. That's our bad.")
+      console.error("Oops! Something went wrong. That's our bad.")
     }
   }
 

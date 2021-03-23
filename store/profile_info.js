@@ -6,9 +6,6 @@ export const useProfileInfo = create(
     (set, get) => ({
       profileInfo: null,
       setProfileInfo: (profileInfo) => set({ profileInfo }),
-      action: () => {
-        const profileInfo = get().profileInfo
-      },
     }),
     {
       name: 'profile-info',
