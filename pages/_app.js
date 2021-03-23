@@ -67,10 +67,10 @@ function MyApp({ Component, pageProps }) {
           property='og:description'
           content='Remote Jobs for Junior Developers'
         />
-        <meta property='og:image' content='/og-image.jpg' />
+        <meta property='og:image' content='/og-image.png' />
 
         <meta name='twitter:card' content='summary_large_image' />
-        <meta name='twitter:image' content='/og-image.jpg' />
+        <meta name='twitter:image' content='/og-image.png' />
         <meta name='twitter:title' content='Protegé.dev' />
         <meta
           name='twitter:description'
