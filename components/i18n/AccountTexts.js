@@ -37,6 +37,7 @@ const AccountTexts = {
     PASSWORD_REQUIRED: 'Password is a required field.',
     PORTFOLIO: 'Portfolio',
     PROTEGE: 'Protegé',
+    PROFILE_INFO: 'Profile Info',
     QUESTION1: 'Describe a difficult problem you solved recently.',
     QUESTION2: 'What were your first steps when faced with that problem?',
     QUESTION3: 'How did you overcome the problem?',
