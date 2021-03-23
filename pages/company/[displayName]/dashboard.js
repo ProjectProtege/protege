@@ -5,6 +5,7 @@ import { useProfileInfo } from 'store/profile_info'
 import NavLink from 'components/global/NavLink'
 import { useAuth } from 'store/AuthContext'
 import getText from 'utils/i18n/Texts'
+import { useEffect } from 'react/cjs/react.development'
 
 const CompanyDashboard = () => {
   const { currentUser } = useAuth()
@@ -14,6 +15,12 @@ const CompanyDashboard = () => {
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
   const displayNameUrl = router.query.displayName
+
+  useEffect(() => {
+    if (!profileInfo.companyName) {
+      router.push(`/company/${displayNameUrl}/edit-profile`)
+    }
+  })
 
   const handleSignOut = async () => {
     try {

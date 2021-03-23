@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import ProfileMenu from 'components/user/ProfileMenu'
+import { useProfileInfo } from 'store/profile_info'
 import getText from 'utils/i18n/Texts'
 
 import JobList from 'components/job/JobList'
@@ -10,6 +11,15 @@ import EmptyDashboard from 'components/user/EmptyDashboard'
 const CandidateDashboard = () => {
   const router = useRouter()
   const [jobList, setJobList] = useState(true)
+  const profileInfo = useProfileInfo((s) => s.profileInfo)
+
+  const displayNameUrl = router.query.displayName
+
+  useEffect(() => {
+    if (!profileInfo.firstName) {
+      router.push(`/candidate/${displayNameUrl}/edit-profile`)
+    }
+  })
 
   return (
     <div className='max-w-6xl mx-auto'>

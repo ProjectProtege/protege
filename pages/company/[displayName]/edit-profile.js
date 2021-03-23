@@ -107,7 +107,11 @@ const CompanyEditProfile = ({ companyData }) => {
         className='container relative z-30 p-6 mt-4 bg-white rounded-lg shadow-md md:p-8 lg:mt-16'
         onSubmit={handleSubmit(handleFormEntry)}
       >
-        <div className='mb-3 md:flex'>
+        <h2 className='text-2xl'>Profile Info</h2>
+        <p className='opacity-75'>
+          Fill out your profile information to get started!
+        </p>
+        <div className='mt-6 mb-3 md:flex'>
           <div className='flex flex-col mb-3 md:w-1/2 md:mr-6 md:mb-0'>
             <label
               htmlFor='companyName'
