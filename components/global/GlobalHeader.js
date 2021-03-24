@@ -45,6 +45,7 @@ const GlobalHeader = () => {
       <div className='container relative flex items-center justify-between px-6 xl:px-2'>
         <Link href='/'>
           <a className='w-2/3 md:w-56'>
+            <span className='sr-only'>Protegé Logo</span>
             <Logo className='w-full' />
           </a>
         </Link>

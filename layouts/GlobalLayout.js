@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { useUi } from 'store/ui_store'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 import GlobalHeader from 'components/global/GlobalHeader'
 import GlobalFooter from 'components/global/GlobalFooter'
@@ -11,7 +12,12 @@ const GlobalLayout = ({ children }) => {
   const location = useRouter().pathname
 
   return (
-    <div className='flex flex-col flex-1 min-h-screen overflow-x-hidden text-blue-900 contianer'>
+    <div className='container flex flex-col flex-1 min-h-screen overflow-x-hidden text-blue-900'>
+      <Head>
+        <title>Protegé</title>
+        <meta name='description' content='Remote Jobs for Junior Developers.' />
+      </Head>
+
       <GlobalHeader />
 
       <div
