@@ -69,14 +69,17 @@ const CompanyEditProfile = ({ companyData }) => {
     mode: 'onChange',
     defaultValues: {
       companyName: displayName,
-      companyLogo: profileInfo.companyLogo,
-      companyWebsite: profileInfo.companyWebsite,
+      companyLogo: profileInfo !== null ? profileInfo.companyLogo : '',
+      companyWebsite: profileInfo !== null ? profileInfo.companyWebsite : '',
       companyEmail: currentUser.email ? currentUser.email : '',
-      companyDescription: profileInfo.companyDescription,
-      companyHQ: profileInfo.companyHQ,
-      companyTimeframeFrom: profileInfo.companyTimeframeFrom,
-      companyTimeframeTo: profileInfo.companyTimeframeTo,
-      companyTimezone: profileInfo.companyTimezone,
+      companyDescription:
+        profileInfo !== null ? profileInfo.companyDescription : '',
+      companyHQ: profileInfo !== null ? profileInfo.companyHQ : '',
+      companyTimeframeFrom:
+        profileInfo !== null ? profileInfo.companyTimeframeFrom : '',
+      companyTimeframeTo:
+        profileInfo !== null ? profileInfo.companyTimeframeTo : '',
+      companyTimezone: profileInfo !== null ? profileInfo.companyTimezone : '',
     },
   })
 
@@ -101,7 +104,7 @@ const CompanyEditProfile = ({ companyData }) => {
           companyTimeframeTo: data.companyTimeframeTo,
           companyTimezone: data.companyTimezone,
         })
-        .then(router.push(`/company/${displayName}`))
+        .then(router.push(`/company/${displayName}/dashboard`))
     } catch {
       console.error("Oops! Something went wrong. That's our bad.")
     }
@@ -298,10 +301,12 @@ const CompanyEditProfile = ({ companyData }) => {
                 ref={register}
                 className='input input-select '
               >
-                {!profileInfo.companyTimezone && (
+                {profileInfo === null ? (
                   <option value='' className='text-gray-300'>
                     Select One...
                   </option>
+                ) : (
+                  ''
                 )}
 
                 {timezonesArray.map((timezone, index) => {
@@ -380,12 +385,13 @@ const CompanyEditProfile = ({ companyData }) => {
                   ref={register}
                   className='input input-select '
                 >
-                  {!profileInfo.companyTimeframeFrom && (
+                  {profileInfo === null ? (
                     <option value='' className='text-gray-300'>
                       Select One...
                     </option>
+                  ) : (
+                    ''
                   )}
-
                   {timezonesArray.map((timezone, index) => {
                     return (
                       <option
@@ -426,10 +432,12 @@ const CompanyEditProfile = ({ companyData }) => {
                   ref={register}
                   className='input input-select '
                 >
-                  {!profileInfo.companyTimeframeTo && (
+                  {profileInfo === null ? (
                     <option value='' className='text-gray-300'>
                       Select One...
                     </option>
+                  ) : (
+                    ''
                   )}
 
                   {timezonesArray.map((timezone, index) => {

@@ -16,7 +16,7 @@ const CandidateDashboard = () => {
   const displayNameUrl = router.query.displayName
 
   useEffect(() => {
-    if (!profileInfo.firstName) {
+    if (profileInfo !== null) {
       router.push(`/candidate/${displayNameUrl}/edit-profile`)
     }
   })

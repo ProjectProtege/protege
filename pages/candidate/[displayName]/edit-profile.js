@@ -58,21 +58,21 @@ const CandidateEditProfile = ({ candidateData }) => {
     resolver: yupResolver(Schema),
     mode: 'onChange',
     defaultValues: {
-      firstName: profileInfo.firstName,
-      lastName: profileInfo.lastName,
-      email: currentUser.email,
-      portfolio: profileInfo.portfolio,
-      social_dev: profileInfo.social_dev,
-      social_github: profileInfo.social_github,
-      social_linkedin: profileInfo.social_linkedin,
-      social_twitter: profileInfo.social_twitter,
-      hideInfo: profileInfo.hideInfo,
-      timezone: profileInfo.timezone,
-      timeframe_from: profileInfo.timeframe_from,
-      timeframe_to: profileInfo.timeframe_to,
-      question1: profileInfo.question1,
-      question2: profileInfo.question2,
-      question3: profileInfo.question3,
+      firstName: profileInfo !== null ? profileInfo.firstName : '',
+      lastName: profileInfo !== null ? profileInfo.lastName : '',
+      email: currentUser ? currentUser.email : '',
+      portfolio: profileInfo !== null ? profileInfo.portfolio : '',
+      social_dev: profileInfo !== null ? profileInfo.social_dev : '',
+      social_github: profileInfo !== null ? profileInfo.social_github : '',
+      social_linkedin: profileInfo !== null ? profileInfo.social_linkedin : '',
+      social_twitter: profileInfo !== null ? profileInfo.social_twitter : '',
+      hideInfo: profileInfo !== null ? profileInfo.hideInfo : '',
+      timezone: profileInfo !== null ? profileInfo.timezone : '',
+      timeframe_from: profileInfo !== null ? profileInfo.timeframe_from : '',
+      timeframe_to: profileInfo !== null ? profileInfo.timeframe_to : '',
+      question1: profileInfo !== null ? profileInfo.question1 : '',
+      question2: profileInfo !== null ? profileInfo.question2 : '',
+      question3: profileInfo !== null ? profileInfo.question3 : '',
     },
   })
 
@@ -86,14 +86,14 @@ const CandidateEditProfile = ({ candidateData }) => {
         lastName: data.lastName,
         email: data.email,
         portfolio: data.portfolio,
-        dev: data.social_dev,
-        github: data.social_github,
-        linkedin: data.social_linkedin,
-        twitter: data.social_twitter,
+        social_dev: data.social_dev,
+        social_github: data.social_github,
+        social_linkedin: data.social_linkedin,
+        social_twitter: data.social_twitter,
         hideInfo: data.hideInfo,
         timezone: data.timezone,
         timeframe_from: data.timeframe_from,
-        timefrom_to: data.timeframe_to,
+        timeframe_to: data.timeframe_to,
         question1: data.question1,
         question2: data.question2,
         question3: data.question3,
@@ -308,6 +308,7 @@ const CandidateEditProfile = ({ candidateData }) => {
                       <option value={getText('DASHBOARD', 'SELECT')}>
                         {getText('DASHBOARD', 'SELECT')}
                       </option>
+
                       {timezonesArray.map((timezone, index) => {
                         return (
                           <option

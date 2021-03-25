@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
-import { useAuth } from '../../store/AuthContext'
+import { useAuth } from 'store/AuthContext'
 import { useUi } from 'store/ui_store'
 import NavLink from 'components/global/NavLink'
 import CloseIcon from 'components/global/CloseIcon'
@@ -34,7 +34,6 @@ const GlobalHeader = () => {
   const handleSignOut = async () => {
     try {
       await signout()
-      router.push('/')
     } catch (error) {
       console.log('Sign Out Error:', error)
     }

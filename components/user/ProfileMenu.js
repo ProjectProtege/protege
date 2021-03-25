@@ -2,6 +2,7 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 import Image from 'next/image'
 import getText from 'utils/i18n/Texts'
+import { useAuth } from 'store/AuthContext'
 
 import dynamic from 'next/dynamic'
 
@@ -20,7 +21,6 @@ const ProfileMenu = ({ avatar, children }) => {
   const handleSignOut = async () => {
     try {
       await signout()
-      router.push('/')
     } catch (error) {
       console.log('Sign Out Error:', error)
     }
@@ -45,8 +45,10 @@ const ProfileMenu = ({ avatar, children }) => {
 
       <ul className='flex flex-col space-y-3'>
         {children}
-        <li className='cursor-pointer' onClick={handleSignOut}>
-          {getText('ACCOUNT', 'SIGN_OUT')}
+        <li>
+          <button onClick={handleSignOut}>
+            {getText('ACCOUNT', 'SIGN_OUT')}
+          </button>
         </li>
         <li className='text-red-500'>{getText('ACCOUNT', 'DELETE_ACCOUNT')}</li>
       </ul>

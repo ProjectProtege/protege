@@ -40,12 +40,6 @@ const SignIn = () => {
     setLoading(true)
     try {
       await signin(data.email, data.password).then(() => {
-        // redirect user to appropriate dashboard with successful account creation
-        if (currentUser.accountType === 'company') {
-          router.push(`/company/${currentUser.displayName}/edit-profile`)
-        } else {
-          router.push(`/candidate/${currentUser.displayName}/edit-profile`)
-        }
         setLoading(false)
       })
     } catch (error) {

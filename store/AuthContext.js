@@ -6,6 +6,7 @@ import { auth } from '../utils/db/index'
 import { db } from 'utils/db'
 
 import { useAccountType } from 'store/account-type_store'
+import { useProfileInfo } from 'store/profile_info'
 
 const AuthContext = React.createContext()
 
@@ -16,6 +17,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const router = useRouter()
   const accountType = useAccountType((s) => s.accountType)
+  const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
   const [currentUser, setCurrentUser] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -29,6 +31,7 @@ export function AuthProvider({ children }) {
           emailVerified: user.emailVerified,
           accountType: user.photoURL,
         }
+
         setCurrentUser(userObject)
       }
       setIsLoading(false)
@@ -36,19 +39,6 @@ export function AuthProvider({ children }) {
     // onAuthStateChanged accepts a function as it's only arguement and returns the unsubscribe function below that will unsubscribe to function originally passed to onAuthStateChanged
     return unsubscribe
   }, [])
-
-  // auth.onAuthStateChanged((user) => {
-  //   if (user) {
-  //     const userObject = {
-  //       uid: user.uid,
-  //       displayName: user.displayName,
-  //       email: user.email,
-  //       emailVerified: user.emailVerified
-  //     }
-  //     setCurrentUser(userObject)
-  //   }
-  //   setIsLoading(false)
-  // })
 
   const signup = async (name, email, password, accountType) => {
     const user = await auth
@@ -73,6 +63,9 @@ export function AuthProvider({ children }) {
               userUid: uid,
             })
         }
+      })
+      .then(() => {
+        router.push(`/${accountType}/${name}/edit-profile`)
       })
   }
 
@@ -106,8 +99,11 @@ export function AuthProvider({ children }) {
   }
 
   function signout() {
-    setCurrentUser()
-    return auth.signOut()
+    return auth.signOut().then(() => {
+      router.push('/').then(() => {
+        setCurrentUser(null)
+      })
+    })
   }
 
   function resetPassword(email) {

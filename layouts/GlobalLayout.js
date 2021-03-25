@@ -29,24 +29,48 @@ const GlobalLayout = ({ children }) => {
           console.log(doc.data())
           const entry = doc.data()
           if (doc.exists) {
-            return {
-              accountType: entry.accountType,
-              companyDescription: entry.companyDescription,
-              companyEmail: entry.companyEmail,
-              companyHQ: entry.companyHQ,
-              companyLogo: entry.companyLogo,
-              companyName: entry.companyName,
-              companyTimeframeFrom: entry.companyTimeframeFrom,
-              companyTimeframeTo: entry.companyTimeframeTo,
-              companyTimezone: entry.companyTimezone,
-              companyWebsite: entry.companyWebsite,
-              userUid: entry.userUid,
+            switch (currentUser) {
+              case 'company':
+                return {
+                  accountType: entry.accountType,
+                  companyDescription: entry.companyDescription,
+                  companyEmail: entry.companyEmail,
+                  companyHQ: entry.companyHQ,
+                  companyLogo: entry.companyLogo,
+                  companyName: entry.companyName,
+                  companyTimeframeFrom: entry.companyTimeframeFrom,
+                  companyTimeframeTo: entry.companyTimeframeTo,
+                  companyTimezone: entry.companyTimezone,
+                  companyWebsite: entry.companyWebsite,
+                  userUid: entry.userUid,
+                }
+                break
+              case 'candidate':
+                return {
+                  accounttype: entry.accountType,
+                  email: entry.email,
+                  firstName: entry.firstName,
+                  hideInfo: entry.hideInfo,
+                  lastName: entry.lastName,
+                  portfolio: entry.portfolio,
+                  question1: entry.question1,
+                  question2: entry.question2,
+                  question3: entry.question3,
+                  social_dev: entry.social_dev,
+                  social_github: entry.social_github,
+                  social_twitter: entry.social_twitter,
+                  social_linkedin: entry.social_linkedin,
+                  timeframe_from: entry.timeframe_from,
+                  timeframe_to: entry.timeframe_to,
+                  timezone: entry.timezone,
+                  userUid: entry.userUid,
+                }
             }
           }
         })
       setProfileInfo(userProfileInfo)
     }
-  }, [])
+  }, [currentUser])
 
   const location = useRouter().pathname
 
