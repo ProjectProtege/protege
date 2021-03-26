@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useAuth } from 'store/AuthContext'
 import { useUi } from 'store/ui_store'
@@ -15,62 +16,68 @@ import { useEffect } from 'react'
 const GlobalLayout = ({ children }) => {
   const isNavOpen = useUi((s) => s.isNavOpen)
   const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
+  const profileInfo = useProfileInfo((s) => s.profileInfo)
   const { currentUser } = useAuth()
+  const [hasUser, setHasUser] = useState(false)
 
-  useEffect(async () => {
-    if (currentUser !== null) {
-      const userProfileInfo = await db
-        .collection(
-          currentUser.accountType === 'candidate' ? 'candidates' : 'companies'
-        )
-        .doc(currentUser.uid)
-        .get()
-        .then((doc) => {
-          console.log(doc.data())
-          const entry = doc.data()
-          if (doc.exists) {
-            switch (currentUser) {
-              case 'company':
-                return {
-                  accountType: entry.accountType,
-                  companyDescription: entry.companyDescription,
-                  companyEmail: entry.companyEmail,
-                  companyHQ: entry.companyHQ,
-                  companyLogo: entry.companyLogo,
-                  companyName: entry.companyName,
-                  companyTimeframeFrom: entry.companyTimeframeFrom,
-                  companyTimeframeTo: entry.companyTimeframeTo,
-                  companyTimezone: entry.companyTimezone,
-                  companyWebsite: entry.companyWebsite,
-                  userUid: entry.userUid,
-                }
-                break
-              case 'candidate':
-                return {
-                  accounttype: entry.accountType,
-                  email: entry.email,
-                  firstName: entry.firstName,
-                  hideInfo: entry.hideInfo,
-                  lastName: entry.lastName,
-                  portfolio: entry.portfolio,
-                  question1: entry.question1,
-                  question2: entry.question2,
-                  question3: entry.question3,
-                  social_dev: entry.social_dev,
-                  social_github: entry.social_github,
-                  social_twitter: entry.social_twitter,
-                  social_linkedin: entry.social_linkedin,
-                  timeframe_from: entry.timeframe_from,
-                  timeframe_to: entry.timeframe_to,
-                  timezone: entry.timezone,
-                  userUid: entry.userUid,
-                }
+  useEffect(() => {
+    if (auth.currentUser !== null) {
+      setHasUser(true)
+      setUserObj(currentUser)
+    }
+  }, [])
+
+  async function setUserObj() {
+    const userProfileInfo = await db
+      .collection(
+        currentUser.accountType === 'candidate' ? 'candidates' : 'companies'
+      )
+      .doc(currentUser.uid)
+      .get()
+      .then((doc) => {
+        console.log(doc.data())
+        const entry = doc.data()
+        if (doc.exists) {
+          if (currentUser.accountType === 'company') {
+            return {
+              accountType: entry.accountType,
+              companyDescription: entry.companyDescription,
+              companyEmail: entry.companyEmail,
+              companyHQ: entry.companyHQ,
+              companyLogo: entry.companyLogo,
+              companyName: entry.companyName,
+              companyTimeframeFrom: entry.companyTimeframeFrom,
+              companyTimeframeTo: entry.companyTimeframeTo,
+              companyTimezone: entry.companyTimezone,
+              companyWebsite: entry.companyWebsite,
+              userUid: entry.userUid,
+            }
+          } else {
+            return {
+              accounttype: entry.accountType,
+              email: entry.email,
+              firstName: entry.firstName,
+              hideInfo: entry.hideInfo,
+              lastName: entry.lastName,
+              portfolio: entry.portfolio,
+              question1: entry.question1,
+              question2: entry.question2,
+              question3: entry.question3,
+              social_dev: entry.social_dev,
+              social_github: entry.social_github,
+              social_twitter: entry.social_twitter,
+              social_linkedin: entry.social_linkedin,
+              timeframe_from: entry.timeframe_from,
+              timeframe_to: entry.timeframe_to,
+              timezone: entry.timezone,
+              userUid: entry.userUid,
             }
           }
-        })
-      setProfileInfo(userProfileInfo)
-    }
-  }, [currentUser])
+        }
+        return userProfileInfo
+      })
+    setProfileInfo(userProfileInfo)
+  }
 
   const location = useRouter().pathname
 

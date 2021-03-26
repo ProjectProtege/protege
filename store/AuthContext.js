@@ -102,6 +102,7 @@ export function AuthProvider({ children }) {
     return auth.signOut().then(() => {
       router.push('/').then(() => {
         setCurrentUser(null)
+        setProfileInfo(null)
       })
     })
   }

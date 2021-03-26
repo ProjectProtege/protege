@@ -33,9 +33,6 @@ const CompanyEditProfile = ({ companyData }) => {
   const [timezonesArray, setTimezonesArray] = useState([])
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
-  console.log('Profile Info:', profileInfo)
-  console.log('Current User:', currentUser)
-
   const displayName = router.query.displayName
 
   useEffect(() => {
@@ -69,17 +66,14 @@ const CompanyEditProfile = ({ companyData }) => {
     mode: 'onChange',
     defaultValues: {
       companyName: displayName,
-      companyLogo: profileInfo !== null ? profileInfo.companyLogo : '',
-      companyWebsite: profileInfo !== null ? profileInfo.companyWebsite : '',
-      companyEmail: currentUser.email ? currentUser.email : '',
-      companyDescription:
-        profileInfo !== null ? profileInfo.companyDescription : '',
-      companyHQ: profileInfo !== null ? profileInfo.companyHQ : '',
-      companyTimeframeFrom:
-        profileInfo !== null ? profileInfo.companyTimeframeFrom : '',
-      companyTimeframeTo:
-        profileInfo !== null ? profileInfo.companyTimeframeTo : '',
-      companyTimezone: profileInfo !== null ? profileInfo.companyTimezone : '',
+      companyLogo: '',
+      companyWebsite: '',
+      companyEmail: currentUser.email,
+      companyDescription: '',
+      companyHQ: '',
+      companyTimeframeFrom: '',
+      companyTimeframeTo: '',
+      companyTimezone: '',
     },
   })
 
