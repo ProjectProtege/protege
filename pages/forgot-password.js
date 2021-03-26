@@ -6,10 +6,10 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
-import { useAuth } from '@/store/AuthContext'
-import getText from '@/utils/i18n/Texts'
+import { useAuth } from 'store/AuthContext'
+import getText from 'utils/i18n/Texts'
 
-import AccountGraphic from '@/assets/images/AccountGraphic'
+import AccountGraphic from 'assets/images/AccountGraphic'
 
 const ForgotPassword = () => {
   const router = useRouter()
