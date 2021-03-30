@@ -14,7 +14,7 @@ const GlobalLayout = ({ children }) => {
   const location = useRouter().pathname
 
   return (
-    <div className='flex flex-col flex-1 min-h-screen overflow-x-hidden text-blue-900 contianer'>
+    <div className='flex flex-col flex-1 min-h-screen overflow-x-hidden text-blue-900'>
       <GlobalHeader />
 
       <div
@@ -24,7 +24,7 @@ const GlobalLayout = ({ children }) => {
       />
 
       {location.includes('/company/') ? (
-        <DashboardLayout>{children}</DashboardLayout>
+        <DashboardLayout hasBanner>{children}</DashboardLayout>
       ) : (
         <GeneralLayout>{children}</GeneralLayout>
       )}

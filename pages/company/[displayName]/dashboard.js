@@ -5,7 +5,6 @@ import { useProfileInfo } from 'store/profile_info'
 import NavLink from 'components/global/NavLink'
 import { useAuth } from 'store/AuthContext'
 import getText from 'utils/i18n/Texts'
-import { useEffect } from 'react/cjs/react.development'
 
 const CompanyDashboard = () => {
   const { currentUser } = useAuth()
@@ -17,21 +16,8 @@ const CompanyDashboard = () => {
   const displayNameUrl = router.query.displayName
   const avatarImg = profileInfo?.companyLogo
 
-  const handleSignOut = async () => {
-    try {
-      await signout()
-      router.push('/')
-    } catch (error) {
-      console.log('Sign Out Error:', error)
-    }
-  }
-
-  const deleteAccount = () => {
-    console.log('delete')
-  }
-
   return (
-    <div className='grid-cols-5 gap-10 mt-6 md:grid md:mt-12'>
+    <div className='grid-cols-5 gap-10 mt-6 lg:grid lg:mt-12'>
       <h1 className='sr-only'>Dashboard</h1>
       <aside className='col-span-1'>
         <ProfileMenu avatar={avatarImg}>
@@ -57,8 +43,8 @@ const CompanyDashboard = () => {
         </ProfileMenu>
       </aside>
 
-      <section className='relative col-span-4 mt-12 md:mt-32'>
-        <article className='mb-20 md:mb-32'>
+      <section className='relative col-span-4 mt-12 lg:mt-32'>
+        <article className='mb-20 lg:mb-32'>
           <h2 className='mb-6 text-xl'>Active Listings</h2>
           <table className='w-full'>
             <tr>
@@ -89,8 +75,8 @@ const CompanyDashboard = () => {
           </table>
 
           {!activeListings ? (
-            <div className='items-center w-full grid-cols-2 gap-10 mt-10 md:grid'>
-              <CompanyDashboardEmpty className='col-span-1 mb-12 md:mb-0' />
+            <div className='items-center w-full grid-cols-2 gap-10 mt-10 lg:grid'>
+              <CompanyDashboardEmpty className='col-span-1 mb-12 lg:mb-0' />
 
               <div className='col-span-1'>
                 <p className='mb-6'>
@@ -136,7 +122,7 @@ const CompanyDashboard = () => {
           </table>
 
           {!archivedListings ? (
-            <div className='items-center w-full grid-cols-2 gap-10 mt-10 md:grid'>
+            <div className='items-center w-full grid-cols-2 gap-10 mt-10 lg:grid'>
               <p>Your archived listings will show up here.</p>
             </div>
           ) : (

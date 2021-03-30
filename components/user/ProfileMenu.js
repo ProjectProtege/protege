@@ -13,6 +13,7 @@ const SimpleFileUpload = dynamic(() => import('react-simple-file-upload'), {
 
 const ProfileMenu = ({ avatar, children }) => {
   const [logo, setLogo] = useState(null)
+  const { signout } = useAuth()
 
   function handleLogoUpload(url) {
     setLogo(url)
@@ -20,6 +21,7 @@ const ProfileMenu = ({ avatar, children }) => {
 
   const handleSignOut = async () => {
     try {
+      console.log('click')
       await signout()
     } catch (error) {
       console.log('Sign Out Error:', error)

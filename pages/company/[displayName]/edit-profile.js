@@ -65,14 +65,24 @@ const CompanyEditProfile = ({ companyData }) => {
     mode: 'onChange',
     defaultValues: {
       companyName: displayName,
-      companyLogo: '',
-      companyWebsite: '',
+      companyLogo: profileInfo?.companyLogo ? profileInfo.companyLogo : '',
+      companyWebsite: profileInfo?.companyWebsite
+        ? profileInfo.companyWebsite
+        : '',
       companyEmail: currentUser.email,
-      companyDescription: '',
-      companyHQ: '',
-      companyTimeframeFrom: '',
-      companyTimeframeTo: '',
-      companyTimezone: '',
+      companyDescription: profileInfo.companyDescription
+        ? profileInfo.companyDescription
+        : '',
+      companyHQ: profileInfo?.companyHQ ? profileInfo.companyHQ : '',
+      companyTimeframeFrom: profileInfo?.companyTimeframeFrom
+        ? profileInfo.companyTimeframeFrom
+        : '',
+      companyTimeframeTo: profileInfo?.companyTimeframeTo
+        ? profileInfo.companyTimeframeTo
+        : '',
+      companyTimezone: profileInfo?.companyTimezone
+        ? profileInfo.companyTimezone
+        : '',
     },
   })
 

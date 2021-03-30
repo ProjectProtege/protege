@@ -55,21 +55,29 @@ const CandidateEditProfile = ({ candidateData }) => {
     resolver: yupResolver(Schema),
     mode: 'onChange',
     defaultValues: {
-      firstName: profileInfo !== null ? profileInfo.firstName : '',
-      lastName: profileInfo !== null ? profileInfo.lastName : '',
+      firstName: profileInfo?.firstName ? profileInfo.firstName : '',
+      lastName: profileInfo?.lastName ? profileInfo.lastName : '',
       email: currentUser ? currentUser.email : '',
-      portfolio: profileInfo !== null ? profileInfo.portfolio : '',
-      social_dev: profileInfo !== null ? profileInfo.social_dev : '',
-      social_github: profileInfo !== null ? profileInfo.social_github : '',
-      social_linkedin: profileInfo !== null ? profileInfo.social_linkedin : '',
-      social_twitter: profileInfo !== null ? profileInfo.social_twitter : '',
-      hideInfo: profileInfo !== null ? profileInfo.hideInfo : '',
-      timezone: profileInfo !== null ? profileInfo.timezone : '',
-      timeframe_from: profileInfo !== null ? profileInfo.timeframe_from : '',
-      timeframe_to: profileInfo !== null ? profileInfo.timeframe_to : '',
-      question1: profileInfo !== null ? profileInfo.question1 : '',
-      question2: profileInfo !== null ? profileInfo.question2 : '',
-      question3: profileInfo !== null ? profileInfo.question3 : '',
+      portfolio: profileInfo?.portfolio ? profileInfo.portfolio : '',
+      social_dev: profileInfo?.social_dev ? profileInfo.social_dev : '',
+      social_github: profileInfo?.social_github
+        ? profileInfo.social_github
+        : '',
+      social_linkedin: profileInfo?.social_linkedin
+        ? profileInfo.social_linkedin
+        : '',
+      social_twitter: profileInfo?.social_twitter
+        ? profileInfo.social_twitter
+        : '',
+      hideInfo: profileInfo?.hideInfo ? profileInfo.hideInfo : '',
+      timezone: profileInfo?.timezone ? profileInfo.timezone : '',
+      timeframe_from: profileInfo?.timeframe_from
+        ? profileInfo.timeframe_from
+        : '',
+      timeframe_to: profileInfo?.timeframe_to ? profileInfo.timeframe_to : '',
+      question1: profileInfo?.question1 ? profileInfo.question1 : '',
+      question2: profileInfo?.question2 ? profileInfo.question2 : '',
+      question3: profileInfo?.question3 ? profileInfo.question3 : '',
     },
   })
 
