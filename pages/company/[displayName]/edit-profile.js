@@ -28,8 +28,7 @@ const CompanyEditProfile = ({ companyData }) => {
   const router = useRouter()
   const { currentUser } = useAuth()
   const [logo, setLogo] = useState('')
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
   const [timezonesArray, setTimezonesArray] = useState([])
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
@@ -98,7 +97,9 @@ const CompanyEditProfile = ({ companyData }) => {
           companyTimeframeTo: data.companyTimeframeTo,
           companyTimezone: data.companyTimezone,
         })
-        .then(router.push(`/company/${displayName}/dashboard`))
+        .then(() => {
+          router.push(`/company/${displayName}/dashboard`)
+        })
     } catch {
       console.error("Oops! Something went wrong. That's our bad.")
     }

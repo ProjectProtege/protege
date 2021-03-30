@@ -15,12 +15,7 @@ const CompanyDashboard = () => {
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
   const displayNameUrl = router.query.displayName
-
-  useEffect(() => {
-    if (!profileInfo.companyName) {
-      router.push(`/company/${displayNameUrl}/edit-profile`)
-    }
-  })
+  const avatarImg = profileInfo?.companyLogo
 
   const handleSignOut = async () => {
     try {
@@ -39,9 +34,8 @@ const CompanyDashboard = () => {
     <div className='grid-cols-5 gap-10 mt-6 md:grid md:mt-12'>
       <h1 className='sr-only'>Dashboard</h1>
       <aside className='col-span-1'>
-        <ProfileMenu avatar={profileInfo.companyLogo}>
-          {' '}
-          <li className='text-lg font-bold'>{profileInfo.companyName}</li>
+        <ProfileMenu avatar={avatarImg}>
+          <li className='text-lg font-bold'>{profileInfo?.companyName}</li>
           <li>
             <NavLink
               href={`/company/${displayNameUrl}/index`}

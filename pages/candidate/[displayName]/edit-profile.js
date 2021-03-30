@@ -26,9 +26,6 @@ const CandidateEditProfile = ({ candidateData }) => {
   const [timezonesArray, setTimezonesArray] = useState([])
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
-  console.log('Profile Info:', profileInfo)
-  console.log('Current User:', currentUser)
-
   let displayName = router.query.displayName
 
   useEffect(() => {

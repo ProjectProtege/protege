@@ -15,8 +15,8 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const router = useRouter()
   const accountType = useAccountType((s) => s.accountType)
+  const router = useRouter()
   const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
   const [currentUser, setCurrentUser] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -33,12 +33,22 @@ export function AuthProvider({ children }) {
         }
 
         setCurrentUser(userObject)
+        setUserProfileInfo(user)
       }
       setIsLoading(false)
     })
     // onAuthStateChanged accepts a function as it's only arguement and returns the unsubscribe function below that will unsubscribe to function originally passed to onAuthStateChanged
     return unsubscribe
   }, [])
+
+  async function setUserProfileInfo(user) {
+    const userProfileInfo = await db
+      .collection(user.photoURL === 'candidate' ? 'candidates' : 'companies')
+      .doc(user.uid)
+      .get()
+
+    setProfileInfo(userProfileInfo.data())
+  }
 
   const signup = async (name, email, password, accountType) => {
     const user = await auth
@@ -61,6 +71,7 @@ export function AuthProvider({ children }) {
             .doc(uid)
             .set({
               userUid: uid,
+              accountType,
             })
         }
       })
