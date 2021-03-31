@@ -24,20 +24,18 @@ const Home = () => {
 
   return (
     <div>
-      <Image
+      <img
         src='/hero-bg-pattern.png'
         className='absolute inset-0 hidden w-full lg:block'
         alt=''
         style={{ zIndex: '-999999' }}
-        layout='fill'
-        objectFit='contain'
       />
 
       <h1 className='sr-only'>
         Protege.dev | Remote jobs for junior developers
       </h1>
 
-      <section className='pt-12'>
+      <section>
         <FindYourNext />
 
         <div className='flex flex-col mx-auto mt-12 text-center text-blue-900 md:w-3/4 md:tracking-wide lg:w-3/4 xl:w-1/2 md:text-lg'>

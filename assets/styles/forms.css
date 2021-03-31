@@ -1,5 +1,9 @@
-/*--Input--*/
+/*--Global Form--*/
+form label {
+  @apply font-bold mb-2;
+}
 
+/*--Input--*/
 .input {
   @apply border border-blue-200 p-2 rounded;
 }
@@ -27,4 +31,9 @@
   line-height: 1;
   font-size: 20px;
   pointer-events: none; /* Don't interfere with clicks */
+}
+
+/* Toggle */
+.toggle-checkbox:checked {
+  @apply right-0 bg-green-400;
 }

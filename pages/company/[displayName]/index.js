@@ -1,5 +1,5 @@
-const CompanyDashboard = () => {
-  return <div class='max-w-screen-lg mx-auto'>hello</div>
+const CompanyProfile = () => {
+  return <h1>hey</h1>
 }
 
-export default CompanyDashboard
+export default CompanyProfile

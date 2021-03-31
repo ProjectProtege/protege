@@ -1,7 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react'
 import firebase from 'firebase/app'
+import { useRouter } from 'next/router'
 
 import { auth } from '../utils/db/index'
+import { db } from 'utils/db'
+
+import { useAccountType } from 'store/account-type_store'
+import { useProfileInfo } from 'store/profile_info'
 
 const AuthContext = React.createContext()
 
@@ -10,20 +15,25 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState()
+  const accountType = useAccountType((s) => s.accountType)
+  const router = useRouter()
+  const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
+  const [currentUser, setCurrentUser] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      // console.log(user);
+  useEffect(async () => {
+    const unsubscribe = await auth.onAuthStateChanged((user) => {
       if (user) {
         const userObject = {
           uid: user.uid,
           displayName: user.displayName,
           email: user.email,
           emailVerified: user.emailVerified,
+          accountType: user.photoURL,
         }
+
         setCurrentUser(userObject)
+        setUserProfileInfo(user)
       }
       setIsLoading(false)
     })
@@ -31,29 +41,57 @@ export function AuthProvider({ children }) {
     return unsubscribe
   }, [])
 
-  // auth.onAuthStateChanged((user) => {
-  //   // console.log(user);
-  //   if (user) {
-  //     const userObject = {
-  //       uid: user.uid,
-  //       displayName: user.displayName,
-  //       email: user.email,
-  //       emailVerified: user.emailVerified
-  //     }
-  //     setCurrentUser(userObject)
-  //   }
-  //   setIsLoading(false)
-  // })
+  async function setUserProfileInfo(user) {
+    const userProfileInfo = await db
+      .collection(user.photoURL === 'candidate' ? 'candidates' : 'companies')
+      .doc(user.uid)
+      .get()
 
-  const signup = async (name, email, password) => {
-    await auth.createUserWithEmailAndPassword(email, password)
-    auth.currentUser.updateProfile({
-      displayName: name,
-    })
+    setProfileInfo(userProfileInfo.data())
   }
 
-  function signin(email, password) {
-    return auth.signInWithEmailAndPassword(email, password)
+  const signup = async (name, email, password, accountType) => {
+    const user = await auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(async (userCredential) => {
+        if (userCredential) {
+          updateUserProfile({
+            displayName: name,
+            photoURL: accountType,
+          })
+
+          // Gets the uid for the users account object
+          const uid = userCredential.user.uid
+
+          // Creates document in appropriate collection with matching uid
+          await db
+            .collection(
+              accountType === 'candidate' ? 'candidates' : 'companies'
+            )
+            .doc(uid)
+            .set({
+              userUid: uid,
+              accountType,
+            })
+        }
+      })
+      .then(() => {
+        router.push(`/${accountType}/${name}/edit-profile`)
+      })
+  }
+
+  function updateUserProfile(data) {
+    return auth.currentUser.updateProfile(data)
+  }
+
+  async function signin(email, password) {
+    const signin = await auth
+      .signInWithEmailAndPassword(email, password)
+      .then((data) => {
+        const user = data.user
+        router.push(`/${user.photoURL}/${user.displayName}/dashboard`)
+      })
+    return signin
   }
 
   function signInWithGoogle() {
@@ -72,8 +110,12 @@ export function AuthProvider({ children }) {
   }
 
   function signout() {
-    setCurrentUser()
-    return auth.signOut()
+    return auth.signOut().then(() => {
+      router.push('/').then(() => {
+        setCurrentUser(null)
+        setProfileInfo(null)
+      })
+    })
   }
 
   function resetPassword(email) {

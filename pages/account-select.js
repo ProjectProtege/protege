@@ -11,15 +11,11 @@ const Dashboard = () => {
   const accountType = useAccountType((s) => s.accountType)
   const setAccountType = useAccountType((s) => s.setAccountType)
 
-  console.log('AccountType:', accountType)
-
   const handleCandidate = () => {
-    console.log('handleCandidate')
     router.push('sign-up?accountType=candidate')
   }
 
   const handleCompany = () => {
-    console.log('handleCompany')
     router.push('sign-up?accountType=company')
   }
   return (

@@ -18,7 +18,7 @@ const SignUp = ({ accountType }) => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  const [displayName, setDisplayName] = useState()
+  const [displayName, setDisplayName] = useState('')
 
   const Schema = yup.object().shape({
     name: yup.string().required(getText('ACCOUNT', 'NAME_REQUIRED')),
@@ -42,20 +42,16 @@ const SignUp = ({ accountType }) => {
 
   const handleSignUp = async (data) => {
     setLoading(true)
+
     try {
-      await signup(data.name, data.email, data.password)
+      await signup(data.name, data.email, data.password, accountType)
       firebase.auth().currentUser.sendEmailVerification()
 
-      // redirect user to appropriate dashboard with successful account creation
-      if (accountType === 'company') {
-        router.push(`/company/${displayName}/edit-profile`)
-      } else {
-        router.push(`/candidate/${displayName}/edit-profile`)
-      }
       setLoading(false)
     } catch (error) {
       setError(error.message)
     }
+
     setLoading(false)
   }
 

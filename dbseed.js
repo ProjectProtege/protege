@@ -26,7 +26,7 @@ function getSeedData() {
         howToApply: faker.internet.url(),
         jobDescription: faker.lorem.paragraph(),
         jobtitle: faker.name.jobTitle(),
-        paid: faker.random.boolean(),
+        paid: true,
         positionType: faker.random.arrayElement([
           'Full Time',
           'Part Time',
@@ -41,7 +41,8 @@ function getSeedData() {
           'Back-end',
           'Full-stack',
         ]),
-        status: faker.random.arrayElement(['inactive', 'active', 'filled']),
+        status: faker.random.arrayElement(['viewed', 'sent']),
+        // dateApplied: faker.date.recent(),
       })
     )
     // eslint-disable-next-line no-console

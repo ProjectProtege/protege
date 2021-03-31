@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
-import { useAuth } from '../../store/AuthContext'
+import { useAuth } from 'store/AuthContext'
 import { useUi } from 'store/ui_store'
 import NavLink from 'components/global/NavLink'
 import CloseIcon from 'components/global/CloseIcon'
@@ -34,7 +34,6 @@ const GlobalHeader = () => {
   const handleSignOut = async () => {
     try {
       await signout()
-      router.push('/')
     } catch (error) {
       console.log('Sign Out Error:', error)
     }
@@ -44,8 +43,7 @@ const GlobalHeader = () => {
     <header className='py-3 md:text-xs xl:text-base'>
       <div className='container relative flex items-center justify-between px-6 xl:px-2'>
         <Link href='/'>
-          <a className='w-2/3 md:w-56'>
-            <span className='sr-only'>Protegé Logo</span>
+          <a className='w-56'>
             <Logo className='w-full' />
           </a>
         </Link>
@@ -131,7 +129,7 @@ const GlobalHeader = () => {
             <li className='px-6 py-4'>
               {currentUser ? (
                 <div className='absolute bottom-0 mb-12 text-lg'>
-                  <span class='text-xs mb-1'>Signed in as:</span>
+                  <span className='mb-1 text-xs'>Signed in as:</span>
                   {/**
                    * TODO: Swap this out with the user photo
                    */}
@@ -260,7 +258,7 @@ const GlobalHeader = () => {
             </li>
           </ul>
 
-          <ul className='absolute right-0 flex items-center mt-3 mr-6 space-x-6 text-xs xl:mt-6 xl:mr-2'>
+          <ul className='absolute right-0 flex items-center mt-4 mr-6 space-x-6 text-xs xl:mr-2'>
             {!currentUser ? (
               <>
                 <li>
@@ -307,7 +305,7 @@ const GlobalHeader = () => {
                       aria-labelledby='user-menu'
                     >
                       <a
-                        href='#'
+                        href={`/${currentUser.accountType}/${currentUser.displayName}/dashboard`}
                         className='block px-4 py-1 text-sm text-blue-900 hover:bg-gray-100 whitespace-nowrap'
                         role='menuitem'
                       >
@@ -325,7 +323,7 @@ const GlobalHeader = () => {
                     </div>
                     {isUserMenuOpen ? (
                       <div
-                        class='fixed bg-white opacity-0 inset-0 h-screen w-screen pointer-events-auto'
+                        className='fixed inset-0 w-screen h-screen bg-white opacity-0 pointer-events-auto'
                         onClick={() => {
                           setIsUserMenuOpen(false)
                         }}
