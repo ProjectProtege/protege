@@ -1,6 +1,6 @@
 import React from 'react'
 
-import EmptyDashboardImage from '@/assets/images/EmptyDashboardImage'
+import EmptyDashboardImage from 'assets/images/EmptyDashboardImage'
 
 import getText from 'utils/i18n/Texts'
 
