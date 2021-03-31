@@ -33,22 +33,22 @@ const CandidateEditProfile = ({ candidateData }) => {
   }, [])
 
   const Schema = yup.object().shape({
-    firstName: yup.string().required(getText('ACCOUNT', 'FIRST_NAME_REQUIRED')),
-    lastName: yup.string().required(getText('ACCOUNT', 'LAST_NAME_REQUIRED')),
+    firstName: yup.string().required(getText('GLOBAL', 'FIRST_NAME_REQUIRED')),
+    lastName: yup.string().required(getText('GLOBAL', 'LAST_NAME_REQUIRED')),
     email: yup
       .string()
-      .email(getText('ACCOUNT', 'EMAIL_VALID'))
-      .required(getText('ACCOUNT', 'EMAIL_REQUIRED')),
-    timezone: yup.string().required(getText('ACCOUNT', 'TIMEZONE_REQUIRED')),
+      .email(getText('GLOBAL', 'EMAIL_VALID'))
+      .required(getText('GLOBAL', 'EMAIL_REQUIRED')),
+    timezone: yup.string().required(getText('GLOBAL', 'TIMEZONE_REQUIRED')),
     timeframe_from: yup
       .string()
-      .required(getText('ACCOUNT', 'TIMEFRAME_REQUIRED')),
+      .required(getText('GLOBAL', 'TIMEFRAME_REQUIRED')),
     timeframe_to: yup
       .string()
-      .required(getText('ACCOUNT', 'TIMEFRAME_REQUIRED')),
-    question1: yup.string().required(getText('ACCOUNT', 'QUESTION_REQUIRED')),
-    question2: yup.string().required(getText('ACCOUNT', 'QUESTION_REQUIRED')),
-    question3: yup.string().required(getText('ACCOUNT', 'QUESTION_REQUIRED')),
+      .required(getText('GLOBAL', 'TIMEFRAME_REQUIRED')),
+    question1: yup.string().required(getText('GLOBAL', 'QUESTION_REQUIRED')),
+    question2: yup.string().required(getText('GLOBAL', 'QUESTION_REQUIRED')),
+    question3: yup.string().required(getText('GLOBAL', 'QUESTION_REQUIRED')),
   })
 
   const { register, handleSubmit, control, errors } = useForm({
@@ -124,7 +124,7 @@ const CandidateEditProfile = ({ candidateData }) => {
                   href={`/candidate/${displayName}/`}
                   activeClassName='text-teal-500'
                 >
-                  {getText('ACCOUNT', 'VIEW_PROFILE')}
+                  {getText('GLOBAL', 'VIEW_PROFILE')}
                 </NavLink>
               </li>
               <li>
@@ -132,7 +132,7 @@ const CandidateEditProfile = ({ candidateData }) => {
                   href={`/candidate/${displayName}/edit-profile`}
                   activeClassName='text-teal-500 font-bold'
                 >
-                  {getText('ACCOUNT', 'EDIT_PROFILE')}
+                  {getText('GLOBAL', 'EDIT_PROFILE')}
                 </NavLink>
               </li>
             </ProfileMenu>
@@ -141,7 +141,7 @@ const CandidateEditProfile = ({ candidateData }) => {
           <div className='order-1 w-full md:order-2'>
             <div className='flex items-center justify-between mb-6'>
               <h1 className='mb-3 text-lg text-blue-900'>
-                {getText('ACCOUNT', 'PROFILE_INFO')}
+                {getText('GLOBAL', 'PROFILE_INFO')}
               </h1>
             </div>
 
@@ -154,7 +154,7 @@ const CandidateEditProfile = ({ candidateData }) => {
               <div className='flex flex-col justify-between md:space-x-8 md:flex-row'>
                 <div className='flex flex-col w-full mb-3 space-y-1'>
                   <label htmlFor='firstName'>
-                    {getText('ACCOUNT', 'FIRST_NAME')}
+                    {getText('GLOBAL', 'FIRST_NAME')}
                   </label>
                   <input
                     id='firstName'
@@ -172,7 +172,7 @@ const CandidateEditProfile = ({ candidateData }) => {
 
                 <div className='flex flex-col w-full mb-3 space-y-1'>
                   <label htmlFor='lastName'>
-                    {getText('ACCOUNT', 'LAST_NAME')}
+                    {getText('GLOBAL', 'LAST_NAME')}
                   </label>
                   <input
                     id='lastName'
@@ -192,7 +192,7 @@ const CandidateEditProfile = ({ candidateData }) => {
               {/* email/portfolio */}
               <div className='flex flex-col justify-between mb-8 md:space-x-8 md:flex-row'>
                 <div className='flex flex-col w-full mb-3 space-y-1'>
-                  <label htmlFor='email'>{getText('ACCOUNT', 'EMAIL')}</label>
+                  <label htmlFor='email'>{getText('GLOBAL', 'EMAIL')}</label>
                   <input
                     id='email'
                     type='text'
@@ -209,7 +209,7 @@ const CandidateEditProfile = ({ candidateData }) => {
 
                 <div className='flex flex-col w-full mb-3 space-y-1'>
                   <label htmlFor='portfolio'>
-                    {getText('ACCOUNT', 'PORTFOLIO')}
+                    {getText('GLOBAL', 'PORTFOLIO')}
                     <span className='text-sm font-normal'> (optional)</span>
                   </label>
                   <input
@@ -226,7 +226,7 @@ const CandidateEditProfile = ({ candidateData }) => {
               <div className='flex flex-col justify-between mb-12 space-y-6 md:space-y-0 md:space-x-8 md:flex-row'>
                 <div className='flex flex-col w-full space-y-4'>
                   <label htmlFor='social' className='mb-0'>
-                    {getText('ACCOUNT', 'SOCIAL_ACCOUNTS')}
+                    {getText('GLOBAL', 'SOCIAL_ACCOUNTS')}
                   </label>
                   <div className='flex items-center space-x-3'>
                     <div className='text-3xl opacity-50'>
@@ -281,7 +281,7 @@ const CandidateEditProfile = ({ candidateData }) => {
                   {/* hide info */}
                   <div className='flex items-center justify-between mb-3'>
                     <label htmlFor='hideInfo' className='mb-0'>
-                      {getText('ACCOUNT', 'HIDE_INFO')}
+                      {getText('GLOBAL', 'HIDE_INFO')}
                     </label>
                     <div className='relative inline-block w-12 align-middle transition duration-700 ease-in-out select-none'>
                       <input
@@ -301,7 +301,7 @@ const CandidateEditProfile = ({ candidateData }) => {
                   {/* timezone */}
                   <div className='flex flex-col w-full space-y-1'>
                     <label htmlFor='timezone'>
-                      {getText('ACCOUNT', 'TIMEZONE')}
+                      {getText('GLOBAL', 'TIMEZONE')}
                     </label>
                     <select
                       id='timezone'
@@ -336,7 +336,7 @@ const CandidateEditProfile = ({ candidateData }) => {
                   {/* timeframe */}
                   <div className='flex flex-col w-full space-y-4'>
                     <label htmlFor='timeframe'>
-                      {getText('ACCOUNT', 'TIMEFRAME')}
+                      {getText('GLOBAL', 'TIMEFRAME')}
                     </label>
 
                     <div className='flex justify-between space-x-3'>
@@ -385,7 +385,7 @@ const CandidateEditProfile = ({ candidateData }) => {
               {/* question1 */}
               <div className='flex flex-col w-full mb-10 space-y-3'>
                 <label htmlFor='question1'>
-                  {getText('ACCOUNT', 'QUESTION1')}
+                  {getText('GLOBAL', 'QUESTION1')}
                 </label>
                 <textarea
                   name='question1'
@@ -405,7 +405,7 @@ const CandidateEditProfile = ({ candidateData }) => {
               {/* question2 */}
               <div className='flex flex-col w-full mb-10 space-y-3'>
                 <label htmlFor='question2'>
-                  {getText('ACCOUNT', 'QUESTION2')}
+                  {getText('GLOBAL', 'QUESTION2')}
                 </label>
                 <textarea
                   name='question2'
@@ -425,7 +425,7 @@ const CandidateEditProfile = ({ candidateData }) => {
               {/* question3 */}
               <div className='flex flex-col w-full mb-4 space-y-3'>
                 <label htmlFor='question3'>
-                  {getText('ACCOUNT', 'QUESTION3')}
+                  {getText('GLOBAL', 'QUESTION3')}
                 </label>
                 <textarea
                   name='question3'
@@ -443,7 +443,7 @@ const CandidateEditProfile = ({ candidateData }) => {
               </div>
 
               <button type='submit' className='btn btn-teal'>
-                {getText('ACCOUNT', 'SAVE')}
+                {getText('GLOBAL', 'SAVE')}
               </button>
 
               {error ? (

@@ -22,9 +22,9 @@ const Dashboard = () => {
     <div className='max-w-2xl mx-auto'>
       <div className='mb-12'>
         <h1 className='mb-3 text-5xl text-blue-900'>
-          {getText('ACCOUNT', 'WELCOME')}
+          {getText('GLOBAL', 'WELCOME')}
         </h1>
-        <p className='opacity-75'>{getText('ACCOUNT', 'WELCOME_INTRO')}</p>
+        <p className='opacity-75'>{getText('GLOBAL', 'WELCOME_INTRO')}</p>
       </div>
 
       <div className='flex flex-col items-start justify-between md:flex-row md:space-x-14'>
@@ -38,9 +38,9 @@ const Dashboard = () => {
             }`}
             onClick={() => setAccountType('candidate')}
           >
-            <h3 className='text-2xl'>{getText('ACCOUNT', 'CANDIDATE')}</h3>
+            <h3 className='text-2xl'>{getText('GLOBAL', 'CANDIDATE')}</h3>
             <p className='opacity-75'>
-              {getText('ACCOUNT', 'CANDIDATE_SELECT')}
+              {getText('GLOBAL', 'CANDIDATE_SELECT')}
             </p>
           </button>
 
@@ -52,8 +52,8 @@ const Dashboard = () => {
             }`}
             onClick={() => setAccountType('company')}
           >
-            <h3 className='text-2xl'>{getText('ACCOUNT', 'COMPANY')}</h3>
-            <p className='opacity-75'>{getText('ACCOUNT', 'COMPANY_SELECT')}</p>
+            <h3 className='text-2xl'>{getText('GLOBAL', 'COMPANY')}</h3>
+            <p className='opacity-75'>{getText('GLOBAL', 'COMPANY_SELECT')}</p>
           </button>
 
           <button
@@ -64,7 +64,7 @@ const Dashboard = () => {
               accountType === 'candidate' ? handleCandidate : handleCompany
             }
           >
-            {getText('ACCOUNT', 'CONTINUE')}
+            {getText('GLOBAL', 'CONTINUE')}
           </button>
         </div>
       </div>
