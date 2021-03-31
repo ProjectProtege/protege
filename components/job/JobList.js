@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useTable } from 'react-table'
 import { useJobs } from 'store/jobs_store'
-import getText from '@/utils/i18n/Texts'
+import getText from 'utils/i18n/Texts'
 
 function Table({ columns, data, getCellProps }) {
   // Use the state and functions returned from useTable to build your UI

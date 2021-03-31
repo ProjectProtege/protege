@@ -29,8 +29,6 @@ const Home = () => {
         className='absolute inset-0 hidden w-full lg:block'
         alt=''
         style={{ zIndex: '-999999' }}
-        layout='fill'
-        objectFit='contain'
       />
 
       <h1 className='sr-only'>
