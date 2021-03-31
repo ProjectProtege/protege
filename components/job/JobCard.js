@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import PropTypes from 'prop-types'
 
 const JobCard = ({ job }) => {
@@ -27,17 +28,19 @@ const JobCard = ({ job }) => {
 
   return (
     <Link data-cy={`job-card-link-${job.id}`} href={`/job-board/${job.id}`}>
-      <a className='flex items-center px-3 py-4 mb-6 transition duration-150 ease-in-out transform bg-white rounded-md shadow md:mb-12 md:px-6 hover:shadow-md overflow-hidden'>
-        <div className='absolute bg-gradient-to-t from-teal-500 to-teal-300 left-0 h-full w-1'></div>
+      <a className='flex items-center px-3 py-4 mb-6 overflow-hidden transition duration-150 ease-in-out transform bg-white rounded-md shadow md:mb-12 md:px-6 hover:shadow-md'>
+        <div className='absolute left-0 w-1 h-full bg-gradient-to-t from-teal-500 to-teal-300'></div>
         <div
           className='items-center justify-center hidden overflow-hidden bg-white rounded-full shadow-md md:flex'
           style={{ width: 75, height: 75 }}
         >
-          <img
+          <Image
             data-cy={`job-card-image-${job.id}`}
             src={job.companyLogo}
             alt={`${job.companyName} Logo`}
             className='w-full my-auto'
+            width={75}
+            height={75}
           />
         </div>
 
@@ -46,7 +49,7 @@ const JobCard = ({ job }) => {
             <div>
               <p
                 data-cy={`job-card-company-name-${job.id}`}
-                className='mb-1 text-sm text-blue-400'
+                className='mb-1 text-sm text-blue-500'
               >
                 {job.companyName}
               </p>
@@ -61,7 +64,7 @@ const JobCard = ({ job }) => {
 
             <p
               data-cy={`job-card-role-focus-${job.id}`}
-              className='text-teal-700'
+              className='text-teal-900'
             >
               {job.roleFocus}
             </p>
@@ -70,7 +73,7 @@ const JobCard = ({ job }) => {
           <div className='flex items-center text-right'>
             <p
               data-cy={`job-card-formatted-date-${job.id}`}
-              className='text-lg font-bold text-teal-700'
+              className='text-lg font-bold text-teal-900'
             >
               {/* {formattedPostDate} */}
             </p>
@@ -88,7 +91,7 @@ JobCard.propTypes = {
     companyLogo: PropTypes.string.isRequired,
     jobTitle: PropTypes.string.isRequired,
     roleFocus: PropTypes.string.isRequired,
-    postedAt: PropTypes.instanceOf(Date).isRequired,
+    // postedAt: PropTypes.instanceOf(Date).isRequired,
   }).isRequired,
 }
 

@@ -10,7 +10,7 @@ import * as yup from 'yup'
 import { useAuth } from 'store/AuthContext'
 import getText from 'utils/i18n/Texts'
 
-import AccountDetails from '@/assets/images/AccountDetails'
+import AccountDetails from 'assets/images/AccountDetails'
 
 const SignUp = ({ accountType }) => {
   const router = useRouter()

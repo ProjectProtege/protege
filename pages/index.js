@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import Head from 'next/head'
+import Image from 'next/image'
 import { useJobs } from 'store/jobs_store'
 import { useJobForm } from 'store/job-post_store'
 
@@ -22,11 +24,13 @@ const Home = () => {
 
   return (
     <div>
-      <img
+      <Image
         src='/hero-bg-pattern.png'
         className='absolute inset-0 hidden w-full lg:block'
         alt=''
         style={{ zIndex: '-999999' }}
+        layout='fill'
+        objectFit='contain'
       />
 
       <h1 className='sr-only'>
