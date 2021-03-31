@@ -9,11 +9,10 @@ const JobBoard = () => {
   const router = useRouter()
   const filterParam = router.query
 
-  const initialFilterParam = Object.keys(filterParam).length
-    ? filterParam.filter
-    : ''
+  // const initialFilterParam = Object.keys(filterParam).length ? filterParam.filter : ''
 
-  const [jobFilter, setJobFilter] = useState(initialFilterParam)
+  // const [jobFilter, setJobFilter] = useState(initialFilterParam)
+  const [jobFilter, setJobFilter] = useState()
   const jobs = useJobs((s) => s.jobs)
 
   function filteredJobs(jobList, filter) {
