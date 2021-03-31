@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <div>
-      <Image
+      <img
         src='/hero-bg-pattern.png'
         className='absolute inset-0 hidden w-full lg:block'
         alt=''
