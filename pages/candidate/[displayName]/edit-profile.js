@@ -26,6 +26,8 @@ const CandidateEditProfile = ({ candidateData }) => {
   const [timezonesArray, setTimezonesArray] = useState([])
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
+  console.log(profileInfo)
+
   let displayName = router.query.displayName
 
   useEffect(() => {
@@ -51,7 +53,7 @@ const CandidateEditProfile = ({ candidateData }) => {
     question3: yup.string().required(getText('ACCOUNT', 'QUESTION_REQUIRED')),
   })
 
-  const { register, handleSubmit, control, errors } = useForm({
+  const { register, handleSubmit, control, reset, errors } = useForm({
     resolver: yupResolver(Schema),
     mode: 'onChange',
     defaultValues: {
@@ -80,6 +82,10 @@ const CandidateEditProfile = ({ candidateData }) => {
       question3: profileInfo?.question3 ? profileInfo.question3 : '',
     },
   })
+
+  useEffect(() => {
+    reset(profileInfo)
+  }, [reset])
 
   const handleProfileForm = (data) => {
     setLoading(true)
