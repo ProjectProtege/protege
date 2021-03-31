@@ -1,7 +1,7 @@
 import Cookies from 'universal-cookie'
-import GlobalTexts from '@/components/i18n/GlobalTexts'
-import AccountTexts from '@/components/i18n/AccountTexts'
-import FormTexts from '@/components/i18n/FormTexts'
+// import GlobalTexts from 'components/i18n/GlobalTexts'
+import AccountTexts from 'components/i18n/AccountTexts'
+import FormTexts from 'components/i18n/FormTexts'
 import DashboardTexts from 'components/i18n/DashboardTexts'
 
 const getText = (type, text) => {
