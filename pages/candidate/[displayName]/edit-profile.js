@@ -336,7 +336,7 @@ const CandidateEditProfile = ({ candidateData }) => {
                   {/* timeframe */}
                   <div className='flex flex-col w-full space-y-4'>
                     <label htmlFor='timeframe'>
-                      {getText('GLOBAL', 'TIMEFRAME')}
+                      {getText('GLOBAL', 'WORK_WITHIN')}
                     </label>
 
                     <div className='flex justify-between space-x-3'>

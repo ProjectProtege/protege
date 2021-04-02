@@ -121,17 +121,15 @@ const CompanyEditProfile = ({ companyData }) => {
         className='container relative z-30 p-6 mt-4 bg-white rounded-lg shadow-md md:p-8 lg:mt-16'
         onSubmit={handleSubmit(handleFormEntry)}
       >
-        <h2 className='text-2xl'>Profile Info</h2>
-        <p className='opacity-75'>
-          Fill out your profile information to get started!
-        </p>
+        <h2 className='text-2xl'>{getText('GLOBAL', 'PROFILE_INFO')}</h2>
+        <p className='opacity-75'>{getText('GLOBAL', 'FILL_OUT')}</p>
         <div className='mt-6 mb-3 md:flex'>
           <div className='flex flex-col mb-3 md:w-1/2 md:mr-6 md:mb-0'>
             <label
               htmlFor='companyName'
               className='mb-2 font-semibold text-blue-900'
             >
-              Company Name
+              {getText('GLOBAL', 'COMPANY_NAME')}
             </label>
 
             <input
@@ -158,7 +156,7 @@ const CompanyEditProfile = ({ companyData }) => {
               htmlFor='companyWebsite'
               className='mb-2 font-semibold text-blue-900'
             >
-              Company Website
+              {getText('GLOBAL', 'COMPANY_WEBSITE')}
             </label>
 
             <input
@@ -188,7 +186,7 @@ const CompanyEditProfile = ({ companyData }) => {
               htmlFor='companyEmail'
               className='mb-2 font-semibold text-blue-900'
             >
-              Email
+              {getText('GLOBAL', 'EMAIL')}
             </label>
 
             <input
@@ -215,7 +213,7 @@ const CompanyEditProfile = ({ companyData }) => {
               htmlFor='companyLogo'
               className='mb-2 font-semibold text-blue-900'
             >
-              Logo
+              {getText('GLOBAL', 'COMPANY_LOGO')}
             </label>
 
             <div className='grid-cols-2 gap-4 md:grid'>
@@ -240,8 +238,7 @@ const CompanyEditProfile = ({ companyData }) => {
                 data-cy='logo-upload-fileName'
                 className='text-xs tracking-tight text-blue-500'
               >
-                Please provide a .jpg, .jpeg, or .png format of your company's
-                logo to be displayed with your job opening listing.
+                {getText('GLOBAL', 'PLEASE_PROVIDE_FILE_TYPE')}
               </span>
             </div>
 
@@ -261,7 +258,7 @@ const CompanyEditProfile = ({ companyData }) => {
             htmlFor='companyDescription'
             className='mb-2 font-semibold text-blue-900'
           >
-            Company Description
+            {getText('GLOBAL', 'COMPANY_DESCRIPTION')}
           </label>
 
           <Controller
@@ -292,11 +289,11 @@ const CompanyEditProfile = ({ companyData }) => {
               htmlFor='companyTimezone'
               className='font-semibold text-blue-900'
             >
-              Timezone
+              {getText('GLOBAL', 'TIMEZONE')}
             </label>
 
             <span className='mb-2 text-xs tracking-tight text-blue-500 '>
-              Where is your company based out of?
+              {getText('GLOBAL', 'TIMEZONE_DESC')}
             </span>
 
             <div className='select-wrap'>
@@ -308,7 +305,7 @@ const CompanyEditProfile = ({ companyData }) => {
               >
                 {profileInfo === null ? (
                   <option value='' className='text-gray-300'>
-                    Select One...
+                    {getText('GLOBAL', 'SELECT_ONE')}
                   </option>
                 ) : (
                   ''
@@ -340,11 +337,11 @@ const CompanyEditProfile = ({ companyData }) => {
 
           <div className='flex flex-col md:w-1/2'>
             <label htmlFor='companyHQ' className='font-semibold text-blue-900'>
-              Company Headquarters
+              {getText('GLOBAL', 'COMPANY_HQ')}
             </label>
 
             <span className='mb-2 text-xs tracking-tight text-blue-500'>
-              These are remote job listings, but where is your main office?
+              {getText('GLOBAL', 'COMPANY_HQ_DESC')}
             </span>
 
             <input
@@ -367,11 +364,11 @@ const CompanyEditProfile = ({ companyData }) => {
 
         <div className='flex flex-col'>
           <div htmlFor='timeframe' className='font-semibold text-blue-900'>
-            Timeframe
+            {getText('GLOBAL', 'TIMEFRAME')}
           </div>
 
           <span className='mb-2 text-xs tracking-tight text-blue-500 '>
-            Where can your candidates be based out of?
+            {getText('GLOBAL', 'TIMEZONE_WITHIN')}
           </span>
 
           <div className='md:flex'>
@@ -380,7 +377,7 @@ const CompanyEditProfile = ({ companyData }) => {
                 htmlFor='timezone-from'
                 className='font-semibold text-blue-900'
               >
-                From
+                {getText('GLOBAL', 'FROM')}
               </label>
 
               <div className='select-wrap'>
@@ -392,7 +389,7 @@ const CompanyEditProfile = ({ companyData }) => {
                 >
                   {profileInfo === null ? (
                     <option value='' className='text-gray-300'>
-                      Select One...
+                      {getText('GLOBAL', 'SELECT_ONE')}
                     </option>
                   ) : (
                     ''
@@ -427,7 +424,7 @@ const CompanyEditProfile = ({ companyData }) => {
                 htmlFor='timezone-to'
                 className='font-semibold text-blue-900'
               >
-                To
+                {getText('GLOBAL', 'TO')}
               </label>
 
               <div className='select-wrap'>
@@ -439,7 +436,7 @@ const CompanyEditProfile = ({ companyData }) => {
                 >
                   {profileInfo === null ? (
                     <option value='' className='text-gray-300'>
-                      Select One...
+                      {getText('GLOBAL', 'SELECT_ONE')}
                     </option>
                   ) : (
                     ''
@@ -476,7 +473,7 @@ const CompanyEditProfile = ({ companyData }) => {
           type='submit'
           className='w-32 mt-12 btn btn-teal'
         >
-          Save
+          {getText('GLOBAL', 'SAVE')}
         </button>
       </form>
     </div>
