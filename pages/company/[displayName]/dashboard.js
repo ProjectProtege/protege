@@ -18,7 +18,7 @@ const CompanyDashboard = () => {
 
   return (
     <div className='grid-cols-5 gap-10 mt-6 lg:grid lg:mt-12'>
-      <h1 className='sr-only'>Dashboard</h1>
+      <h1 className='sr-only'>{getText('GLOBAL', 'DASHBOARD')}</h1>
       <aside className='col-span-1'>
         <ProfileMenu avatar={avatarImg}>
           <li className='text-lg font-bold'>{profileInfo?.companyName}</li>
@@ -45,23 +45,25 @@ const CompanyDashboard = () => {
 
       <section className='relative col-span-4 mt-12 lg:mt-32'>
         <article className='mb-20 lg:mb-32'>
-          <h2 className='mb-6 text-xl'>Active Listings</h2>
+          <h2 className='mb-6 text-xl'>
+            {getText('GLOBAL', 'ACTIVE_LISTINGS')}
+          </h2>
           <table className='w-full'>
             <tr>
               <th className='text-sm font-light text-blue-400 uppercase'>
-                Title
+                {getText('GLOBAL', 'TITLE')}
               </th>
               <th className='text-sm font-light text-blue-400 uppercase'>
-                Applications Received
+                {getText('GLOBAL', 'APPLICATIONS_RECEIVED')}
               </th>
               <th className='text-sm font-light text-blue-400 uppercase'>
-                Date Posted
+                {getText('GLOBAL', 'DATE_POSTED')}
               </th>
               <th className='text-sm font-light text-right text-blue-400 uppercase'>
-                Status
+                {getText('GLOBAL', 'STATUS')}
               </th>
               <th className='text-sm font-light text-right text-blue-400 uppercase'>
-                Actions
+                {getText('GLOBAL', 'ACTIONS')}
               </th>
             </tr>
             {activeListings ? (
@@ -80,10 +82,9 @@ const CompanyDashboard = () => {
 
               <div className='col-span-1'>
                 <p className='mb-6'>
-                  Your active listings will show up here so you can easily track
-                  them!
+                  {getText('GLOBAL', 'EMPTY_COMPANY_DESC')}
                 </p>
-                <p>It's looking kind of empty.. get some listings up!</p>
+                <p>{getText('GLOBAL', 'EMPTY_COMPANY_DESC2')}</p>
               </div>
             </div>
           ) : (
@@ -92,23 +93,25 @@ const CompanyDashboard = () => {
         </article>
 
         <article>
-          <h2 className='mb-6 text-xl'>Archived Listings</h2>
+          <h2 className='mb-6 text-xl'>
+            {getText('GLOBAL', 'ARCHIVED_LISTINGS')}
+          </h2>
           <table className='w-full'>
             <tr>
               <th className='text-sm font-light text-blue-400 uppercase'>
-                Title
+                {getText('GLOBAL', 'TITLE')}
               </th>
               <th className='text-sm font-light text-blue-400 uppercase'>
-                Applications Received
+                {getText('GLOBAL', 'APPLICATIONS_RECEIVED')}
               </th>
               <th className='text-sm font-light text-blue-400 uppercase'>
-                Date Posted
+                {getText('GLOBAL', 'DATE_POSTED')}
               </th>
               <th className='text-sm font-light text-right text-blue-400 uppercase'>
-                Status
+                {getText('GLOBAL', 'STATUS')}
               </th>
               <th className='text-sm font-light text-right text-blue-400 uppercase'>
-                Actions
+                {getText('GLOBAL', 'ACTIONS')}
               </th>
             </tr>
             {activeListings ? (
@@ -123,7 +126,7 @@ const CompanyDashboard = () => {
 
           {!archivedListings ? (
             <div className='items-center w-full grid-cols-2 gap-10 mt-10 lg:grid'>
-              <p>Your archived listings will show up here.</p>
+              <p>{getText('GLOBAL', 'EMPTY_ARCHIVE_DESC')}</p>
             </div>
           ) : (
             <div>Hello</div>
