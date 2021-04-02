@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "emulators": "firebase emulators:start",
-    "test": "cypress open",
+    "e2e:test": "cypress open",
+    "test": "jest --coverage",
+    "test:watch": "yarn test -- --watch",
     "build": "next build",
     "start": "next start"
   },
