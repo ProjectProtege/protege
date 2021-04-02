@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import PropTypes from 'prop-types'
+import ProfileMenu from 'components/user/ProfileMenu'
+import NavLink from 'components/global/NavLink'
 
 // Lib imports
 import { useForm, Controller } from 'react-hook-form'
@@ -32,7 +34,8 @@ const CompanyEditProfile = ({ companyData }) => {
   const [timezonesArray, setTimezonesArray] = useState([])
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
-  const displayName = router.query.displayName
+  const displayNameUrl = router.query.displayName
+  const avatarImg = profileInfo?.companyLogo
 
   useEffect(() => {
     setTimezonesArray(timezones)
@@ -64,7 +67,7 @@ const CompanyEditProfile = ({ companyData }) => {
     resolver: yupResolver(Schema),
     mode: 'onChange',
     defaultValues: {
-      companyName: displayName,
+      companyName: displayNameUrl,
       companyLogo: profileInfo?.companyLogo ? profileInfo.companyLogo : '',
       companyWebsite: profileInfo?.companyWebsite
         ? profileInfo.companyWebsite
@@ -116,9 +119,32 @@ const CompanyEditProfile = ({ companyData }) => {
   }
 
   return (
-    <div>
+    <div className='grid-cols-5 gap-10 lg:grid mt-6 lg:mt-12'>
+      <aside className='col-span-1'>
+        <ProfileMenu avatar={avatarImg}>
+          <li className='text-lg font-bold'>{profileInfo?.companyName}</li>
+          <li>
+            <NavLink
+              href={`/company/${displayNameUrl}/index`}
+              activeClassName='text-teal-700 opacity-100'
+              className='opacity-75 hover:opacity-100'
+            >
+              {getText('GLOBAL', 'VIEW_PROFILE')}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              href={`/company/${displayNameUrl}/edit-profile`}
+              activeClassName='text-teal-700 opacity-100'
+              className='opacity-75 hover:opacity-100'
+            >
+              {getText('GLOBAL', 'EDIT_PROFILE')}
+            </NavLink>
+          </li>
+        </ProfileMenu>
+      </aside>
       <form
-        className='container relative z-30 p-6 mt-4 bg-white rounded-lg shadow-md md:p-8 lg:mt-16'
+        className='container relative z-30 p-6 bg-white rounded-lg shadow-md md:p-8 col-span-4'
         onSubmit={handleSubmit(handleFormEntry)}
       >
         <h2 className='text-2xl'>{getText('GLOBAL', 'PROFILE_INFO')}</h2>
