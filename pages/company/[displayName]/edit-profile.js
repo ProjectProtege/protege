@@ -134,6 +134,15 @@ const CompanyEditProfile = ({ companyData }) => {
           </li>
           <li>
             <NavLink
+              href={`/company/${displayNameUrl}/dashboard`}
+              activeClassName='text-teal-700 opacity-100'
+              className='opacity-75 hover:opacity-100'
+            >
+              {getText('GLOBAL', 'DASHBOARD')}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               href={`/company/${displayNameUrl}/edit-profile`}
               activeClassName='text-teal-700 opacity-100'
               className='opacity-75 hover:opacity-100'
