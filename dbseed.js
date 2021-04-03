@@ -1,16 +1,35 @@
+/* eslint-env node */
+
+// Seeding data is only for non-production environments.
+if (process.env.NODE_ENV === 'production') {
+  throw new Error(
+    'Data is not allowed to be seeded in a production environment.'
+  )
+}
+
+const path = require('path')
+
+// Load the local development configuration file.
+require('dotenv').config({ path: path.join(__dirname, '.env.local') })
+
 const admin = require('firebase-admin')
 const faker = require('faker')
+const yargs = require('yargs/yargs')
+const { hideBin } = require('yargs/helpers')
 
-const projectId = 'protege-dev-env'
-process.env.FIRESTORE_EMULATOR_HOST = 'localhost:8080'
+// The argument --seedSize=n can be passed in.
+// If it is not passed in the default seed size is 10.
+const { seedSize = 10 } = yargs(hideBin(process.argv)).argv
+const { PROJECT_ID: projectId } = process.env
+
 admin.initializeApp({ projectId })
 
 const db = admin.firestore()
 
-function getSeedData() {
+async function seedDatabase() {
   try {
-    ;[...Array(10).keys()].map(() =>
-      db.collection('jobs').add({
+    for (let i = 0; i < seedSize; i++) {
+      const job = {
         approved: true,
         companyDescription: faker.lorem.paragraph(),
         companyEmail: faker.internet.email(),
@@ -43,8 +62,11 @@ function getSeedData() {
         ]),
         status: faker.random.arrayElement(['viewed', 'sent']),
         // dateApplied: faker.date.recent(),
-      })
-    )
+      }
+
+      await db.collection('jobs').add(job)
+    }
+
     // eslint-disable-next-line no-console
     console.log('database seed was successful')
   } catch (error) {
@@ -53,4 +75,4 @@ function getSeedData() {
   }
 }
 
-getSeedData()
+seedDatabase()
