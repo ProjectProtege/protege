@@ -26,7 +26,7 @@ admin.initializeApp({ projectId })
 
 const db = admin.firestore()
 
-async function seedDatabase() {
+async function seedData() {
   try {
     for (let i = 0; i < seedSize; i++) {
       const job = {
@@ -75,4 +75,4 @@ async function seedDatabase() {
   }
 }
 
-seedDatabase()
+seedData()
