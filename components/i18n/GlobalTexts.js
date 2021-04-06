@@ -1,3 +1,10 @@
+// Translations should be added / modified based on the 'en-us' object.
+// To add a new language, copy-paste the whole 'en-us' object, add it at the end of the GlobalTexts object, then change
+// the language format (ie 'en-us') and start the translation.
+// To complete a language, only add the KEY from 'en-us' and add the translation as VALUE. Please, respect the
+// alphabetical order.
+// KEYs should be the same across all languages and are not meant to be translated.
+
 const GlobalTexts = {
   'en-us': {
     ACCOUNT_CREATE: 'Create an Account',
@@ -90,6 +97,98 @@ const GlobalTexts = {
     WELCOME_INTRO:
       'Looks like this is your first time here! What type of account would you like to create?',
     WORK_WITHIN: 'Willing to work within',
+  },
+  'fr-fr': {
+    ACCOUNT_CREATE: 'Créer un compte',
+    ACCOUNT_SIGN_IN: 'Vous avez un compte? Identifiez-vous',
+    ACCOUNT_SIGN_UP: 'Vous n\'avez pas de compte? Enregistrez-vous',
+    ACTIONS: 'Actions',
+    ACTIVE_APPLICATIONS: 'Candidatures en cours',
+    ACTIVE_LISTINGS: 'Offres d\'emploi actives',
+    APPLICATIONS_RECEIVED: 'Candidatures reçues',
+    ARCHIVED_LISTINGS: 'Offres d\'emploi archivées',
+    BACK: 'Retour à la page d\'identification',
+    CANDIDATE: 'Candidat(e)',
+    CANDIDATE_SELECT: 'Je cherche un emploi',
+    COMPANY: 'Entreprise',
+    COMPANY_NAME: 'Nom de l\'entreprise',
+    COMPANY_LOGO: 'Logo de l\'entreprise',
+    COMPANY_SELECT: 'Je cherche des candidat(e)s',
+    COMPANY_WEBSITE: 'Site internet de l\'entreprise',
+    COMPANY_DESCRIPTION: 'Présentation de l\'entreprise',
+    COMPANY_HQ: 'Siège de l\'entreprise',
+    COMPANY_HQ_DESC:
+        'Ces postes sont en télétravail, où se trouvent les bureaux?',
+    CONTINUE: 'Continuer',
+    DASHBOARD: 'Tableau de bord',
+    DATE_POSTED: 'Posté le',
+    DELETE_ACCOUNT: 'Supprimez votre compte',
+    EDIT_PROFILE: 'Editez votre profil',
+    EMAIL: 'Adresse e-mail',
+    EMAIL_COMPANY: 'E-mail de l\'entreprise',
+    EMAIL_REQUIRED: 'Un e-mail est requis.',
+    EMAIL_VALID: 'L\'adresse e-mail doit être valide',
+    EMPTY_ARCHIVE_DESC: 'Vos offres d\'emploi archivées apaîtront ici',
+    EMPTY_COMPANY_DESC:
+        'Vos offres d\'emploi actives aparaîtront ici pour faciliter leur suivi!',
+    EMPTY_COMPANY_DESC2: "Cela semble un peu vide... ajoutez des offres d'emploi!",
+    EMPTY_INTRO:
+        'Vos candidatures actives aparaîtront ici pour un meilleur accès et suivi!',
+    EMPTY_INTRO_2: 'Cela semble un peu vide... faîtes vos premières candidatures!',
+    FIRST_NAME: 'Prénom',
+    FILL_OUT: 'Remplissez votre profil and commencez!',
+    FIRST_NAME_REQUIRED: 'Votre prénom est requis.',
+    FROM: 'Depuis',
+    TO: 'A',
+    GITHUB: 'Identifiez-vous avec Github',
+    HERE: 'ici.',
+    HIDE_INFO: 'Cacher l\'information',
+    LAST_NAME: 'Nom de famille',
+    LAST_NAME_REQUIRED: 'Le nom de famille est requis.',
+    NAME: 'Nom',
+    NAME_REQUIRED: "Dîtes-nous qui vous êtes.",
+    OPTIONAL: 'facultatif',
+    OR: 'ou',
+    PASSWORD: 'Mot de passe',
+    PASSWORD_FORGOT: 'Mot de passe oublié?',
+    PASSWORD_MATCH:
+        'Votre mot de passe doit contenir au moins 8 caractères, avec au moins: 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial.',
+    PASSWORD_REQUIRED: 'Le mot de passe est requis.',
+    PASSWORD_RESET: 'Réinitialisez votre mot de passe',
+    PASSWORD_RESET_SUCCESS:
+        'Réinitialisation réussie! Un e-mail vous a été envoyé(e) avec un lien pour vous reconnecter.',
+    PLEASE_PROVIDE_FILE_TYPE:
+        'Le logo de l\'entreprise doit être au format .jpg, .jpeg, ou .png pour aparaître sur l\'offre d\'emploi',
+    PORTFOLIO: 'Portfolio',
+    PROFILE_INFO: 'Votre profil',
+    PROTEGE: 'Protegé',
+    QUESTION_REQUIRED: 'Ce champ est obligatoire.',
+    QUESTION1: 'Décrivez comment vous avez résolu une situation difficile récemment.',
+    QUESTION2: 'Quelles ont été vos premières réflexions face à ce problème?',
+    QUESTION3: 'Comment êtes-vous parvenu(e) à résoudre ce problème?',
+    SAVE: 'Sauvegarder',
+    SELECT: 'Sélectionner un fuseau horaire',
+    SELECT_ONE: 'Sélectionner un...',
+    SIGN_IN: 'S\'identifier',
+    SIGN_OUT: 'Se déconnecter',
+    SOCIAL_ACCOUNTS: 'Social Media',
+    STATUS: 'Statut',
+    TABLE_COMPANY: 'Entreprise',
+    TABLE_DATE: 'Date de candidature',
+    TABLE_STATUS: 'Statut',
+    TABLE_TITLE: 'Titre',
+    TIMEFRAME: 'Période',
+    TIMEFRAME_REQUIRED: 'Une période est requise.',
+    TIMEZONE: 'Fuseau horaire',
+    TIMEZONE_DESC: 'Quel est le fuseau horaire du siège de l\'entreprise?',
+    TIMEZONE_REQUIRED: 'Un Fuseau horaire est requis.',
+    TIMEZONE_WITHIN: 'Quelle doit être la situation géographique de vos candidats?',
+    TITLE: 'Titre',
+    VIEW_PROFILE: 'Votre votre profil',
+    WELCOME: 'Bienvenue sur Protegé!',
+    WELCOME_INTRO:
+        'Vous semblez être nouvelle/nouveau ici! Quel type de compte souhaitez-vous créer?',
+    WORK_WITHIN: 'Souhaite travailler dans...',
   },
 }
 
