@@ -49,10 +49,10 @@ const ProfileMenu = ({ avatar, children }) => {
         {children}
         <li>
           <button onClick={handleSignOut}>
-            {getText('ACCOUNT', 'SIGN_OUT')}
+            {getText('GLOBAL', 'SIGN_OUT')}
           </button>
         </li>
-        <li className='text-red-500'>{getText('ACCOUNT', 'DELETE_ACCOUNT')}</li>
+        <li className='text-red-500'>{getText('GLOBAL', 'DELETE_ACCOUNT')}</li>
       </ul>
     </div>
   )

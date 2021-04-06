@@ -27,7 +27,7 @@ const CandidateDashboard = () => {
               href={`/candidate/${displayName}/`}
               activeClassName='text-teal-500'
             >
-              {getText('ACCOUNT', 'VIEW_PROFILE')}
+              {getText('GLOBAL', 'VIEW_PROFILE')}
             </NavLink>
           </li>
           <li>
@@ -35,7 +35,7 @@ const CandidateDashboard = () => {
               href={`/candidate/${displayName}/edit-profile`}
               activeClassName='text-teal-500 font-bold'
             >
-              {getText('ACCOUNT', 'EDIT_PROFILE')}
+              {getText('GLOBAL', 'EDIT_PROFILE')}
             </NavLink>
           </li>
         </ProfileMenu>
