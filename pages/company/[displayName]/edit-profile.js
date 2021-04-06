@@ -63,7 +63,7 @@ const CompanyEditProfile = ({ companyData }) => {
     ),
   })
 
-  const { register, handleSubmit, control, errors } = useForm({
+  const { register, handleSubmit, reset, control, errors } = useForm({
     resolver: yupResolver(Schema),
     mode: 'onChange',
     defaultValues: {
@@ -73,7 +73,7 @@ const CompanyEditProfile = ({ companyData }) => {
         ? profileInfo.companyWebsite
         : '',
       companyEmail: currentUser.email,
-      companyDescription: profileInfo.companyDescription
+      companyDescription: profileInfo?.companyDescription
         ? profileInfo.companyDescription
         : '',
       companyHQ: profileInfo?.companyHQ ? profileInfo.companyHQ : '',
@@ -88,6 +88,10 @@ const CompanyEditProfile = ({ companyData }) => {
         : '',
     },
   })
+
+  useEffect(() => {
+    reset(profileInfo)
+  }, [reset])
 
   function handleLogoUpload(url) {
     setLogo(url)
