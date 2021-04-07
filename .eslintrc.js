@@ -1,4 +1,5 @@
 module.exports = {
+  parser: 'babel-eslint',
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
@@ -9,6 +10,7 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint',
     sourceType: 'module',
+    allowImportExportEverywhere: true,
   },
   rules: {
     'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],

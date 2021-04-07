@@ -26,9 +26,7 @@ const CandidateEditProfile = ({ candidateData }) => {
   const [timezonesArray, setTimezonesArray] = useState([])
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
-  console.log(profileInfo)
-
-  let displayName = router.query.displayName
+  const { displayName } = router.query
 
   useEffect(() => {
     setTimezonesArray(timezones)
@@ -53,7 +51,7 @@ const CandidateEditProfile = ({ candidateData }) => {
     question3: yup.string().required(getText('GLOBAL', 'QUESTION_REQUIRED')),
   })
 
-  const { register, handleSubmit, control, reset, errors } = useForm({
+  const { register, handleSubmit, reset, errors } = useForm({
     resolver: yupResolver(Schema),
     mode: 'onChange',
     defaultValues: {
@@ -110,17 +108,16 @@ const CandidateEditProfile = ({ candidateData }) => {
         question3: data.question3,
       })
       .then(() => {
-        console.log('Document successfully written!')
         router.push(`/candidate/${displayName}/dashboard`)
       })
-      .catch((error) => {
-        console.error('Error writing document: ', error)
+      .catch((err) => {
+        throw new Error('Error writing document: ', err)
       })
   }
 
   return (
     <>
-      <div className='container px-6 mx-auto 2xl:px-0'>
+      <div className='container mx-auto'>
         <div className='grid-cols-5 gap-10 lg:grid'>
           <div className='col-span-1 mb-12 md:mb-0'>
             <ProfileMenu>
@@ -157,8 +154,8 @@ const CandidateEditProfile = ({ candidateData }) => {
               className='mb-6'
             >
               {/* name */}
-              <div className='flex flex-col justify-between md:space-x-8 md:flex-row'>
-                <div className='flex flex-col w-full mb-3 space-y-1'>
+              <div className='md:grid grid-cols-2 gap-8'>
+                <div className='flex flex-col w-full mb-3'>
                   <label htmlFor='firstName'>
                     {getText('GLOBAL', 'FIRST_NAME')}
                   </label>
@@ -176,7 +173,7 @@ const CandidateEditProfile = ({ candidateData }) => {
                   ) : null}
                 </div>
 
-                <div className='flex flex-col w-full mb-3 space-y-1'>
+                <div className='flex flex-col w-full mb-3'>
                   <label htmlFor='lastName'>
                     {getText('GLOBAL', 'LAST_NAME')}
                   </label>
@@ -196,8 +193,8 @@ const CandidateEditProfile = ({ candidateData }) => {
               </div>
 
               {/* email/portfolio */}
-              <div className='flex flex-col justify-between mb-8 md:space-x-8 md:flex-row'>
-                <div className='flex flex-col w-full mb-3 space-y-1'>
+              <div className='md:grid grid-cols-2 gap-8 mb-12'>
+                <div className='flex flex-col w-full mb-3 '>
                   <label htmlFor='email'>{getText('GLOBAL', 'EMAIL')}</label>
                   <input
                     id='email'
@@ -213,7 +210,7 @@ const CandidateEditProfile = ({ candidateData }) => {
                   ) : null}
                 </div>
 
-                <div className='flex flex-col w-full mb-3 space-y-1'>
+                <div className='flex flex-col w-full mb-3 '>
                   <label htmlFor='portfolio'>
                     {getText('GLOBAL', 'PORTFOLIO')}
                     <span className='text-sm font-normal'> (optional)</span>
@@ -229,14 +226,15 @@ const CandidateEditProfile = ({ candidateData }) => {
               </div>
 
               {/* social/timezone */}
-              <div className='flex flex-col justify-between mb-12 space-y-6 md:space-y-0 md:space-x-8 md:flex-row'>
-                <div className='flex flex-col w-full space-y-4'>
-                  <label htmlFor='social' className='mb-0'>
+              <div className='md:grid grid-cols-2 gap-8 mb-12'>
+                <div className='mb-6 md:mb-0'>
+                  <label htmlFor='social' className='mb-6'>
                     {getText('GLOBAL', 'SOCIAL_ACCOUNTS')}
                   </label>
-                  <div className='flex items-center space-x-3'>
-                    <div className='text-3xl opacity-50'>
-                      <i className='fab fa-dev'></i>
+
+                  <div className='flex items-center my-2'>
+                    <div className='text-3xl opacity-50 mr-4'>
+                      <i className='fab fa-dev' />
                     </div>
                     <input
                       type='text'
@@ -246,9 +244,9 @@ const CandidateEditProfile = ({ candidateData }) => {
                     />
                   </div>
 
-                  <div className='flex items-center space-x-2'>
-                    <div className='text-3xl opacity-50'>
-                      <i className='fab fa-github'></i>
+                  <div className='flex items-center mb-2'>
+                    <div className='text-3xl opacity-50 mr-3'>
+                      <i className='fab fa-github' />
                     </div>
                     <input
                       type='text'
@@ -258,9 +256,9 @@ const CandidateEditProfile = ({ candidateData }) => {
                     />
                   </div>
 
-                  <div className='flex items-center space-x-3'>
-                    <div className='text-3xl opacity-50'>
-                      <i className='fab fa-linkedin'></i>
+                  <div className='flex items-center mb-2'>
+                    <div className='text-3xl opacity-50 mr-4'>
+                      <i className='fab fa-linkedin' />
                     </div>
                     <input
                       type='text'
@@ -270,9 +268,9 @@ const CandidateEditProfile = ({ candidateData }) => {
                     />
                   </div>
 
-                  <div className='flex items-center space-x-2'>
-                    <div className='text-3xl opacity-50'>
-                      <i className='fab fa-twitter'></i>
+                  <div className='flex items-center mb-2'>
+                    <div className='text-3xl opacity-50 mr-3'>
+                      <i className='fab fa-twitter' />
                     </div>
                     <input
                       type='text'
@@ -283,9 +281,9 @@ const CandidateEditProfile = ({ candidateData }) => {
                   </div>
                 </div>
 
-                <div className='flex flex-col justify-between w-full space-y-4'>
+                <div className='flex flex-col w-full'>
                   {/* hide info */}
-                  <div className='flex items-center justify-between mb-3'>
+                  {/* <div className='flex items-center justify-between mb-3'>
                     <label htmlFor='hideInfo' className='mb-0'>
                       {getText('GLOBAL', 'HIDE_INFO')}
                     </label>
@@ -302,36 +300,38 @@ const CandidateEditProfile = ({ candidateData }) => {
                         className='block h-5 mb-0 overflow-hidden bg-gray-300 rounded-full cursor-pointer toggle-label'
                       ></label>
                     </div>
-                  </div>
+                  </div> */}
 
                   {/* timezone */}
-                  <div className='flex flex-col w-full space-y-1'>
+                  <div className='flex flex-col w-full mb-8'>
                     <label htmlFor='timezone'>
                       {getText('GLOBAL', 'TIMEZONE')}
                     </label>
-                    <select
-                      id='timezone'
-                      type='text'
-                      name='timezone'
-                      className='w-full input'
-                      ref={register}
-                    >
-                      <option value={getText('DASHBOARD', 'SELECT')}>
-                        {getText('DASHBOARD', 'SELECT')}
-                      </option>
+                    <div className='select-wrap'>
+                      <select
+                        id='timezone'
+                        type='text'
+                        name='timezone'
+                        className='w-full input input-select'
+                        ref={register}
+                      >
+                        <option value={getText('GLOBAL', 'SELECT')}>
+                          {getText('GLOBAL', 'SELECT')}
+                        </option>
 
-                      {timezonesArray.map((timezone, index) => {
-                        return (
-                          <option
-                            key={index}
-                            value={timezone.text}
-                            className='text-gray-300'
-                          >
-                            {timezone.text}
-                          </option>
-                        )
-                      })}
-                    </select>
+                        {timezonesArray.map((timezone, index) => {
+                          return (
+                            <option
+                              key={index}
+                              value={timezone.text}
+                              className='text-gray-300'
+                            >
+                              {timezone.text}
+                            </option>
+                          )
+                        })}
+                      </select>
+                    </div>
                     {errors.timezone ? (
                       <p className='input-error'>
                         {errors.timezone && errors.timezone.message}
@@ -340,23 +340,38 @@ const CandidateEditProfile = ({ candidateData }) => {
                   </div>
 
                   {/* timeframe */}
-                  <div className='flex flex-col w-full space-y-4'>
+                  <div className='flex flex-col w-full'>
                     <label htmlFor='timeframe'>
                       {getText('GLOBAL', 'WORK_WITHIN')}
                     </label>
 
-                    <div className='flex justify-between space-x-3'>
-                      <div className='flex flex-col w-full space-y-1'>
-                        <select
-                          id='timeframe_from'
-                          type='text'
-                          name='timeframe_from'
-                          className='input'
-                          ref={register}
-                        >
-                          <option value=''>From</option>
-                          <option value='Option #1'>Option #1</option>
-                        </select>
+                    <div className='grid grid-cols-2 gap-6'>
+                      <div className='flex flex-col w-full '>
+                        <div className='select-wrap'>
+                          <select
+                            id='timeframe_from'
+                            type='text'
+                            name='timeframe_from'
+                            className='input input-select'
+                            ref={register}
+                          >
+                            <option value={getText('GLOBAL', 'SELECT')}>
+                              {getText('GLOBAL', 'FROM')}
+                            </option>
+
+                            {timezonesArray.map((timezone, index) => {
+                              return (
+                                <option
+                                  key={index}
+                                  value={timezone.text}
+                                  className='text-gray-300'
+                                >
+                                  {timezone.text}
+                                </option>
+                              )
+                            })}
+                          </select>
+                        </div>
                         {errors.timeframe_from ? (
                           <p className='input-error'>
                             {errors.timeframe_from &&
@@ -365,17 +380,32 @@ const CandidateEditProfile = ({ candidateData }) => {
                         ) : null}
                       </div>
 
-                      <div className='flex flex-col w-full space-y-1'>
-                        <select
-                          id='timeframe_to'
-                          type='text'
-                          name='timeframe_to'
-                          className='input'
-                          ref={register}
-                        >
-                          <option value=''>To</option>
-                          <option value='Option #1'>Option #1</option>
-                        </select>
+                      <div className='flex flex-col w-full '>
+                        <div className='select-wrap'>
+                          <select
+                            id='timeframe_to'
+                            type='text'
+                            name='timeframe_to'
+                            className='input input-select'
+                            ref={register}
+                          >
+                            <option value={getText('GLOBAL', 'SELECT')}>
+                              {getText('GLOBAL', 'TO')}
+                            </option>
+
+                            {timezonesArray.map((timezone, index) => {
+                              return (
+                                <option
+                                  key={index}
+                                  value={timezone.text}
+                                  className='text-gray-300'
+                                >
+                                  {timezone.text}
+                                </option>
+                              )
+                            })}
+                          </select>
+                        </div>
 
                         {errors ? (
                           <p className='input-error'>

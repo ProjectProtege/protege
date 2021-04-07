@@ -34,7 +34,7 @@ const CompanyEditProfile = ({ companyData }) => {
   const [timezonesArray, setTimezonesArray] = useState([])
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
-  const displayNameUrl = router.query.displayName
+  const { displayName } = router.query
   const avatarImg = profileInfo?.companyLogo
 
   useEffect(() => {
@@ -67,7 +67,7 @@ const CompanyEditProfile = ({ companyData }) => {
     resolver: yupResolver(Schema),
     mode: 'onChange',
     defaultValues: {
-      companyName: displayNameUrl,
+      companyName: displayName,
       companyLogo: profileInfo?.companyLogo ? profileInfo.companyLogo : '',
       companyWebsite: profileInfo?.companyWebsite
         ? profileInfo.companyWebsite
@@ -118,7 +118,7 @@ const CompanyEditProfile = ({ companyData }) => {
           router.push(`/company/${displayName}/dashboard`)
         })
     } catch {
-      console.error("Oops! Something went wrong. That's our bad.")
+      throw new Error("Oops! Something went wrong. That's our bad.")
     }
   }
 
@@ -129,7 +129,7 @@ const CompanyEditProfile = ({ companyData }) => {
           <li className='text-lg font-bold'>{profileInfo?.companyName}</li>
           <li>
             <NavLink
-              href={`/company/${displayNameUrl}/index`}
+              href={`/company/${displayName}`}
               activeClassName='text-teal-700 opacity-100'
               className='opacity-75 hover:opacity-100'
             >
@@ -138,7 +138,7 @@ const CompanyEditProfile = ({ companyData }) => {
           </li>
           <li>
             <NavLink
-              href={`/company/${displayNameUrl}/dashboard`}
+              href={`/company/${displayName}/dashboard`}
               activeClassName='text-teal-700 opacity-100'
               className='opacity-75 hover:opacity-100'
             >
@@ -147,7 +147,7 @@ const CompanyEditProfile = ({ companyData }) => {
           </li>
           <li>
             <NavLink
-              href={`/company/${displayNameUrl}/edit-profile`}
+              href={`/company/${displayName}/edit-profile`}
               activeClassName='text-teal-700 opacity-100'
               className='opacity-75 hover:opacity-100'
             >
