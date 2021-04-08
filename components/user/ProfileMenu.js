@@ -115,6 +115,7 @@ const ProfileMenu = ({ avatar, children, profileUid, accountType }) => {
 }
 
 ProfileMenu.propTypes = {
+  children: PropTypes.node.isRequired,
   avatar: PropTypes.string,
   profileUid: PropTypes.string,
   accountType: PropTypes.string,
