@@ -19,6 +19,7 @@ import { useProfileInfo } from 'store/profile_info'
 import getText from 'utils/i18n/Texts'
 
 import timezones from 'data/timezones.json'
+import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
 
 // Custom component imports
 const SimpleFileUpload = dynamic(() => import('react-simple-file-upload'), {
@@ -123,41 +124,9 @@ const CompanyEditProfile = ({ companyData }) => {
   }
 
   return (
-    <div className='grid-cols-5 gap-10 lg:grid mt-6 lg:mt-12'>
-      <aside className='col-span-1'>
-        <ProfileMenu avatar={avatarImg}>
-          <li className='text-lg font-bold'>{profileInfo?.companyName}</li>
-          <li>
-            <NavLink
-              href={`/company/${displayName}`}
-              activeClassName='text-teal-700 opacity-100'
-              className='opacity-75 hover:opacity-100'
-            >
-              {getText('GLOBAL', 'VIEW_PROFILE')}
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              href={`/company/${displayName}/dashboard`}
-              activeClassName='text-teal-700 opacity-100'
-              className='opacity-75 hover:opacity-100'
-            >
-              {getText('GLOBAL', 'DASHBOARD')}
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              href={`/company/${displayName}/edit-profile`}
-              activeClassName='text-teal-700 opacity-100'
-              className='opacity-75 hover:opacity-100'
-            >
-              {getText('GLOBAL', 'EDIT_PROFILE')}
-            </NavLink>
-          </li>
-        </ProfileMenu>
-      </aside>
+    <AccountInteriorLayout className='mt-12'>
       <form
-        className='container relative z-30 p-6 bg-white rounded-lg shadow-md md:p-8 col-span-4'
+        className='container relative z-30 p-6 bg-white rounded-lg shadow-md md:p-8'
         onSubmit={handleSubmit(handleFormEntry)}
       >
         <h2 className='text-2xl'>{getText('GLOBAL', 'PROFILE_INFO')}</h2>
@@ -515,7 +484,7 @@ const CompanyEditProfile = ({ companyData }) => {
           {getText('GLOBAL', 'SAVE')}
         </button>
       </form>
-    </div>
+    </AccountInteriorLayout>
   )
 }
 

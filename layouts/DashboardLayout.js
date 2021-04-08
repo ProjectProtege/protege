@@ -12,7 +12,7 @@ const DashboardLayout = ({ children, hasBanner }) => {
 
 DashboardLayout.propTypes = {
   children: PropTypes.node.isRequired,
-  hasBanner: PropTypes.boolean,
+  hasBanner: PropTypes.bool,
 }
 
 DashboardLayout.defaultProps = {
