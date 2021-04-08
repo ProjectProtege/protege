@@ -41,10 +41,9 @@ const ProfileMenu = ({ avatar, children, profileUid, accountType }) => {
 
   const handleSignOut = async () => {
     try {
-      console.log('click')
       await signout()
-    } catch (error) {
-      console.log('Sign Out Error:', error)
+    } catch (err) {
+      throw new Error(err)
     }
   }
 
