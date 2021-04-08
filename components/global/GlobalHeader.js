@@ -11,7 +11,6 @@ import Logo from 'assets/images/ProtegeLogo'
 
 const GlobalHeader = () => {
   const router = useRouter()
-  const location = useRouter().route
   const { currentUser, signout } = useAuth()
   const isNavOpen = useUi((s) => s.isNavOpen)
   const setIsNavOpen = useUi((s) => s.setIsNavOpen)

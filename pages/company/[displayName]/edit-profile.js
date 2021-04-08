@@ -3,8 +3,6 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import PropTypes from 'prop-types'
-import ProfileMenu from 'components/user/ProfileMenu'
-import NavLink from 'components/global/NavLink'
 
 // Lib imports
 import { useForm, Controller } from 'react-hook-form'
@@ -27,16 +25,14 @@ const SimpleFileUpload = dynamic(() => import('react-simple-file-upload'), {
 })
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
-const CompanyEditProfile = ({ companyData }) => {
+const CompanyEditProfile = () => {
   const router = useRouter()
   const { currentUser } = useAuth()
   const [logo, setLogo] = useState('')
-  const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
   const [timezonesArray, setTimezonesArray] = useState([])
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
   const { displayName } = router.query
-  const avatarImg = profileInfo?.companyLogo
 
   useEffect(() => {
     setTimezonesArray(timezones)
@@ -228,7 +224,7 @@ const CompanyEditProfile = ({ companyData }) => {
               <div className='mb-2 md:mb-0'>
                 <SimpleFileUpload
                   apiKey={process.env.SIMPLE_FILE_API_KEY}
-                  preview={true}
+                  preview
                   onSuccess={handleLogoUpload}
                   value={logo}
                 />

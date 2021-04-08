@@ -1,21 +1,10 @@
-import ProfileMenu from 'components/user/ProfileMenu'
-import { useRouter } from 'next/router'
 import CompanyDashboardEmpty from 'assets/images/CompanyDashboardEmpty'
-import { useProfileInfo } from 'store/profile_info'
-import NavLink from 'components/global/NavLink'
-import { useAuth } from 'store/AuthContext'
 import getText from 'utils/i18n/Texts'
 import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
 
 const CompanyDashboard = () => {
-  const { currentUser } = useAuth()
-  const router = useRouter()
   const activeListings = null
   const archivedListings = null
-  const profileInfo = useProfileInfo((s) => s.profileInfo)
-
-  const displayNameUrl = router.query.displayName
-  const avatarImg = profileInfo?.companyLogo
 
   return (
     <AccountInteriorLayout className='mt-12'>
