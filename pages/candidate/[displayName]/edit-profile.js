@@ -26,6 +26,8 @@ const CandidateEditProfile = ({ candidateData }) => {
   const [timezonesArray, setTimezonesArray] = useState([])
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
+  console.log(profileInfo)
+
   let displayName = router.query.displayName
 
   useEffect(() => {
@@ -51,7 +53,7 @@ const CandidateEditProfile = ({ candidateData }) => {
     question3: yup.string().required(getText('GLOBAL', 'QUESTION_REQUIRED')),
   })
 
-  const { register, handleSubmit, control, errors } = useForm({
+  const { register, handleSubmit, control, reset, errors } = useForm({
     resolver: yupResolver(Schema),
     mode: 'onChange',
     defaultValues: {
@@ -80,6 +82,10 @@ const CandidateEditProfile = ({ candidateData }) => {
       question3: profileInfo?.question3 ? profileInfo.question3 : '',
     },
   })
+
+  useEffect(() => {
+    reset(profileInfo)
+  }, [reset])
 
   const handleProfileForm = (data) => {
     setLoading(true)
@@ -114,9 +120,9 @@ const CandidateEditProfile = ({ candidateData }) => {
 
   return (
     <>
-      <div className='max-w-4xl mx-auto'>
-        <div className='flex flex-col justify-between space-y-6 md:space-x-24 md:space-y-0 md:flex-row'>
-          <div className='flex flex-col order-2 space-y-4 md:order-1'>
+      <div className='container px-6 mx-auto 2xl:px-0'>
+        <div className='grid-cols-5 gap-10 lg:grid'>
+          <div className='col-span-1 mb-12 md:mb-0'>
             <ProfileMenu>
               <li className='font-bold'>{displayName}</li>
               <li>
@@ -138,7 +144,7 @@ const CandidateEditProfile = ({ candidateData }) => {
             </ProfileMenu>
           </div>
 
-          <div className='order-1 w-full md:order-2'>
+          <div className='col-span-4'>
             <div className='flex items-center justify-between mb-6'>
               <h1 className='mb-3 text-lg text-blue-900'>
                 {getText('GLOBAL', 'PROFILE_INFO')}
