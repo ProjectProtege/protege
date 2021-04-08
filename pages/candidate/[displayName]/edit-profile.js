@@ -18,13 +18,13 @@ import ProfileMenu from 'components/user/ProfileMenu'
 
 import timezones from 'data/timezones.json'
 
-const CandidateEditProfile = ({ candidateData }) => {
+const CandidateEditProfile = () => {
   const router = useRouter()
   const { currentUser } = useAuth()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [timezonesArray, setTimezonesArray] = useState([])
-  const profileInfo = useProfileInfo((s) => s.profileInfo)
+  const profileInfo = useProfileInfo((s) => s.profileInfo || {})
 
   const { displayName } = router.query
 
@@ -120,7 +120,11 @@ const CandidateEditProfile = ({ candidateData }) => {
       <div className='container mx-auto'>
         <div className='grid-cols-5 gap-10 lg:grid'>
           <div className='col-span-1 mb-12 md:mb-0'>
-            <ProfileMenu>
+            <ProfileMenu
+              avatar={profileInfo.logo}
+              profileUid={currentUser.uid}
+              accountType={currentUser.accountType}
+            >
               <li className='font-bold'>{displayName}</li>
               <li>
                 <NavLink
@@ -430,7 +434,7 @@ const CandidateEditProfile = ({ candidateData }) => {
                   cols='30'
                   rows='5'
                   ref={register}
-                ></textarea>
+                />
                 {errors ? (
                   <p className='input-error'>
                     {errors.question1 && errors.question1.message}
@@ -450,7 +454,7 @@ const CandidateEditProfile = ({ candidateData }) => {
                   cols='30'
                   rows='5'
                   ref={register}
-                ></textarea>
+                />
                 {errors ? (
                   <p className='input-error'>
                     {errors.question2 && errors.question2.message}
@@ -470,7 +474,7 @@ const CandidateEditProfile = ({ candidateData }) => {
                   cols='30'
                   rows='5'
                   ref={register}
-                ></textarea>
+                />
                 {errors ? (
                   <p className='input-error'>
                     {errors.question3 && errors.question3.message}
@@ -505,7 +509,7 @@ CandidateEditProfile.propTypes = {
     social_github: PropTypes.string,
     social_linkedin: PropTypes.string,
     social_twitter: PropTypes.string,
-    hideInfo: PropTypes.boolean,
+    hideInfo: PropTypes.bool,
     timezone: PropTypes.string,
     timeframe_from: PropTypes.string,
     timeframe_to: PropTypes.string,

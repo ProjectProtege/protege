@@ -423,7 +423,7 @@ const PostAJobForm = ({ jobData }) => {
                   <div className='mb-2 md:mb-0'>
                     <SimpleFileUpload
                       apiKey={process.env.SIMPLE_FILE_API_KEY}
-                      preview={true}
+                      preview
                       onSuccess={handleLogoUpload}
                       value={logo}
                     />
