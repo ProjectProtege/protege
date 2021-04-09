@@ -68,7 +68,6 @@ const CandidateEditProfile = () => {
       social_twitter: profileInfo?.social_twitter
         ? profileInfo.social_twitter
         : '',
-      hideInfo: profileInfo?.hideInfo ? profileInfo.hideInfo : '',
       timezone: profileInfo?.timezone ? profileInfo.timezone : '',
       timeframe_from: profileInfo?.timeframe_from
         ? profileInfo.timeframe_from
@@ -98,7 +97,6 @@ const CandidateEditProfile = () => {
         social_github: data.social_github,
         social_linkedin: data.social_linkedin,
         social_twitter: data.social_twitter,
-        hideInfo: data.hideInfo,
         timezone: data.timezone,
         timeframe_from: data.timeframe_from,
         timeframe_to: data.timeframe_to,
@@ -255,26 +253,6 @@ const CandidateEditProfile = () => {
             </div>
 
             <div className='flex flex-col w-full'>
-              {/* hide info */}
-              {/* <div className='flex items-center justify-between mb-3'>
-                    <label htmlFor='hideInfo' className='mb-0'>
-                      {getText('GLOBAL', 'HIDE_INFO')}
-                    </label>
-                    <div className='relative inline-block w-12 align-middle transition duration-700 ease-in-out select-none'>
-                      <input
-                        type='checkbox'
-                        name='hideInfo'
-                        id='toggle'
-                        className='absolute block w-5 h-5 bg-white border-gray-300 rounded-full outline-none appearance-none cursor-pointer border-3 toggle-checkbox'
-                        ref={register}
-                      />
-                      <label
-                        htmlFor='toggle'
-                        className='block h-5 mb-0 overflow-hidden bg-gray-300 rounded-full cursor-pointer toggle-label'
-                      ></label>
-                    </div>
-                  </div> */}
-
               {/* timezone */}
               <div className='flex flex-col w-full mb-8'>
                 <label htmlFor='timezone'>
@@ -459,44 +437,42 @@ const CandidateEditProfile = () => {
   )
 }
 
-CandidateEditProfile.propTypes = {
-  candidateData: PropTypes.shape({
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
-    email: PropTypes.string,
-    portfolio: PropTypes.string,
-    social_dev: PropTypes.string,
-    social_github: PropTypes.string,
-    social_linkedin: PropTypes.string,
-    social_twitter: PropTypes.string,
-    hideInfo: PropTypes.bool,
-    timezone: PropTypes.string,
-    timeframe_from: PropTypes.string,
-    timeframe_to: PropTypes.string,
-    question1: PropTypes.string,
-    question2: PropTypes.string,
-    question3: PropTypes.string,
-  }),
-}
+// CandidateEditProfile.propTypes = {
+//   candidateData: PropTypes.shape({
+//     firstName: PropTypes.string,
+//     lastName: PropTypes.string,
+//     email: PropTypes.string,
+//     portfolio: PropTypes.string,
+//     social_dev: PropTypes.string,
+//     social_github: PropTypes.string,
+//     social_linkedin: PropTypes.string,
+//     social_twitter: PropTypes.string,
+//     timezone: PropTypes.string,
+//     timeframe_from: PropTypes.string,
+//     timeframe_to: PropTypes.string,
+//     question1: PropTypes.string,
+//     question2: PropTypes.string,
+//     question3: PropTypes.string,
+//   }),
+// }
 
-CandidateEditProfile.defaultProps = {
-  candidateData: {
-    firstName: '',
-    lastName: '',
-    email: '',
-    portfolio: '',
-    social_dev: '',
-    social_github: '',
-    social_linkedin: '',
-    social_twitter: '',
-    hideInfo: false,
-    timezone: '',
-    timeframe_from: '',
-    timeframe_to: '',
-    question1: '',
-    question2: '',
-    question3: '',
-  },
-}
+// CandidateEditProfile.defaultProps = {
+//   candidateData: {
+//     firstName: '',
+//     lastName: '',
+//     email: '',
+//     portfolio: '',
+//     social_dev: '',
+//     social_github: '',
+//     social_linkedin: '',
+//     social_twitter: '',
+//     timezone: '',
+//     timeframe_from: '',
+//     timeframe_to: '',
+//     question1: '',
+//     question2: '',
+//     question3: '',
+//   },
+// }
 
 export default CandidateEditProfile
