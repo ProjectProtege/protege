@@ -2,10 +2,8 @@ import React, { useContext, useState, useEffect } from 'react'
 import firebase from 'firebase/app'
 import { useRouter } from 'next/router'
 
-import { auth } from '../utils/db/index'
-import { db } from 'utils/db'
+import { auth, db } from 'utils/db/index'
 
-import { useAccountType } from 'store/account-type_store'
 import { useProfileInfo } from 'store/profile_info'
 
 const AuthContext = React.createContext()
@@ -14,12 +12,21 @@ export function useAuth() {
   return useContext(AuthContext)
 }
 
+// eslint-disable-next-line react/prop-types
 export function AuthProvider({ children }) {
-  const accountType = useAccountType((s) => s.accountType)
   const router = useRouter()
   const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
   const [currentUser, setCurrentUser] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
+
+  async function setUserProfileInfo(user) {
+    const userProfileInfo = await db
+      .collection(user.photoURL === 'candidate' ? 'candidates' : 'companies')
+      .doc(user.uid)
+      .get()
+
+    setProfileInfo(userProfileInfo.data())
+  }
 
   useEffect(async () => {
     const unsubscribe = await auth.onAuthStateChanged((user) => {
@@ -41,13 +48,8 @@ export function AuthProvider({ children }) {
     return unsubscribe
   }, [])
 
-  async function setUserProfileInfo(user) {
-    const userProfileInfo = await db
-      .collection(user.photoURL === 'candidate' ? 'candidates' : 'companies')
-      .doc(user.uid)
-      .get()
-
-    setProfileInfo(userProfileInfo.data())
+  function updateUserProfile(data) {
+    return auth.currentUser.updateProfile(data)
   }
 
   const signup = async (name, email, password, accountType) => {
@@ -61,7 +63,7 @@ export function AuthProvider({ children }) {
           })
 
           // Gets the uid for the users account object
-          const uid = userCredential.user.uid
+          const { uid } = userCredential.user
 
           // Creates document in appropriate collection with matching uid
           await db
@@ -80,15 +82,11 @@ export function AuthProvider({ children }) {
       })
   }
 
-  function updateUserProfile(data) {
-    return auth.currentUser.updateProfile(data)
-  }
-
   async function signin(email, password) {
     const signin = await auth
       .signInWithEmailAndPassword(email, password)
       .then((data) => {
-        const user = data.user
+        const { user } = data
         router.push(`/${user.photoURL}/${user.displayName}/dashboard`)
       })
     return signin
@@ -100,12 +98,12 @@ export function AuthProvider({ children }) {
   }
 
   function signInWithFacebook() {
-    var provider = new firebase.auth.FacebookAuthProvider()
+    const provider = new firebase.auth.FacebookAuthProvider()
     return auth.signInWithPopup(provider)
   }
 
   function signInWithGithub() {
-    var provider = new firebase.auth.GithubAuthProvider()
+    const provider = new firebase.auth.GithubAuthProvider()
     return auth.signInWithPopup(provider)
   }
 
