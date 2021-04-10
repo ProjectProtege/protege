@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "emulators": "firebase emulators:start",
-    "test": "cypress open",
+    "e2e:test": "cypress open",
+    "test": "jest --coverage",
+    "test:watch": "yarn test -- --watch",
     "build": "next build",
     "start": "next start"
   },
@@ -53,6 +55,8 @@
     "eslint-plugin-no-only-tests": "^2.4.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.23.1",
+    "jest": "^26.6.3",
+    "jest-watch-typeahead": "^0.6.1",
     "prettier": "^2.2.1",
     "yargs": "^16.2.0"
   }
