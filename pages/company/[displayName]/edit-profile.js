@@ -3,8 +3,6 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import PropTypes from 'prop-types'
-import ProfileMenu from 'components/user/ProfileMenu'
-import NavLink from 'components/global/NavLink'
 
 // Lib imports
 import { useForm, Controller } from 'react-hook-form'
@@ -19,6 +17,7 @@ import { useProfileInfo } from 'store/profile_info'
 import getText from 'utils/i18n/Texts'
 
 import timezones from 'data/timezones.json'
+import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
 
 // Custom component imports
 const SimpleFileUpload = dynamic(() => import('react-simple-file-upload'), {
@@ -26,16 +25,14 @@ const SimpleFileUpload = dynamic(() => import('react-simple-file-upload'), {
 })
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
-const CompanyEditProfile = ({ companyData }) => {
+const CompanyEditProfile = () => {
   const router = useRouter()
   const { currentUser } = useAuth()
   const [logo, setLogo] = useState('')
-  const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
   const [timezonesArray, setTimezonesArray] = useState([])
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
-  const displayNameUrl = router.query.displayName
-  const avatarImg = profileInfo?.companyLogo
+  const { displayName } = router.query
 
   useEffect(() => {
     setTimezonesArray(timezones)
@@ -67,7 +64,7 @@ const CompanyEditProfile = ({ companyData }) => {
     resolver: yupResolver(Schema),
     mode: 'onChange',
     defaultValues: {
-      companyName: displayNameUrl,
+      companyName: displayName,
       companyLogo: profileInfo?.companyLogo ? profileInfo.companyLogo : '',
       companyWebsite: profileInfo?.companyWebsite
         ? profileInfo.companyWebsite
@@ -118,46 +115,14 @@ const CompanyEditProfile = ({ companyData }) => {
           router.push(`/company/${displayName}/dashboard`)
         })
     } catch {
-      console.error("Oops! Something went wrong. That's our bad.")
+      throw new Error("Oops! Something went wrong. That's our bad.")
     }
   }
 
   return (
-    <div className='grid-cols-5 gap-10 lg:grid mt-6 lg:mt-12'>
-      <aside className='col-span-1'>
-        <ProfileMenu avatar={avatarImg}>
-          <li className='text-lg font-bold'>{profileInfo?.companyName}</li>
-          <li>
-            <NavLink
-              href={`/company/${displayNameUrl}/index`}
-              activeClassName='text-teal-700 opacity-100'
-              className='opacity-75 hover:opacity-100'
-            >
-              {getText('GLOBAL', 'VIEW_PROFILE')}
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              href={`/company/${displayNameUrl}/dashboard`}
-              activeClassName='text-teal-700 opacity-100'
-              className='opacity-75 hover:opacity-100'
-            >
-              {getText('GLOBAL', 'DASHBOARD')}
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              href={`/company/${displayNameUrl}/edit-profile`}
-              activeClassName='text-teal-700 opacity-100'
-              className='opacity-75 hover:opacity-100'
-            >
-              {getText('GLOBAL', 'EDIT_PROFILE')}
-            </NavLink>
-          </li>
-        </ProfileMenu>
-      </aside>
+    <AccountInteriorLayout className='mt-12'>
       <form
-        className='container relative z-30 p-6 bg-white rounded-lg shadow-md md:p-8 col-span-4'
+        className='container relative z-30 p-6 bg-white rounded-lg shadow-md md:p-8'
         onSubmit={handleSubmit(handleFormEntry)}
       >
         <h2 className='text-2xl'>{getText('GLOBAL', 'PROFILE_INFO')}</h2>
@@ -259,7 +224,7 @@ const CompanyEditProfile = ({ companyData }) => {
               <div className='mb-2 md:mb-0'>
                 <SimpleFileUpload
                   apiKey={process.env.SIMPLE_FILE_API_KEY}
-                  preview={true}
+                  preview
                   onSuccess={handleLogoUpload}
                   value={logo}
                 />
@@ -515,7 +480,7 @@ const CompanyEditProfile = ({ companyData }) => {
           {getText('GLOBAL', 'SAVE')}
         </button>
       </form>
-    </div>
+    </AccountInteriorLayout>
   )
 }
 

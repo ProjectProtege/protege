@@ -11,24 +11,21 @@ import * as yup from 'yup'
 import { db } from 'utils/db'
 import { useAuth } from 'store/AuthContext'
 import { useProfileInfo } from 'store/profile_info'
-import NavLink from 'components/global/NavLink'
+import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
 
 import getText from 'utils/i18n/Texts'
-import ProfileMenu from 'components/user/ProfileMenu'
 
 import timezones from 'data/timezones.json'
 
-const CandidateEditProfile = ({ candidateData }) => {
+const CandidateEditProfile = () => {
   const router = useRouter()
   const { currentUser } = useAuth()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [timezonesArray, setTimezonesArray] = useState([])
-  const profileInfo = useProfileInfo((s) => s.profileInfo)
+  const profileInfo = useProfileInfo((s) => s.profileInfo || {})
 
-  console.log(profileInfo)
-
-  let displayName = router.query.displayName
+  const { displayName } = router.query
 
   useEffect(() => {
     setTimezonesArray(timezones)
@@ -53,7 +50,7 @@ const CandidateEditProfile = ({ candidateData }) => {
     question3: yup.string().required(getText('GLOBAL', 'QUESTION_REQUIRED')),
   })
 
-  const { register, handleSubmit, control, reset, errors } = useForm({
+  const { register, handleSubmit, reset, errors } = useForm({
     resolver: yupResolver(Schema),
     mode: 'onChange',
     defaultValues: {
@@ -71,7 +68,6 @@ const CandidateEditProfile = ({ candidateData }) => {
       social_twitter: profileInfo?.social_twitter
         ? profileInfo.social_twitter
         : '',
-      hideInfo: profileInfo?.hideInfo ? profileInfo.hideInfo : '',
       timezone: profileInfo?.timezone ? profileInfo.timezone : '',
       timeframe_from: profileInfo?.timeframe_from
         ? profileInfo.timeframe_from
@@ -101,7 +97,6 @@ const CandidateEditProfile = ({ candidateData }) => {
         social_github: data.social_github,
         social_linkedin: data.social_linkedin,
         social_twitter: data.social_twitter,
-        hideInfo: data.hideInfo,
         timezone: data.timezone,
         timeframe_from: data.timeframe_from,
         timeframe_to: data.timeframe_to,
@@ -110,399 +105,374 @@ const CandidateEditProfile = ({ candidateData }) => {
         question3: data.question3,
       })
       .then(() => {
-        console.log('Document successfully written!')
         router.push(`/candidate/${displayName}/dashboard`)
       })
-      .catch((error) => {
-        console.error('Error writing document: ', error)
+      .catch((err) => {
+        throw new Error('Error writing document: ', err)
       })
   }
 
   return (
     <>
-      <div className='container px-6 mx-auto 2xl:px-0'>
-        <div className='grid-cols-5 gap-10 lg:grid'>
-          <div className='col-span-1 mb-12 md:mb-0'>
-            <ProfileMenu>
-              <li className='font-bold'>{displayName}</li>
-              <li>
-                <NavLink
-                  href={`/candidate/${displayName}/`}
-                  activeClassName='text-teal-500'
-                >
-                  {getText('GLOBAL', 'VIEW_PROFILE')}
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  href={`/candidate/${displayName}/edit-profile`}
-                  activeClassName='text-teal-500 font-bold'
-                >
-                  {getText('GLOBAL', 'EDIT_PROFILE')}
-                </NavLink>
-              </li>
-            </ProfileMenu>
-          </div>
+      <AccountInteriorLayout>
+        <div className='flex items-center justify-between mb-6'>
+          <h1 className='mb-3 text-lg text-blue-900'>
+            {getText('GLOBAL', 'PROFILE_INFO')}
+          </h1>
+        </div>
 
-          <div className='col-span-4'>
-            <div className='flex items-center justify-between mb-6'>
-              <h1 className='mb-3 text-lg text-blue-900'>
-                {getText('GLOBAL', 'PROFILE_INFO')}
-              </h1>
+        <form
+          autoComplete='on'
+          onSubmit={handleSubmit(handleProfileForm)}
+          className='mb-6'
+        >
+          {/* name */}
+          <div className='md:grid grid-cols-2 gap-8'>
+            <div className='flex flex-col w-full mb-3'>
+              <label htmlFor='firstName'>
+                {getText('GLOBAL', 'FIRST_NAME')}
+              </label>
+              <input
+                id='firstName'
+                type='text'
+                name='firstName'
+                className='input'
+                ref={register}
+              />
+              {errors.firstName ? (
+                <p className='input-error'>
+                  {errors.firstName && errors.firstName.message}
+                </p>
+              ) : null}
             </div>
 
-            <form
-              autoComplete='on'
-              onSubmit={handleSubmit(handleProfileForm)}
-              className='mb-6'
-            >
-              {/* name */}
-              <div className='flex flex-col justify-between md:space-x-8 md:flex-row'>
-                <div className='flex flex-col w-full mb-3 space-y-1'>
-                  <label htmlFor='firstName'>
-                    {getText('GLOBAL', 'FIRST_NAME')}
-                  </label>
-                  <input
-                    id='firstName'
-                    type='text'
-                    name='firstName'
-                    className='input'
-                    ref={register}
-                  />
-                  {errors.firstName ? (
-                    <p className='input-error'>
-                      {errors.firstName && errors.firstName.message}
-                    </p>
-                  ) : null}
-                </div>
+            <div className='flex flex-col w-full mb-3'>
+              <label htmlFor='lastName'>{getText('GLOBAL', 'LAST_NAME')}</label>
+              <input
+                id='lastName'
+                type='text'
+                name='lastName'
+                className='input'
+                ref={register}
+              />
+              {errors.lastName ? (
+                <p className='input-error'>
+                  {errors.lastName && errors.lastName.message}
+                </p>
+              ) : null}
+            </div>
+          </div>
 
-                <div className='flex flex-col w-full mb-3 space-y-1'>
-                  <label htmlFor='lastName'>
-                    {getText('GLOBAL', 'LAST_NAME')}
-                  </label>
-                  <input
-                    id='lastName'
-                    type='text'
-                    name='lastName'
-                    className='input'
-                    ref={register}
-                  />
-                  {errors.lastName ? (
-                    <p className='input-error'>
-                      {errors.lastName && errors.lastName.message}
-                    </p>
-                  ) : null}
+          {/* email/portfolio */}
+          <div className='md:grid grid-cols-2 gap-8 mb-12'>
+            <div className='flex flex-col w-full mb-3 '>
+              <label htmlFor='email'>{getText('GLOBAL', 'EMAIL')}</label>
+              <input
+                id='email'
+                type='text'
+                name='email'
+                className='input'
+                ref={register}
+              />
+              {errors.email ? (
+                <p className='input-error'>
+                  {errors.email && errors.email.message}
+                </p>
+              ) : null}
+            </div>
+
+            <div className='flex flex-col w-full mb-3 '>
+              <label htmlFor='portfolio'>
+                {getText('GLOBAL', 'PORTFOLIO')}
+                <span className='text-sm font-normal'> (optional)</span>
+              </label>
+              <input
+                id='portfolio'
+                type='text'
+                name='portfolio'
+                className='input'
+                ref={register}
+              />
+            </div>
+          </div>
+
+          {/* social/timezone */}
+          <div className='md:grid grid-cols-2 gap-8 mb-12'>
+            <div className='mb-6 md:mb-0'>
+              <label htmlFor='social' className='mb-6'>
+                {getText('GLOBAL', 'SOCIAL_ACCOUNTS')}
+              </label>
+
+              <div className='flex items-center my-2'>
+                <div className='text-3xl opacity-50 mr-4'>
+                  <i className='fab fa-dev' />
                 </div>
+                <input
+                  type='text'
+                  name='social_dev'
+                  className='w-full input'
+                  ref={register}
+                />
               </div>
 
-              {/* email/portfolio */}
-              <div className='flex flex-col justify-between mb-8 md:space-x-8 md:flex-row'>
-                <div className='flex flex-col w-full mb-3 space-y-1'>
-                  <label htmlFor='email'>{getText('GLOBAL', 'EMAIL')}</label>
-                  <input
-                    id='email'
-                    type='text'
-                    name='email'
-                    className='input'
-                    ref={register}
-                  />
-                  {errors.email ? (
-                    <p className='input-error'>
-                      {errors.email && errors.email.message}
-                    </p>
-                  ) : null}
+              <div className='flex items-center mb-2'>
+                <div className='text-3xl opacity-50 mr-3'>
+                  <i className='fab fa-github' />
                 </div>
-
-                <div className='flex flex-col w-full mb-3 space-y-1'>
-                  <label htmlFor='portfolio'>
-                    {getText('GLOBAL', 'PORTFOLIO')}
-                    <span className='text-sm font-normal'> (optional)</span>
-                  </label>
-                  <input
-                    id='portfolio'
-                    type='text'
-                    name='portfolio'
-                    className='input'
-                    ref={register}
-                  />
-                </div>
+                <input
+                  type='text'
+                  name='social_github'
+                  className='w-full input '
+                  ref={register}
+                />
               </div>
 
-              {/* social/timezone */}
-              <div className='flex flex-col justify-between mb-12 space-y-6 md:space-y-0 md:space-x-8 md:flex-row'>
-                <div className='flex flex-col w-full space-y-4'>
-                  <label htmlFor='social' className='mb-0'>
-                    {getText('GLOBAL', 'SOCIAL_ACCOUNTS')}
-                  </label>
-                  <div className='flex items-center space-x-3'>
-                    <div className='text-3xl opacity-50'>
-                      <i className='fab fa-dev'></i>
-                    </div>
-                    <input
-                      type='text'
-                      name='social_dev'
-                      className='w-full input'
-                      ref={register}
-                    />
-                  </div>
-
-                  <div className='flex items-center space-x-2'>
-                    <div className='text-3xl opacity-50'>
-                      <i className='fab fa-github'></i>
-                    </div>
-                    <input
-                      type='text'
-                      name='social_github'
-                      className='w-full input '
-                      ref={register}
-                    />
-                  </div>
-
-                  <div className='flex items-center space-x-3'>
-                    <div className='text-3xl opacity-50'>
-                      <i className='fab fa-linkedin'></i>
-                    </div>
-                    <input
-                      type='text'
-                      name='social_linkedin'
-                      className='w-full input '
-                      ref={register}
-                    />
-                  </div>
-
-                  <div className='flex items-center space-x-2'>
-                    <div className='text-3xl opacity-50'>
-                      <i className='fab fa-twitter'></i>
-                    </div>
-                    <input
-                      type='text'
-                      name='social_twitter'
-                      className='w-full input '
-                      ref={register}
-                    />
-                  </div>
+              <div className='flex items-center mb-2'>
+                <div className='text-3xl opacity-50 mr-4'>
+                  <i className='fab fa-linkedin' />
                 </div>
+                <input
+                  type='text'
+                  name='social_linkedin'
+                  className='w-full input '
+                  ref={register}
+                />
+              </div>
 
-                <div className='flex flex-col justify-between w-full space-y-4'>
-                  {/* hide info */}
-                  <div className='flex items-center justify-between mb-3'>
-                    <label htmlFor='hideInfo' className='mb-0'>
-                      {getText('GLOBAL', 'HIDE_INFO')}
-                    </label>
-                    <div className='relative inline-block w-12 align-middle transition duration-700 ease-in-out select-none'>
-                      <input
-                        type='checkbox'
-                        name='hideInfo'
-                        id='toggle'
-                        className='absolute block w-5 h-5 bg-white border-gray-300 rounded-full outline-none appearance-none cursor-pointer border-3 toggle-checkbox'
+              <div className='flex items-center mb-2'>
+                <div className='text-3xl opacity-50 mr-3'>
+                  <i className='fab fa-twitter' />
+                </div>
+                <input
+                  type='text'
+                  name='social_twitter'
+                  className='w-full input '
+                  ref={register}
+                />
+              </div>
+            </div>
+
+            <div className='flex flex-col w-full'>
+              {/* timezone */}
+              <div className='flex flex-col w-full mb-8'>
+                <label htmlFor='timezone'>
+                  {getText('GLOBAL', 'TIMEZONE')}
+                </label>
+                <div className='select-wrap'>
+                  <select
+                    id='timezone'
+                    type='text'
+                    name='timezone'
+                    className='w-full input input-select'
+                    ref={register}
+                  >
+                    <option value={getText('GLOBAL', 'SELECT')}>
+                      {getText('GLOBAL', 'SELECT')}
+                    </option>
+
+                    {timezonesArray.map((timezone, index) => {
+                      return (
+                        <option
+                          key={index}
+                          value={timezone.text}
+                          className='text-gray-300'
+                        >
+                          {timezone.text}
+                        </option>
+                      )
+                    })}
+                  </select>
+                </div>
+                {errors.timezone ? (
+                  <p className='input-error'>
+                    {errors.timezone && errors.timezone.message}
+                  </p>
+                ) : null}
+              </div>
+
+              {/* timeframe */}
+              <div className='flex flex-col w-full'>
+                <label htmlFor='timeframe'>
+                  {getText('GLOBAL', 'WORK_WITHIN')}
+                </label>
+
+                <div className='grid grid-cols-2 gap-6'>
+                  <div className='flex flex-col w-full '>
+                    <div className='select-wrap'>
+                      <select
+                        id='timeframe_from'
+                        type='text'
+                        name='timeframe_from'
+                        className='input input-select'
                         ref={register}
-                      />
-                      <label
-                        htmlFor='toggle'
-                        className='block h-5 mb-0 overflow-hidden bg-gray-300 rounded-full cursor-pointer toggle-label'
-                      ></label>
+                      >
+                        <option value={getText('GLOBAL', 'SELECT')}>
+                          {getText('GLOBAL', 'FROM')}
+                        </option>
+
+                        {timezonesArray.map((timezone, index) => {
+                          return (
+                            <option
+                              key={index}
+                              value={timezone.text}
+                              className='text-gray-300'
+                            >
+                              {timezone.text}
+                            </option>
+                          )
+                        })}
+                      </select>
                     </div>
-                  </div>
-
-                  {/* timezone */}
-                  <div className='flex flex-col w-full space-y-1'>
-                    <label htmlFor='timezone'>
-                      {getText('GLOBAL', 'TIMEZONE')}
-                    </label>
-                    <select
-                      id='timezone'
-                      type='text'
-                      name='timezone'
-                      className='w-full input'
-                      ref={register}
-                    >
-                      <option value={getText('DASHBOARD', 'SELECT')}>
-                        {getText('DASHBOARD', 'SELECT')}
-                      </option>
-
-                      {timezonesArray.map((timezone, index) => {
-                        return (
-                          <option
-                            key={index}
-                            value={timezone.text}
-                            className='text-gray-300'
-                          >
-                            {timezone.text}
-                          </option>
-                        )
-                      })}
-                    </select>
-                    {errors.timezone ? (
+                    {errors.timeframe_from ? (
                       <p className='input-error'>
-                        {errors.timezone && errors.timezone.message}
+                        {errors.timeframe_from && errors.timeframe_from.message}
                       </p>
                     ) : null}
                   </div>
 
-                  {/* timeframe */}
-                  <div className='flex flex-col w-full space-y-4'>
-                    <label htmlFor='timeframe'>
-                      {getText('GLOBAL', 'WORK_WITHIN')}
-                    </label>
+                  <div className='flex flex-col w-full '>
+                    <div className='select-wrap'>
+                      <select
+                        id='timeframe_to'
+                        type='text'
+                        name='timeframe_to'
+                        className='input input-select'
+                        ref={register}
+                      >
+                        <option value={getText('GLOBAL', 'SELECT')}>
+                          {getText('GLOBAL', 'TO')}
+                        </option>
 
-                    <div className='flex justify-between space-x-3'>
-                      <div className='flex flex-col w-full space-y-1'>
-                        <select
-                          id='timeframe_from'
-                          type='text'
-                          name='timeframe_from'
-                          className='input'
-                          ref={register}
-                        >
-                          <option value=''>From</option>
-                          <option value='Option #1'>Option #1</option>
-                        </select>
-                        {errors.timeframe_from ? (
-                          <p className='input-error'>
-                            {errors.timeframe_from &&
-                              errors.timeframe_from.message}
-                          </p>
-                        ) : null}
-                      </div>
-
-                      <div className='flex flex-col w-full space-y-1'>
-                        <select
-                          id='timeframe_to'
-                          type='text'
-                          name='timeframe_to'
-                          className='input'
-                          ref={register}
-                        >
-                          <option value=''>To</option>
-                          <option value='Option #1'>Option #1</option>
-                        </select>
-
-                        {errors ? (
-                          <p className='input-error'>
-                            {errors.timeframe_to && errors.timeframe_to.message}
-                          </p>
-                        ) : null}
-                      </div>
+                        {timezonesArray.map((timezone, index) => {
+                          return (
+                            <option
+                              key={index}
+                              value={timezone.text}
+                              className='text-gray-300'
+                            >
+                              {timezone.text}
+                            </option>
+                          )
+                        })}
+                      </select>
                     </div>
+
+                    {errors ? (
+                      <p className='input-error'>
+                        {errors.timeframe_to && errors.timeframe_to.message}
+                      </p>
+                    ) : null}
                   </div>
                 </div>
               </div>
-
-              {/* question1 */}
-              <div className='flex flex-col w-full mb-10 space-y-3'>
-                <label htmlFor='question1'>
-                  {getText('GLOBAL', 'QUESTION1')}
-                </label>
-                <textarea
-                  name='question1'
-                  id='question1'
-                  className='input'
-                  cols='30'
-                  rows='5'
-                  ref={register}
-                ></textarea>
-                {errors ? (
-                  <p className='input-error'>
-                    {errors.question1 && errors.question1.message}
-                  </p>
-                ) : null}
-              </div>
-
-              {/* question2 */}
-              <div className='flex flex-col w-full mb-10 space-y-3'>
-                <label htmlFor='question2'>
-                  {getText('GLOBAL', 'QUESTION2')}
-                </label>
-                <textarea
-                  name='question2'
-                  id='question2'
-                  className='input'
-                  cols='30'
-                  rows='5'
-                  ref={register}
-                ></textarea>
-                {errors ? (
-                  <p className='input-error'>
-                    {errors.question2 && errors.question2.message}
-                  </p>
-                ) : null}
-              </div>
-
-              {/* question3 */}
-              <div className='flex flex-col w-full mb-4 space-y-3'>
-                <label htmlFor='question3'>
-                  {getText('GLOBAL', 'QUESTION3')}
-                </label>
-                <textarea
-                  name='question3'
-                  id='question3'
-                  className='input'
-                  cols='30'
-                  rows='5'
-                  ref={register}
-                ></textarea>
-                {errors ? (
-                  <p className='input-error'>
-                    {errors.question3 && errors.question3.message}
-                  </p>
-                ) : null}
-              </div>
-
-              <button type='submit' className='btn btn-teal'>
-                {getText('GLOBAL', 'SAVE')}
-              </button>
-
-              {error ? (
-                <p className='p-3 mt-6 text-lg text-center text-red-500 bg-red-100 rounded-md'>
-                  {error}
-                </p>
-              ) : null}
-            </form>
+            </div>
           </div>
-        </div>
-      </div>
+
+          {/* question1 */}
+          <div className='flex flex-col w-full mb-10 space-y-3'>
+            <label htmlFor='question1'>{getText('GLOBAL', 'QUESTION1')}</label>
+            <textarea
+              name='question1'
+              id='question1'
+              className='input'
+              cols='30'
+              rows='5'
+              ref={register}
+            />
+            {errors ? (
+              <p className='input-error'>
+                {errors.question1 && errors.question1.message}
+              </p>
+            ) : null}
+          </div>
+
+          {/* question2 */}
+          <div className='flex flex-col w-full mb-10 space-y-3'>
+            <label htmlFor='question2'>{getText('GLOBAL', 'QUESTION2')}</label>
+            <textarea
+              name='question2'
+              id='question2'
+              className='input'
+              cols='30'
+              rows='5'
+              ref={register}
+            />
+            {errors ? (
+              <p className='input-error'>
+                {errors.question2 && errors.question2.message}
+              </p>
+            ) : null}
+          </div>
+
+          {/* question3 */}
+          <div className='flex flex-col w-full mb-4 space-y-3'>
+            <label htmlFor='question3'>{getText('GLOBAL', 'QUESTION3')}</label>
+            <textarea
+              name='question3'
+              id='question3'
+              className='input'
+              cols='30'
+              rows='5'
+              ref={register}
+            />
+            {errors ? (
+              <p className='input-error'>
+                {errors.question3 && errors.question3.message}
+              </p>
+            ) : null}
+          </div>
+
+          <button type='submit' className='btn btn-teal'>
+            {getText('GLOBAL', 'SAVE')}
+          </button>
+
+          {error ? (
+            <p className='p-3 mt-6 text-lg text-center text-red-500 bg-red-100 rounded-md'>
+              {error}
+            </p>
+          ) : null}
+        </form>
+      </AccountInteriorLayout>
     </>
   )
 }
 
-CandidateEditProfile.propTypes = {
-  candidateData: PropTypes.shape({
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
-    email: PropTypes.string,
-    portfolio: PropTypes.string,
-    social_dev: PropTypes.string,
-    social_github: PropTypes.string,
-    social_linkedin: PropTypes.string,
-    social_twitter: PropTypes.string,
-    hideInfo: PropTypes.boolean,
-    timezone: PropTypes.string,
-    timeframe_from: PropTypes.string,
-    timeframe_to: PropTypes.string,
-    question1: PropTypes.string,
-    question2: PropTypes.string,
-    question3: PropTypes.string,
-  }),
-}
+// CandidateEditProfile.propTypes = {
+//   candidateData: PropTypes.shape({
+//     firstName: PropTypes.string,
+//     lastName: PropTypes.string,
+//     email: PropTypes.string,
+//     portfolio: PropTypes.string,
+//     social_dev: PropTypes.string,
+//     social_github: PropTypes.string,
+//     social_linkedin: PropTypes.string,
+//     social_twitter: PropTypes.string,
+//     timezone: PropTypes.string,
+//     timeframe_from: PropTypes.string,
+//     timeframe_to: PropTypes.string,
+//     question1: PropTypes.string,
+//     question2: PropTypes.string,
+//     question3: PropTypes.string,
+//   }),
+// }
 
-CandidateEditProfile.defaultProps = {
-  candidateData: {
-    firstName: '',
-    lastName: '',
-    email: '',
-    portfolio: '',
-    social_dev: '',
-    social_github: '',
-    social_linkedin: '',
-    social_twitter: '',
-    hideInfo: false,
-    timezone: '',
-    timeframe_from: '',
-    timeframe_to: '',
-    question1: '',
-    question2: '',
-    question3: '',
-  },
-}
+// CandidateEditProfile.defaultProps = {
+//   candidateData: {
+//     firstName: '',
+//     lastName: '',
+//     email: '',
+//     portfolio: '',
+//     social_dev: '',
+//     social_github: '',
+//     social_linkedin: '',
+//     social_twitter: '',
+//     timezone: '',
+//     timeframe_from: '',
+//     timeframe_to: '',
+//     question1: '',
+//     question2: '',
+//     question3: '',
+//   },
+// }
 
 export default CandidateEditProfile

@@ -1,57 +1,13 @@
-import ProfileMenu from 'components/user/ProfileMenu'
-import { useRouter } from 'next/router'
 import CompanyDashboardEmpty from 'assets/images/CompanyDashboardEmpty'
-import { useProfileInfo } from 'store/profile_info'
-import NavLink from 'components/global/NavLink'
-import { useAuth } from 'store/AuthContext'
 import getText from 'utils/i18n/Texts'
+import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
 
 const CompanyDashboard = () => {
-  const { currentUser } = useAuth()
-  const router = useRouter()
   const activeListings = null
   const archivedListings = null
-  const profileInfo = useProfileInfo((s) => s.profileInfo)
-
-  const displayNameUrl = router.query.displayName
-  const avatarImg = profileInfo?.companyLogo
 
   return (
-    <div className='grid-cols-5 gap-10 mt-6 lg:grid lg:mt-12'>
-      <h1 className='sr-only'>{getText('GLOBAL', 'DASHBOARD')}</h1>
-      <aside className='col-span-1'>
-        <ProfileMenu avatar={avatarImg}>
-          <li className='text-lg font-bold'>{profileInfo?.companyName}</li>
-          <li>
-            <NavLink
-              href={`/company/${displayNameUrl}/index`}
-              activeClassName='text-teal-700 opacity-100'
-              className='opacity-75 hover:opacity-100'
-            >
-              {getText('GLOBAL', 'VIEW_PROFILE')}
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              href={`/company/${displayNameUrl}/dashboard`}
-              activeClassName='text-teal-700 opacity-100'
-              className='opacity-75 hover:opacity-100'
-            >
-              {getText('GLOBAL', 'DASHBOARD')}
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              href={`/company/${displayNameUrl}/edit-profile`}
-              activeClassName='text-teal-700 opacity-100'
-              className='opacity-75 hover:opacity-100'
-            >
-              {getText('GLOBAL', 'EDIT_PROFILE')}
-            </NavLink>
-          </li>
-        </ProfileMenu>
-      </aside>
-
+    <AccountInteriorLayout className='mt-12'>
       <section className='relative col-span-4 mt-12 lg:mt-32'>
         <article className='mb-20 lg:mb-32'>
           <h2 className='mb-6 text-xl'>
@@ -142,7 +98,7 @@ const CompanyDashboard = () => {
           )}
         </article>
       </section>
-    </div>
+    </AccountInteriorLayout>
   )
 }
 
