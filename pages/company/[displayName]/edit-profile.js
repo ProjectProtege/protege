@@ -33,7 +33,7 @@ const CompanyEditProfile = () => {
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
   const { displayName } = router.query
-
+  console.log('router', { ...router.query })
   useEffect(() => {
     setTimezonesArray(timezones)
   })
@@ -86,9 +86,9 @@ const CompanyEditProfile = () => {
     },
   })
 
-  useEffect(() => {
-    reset(profileInfo)
-  }, [reset])
+  // useEffect(() => {
+  //   reset(profileInfo)
+  // }, [reset])
 
   function handleLogoUpload(url) {
     setLogo(url)

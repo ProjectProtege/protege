@@ -1,10 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react'
 import firebase from 'firebase/app'
 import { useRouter } from 'next/router'
+import { useProfileInfo } from 'store/profile_info'
 
 import { auth, db } from 'utils/db/index'
-
-import { useProfileInfo } from 'store/profile_info'
 
 const AuthContext = React.createContext()
 
@@ -15,9 +14,9 @@ export function useAuth() {
 // eslint-disable-next-line react/prop-types
 export function AuthProvider({ children }) {
   const router = useRouter()
-  const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
   const [currentUser, setCurrentUser] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
+  const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
 
   async function setUserProfileInfo(user) {
     const userProfileInfo = await db
@@ -48,38 +47,46 @@ export function AuthProvider({ children }) {
     return unsubscribe
   }, [])
 
-  function updateUserProfile(data) {
-    return auth.currentUser.updateProfile(data)
+  async function updateUserProfile(data) {
+    await auth.currentUser.updateProfile(data)
+
+    setCurrentUser((oldVal) => {
+      return {
+        ...oldVal,
+        accountType: data.photoURL,
+        displayName: data.displayName,
+      }
+    })
   }
 
   const signup = async (name, email, password, accountType) => {
-    const user = await auth
-      .createUserWithEmailAndPassword(email, password)
-      .then(async (userCredential) => {
-        if (userCredential) {
-          updateUserProfile({
-            displayName: name,
-            photoURL: accountType,
-          })
-
-          // Gets the uid for the users account object
-          const { uid } = userCredential.user
-
-          // Creates document in appropriate collection with matching uid
-          await db
-            .collection(
-              accountType === 'candidate' ? 'candidates' : 'companies'
-            )
-            .doc(uid)
-            .set({
-              userUid: uid,
-              accountType,
-            })
-        }
+    const userCredential = await auth.createUserWithEmailAndPassword(
+      email,
+      password
+    )
+    // const unknown = async (userCredential) => {
+    if (userCredential) {
+      await updateUserProfile({
+        displayName: name,
+        photoURL: accountType,
       })
-      .then(() => {
-        router.push(`/${accountType}/${name}/edit-profile`)
-      })
+
+      // Gets the uid for the users account object
+      const { uid } = userCredential.user
+
+      // Creates document in appropriate collection with matching uid
+      await db
+        .collection(accountType === 'candidate' ? 'candidates' : 'companies')
+        .doc(uid)
+        .set({
+          userUid: uid,
+          accountType,
+        })
+    }
+    // })
+    // .then(() => {
+    router.push(`/${accountType}/${name}/edit-profile`)
+    // })
   }
 
   async function signin(email, password) {
@@ -111,7 +118,6 @@ export function AuthProvider({ children }) {
     return auth.signOut().then(() => {
       router.push('/').then(() => {
         setCurrentUser(null)
-        setProfileInfo(null)
       })
     })
   }
