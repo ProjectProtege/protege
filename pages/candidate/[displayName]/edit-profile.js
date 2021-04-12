@@ -1,7 +1,6 @@
 // React/Next imports
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import PropTypes from 'prop-types'
 
 // Lib Imports
 import { useForm } from 'react-hook-form'
@@ -23,7 +22,7 @@ const CandidateEditProfile = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [timezonesArray, setTimezonesArray] = useState([])
-  const profileInfo = useProfileInfo((s) => s.profileInfo || {})
+  const profileInfo = useProfileInfo((s) => s.profileInfo)
 
   const { displayName } = router.query
 
@@ -50,7 +49,7 @@ const CandidateEditProfile = () => {
     question3: yup.string().required(getText('GLOBAL', 'QUESTION_REQUIRED')),
   })
 
-  const { register, handleSubmit, reset, errors } = useForm({
+  const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(Schema),
     mode: 'onChange',
     defaultValues: {
@@ -78,10 +77,6 @@ const CandidateEditProfile = () => {
       question3: profileInfo?.question3 ? profileInfo.question3 : '',
     },
   })
-
-  useEffect(() => {
-    reset(profileInfo)
-  }, [reset])
 
   const handleProfileForm = (data) => {
     setLoading(true)
@@ -436,43 +431,5 @@ const CandidateEditProfile = () => {
     </>
   )
 }
-
-// CandidateEditProfile.propTypes = {
-//   candidateData: PropTypes.shape({
-//     firstName: PropTypes.string,
-//     lastName: PropTypes.string,
-//     email: PropTypes.string,
-//     portfolio: PropTypes.string,
-//     social_dev: PropTypes.string,
-//     social_github: PropTypes.string,
-//     social_linkedin: PropTypes.string,
-//     social_twitter: PropTypes.string,
-//     timezone: PropTypes.string,
-//     timeframe_from: PropTypes.string,
-//     timeframe_to: PropTypes.string,
-//     question1: PropTypes.string,
-//     question2: PropTypes.string,
-//     question3: PropTypes.string,
-//   }),
-// }
-
-// CandidateEditProfile.defaultProps = {
-//   candidateData: {
-//     firstName: '',
-//     lastName: '',
-//     email: '',
-//     portfolio: '',
-//     social_dev: '',
-//     social_github: '',
-//     social_linkedin: '',
-//     social_twitter: '',
-//     timezone: '',
-//     timeframe_from: '',
-//     timeframe_to: '',
-//     question1: '',
-//     question2: '',
-//     question3: '',
-//   },
-// }
 
 export default CandidateEditProfile

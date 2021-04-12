@@ -83,10 +83,7 @@ export function AuthProvider({ children }) {
           accountType,
         })
     }
-    // })
-    // .then(() => {
     router.push(`/${accountType}/${name}/edit-profile`)
-    // })
   }
 
   async function signin(email, password) {

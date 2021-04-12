@@ -19,21 +19,16 @@ import getText from 'utils/i18n/Texts'
 import timezones from 'data/timezones.json'
 import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
 
-// Custom component imports
-const SimpleFileUpload = dynamic(() => import('react-simple-file-upload'), {
-  ssr: false,
-})
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
 const CompanyEditProfile = () => {
   const router = useRouter()
   const { currentUser } = useAuth()
-  const [logo, setLogo] = useState('')
   const [timezonesArray, setTimezonesArray] = useState([])
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
   const { displayName } = router.query
-  console.log('router', { ...router.query })
+
   useEffect(() => {
     setTimezonesArray(timezones)
   })
@@ -60,12 +55,11 @@ const CompanyEditProfile = () => {
     ),
   })
 
-  const { register, handleSubmit, reset, control, errors } = useForm({
+  const { register, handleSubmit, control, errors } = useForm({
     resolver: yupResolver(Schema),
     mode: 'onChange',
     defaultValues: {
       companyName: displayName,
-      companyLogo: profileInfo?.companyLogo ? profileInfo.companyLogo : '',
       companyWebsite: profileInfo?.companyWebsite
         ? profileInfo.companyWebsite
         : '',
@@ -86,14 +80,6 @@ const CompanyEditProfile = () => {
     },
   })
 
-  // useEffect(() => {
-  //   reset(profileInfo)
-  // }, [reset])
-
-  function handleLogoUpload(url) {
-    setLogo(url)
-  }
-
   async function handleFormEntry(data) {
     try {
       await db
@@ -102,7 +88,6 @@ const CompanyEditProfile = () => {
         .update({
           accountType: 'company',
           companyEmail: data.companyEmail,
-          companyLogo: logo,
           companyName: data.companyName,
           companyWebsite: data.companyWebsite,
           companyHQ: data.companyHQ,
@@ -443,7 +428,6 @@ CompanyEditProfile.propTypes = {
     companyName: PropTypes.string,
     companyWebsite: PropTypes.string,
     companyEmail: PropTypes.string,
-    companyLogo: PropTypes.string,
     companyDescription: PropTypes.string,
     companyHQ: PropTypes.string,
     companyTimezone: PropTypes.string,
@@ -458,7 +442,6 @@ CompanyEditProfile.defaultProps = {
     companyName: '',
     companyWebsite: '',
     companyEmail: '',
-    companyLogo: '',
     companyDescription: '',
     companyHQ: '',
     companyTimezone: '',

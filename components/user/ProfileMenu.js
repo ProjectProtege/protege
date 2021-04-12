@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import PropTypes from 'prop-types'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
@@ -9,32 +9,33 @@ import CloseIcon from 'assets/images/icons/close-icon'
 
 import getText from 'utils/i18n/Texts'
 import { db } from 'utils/db'
+import { useProfileInfo } from 'store/profile_info'
 
 // Custom component imports
 const SimpleFileUpload = dynamic(() => import('react-simple-file-upload'), {
   ssr: false,
 })
 
-const ProfileMenu = ({ avatar, children, profileUid, accountType }) => {
+const ProfileMenu = ({ children, profileUid, accountType }) => {
   const [logo, setLogo] = useState(null)
   const { signout } = useAuth()
   const [uploadImage, setUploadImage] = useState(false)
+  const profileInfo = useProfileInfo((s) => s.profileInfo)
+  const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
 
-  useEffect(() => {
-    if (avatar !== null) {
-      setLogo(avatar)
-    }
-  }, [])
-
-  function handleLogoUpload(url) {
-    setLogo(url)
-
+  function handleAvatarUpload(url) {
     db.collection(accountType === 'candidate' ? 'candidates' : 'companies')
       .doc(profileUid)
       .update({
-        logo: url,
+        avatar: url,
       })
       .then(() => {
+        setProfileInfo((oldVal) => {
+          return {
+            ...oldVal,
+            avatar: url,
+          }
+        })
         setUploadImage(false)
       })
   }
@@ -63,7 +64,7 @@ const ProfileMenu = ({ avatar, children, profileUid, accountType }) => {
             <SimpleFileUpload
               apiKey={process.env.SIMPLE_FILE_API_KEY}
               preview
-              onSuccess={handleLogoUpload}
+              onSuccess={handleAvatarUpload}
               value={logo}
             />
           </div>
@@ -77,7 +78,13 @@ const ProfileMenu = ({ avatar, children, profileUid, accountType }) => {
               <ImageUploadIcon className='h-12 w-12 ' tabIndex={0} />
             </button>
             <div className='relative w-32 h-32 overflow-hidden rounded-full'>
-              {logo === null ? (
+              {profileInfo?.avatar ? (
+                <Image
+                  src={profileInfo?.avatar}
+                  layout='fill'
+                  objectFit='cover'
+                />
+              ) : (
                 <div className='text-gray-400'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -92,8 +99,6 @@ const ProfileMenu = ({ avatar, children, profileUid, accountType }) => {
                     />
                   </svg>
                 </div>
-              ) : (
-                <Image src={logo} layout='fill' objectFit='cover' />
               )}
             </div>
           </>
@@ -115,13 +120,11 @@ const ProfileMenu = ({ avatar, children, profileUid, accountType }) => {
 
 ProfileMenu.propTypes = {
   children: PropTypes.node.isRequired,
-  avatar: PropTypes.string,
   profileUid: PropTypes.string,
   accountType: PropTypes.string,
 }
 
 ProfileMenu.defaultProps = {
-  avatar: null,
   profileUid: '',
   accountType: '',
 }
