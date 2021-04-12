@@ -23,21 +23,21 @@ const ProfileMenu = ({ children, profileUid, accountType }) => {
   const profileInfo = useProfileInfo((s) => s.profileInfo)
   const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
 
-  function handleAvatarUpload(url) {
-    db.collection(accountType === 'candidate' ? 'candidates' : 'companies')
+  async function handleAvatarUpload(url) {
+    await db
+      .collection(accountType === 'candidate' ? 'candidates' : 'companies')
       .doc(profileUid)
       .update({
         avatar: url,
       })
-      .then(() => {
-        setProfileInfo((oldVal) => {
-          return {
-            ...oldVal,
-            avatar: url,
-          }
-        })
-        setUploadImage(false)
-      })
+
+    setProfileInfo((oldVal) => {
+      return {
+        ...oldVal,
+        avatar: url,
+      }
+    })
+    setUploadImage(false)
   }
 
   const handleSignOut = async () => {
