@@ -2,6 +2,7 @@ import { useState } from 'react'
 import firebase from 'firebase/app'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import PropTypes from 'prop-types'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -14,11 +15,9 @@ import AccountDetails from 'assets/images/AccountDetails'
 
 const SignUp = ({ accountType }) => {
   const router = useRouter()
-  const { currentUser, signup, signInWithGithub } = useAuth()
+  const { signup, signInWithGithub } = useAuth()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-
-  const [displayName, setDisplayName] = useState('')
 
   const Schema = yup.object().shape({
     name: yup.string().required(getText('GLOBAL', 'NAME_REQUIRED')),
@@ -35,7 +34,7 @@ const SignUp = ({ accountType }) => {
       ),
   })
 
-  const { register, handleSubmit, control, errors } = useForm({
+  const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(Schema),
     mode: 'onChange',
   })
@@ -48,8 +47,8 @@ const SignUp = ({ accountType }) => {
       firebase.auth().currentUser.sendEmailVerification()
 
       setLoading(false)
-    } catch (error) {
-      setError(error.message)
+    } catch (err) {
+      setError(err.message)
     }
 
     setLoading(false)
@@ -59,8 +58,8 @@ const SignUp = ({ accountType }) => {
     try {
       await signInWithGithub()
       router.push('/account-select')
-    } catch (error) {
-      setError(error.messge)
+    } catch (err) {
+      setError(err.messge)
     }
   }
 
@@ -89,7 +88,6 @@ const SignUp = ({ accountType }) => {
               name='name'
               className='input'
               ref={register}
-              onChange={(e) => setDisplayName(e.target.value)}
             />
             <p className='input-error'>{errors.name && errors.name.message}</p>
           </div>
@@ -151,6 +149,7 @@ const SignUp = ({ accountType }) => {
           <button
             className='flex p-2 m-auto space-x-2 text-green-500 border border-green-500 rounded-md'
             onClick={handleSignInWithGithub}
+            type='button'
           >
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -173,6 +172,10 @@ const SignUp = ({ accountType }) => {
 
 SignUp.getInitialProps = ({ query: { accountType } }) => {
   return { accountType }
+}
+
+SignUp.propTypes = {
+  accountType: PropTypes.string.isRequired,
 }
 
 export default SignUp

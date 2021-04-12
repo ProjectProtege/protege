@@ -19,16 +19,11 @@ import getText from 'utils/i18n/Texts'
 import timezones from 'data/timezones.json'
 import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
 
-// Custom component imports
-const SimpleFileUpload = dynamic(() => import('react-simple-file-upload'), {
-  ssr: false,
-})
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
 const CompanyEditProfile = () => {
   const router = useRouter()
   const { currentUser } = useAuth()
-  const [logo, setLogo] = useState('')
   const [timezonesArray, setTimezonesArray] = useState([])
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
@@ -60,12 +55,11 @@ const CompanyEditProfile = () => {
     ),
   })
 
-  const { register, handleSubmit, reset, control, errors } = useForm({
+  const { register, handleSubmit, control, errors } = useForm({
     resolver: yupResolver(Schema),
     mode: 'onChange',
     defaultValues: {
       companyName: displayName,
-      companyLogo: profileInfo?.companyLogo ? profileInfo.companyLogo : '',
       companyWebsite: profileInfo?.companyWebsite
         ? profileInfo.companyWebsite
         : '',
@@ -86,14 +80,6 @@ const CompanyEditProfile = () => {
     },
   })
 
-  useEffect(() => {
-    reset(profileInfo)
-  }, [reset])
-
-  function handleLogoUpload(url) {
-    setLogo(url)
-  }
-
   async function handleFormEntry(data) {
     try {
       await db
@@ -102,7 +88,6 @@ const CompanyEditProfile = () => {
         .update({
           accountType: 'company',
           companyEmail: data.companyEmail,
-          companyLogo: logo,
           companyName: data.companyName,
           companyWebsite: data.companyWebsite,
           companyHQ: data.companyHQ,
@@ -127,8 +112,8 @@ const CompanyEditProfile = () => {
       >
         <h2 className='text-2xl'>{getText('GLOBAL', 'PROFILE_INFO')}</h2>
         <p className='opacity-75'>{getText('GLOBAL', 'FILL_OUT')}</p>
-        <div className='mt-6 mb-3 md:flex'>
-          <div className='flex flex-col mb-3 md:w-1/2 md:mr-6 md:mb-0'>
+        <div className='mt-6 mb-3 md:grid grid-cols-2 gap-6'>
+          <div className='flex flex-col mb-3 md:mb-0'>
             <label
               htmlFor='companyName'
               className='mb-2 font-semibold text-blue-900'
@@ -155,7 +140,7 @@ const CompanyEditProfile = () => {
             </p>
           </div>
 
-          <div className='flex flex-col md:w-1/2'>
+          <div className='flex flex-col'>
             <label
               htmlFor='companyWebsite'
               className='mb-2 font-semibold text-blue-900'
@@ -184,8 +169,8 @@ const CompanyEditProfile = () => {
           </div>
         </div>
 
-        <div className='md:flex'>
-          <div className='flex flex-col mb-3 md:w-1/2 md:mr-6'>
+        <div className='md:grid grid-cols-2 gap-6'>
+          <div className='flex flex-col mb-12 '>
             <label
               htmlFor='companyEmail'
               className='mb-2 font-semibold text-blue-900'
@@ -210,54 +195,9 @@ const CompanyEditProfile = () => {
               {errors.companyEmail && errors.companyEmail.message}
             </p>
           </div>
-
-          <div className='flex flex-col mb-3 md:w-1/2'>
-            {/* TODO: Make this work */}
-            <label
-              htmlFor='companyLogo'
-              className='mb-2 font-semibold text-blue-900'
-            >
-              {getText('GLOBAL', 'COMPANY_LOGO')}
-            </label>
-
-            <div className='grid-cols-2 gap-4 md:grid'>
-              <div className='mb-2 md:mb-0'>
-                <SimpleFileUpload
-                  apiKey={process.env.SIMPLE_FILE_API_KEY}
-                  preview
-                  onSuccess={handleLogoUpload}
-                  value={logo}
-                />
-                <a
-                  href='https://simplefileupload.com'
-                  className='text-blue-400'
-                  style={{ fontSize: '10px' }}
-                >
-                  Powered by:{' '}
-                  <span className='underline'>Simple File Upload</span>
-                </a>
-              </div>
-
-              <span
-                data-cy='logo-upload-fileName'
-                className='text-xs tracking-tight text-blue-500'
-              >
-                {getText('GLOBAL', 'PLEASE_PROVIDE_FILE_TYPE')}
-              </span>
-            </div>
-
-            <p
-              name='companyLogo'
-              component='span'
-              className='input-error'
-              role='alert'
-            >
-              {errors.companyLogo && errors.companyLogo.message}
-            </p>
-          </div>
         </div>
 
-        <div className='flex flex-col mb-3'>
+        <div className='flex flex-col mb-12'>
           <label
             htmlFor='companyDescription'
             className='mb-2 font-semibold text-blue-900'
@@ -287,8 +227,33 @@ const CompanyEditProfile = () => {
           </p>
         </div>
 
-        <div className='mb-6 md:flex'>
-          <div className='flex flex-col mb-3 md:w-1/2 md:mr-6'>
+        <div className='mb-6 md:grid grid-cols-2 gap-6'>
+          <div className='flex flex-col'>
+            <label htmlFor='companyHQ' className='font-semibold text-blue-900'>
+              {getText('GLOBAL', 'COMPANY_HQ')}
+            </label>
+
+            <span className='mb-2 text-xs tracking-tight text-blue-500'>
+              {getText('GLOBAL', 'COMPANY_HQ_DESC')}
+            </span>
+
+            <input
+              id='companyHQ'
+              name='companyHQ'
+              className='input'
+              ref={register}
+            />
+
+            <p
+              name='companyHQ'
+              component='span'
+              className='input-error'
+              role='alert'
+            >
+              {errors.companyHQ && errors.companyHQ.message}
+            </p>
+          </div>
+          <div className='flex flex-col mb-3 '>
             <label
               htmlFor='companyTimezone'
               className='font-semibold text-blue-900'
@@ -338,32 +303,6 @@ const CompanyEditProfile = () => {
               {errors.companyTimezone && errors.companyTimezone.message}
             </p>
           </div>
-
-          <div className='flex flex-col md:w-1/2'>
-            <label htmlFor='companyHQ' className='font-semibold text-blue-900'>
-              {getText('GLOBAL', 'COMPANY_HQ')}
-            </label>
-
-            <span className='mb-2 text-xs tracking-tight text-blue-500'>
-              {getText('GLOBAL', 'COMPANY_HQ_DESC')}
-            </span>
-
-            <input
-              id='companyHQ'
-              name='companyHQ'
-              className='input'
-              ref={register}
-            />
-
-            <p
-              name='companyHQ'
-              component='span'
-              className='input-error'
-              role='alert'
-            >
-              {errors.companyHQ && errors.companyHQ.message}
-            </p>
-          </div>
         </div>
 
         <div className='flex flex-col'>
@@ -375,8 +314,8 @@ const CompanyEditProfile = () => {
             {getText('GLOBAL', 'TIMEZONE_WITHIN')}
           </span>
 
-          <div className='md:flex'>
-            <div className='mb-3 md:w-1/2 md:mr-6 md:mb-0'>
+          <div className='md:grid grid-cols-2 gap-6'>
+            <div className='mb-3  md:mb-0'>
               <label
                 htmlFor='timezone-from'
                 className='font-semibold text-blue-900'
@@ -423,7 +362,7 @@ const CompanyEditProfile = () => {
               </p>
             </div>
 
-            <div className='md:w-1/2'>
+            <div>
               <label
                 htmlFor='timezone-to'
                 className='font-semibold text-blue-900'
@@ -489,7 +428,6 @@ CompanyEditProfile.propTypes = {
     companyName: PropTypes.string,
     companyWebsite: PropTypes.string,
     companyEmail: PropTypes.string,
-    companyLogo: PropTypes.string,
     companyDescription: PropTypes.string,
     companyHQ: PropTypes.string,
     companyTimezone: PropTypes.string,
@@ -504,7 +442,6 @@ CompanyEditProfile.defaultProps = {
     companyName: '',
     companyWebsite: '',
     companyEmail: '',
-    companyLogo: '',
     companyDescription: '',
     companyHQ: '',
     companyTimezone: '',

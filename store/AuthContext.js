@@ -1,12 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react'
 import firebase from 'firebase/app'
 import { useRouter } from 'next/router'
-
-import { auth } from '../utils/db/index'
-import { db } from 'utils/db'
-
-import { useAccountType } from 'store/account-type_store'
 import { useProfileInfo } from 'store/profile_info'
+
+import { auth, db } from 'utils/db/index'
 
 const AuthContext = React.createContext()
 
@@ -14,12 +11,21 @@ export function useAuth() {
   return useContext(AuthContext)
 }
 
+// eslint-disable-next-line react/prop-types
 export function AuthProvider({ children }) {
-  const accountType = useAccountType((s) => s.accountType)
   const router = useRouter()
-  const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
   const [currentUser, setCurrentUser] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
+  const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
+
+  async function setUserProfileInfo(user) {
+    const userProfileInfo = await db
+      .collection(user.photoURL === 'candidate' ? 'candidates' : 'companies')
+      .doc(user.uid)
+      .get()
+
+    setProfileInfo(userProfileInfo.data())
+  }
 
   useEffect(async () => {
     const unsubscribe = await auth.onAuthStateChanged((user) => {
@@ -41,54 +47,50 @@ export function AuthProvider({ children }) {
     return unsubscribe
   }, [])
 
-  async function setUserProfileInfo(user) {
-    const userProfileInfo = await db
-      .collection(user.photoURL === 'candidate' ? 'candidates' : 'companies')
-      .doc(user.uid)
-      .get()
+  async function updateUserProfile(data) {
+    await auth.currentUser.updateProfile(data)
 
-    setProfileInfo(userProfileInfo.data())
+    setCurrentUser((oldVal) => {
+      return {
+        ...oldVal,
+        accountType: data.photoURL,
+        displayName: data.displayName,
+      }
+    })
   }
 
   const signup = async (name, email, password, accountType) => {
-    const user = await auth
-      .createUserWithEmailAndPassword(email, password)
-      .then(async (userCredential) => {
-        if (userCredential) {
-          updateUserProfile({
-            displayName: name,
-            photoURL: accountType,
-          })
-
-          // Gets the uid for the users account object
-          const uid = userCredential.user.uid
-
-          // Creates document in appropriate collection with matching uid
-          await db
-            .collection(
-              accountType === 'candidate' ? 'candidates' : 'companies'
-            )
-            .doc(uid)
-            .set({
-              userUid: uid,
-              accountType,
-            })
-        }
+    const userCredential = await auth.createUserWithEmailAndPassword(
+      email,
+      password
+    )
+    // const unknown = async (userCredential) => {
+    if (userCredential) {
+      await updateUserProfile({
+        displayName: name,
+        photoURL: accountType,
       })
-      .then(() => {
-        router.push(`/${accountType}/${name}/edit-profile`)
-      })
-  }
 
-  function updateUserProfile(data) {
-    return auth.currentUser.updateProfile(data)
+      // Gets the uid for the users account object
+      const { uid } = userCredential.user
+
+      // Creates document in appropriate collection with matching uid
+      await db
+        .collection(accountType === 'candidate' ? 'candidates' : 'companies')
+        .doc(uid)
+        .set({
+          userUid: uid,
+          accountType,
+        })
+    }
+    router.push(`/${accountType}/${name}/edit-profile`)
   }
 
   async function signin(email, password) {
     const signin = await auth
       .signInWithEmailAndPassword(email, password)
       .then((data) => {
-        const user = data.user
+        const { user } = data
         router.push(`/${user.photoURL}/${user.displayName}/dashboard`)
       })
     return signin
@@ -100,12 +102,12 @@ export function AuthProvider({ children }) {
   }
 
   function signInWithFacebook() {
-    var provider = new firebase.auth.FacebookAuthProvider()
+    const provider = new firebase.auth.FacebookAuthProvider()
     return auth.signInWithPopup(provider)
   }
 
   function signInWithGithub() {
-    var provider = new firebase.auth.GithubAuthProvider()
+    const provider = new firebase.auth.GithubAuthProvider()
     return auth.signInWithPopup(provider)
   }
 
@@ -113,7 +115,6 @@ export function AuthProvider({ children }) {
     return auth.signOut().then(() => {
       router.push('/').then(() => {
         setCurrentUser(null)
-        setProfileInfo(null)
       })
     })
   }
