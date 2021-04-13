@@ -10,6 +10,7 @@ import CloseIcon from 'assets/images/icons/close-icon'
 import getText from 'utils/i18n/Texts'
 import { db } from 'utils/db'
 import { useProfileInfo } from 'store/profile_info'
+import shallow from 'zustand/shallow'
 
 // Custom component imports
 const SimpleFileUpload = dynamic(() => import('react-simple-file-upload'), {
@@ -20,8 +21,10 @@ const ProfileMenu = ({ children, profileUid, accountType }) => {
   const [logo, setLogo] = useState(null)
   const { signout } = useAuth()
   const [uploadImage, setUploadImage] = useState(false)
-  const profileInfo = useProfileInfo((s) => s.profileInfo)
-  const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
+  const [profileInfo, setProfileInfo] = useProfileInfo(
+    (s) => [s.profileInfo, s.setProfileInfo],
+    shallow
+  )
 
   async function handleAvatarUpload(url) {
     await db
@@ -31,12 +34,7 @@ const ProfileMenu = ({ children, profileUid, accountType }) => {
         avatar: url,
       })
 
-    setProfileInfo((oldVal) => {
-      return {
-        ...oldVal,
-        avatar: url,
-      }
-    })
+    setProfileInfo({ ...profileInfo, avatar: url })
     setUploadImage(false)
   }
 
