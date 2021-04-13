@@ -76,7 +76,7 @@ export function AuthProvider({ children }) {
 
       // Creates document in appropriate collection with matching uid
       await db
-        .collection(accountType === 'candidate' ? 'candidates' : 'companies')
+        .collection(accountType === 'company' ? 'companies' : 'candidates')
         .doc(uid)
         .set({
           userUid: uid,

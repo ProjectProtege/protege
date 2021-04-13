@@ -21,10 +21,10 @@ const ProfileMenu = ({ children, profileUid, accountType }) => {
   const [logo, setLogo] = useState(null)
   const { signout } = useAuth()
   const [uploadImage, setUploadImage] = useState(false)
-  const [profileInfo, setProfileInfo] = useProfileInfo(
-    (s) => [s.profileInfo, s.setProfileInfo],
-    shallow
-  )
+  const [profileInfo, setProfileInfo] = useProfileInfo((s) => [
+    s.profileInfo,
+    s.setProfileInfo,
+  ])
 
   async function handleAvatarUpload(url) {
     await db
