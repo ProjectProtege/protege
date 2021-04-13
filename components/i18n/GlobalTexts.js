@@ -193,7 +193,7 @@ const GlobalTexts = {
   'ro-ro': {
     ACCOUNT_CREATE: 'Creează un cont nou',
     ACCOUNT_SIGN_IN: 'Ai deja cont? Autentifică-te',
-    ACCOUNT_SIGN_UP: "Nu ai cont? Inregistrează-te",
+    ACCOUNT_SIGN_UP: "Nu ai cont? Înregistrează-te",
     ACTIONS: 'Acțiuni',
     ACTIVE_APPLICATIONS: 'Aplicații Deschise',
     ACTIVE_LISTINGS: 'Joburi Disponibile',
@@ -206,7 +206,7 @@ const GlobalTexts = {
     COMPANY_NAME: 'Nume Companie',
     COMPANY_LOGO: 'Logo Companie',
     COMPANY_SELECT: 'Vreau să angajez.',
-    COMPANY_WEBSITE: 'Webiste Companie',
+    COMPANY_WEBSITE: 'Website Companie',
     COMPANY_DESCRIPTION: 'Descriere Companie',
     COMPANY_HQ: 'Sediu Companie',
     COMPANY_HQ_DESC:
@@ -248,7 +248,7 @@ const GlobalTexts = {
     PASSWORD_RESET_SUCCESS:
       'Succes! Verifică-ți emailul pentru a reseta parola.',
     PLEASE_PROVIDE_FILE_TYPE:
-      "Folosește o imagine .jpg, .jpeg, sau .png pentru logoul companiei. Aceasta va apărea pentru fiecare job disponibil.",
+      "Folosește o imagine .jpg, .jpeg, sau .png pentru logo-ul companiei. Aceasta va apărea pentru fiecare job disponibil.",
     PORTFOLIO: 'Portofoliu',
     PROFILE_INFO: 'Profil',
     PROTEGE: 'Protegé',
