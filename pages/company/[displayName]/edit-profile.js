@@ -23,8 +23,10 @@ const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 const CompanyEditProfile = () => {
   const router = useRouter()
   const { currentUser } = useAuth()
+  const [error, setError] = useState(null)
   const [timezonesArray, setTimezonesArray] = useState([])
   const profileInfo = useProfileInfo((s) => s.profileInfo || {})
+  const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
 
   useEffect(() => {
     setTimezonesArray(timezones)
@@ -95,9 +97,13 @@ const CompanyEditProfile = () => {
         })
         .then(() => {
           router.push(`/company/${currentUser.displayName}/dashboard`)
+          setProfileInfo({
+            ...profileInfo,
+            ...data,
+          })
         })
     } catch {
-      throw new Error("Oops! Something went wrong. That's our bad.")
+      setError('Oops! Something went wrong on our end. Please try again later.')
     }
   }
 
@@ -415,6 +421,12 @@ const CompanyEditProfile = () => {
         >
           {getText('GLOBAL', 'SAVE')}
         </button>
+
+        {error ? (
+          <p className='p-3 mt-6 text-lg text-center text-red-500 bg-red-100 rounded-md'>
+            {error}
+          </p>
+        ) : null}
       </form>
     </AccountInteriorLayout>
   )
