@@ -17,11 +17,14 @@ export function AuthProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true)
   const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
 
-  async function setUserProfileInfo(user) {
+  async function fetchUserInfo(user) {
     const userProfileInfo = await db
       .collection(user.accountType === 'candidate' ? 'candidates' : 'companies')
-      .doc(user.uid)
+      .doc(user.userUid)
       .get()
+
+    console.log({ user })
+    console.log(userProfileInfo.data())
 
     setProfileInfo(userProfileInfo.data())
   }
@@ -30,14 +33,14 @@ export function AuthProvider({ children }) {
     const unsubscribe = await auth.onIdTokenChanged((user) => {
       if (user) {
         const userObject = {
-          uid: user.uid,
+          userUid: user.userUid,
           displayName: user.displayName,
           email: user.email,
           emailVerified: user.emailVerified,
           accountType: user.photoURL,
         }
 
-        setUserProfileInfo(userObject)
+        // fetchUserInfo(userObject)
         setCurrentUser(userObject)
       }
       setIsLoading(false)
@@ -70,7 +73,7 @@ export function AuthProvider({ children }) {
         photoURL: accountType,
       })
 
-      // Gets the uid for the users account object
+      // Gets the userUid for the users account object
       const { uid } = userCredential.user
 
       // Creates document in appropriate collection with matching uid
@@ -82,17 +85,29 @@ export function AuthProvider({ children }) {
           accountType,
         })
 
+      await fetchUserInfo({
+        userUid: uid,
+        accountType,
+      })
+
       router.push(`/${accountType}/${name}/edit-profile`)
     }
   }
 
   async function signin(email, password) {
-    const rawUser = await auth
-      .signInWithEmailAndPassword(email, password)
-      .then((data) => {
-        const { user } = data
-        router.push(`/${user.photoURL}/${user.displayName}/dashboard`)
-      })
+    const rawUser = await auth.signInWithEmailAndPassword(email, password)
+
+    const { user } = rawUser
+
+    const userObject = {
+      userUid: user.uid,
+      accountType: user.photoURL,
+    }
+
+    await fetchUserInfo(userObject)
+
+    router.push(`/${user.photoURL}/${user.displayName}/dashboard`)
+
     return rawUser
   }
 

@@ -10,7 +10,6 @@ import CloseIcon from 'assets/images/icons/close-icon'
 import getText from 'utils/i18n/Texts'
 import { db } from 'utils/db'
 import { useProfileInfo } from 'store/profile_info'
-import shallow from 'zustand/shallow'
 
 // Custom component imports
 const SimpleFileUpload = dynamic(() => import('react-simple-file-upload'), {

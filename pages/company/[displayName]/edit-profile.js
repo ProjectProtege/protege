@@ -83,7 +83,7 @@ const CompanyEditProfile = () => {
     try {
       await db
         .collection('companies')
-        .doc(currentUser.uid)
+        .doc(currentUser.userUid)
         .update({
           accountType: 'company',
           companyEmail: data.companyEmail,

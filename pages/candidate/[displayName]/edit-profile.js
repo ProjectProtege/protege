@@ -77,7 +77,7 @@ const CandidateEditProfile = () => {
 
   const handleProfileForm = (data) => {
     db.collection('candidates')
-      .doc(currentUser.uid)
+      .doc(currentUser.userUid)
       .update({
         accountType: 'candidate',
         firstName: data.firstName,

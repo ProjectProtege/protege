@@ -72,22 +72,22 @@ const JobList = () => {
   const columns = useMemo(
     () => [
       {
-        Header: getText('DASHBOARD', 'TABLE_TITLE'),
+        Header: getText('GLOBAL', 'TABLE_TITLE'),
         accessor: 'jobTitle',
         className: 'font-bold  md:col-span-2',
       },
       {
-        Header: getText('DASHBOARD', 'TABLE_COMPANY'),
+        Header: getText('GLOBAL', 'TABLE_COMPANY'),
         accessor: 'companyName',
         className: 'text-gray-600',
       },
       {
-        Header: getText('DASHBOARD', 'TABLE_DATE'),
+        Header: getText('GLOBAL', 'TABLE_DATE'),
         accessor: 'dateApplied',
         className: 'text-gray-600',
       },
       {
-        Header: getText('DASHBOARD', 'TABLE_STATUS'),
+        Header: getText('GLOBAL', 'TABLE_STATUS'),
         accessor: 'status',
         className: 'uppercase text-right',
       },

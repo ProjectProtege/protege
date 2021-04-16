@@ -44,11 +44,11 @@ const PostAJob = ({ query }) => {
   async function sendJobtoDB(data) {
     const postDate = firebase.firestore.Timestamp.fromDate(new Date())
 
-    const uid = uuidv4()
+    const userUid = uuidv4()
 
     await db
       .collection('jobs')
-      .doc(uid)
+      .doc(userUid)
       .set({
         approved: false,
         status: 'active',
@@ -67,7 +67,7 @@ const PostAJob = ({ query }) => {
         roleFocus: data.jobData.roleFocus,
         tier,
       })
-      .then(localStorage.setItem('Job ID', uid))
+      .then(localStorage.setItem('Job ID', userUid))
   }
 
   const handlePaymentClick = async () => {

@@ -10,9 +10,9 @@ const EmptyDashboard = () => {
       <EmptyDashboardImage className='mb-6 md:mb-0 md:w-2/3 md:mr-6' />
 
       <div className='w-full md:w-1/3 md:mt-6'>
-        <p>{getText('DASHBOARD', 'EMPTY_INTRO')}</p>
+        <p>{getText('GLOBAL', 'EMPTY_INTRO')}</p>
         <br />
-        <p>{getText('DASHBOARD', 'EMPTY_INTRO_2')}</p>
+        <p>{getText('GLOBAL', 'EMPTY_INTRO_2')}</p>
       </div>
     </div>
   )

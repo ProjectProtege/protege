@@ -17,11 +17,11 @@ const Entry = ({ params }) => {
 
   const [job, setJob] = useState({})
 
-  const uid = params.uid.toString()
+  const userUid = params.userUid.toString()
 
   useEffect(() => {
     const filteredJob = jobs.filter((item) => {
-      return item.id === uid
+      return item.id === userUid
     })
 
     setJob(filteredJob[0])
@@ -47,7 +47,7 @@ const Entry = ({ params }) => {
 
 Entry.propTypes = {
   params: PropTypes.shape({
-    uid: PropTypes.string,
+    userUid: PropTypes.string,
   }).isRequired,
 }
 
