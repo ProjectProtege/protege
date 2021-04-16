@@ -127,6 +127,7 @@ const SignIn = () => {
           <button
             className='flex items-center px-6 py-4 m-auto space-x-2 text-teal-700 transition ease-in-out border border-teal-500 rounded-md hover:border-teal-800 hover:bg-teal-100 hover:text-teal-900'
             onClick={handleSignInWithGithub}
+            type='button'
           >
             <svg
               xmlns='http://www.w3.org/2000/svg'

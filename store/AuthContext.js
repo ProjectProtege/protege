@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from 'react'
-import firebase from 'firebase/app'
 import { useRouter } from 'next/router'
 import { useProfileInfo } from 'store/profile_info'
 
@@ -20,7 +19,7 @@ export function AuthProvider({ children }) {
 
   async function setUserProfileInfo(user) {
     const userProfileInfo = await db
-      .collection(user.photoURL === 'candidate' ? 'candidates' : 'companies')
+      .collection(user.accountType === 'candidate' ? 'candidates' : 'companies')
       .doc(user.uid)
       .get()
 
@@ -28,7 +27,7 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(async () => {
-    const unsubscribe = await auth.onAuthStateChanged((user) => {
+    const unsubscribe = await auth.onIdTokenChanged((user) => {
       if (user) {
         const userObject = {
           uid: user.uid,
@@ -38,8 +37,8 @@ export function AuthProvider({ children }) {
           accountType: user.photoURL,
         }
 
+        setUserProfileInfo(userObject)
         setCurrentUser(userObject)
-        setUserProfileInfo(user)
       }
       setIsLoading(false)
     })
@@ -64,7 +63,7 @@ export function AuthProvider({ children }) {
       email,
       password
     )
-    // const unknown = async (userCredential) => {
+
     if (userCredential) {
       await updateUserProfile({
         displayName: name,
@@ -76,39 +75,25 @@ export function AuthProvider({ children }) {
 
       // Creates document in appropriate collection with matching uid
       await db
-        .collection(accountType === 'company' ? 'companies' : 'candidates')
+        .collection(accountType === 'candidate' ? 'candidates' : 'companies')
         .doc(uid)
         .set({
           userUid: uid,
           accountType,
         })
+
+      router.push(`/${accountType}/${name}/edit-profile`)
     }
-    router.push(`/${accountType}/${name}/edit-profile`)
   }
 
   async function signin(email, password) {
-    const signin = await auth
+    const rawUser = await auth
       .signInWithEmailAndPassword(email, password)
       .then((data) => {
         const { user } = data
         router.push(`/${user.photoURL}/${user.displayName}/dashboard`)
       })
-    return signin
-  }
-
-  function signInWithGoogle() {
-    const provider = new firebase.auth.GoogleAuthProvider()
-    return auth.signInWithPopup(provider)
-  }
-
-  function signInWithFacebook() {
-    const provider = new firebase.auth.FacebookAuthProvider()
-    return auth.signInWithPopup(provider)
-  }
-
-  function signInWithGithub() {
-    const provider = new firebase.auth.GithubAuthProvider()
-    return auth.signInWithPopup(provider)
+    return rawUser
   }
 
   function signout() {
@@ -135,9 +120,6 @@ export function AuthProvider({ children }) {
     currentUser,
     signup,
     signin,
-    signInWithGoogle,
-    signInWithFacebook,
-    signInWithGithub,
     signout,
     resetPassword,
     updateEmail,
