@@ -23,9 +23,6 @@ export function AuthProvider({ children }) {
       .doc(user.userUid)
       .get()
 
-    console.log({ user })
-    console.log(userProfileInfo.data())
-
     setProfileInfo(userProfileInfo.data())
   }
 
@@ -33,7 +30,7 @@ export function AuthProvider({ children }) {
     const unsubscribe = await auth.onIdTokenChanged((user) => {
       if (user) {
         const userObject = {
-          userUid: user.userUid,
+          userUid: user.uid,
           displayName: user.displayName,
           email: user.email,
           emailVerified: user.emailVerified,
@@ -83,6 +80,7 @@ export function AuthProvider({ children }) {
         .set({
           userUid: uid,
           accountType,
+          email,
         })
 
       await fetchUserInfo({

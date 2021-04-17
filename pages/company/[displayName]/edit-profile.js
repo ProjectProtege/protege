@@ -25,7 +25,7 @@ const CompanyEditProfile = () => {
   const { currentUser } = useAuth()
   const [error, setError] = useState(null)
   const [timezonesArray, setTimezonesArray] = useState([])
-  const profileInfo = useProfileInfo((s) => s.profileInfo || {})
+  const profileInfo = useProfileInfo((s) => s.profileInfo)
   const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
 
   useEffect(() => {
@@ -97,10 +97,10 @@ const CompanyEditProfile = () => {
         })
         .then(() => {
           router.push(`/company/${currentUser.displayName}/dashboard`)
-          setProfileInfo({
-            ...profileInfo,
-            ...data,
-          })
+          // setProfileInfo({
+          //   ...profileInfo,
+          //   ...data,
+          // })
         })
     } catch {
       setError('Oops! Something went wrong on our end. Please try again later.')

@@ -22,7 +22,7 @@ const CandidateEditProfile = () => {
   const { currentUser } = useAuth()
   // const [error, setError] = useState(null)
   const [timezonesArray, setTimezonesArray] = useState([])
-  const profileInfo = useProfileInfo((s) => s.profileInfo || {})
+  const profileInfo = useProfileInfo((s) => s.profileInfo)
 
   useEffect(() => {
     setTimezonesArray(timezones)
@@ -52,7 +52,7 @@ const CandidateEditProfile = () => {
     defaultValues: {
       firstName: profileInfo?.firstName ? profileInfo.firstName : '',
       lastName: profileInfo?.lastName ? profileInfo.lastName : '',
-      email: currentUser ? currentUser.email : '',
+      email: profileInfo?.email ? profileInfo.email : '',
       portfolio: profileInfo?.portfolio ? profileInfo.portfolio : '',
       social_dev: profileInfo?.social_dev ? profileInfo.social_dev : '',
       social_github: profileInfo?.social_github

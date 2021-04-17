@@ -312,10 +312,10 @@ const GlobalHeader = () => {
                       </a>
 
                       <button
-                        href='#'
                         className='block w-full px-4 py-1 text-sm font-semibold text-left text-blue-900 uppercase hover:bg-gray-100 whitespace-nowrap'
                         role='menuitem'
                         onClick={handleSignOut}
+                        type='button'
                       >
                         Sign out
                       </button>
