@@ -31,7 +31,7 @@ const GetInTouch = () => {
     comment: yup.string().required('A comment is required.'),
   })
 
-  const { register, handleSubmit, control, errors } = useForm({
+  const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(Schema),
     mode: 'onBlur',
   })
@@ -41,7 +41,7 @@ const GetInTouch = () => {
       setStatus({
         submitted: true,
         submitting: false,
-        info: { error: false, msg: msg },
+        info: { error: false, msg },
       })
       setInputs({
         name: '',
@@ -50,9 +50,17 @@ const GetInTouch = () => {
       })
     } else {
       setStatus({
-        info: { error: true, msg: msg },
+        info: { error: true, msg },
       })
     }
+  }
+
+  const encode = (data) => {
+    return Object.keys(data)
+      .map(
+        (key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
+      )
+      .join('&')
   }
 
   const onSubmit = (data) => {
@@ -69,14 +77,6 @@ const GetInTouch = () => {
       .catch((error) => {
         handleServerResponse(false, error.response.data.error)
       })
-  }
-
-  const encode = (data) => {
-    return Object.keys(data)
-      .map(
-        (key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
-      )
-      .join('&')
   }
 
   return (

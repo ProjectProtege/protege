@@ -25,7 +25,7 @@ const ForgotPassword = () => {
       .required(getText('GLOBAL', 'EMAIL_REQUIRED')),
   })
 
-  const { register, handleSubmit, control, errors } = useForm({
+  const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(Schema),
     mode: 'onChange',
   })
