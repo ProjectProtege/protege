@@ -5,6 +5,7 @@ import { AuthProvider } from 'store/AuthContext'
 import { Toaster } from 'react-hot-toast'
 import GlobalLayout from 'layouts/GlobalLayout'
 import { useJobs } from 'store/jobs_store'
+import UserProfileProvider from 'store/UserProfileProvider'
 import { db, analytics } from 'utils/db'
 import 'assets/styles/globals.css'
 import '@fortawesome/fontawesome-free/js/fontawesome'
@@ -60,17 +61,19 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <AuthProvider>
-      <GlobalLayout>
-        <Head>
-          <title>Protegé.dev</title>
-          <meta
-            name='viewport'
-            content='initial-scale=1.0, width=device-width'
-          />
-        </Head>
-        <Toaster position='top-center' />
-        <Component {...pageProps} />
-      </GlobalLayout>
+      <UserProfileProvider>
+        <GlobalLayout>
+          <Head>
+            <title>Protegé.dev</title>
+            <meta
+              name='viewport'
+              content='initial-scale=1.0, width=device-width'
+            />
+          </Head>
+          <Toaster position='top-center' />
+          <Component {...pageProps} />
+        </GlobalLayout>
+      </UserProfileProvider>
     </AuthProvider>
   )
 }

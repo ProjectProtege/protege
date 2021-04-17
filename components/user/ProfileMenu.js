@@ -20,8 +20,10 @@ const ProfileMenu = ({ children, profileUid, accountType }) => {
   const [logo, setLogo] = useState(null)
   const { signout } = useAuth()
   const [uploadImage, setUploadImage] = useState(false)
-  const profileInfo = useProfileInfo((s) => s.profileInfo)
-  const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
+  const [profileInfo, setProfileInfo] = useProfileInfo((s) => [
+    s.profileInfo,
+    s.setProfileInfo,
+  ])
 
   async function handleAvatarUpload(url) {
     await db
@@ -31,12 +33,7 @@ const ProfileMenu = ({ children, profileUid, accountType }) => {
         avatar: url,
       })
 
-    setProfileInfo((oldVal) => {
-      return {
-        ...oldVal,
-        avatar: url,
-      }
-    })
+    setProfileInfo({ ...profileInfo, avatar: url })
     setUploadImage(false)
   }
 

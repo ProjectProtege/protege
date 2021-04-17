@@ -19,7 +19,7 @@ const AccountInteriorLayout = ({ children, className }) => {
         <div className='grid-cols-5 gap-10 lg:grid'>
           <aside className='col-span-1 mb-12 md:mb-0'>
             <ProfileMenu
-              profileUid={currentUser.uid}
+              profileUid={currentUser.userUid}
               accountType={currentUser.accountType}
             >
               <li className='font-bold'>{displayName}</li>

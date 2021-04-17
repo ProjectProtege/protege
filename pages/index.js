@@ -1,6 +1,4 @@
 import Link from 'next/link'
-import Head from 'next/head'
-import Image from 'next/image'
 import { useJobs } from 'store/jobs_store'
 import { useJobForm } from 'store/job-post_store'
 
@@ -54,7 +52,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className='max-w-2xl min-h-screen mx-auto mt-12 mb-32 lg:pt-16max-w-2xl'>
+      <section className='min-h-screen mx-auto mt-12 mb-32 lg:pt-16 max-w-2xl'>
         <h2 className='mb-8 text-2xl text-center text-blue-900'>
           Latest Opportunities
         </h2>

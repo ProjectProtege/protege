@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
-import PropTypes from 'prop-types'
 
 // Lib imports
 import { useForm, Controller } from 'react-hook-form'
@@ -13,25 +12,25 @@ import 'react-quill/dist/quill.snow.css'
 import { db } from 'utils/db'
 import { useAuth } from 'store/AuthContext'
 import { useProfileInfo } from 'store/profile_info'
+import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
 
 import getText from 'utils/i18n/Texts'
 
 import timezones from 'data/timezones.json'
-import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
 const CompanyEditProfile = () => {
   const router = useRouter()
   const { currentUser } = useAuth()
+  const [error, setError] = useState(null)
   const [timezonesArray, setTimezonesArray] = useState([])
   const profileInfo = useProfileInfo((s) => s.profileInfo)
-
-  const { displayName } = router.query
+  const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
 
   useEffect(() => {
     setTimezonesArray(timezones)
-  })
+  }, [])
 
   const Schema = Yup.object().shape({
     companyName: Yup.string().required('Please enter a company name.'),
@@ -59,7 +58,7 @@ const CompanyEditProfile = () => {
     resolver: yupResolver(Schema),
     mode: 'onChange',
     defaultValues: {
-      companyName: displayName,
+      companyName: currentUser.displayName,
       companyWebsite: profileInfo?.companyWebsite
         ? profileInfo.companyWebsite
         : '',
@@ -84,7 +83,7 @@ const CompanyEditProfile = () => {
     try {
       await db
         .collection('companies')
-        .doc(currentUser.uid)
+        .doc(currentUser.userUid)
         .update({
           accountType: 'company',
           companyEmail: data.companyEmail,
@@ -97,10 +96,14 @@ const CompanyEditProfile = () => {
           companyTimezone: data.companyTimezone,
         })
         .then(() => {
-          router.push(`/company/${displayName}/dashboard`)
+          router.push(`/company/${currentUser.displayName}/dashboard`)
+          // setProfileInfo({
+          //   ...profileInfo,
+          //   ...data,
+          // })
         })
     } catch {
-      throw new Error("Oops! Something went wrong. That's our bad.")
+      setError('Oops! Something went wrong on our end. Please try again later.')
     }
   }
 
@@ -418,37 +421,15 @@ const CompanyEditProfile = () => {
         >
           {getText('GLOBAL', 'SAVE')}
         </button>
+
+        {error ? (
+          <p className='p-3 mt-6 text-lg text-center text-red-500 bg-red-100 rounded-md'>
+            {error}
+          </p>
+        ) : null}
       </form>
     </AccountInteriorLayout>
   )
-}
-
-CompanyEditProfile.propTypes = {
-  companyData: PropTypes.shape({
-    companyName: PropTypes.string,
-    companyWebsite: PropTypes.string,
-    companyEmail: PropTypes.string,
-    companyDescription: PropTypes.string,
-    companyHQ: PropTypes.string,
-    companyTimezone: PropTypes.string,
-    companyTimeframeFrom: PropTypes.string,
-    companyTimeframeTo: PropTypes.string,
-  }),
-  timezones: PropTypes.shape({}),
-}
-
-CompanyEditProfile.defaultProps = {
-  companyData: {
-    companyName: '',
-    companyWebsite: '',
-    companyEmail: '',
-    companyDescription: '',
-    companyHQ: '',
-    companyTimezone: '',
-    companyTimeframeFrom: '',
-    companyTimeframeTo: '',
-  },
-  timezones: {},
 }
 
 export default CompanyEditProfile

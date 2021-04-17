@@ -1,11 +1,12 @@
 // React/Next imports
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
-// Lib Imports
+// Lib imports
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
+import * as Yup from 'yup'
+import 'react-quill/dist/quill.snow.css'
 
 import { db } from 'utils/db'
 import { useAuth } from 'store/AuthContext'
@@ -19,34 +20,30 @@ import timezones from 'data/timezones.json'
 const CandidateEditProfile = () => {
   const router = useRouter()
   const { currentUser } = useAuth()
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  // const [error, setError] = useState(null)
   const [timezonesArray, setTimezonesArray] = useState([])
   const profileInfo = useProfileInfo((s) => s.profileInfo)
-
-  const { displayName } = router.query
 
   useEffect(() => {
     setTimezonesArray(timezones)
   }, [])
 
-  const Schema = yup.object().shape({
-    firstName: yup.string().required(getText('GLOBAL', 'FIRST_NAME_REQUIRED')),
-    lastName: yup.string().required(getText('GLOBAL', 'LAST_NAME_REQUIRED')),
-    email: yup
-      .string()
+  const Schema = Yup.object().shape({
+    firstName: Yup.string().required(getText('GLOBAL', 'FIRST_NAME_REQUIRED')),
+    lastName: Yup.string().required(getText('GLOBAL', 'LAST_NAME_REQUIRED')),
+    email: Yup.string()
       .email(getText('GLOBAL', 'EMAIL_VALID'))
       .required(getText('GLOBAL', 'EMAIL_REQUIRED')),
-    timezone: yup.string().required(getText('GLOBAL', 'TIMEZONE_REQUIRED')),
-    timeframe_from: yup
-      .string()
-      .required(getText('GLOBAL', 'TIMEFRAME_REQUIRED')),
-    timeframe_to: yup
-      .string()
-      .required(getText('GLOBAL', 'TIMEFRAME_REQUIRED')),
-    question1: yup.string().required(getText('GLOBAL', 'QUESTION_REQUIRED')),
-    question2: yup.string().required(getText('GLOBAL', 'QUESTION_REQUIRED')),
-    question3: yup.string().required(getText('GLOBAL', 'QUESTION_REQUIRED')),
+    timezone: Yup.string().required(getText('GLOBAL', 'TIMEZONE_REQUIRED')),
+    timeframe_from: Yup.string().required(
+      getText('GLOBAL', 'TIMEFRAME_REQUIRED')
+    ),
+    timeframe_to: Yup.string().required(
+      getText('GLOBAL', 'TIMEFRAME_REQUIRED')
+    ),
+    question1: Yup.string().required(getText('GLOBAL', 'QUESTION_REQUIRED')),
+    question2: Yup.string().required(getText('GLOBAL', 'QUESTION_REQUIRED')),
+    question3: Yup.string().required(getText('GLOBAL', 'QUESTION_REQUIRED')),
   })
 
   const { register, handleSubmit, errors } = useForm({
@@ -55,7 +52,7 @@ const CandidateEditProfile = () => {
     defaultValues: {
       firstName: profileInfo?.firstName ? profileInfo.firstName : '',
       lastName: profileInfo?.lastName ? profileInfo.lastName : '',
-      email: currentUser ? currentUser.email : '',
+      email: profileInfo?.email ? profileInfo.email : '',
       portfolio: profileInfo?.portfolio ? profileInfo.portfolio : '',
       social_dev: profileInfo?.social_dev ? profileInfo.social_dev : '',
       social_github: profileInfo?.social_github
@@ -79,9 +76,8 @@ const CandidateEditProfile = () => {
   })
 
   const handleProfileForm = (data) => {
-    setLoading(true)
     db.collection('candidates')
-      .doc(currentUser.uid)
+      .doc(currentUser.userUid)
       .update({
         accountType: 'candidate',
         firstName: data.firstName,
@@ -100,7 +96,7 @@ const CandidateEditProfile = () => {
         question3: data.question3,
       })
       .then(() => {
-        router.push(`/candidate/${displayName}/dashboard`)
+        router.push(`/candidate/${currentUser.displayName}/dashboard`)
       })
       .catch((err) => {
         throw new Error('Error writing document: ', err)
@@ -421,11 +417,11 @@ const CandidateEditProfile = () => {
             {getText('GLOBAL', 'SAVE')}
           </button>
 
-          {error ? (
+          {/* {error ? (
             <p className='p-3 mt-6 text-lg text-center text-red-500 bg-red-100 rounded-md'>
               {error}
             </p>
-          ) : null}
+          ) : null} */}
         </form>
       </AccountInteriorLayout>
     </>
