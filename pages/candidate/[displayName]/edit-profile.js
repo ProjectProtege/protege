@@ -297,9 +297,18 @@ const CandidateEditProfile = () => {
                         className='input input-select'
                         ref={register}
                       >
-                        <option value={getText('GLOBAL', 'SELECT')}>
-                          {getText('GLOBAL', 'FROM')}
-                        </option>
+                        {!profileInfo?.timeframe_from ? (
+                          <option value='' className='text-gray-300'>
+                            {getText('GLOBAL', 'FROM')}
+                          </option>
+                        ) : (
+                          <option
+                            value={profileInfo.timeframe_from}
+                            className='text-gray-300'
+                          >
+                            {profileInfo.timeframe_from}
+                          </option>
+                        )}
 
                         {timezonesArray.map((timezone, index) => {
                           return (
@@ -330,9 +339,13 @@ const CandidateEditProfile = () => {
                         className='input input-select'
                         ref={register}
                       >
-                        <option value={getText('GLOBAL', 'SELECT')}>
-                          {getText('GLOBAL', 'TO')}
-                        </option>
+                        {!profileInfo?.timeframe_to ? (
+                          <option value='' className='text-gray-300'>
+                            {getText('GLOBAL', 'TO')}
+                          </option>
+                        ) : (
+                          ''
+                        )}
 
                         {timezonesArray.map((timezone, index) => {
                           return (

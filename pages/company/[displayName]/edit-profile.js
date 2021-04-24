@@ -275,7 +275,7 @@ const CompanyEditProfile = () => {
                 ref={register}
                 className='input input-select '
               >
-                {profileInfo === null ? (
+                {!profileInfo?.companyTimezone ? (
                   <option value='' className='text-gray-300'>
                     {getText('GLOBAL', 'SELECT_ONE')}
                   </option>
@@ -333,7 +333,7 @@ const CompanyEditProfile = () => {
                   ref={register}
                   className='input input-select '
                 >
-                  {profileInfo === null ? (
+                  {!profileInfo?.companyTimeframeFrom ? (
                     <option value='' className='text-gray-300'>
                       {getText('GLOBAL', 'SELECT_ONE')}
                     </option>
@@ -380,7 +380,7 @@ const CompanyEditProfile = () => {
                   ref={register}
                   className='input input-select '
                 >
-                  {profileInfo === null ? (
+                  {!profileInfo?.companyTimeframeTo ? (
                     <option value='' className='text-gray-300'>
                       {getText('GLOBAL', 'SELECT_ONE')}
                     </option>
