@@ -113,7 +113,7 @@ const CompanyEditProfile = () => {
         className='container relative z-30 p-6 bg-white rounded-lg shadow-md md:p-8'
         onSubmit={handleSubmit(handleFormEntry)}
       >
-        <h2 className='text-2xl'>{getText('GLOBAL', 'PROFILE_INFO')}</h2>
+        <h1 className='text-2xl'>{getText('GLOBAL', 'PROFILE_INFO')}</h1>
         <p className='opacity-75'>{getText('GLOBAL', 'FILL_OUT')}</p>
         <div className='mt-6 mb-3 md:grid grid-cols-2 gap-6'>
           <div className='flex flex-col mb-3 md:mb-0'>
