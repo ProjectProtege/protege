@@ -60,10 +60,10 @@ const PostAJob = () => {
       .collection('jobs')
       .doc(userUid)
       .set({
-        approved: false,
+        approved: true,
         status: 'active',
         userUid: profileInfo.userUid,
-        companyEmail: profileInfo.companyEmail,
+        companyEmail: profileInfo.email,
         companyLogo: profileInfo.avatar,
         companyName: profileInfo.companyName,
         companyWebsite: profileInfo.companyWebsite,
