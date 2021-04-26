@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
+import getText from 'utils/i18n/Texts'
 
 // Lib imports
 import { useForm, Controller } from 'react-hook-form'
@@ -102,18 +103,20 @@ const PostAJob = () => {
           <TierSelect />
 
           <p className='mb-2 tracking-wide text-center text-teal-900'>
-            Select Your Tier
+            {getText('GLOBAL', 'SELECT_TIER')}
           </p>
 
           <form className='mt-12' onSubmit={handleSubmit(handleFormEntry)}>
-            <h2 className='text-xl text-blue-900 mb-4'>About the Job</h2>
+            <h2 className='text-xl text-blue-900 mb-4'>
+              {getText('GLOBAL', 'ABOUT_THE_JOB')}
+            </h2>
 
             <div className='flex flex-col mb-3'>
               <label
                 htmlFor='job-title'
                 className='mb-2 font-semibold text-blue-900'
               >
-                Job Title
+                {getText('GLOBAL', 'JOB_TITLE')}
               </label>
 
               <input
@@ -141,11 +144,11 @@ const PostAJob = () => {
                   htmlFor='role-focus'
                   className='font-semibold text-blue-900'
                 >
-                  Role Focus
+                  {getText('GLOBAL', 'ROLE_FOCUS')}
                 </label>
 
                 <span className='mb-2 text-xs tracking-tight text-blue-500 '>
-                  Frontend, Backend, Full-Stack
+                  {getText('GLOBAL', 'ROLE_FOCUS_OPTIONS')}
                 </span>
 
                 <div className='select-wrap'>
@@ -156,14 +159,20 @@ const PostAJob = () => {
                     className='input input-select '
                   >
                     <option value='' className='text-gray-300'>
-                      Select One...
+                      {getText('GLOBAL', 'SELECT_ONE')}
                     </option>
 
-                    <option value='Front-end'>Front-end</option>
+                    <option value='Front-end'>
+                      {getText('GLOBAL', 'FRONT_END')}
+                    </option>
 
-                    <option value='Back-end'>Back-end</option>
+                    <option value='Back-end'>
+                      {getText('GLOBAL', 'BACK_END')}
+                    </option>
 
-                    <option value='Full-stack'>Full-Stack</option>
+                    <option value='Full-stack'>
+                      {getText('GLOBAL', 'FULL_STACK')}
+                    </option>
                   </select>
                 </div>
 
@@ -182,11 +191,11 @@ const PostAJob = () => {
                   htmlFor='position-type'
                   className='font-semibold text-blue-900'
                 >
-                  Position Type
+                  {getText('GLOBAL', 'POSITION_TYPE')}
                 </label>
 
                 <span className='mb-2 text-xs tracking-tight text-blue-500 '>
-                  Full-time, Part-time, or Contract?
+                  {getText('GLOBAL', 'POSITION_TYPE_OPTIONS')}
                 </span>
 
                 <div className='select-wrap'>
@@ -197,11 +206,17 @@ const PostAJob = () => {
                     ref={register}
                   >
                     <option value='' className='text-gray-300'>
-                      Select One...
+                      {getText('GLOBAL', 'SELECT_ONE')}
                     </option>
-                    <option value='Full-time'>Full-time</option>
-                    <option value='Part-time'>Part-time</option>
-                    <option value='Contract'>contract</option>
+                    <option value='Full-time'>
+                      {getText('GLOBAL', 'FULL_TIME')}
+                    </option>
+                    <option value='Part-time'>
+                      {getText('GLOBAL', 'PART_TIME')}
+                    </option>
+                    <option value='Contract'>
+                      {getText('GLOBAL', 'CONTRACT')}
+                    </option>
                   </select>
                 </div>
 
@@ -221,7 +236,7 @@ const PostAJob = () => {
                 htmlFor='job-description'
                 className='mb-2 font-semibold text-blue-900'
               >
-                Job Description
+                {getText('GLOBAL', 'JOB_DESCRIPTION')}
               </label>
 
               <Controller
@@ -247,7 +262,7 @@ const PostAJob = () => {
             </div>
 
             <button type='submit' className='btn btn-teal'>
-              Proceed to Payment
+              {getText('GLOBAL', 'PROCEED_TO_PAYMENT')}
             </button>
           </form>
         </div>

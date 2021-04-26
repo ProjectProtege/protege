@@ -1,9 +1,12 @@
 import CompanyDashboardEmpty from 'assets/images/CompanyDashboardEmpty'
 import getText from 'utils/i18n/Texts'
 import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
+import { useProfileInfo } from 'store/profile_info'
+import Trash from 'assets/images/icons/trash'
+import Edit from 'assets/images/icons/edit'
 
 const CompanyDashboard = () => {
-  const activeListings = null
+  const postedJobs = useProfileInfo((s) => s.postedJobs)
   const archivedListings = null
 
   return (
@@ -13,35 +16,65 @@ const CompanyDashboard = () => {
           <h2 className='mb-6 text-xl'>
             {getText('GLOBAL', 'ACTIVE_LISTINGS')}
           </h2>
-          <table className='w-full'>
-            <tr>
-              <th className='text-sm font-light text-blue-400 uppercase'>
-                {getText('GLOBAL', 'TITLE')}
-              </th>
-              <th className='text-sm font-light text-blue-400 uppercase'>
-                {getText('GLOBAL', 'APPLICATIONS_RECEIVED')}
-              </th>
-              <th className='text-sm font-light text-blue-400 uppercase'>
-                {getText('GLOBAL', 'DATE_POSTED')}
-              </th>
-              <th className='text-sm font-light text-right text-blue-400 uppercase'>
-                {getText('GLOBAL', 'STATUS')}
-              </th>
-              <th className='text-sm font-light text-right text-blue-400 uppercase'>
-                {getText('GLOBAL', 'ACTIONS')}
-              </th>
-            </tr>
-            {activeListings ? (
-              <tr>
-                <td>Front-end Engineer (SaaS)</td>
-                <td>32</td>
-                <td>Mar. 1, 2020</td>
-                <td>Active</td>
-              </tr>
-            ) : null}
-          </table>
 
-          {!activeListings ? (
+          <div className='w-full'>
+            <div className='grid grid-cols-12 mb-4 px-3'>
+              <p className='text-sm font-light text-blue-400 uppercase text-left col-span-4'>
+                {getText('GLOBAL', 'TITLE')}
+              </p>
+              <p className='text-sm font-light text-blue-400 uppercase text-left col-span-3'>
+                {getText('GLOBAL', 'APPLICATIONS_RECEIVED')}
+              </p>
+              <p className='text-sm font-light text-blue-400 uppercase text-left col-span-2'>
+                {getText('GLOBAL', 'DATE_POSTED')}
+              </p>
+              <p className='text-sm font-light text-blue-400 uppercase text-left col-span-1'>
+                {getText('GLOBAL', 'STATUS')}
+              </p>
+              <p className='text-sm font-light text-right text-blue-400 uppercase col-span-2'>
+                {getText('GLOBAL', 'ACTIONS')}
+              </p>
+            </div>
+            <ul>
+              {postedJobs &&
+                postedJobs.map((job) => {
+                  return (
+                    <li className='grid items-center mb-4 p-3 text-sm bg-white border-l-4 border-teal-500 rounded shadow grid-cols-12'>
+                      <p className='col-span-4 font-bold'>
+                        <a href='#'>{job.jobTitle}</a>
+                      </p>
+                      <p className='col-span-3 opacity-75'>32</p>
+                      <p className='col-span-2 opacity-75'>March 21, 2021</p>
+                      <p
+                        className={`col-span-1 capitalize ${
+                          job.status === 'active'
+                            ? 'text-green-600'
+                            : 'text-error-full'
+                        }`}
+                      >
+                        {job.status}
+                      </p>
+                      <p className='col-span-2 flex items-center justify-end'>
+                        <button
+                          className='opacity-50 hover:opacity-100 mr-6'
+                          type='button'
+                        >
+                          <Edit />
+                        </button>
+                        <button
+                          className='opacity-50 hover:opacity-100 text-error-full'
+                          type='button'
+                        >
+                          <Trash />
+                        </button>
+                      </p>
+                    </li>
+                  )
+                })}
+            </ul>
+          </div>
+
+          {!postedJobs && (
             <div className='items-center w-full grid-cols-2 gap-10 mt-10 lg:grid'>
               <CompanyDashboardEmpty className='col-span-1 mb-12 lg:mb-0' />
 
@@ -52,8 +85,6 @@ const CompanyDashboard = () => {
                 <p>{getText('GLOBAL', 'EMPTY_COMPANY_DESC2')}</p>
               </div>
             </div>
-          ) : (
-            <div>Hello</div>
           )}
         </article>
 
@@ -79,7 +110,7 @@ const CompanyDashboard = () => {
                 {getText('GLOBAL', 'ACTIONS')}
               </th>
             </tr>
-            {activeListings ? (
+            {archivedListings ? (
               <tr>
                 <td>Front-end Engineer (SaaS)</td>
                 <td>32</td>
