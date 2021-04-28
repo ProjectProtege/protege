@@ -1,13 +1,18 @@
+import { useRouter } from 'next/router'
 import CompanyDashboardEmpty from 'assets/images/CompanyDashboardEmpty'
 import getText from 'utils/i18n/Texts'
 import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
 import { useProfileInfo } from 'store/profile_info'
 import Trash from 'assets/images/icons/trash'
 import Edit from 'assets/images/icons/edit'
+import Link from 'next/link'
 
 const CompanyDashboard = () => {
+  const router = useRouter()
   const postedJobs = useProfileInfo((s) => s.postedJobs)
   const archivedListings = null
+
+  const { displayName } = router.query
 
   return (
     <AccountInteriorLayout className='mt-12'>
@@ -55,12 +60,11 @@ const CompanyDashboard = () => {
                         {job.status}
                       </p>
                       <p className='col-span-2 flex items-center justify-end'>
-                        <button
-                          className='opacity-50 hover:opacity-100 mr-6'
-                          type='button'
-                        >
-                          <Edit />
-                        </button>
+                        <Link href={`/company/${displayName}/${job.id}/edit`}>
+                          <a className='opacity-50 hover:opacity-100 mr-6'>
+                            <Edit />
+                          </a>
+                        </Link>
                         <button
                           className='opacity-50 hover:opacity-100 text-error-full'
                           type='button'
@@ -74,7 +78,7 @@ const CompanyDashboard = () => {
             </ul>
           </div>
 
-          {!postedJobs && (
+          {/* {!postedJobs.length && (
             <div className='items-center w-full grid-cols-2 gap-10 mt-10 lg:grid'>
               <CompanyDashboardEmpty className='col-span-1 mb-12 lg:mb-0' />
 
@@ -85,7 +89,7 @@ const CompanyDashboard = () => {
                 <p>{getText('GLOBAL', 'EMPTY_COMPANY_DESC2')}</p>
               </div>
             </div>
-          )}
+          )} */}
         </article>
 
         <article>

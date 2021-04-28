@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 import getText from 'utils/i18n/Texts'
 
 // Lib imports
@@ -10,27 +10,14 @@ import 'react-quill/dist/quill.snow.css'
 
 // Component imports
 import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
-import TierSelect from 'components/form/TierSelect'
-import { loadStripe } from '@stripe/stripe-js'
-import firebase from 'firebase/app'
-import { db } from 'utils/db'
-import { v4 as uuidv4 } from 'uuid'
-
-// Zustand imports
-import { useJobForm } from 'store/job-post_store'
-import { useProfileInfo } from 'store/profile_info'
+// import { loadStripe } from '@stripe/stripe-js'
+// import firebase from 'firebase/app'
+// import { db } from 'utils/db'
+// import { v4 as uuidv4 } from 'uuid'
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
-const PostAJob = () => {
-  const router = useRouter()
-
-  // Form and Status state from zustand
-  const tier = useJobForm((s) => s.tier)
-  const profileInfo = useProfileInfo((s) => s.profileInfo)
-
-  const { displayName } = router.query
-
+const Edit = () => {
   const Schema = Yup.object().shape({
     jobtitle: Yup.string().required('Job title is a required field.'),
     roleFocus: Yup.string().required('Please select a focus area.'),
@@ -52,61 +39,27 @@ const PostAJob = () => {
     },
   })
 
-  async function sendJobtoDB(data) {
-    const postDate = firebase.firestore.Timestamp.fromDate(new Date())
-
-    const userUid = uuidv4()
-
-    await db
-      .collection('jobs')
-      .doc(userUid)
-      .set({
-        approved: true,
-        status: 'active',
-        userUid: profileInfo.userUid,
-        companyEmail: profileInfo.email,
-        companyLogo: profileInfo.avatar,
-        companyName: profileInfo.companyName,
-        companyWebsite: profileInfo.companyWebsite,
-        companyHQ: profileInfo.companyHQ,
-        companyDescription: profileInfo.companyDescription,
-        jobDescription: data.jobDescription,
-        jobtitle: data.jobtitle,
-        paid: false,
-        positionType: data.positionType,
-        postedAt: postDate,
-        roleFocus: data.roleFocus,
-        tier,
-      })
-      .then(localStorage.setItem('Job ID', userUid))
-  }
-
   const handleFormEntry = async (data) => {
-    const stripe = await loadStripe(process.env.STRIPE_API_KEY)
+    console.log(data)
+    // const stripe = await loadStripe(process.env.STRIPE_API_KEY)
 
-    await sendJobtoDB(data)
+    // await sendJobtoDB(data)
 
-    await stripe.redirectToCheckout({
-      lineItems: [{ price: tier, quantity: 1 }],
-      mode: 'payment',
-      successUrl: `${process.env.BASE_URL}/company/${displayName}/thanks`,
-      cancelUrl: `${process.env.BASE_URL}/company/${displayName}/post-a-job`,
-    })
+    // await stripe.redirectToCheckout({
+    //   lineItems: [{ price: tier, quantity: 1 }],
+    //   mode: 'payment',
+    //   successUrl: `${process.env.BASE_URL}/company/${displayName}/dashboard`,
+    //   cancelUrl: `${process.env.BASE_URL}/company/${displayName}/post-a-job`,
+    // })
   }
 
   return (
     <AccountInteriorLayout className='mt-12'>
+      <h1 className='sr-only'>Edit Job Listing</h1>
+
       <section>
-        <h1 className='sr-only'>Post a Job</h1>
-
         <div className='container relative z-30 p-6 bg-white rounded-lg shadow-md md:p-8'>
-          <TierSelect />
-
-          <p className='mb-2 tracking-wide text-center text-teal-900'>
-            {getText('GLOBAL', 'SELECT_TIER')}
-          </p>
-
-          <form className='mt-12' onSubmit={handleSubmit(handleFormEntry)}>
+          <form onSubmit={handleSubmit(handleFormEntry)}>
             <h2 className='text-xl text-blue-900 mb-4'>
               {getText('GLOBAL', 'ABOUT_THE_JOB')}
             </h2>
@@ -271,4 +224,4 @@ const PostAJob = () => {
   )
 }
 
-export default PostAJob
+export default Edit

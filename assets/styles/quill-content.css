@@ -22,7 +22,7 @@
 }
 
 .rich-text-content {
-  @apply text-blue-900 leading-relaxed;
+  @apply text-blue-900 opacity-75 leading-relaxed !important;
 }
 
 .rich-text-content h1,
