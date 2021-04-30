@@ -44,10 +44,10 @@ const JobBoard = () => {
   }, [])
 
   return (
-    <div className='container '>
+    <div className='container'>
       <div className='w-full mx-auto lg:w-3/5'>
         <div className='flex items-center justify-between mb-6'>
-          <h1 className='mb-6 text-2xl'>
+          <h1 className='text-2xl'>
             {jobFilter ? `${jobFilter} Jobs` : 'All Jobs'}
           </h1>
 
