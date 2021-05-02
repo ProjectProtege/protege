@@ -20,6 +20,8 @@ const UserProfileProvider = ({ children }) => {
 
       setProfileInfo(userProfileInfo.data())
 
+      console.log(userProfileInfo.data())
+
       if (currentUser.accountType === 'company') {
         const postedJobs = await db
           .collection('jobs')

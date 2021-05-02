@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { db } from 'utils/db'
 import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
+import { useProfileInfo } from 'store/profile_info'
 
 const Thanks = () => {
-  const router = useRouter()
-
-  const { displayName } = router.query
+  const profileInfo = useProfileInfo((s) => s.profileInfo)
 
   useEffect(() => {
     const jobId = localStorage.getItem('Job ID')
@@ -65,7 +63,7 @@ const Thanks = () => {
           </ul>
 
           <button className='mt-12 btn btn-teal' type='button'>
-            <Link href={`/company/${displayName}/dashboard`}>
+            <Link href={`/company/${profileInfo.slug}/dashboard`}>
               <a>View Dashboard</a>
             </Link>
           </button>

@@ -8,6 +8,7 @@ import NavLink from 'components/global/NavLink'
 import CloseIcon from 'components/global/CloseIcon'
 import MenuIcon from 'assets/images/MenuIcon'
 import Logo from 'assets/images/ProtegeLogo'
+import { useProfileInfo } from 'store/profile_info'
 
 const GlobalHeader = () => {
   const router = useRouter()
@@ -16,6 +17,7 @@ const GlobalHeader = () => {
   const setIsNavOpen = useUi((s) => s.setIsNavOpen)
   const isUserMenuOpen = useUi((s) => s.isUserMenuOpen)
   const setIsUserMenuOpen = useUi((s) => s.setIsUserMenuOpen)
+  const profileInfo = useProfileInfo((s) => s.profileInfo)
 
   useEffect(() => {
     const handleRouteChange = () => {
@@ -304,7 +306,7 @@ const GlobalHeader = () => {
                       aria-labelledby='user-menu'
                     >
                       <a
-                        href={`/${currentUser.accountType}/${currentUser.displayName}/dashboard`}
+                        href={`/${profileInfo.accountType}/${profileInfo.slug}/dashboard`}
                         className='block px-4 py-1 text-sm text-blue-900 hover:bg-gray-100 whitespace-nowrap'
                         role='menuitem'
                       >

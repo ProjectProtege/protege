@@ -17,6 +17,10 @@ export function AuthProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true)
   const setProfileInfo = useProfileInfo((s) => s.setProfileInfo)
 
+  function slugify(name) {
+    return name.replace(' ', '-').toLowerCase()
+  }
+
   async function fetchUserInfo(user) {
     const userProfileInfo = await db
       .collection(user.accountType === 'candidate' ? 'candidates' : 'companies')
@@ -78,7 +82,9 @@ export function AuthProvider({ children }) {
         .collection(accountType === 'candidate' ? 'candidates' : 'companies')
         .doc(uid)
         .set({
+          displayName: name,
           userUid: uid,
+          slug: slugify(name),
           accountType,
           email,
         })
@@ -88,7 +94,7 @@ export function AuthProvider({ children }) {
         accountType,
       })
 
-      router.push(`/${accountType}/${name}/edit-profile`)
+      router.push(`/${accountType}/${slugify(name)}/edit-profile`)
     }
   }
 
@@ -104,7 +110,7 @@ export function AuthProvider({ children }) {
 
     await fetchUserInfo(userObject)
 
-    router.push(`/${user.photoURL}/${user.displayName}/dashboard`)
+    router.push(`/${user.photoURL}/${user.slug}/dashboard`)
 
     return rawUser
   }
