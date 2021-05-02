@@ -78,7 +78,7 @@ const CompanyDashboard = () => {
             </ul>
           </div>
 
-          {!postedJobs.length && (
+          {!postedJobs?.length && (
             <div className='items-center w-full grid-cols-2 gap-10 mt-10 lg:grid'>
               <CompanyDashboardEmpty className='col-span-1 mb-12 lg:mb-0' />
 
