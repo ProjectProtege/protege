@@ -1,18 +1,16 @@
-import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 import { useAuth } from 'store/AuthContext'
 
 import ProfileMenu from 'components/user/ProfileMenu'
 import NavLink from 'components/global/NavLink'
+import { useProfileInfo } from 'store/profile_info'
 
 import getText from 'utils/i18n/Texts'
 import Link from 'next/link'
 
 const AccountInteriorLayout = ({ children, className }) => {
-  const router = useRouter()
   const { currentUser } = useAuth()
-
-  const { displayName } = router.query
+  const profileInfo = useProfileInfo((s) => s.profileInfo)
 
   return (
     <>
@@ -23,10 +21,10 @@ const AccountInteriorLayout = ({ children, className }) => {
               profileUid={currentUser.userUid}
               accountType={currentUser.accountType}
             >
-              <li className='font-bold'>{displayName}</li>
+              <li className='font-bold'>{profileInfo?.displayName}</li>
               <li>
                 <NavLink
-                  href={`/${currentUser.accountType}/${displayName}/dashboard`}
+                  href={`/${profileInfo?.accountType}/${profileInfo?.slug}/dashboard`}
                   activeClassName='text-teal-700 opacity-100'
                   className='opacity-75 hover:opacity-100'
                 >
@@ -35,7 +33,7 @@ const AccountInteriorLayout = ({ children, className }) => {
               </li>
               <li>
                 <NavLink
-                  href={`/${currentUser.accountType}/${displayName}/`}
+                  href={`/${profileInfo?.accountType}/${profileInfo?.slug}/`}
                   activeClassName='text-teal-700 opacity-100'
                   className='opacity-75 hover:opacity-100'
                 >
@@ -44,7 +42,7 @@ const AccountInteriorLayout = ({ children, className }) => {
               </li>
               <li>
                 <NavLink
-                  href={`/${currentUser.accountType}/${displayName}/edit-profile`}
+                  href={`/${currentUser.accountType}/${profileInfo?.slug}/edit-profile`}
                   activeClassName='text-teal-700 opacity-100'
                   className='opacity-75 hover:opacity-100'
                 >
@@ -54,7 +52,7 @@ const AccountInteriorLayout = ({ children, className }) => {
             </ProfileMenu>
 
             {currentUser.accountType === 'company' && (
-              <Link href={`/company/${displayName}/post-a-job`}>
+              <Link href={`/company/${profileInfo?.slug}/post-a-job`}>
                 <a className='btn btn-teal block text-center mt-6'>
                   Post a Job
                 </a>

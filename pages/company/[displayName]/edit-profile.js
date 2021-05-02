@@ -98,7 +98,7 @@ const CompanyEditProfile = () => {
         ...data,
       })
 
-      router.push(`/company/${currentUser.displayName}/dashboard`)
+      router.push(`/company/${profileInfo.slug}/dashboard`)
     } catch {
       setError('Oops! Something went wrong on our end. Please try again later.')
     }

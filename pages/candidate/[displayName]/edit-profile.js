@@ -77,7 +77,7 @@ const CandidateEditProfile = () => {
 
   const handleProfileForm = (data) => {
     db.collection('candidates')
-      .doc(currentUser.userUid)
+      .doc(profileInfo.userUid)
       .update({
         accountType: 'candidate',
         firstName: data.firstName,
@@ -96,7 +96,7 @@ const CandidateEditProfile = () => {
         question3: data.question3,
       })
       .then(() => {
-        router.push(`/candidate/${currentUser.displayName}/dashboard`)
+        router.push(`/candidate/${profileInfo.slug}/dashboard`)
       })
       .catch((err) => {
         throw new Error('Error writing document: ', err)
