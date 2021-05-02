@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
+import Image from 'next/image'
 
 const JobTemplate = ({ props }) => {
   const router = useRouter()
@@ -110,11 +111,12 @@ const JobTemplate = ({ props }) => {
             <div className='mt-8 text-center md:w-1/4 md:text-left'>
               <div className='p-4 bg-gray-200'>
                 {companyLogo ? (
-                  <div className='relative w-2/3 p-4 mx-auto mb-6 overflow-hidden bg-white rounded shadow-md md:w-auto md:mx-0'>
-                    <img
+                  <div className='relative flex items-center justify-center w-32 h-32 mb-6 overflow-hidden bg-white rounded-full shadow-md'>
+                    <Image
                       data-cy='company-logo'
                       id='companyLogo'
-                      className='w-full rounded-full'
+                      layout='fill'
+                      objectFit='contain'
                       src={companyLogo}
                       alt={`${companyName} logo`}
                     />

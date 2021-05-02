@@ -24,7 +24,7 @@ const TierSelectCard = ({ children, value }) => {
       type='button'
     >
       <div
-        className={`absolute w-full h-2 bg-gradient-to-r from-gray-400 to-gray-300 ${
+        className={`absolute w-full h-2 top-0 left-0 bg-gradient-to-r from-gray-400 to-gray-300 ${
           tier === value ? 'from-teal-500 to-teal-300' : ''
         }`}
       ></div>

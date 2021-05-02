@@ -58,3 +58,20 @@ iframe[title*='Simple File Upload'] #widget .dropzone {
 .z-bottom {
   z-index: -99999;
 }
+
+/*-- homepage iframe video --*/
+
+.video-wrapper {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+}
+
+.video-wrapper iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Skeleton from 'react-loading-skeleton'
+import Image from 'next/image'
 
 const ResourceCard = ({ resource }) => {
   const [loading, setLoading] = useState(true)
@@ -25,12 +26,12 @@ const ResourceCard = ({ resource }) => {
               target='_blank'
               rel='noopener noreferrer'
             >
-              <div className='h-48 overflow-hidden'>
-                <img
-                  className='w-full'
+              <div className='relative h-48 overflow-hidden'>
+                <Image
                   // eslint-disable-next-line import/no-dynamic-require
                   src={`/resources/${resource.resourceImage}`}
                   alt={`${resource.title} screenshot of website`}
+                  layout='fill'
                 />
               </div>
               <div className='px-6 py-4'>

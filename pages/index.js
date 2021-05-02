@@ -66,7 +66,7 @@ const Home = () => {
         </div>
       </section>
 
-      <div className='flex flex-col items-center'>
+      <section className='flex flex-col items-center'>
         <h2 className='mb-8 text-2xl leading-normal text-center text-blue-500'>
           Broadcast to unmatched ambition,
           <br />
@@ -86,7 +86,49 @@ const Home = () => {
             <a className='mt-3 btn btn-teal'>Post a Job</a>
           </Link>
         </div>
-      </div>
+      </section>
+
+      <section className='grid md:grid-cols-2 gap-12 my-24 container mx-auto'>
+        <div className='mb-12 md:mb-0'>
+          <h2 className='text-3xl mb-6 capitalize'>
+            Not your average job board
+          </h2>
+
+          <div className='opacity-75 text-lg md:ml-10 leading-loose'>
+            <p>
+              Protegé&apos;s mission is to reach beyond that of just a job
+              board. Our goal is to champion the junior developer at as many of
+              the steps of the hiring process as possible.
+            </p>
+
+            <p className='mt-6'>
+              Watch this live panel our founder was a part of, hosted by{' '}
+              <a
+                className='text-teal-800 underline font-semibold'
+                href='https://virtualcoffee.io'
+              >
+                VirtualCoffee
+              </a>
+              , where they discussed some of the struggles juniors commonly face
+              during the hiring process and what we&apos;re doing to help.
+            </p>
+          </div>
+        </div>
+
+        <div className='md:mt-16'>
+          <div className='video-wrapper'>
+            <iframe
+              width='560'
+              height='315'
+              src='https://www.youtube.com/embed/PDytThYBSvA'
+              title='YouTube video player'
+              frameBorder='0'
+              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+              allowFullScreen
+            />
+          </div>
+        </div>
+      </section>
     </div>
   )
 }
