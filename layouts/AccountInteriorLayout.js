@@ -6,6 +6,7 @@ import ProfileMenu from 'components/user/ProfileMenu'
 import NavLink from 'components/global/NavLink'
 
 import getText from 'utils/i18n/Texts'
+import Link from 'next/link'
 
 const AccountInteriorLayout = ({ children, className }) => {
   const router = useRouter()
@@ -51,6 +52,14 @@ const AccountInteriorLayout = ({ children, className }) => {
                 </NavLink>
               </li>
             </ProfileMenu>
+
+            {currentUser.accountType === 'company' && (
+              <Link href={`/company/${displayName}/post-a-job`}>
+                <a className='btn btn-teal block text-center mt-6'>
+                  Post a Job
+                </a>
+              </Link>
+            )}
           </aside>
 
           <div className='col-span-4'>{children}</div>

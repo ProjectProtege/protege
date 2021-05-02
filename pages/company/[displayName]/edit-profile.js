@@ -34,8 +34,8 @@ const CompanyEditProfile = () => {
 
   const Schema = Yup.object().shape({
     companyName: Yup.string().required('Please enter a company name.'),
-    companyWebsite: Yup.string().required('Please enter a company website.'),
-    companyEmail: Yup.string().required('Please enter a company email.'),
+    companyWebsite: Yup.string(),
+    companyEmail: Yup.string(),
     companyDescription: Yup.string().required(
       'Please give a brief description of the company and culture.'
     ),
@@ -81,27 +81,24 @@ const CompanyEditProfile = () => {
 
   async function handleFormEntry(data) {
     try {
-      await db
-        .collection('companies')
-        .doc(currentUser.userUid)
-        .update({
-          accountType: 'company',
-          companyEmail: data.companyEmail,
-          companyName: data.companyName,
-          companyWebsite: data.companyWebsite,
-          companyHQ: data.companyHQ,
-          companyDescription: data.companyDescription,
-          companyTimeframeFrom: data.companyTimeframeFrom,
-          companyTimeframeTo: data.companyTimeframeTo,
-          companyTimezone: data.companyTimezone,
-        })
-        .then(() => {
-          router.push(`/company/${currentUser.displayName}/dashboard`)
-          // setProfileInfo({
-          //   ...profileInfo,
-          //   ...data,
-          // })
-        })
+      await db.collection('companies').doc(currentUser.userUid).update({
+        accountType: 'company',
+        companyEmail: data.companyEmail,
+        companyName: data.companyName,
+        companyWebsite: data.companyWebsite,
+        companyHQ: data.companyHQ,
+        companyDescription: data.companyDescription,
+        companyTimeframeFrom: data.companyTimeframeFrom,
+        companyTimeframeTo: data.companyTimeframeTo,
+        companyTimezone: data.companyTimezone,
+      })
+
+      setProfileInfo({
+        ...profileInfo,
+        ...data,
+      })
+
+      router.push(`/company/${currentUser.displayName}/dashboard`)
     } catch {
       setError('Oops! Something went wrong on our end. Please try again later.')
     }
@@ -113,7 +110,7 @@ const CompanyEditProfile = () => {
         className='container relative z-30 p-6 bg-white rounded-lg shadow-md md:p-8'
         onSubmit={handleSubmit(handleFormEntry)}
       >
-        <h2 className='text-2xl'>{getText('GLOBAL', 'PROFILE_INFO')}</h2>
+        <h1 className='text-2xl'>{getText('GLOBAL', 'PROFILE_INFO')}</h1>
         <p className='opacity-75'>{getText('GLOBAL', 'FILL_OUT')}</p>
         <div className='mt-6 mb-3 md:grid grid-cols-2 gap-6'>
           <div className='flex flex-col mb-3 md:mb-0'>
@@ -121,7 +118,7 @@ const CompanyEditProfile = () => {
               htmlFor='companyName'
               className='mb-2 font-semibold text-blue-900'
             >
-              {getText('GLOBAL', 'COMPANY_NAME')}
+              {getText('GLOBAL', 'COMPANY_NAME')}{' '}
             </label>
 
             <input
