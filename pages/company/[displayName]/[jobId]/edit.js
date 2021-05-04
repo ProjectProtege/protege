@@ -1,5 +1,6 @@
+import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
-// import { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import getText from 'utils/i18n/Texts'
 
 // Lib imports
@@ -10,14 +11,32 @@ import 'react-quill/dist/quill.snow.css'
 
 // Component imports
 import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
+import { useProfileInfo } from 'store/profile_info'
 // import { loadStripe } from '@stripe/stripe-js'
 // import firebase from 'firebase/app'
-// import { db } from 'utils/db'
+import { db } from 'utils/db'
 // import { v4 as uuidv4 } from 'uuid'
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
 const Edit = () => {
+  const router = useRouter()
+  const [currentJob, setCurrentJob] = useState()
+  const postedJobs = useProfileInfo((s) => s.postedJobs)
+  const { jobId, displayName } = router.query
+
+  useEffect(() => {
+    function getJob() {
+      const filteredJob = postedJobs.filter((job) => {
+        return job.id === jobId
+      })
+
+      setCurrentJob(filteredJob)
+    }
+
+    getJob()
+  }, [])
+
   const Schema = Yup.object().shape({
     jobtitle: Yup.string().required('Job title is a required field.'),
     roleFocus: Yup.string().required('Please select a focus area.'),
@@ -32,25 +51,24 @@ const Edit = () => {
     resolver: yupResolver(Schema),
     mode: 'onChange',
     defaultValues: {
-      jobtitle: '',
-      roleFocus: '',
-      positionType: '',
-      jobDescription: '',
+      jobtitle: currentJob?.jobtitle ? currentJob.jobtitle : '',
+      roleFocus: currentJob?.roleFocus ? currentJob.roleFocus : '',
+      positionType: currentJob?.positionType ? currentJob.positionType : '',
+      jobDescription: currentJob?.jobDescription
+        ? currentJob.jobDescription
+        : '',
     },
   })
 
   const handleFormEntry = async (data) => {
-    console.log(data)
-    // const stripe = await loadStripe(process.env.STRIPE_API_KEY)
+    await db.collection('jobs').doc(jobId).update({
+      jobtitle: data.jobtitle,
+      roleFocus: data.roleFocus,
+      positionType: data.positionType,
+      jobDescription: data.jobDescription,
+    })
 
-    // await sendJobtoDB(data)
-
-    // await stripe.redirectToCheckout({
-    //   lineItems: [{ price: tier, quantity: 1 }],
-    //   mode: 'payment',
-    //   successUrl: `${process.env.BASE_URL}/company/${displayName}/dashboard`,
-    //   cancelUrl: `${process.env.BASE_URL}/company/${displayName}/post-a-job`,
-    // })
+    router.push(`/company/${displayName}/dashboard`)
   }
 
   return (
@@ -73,7 +91,7 @@ const Edit = () => {
               </label>
 
               <input
-                id='jobTitle'
+                id='job-title'
                 name='jobtitle'
                 ref={register}
                 className='input'
@@ -215,7 +233,7 @@ const Edit = () => {
             </div>
 
             <button type='submit' className='btn btn-teal'>
-              {getText('GLOBAL', 'PROCEED_TO_PAYMENT')}
+              {getText('GLOBAL', 'SAVE')}
             </button>
           </form>
         </div>

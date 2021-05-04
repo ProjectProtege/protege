@@ -1,18 +1,53 @@
-import { useRouter } from 'next/router'
-import CompanyDashboardEmpty from 'assets/images/CompanyDashboardEmpty'
+import { useEffect } from 'react'
 import getText from 'utils/i18n/Texts'
-import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
+
 import { useProfileInfo } from 'store/profile_info'
-import Trash from 'assets/images/icons/trash'
-import Edit from 'assets/images/icons/edit'
-import Link from 'next/link'
+import { db } from 'utils/db'
+import { useAuth } from 'store/AuthContext'
+
+import CompanyDashboardEmpty from 'assets/images/CompanyDashboardEmpty'
+import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
+import JobItem from 'components/dashboard/JobItem'
 
 const CompanyDashboard = () => {
-  const router = useRouter()
   const postedJobs = useProfileInfo((s) => s.postedJobs)
   const archivedListings = null
+  const setPostedJobs = useProfileInfo((s) => s.setPostedJobs)
+  const { currentUser } = useAuth()
 
-  const { displayName } = router.query
+  useEffect(async () => {
+    const userJobs = await db
+      .collection('jobs')
+      .where('userUid', '==', currentUser.userUid)
+      .get()
+
+    const userJobsData = userJobs.docs.map((documentSnapshot) => {
+      const entry = documentSnapshot.data()
+      const doc = documentSnapshot
+
+      return {
+        id: doc.id,
+        jobtitle: entry.jobtitle,
+        jobDescription: entry.jobDescription,
+        roleFocus: entry.roleFocus,
+        status: entry.status,
+        companyHQ: entry.companyHQ,
+        companyName: entry.companyName,
+        // postedAt: entry.postedAt.toDate(),
+        companyLogo: entry.companyLogo,
+        companyDescription: entry.companyDescription,
+        companyWebsite: entry.companyWebsite,
+        positionType: entry.positionType,
+        paid: entry.paid,
+        approved: entry.approved,
+        userUid: entry.userUid,
+      }
+    })
+
+    if (userJobsData) {
+      setPostedJobs(userJobsData)
+    }
+  })
 
   return (
     <AccountInteriorLayout className='mt-12'>
@@ -43,37 +78,7 @@ const CompanyDashboard = () => {
             <ul>
               {postedJobs &&
                 postedJobs.map((job) => {
-                  return (
-                    <li className='grid items-center mb-4 p-3 text-sm bg-white border-l-4 border-teal-500 rounded shadow grid-cols-12'>
-                      <p className='col-span-4 font-bold'>
-                        <a href='#'>{job.jobTitle}</a>
-                      </p>
-                      <p className='col-span-3 opacity-75'>32</p>
-                      <p className='col-span-2 opacity-75'>March 21, 2021</p>
-                      <p
-                        className={`col-span-1 capitalize ${
-                          job.status === 'active'
-                            ? 'text-green-600'
-                            : 'text-error-full'
-                        }`}
-                      >
-                        {job.status}
-                      </p>
-                      <p className='col-span-2 flex items-center justify-end'>
-                        <Link href={`/company/${displayName}/${job.id}/edit`}>
-                          <a className='opacity-50 hover:opacity-100 mr-6'>
-                            <Edit />
-                          </a>
-                        </Link>
-                        <button
-                          className='opacity-50 hover:opacity-100 text-error-full'
-                          type='button'
-                        >
-                          <Trash />
-                        </button>
-                      </p>
-                    </li>
-                  )
+                  return <JobItem job={job} key={job.id} />
                 })}
             </ul>
           </div>
