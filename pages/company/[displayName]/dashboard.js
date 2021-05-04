@@ -63,7 +63,7 @@ const CompanyDashboard = () => {
                 {getText('GLOBAL', 'TITLE')}
               </p>
               <p className='text-sm font-light text-blue-400 uppercase text-left col-span-3'>
-                {getText('GLOBAL', 'APPLICATIONS_RECEIVED')}
+                {getText('GLOBAL', 'APPLICANTS')}
               </p>
               <p className='text-sm font-light text-blue-400 uppercase text-left col-span-2'>
                 {getText('GLOBAL', 'DATE_POSTED')}
@@ -107,7 +107,7 @@ const CompanyDashboard = () => {
                 {getText('GLOBAL', 'TITLE')}
               </th>
               <th className='text-sm font-light text-blue-400 uppercase'>
-                {getText('GLOBAL', 'APPLICATIONS_RECEIVED')}
+                {getText('GLOBAL', 'APPLICANTS')}
               </th>
               <th className='text-sm font-light text-blue-400 uppercase'>
                 {getText('GLOBAL', 'DATE_POSTED')}

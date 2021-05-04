@@ -37,7 +37,15 @@ const JobItem = ({ job }) => {
         <button
           className='opacity-50 hover:opacity-100 text-error-full'
           type='button'
-          onClick={deleteJob}
+          onClick={() => {
+            if (
+              // eslint-disable-next-line no-alert
+              window.confirm(
+                'This is permanant action. Are you sure you want to delete this job?'
+              )
+            )
+              deleteJob()
+          }}
         >
           <Trash />
         </button>

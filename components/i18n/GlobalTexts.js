@@ -15,6 +15,7 @@ const GlobalTexts = {
     ACTIVE_APPLICATIONS: 'Active Applications',
     ACTIVE_LISTINGS: 'Active Listings',
     APPLICATIONS_RECEIVED: 'Applications Received',
+    APPLICANTS: 'Applicants',
     ARCHIVED_LISTINGS: 'Archived Listings',
     BACK: 'Back to Sign in.',
     BACK_END: 'Back-end',
