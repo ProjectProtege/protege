@@ -1,17 +1,28 @@
-import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 import { db } from 'utils/db'
 
 import Trash from 'assets/images/icons/trash'
 import Edit from 'assets/images/icons/edit'
-import Link from 'next/link'
+
+import { useEditJob } from 'store/edit-job_store'
+import { useRouter } from 'next/router'
 
 const JobItem = ({ job }) => {
   const router = useRouter()
+  const setEditJob = useEditJob((s) => s.setEditJob)
   const { displayName } = router.query
 
   const deleteJob = async () => {
-    await db.collection('jobs').doc(job.id).delete()
+    try {
+      await db.collection('jobs').doc(job.id).delete()
+    } catch {
+      alert('oops something went wrong')
+    }
+  }
+
+  const editJob = () => {
+    setEditJob({ job })
+    router.push(`/company/${displayName}/${job.id}/edit`)
   }
 
   return (
@@ -29,11 +40,13 @@ const JobItem = ({ job }) => {
         {job.status}
       </p>
       <p className='col-span-2 flex items-center justify-end'>
-        <Link href={`/company/${displayName}/${job.id}/edit`}>
-          <a className='opacity-50 hover:opacity-100 mr-6'>
-            <Edit />
-          </a>
-        </Link>
+        <button
+          className='opacity-50 hover:opacity-100 mr-6'
+          type='button'
+          onClick={editJob}
+        >
+          <Edit />
+        </button>
         <button
           className='opacity-50 hover:opacity-100 text-error-full'
           type='button'

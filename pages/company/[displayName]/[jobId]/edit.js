@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import getText from 'utils/i18n/Texts'
@@ -11,7 +10,7 @@ import 'react-quill/dist/quill.snow.css'
 
 // Component imports
 import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
-import { useProfileInfo } from 'store/profile_info'
+import { useEditJob } from 'store/edit-job_store'
 // import { loadStripe } from '@stripe/stripe-js'
 // import firebase from 'firebase/app'
 import { db } from 'utils/db'
@@ -21,28 +20,15 @@ const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
 const Edit = () => {
   const router = useRouter()
-  const [currentJob, setCurrentJob] = useState()
-  const postedJobs = useProfileInfo((s) => s.postedJobs)
   const { jobId, displayName } = router.query
-
-  useEffect(() => {
-    function getJob() {
-      const filteredJob = postedJobs.filter((job) => {
-        return job.id === jobId
-      })
-
-      setCurrentJob(filteredJob)
-    }
-
-    getJob()
-  }, [])
+  const editJob = useEditJob((s) => s.editJob)
 
   const Schema = Yup.object().shape({
     jobtitle: Yup.string().required('Job title is a required field.'),
     roleFocus: Yup.string().required('Please select a focus area.'),
     positionType: Yup.string().required('Please select a position type.'),
     jobDescription: Yup.string().required(
-      'Please give a description of the job and responsibilities.'
+      'Please describe the job and its responsibilities.'
     ),
   })
 
@@ -51,24 +37,26 @@ const Edit = () => {
     resolver: yupResolver(Schema),
     mode: 'onChange',
     defaultValues: {
-      jobtitle: currentJob?.jobtitle ? currentJob.jobtitle : '',
-      roleFocus: currentJob?.roleFocus ? currentJob.roleFocus : '',
-      positionType: currentJob?.positionType ? currentJob.positionType : '',
-      jobDescription: currentJob?.jobDescription
-        ? currentJob.jobDescription
-        : '',
+      jobtitle: editJob.job.jobtitle,
+      roleFocus: editJob.job.roleFocus,
+      positionType: editJob.job.positionType,
+      jobDescription: editJob.job.jobDescription,
     },
   })
 
   const handleFormEntry = async (data) => {
-    await db.collection('jobs').doc(jobId).update({
-      jobtitle: data.jobtitle,
-      roleFocus: data.roleFocus,
-      positionType: data.positionType,
-      jobDescription: data.jobDescription,
-    })
+    try {
+      await db.collection('jobs').doc(jobId).update({
+        jobtitle: data.jobtitle,
+        roleFocus: data.roleFocus,
+        positionType: data.positionType,
+        jobDescription: data.jobDescription,
+      })
 
-    router.push(`/company/${displayName}/dashboard`)
+      router.push(`/company/${displayName}/dashboard`)
+    } catch {
+      alert('oops! something went wrong')
+    }
   }
 
   return (
@@ -84,14 +72,14 @@ const Edit = () => {
 
             <div className='flex flex-col mb-3'>
               <label
-                htmlFor='job-title'
+                htmlFor='jobtitle'
                 className='mb-2 font-semibold text-blue-900'
               >
                 {getText('GLOBAL', 'JOB_TITLE')}
               </label>
 
               <input
-                id='job-title'
+                id='jobtitle'
                 name='jobtitle'
                 ref={register}
                 className='input'
@@ -112,7 +100,7 @@ const Edit = () => {
             <div className='md:flex'>
               <div className='flex flex-col mb-3 md:w-1/2 md:mr-6'>
                 <label
-                  htmlFor='role-focus'
+                  htmlFor='roleFocus'
                   className='font-semibold text-blue-900'
                 >
                   {getText('GLOBAL', 'ROLE_FOCUS')}
@@ -124,7 +112,7 @@ const Edit = () => {
 
                 <div className='select-wrap'>
                   <select
-                    id='role-focus'
+                    id='roleFocus'
                     name='roleFocus'
                     ref={register}
                     className='input input-select '
@@ -159,7 +147,7 @@ const Edit = () => {
 
               <div className='flex flex-col mb-3 md:w-1/2'>
                 <label
-                  htmlFor='position-type'
+                  htmlFor='positionType'
                   className='font-semibold text-blue-900'
                 >
                   {getText('GLOBAL', 'POSITION_TYPE')}
@@ -171,7 +159,7 @@ const Edit = () => {
 
                 <div className='select-wrap'>
                   <select
-                    id='position-type'
+                    id='positionType'
                     name='positionType'
                     className='input input-select '
                     ref={register}
@@ -204,7 +192,7 @@ const Edit = () => {
 
             <div className='flex flex-col mb-3'>
               <label
-                htmlFor='job-description'
+                htmlFor='jobDescription'
                 className='mb-2 font-semibold text-blue-900'
               >
                 {getText('GLOBAL', 'JOB_DESCRIPTION')}

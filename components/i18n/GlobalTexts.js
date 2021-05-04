@@ -48,7 +48,7 @@ const GlobalTexts = {
       'Your active applications will show up here so you can easily review and track them!',
     EMPTY_INTRO_2: 'It’s looking kind of empty... get some applications out!',
     FIRST_NAME: 'First Name',
-    FILL_OUT: 'Fill out your profile information and get started!',
+    FILL_OUT: 'Fill out your profile information!',
     FIRST_NAME_REQUIRED: 'First name is a required field.',
     FROM: 'From',
     FRONT_END: 'Front-end',
