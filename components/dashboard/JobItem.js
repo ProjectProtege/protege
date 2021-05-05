@@ -50,13 +50,34 @@ const JobItem = ({ job }) => {
     router.push(`/company/${displayName}/${job.id}/edit`)
   }
 
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'June',
+    'July',
+    'Aug',
+    'Sept',
+    'Oct',
+    'Nov',
+    'Dec',
+  ]
+
+  const postDate = job.postedAt
+
+  const formattedPostDate = `${
+    months[postDate.getMonth()]
+  } ${postDate.getDate()}`
+
   return (
     <li className='grid items-center mb-4 p-3 text-sm bg-white border-l-4 border-teal-500 rounded shadow grid-cols-12'>
       <p className='col-span-4 font-bold'>
         <a href='#'>{job.jobtitle}</a>
       </p>
-      <p className='col-span-3 opacity-75'>{applicants?.length + 1}</p>
-      {/* <p className='col-span-2 opacity-75'>{job.postedAt.toDate()}</p> */}
+      <p className='col-span-3 opacity-75'>{applicants?.length}</p>
+      <p className='col-span-2 opacity-75'>{formattedPostDate}</p>
       <p
         className={`col-span-1 capitalize ${
           job.status === 'active' ? 'text-green-600' : 'text-error-full'
@@ -97,7 +118,7 @@ JobItem.propTypes = {
     jobtitle: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
-    postedAt: PropTypes.shape().isRequired,
+    postedAt: PropTypes.instanceOf(Date).isRequired,
   }).isRequired,
 }
 

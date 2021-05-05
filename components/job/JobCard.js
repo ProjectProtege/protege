@@ -4,27 +4,26 @@ import Image from 'next/image'
 import PropTypes from 'prop-types'
 
 const JobCard = ({ job }) => {
-  // const months = [
-  //   'Jan',
-  //   'Feb',
-  //   'Mar',
-  //   'Apr',
-  //   'May',
-  //   'June',
-  //   'July',
-  //   'Aug',
-  //   'Sept',
-  //   'Oct',
-  //   'Nov',
-  //   'Dec',
-  // ]
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'June',
+    'July',
+    'Aug',
+    'Sept',
+    'Oct',
+    'Nov',
+    'Dec',
+  ]
 
-  // TODO: Fix blocking error
-  // const postDate = job.postedAt.toDate()
+  const postDate = job.postedAt
 
-  // const formattedPostDate = `${
-  //   months[postDate.getMonth()]
-  // } ${postDate.getDate()}`
+  const formattedPostDate = `${
+    months[postDate.getMonth()]
+  } ${postDate.getDate()}`
 
   return (
     <Link data-cy={`job-card-link-${job.id}`} href={`/job-board/${job.id}`}>
@@ -75,7 +74,7 @@ const JobCard = ({ job }) => {
               data-cy={`job-card-formatted-date-${job.id}`}
               className='text-lg font-bold text-teal-900'
             >
-              {/* {formattedPostDate} */}
+              {formattedPostDate}
             </p>
           </div>
         </div>
@@ -91,7 +90,7 @@ JobCard.propTypes = {
     companyLogo: PropTypes.string.isRequired,
     jobTitle: PropTypes.string.isRequired,
     roleFocus: PropTypes.string.isRequired,
-    // postedAt: PropTypes.instanceOf(Date).isRequired,
+    postedAt: PropTypes.instanceOf(Date).isRequired,
   }).isRequired,
 }
 

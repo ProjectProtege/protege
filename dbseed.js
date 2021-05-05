@@ -51,10 +51,7 @@ async function seedData() {
           'Part Time',
           'Contract',
         ]),
-        postedAt: {
-          nanoseconds: 201000000,
-          seconds: 1599738319,
-        },
+        postedAt: admin.firestore.FieldValue.serverTimestamp(),
         roleFocus: faker.random.arrayElement([
           'Front-end',
           'Back-end',
