@@ -42,7 +42,7 @@ function MyApp({ Component, pageProps }) {
           status: entry.status,
           companyHQ: entry.companyHQ,
           companyName: entry.companyName,
-          // postedAt: entry.postedAt.toDate(),
+          postedAt: entry.postedAt.toDate(),
           companyLogo: entry.companyLogo,
           companyDescription: entry.companyDescription,
           howToApply: entry.howToApply,

@@ -6,11 +6,36 @@ import Edit from 'assets/images/icons/edit'
 
 import { useEditJob } from 'store/edit-job_store'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
 const JobItem = ({ job }) => {
   const router = useRouter()
+  const [applicants, setApplicants] = useState()
   const setEditJob = useEditJob((s) => s.setEditJob)
   const { displayName } = router.query
+
+  useEffect(() => {
+    async function fetchApplications() {
+      const applications = await db
+        .collection('applications')
+        .where('jobId', '==', job.id)
+        .get()
+
+      const applicationData = applications.docs.map((documentSnapshot) => {
+        const entry = documentSnapshot.data()
+        const doc = documentSnapshot
+
+        return {
+          id: doc.id,
+          candidateId: entry.candidateId,
+          jobId: entry.jobId,
+        }
+      })
+      setApplicants(applicationData)
+    }
+
+    fetchApplications()
+  }, [])
 
   const deleteJob = async () => {
     try {
@@ -30,8 +55,8 @@ const JobItem = ({ job }) => {
       <p className='col-span-4 font-bold'>
         <a href='#'>{job.jobtitle}</a>
       </p>
-      <p className='col-span-3 opacity-75'>32</p>
-      <p className='col-span-2 opacity-75'>March 21, 2021</p>
+      <p className='col-span-3 opacity-75'>{applicants?.length + 1}</p>
+      {/* <p className='col-span-2 opacity-75'>{job.postedAt.toDate()}</p> */}
       <p
         className={`col-span-1 capitalize ${
           job.status === 'active' ? 'text-green-600' : 'text-error-full'
@@ -72,6 +97,7 @@ JobItem.propTypes = {
     jobtitle: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
+    postedAt: PropTypes.shape().isRequired,
   }).isRequired,
 }
 

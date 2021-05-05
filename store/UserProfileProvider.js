@@ -20,8 +20,6 @@ const UserProfileProvider = ({ children }) => {
 
       setProfileInfo(userProfileInfo.data())
 
-      console.log(userProfileInfo.data())
-
       if (currentUser.accountType === 'company') {
         const postedJobs = await db
           .collection('jobs')
@@ -40,7 +38,7 @@ const UserProfileProvider = ({ children }) => {
             status: entry.status,
             companyHQ: entry.companyHQ,
             companyName: entry.companyName,
-            // postedAt: entry.postedAt.toDate(),
+            postedAt: entry.postedAt.toDate(),
             companyLogo: entry.companyLogo,
             companyDescription: entry.companyDescription,
             companyWebsite: entry.companyWebsite,
