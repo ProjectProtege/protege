@@ -57,7 +57,7 @@ const JobCard = ({ job }) => {
                 data-cy={`job-card-job-title-${job.id}`}
                 className='text-xl leading-tight text-blue-900 capitalize md:-mt-1 xl:text-2xl'
               >
-                {job.jobTitle}
+                {job.jobtitle}
               </h2>
             </div>
 
@@ -88,7 +88,7 @@ JobCard.propTypes = {
     id: PropTypes.string.isRequired,
     companyName: PropTypes.string.isRequired,
     companyLogo: PropTypes.string.isRequired,
-    jobTitle: PropTypes.string.isRequired,
+    jobtitle: PropTypes.string.isRequired,
     roleFocus: PropTypes.string.isRequired,
     postedAt: PropTypes.instanceOf(Date).isRequired,
   }).isRequired,

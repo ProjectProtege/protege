@@ -13,7 +13,7 @@ export default async (req, res) => {
 
       return {
         id: doc.id,
-        jobTitle: entry.jobtitle,
+        jobtitle: entry.jobtitle,
         jobDescription: entry.jobDescription,
         roleFocus: entry.roleFocus,
         status: entry.status,

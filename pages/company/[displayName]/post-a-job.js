@@ -120,7 +120,7 @@ const PostAJob = () => {
               </label>
 
               <input
-                id='jobTitle'
+                id='jobtitle'
                 name='jobtitle'
                 ref={register}
                 className='input'

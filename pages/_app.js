@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }) {
 
         return {
           id: doc.id,
-          jobTitle: entry.jobtitle,
+          jobtitle: entry.jobtitle,
           jobDescription: entry.jobDescription,
           roleFocus: entry.roleFocus,
           status: entry.status,

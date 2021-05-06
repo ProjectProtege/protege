@@ -73,7 +73,7 @@ const JobList = () => {
     () => [
       {
         Header: getText('GLOBAL', 'TABLE_TITLE'),
-        accessor: 'jobTitle',
+        accessor: 'jobtitle',
         className: 'font-bold  md:col-span-2',
       },
       {

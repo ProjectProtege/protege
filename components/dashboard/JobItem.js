@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import { db } from 'utils/db'
+import Link from 'next/link'
 
 import Trash from 'assets/images/icons/trash'
 import Edit from 'assets/images/icons/edit'
@@ -74,7 +75,9 @@ const JobItem = ({ job }) => {
   return (
     <li className='grid items-center mb-4 p-3 text-sm bg-white border-l-4 border-teal-500 rounded shadow grid-cols-12'>
       <p className='col-span-4 font-bold'>
-        <a href='#'>{job.jobtitle}</a>
+        <Link href={`/company/${displayName}/${job.id}`}>
+          <a className='font-semibold'>{job.jobtitle}</a>
+        </Link>
       </p>
       <p className='col-span-3 opacity-75'>{applicants?.length}</p>
       <p className='col-span-2 opacity-75'>{formattedPostDate}</p>
@@ -85,7 +88,7 @@ const JobItem = ({ job }) => {
       >
         {job.status}
       </p>
-      <p className='col-span-2 flex items-center justify-end'>
+      <div className='col-span-2 flex items-center justify-end'>
         <button
           className='opacity-50 hover:opacity-100 mr-6'
           type='button'
@@ -108,7 +111,7 @@ const JobItem = ({ job }) => {
         >
           <Trash />
         </button>
-      </p>
+      </div>
     </li>
   )
 }
