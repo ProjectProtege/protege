@@ -44,17 +44,14 @@ async function seedData() {
         companyWebsite: faker.internet.url(),
         howToApply: faker.internet.url(),
         jobDescription: faker.lorem.paragraph(),
-        jobtitle: faker.name.jobTitle(),
+        jobtitle: faker.name.jobtitle(),
         paid: true,
         positionType: faker.random.arrayElement([
           'Full Time',
           'Part Time',
           'Contract',
         ]),
-        postedAt: {
-          nanoseconds: 201000000,
-          seconds: 1599738319,
-        },
+        postedAt: admin.firestore.FieldValue.serverTimestamp(),
         roleFocus: faker.random.arrayElement([
           'Front-end',
           'Back-end',

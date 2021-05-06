@@ -4,14 +4,21 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 import Image from 'next/image'
+import { db } from 'utils/db'
+import firebase from 'firebase/app'
+
+import { v4 as uuidv4 } from 'uuid'
+import { useProfileInfo } from 'store/profile_info'
 
 const JobTemplate = ({ props }) => {
   const router = useRouter()
+  const profileInfo = useProfileInfo((s) => s.profileInfo)
 
   const isPreview = router.pathname.indexOf('/job-board/') !== 0
 
+  const jobId = router.query.uid
+
   const {
-    howToApply,
     jobDescription,
     companyDescription,
     companyName,
@@ -57,6 +64,17 @@ const JobTemplate = ({ props }) => {
 
   function createMarkup(text) {
     return { __html: text }
+  }
+
+  const createApplication = async () => {
+    const currentDate = firebase.firestore.Timestamp.fromDate(new Date())
+    const uid = uuidv4()
+    await db.collection('applications').doc(uid).set({
+      candidateId: profileInfo.userUid,
+      jobId,
+      applicationDate: currentDate,
+      viewed: false,
+    })
   }
 
   return (
@@ -138,15 +156,16 @@ const JobTemplate = ({ props }) => {
                   >
                     Visit website
                   </a>
-                  <a
+                  <button
                     data-cy='how-to-apply'
-                    href={howToApply}
+                    type='button'
+                    onClick={createApplication}
                     className={`hidden text-center md:block btn btn-teal mt-8 w-full
                         ${isPreview ? ' btn-disabled' : ''}`}
                     tabIndex={isPreview ? -1 : 0}
                   >
                     Apply
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
@@ -174,7 +193,6 @@ const JobTemplate = ({ props }) => {
 JobTemplate.propTypes = {
   logo: PropTypes.shape({}),
   props: PropTypes.shape({}).isRequired,
-  howToApply: PropTypes.string,
   companyName: PropTypes.string,
   companyWebsite: PropTypes.string,
   roleFocus: PropTypes.string,
@@ -188,7 +206,6 @@ JobTemplate.propTypes = {
 JobTemplate.defaultProps = {
   companyLogo: '',
   logo: {},
-  howToApply: '',
   companyName: '',
   companyWebsite: '',
   roleFocus: '',

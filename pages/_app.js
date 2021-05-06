@@ -36,13 +36,13 @@ function MyApp({ Component, pageProps }) {
 
         return {
           id: doc.id,
-          jobTitle: entry.jobtitle,
+          jobtitle: entry.jobtitle,
           jobDescription: entry.jobDescription,
           roleFocus: entry.roleFocus,
           status: entry.status,
           companyHQ: entry.companyHQ,
           companyName: entry.companyName,
-          // postedAt: entry.postedAt.toDate(),
+          postedAt: entry.postedAt.toDate(),
           companyLogo: entry.companyLogo,
           companyDescription: entry.companyDescription,
           howToApply: entry.howToApply,

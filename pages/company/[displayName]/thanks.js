@@ -63,7 +63,7 @@ const Thanks = () => {
           </ul>
 
           <button className='mt-12 btn btn-teal' type='button'>
-            <Link href={`/company/${profileInfo.slug}/dashboard`}>
+            <Link href={`/company/${profileInfo?.slug}/dashboard`}>
               <a>View Dashboard</a>
             </Link>
           </button>

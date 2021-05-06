@@ -102,6 +102,7 @@ export function AuthProvider({ children }) {
     const rawUser = await auth.signInWithEmailAndPassword(email, password)
 
     const { user } = rawUser
+    const slug = user.displayName.replace(' ', '-').toLowerCase()
 
     const userObject = {
       userUid: user.uid,
@@ -110,7 +111,7 @@ export function AuthProvider({ children }) {
 
     await fetchUserInfo(userObject)
 
-    router.push(`/${user.photoURL}/${user.slug}/dashboard`)
+    router.push(`/${user.photoURL}/${slug}/dashboard`)
 
     return rawUser
   }
