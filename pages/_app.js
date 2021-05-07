@@ -98,7 +98,21 @@ function MyApp({ Component, pageProps }) {
             <title>Protegé.dev | Remote Jobs for Junior Developers</title>
             <link rel='shortcut icon' href='/protege-logo.png' />
           </Head>
-          <Toaster position='top-center' />
+          <Toaster
+            position='bottom-left'
+            toastOptions={{
+              success: {
+                iconTheme: {
+                  primary: '#5aa88e',
+                },
+              },
+              error: {
+                iconTheme: {
+                  primary: '#E53E3E',
+                },
+              },
+            }}
+          />
           <Component {...pageProps} />
         </GlobalLayout>
       </UserProfileProvider>

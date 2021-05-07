@@ -15,6 +15,7 @@ import PostAJobForm from 'components/form/PostAJobForm'
 import JobTemplate from 'components/job/JobTemplate'
 import JobPostingConfirmation from 'components/job/JobPostingConfirmation'
 import BackArrow from 'assets/images/icons/back-arrow'
+import toast from 'react-hot-toast'
 
 export async function getServerSideProps(context) {
   return {
@@ -84,9 +85,9 @@ const PostAJob = ({ query }) => {
       })
       .then(function result() {
         if (error) {
-          alert(result.error.message)
+          toast.error(result.error.message)
         } else {
-          console.log('success')
+          toast.success('Job listing submitted!')
         }
       })
   }

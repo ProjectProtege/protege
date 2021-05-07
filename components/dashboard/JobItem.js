@@ -8,6 +8,7 @@ import Edit from 'assets/images/icons/edit'
 import { useEditJob } from 'store/edit-job_store'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
 const JobItem = ({ job }) => {
   const router = useRouter()
@@ -41,8 +42,9 @@ const JobItem = ({ job }) => {
   const deleteJob = async () => {
     try {
       await db.collection('jobs').doc(job.id).delete()
+      toast.success('Job listing deleted')
     } catch {
-      alert('oops something went wrong')
+      toast.error('oops something went wrong')
     }
   }
 

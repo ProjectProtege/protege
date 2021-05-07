@@ -9,6 +9,7 @@ import { db } from 'utils/db'
 import Trash from 'assets/images/icons/trash'
 import Edit from 'assets/images/icons/edit'
 import BackArrow from 'assets/images/icons/back-arrow'
+import toast from 'react-hot-toast'
 
 const ViewListing = () => {
   const router = useRouter()
@@ -81,7 +82,7 @@ const ViewListing = () => {
     try {
       await db.collection('jobs').doc(job.id).delete()
     } catch {
-      alert('oops something went wrong')
+      toast.error('oops something went wrong')
     }
   }
 
@@ -178,11 +179,15 @@ const ViewListing = () => {
           <h2 className='text-2xl mb-8'>Applications</h2>
 
           <ul>
-            {applicants.map((applicant) => (
+            {applicants?.map((applicant) => (
               <li className='mb-4 p-4 bg-white shadow'>
                 {applicant.candidateId}
               </li>
             ))}
+
+            {!applicants?.length && (
+              <li className='opacity-50'>No applications yet!</li>
+            )}
           </ul>
         </div>
       </div>

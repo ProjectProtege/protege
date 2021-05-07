@@ -1,12 +1,40 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import getText from 'utils/i18n/Texts'
 
-import JobList from 'components/job/JobList'
-import EmptyDashboard from 'components/user/EmptyDashboard'
 import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
+import { db } from 'utils/db'
+import { useAuth } from 'store/AuthContext'
+import ApplicationItem from 'components/dashboard/ApplicationItem'
 
 const CandidateDashboard = () => {
-  const [jobList, setJobList] = useState(true)
+  const { currentUser } = useAuth()
+  const [appliedJobs, setAppliedJobs] = useState()
+
+  useEffect(() => {
+    async function fetchApplications() {
+      const applications = await db
+        .collection('applications')
+        .where('candidateId', '==', currentUser.userUid)
+        .orderBy('applicationDate', 'desc')
+        .get()
+
+      const applicationData = applications.docs.map((documentSnapshot) => {
+        const entry = documentSnapshot.data()
+        const doc = documentSnapshot
+
+        return {
+          id: doc.id,
+          candidateId: entry.candidateId,
+          jobId: entry.jobId,
+          viewed: entry.viewed,
+          applicationDate: entry.applicationDate.toDate(),
+        }
+      })
+      setAppliedJobs(applicationData)
+    }
+
+    fetchApplications()
+  }, [])
 
   return (
     <AccountInteriorLayout>
@@ -15,7 +43,33 @@ const CandidateDashboard = () => {
           {getText('GLOBAL', 'ACTIVE_APPLICATIONS')}
         </h1>
 
-        {jobList ? <JobList /> : <EmptyDashboard />}
+        <section>
+          <div className='w-full'>
+            <div className='grid grid-cols-12 mb-4 px-3'>
+              <p className='text-sm font-light text-blue-400 uppercase text-left col-span-4'>
+                {getText('GLOBAL', 'TITLE')}
+              </p>
+              <p className='text-sm font-light text-blue-400 uppercase text-left col-span-3'>
+                {getText('GLOBAL', 'COMPANY')}
+              </p>
+              <p className='text-sm font-light text-blue-400 uppercase text-left col-span-2'>
+                {getText('GLOBAL', 'DATE_APPLIED')}
+              </p>
+              <p className='text-sm font-light text-blue-400 uppercase text-left col-span-1'>
+                {getText('GLOBAL', 'STATUS')}
+              </p>
+              <p className='text-sm font-light text-right text-blue-400 uppercase col-span-1'>
+                {' '}
+              </p>
+            </div>
+            <ul>
+              {appliedJobs &&
+                appliedJobs.map((job, index) => {
+                  return <ApplicationItem job={job} key={index} />
+                })}
+            </ul>
+          </div>
+        </section>
       </div>
     </AccountInteriorLayout>
   )

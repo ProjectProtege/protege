@@ -1,110 +1,119 @@
-import { useMemo } from 'react'
-import { useTable } from 'react-table'
 import { useJobs } from 'store/jobs_store'
+import { useProfileInfo } from 'store/profile_info'
+import { db } from 'utils/db'
 import getText from 'utils/i18n/Texts'
-
-function Table({ columns, data, getCellProps }) {
-  // Use the state and functions returned from useTable to build your UI
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable({
-    columns,
-    data,
-  })
-
-  return (
-    <table {...getTableProps()} className='w-full'>
-      <thead>
-        {headerGroups.map((headerGroup) => (
-          <tr
-            {...headerGroup.getHeaderGroupProps()}
-            className='grid grid-cols-5 gap-4 p-4'
-          >
-            {headerGroup.headers.map((column) => (
-              <th
-                {...column.getHeaderProps()}
-                className='hidden text-sm font-normal text-left text-gray-600 lg:block'
-              >
-                {column.render('Header')}
-              </th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()} className='flex flex-col space-y-3'>
-        {rows.map((row, i) => {
-          prepareRow(row)
-
-          return (
-            <tr
-              {...row.getRowProps()}
-              className='grid items-center gap-4 p-4 text-sm bg-white border-l-4 border-teal-500 rounded shadow cursor-pointer md:grid-cols-5 grid-row-4'
-            >
-              {row.cells.map((cell) => {
-                return (
-                  <td
-                    {...cell.getCellProps([
-                      {
-                        className: cell.column.className,
-                      },
-                      getCellProps(cell),
-                    ])}
-                  >
-                    {cell.render('Cell')}
-                  </td>
-                )
-              })}
-            </tr>
-          )
-        })}
-      </tbody>
-    </table>
-  )
-}
 
 const JobList = () => {
   const jobs = useJobs((s) => s.jobs)
+  const profileInfo = useProfileInfo((s) => s.profileInfo)
 
-  const columns = useMemo(
-    () => [
-      {
-        Header: getText('GLOBAL', 'TABLE_TITLE'),
-        accessor: 'jobtitle',
-        className: 'font-bold  md:col-span-2',
-      },
-      {
-        Header: getText('GLOBAL', 'TABLE_COMPANY'),
-        accessor: 'companyName',
-        className: 'text-gray-600',
-      },
-      {
-        Header: getText('GLOBAL', 'TABLE_DATE'),
-        accessor: 'dateApplied',
-        className: 'text-gray-600',
-      },
-      {
-        Header: getText('GLOBAL', 'TABLE_STATUS'),
-        accessor: 'status',
-        className: 'uppercase text-right',
-      },
-    ],
-    []
-  )
+  const [activeApplications, setActiveApplications] = useState()
+
+  useEffect(() => {
+    async function fetchApplications() {
+      const applications = await db
+        .collection('applications')
+        .where('candidateId', '==', profileInfo.userUid)
+        .get()
+
+      const applicationData = applications.docs.map((documentSnapshot) => {
+        const entry = documentSnapshot.data()
+        const doc = documentSnapshot
+
+        return {
+          id: doc.id,
+          candidateId: entry.candidateId,
+          jobId: entry.jobId,
+        }
+      })
+      setActiveApplications(applicationData)
+    }
+  })
 
   return (
-    <Table
-      columns={columns}
-      data={jobs}
-      getCellProps={(cell) => ({
-        className: `${
-          cell.value === 'viewed' ? 'text-teal-500' : 'text-black'
-        }`,
-      })}
-    />
+    <section>
+      <article className='mb-20 lg:mb-32'>
+        <h2 className='mb-6 text-xl'>{getText('GLOBAL', 'ACTIVE_LISTINGS')}</h2>
+
+        <div className='w-full'>
+          <div className='grid grid-cols-12 mb-4 px-3'>
+            <p className='text-sm font-light text-blue-400 uppercase text-left col-span-4'>
+              {getText('GLOBAL', 'TITLE')}
+            </p>
+            <p className='text-sm font-light text-blue-400 uppercase text-left col-span-3'>
+              {getText('GLOBAL', 'APPLICANTS')}
+            </p>
+            <p className='text-sm font-light text-blue-400 uppercase text-left col-span-2'>
+              {getText('GLOBAL', 'DATE_POSTED')}
+            </p>
+            <p className='text-sm font-light text-blue-400 uppercase text-left col-span-1'>
+              {getText('GLOBAL', 'STATUS')}
+            </p>
+            <p className='text-sm font-light text-right text-blue-400 uppercase col-span-2'>
+              {getText('GLOBAL', 'ACTIONS')}
+            </p>
+          </div>
+          <ul>
+            {activeApplications &&
+              activeApplications.map((job) => {
+                return <JobItem job={job} key={job.id} />
+              })}
+          </ul>
+        </div>
+
+        {!activeApplications?.length && (
+          <div className='items-center w-full grid-cols-2 gap-10 mt-10 lg:grid'>
+            <CompanyDashboardEmpty className='col-span-1 mb-12 lg:mb-0' />
+
+            <div className='col-span-1'>
+              <p className='mb-6'>{getText('GLOBAL', 'EMPTY_COMPANY_DESC')}</p>
+              <p>{getText('GLOBAL', 'EMPTY_COMPANY_DESC2')}</p>
+            </div>
+          </div>
+        )}
+      </article>
+
+      <article>
+        <h2 className='mb-6 text-xl'>
+          {getText('GLOBAL', 'ARCHIVED_LISTINGS')}
+        </h2>
+        <table className='w-full'>
+          <tr>
+            <th className='text-sm font-light text-blue-400 uppercase'>
+              {getText('GLOBAL', 'TITLE')}
+            </th>
+            <th className='text-sm font-light text-blue-400 uppercase'>
+              {getText('GLOBAL', 'APPLICANTS')}
+            </th>
+            <th className='text-sm font-light text-blue-400 uppercase'>
+              {getText('GLOBAL', 'DATE_POSTED')}
+            </th>
+            <th className='text-sm font-light text-right text-blue-400 uppercase'>
+              {getText('GLOBAL', 'STATUS')}
+            </th>
+            <th className='text-sm font-light text-right text-blue-400 uppercase'>
+              {getText('GLOBAL', 'ACTIONS')}
+            </th>
+          </tr>
+          {archivedListings ? (
+            <tr>
+              <td>Front-end Engineer (SaaS)</td>
+              <td>32</td>
+              <td>Mar. 1, 2020</td>
+              <td>Active</td>
+            </tr>
+          ) : null}
+        </table>
+
+        {!archivedListings ? (
+          <div className='items-center w-full grid-cols-2 gap-10 mt-10 lg:grid'>
+            <p>{getText('GLOBAL', 'EMPTY_ARCHIVE_DESC')}</p>
+          </div>
+        ) : (
+          <div>Hello</div>
+        )}
+      </article>
+    </section>
   )
 }
 
