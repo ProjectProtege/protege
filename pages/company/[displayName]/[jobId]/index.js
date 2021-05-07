@@ -9,6 +9,7 @@ import { db } from 'utils/db'
 import Trash from 'assets/images/icons/trash'
 import Edit from 'assets/images/icons/edit'
 import BackArrow from 'assets/images/icons/back-arrow'
+import toast from 'react-hot-toast'
 
 const ViewListing = () => {
   const router = useRouter()
@@ -81,7 +82,7 @@ const ViewListing = () => {
     try {
       await db.collection('jobs').doc(job.id).delete()
     } catch {
-      alert('oops something went wrong')
+      toast.error('oops something went wrong')
     }
   }
 

@@ -14,6 +14,7 @@ import { useEditJob } from 'store/edit-job_store'
 // import { loadStripe } from '@stripe/stripe-js'
 // import firebase from 'firebase/app'
 import { db } from 'utils/db'
+import toast from 'react-hot-toast'
 // import { v4 as uuidv4 } from 'uuid'
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
@@ -55,7 +56,7 @@ const Edit = () => {
 
       router.push(`/company/${displayName}/dashboard`)
     } catch {
-      alert('oops! something went wrong')
+      toast.error('oops! something went wrong')
     }
   }
 

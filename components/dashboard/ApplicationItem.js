@@ -5,6 +5,7 @@ import { useJobs } from 'store/jobs_store'
 
 import Link from 'next/link'
 import Cancel from 'assets/images/icons/cancel'
+import toast from 'react-hot-toast'
 
 const ApplicationItem = ({ job }) => {
   const [jobData, setJobData] = useState()
@@ -21,8 +22,9 @@ const ApplicationItem = ({ job }) => {
   const cancelApplication = async () => {
     try {
       await db.collection('applications').doc(job.id).delete()
+      toast.success('Application removed.')
     } catch {
-      alert('oops, something went wrong')
+      toast.error('Oops, something went wrong. Try again!')
     }
   }
 
