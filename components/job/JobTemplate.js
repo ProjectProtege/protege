@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import Image from 'next/image'
 import { db } from 'utils/db'
 import firebase from 'firebase/app'
+import toast from 'react-hot-toast'
 
 import { v4 as uuidv4 } from 'uuid'
 import { useProfileInfo } from 'store/profile_info'
@@ -68,13 +69,17 @@ const JobTemplate = ({ props }) => {
 
   const createApplication = async () => {
     const currentDate = firebase.firestore.Timestamp.fromDate(new Date())
+
     const uid = uuidv4()
+
     await db.collection('applications').doc(uid).set({
       candidateId: profileInfo.userUid,
       jobId,
       applicationDate: currentDate,
       viewed: false,
     })
+
+    toast.success('Application submitted!')
   }
 
   return (

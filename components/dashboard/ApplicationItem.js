@@ -11,16 +11,12 @@ const ApplicationItem = ({ job }) => {
   const jobs = useJobs((s) => s.jobs)
 
   useEffect(() => {
-    function getJobData() {
-      const jobInfo = jobs.filter((item) => {
-        return item.id === job.jobId
-      })
+    const jobInfo = jobs.filter((item) => {
+      return item.id === job.jobId
+    })
 
-      setJobData(jobInfo)
-    }
-
-    getJobData()
-  }, [])
+    setJobData(jobInfo[0])
+  }, [jobs])
 
   const cancelApplication = async () => {
     try {
@@ -52,15 +48,15 @@ const ApplicationItem = ({ job }) => {
   } ${postDate.getDate()}`
 
   return (
-    <div>
-      <li className='grid items-center mb-4 p-3 text-sm bg-white border-l-4 border-teal-500 rounded shadow grid-cols-12'>
+    <li>
+      <div className='grid items-center mb-4 p-3 text-sm bg-white border-l-4 border-teal-500 rounded shadow grid-cols-12'>
         <p className='col-span-4 font-bold'>
           <Link href={`/job-board/${job.jobId}`}>
-            <a className='font-semibold'>{jobData.jobtitle}</a>
+            <a className='font-semibold'>{jobData?.jobtitle}</a>
           </Link>
         </p>
 
-        <p className='col-span-3 text-blue-600'>{jobData.companyName}</p>
+        <p className='col-span-3 text-blue-600'>{jobData?.companyName}</p>
 
         <p className='col-span-2 text-blue-600'>{formattedPostDate}</p>
 
@@ -80,8 +76,8 @@ const ApplicationItem = ({ job }) => {
           <Cancel className='w-5 h-5 inline-block mr-2' />{' '}
           <span>Cancel Application</span>
         </button>
-      </li>
-    </div>
+      </div>
+    </li>
   )
 }
 

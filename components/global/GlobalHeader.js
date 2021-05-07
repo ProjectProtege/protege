@@ -305,13 +305,16 @@ const GlobalHeader = () => {
                       aria-orientation='vertical'
                       aria-labelledby='user-menu'
                     >
-                      <a
+                      <Link
                         href={`/${profileInfo.accountType}/${profileInfo.slug}/dashboard`}
-                        className='block px-4 py-1 text-sm text-blue-900 hover:bg-gray-100 whitespace-nowrap'
-                        role='menuitem'
                       >
-                        Your Profile
-                      </a>
+                        <a
+                          className='block px-4 py-1 text-sm text-blue-900 hover:bg-gray-100 whitespace-nowrap'
+                          role='menuitem'
+                        >
+                          Your Profile
+                        </a>
+                      </Link>
 
                       <button
                         className='block w-full px-4 py-1 text-sm font-semibold text-left text-blue-900 uppercase hover:bg-gray-100 whitespace-nowrap'

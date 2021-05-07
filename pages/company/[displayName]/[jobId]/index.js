@@ -184,7 +184,7 @@ const ViewListing = () => {
               </li>
             ))}
 
-            {!applicants.length && (
+            {!applicants?.length && (
               <li className='opacity-50'>No applications yet!</li>
             )}
           </ul>

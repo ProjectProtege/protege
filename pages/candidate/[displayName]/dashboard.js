@@ -5,18 +5,17 @@ import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
 import { db } from 'utils/db'
 import { useAuth } from 'store/AuthContext'
 import ApplicationItem from 'components/dashboard/ApplicationItem'
-import { useJobs } from 'store/jobs_store'
 
 const CandidateDashboard = () => {
   const { currentUser } = useAuth()
   const [appliedJobs, setAppliedJobs] = useState()
-  const jobs = useJobs((s) => s.jobs)
 
   useEffect(() => {
     async function fetchApplications() {
       const applications = await db
         .collection('applications')
         .where('candidateId', '==', currentUser.userUid)
+        .orderBy('applicationDate', 'desc')
         .get()
 
       const applicationData = applications.docs.map((documentSnapshot) => {
