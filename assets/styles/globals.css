@@ -75,3 +75,8 @@ iframe[title*='Simple File Upload'] #widget .dropzone {
   width: 100%;
   position: absolute;
 }
+
+.blurry-text {
+  color: transparent;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}

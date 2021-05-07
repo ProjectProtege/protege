@@ -77,6 +77,7 @@ const JobTemplate = ({ props }) => {
       jobId,
       applicationDate: currentDate,
       viewed: false,
+      favorited: false,
     })
 
     toast.success('Application submitted!')
