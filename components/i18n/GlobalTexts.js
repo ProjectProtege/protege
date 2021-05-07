@@ -34,6 +34,7 @@ const GlobalTexts = {
     CONTRACT: 'Contract',
     DASHBOARD: 'Dashboard',
     DATE_POSTED: 'Date Posted',
+    DATE_APPLIED: 'Date Applied',
     DELETE_ACCOUNT: 'Delete Account',
     EDIT_PROFILE: 'Edit Profile',
     EMAIL: 'Email',

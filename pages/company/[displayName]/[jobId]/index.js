@@ -178,11 +178,15 @@ const ViewListing = () => {
           <h2 className='text-2xl mb-8'>Applications</h2>
 
           <ul>
-            {applicants.map((applicant) => (
+            {applicants?.map((applicant) => (
               <li className='mb-4 p-4 bg-white shadow'>
                 {applicant.candidateId}
               </li>
             ))}
+
+            {!applicants.length && (
+              <li className='opacity-50'>No applications yet!</li>
+            )}
           </ul>
         </div>
       </div>
