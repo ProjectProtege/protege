@@ -72,25 +72,31 @@ const JobItem = ({ job }) => {
 
   const formattedPostDate = `${
     months[postDate.getMonth()]
-  } ${postDate.getDate()}`
+  } ${postDate.getDate()}, ${postDate.getFullYear()}`
 
   return (
-    <li className='grid items-center mb-4 p-3 text-sm bg-white border-l-4 border-teal-500 rounded shadow grid-cols-12'>
-      <p className='col-span-4 font-bold'>
-        <Link href={`/company/${displayName}/${job.id}`}>
-          <a className='font-semibold'>{job.jobtitle}</a>
-        </Link>
+    <li className='grid items-center mb-4 p-3 text-sm bg-white border-l-4 border-teal-500 rounded shadow grid-cols-12 gap-6'>
+      <p className='col-span-8 md:col-span-5 font-bold'>
+        <div className='truncate'>
+          <Link href={`/company/${displayName}/${job.id}`}>
+            <a className='font-semibold'>{job.jobtitle}</a>
+          </Link>
+        </div>
       </p>
-      <p className='col-span-3 opacity-75'>{applicants?.length}</p>
-      <p className='col-span-2 opacity-75'>{formattedPostDate}</p>
+      <p className='col-span-4 md:col-span-2 opacity-75 text-right md:text-left'>
+        {applicants?.length}
+      </p>
+      <p className='hidden md:block col-span-2 opacity-75'>
+        {formattedPostDate}
+      </p>
       <p
-        className={`col-span-1 capitalize ${
+        className={`hidden md:block col-span-1 capitalize ${
           job.status === 'active' ? 'text-green-600' : 'text-error-full'
         }`}
       >
         {job.status}
       </p>
-      <div className='col-span-2 flex items-center justify-end'>
+      <div className='hidden md:flex col-span-2 items-center justify-end'>
         <button
           className='opacity-50 hover:opacity-100 mr-6'
           type='button'
