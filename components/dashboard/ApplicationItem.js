@@ -47,7 +47,7 @@ const ApplicationItem = ({ job }) => {
 
   const formattedPostDate = `${
     months[postDate.getMonth()]
-  } ${postDate.getDate()}`
+  } ${postDate.getDate()}, ${postDate.getFullYear()}`
 
   return (
     <li>
@@ -64,7 +64,7 @@ const ApplicationItem = ({ job }) => {
 
         <p className='col-span-1 uppercase'>
           {job.viewed ? (
-            <span className='text-green-700'>Viewed</span>
+            <span className='text-green-600'>Viewed</span>
           ) : (
             <span>Sent</span>
           )}
