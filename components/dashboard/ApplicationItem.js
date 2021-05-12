@@ -71,11 +71,11 @@ const ApplicationItem = ({ job }) => {
         </p>
 
         <button
-          className='col-span-2 text-right text-red-600 flex justify-end items-center'
+          className='col-span-2 text-right text-red-600 flex justify-end items-center  opacity-75 hover:opacity-100'
           onClick={cancelApplication}
           type='button'
         >
-          <Cancel className='w-5 h-5 inline-block mr-2' />{' '}
+          <Cancel className='w-5 h-5 inline-block mr-2' />
           <span>Cancel Application</span>
         </button>
       </div>

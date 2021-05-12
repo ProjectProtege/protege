@@ -61,61 +61,57 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <AuthProvider>
-      <UserProfileProvider>
-        <GlobalLayout>
-          <Head>
-            <meta
-              name='viewport'
-              content='width=device-width, initial-scale=1'
-            />
-            <meta
-              name='description'
-              content='Remote job opportunities for junior developers'
-            />
-            <link rel='apple-touch-icon' href='/protege-logo.png' />
-
-            <meta property='og:title' content='Protegé.dev' />
-            <meta
-              property='og:description'
-              content='Remote Jobs for Junior Developers'
-            />
-            <meta
-              property='og:image'
-              content='https://protege.dev/og-image.png'
-            />
-
-            <meta name='twitter:card' content='summary_large_image' />
-            <meta
-              name='twitter:image'
-              content='https://protege.dev/og-image.png'
-            />
-            <meta name='twitter:title' content='Protegé.dev' />
-            <meta
-              name='twitter:description'
-              content='Remote Jobs for Junior Developers'
-            />
-
-            <title>Protegé.dev | Remote Jobs for Junior Developers</title>
-            <link rel='shortcut icon' href='/protege-logo.png' />
-          </Head>
-          <Toaster
-            position='bottom-left'
-            toastOptions={{
-              success: {
-                iconTheme: {
-                  primary: '#5aa88e',
-                },
-              },
-              error: {
-                iconTheme: {
-                  primary: '#E53E3E',
-                },
-              },
-            }}
+      <UserProfileProvider />
+      <GlobalLayout>
+        <Head>
+          <meta name='viewport' content='width=device-width, initial-scale=1' />
+          <meta
+            name='description'
+            content='Remote job opportunities for junior developers'
           />
-          <Component {...pageProps} />
-        </GlobalLayout>
-      </UserProfileProvider>
+          <link rel='apple-touch-icon' href='/protege-logo.png' />
+
+          <meta property='og:title' content='Protegé.dev' />
+          <meta
+            property='og:description'
+            content='Remote Jobs for Junior Developers'
+          />
+          <meta
+            property='og:image'
+            content='https://protege.dev/og-image.png'
+          />
+
+          <meta name='twitter:card' content='summary_large_image' />
+          <meta
+            name='twitter:image'
+            content='https://protege.dev/og-image.png'
+          />
+          <meta name='twitter:title' content='Protegé.dev' />
+          <meta
+            name='twitter:description'
+            content='Remote Jobs for Junior Developers'
+          />
+
+          <title>Protegé.dev | Remote Jobs for Junior Developers</title>
+          <link rel='shortcut icon' href='/protege-logo.png' />
+        </Head>
+        <Toaster
+          position='bottom-left'
+          toastOptions={{
+            success: {
+              iconTheme: {
+                primary: '#5aa88e',
+              },
+            },
+            error: {
+              iconTheme: {
+                primary: '#E53E3E',
+              },
+            },
+          }}
+        />
+        <Component {...pageProps} />
+      </GlobalLayout>
     </AuthProvider>
   )
 }

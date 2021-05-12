@@ -10,31 +10,30 @@ const CandidateDashboard = () => {
   const { currentUser } = useAuth()
   const [appliedJobs, setAppliedJobs] = useState()
 
-  useEffect(() => {
-    async function fetchApplications() {
-      const applications = await db
-        .collection('applications')
-        .where('candidateId', '==', currentUser.userUid)
-        .orderBy('applicationDate', 'desc')
-        .get()
+  useEffect(async () => {
+    const applications = await db
+      .collection('applications')
+      .where('candidateId', '==', currentUser.userUid)
+      .orderBy('applicationDate', 'desc')
+      .get()
 
-      const applicationData = applications.docs.map((documentSnapshot) => {
-        const entry = documentSnapshot.data()
-        const doc = documentSnapshot
+    const applicationData = applications.docs.map((documentSnapshot) => {
+      const entry = documentSnapshot.data()
+      const doc = documentSnapshot
 
-        return {
-          id: doc.id,
-          candidateId: entry.candidateId,
-          jobId: entry.jobId,
-          viewed: entry.viewed,
-          applicationDate: entry.applicationDate.toDate(),
-        }
-      })
+      return {
+        id: doc.id,
+        candidateId: entry.candidateId,
+        jobId: entry.jobId,
+        viewed: entry.viewed,
+        applicationDate: entry.applicationDate.toDate(),
+      }
+    })
+
+    if (applicationData) {
       setAppliedJobs(applicationData)
     }
-
-    fetchApplications()
-  }, [])
+  })
 
   return (
     <AccountInteriorLayout>
