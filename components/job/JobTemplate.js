@@ -153,11 +153,11 @@ const JobTemplate = ({ props }) => {
           ) : null}
         </div>
 
-        {/* <div className='mt-8'>
+        <div className='mt-8'>
           <a
             data-cy='how-to-apply-bottom'
             href={howToApply}
-            className={`btn btn-teal w-full md:w-auto ${
+            className={`block md:inline text-center btn btn-teal w-full md:w-auto ${
               isPreview ? ' btn-disabled' : ''
             }
               `}
@@ -165,7 +165,7 @@ const JobTemplate = ({ props }) => {
           >
             Apply
           </a>
-        </div> */}
+        </div>
       </div>
     </>
   )
