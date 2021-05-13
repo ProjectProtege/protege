@@ -1,30 +1,30 @@
 import PropTypes from 'prop-types'
-import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
 import { db } from 'utils/db'
 
 import Happy from 'assets/images/icons/happy'
 import User from 'assets/images/icons/user'
+import { useJobs } from 'store/jobs_store'
 
 const ApplicantCard = ({ application }) => {
-  const [candidate, setCandidate] = useState()
+  const router = useRouter()
+  const setActiveCandidate = useJobs((s) => s.setActiveCandidate)
   const [isFavorited, setIsFavorited] = useState(application.favorited)
 
-  useEffect(async () => {
-    const candidateInfo = await db
-      .collection('candidates')
-      .doc(application.candidateId)
-      .get()
+  const { displayName } = router.query
+  const { jobId } = router.query
 
-    setCandidate(candidateInfo.data())
-  }, [])
-
-  const favoriteCandidate = async () => {
-    await db
-      .collection('applications')
+  const favoriteCandidate = () => {
+    db.collection('applications')
       .doc(application.id)
       .update({ favorited: !isFavorited })
+      .then(setIsFavorited(!isFavorited))
+  }
 
-    setIsFavorited(!isFavorited)
+  const viewCandidate = () => {
+    setActiveCandidate({ userUid: application.candidateId })
+    router.push(`/company/${displayName}/${jobId}/${application.id}`)
   }
 
   return (
@@ -35,11 +35,11 @@ const ApplicantCard = ({ application }) => {
         </div>
 
         <div className='w-full flex justify-between items-center'>
-          <div>
+          <button className='text-left' onClick={viewCandidate} type='button'>
             <p className='font-bold'>Protege</p>
             <p className='blurry-text text-sm'>no.peeking@gmail.com</p>
             <p className='blurry-text text-sm'>dontlook.com</p>
-          </div>
+          </button>
           <button onClick={favoriteCandidate} type='button'>
             <Happy
               className={`h-8 w-8 ${

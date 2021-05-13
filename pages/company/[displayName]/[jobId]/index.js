@@ -6,7 +6,7 @@ import { useJobs } from 'store/jobs_store'
 import { useEditJob } from 'store/edit-job_store'
 import { db } from 'utils/db'
 
-import ApplicantCard from 'components/dashboard/ApplicantCard'
+import ApplicantCard from 'components/dashboard/CandidateCard'
 import Trash from 'assets/images/icons/trash'
 import Edit from 'assets/images/icons/edit'
 import BackArrow from 'assets/images/icons/back-arrow'
@@ -15,8 +15,9 @@ import toast from 'react-hot-toast'
 const ViewListing = () => {
   const router = useRouter()
   const jobs = useJobs((s) => s.jobs)
+  const applicants = useJobs((s) => s.applicants)
+  const setApplicants = useJobs((s) => s.setApplicants)
   const [job, setJob] = useState()
-  const [applicants, setApplicants] = useState()
   const setEditJob = useEditJob((s) => s.setEditJob)
 
   const { jobId } = router.query
@@ -45,6 +46,8 @@ const ViewListing = () => {
         id: docSnapshot.id,
         candidateId: entry.candidateId,
         favorited: entry.favorited,
+        viewed: entry.viewed,
+        applicationDate: entry.applicationDate,
       }
     })
 

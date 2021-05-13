@@ -47,7 +47,7 @@ const ApplicationItem = ({ job }) => {
 
   const formattedPostDate = `${
     months[postDate.getMonth()]
-  } ${postDate.getDate()}`
+  } ${postDate.getDate()}, ${postDate.getFullYear()}`
 
   return (
     <li>
@@ -64,18 +64,18 @@ const ApplicationItem = ({ job }) => {
 
         <p className='col-span-1 uppercase'>
           {job.viewed ? (
-            <span className='text-green-700'>Viewed</span>
+            <span className='text-green-600'>Viewed</span>
           ) : (
             <span>Sent</span>
           )}
         </p>
 
         <button
-          className='col-span-2 text-right text-red-600 flex justify-end items-center'
+          className='col-span-2 text-right text-red-600 flex justify-end items-center  opacity-75 hover:opacity-100'
           onClick={cancelApplication}
           type='button'
         >
-          <Cancel className='w-5 h-5 inline-block mr-2' />{' '}
+          <Cancel className='w-5 h-5 inline-block mr-2' />
           <span>Cancel Application</span>
         </button>
       </div>

@@ -58,20 +58,20 @@ const CompanyDashboard = () => {
           </h2>
 
           <div className='w-full'>
-            <div className='grid grid-cols-12 mb-4 px-3'>
-              <p className='text-sm font-light text-blue-400 uppercase text-left col-span-4'>
+            <div className='grid grid-cols-12 mb-4 px-3 gap-6'>
+              <p className='text-sm font-light text-blue-400 uppercase text-left col-span-8 md:col-span-5'>
                 {getText('GLOBAL', 'TITLE')}
               </p>
-              <p className='text-sm font-light text-blue-400 uppercase text-left col-span-3'>
+              <p className='text-sm font-light text-blue-400 uppercase text-left col-span-4 md:col-span-2'>
                 {getText('GLOBAL', 'APPLICANTS')}
               </p>
-              <p className='text-sm font-light text-blue-400 uppercase text-left col-span-2'>
+              <p className='hidden md:block text-sm font-light text-blue-400 uppercase text-left col-span-2'>
                 {getText('GLOBAL', 'DATE_POSTED')}
               </p>
-              <p className='text-sm font-light text-blue-400 uppercase text-left col-span-1'>
+              <p className='hidden md:block text-sm font-light text-blue-400 uppercase text-left col-span-1'>
                 {getText('GLOBAL', 'STATUS')}
               </p>
-              <p className='text-sm font-light text-right text-blue-400 uppercase col-span-2'>
+              <p className='hidden md:block text-sm font-light text-right text-blue-400 uppercase col-span-2'>
                 {getText('GLOBAL', 'ACTIONS')}
               </p>
             </div>

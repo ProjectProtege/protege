@@ -28,6 +28,7 @@ const JobTemplate = ({ props }) => {
     jobtitle,
     positionType,
     companyLogo,
+    howToApply,
   } = props
 
   const [isAdmin, setIsAdmin] = useState(false)
@@ -162,35 +163,36 @@ const JobTemplate = ({ props }) => {
                   >
                     Visit website
                   </a>
-                  <button
-                    data-cy='how-to-apply'
-                    type='button'
-                    onClick={createApplication}
-                    className={`hidden text-center md:block btn btn-teal mt-8 w-full
+                  {howToApply ? (
+                    <div className='mt-8'>
+                      <a
+                        data-cy='how-to-apply-bottom'
+                        href={howToApply}
+                        className={`btn btn-teal w-full md:w-auto ${
+                          isPreview ? ' btn-disabled' : ''
+                        }`}
+                        tabIndex={isPreview ? -1 : 0}
+                      >
+                        Apply
+                      </a>
+                    </div>
+                  ) : (
+                    <button
+                      data-cy='how-to-apply'
+                      type='button'
+                      onClick={createApplication}
+                      className={`hidden text-center md:block btn btn-teal mt-8 w-full
                         ${isPreview ? ' btn-disabled' : ''}`}
-                    tabIndex={isPreview ? -1 : 0}
-                  >
-                    Apply
-                  </button>
+                      tabIndex={isPreview ? -1 : 0}
+                    >
+                      Apply
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
           ) : null}
         </div>
-
-        {/* <div className='mt-8'>
-          <a
-            data-cy='how-to-apply-bottom'
-            href={howToApply}
-            className={`btn btn-teal w-full md:w-auto ${
-              isPreview ? ' btn-disabled' : ''
-            }
-              `}
-            tabIndex={isPreview ? -1 : 0}
-          >
-            Apply
-          </a>
-        </div> */}
       </div>
     </>
   )
@@ -207,6 +209,7 @@ JobTemplate.propTypes = {
   jobDescription: PropTypes.string,
   companyDescription: PropTypes.string,
   companyLogo: PropTypes.string,
+  howToApply: PropTypes.string,
 }
 
 JobTemplate.defaultProps = {
@@ -219,6 +222,7 @@ JobTemplate.defaultProps = {
   positionType: '',
   jobDescription: '',
   companyDescription: '',
+  howToApply: '',
 }
 
 export default JobTemplate

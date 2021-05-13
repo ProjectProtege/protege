@@ -44,7 +44,7 @@ async function seedData() {
         companyWebsite: faker.internet.url(),
         howToApply: faker.internet.url(),
         jobDescription: faker.lorem.paragraph(),
-        jobtitle: faker.name.jobtitle(),
+        jobtitle: faker.name.jobTitle(),
         paid: true,
         positionType: faker.random.arrayElement([
           'Full Time',
