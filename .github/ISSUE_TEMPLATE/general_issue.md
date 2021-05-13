@@ -12,13 +12,13 @@ What will this issue accomplish?
 
 _Example: This issue will refactor component X, reducing bundle size and improving load times._
 
-## Reason
+## Context
 
 How will this improvement affect the application? Give plenty of context.
 
 _Example: Component X currently retrieves the apples needed one at a time. This refactor will allow to grab all of the apples at once, and then distribute them as needed._
 
-### Tips
+### Notes
 
 Have an idea how this could be accomplished? Leave notes here!
 
@@ -29,3 +29,7 @@ _Example: Add a list of benchmarks to measure issue completion._
 - [ ] appleGrab function uses .map rather than for loop
 - [ ] Component X grabs all apples at once
 - [ ] apples distribute as needed, faster
+
+## Out of scope
+
+Does anything seem related but shouldn't be addressed here?
