@@ -35,8 +35,5 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-firestore-debug.log
-ui-debug.log
-
 # vercel
 .vercel
