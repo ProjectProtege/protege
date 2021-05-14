@@ -1,36 +1,52 @@
-import { useJobs } from 'store/jobs_store'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+
+import { useJobs } from 'store/jobs_store'
+import { db } from 'utils/db'
+
 import ApplicantCard from 'components/dashboard/CandidateCard'
 import BackArrow from 'assets/images/icons/back-arrow'
-import { useEffect } from 'react'
-import { db } from 'utils/db'
 
 const candidateApplication = () => {
   const router = useRouter()
   const applicants = useJobs((s) => s.applicants)
   const setApplicants = useJobs((s) => s.setApplicants)
-  const activeCandidate = useJobs((s) => s.activeCandidate)
-  const setActiveCandidate = useJobs((s) => s.setActiveCandidate)
+  const [candidateId, setCandidateId] = useState()
+  const [candidateInfo, setCandidateInfo] = useState()
 
   const { displayName } = router.query
   const { jobId } = router.query
   const { applicationId } = router.query
 
+  // update applicaton to viewed
   useEffect(async () => {
     db.collection('applications').doc(applicationId).update({ viewed: true })
   }, [])
 
+  // grab application doc to get candidate ID
   useEffect(async () => {
-    const candidateInfo = await db
-      .collection('candidates')
-      .doc(activeCandidate.userUid)
+    const candidateRef = await db
+      .collection('applications')
+      .doc(applicationId)
       .get()
 
-    setActiveCandidate(candidateInfo.data())
+    const data = candidateRef.data()
+    setCandidateId(data.candidateId)
   }, [])
 
-  // Get applications
+  // Use candidate Id to get candidate profile info
+  useEffect(async () => {
+    const candidateInfoRef = await db
+      .collection('candidates')
+      .doc(candidateId)
+      .get()
+
+    const data = candidateInfoRef.data()
+    setCandidateInfo({ ...data })
+  })
+
+  // Get all applications for job
   useEffect(async () => {
     const applications = await db
       .collection('applications')
@@ -85,21 +101,21 @@ const candidateApplication = () => {
                 <p className='font-bold text-lg mb-3'>
                   Describe a difficult problem you solved recently.
                 </p>
-                <p>{activeCandidate?.question1}</p>
+                <p>{candidateInfo?.question1}</p>
               </div>
 
               <div className='mb-6'>
                 <p className='font-bold text-lg mb-3'>
                   What were your first steps when faced with that problem?
                 </p>
-                <p>{activeCandidate?.question2}</p>
+                <p>{candidateInfo?.question2}</p>
               </div>
 
               <div className='mb-6'>
                 <p className='font-bold text-lg mb-3'>
                   How did you overcome that problem?
                 </p>
-                <p>{activeCandidate?.question3}</p>
+                <p>{candidateInfo?.question3}</p>
               </div>
             </div>
           </article>

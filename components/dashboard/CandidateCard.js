@@ -2,14 +2,13 @@ import PropTypes from 'prop-types'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { db } from 'utils/db'
+import Link from 'next/link'
 
 import Happy from 'assets/images/icons/happy'
 import User from 'assets/images/icons/user'
-import { useJobs } from 'store/jobs_store'
 
 const ApplicantCard = ({ application }) => {
   const router = useRouter()
-  const setActiveCandidate = useJobs((s) => s.setActiveCandidate)
   const [isFavorited, setIsFavorited] = useState(application.favorited)
 
   const { displayName } = router.query
@@ -20,11 +19,6 @@ const ApplicantCard = ({ application }) => {
       .doc(application.id)
       .update({ favorited: !isFavorited })
       .then(setIsFavorited(!isFavorited))
-  }
-
-  const viewCandidate = () => {
-    setActiveCandidate({ userUid: application.candidateId })
-    router.push(`/company/${displayName}/${jobId}/${application.id}`)
   }
 
   return (
@@ -39,11 +33,13 @@ const ApplicantCard = ({ application }) => {
         </div>
 
         <div className='w-full flex justify-between items-center'>
-          <button className='text-left' onClick={viewCandidate} type='button'>
-            <p className='font-bold'>Protege</p>
-            <p className='blurry-text text-sm'>no.peeking@gmail.com</p>
-            <p className='blurry-text text-sm'>dontlook.com</p>
-          </button>
+          <Link href={`/company/${displayName}/${jobId}/${application.id}`}>
+            <a className='text-left'>
+              <p className='font-bold'>Protege</p>
+              <p className='blurry-text text-sm'>no.peeking@gmail.com</p>
+              <p className='blurry-text text-sm'>dontlook.com</p>
+            </a>
+          </Link>
           <button onClick={favoriteCandidate} type='button'>
             <Happy
               className={`h-8 w-8 ${
