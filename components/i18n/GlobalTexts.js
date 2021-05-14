@@ -42,6 +42,10 @@ const GlobalTexts = {
     EMAIL_REQUIRED: 'Email is a required field.',
     EMAIL_VALID: 'This must be a valid email address.',
     EMPTY_ARCHIVE_DESC: 'Your archived listings will show up here.',
+    EMPTY_CANDIDATE_DESC:
+      'Your active applications will show up here so you can easily review and track them!',
+    EMPTY_CANDIDATE_DESC2:
+      'It’s looking kind of empty.. get some applications out!',
     EMPTY_COMPANY_DESC:
       'Your active listings will show up here so you can easily track them!',
     EMPTY_COMPANY_DESC2: "It's looking kind of empty.. get some listings up!",
