@@ -5,6 +5,7 @@ import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
 import { db } from 'utils/db'
 import { useAuth } from 'store/AuthContext'
 import ApplicationItem from 'components/dashboard/ApplicationItem'
+import CandidateDashboardEmpty from 'assets/images/CandidateDashboardEmpty'
 
 const CandidateDashboard = () => {
   const { currentUser } = useAuth()
@@ -68,6 +69,19 @@ const CandidateDashboard = () => {
                 })}
             </ul>
           </div>
+
+          {!appliedJobs?.length && (
+            <div className='w-full grid-cols-2 gap-10 mt-10 lg:grid'>
+              <CandidateDashboardEmpty className='col-span-1 mb-12 lg:mb-0' />
+
+              <div className='col-span-1 lg:w-3/4 lg:mt-16'>
+                <p className='mb-6'>
+                  {getText('GLOBAL', 'EMPTY_CANDIDATE_DESC')}
+                </p>
+                <p>{getText('GLOBAL', 'EMPTY_CANDIDATE_DESC2')}</p>
+              </div>
+            </div>
+          )}
         </section>
       </div>
     </AccountInteriorLayout>

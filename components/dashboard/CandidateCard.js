@@ -28,7 +28,11 @@ const ApplicantCard = ({ application }) => {
   }
 
   return (
-    <li className='mb-4 px-4 py-2 bg-white shadow rounded-md'>
+    <li
+      className={`relative mb-4 px-4 py-2 bg-white shadow rounded-md border-l-6 ${
+        application.viewed ? 'border-gray-400' : 'border-teal-500'
+      }`}
+    >
       <div className='flex items-center'>
         <div className='bg-blue-700 rounded-full w-12 mr-6'>
           <User className='h-full w-full text-teal-300 blur' />
@@ -58,6 +62,7 @@ ApplicantCard.propTypes = {
     id: PropTypes.string.isRequired,
     candidateId: PropTypes.string.isRequired,
     favorited: PropTypes.bool.isRequired,
+    viewed: PropTypes.bool.isRequired,
   }).isRequired,
 }
 
