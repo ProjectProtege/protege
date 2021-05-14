@@ -72,7 +72,15 @@ const ApplicationItem = ({ job }) => {
 
         <button
           className='col-span-2 text-right text-red-600 flex justify-end items-center  opacity-75 hover:opacity-100'
-          onClick={cancelApplication}
+          onClick={() => {
+            if (
+              // eslint-disable-next-line no-alert
+              window.confirm(
+                'Are you sure you want to cancel this application?'
+              )
+            )
+              cancelApplication()
+          }}
           type='button'
         >
           <Cancel className='w-5 h-5 inline-block mr-2' />
