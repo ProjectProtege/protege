@@ -1,15 +1,15 @@
-import { useJobs } from 'store/jobs_store'
+import { useEffect, useState } from 'react'
 import { useProfileInfo } from 'store/profile_info'
 import { db } from 'utils/db'
 import getText from 'utils/i18n/Texts'
 
 const JobList = () => {
-  const jobs = useJobs((s) => s.jobs)
   const profileInfo = useProfileInfo((s) => s.profileInfo)
-
   const [activeApplications, setActiveApplications] = useState()
 
   useEffect(() => {
+    // TODO: What should happen with this fn? It's not being used anywhere.
+    // eslint-disable-next-line no-unused-vars
     async function fetchApplications() {
       const applications = await db
         .collection('applications')
@@ -56,6 +56,7 @@ const JobList = () => {
           <ul>
             {activeApplications &&
               activeApplications.map((job) => {
+                // TODO: ?
                 return <JobItem job={job} key={job.id} />
               })}
           </ul>
@@ -95,6 +96,7 @@ const JobList = () => {
               {getText('GLOBAL', 'ACTIONS')}
             </th>
           </tr>
+          {/* TODO: ? */}
           {archivedListings ? (
             <tr>
               <td>Front-end Engineer (SaaS)</td>
@@ -105,6 +107,7 @@ const JobList = () => {
           ) : null}
         </table>
 
+        {/* TODO: ? */}
         {!archivedListings ? (
           <div className='items-center w-full grid-cols-2 gap-10 mt-10 lg:grid'>
             <p>{getText('GLOBAL', 'EMPTY_ARCHIVE_DESC')}</p>

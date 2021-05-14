@@ -27,7 +27,7 @@ const TierSelectCard = ({ children, value }) => {
         className={`absolute w-full h-2 top-0 left-0 bg-gradient-to-r from-gray-400 to-gray-300 ${
           tier === value ? 'from-teal-500 to-teal-300' : ''
         }`}
-      ></div>
+      />
       {route.pathname === '/' ? (
         <div className='absolute z-10 hidden px-4 py-2 -ml-1 text-sm font-semibold tracking-widest text-white uppercase transform shadow bg-error -rotate-15'>
           Free for now!

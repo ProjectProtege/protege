@@ -17,7 +17,7 @@ const SimpleFileUpload = dynamic(() => import('react-simple-file-upload'), {
 })
 
 const ProfileMenu = ({ children, profileUid, accountType }) => {
-  const [logo, setLogo] = useState(null)
+  const [logo] = useState(null)
   const { signout } = useAuth()
   const [uploadImage, setUploadImage] = useState(false)
   const [profileInfo, setProfileInfo] = useProfileInfo((s) => [

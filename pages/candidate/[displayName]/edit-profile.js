@@ -9,7 +9,6 @@ import * as Yup from 'yup'
 import 'react-quill/dist/quill.snow.css'
 
 import { db } from 'utils/db'
-import { useAuth } from 'store/AuthContext'
 import { useProfileInfo } from 'store/profile_info'
 import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
 
@@ -19,8 +18,6 @@ import timezones from 'data/timezones.json'
 
 const CandidateEditProfile = () => {
   const router = useRouter()
-  const { currentUser } = useAuth()
-  // const [error, setError] = useState(null)
   const [timezonesArray, setTimezonesArray] = useState([])
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 

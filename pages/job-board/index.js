@@ -1,22 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useJobs } from 'store/jobs_store'
-import { useRouter } from 'next/router'
 
 import JobCard from '../../components/job/JobCard'
 
 const JobBoard = () => {
-  const router = useRouter()
-  const filterParam = router.query
-  const [activeJobs, setActiveJobs] = useState([])
-
-  // const initialFilterParam = Object.keys(filterParam).length ? filterParam.filter : ''
-
-  // const [jobFilter, setJobFilter] = useState(initialFilterParam)
   const [jobFilter, setJobFilter] = useState()
   const jobs = useJobs((s) => s.jobs)
 
   function filteredJobs(jobList, filter) {
-    const filtered = jobList.filter((job) => {
+    return jobList.filter((job) => {
       return (
         job.roleFocus === filter &&
         job.status !== 'inactive' &&
@@ -24,18 +16,14 @@ const JobBoard = () => {
         job.approved === true
       )
     })
-
-    return filtered
   }
 
   function getActiveJobs(jobList) {
-    const active = jobList.filter((job) => {
+    return jobList.filter((job) => {
       return (
         job.status !== 'inactive' && job.paid === true && job.approved === true
       )
     })
-
-    return active
   }
 
   useEffect(() => {

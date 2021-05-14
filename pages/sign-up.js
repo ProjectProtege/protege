@@ -16,7 +16,10 @@ import AccountDetails from 'assets/images/AccountDetails'
 const SignUp = ({ accountType }) => {
   const router = useRouter()
   const { signup, signInWithGithub } = useAuth()
-  const [loading, setLoading] = useState(true)
+  // TODO: useState value not used, this useState could probably be removed or
+  //       a loading state needs to be added to the UI.
+  // eslint-disable-next-line no-unused-vars
+  const [_, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
   const Schema = yup.object().shape({
