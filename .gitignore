@@ -23,6 +23,7 @@ ui-debug.log
 # misc
 .DS_Store
 *.pem
+.idea
 
 # debug
 npm-debug.log*
@@ -34,9 +35,6 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
-
-firestore-debug.log
-ui-debug.log
 
 # vercel
 .vercel
