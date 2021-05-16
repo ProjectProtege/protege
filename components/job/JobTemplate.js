@@ -10,6 +10,7 @@ import toast from 'react-hot-toast'
 
 import { v4 as uuidv4 } from 'uuid'
 import { useProfileInfo } from 'store/profile_info'
+import ExternalLink from 'assets/images/icons/external-link'
 
 const JobTemplate = ({ props }) => {
   const router = useRouter()
@@ -136,7 +137,7 @@ const JobTemplate = ({ props }) => {
             <div className='mt-8 text-center md:w-1/4 md:text-left'>
               <div className='p-4 bg-gray-200'>
                 {companyLogo ? (
-                  <div className='relative flex items-center justify-center w-32 h-32 mb-6 overflow-hidden bg-white rounded-full shadow-md'>
+                  <div className='relative flex items-center justify-center w-32 h-32 mb-6 overflow-hidden bg-white rounded-full shadow-md mx-auto md:mx-0'>
                     <Image
                       data-cy='company-logo'
                       id='companyLogo'
@@ -168,12 +169,13 @@ const JobTemplate = ({ props }) => {
                       <a
                         data-cy='how-to-apply-bottom'
                         href={howToApply}
-                        className={`btn btn-teal w-full md:w-auto ${
+                        className={`btn btn-teal w-full block text-center ${
                           isPreview ? ' btn-disabled' : ''
                         }`}
                         tabIndex={isPreview ? -1 : 0}
                       >
-                        Apply
+                        <span>Apply</span>
+                        <ExternalLink className='w-5 h-5 inline-block -mt-1 ml-2 opacity-75' />
                       </a>
                     </div>
                   ) : (
@@ -181,7 +183,7 @@ const JobTemplate = ({ props }) => {
                       data-cy='how-to-apply'
                       type='button'
                       onClick={createApplication}
-                      className={`hidden text-center md:block btn btn-teal mt-8 w-full
+                      className={`text-center btn btn-teal mt-8 w-full
                         ${isPreview ? ' btn-disabled' : ''}`}
                       tabIndex={isPreview ? -1 : 0}
                     >
