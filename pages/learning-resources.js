@@ -71,7 +71,7 @@ LearningResources.propTypes = {
         resourceUrl: PropTypes.string.isRequired,
       })
     ),
-  }),
+  }).isRequired,
 }
 
 export async function getStaticProps() {

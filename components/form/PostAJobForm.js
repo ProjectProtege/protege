@@ -13,7 +13,6 @@ import 'react-quill/dist/quill.snow.css'
 
 // Custom component imports
 import FormCard from 'components/global/FormCard'
-import LogoUpload from './LogoUpload'
 
 const SimpleFileUpload = dynamic(() => import('react-simple-file-upload'), {
   ssr: false,
@@ -27,7 +26,6 @@ const PostAJobForm = ({ jobData }) => {
   // Form and Status state from zustand
   const setForm = useJobForm((s) => s.setForm)
   const setStatus = useJobForm((s) => s.setStatus)
-  const companyLogoFile = useJobForm((s) => s.companyLogoFile)
 
   // Form validation schema
   const Schema = Yup.object().shape({
@@ -77,11 +75,6 @@ const PostAJobForm = ({ jobData }) => {
   const [linkType, setLinkType] = useState('url')
   const [placeholder, setPlaceholder] = useState('')
 
-  function recievingLogo(logo) {
-    setFileValue(logo)
-    // recievingLogo2(logo)
-  }
-
   // toggling placeholder for 'How to apply'
   useEffect(() => {
     if (linkType === 'url') {
@@ -95,10 +88,6 @@ const PostAJobForm = ({ jobData }) => {
   function handleChange(e) {
     setLinkType(e.target.value)
   }
-
-  // function receivingLogo2(logo) {
-  //   receivingLogo(logo)
-  // }
 
   // Form submission event
   function handleFormEntry(data) {
@@ -145,14 +134,9 @@ const PostAJobForm = ({ jobData }) => {
                 autoComplete='off'
               />
 
-              <p
-                name='jobtitle'
-                component='span'
-                className='input-error'
-                role='alert'
-              >
+              <span className='input-error' role='alert'>
                 {errors.jobtitle && errors.jobtitle.message}
-              </p>
+              </span>
             </div>
 
             <div className='md:flex'>
@@ -187,14 +171,9 @@ const PostAJobForm = ({ jobData }) => {
                   </select>
                 </div>
 
-                <p
-                  name='roleFocus'
-                  component='span'
-                  className='input-error'
-                  role='alert'
-                >
+                <span className='input-error' role='alert'>
                   {errors.roleFocus && errors.roleFocus.message}
-                </p>
+                </span>
               </div>
 
               <div className='flex flex-col mb-3 md:w-1/2'>
@@ -225,14 +204,9 @@ const PostAJobForm = ({ jobData }) => {
                   </select>
                 </div>
 
-                <p
-                  name='positionType'
-                  component='span'
-                  className='input-error'
-                  role='alert'
-                >
+                <span className='input-error' role='alert'>
                   {errors.positionType && errors.positionType.message}
-                </p>
+                </span>
               </div>
             </div>
 
@@ -256,14 +230,9 @@ const PostAJobForm = ({ jobData }) => {
                 )}
               />
 
-              <p
-                name='jobDescription'
-                component='span'
-                className='input-error'
-                role='alert'
-              >
+              <span className='input-error' role='alert'>
                 {errors.jobDescription && errors.jobDescription.message}
-              </p>
+              </span>
             </div>
 
             <div className='flex flex-col'>
@@ -312,14 +281,9 @@ const PostAJobForm = ({ jobData }) => {
                 placeholder={placeholder}
               />
 
-              <p
-                name='howToApply'
-                component='span'
-                className='input-error'
-                role='alert'
-              >
+              <span className='input-error' role='alert'>
                 {errors.howToApply && errors.howToApply.message}
-              </p>
+              </span>
             </div>
           </div>
         </FormCard>
@@ -344,14 +308,9 @@ const PostAJobForm = ({ jobData }) => {
                   type='text'
                 />
 
-                <p
-                  name='companyName'
-                  component='span'
-                  className='input-error'
-                  role='alert'
-                >
+                <span className='input-error' role='alert'>
                   {errors.companyName && errors.companyName.message}
-                </p>
+                </span>
               </div>
 
               <div className='flex flex-col md:w-1/2'>
@@ -372,14 +331,9 @@ const PostAJobForm = ({ jobData }) => {
                   placeholder='https://'
                 />
 
-                <p
-                  name='companyWebsite'
-                  component='span'
-                  className='input-error'
-                  role='alert'
-                >
+                <span className='input-error' role='alert'>
                   {errors.companyWebsite && errors.companyWebsite.message}
-                </p>
+                </span>
               </div>
             </div>
 
@@ -400,14 +354,9 @@ const PostAJobForm = ({ jobData }) => {
                   ref={register}
                 />
 
-                <p
-                  name='companyEmail'
-                  component='span'
-                  className='input-error'
-                  role='alert'
-                >
+                <span className='input-error' role='alert'>
                   {errors.companyEmail && errors.companyEmail.message}
-                </p>
+                </span>
               </div>
 
               <div className='flex flex-col mb-3 md:w-1/2'>
@@ -442,7 +391,7 @@ const PostAJobForm = ({ jobData }) => {
                     className='text-xs tracking-tight text-blue-500'
                   >
                     Please provide a .jpg, .jpeg, or .png format of your
-                    company's logo to be displayed with your job opening
+                    company&apos;s logo to be displayed with your job opening
                     listing.
                   </span>
                 </div>
@@ -452,14 +401,9 @@ const PostAJobForm = ({ jobData }) => {
                   receivingLogo2={receivingLogo2}
                 /> */}
 
-                <p
-                  name='companyLogo'
-                  component='span'
-                  className='input-error'
-                  role='alert'
-                >
+                <span className='input-error' role='alert'>
                   {errors.companyLogo && errors.companyLogo.message}
-                </p>
+                </span>
               </div>
             </div>
 
@@ -483,14 +427,9 @@ const PostAJobForm = ({ jobData }) => {
                 )}
               />
 
-              <p
-                name='companyDescription'
-                component='span'
-                className='input-error'
-                role='alert'
-              >
+              <span className='input-error' role='alert'>
                 {errors.companyDescription && errors.companyDescription.message}
-              </p>
+              </span>
             </div>
 
             <div className='flex flex-col'>
@@ -512,14 +451,9 @@ const PostAJobForm = ({ jobData }) => {
                 ref={register}
               />
 
-              <p
-                name='companyHQ'
-                component='span'
-                className='input-error'
-                role='alert'
-              >
+              <span className='input-error' role='alert'>
                 {errors.companyHQ && errors.companyHQ.message}
-              </p>
+              </span>
             </div>
           </div>
         </FormCard>

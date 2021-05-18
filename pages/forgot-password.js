@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -12,9 +11,11 @@ import getText from 'utils/i18n/Texts'
 import AccountGraphic from 'assets/images/AccountGraphic'
 
 const ForgotPassword = () => {
-  const router = useRouter()
   const { resetPassword } = useAuth()
-  const [loading, setLoading] = useState(true)
+  // TODO: useState value not used, this useState could probably be removed or
+  //       a loading state needs to be added to the UI.
+  // eslint-disable-next-line no-unused-vars
+  const [_, setLoading] = useState(true)
   const [success, setSuccess] = useState(null)
   const [error, setError] = useState(null)
 
@@ -37,8 +38,8 @@ const ForgotPassword = () => {
       setSuccess(getText('GLOBAL', 'PASSWORD_RESET_SUCCESS'))
       setError(null)
       setLoading(false)
-    } catch (error) {
-      setError(error.message)
+    } catch (handleResetPasswordError) {
+      setError(handleResetPasswordError.message)
       setSuccess(null)
     }
     setLoading(false)
@@ -55,7 +56,7 @@ const ForgotPassword = () => {
             </label>
             <input
               id='email'
-              ype='text'
+              type='text'
               name='email'
               className='input'
               ref={register}

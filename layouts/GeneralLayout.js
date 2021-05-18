@@ -1,10 +1,13 @@
 import PropTypes from 'prop-types'
+import { useRouter } from 'next/router'
 
 const GeneralLayout = ({ children }) => {
+  const { pathname } = useRouter()
+
   return (
     <main
       className={`container flex-grow px-6 xl:px-0 ${
-        location !== '/' ? 'mt-12' : ''
+        pathname !== '/' ? 'mt-12' : ''
       }`}
     >
       {children}

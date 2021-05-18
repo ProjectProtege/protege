@@ -163,6 +163,7 @@ const ViewListing = () => {
             <div
               data-cy='job-description'
               id='jobDesc'
+              /* eslint-disable-next-line react/no-danger */
               dangerouslySetInnerHTML={createMarkup(job?.jobDescription)}
               className='mb-6 rich-text-content'
             />
@@ -179,6 +180,7 @@ const ViewListing = () => {
               data-cy='company-description'
               className='mt-2 text-blue-300 rich-text-content'
               id='companyDesc'
+              /* eslint-disable-next-line react/no-danger */
               dangerouslySetInnerHTML={createMarkup(job?.companyDescription)}
             />
           </div>

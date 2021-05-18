@@ -5,7 +5,7 @@ const FormCard = ({ title, children, className }) => {
     <div
       className={`relative shadow-md rounded-md overflow-hidden ${className}`}
     >
-      <div className='w-full h-3 bg-gradient-to-r from-teal-500 to-teal-300 absolute top-0'></div>
+      <div className='w-full h-3 bg-gradient-to-r from-teal-500 to-teal-300 absolute top-0' />
       <h2
         style={{
           backgroundImage: `url(/bg-pattern.png)`,

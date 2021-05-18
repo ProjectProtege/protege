@@ -36,6 +36,8 @@ const GlobalHeader = () => {
     try {
       await signout()
     } catch (error) {
+      // TODO: Handle error.
+      // eslint-disable-next-line no-console
       console.log('Sign Out Error:', error)
     }
   }
@@ -149,7 +151,11 @@ const GlobalHeader = () => {
                       </Link>
                     </li>
                     <li>
-                      <button className='underline' onClick={handleSignOut}>
+                      <button
+                        type='button'
+                        className='underline'
+                        onClick={handleSignOut}
+                      >
                         Sign Out
                       </button>
                     </li>
@@ -331,7 +337,7 @@ const GlobalHeader = () => {
                         onClick={() => {
                           setIsUserMenuOpen(false)
                         }}
-                      ></div>
+                      />
                     ) : null}
                   </>
                 ) : null}

@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import { useUi } from 'store/ui_store'
 import { useRouter } from 'next/router'
-import Head from 'next/head'
 
 import GlobalHeader from 'components/global/GlobalHeader'
 import GlobalFooter from 'components/global/GlobalFooter'

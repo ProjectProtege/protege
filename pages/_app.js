@@ -55,6 +55,8 @@ function MyApp({ Component, pageProps }) {
       })
       setJobs(entriesData)
     } catch (err) {
+      // TODO: Handle error.
+      // eslint-disable-next-line no-console
       console.log('Oops! Something went wrong:', err.message)
     }
   }, [])

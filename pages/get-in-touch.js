@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import FormCard from 'components/global/FormCard'
 import axios from 'axios'
-// import LoadingSpinner from 'components/LoadingSpinner'
 
 // React Hook Forms
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -15,11 +14,6 @@ const GetInTouch = () => {
     submitted: false,
     submitting: false,
     info: { error: false, msg: null },
-  })
-  const [inputs, setInputs] = useState({
-    name: '',
-    email: '',
-    comment: '',
   })
 
   const Schema = yup.object().shape({
@@ -43,11 +37,6 @@ const GetInTouch = () => {
         submitting: false,
         info: { error: false, msg },
       })
-      setInputs({
-        name: '',
-        email: '',
-        comment: '',
-      })
     } else {
       setStatus({
         info: { error: true, msg },
@@ -70,7 +59,7 @@ const GetInTouch = () => {
       url: 'https://formspree.io/f/mqkgovpl',
       data: encode(data),
     })
-      .then((response) => {
+      .then(() => {
         handleServerResponse(true, 'Your message has been submitted')
         router.push('/thanks')
       })
@@ -160,8 +149,6 @@ const GetInTouch = () => {
                 ref={register}
                 className='input'
                 title='Users comment'
-                type='text'
-                as='textarea'
                 rows='8'
                 required
                 // onChange={(e) => setComment(e.target.value)}

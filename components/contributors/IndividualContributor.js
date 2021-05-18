@@ -26,7 +26,7 @@ const IndividualContributor = ({ contributor }) => {
 
   return (
     <div className='relative grid grid-cols-3 gap-6 py-6 pl-6 pr-4 overflow-hidden text-center transition duration-150 ease-in-out bg-white rounded-md shadow md:text-left'>
-      <div className='absolute left-0 w-2 h-full -mx-px bg-gradient-to-t from-teal-500 to-teal-300'></div>
+      <div className='absolute left-0 w-2 h-full -mx-px bg-gradient-to-t from-teal-500 to-teal-300' />
       <div className='items-center col-span-1'>
         <div className='relative w-20 h-20 mt-1 overflow-hidden rounded-full'>
           <Image

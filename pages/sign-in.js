@@ -13,8 +13,11 @@ import AccountGraphic from 'assets/images/AccountGraphic'
 
 const SignIn = () => {
   const router = useRouter()
-  const { currentUser, signin, signInWithGithub } = useAuth()
-  const [loading, setLoading] = useState(true)
+  const { signin, signInWithGithub } = useAuth()
+  // TODO: useState value not used, this useState could probably be removed or
+  //       a loading state needs to be added to the UI.
+  // eslint-disable-next-line no-unused-vars
+  const [_, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
   const Schema = yup.object().shape({
@@ -31,7 +34,7 @@ const SignIn = () => {
       ),
   })
 
-  const { register, handleSubmit, control, errors } = useForm({
+  const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(Schema),
     mode: 'onChange',
   })
@@ -42,18 +45,18 @@ const SignIn = () => {
       await signin(data.email, data.password).then(() => {
         setLoading(false)
       })
-    } catch (error) {
-      setError(error.message)
+    } catch (handleSignInError) {
+      setError(handleSignInError.message)
     }
     setLoading(false)
   }
 
-  const handleSignInWithGithub = async (data) => {
+  const handleSignInWithGithub = async () => {
     try {
       await signInWithGithub()
       router.push('/dashboard')
-    } catch (error) {
-      setError(error.messge)
+    } catch (handleSignInWithGithubError) {
+      setError(handleSignInWithGithubError.message)
     }
   }
 
@@ -68,7 +71,7 @@ const SignIn = () => {
             </label>
             <input
               id='email'
-              ype='text'
+              type='text'
               name='email'
               className='input'
               ref={register}
