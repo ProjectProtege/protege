@@ -47,7 +47,7 @@ const CompanyDashboard = () => {
     if (userJobsData) {
       setPostedJobs(userJobsData)
     }
-  })
+  }, [])
 
   return (
     <AccountInteriorLayout className='mt-12'>

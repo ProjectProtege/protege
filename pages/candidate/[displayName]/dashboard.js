@@ -34,7 +34,7 @@ const CandidateDashboard = () => {
     if (applicationData) {
       setAppliedJobs(applicationData)
     }
-  })
+  }, [])
 
   return (
     <AccountInteriorLayout>
