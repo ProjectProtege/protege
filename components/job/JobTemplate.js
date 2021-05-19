@@ -171,6 +171,10 @@ const JobTemplate = ({ props }) => {
                         href={howToApply}
                         className={`btn btn-teal w-full block text-center ${
                           isPreview ? ' btn-disabled' : ''
+                        } ${
+                          profileInfo?.accountType === 'company'
+                            ? 'btn-disabled'
+                            : ''
                         }`}
                         tabIndex={isPreview ? -1 : 0}
                       >
@@ -184,8 +188,13 @@ const JobTemplate = ({ props }) => {
                       type='button'
                       onClick={createApplication}
                       className={`text-center btn btn-teal mt-8 w-full
-                        ${isPreview ? ' btn-disabled' : ''}`}
+                        ${isPreview ? ' btn-disabled' : ''} ${
+                        profileInfo?.accountType === 'company'
+                          ? 'btn-disabled'
+                          : ''
+                      }`}
                       tabIndex={isPreview ? -1 : 0}
+                      disabled={profileInfo?.accountType === 'company'}
                     >
                       Apply
                     </button>
