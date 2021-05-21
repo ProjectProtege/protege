@@ -12,8 +12,8 @@ const candidateApplication = () => {
   const router = useRouter()
   const applicants = useJobs((s) => s.applicants)
   const setApplicants = useJobs((s) => s.setApplicants)
-  const [candidateId, setCandidateId] = useState()
   const [candidateInfo, setCandidateInfo] = useState()
+  // const [candidateInfo, setCandidateInfo] = useState()
 
   const { displayName } = router.query
   const { jobId } = router.query
@@ -32,19 +32,8 @@ const candidateApplication = () => {
       .get()
 
     const data = candidateRef.data()
-    setCandidateId(data.candidateId)
+    setCandidateInfo(data)
   }, [])
-
-  // Use candidate Id to get candidate profile info
-  useEffect(async () => {
-    const candidateInfoRef = await db
-      .collection('candidates')
-      .doc(candidateId)
-      .get()
-
-    const data = candidateInfoRef.data()
-    setCandidateInfo({ ...data })
-  })
 
   // Get all applications for job
   useEffect(async () => {
@@ -101,21 +90,21 @@ const candidateApplication = () => {
                 <p className='font-bold text-lg mb-3'>
                   Describe a difficult problem you solved recently.
                 </p>
-                <p>{candidateInfo?.question1}</p>
+                <p>{candidateInfo?.candidateProfile?.question1}</p>
               </div>
 
               <div className='mb-6'>
                 <p className='font-bold text-lg mb-3'>
                   What were your first steps when faced with that problem?
                 </p>
-                <p>{candidateInfo?.question2}</p>
+                <p>{candidateInfo?.candidateProfile?.question2}</p>
               </div>
 
               <div className='mb-6'>
                 <p className='font-bold text-lg mb-3'>
                   How did you overcome that problem?
                 </p>
-                <p>{candidateInfo?.question3}</p>
+                <p>{candidateInfo?.candidateProfile?.question3}</p>
               </div>
             </div>
           </article>
