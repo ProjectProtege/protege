@@ -59,10 +59,13 @@ const candidateApplication = () => {
 
   return (
     <section className='container mx-auto mt-12 z-50'>
-      <h1>hello</h1>
+      <h1 className='sr-only'>
+        Viewing {candidateInfo?.candidateProfile?.firstName}{' '}
+        {candidateInfo?.candidateProfile?.lastName}&apos;s Application
+      </h1>
 
-      <div className='grid-cols-6 gap-10 lg:grid'>
-        <div className='col-span-2 mt-24'>
+      <div className='flex flex-col grid-cols-6 gap-10 lg:grid'>
+        <div className='col-span-2 lg:mt-32 order-last lg:order-first'>
           <h2 className='text-2xl mb-8 text-teal-700'>Applications</h2>
 
           <ul>
@@ -76,7 +79,7 @@ const candidateApplication = () => {
           </ul>
         </div>
 
-        <div className='col-span-4 z-30'>
+        <div className='col-span-4 z-30 mt-12 lg:mt-0'>
           <article className='p-6 bg-white rounded-lg shadow-md md:p-8'>
             <Link href={`/company/${displayName}/${jobId}`}>
               <a className='opacity-75 hover:opacity-100 flex items-center'>
