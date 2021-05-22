@@ -104,7 +104,7 @@ const ViewListing = () => {
       <h1 className='sr-only'>Viewing job listing for {job?.jobtitle}</h1>
 
       <div className='grid-cols-6 gap-10 lg:grid'>
-        <div className='col-span-4  z-30 '>
+        <div className='col-span-4 z-30 mt-24 lg:mt-0'>
           <div className='p-6 bg-white rounded-lg shadow-md md:p-8'>
             <div className='bg-gray-200 rounded-md mb-8 p-4 flex justify-between items-center'>
               <Link href={`/company/${displayName}/dashboard`}>
@@ -184,7 +184,7 @@ const ViewListing = () => {
           </div>
         </div>
 
-        <div className='col-span-2 mt-32'>
+        <div className='col-span-2 mt-20 lg:mt-32'>
           <h2 className='text-2xl mb-8 text-teal-700'>Applications</h2>
 
           <ul>
