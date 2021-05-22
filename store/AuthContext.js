@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useProfileInfo } from 'store/profile_info'
+import nookies from 'nookies'
 
 import { auth, db } from 'utils/db/index'
 
@@ -31,7 +32,11 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(async () => {
-    const unsubscribe = await auth.onIdTokenChanged((user) => {
+    const unsubscribe = await auth.onIdTokenChanged(async (user) => {
+      if (!user) {
+        setCurrentUser(null)
+        nookies.set(undefined, 'token', '', {})
+      }
       if (user) {
         const userObject = {
           userUid: user.uid,
@@ -40,9 +45,12 @@ export function AuthProvider({ children }) {
           emailVerified: user.emailVerified,
           accountType: user.photoURL,
         }
+        const token = await user.getIdToken()
 
+        console.log({ token })
         // fetchUserInfo(userObject)
         setCurrentUser(userObject)
+        nookies.set(undefined, 'token', token, {})
       }
       setIsLoading(false)
     })
