@@ -7,14 +7,18 @@ import Image from 'next/image'
 import { db } from 'utils/db'
 import firebase from 'firebase/app'
 import toast from 'react-hot-toast'
+import { useAuth } from 'store/AuthContext'
 
 import { v4 as uuidv4 } from 'uuid'
 import { useProfileInfo } from 'store/profile_info'
 import ExternalLink from 'assets/images/icons/external-link'
 
 const JobTemplate = ({ props }) => {
+  const { currentUser } = useAuth()
   const router = useRouter()
   const profileInfo = useProfileInfo((s) => s.profileInfo)
+  const [applications, setApplications] = useState([])
+  const [hasApplied, setHasApplied] = useState(false)
 
   const isPreview = router.pathname.indexOf('/job-board/') !== 0
 
@@ -65,6 +69,34 @@ const JobTemplate = ({ props }) => {
     checkAdmin()
   }, [])
 
+  // grab all applications for job
+  useEffect(async () => {
+    const appRef = await db
+      .collection('applications')
+      .where('jobId', '==', jobId)
+      .get()
+
+    const appRefData = appRef.docs.map((docSnapshot) => {
+      const entry = docSnapshot.data()
+
+      return {
+        ...entry,
+      }
+    })
+    setApplications(appRefData)
+  }, [])
+
+  // check if user has already applied for job
+  useEffect(() => {
+    if (currentUser) {
+      const checkForApplication = applications.map((application) => {
+        return profileInfo.userUid === application.candidateId
+      })
+
+      setHasApplied(...checkForApplication)
+    }
+  }, [])
+
   function createMarkup(text) {
     return { __html: text }
   }
@@ -74,13 +106,17 @@ const JobTemplate = ({ props }) => {
 
     const uid = uuidv4()
 
-    await db.collection('applications').doc(uid).set({
-      candidateId: profileInfo.userUid,
-      jobId,
-      applicationDate: currentDate,
-      viewed: false,
-      favorited: false,
-    })
+    await db
+      .collection('applications')
+      .doc(uid)
+      .set({
+        candidateId: profileInfo.userUid,
+        jobId,
+        applicationDate: currentDate,
+        viewed: false,
+        favorited: false,
+        candidateProfile: { ...profileInfo },
+      })
 
     toast.success('Application submitted!')
   }
@@ -164,8 +200,8 @@ const JobTemplate = ({ props }) => {
                   >
                     Visit website
                   </a>
-                  {howToApply ? (
-                    <div className='mt-8'>
+                  <div className='mt-8'>
+                    {howToApply ? (
                       <a
                         data-cy='how-to-apply-bottom'
                         href={howToApply}
@@ -181,24 +217,28 @@ const JobTemplate = ({ props }) => {
                         <span>Apply</span>
                         <ExternalLink className='w-5 h-5 inline-block -mt-1 ml-2 opacity-75' />
                       </a>
-                    </div>
-                  ) : (
-                    <button
-                      data-cy='how-to-apply'
-                      type='button'
-                      onClick={createApplication}
-                      className={`text-center btn btn-teal mt-8 w-full
-                        ${isPreview ? ' btn-disabled' : ''} ${
-                        profileInfo?.accountType === 'company'
-                          ? 'btn-disabled'
-                          : ''
-                      }`}
-                      tabIndex={isPreview ? -1 : 0}
-                      disabled={profileInfo?.accountType === 'company'}
-                    >
-                      Apply
-                    </button>
-                  )}
+                    ) : (
+                      <button
+                        data-cy='how-to-apply'
+                        type='button'
+                        onClick={createApplication}
+                        className={`text-center btn btn-teal mt-8 w-full
+  ${isPreview ? ' btn-disabled' : ''} ${
+                          profileInfo?.accountType === 'company'
+                            ? 'btn-disabled'
+                            : ''
+                        } ${hasApplied ? 'btn-disabled' : ''}`}
+                        tabIndex={isPreview ? -1 : 0}
+                      >
+                        Apply
+                      </button>
+                    )}
+                    {hasApplied && (
+                      <span className='text-xs tracking-wide'>
+                        You&apos;ve already applied for this job
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

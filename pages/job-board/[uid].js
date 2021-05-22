@@ -30,7 +30,7 @@ const Entry = ({ params }) => {
   if (!job) return null
 
   return (
-    <div className='flex flex-col container justify-center w-full lg:w-3/5'>
+    <div className='flex flex-col container justify-center w-full lg:max-w-4xl'>
       <Link href='/job-board'>
         <a className='w-3/4 md:w-1/3 text-teal-600 hover:text-teal-800 mb-3 md:mb-6'>
           <BackArrow className='inline-block -mt-1' />
