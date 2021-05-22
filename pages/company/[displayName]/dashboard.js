@@ -156,7 +156,7 @@ export async function getServerSideProps(context) {
 
     return {
       props: {
-        session: `You email is ${email}`,
+        session: `Your email is ${email}`,
       },
     }
   } catch (err) {
