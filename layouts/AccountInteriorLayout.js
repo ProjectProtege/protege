@@ -18,8 +18,8 @@ const AccountInteriorLayout = ({ children, className }) => {
         <div className='grid-cols-5 gap-10 lg:grid'>
           <aside className='col-span-1 mb-12 md:mb-0'>
             <ProfileMenu
-              profileUid={currentUser.userUid}
-              accountType={currentUser.accountType}
+              profileUid={currentUser?.userUid}
+              accountType={currentUser?.accountType}
             >
               <li className='font-bold'>{profileInfo?.displayName}</li>
               <li>
@@ -42,7 +42,7 @@ const AccountInteriorLayout = ({ children, className }) => {
               </li>
               <li>
                 <NavLink
-                  href={`/${currentUser.accountType}/${profileInfo?.slug}/edit-profile`}
+                  href={`/${currentUser?.accountType}/${profileInfo?.slug}/edit-profile`}
                   activeClassName='text-teal-700 opacity-100'
                   className='opacity-75 hover:opacity-100'
                 >
@@ -51,7 +51,7 @@ const AccountInteriorLayout = ({ children, className }) => {
               </li>
             </ProfileMenu>
 
-            {currentUser.accountType === 'company' && (
+            {currentUser?.accountType === 'company' && (
               <Link href={`/company/${profileInfo?.slug}/post-a-job`}>
                 <a className='btn btn-teal block text-center mt-6'>
                   Post a Job
