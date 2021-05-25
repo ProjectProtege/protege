@@ -47,7 +47,6 @@ export function AuthProvider({ children }) {
         }
         const token = await user.getIdToken()
 
-        console.log({ token })
         // fetchUserInfo(userObject)
         setCurrentUser(userObject)
         nookies.set(undefined, 'token', token, {})

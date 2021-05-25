@@ -279,11 +279,10 @@ export async function getServerSideProps(context) {
   try {
     const cookies = nookies.get(context)
     const token = await verifyIdToken(cookies.token)
-    const { email } = token
 
     return {
       props: {
-        session: `Your email is ${email}`,
+        session: { ...token },
       },
     }
   } catch (err) {
