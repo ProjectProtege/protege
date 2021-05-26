@@ -9,10 +9,11 @@ const JobBoard = () => {
   const filterParam = router.query
   const [activeJobs, setActiveJobs] = useState([])
 
-  // const initialFilterParam = Object.keys(filterParam).length ? filterParam.filter : ''
+  const initialFilterParam = Object.keys(filterParam).length
+    ? filterParam.filter
+    : ''
 
-  // const [jobFilter, setJobFilter] = useState(initialFilterParam)
-  const [jobFilter, setJobFilter] = useState()
+  const [jobFilter, setJobFilter] = useState(initialFilterParam)
   const jobs = useJobs((s) => s.jobs)
 
   function filteredJobs(jobList, filter) {
@@ -41,6 +42,22 @@ const JobBoard = () => {
   useEffect(() => {
     setJobFilter(jobFilter)
   }, [])
+
+  useEffect(() => {
+    if (jobFilter) {
+      router.replace(`/job-board?filter=${jobFilter}`)
+    } else {
+      router.replace('/job-board')
+    }
+  }, [jobFilter])
+
+  useEffect(() => {
+    if (filterParam.filter) {
+      setJobFilter(filterParam.filter)
+    } else {
+      setJobFilter('')
+    }
+  }, [filterParam.filter])
 
   return (
     <div className='container'>
