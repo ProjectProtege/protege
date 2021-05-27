@@ -6,14 +6,10 @@ import JobCard from '../../components/job/JobCard'
 
 const JobBoard = () => {
   const router = useRouter()
-  const filterParam = router.query
   const [activeJobs, setActiveJobs] = useState([])
 
-  const initialFilterParam = Object.keys(filterParam).length
-    ? filterParam.filter
-    : ''
-
-  const [jobFilter, setJobFilter] = useState(initialFilterParam)
+  const filterParam = router.query.filter
+  const [jobFilter, setJobFilter] = useState(filterParam)
   const jobs = useJobs((s) => s.jobs)
 
   function filteredJobs(jobList, filter) {
@@ -39,25 +35,18 @@ const JobBoard = () => {
     return active
   }
 
-  useEffect(() => {
-    setJobFilter(jobFilter)
-  }, [])
-
-  useEffect(() => {
-    if (jobFilter) {
-      router.replace(`/job-board?filter=${jobFilter}`)
-    } else {
+  function handleOptionChange(event) {
+    if (event.target.value === '') {
       router.replace('/job-board')
+    } else {
+      router.replace(`/job-board?filter=${event.target.value}`)
     }
-  }, [jobFilter])
+    setJobFilter(event.target.value)
+  }
 
   useEffect(() => {
-    if (filterParam.filter) {
-      setJobFilter(filterParam.filter)
-    } else {
-      setJobFilter('')
-    }
-  }, [filterParam.filter])
+    setJobFilter(filterParam)
+  }, [filterParam])
 
   return (
     <div className='container'>
@@ -77,8 +66,8 @@ const JobBoard = () => {
                 className='justify-end rounded-md input input-select'
                 id='filter-by'
                 placeholder='Filter By'
-                onChange={(event) => setJobFilter(event.target.value)}
-                value={jobFilter}
+                onChange={handleOptionChange}
+                value={jobFilter || ''}
               >
                 <option value=''>All</option>
                 <option value='Front-end'>Front-end</option>
