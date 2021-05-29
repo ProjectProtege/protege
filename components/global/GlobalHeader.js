@@ -187,7 +187,7 @@ const GlobalHeader = () => {
               >
                 Find a Job
               </NavLink>
-              {/* <ul
+              <ul
                 data-cy='quick-filter'
                 className='absolute p-4 mt-2 bg-white rounded shadow-md submenu'
                 aria-label='submenu'
@@ -216,7 +216,7 @@ const GlobalHeader = () => {
                     Full-stack
                   </NavLink>
                 </li>
-              </ul> */}
+              </ul>
             </li>
 
             <li className='pr-4 opacity-75 menu-item lg:pr-10 hover:opacity-100'>
