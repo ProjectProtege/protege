@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import 'react-quill/dist/quill.snow.css'
+import { v4 as uuidv4 } from 'uuid'
 
 import { db } from 'utils/db'
 import { useAuth } from 'store/AuthContext'
@@ -25,10 +26,41 @@ const CandidateEditProfile = ({ session }) => {
   const { currentUser } = useAuth()
   // const [error, setError] = useState(null)
   const [timezonesArray, setTimezonesArray] = useState([])
+  const [tech, setTech] = useState('')
+  const [techArray, setTechArray] = useState([])
+  const [project, setProject] = useState('')
+  const [projectsArray, setProjectsArray] = useState([])
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
   useEffect(() => {
     setTimezonesArray(timezones)
+
+    async function fetchTech() {
+      await db
+        .collection('candidates')
+        .where('userUid', '==', currentUser.userUid)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            setTechArray(doc.data().tech)
+          })
+        })
+    }
+
+    async function fetchProjects() {
+      await db
+        .collection('candidates')
+        .where('userUid', '==', currentUser.userUid)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            setProjectsArray(doc.data().projects)
+          })
+        })
+    }
+
+    fetchTech()
+    fetchProjects()
   }, [])
 
   const Schema = Yup.object().shape({
@@ -78,6 +110,26 @@ const CandidateEditProfile = ({ session }) => {
     },
   })
 
+  const saveTech = (e) => {
+    setTech(e.target.value)
+  }
+
+  const addTech = () => {
+    const techList = techArray.concat({ id: uuidv4(), tech })
+    setTechArray(techList)
+    setTech('')
+  }
+
+  const saveProject = (e) => {
+    setProject(e.target.value)
+  }
+
+  const addProject = () => {
+    const projectList = projectsArray.concat({ id: uuidv4(), project })
+    setProjectsArray(projectList)
+    setProject('')
+  }
+
   const handleProfileForm = (data) => {
     db.collection('candidates')
       .doc(profileInfo.userUid)
@@ -94,6 +146,8 @@ const CandidateEditProfile = ({ session }) => {
         timezone: data.timezone,
         timeframe_from: data.timeframe_from,
         timeframe_to: data.timeframe_to,
+        tech: techArray,
+        projects: projectsArray,
         question1: data.question1,
         question2: data.question2,
         question3: data.question3,
@@ -122,7 +176,7 @@ const CandidateEditProfile = ({ session }) => {
             className='mb-6'
           >
             {/* name */}
-            <div className='md:grid grid-cols-2 gap-8'>
+            <div className='grid-cols-2 gap-8 md:grid'>
               <div className='flex flex-col w-full mb-3'>
                 <label htmlFor='firstName'>
                   {getText('GLOBAL', 'FIRST_NAME')}
@@ -161,7 +215,7 @@ const CandidateEditProfile = ({ session }) => {
             </div>
 
             {/* email/portfolio */}
-            <div className='md:grid grid-cols-2 gap-8 mb-12'>
+            <div className='grid-cols-2 gap-8 mb-12 md:grid'>
               <div className='flex flex-col w-full mb-3 '>
                 <label htmlFor='email'>{getText('GLOBAL', 'EMAIL')}</label>
                 <input
@@ -194,14 +248,14 @@ const CandidateEditProfile = ({ session }) => {
             </div>
 
             {/* social/timezone */}
-            <div className='md:grid grid-cols-2 gap-8 mb-12'>
+            <div className='grid-cols-2 gap-8 mb-12 md:grid'>
               <div className='mb-6 md:mb-0'>
-                <label htmlFor='social' className='mb-6'>
+                <label htmlFor='social'>
                   {getText('GLOBAL', 'SOCIAL_ACCOUNTS')}
                 </label>
 
                 <div className='flex items-center my-2'>
-                  <div className='text-3xl opacity-50 mr-4'>
+                  <div className='mr-4 text-3xl opacity-50'>
                     <i className='fab fa-dev' />
                   </div>
                   <input
@@ -213,7 +267,7 @@ const CandidateEditProfile = ({ session }) => {
                 </div>
 
                 <div className='flex items-center mb-2'>
-                  <div className='text-3xl opacity-50 mr-3'>
+                  <div className='mr-3 text-3xl opacity-50'>
                     <i className='fab fa-github' />
                   </div>
                   <input
@@ -225,7 +279,7 @@ const CandidateEditProfile = ({ session }) => {
                 </div>
 
                 <div className='flex items-center mb-2'>
-                  <div className='text-3xl opacity-50 mr-4'>
+                  <div className='mr-4 text-3xl opacity-50'>
                     <i className='fab fa-linkedin' />
                   </div>
                   <input
@@ -237,7 +291,7 @@ const CandidateEditProfile = ({ session }) => {
                 </div>
 
                 <div className='flex items-center mb-2'>
-                  <div className='text-3xl opacity-50 mr-3'>
+                  <div className='mr-3 text-3xl opacity-50'>
                     <i className='fab fa-twitter' />
                   </div>
                   <input
@@ -376,6 +430,79 @@ const CandidateEditProfile = ({ session }) => {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* tech used/projects */}
+            <div className='grid-cols-2 gap-8 mb-12 md:grid'>
+              <div className='flex flex-col w-full mb-3'>
+                <label htmlFor='tech'>{getText('GLOBAL', 'TECH_USED')}</label>
+                <div className='flex items-center space-x-6'>
+                  <input
+                    type='text'
+                    name='tech'
+                    className='w-full input'
+                    ref={register}
+                    onChange={saveTech}
+                    value={tech}
+                  />
+                  <button
+                    type='button'
+                    className='btn btn-blue'
+                    onClick={addTech}
+                  >
+                    Add
+                  </button>
+                </div>
+                <ul className='flex flex-col mt-4 space-y-2'>
+                  {techArray &&
+                    techArray.map((t) => (
+                      <>
+                        <li className='text-gray-600' key={t.id}>
+                          <span className='mr-4 font-bold text-gray-500'>
+                            x
+                          </span>
+                          {t.tech}
+                        </li>
+                      </>
+                    ))}
+                </ul>
+              </div>
+
+              <div className='flex flex-col w-full mb-3'>
+                <label htmlFor='projects'>
+                  {getText('GLOBAL', 'PROJECTS')}
+                </label>
+                <div className='flex items-center space-x-6'>
+                  <input
+                    type='text'
+                    name='projects'
+                    className='w-full input'
+                    ref={register}
+                    onChange={saveProject}
+                    value={project}
+                  />
+                  <button
+                    type='button'
+                    className='btn btn-blue'
+                    onClick={addProject}
+                  >
+                    Add
+                  </button>
+                </div>
+                <ul className='flex flex-col mt-4 space-y-2'>
+                  {projectsArray &&
+                    projectsArray.map((p) => (
+                      <>
+                        <li className='text-gray-600' key={p.id}>
+                          <span className='mr-4 font-bold text-gray-500'>
+                            x
+                          </span>
+                          {p.project}
+                        </li>
+                      </>
+                    ))}
+                </ul>
               </div>
             </div>
 
