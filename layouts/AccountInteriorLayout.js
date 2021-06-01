@@ -59,15 +59,20 @@ const AccountInteriorLayout = ({ children, className }) => {
             </ProfileMenu>
 
             {currentUser?.accountType === 'company' && (
-              <Link href={`/company/${profileInfo?.slug}/post-a-job`}>
-                <a
-                  className={`btn btn-teal block text-center mt-6 ${
-                    !companyProfileComplete ? 'btn-disabled' : ''
-                  }`}
-                >
-                  Post a Job
-                </a>
-              </Link>
+              <div>
+                <Link href={`/company/${profileInfo?.slug}/post-a-job`}>
+                  <a
+                    className={`btn btn-teal block text-center mt-6 ${
+                      !companyProfileComplete ? 'btn-disabled' : ''
+                    }`}
+                  >
+                    Post a Job
+                  </a>
+                </Link>
+                <p className='opacity-75'>
+                  {!companyProfileComplete ? getText('GLOBAL', 'FILL_OUT') : ''}
+                </p>
+              </div>
             )}
           </aside>
 
