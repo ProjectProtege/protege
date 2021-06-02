@@ -11,6 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import 'react-quill/dist/quill.snow.css'
 import { v4 as uuidv4 } from 'uuid'
+import toast from 'react-hot-toast'
 
 import { db } from 'utils/db'
 import { useAuth } from 'store/AuthContext'
@@ -26,9 +27,11 @@ const CandidateEditProfile = ({ session }) => {
   const { currentUser } = useAuth()
   // const [error, setError] = useState(null)
   const [timezonesArray, setTimezonesArray] = useState([])
-  const [tech, setTech] = useState('')
+
+  const [techItem, setTechItem] = useState('')
   const [techArray, setTechArray] = useState([])
-  const [project, setProject] = useState('')
+
+  const [projectItem, setProjectItem] = useState('')
   const [projectsArray, setProjectsArray] = useState([])
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
@@ -110,24 +113,106 @@ const CandidateEditProfile = ({ session }) => {
     },
   })
 
+  const addToArray = (arrayType, array) => {
+    if (arrayType === 'tech') {
+      db.collection('candidates')
+        .doc(profileInfo.userUid)
+        .update({
+          tech: array,
+        })
+        .then(() => {
+          toast.success(
+            `${techItem} ${getText('GLOBAL', 'TECH_ARRAY_ADD_SUCCESS')}`
+          )
+        })
+        .catch((err) => {
+          toast.error(getText('GLOBAL', 'TECH_ARRAY_ADD_ERROR') + err.message)
+        })
+    } else {
+      db.collection('candidates')
+        .doc(profileInfo.userUid)
+        .update({
+          projects: array,
+        })
+        .then(() => {
+          toast.success(
+            `${projectItem} ${getText('GLOBAL', 'PROJECT_ARRAY_ADD_SUCCESS')}`
+          )
+        })
+        .catch((err) => {
+          toast.error(
+            getText('GLOBAL', 'PROJECT_ARRAY_ADD_ERROR') + err.message
+          )
+        })
+    }
+  }
+
+  const removeFromArray = (arrayType, item, array) => {
+    if (arrayType === 'tech') {
+      db.collection('candidates')
+        .doc(profileInfo.userUid)
+        .update({
+          tech: array,
+        })
+        .then(() => {
+          toast.success(
+            `${item} ${getText('GLOBAL', 'TECH_ARRAY_REMOVE_SUCCESS')}`
+          )
+        })
+        .catch((err) => {
+          toast.error(
+            getText('GLOBAL', 'TECH_ARRAY_REMOVE_ERROR') + err.message
+          )
+        })
+    } else {
+      db.collection('candidates')
+        .doc(profileInfo.userUid)
+        .update({
+          projects: array,
+        })
+        .then(() => {
+          toast.success(
+            `${item} ${getText('GLOBAL', 'PROJECT_ARRAY_REMOVE_SUCCESS')}`
+          )
+        })
+        .catch((err) => {
+          toast.error(
+            getText('GLOBAL', 'PROJECT_ARRAY_REMOVE_ERROR') + err.message
+          )
+        })
+    }
+  }
+
   const saveTech = (e) => {
-    setTech(e.target.value)
+    setTechItem(e.target.value)
   }
 
   const addTech = () => {
-    const techList = techArray.concat({ id: uuidv4(), tech })
-    setTechArray(techList)
-    setTech('')
+    setTechArray([...techArray, { id: uuidv4(), techItem }])
+    addToArray('tech', [...techArray, { id: uuidv4(), techItem }])
+    setTechItem('')
+  }
+
+  const deleteTech = (id, item) => {
+    const newTechArray = techArray.filter((el) => el.id !== id)
+    setTechArray(newTechArray)
+    removeFromArray('tech', item, newTechArray)
   }
 
   const saveProject = (e) => {
-    setProject(e.target.value)
+    setProjectItem(e.target.value)
   }
 
   const addProject = () => {
-    const projectList = projectsArray.concat({ id: uuidv4(), project })
-    setProjectsArray(projectList)
-    setProject('')
+    setProjectsArray([...projectsArray, { id: uuidv4(), projectItem }])
+    addToArray('projects', [...projectsArray, { id: uuidv4(), projectItem }])
+    setProjectItem('')
+  }
+
+  const deleteProject = (id, item) => {
+    const newProjectArray = projectsArray.filter((el) => el.id !== id)
+    setProjectsArray(newProjectArray)
+    removeFromArray('projects', item, newProjectArray)
   }
 
   const handleProfileForm = (data) => {
@@ -146,8 +231,8 @@ const CandidateEditProfile = ({ session }) => {
         timezone: data.timezone,
         timeframe_from: data.timeframe_from,
         timeframe_to: data.timeframe_to,
-        tech: techArray,
-        projects: projectsArray,
+        // tech: techArray,
+        // projects: projectsArray,
         question1: data.question1,
         question2: data.question2,
         question3: data.question3,
@@ -444,7 +529,7 @@ const CandidateEditProfile = ({ session }) => {
                     className='w-full input'
                     ref={register}
                     onChange={saveTech}
-                    value={tech}
+                    value={techItem}
                   />
                   <button
                     type='button'
@@ -455,17 +540,20 @@ const CandidateEditProfile = ({ session }) => {
                   </button>
                 </div>
                 <ul className='flex flex-col mt-4 space-y-2'>
-                  {techArray &&
-                    techArray.map((t) => (
-                      <>
-                        <li className='text-gray-600' key={t.id}>
-                          <span className='mr-4 font-bold text-gray-500'>
-                            x
-                          </span>
-                          {t.tech}
-                        </li>
-                      </>
-                    ))}
+                  {techArray.map((t) => (
+                    <>
+                      <li className='text-gray-600' key={t.id}>
+                        <button
+                          type='button'
+                          className='mr-4 font-bold text-gray-500'
+                          onClick={() => deleteTech(t.id, t.techItem)}
+                        >
+                          x
+                        </button>
+                        {t.techItem}
+                      </li>
+                    </>
+                  ))}
                 </ul>
               </div>
 
@@ -480,7 +568,7 @@ const CandidateEditProfile = ({ session }) => {
                     className='w-full input'
                     ref={register}
                     onChange={saveProject}
-                    value={project}
+                    value={projectItem}
                   />
                   <button
                     type='button'
@@ -495,10 +583,14 @@ const CandidateEditProfile = ({ session }) => {
                     projectsArray.map((p) => (
                       <>
                         <li className='text-gray-600' key={p.id}>
-                          <span className='mr-4 font-bold text-gray-500'>
+                          <button
+                            type='button'
+                            className='mr-4 font-bold text-gray-500'
+                            onClick={() => deleteProject(p.id, p.projectItem)}
+                          >
                             x
-                          </span>
-                          {p.project}
+                          </button>
+                          {p.projectItem}
                         </li>
                       </>
                     ))}
