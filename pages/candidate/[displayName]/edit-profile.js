@@ -31,8 +31,10 @@ const CandidateEditProfile = ({ session }) => {
   const [techItem, setTechItem] = useState('')
   const [techArray, setTechArray] = useState([])
 
-  const [projectItem, setProjectItem] = useState('')
+  const [projectItemName, setProjectItemName] = useState('')
+  const [projectItemUrl, setProjectItemUrl] = useState('')
   const [projectsArray, setProjectsArray] = useState([])
+
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
   useEffect(() => {
@@ -136,7 +138,10 @@ const CandidateEditProfile = ({ session }) => {
         })
         .then(() => {
           toast.success(
-            `${projectItem} ${getText('GLOBAL', 'PROJECT_ARRAY_ADD_SUCCESS')}`
+            `${projectItemName} ${getText(
+              'GLOBAL',
+              'PROJECT_ARRAY_ADD_SUCCESS'
+            )}`
           )
         })
         .catch((err) => {
@@ -199,14 +204,25 @@ const CandidateEditProfile = ({ session }) => {
     removeFromArray('tech', item, newTechArray)
   }
 
-  const saveProject = (e) => {
-    setProjectItem(e.target.value)
+  const saveProjectName = (e) => {
+    setProjectItemName(e.target.value)
+  }
+
+  const saveProjectUrl = (e) => {
+    setProjectItemUrl(e.target.value)
   }
 
   const addProject = () => {
-    setProjectsArray([...projectsArray, { id: uuidv4(), projectItem }])
-    addToArray('projects', [...projectsArray, { id: uuidv4(), projectItem }])
-    setProjectItem('')
+    setProjectsArray([
+      ...projectsArray,
+      { id: uuidv4(), projectItemName, projectItemUrl },
+    ])
+    addToArray('projects', [
+      ...projectsArray,
+      { id: uuidv4(), projectItemName, projectItemUrl },
+    ])
+    setProjectItemName('')
+    setProjectItemUrl('')
   }
 
   const deleteProject = (id, item) => {
@@ -339,7 +355,7 @@ const CandidateEditProfile = ({ session }) => {
                   {getText('GLOBAL', 'SOCIAL_ACCOUNTS')}
                 </label>
 
-                <div className='flex items-center my-2'>
+                <div className='flex items-center my-2 mb-4'>
                   <div className='mr-4 text-3xl opacity-50'>
                     <i className='fab fa-dev' />
                   </div>
@@ -351,7 +367,7 @@ const CandidateEditProfile = ({ session }) => {
                   />
                 </div>
 
-                <div className='flex items-center mb-2'>
+                <div className='flex items-center mb-4'>
                   <div className='mr-3 text-3xl opacity-50'>
                     <i className='fab fa-github' />
                   </div>
@@ -363,7 +379,7 @@ const CandidateEditProfile = ({ session }) => {
                   />
                 </div>
 
-                <div className='flex items-center mb-2'>
+                <div className='flex items-center mb-4'>
                   <div className='mr-4 text-3xl opacity-50'>
                     <i className='fab fa-linkedin' />
                   </div>
@@ -375,7 +391,7 @@ const CandidateEditProfile = ({ session }) => {
                   />
                 </div>
 
-                <div className='flex items-center mb-2'>
+                <div className='flex items-center mb-4'>
                   <div className='mr-3 text-3xl opacity-50'>
                     <i className='fab fa-twitter' />
                   </div>
@@ -558,43 +574,65 @@ const CandidateEditProfile = ({ session }) => {
               </div>
 
               <div className='flex flex-col w-full mb-3'>
-                <label htmlFor='projects'>
-                  {getText('GLOBAL', 'PROJECTS')}
-                </label>
-                <div className='flex items-center space-x-6'>
-                  <input
-                    type='text'
-                    name='projects'
-                    className='w-full input'
-                    ref={register}
-                    onChange={saveProject}
-                    value={projectItem}
-                  />
-                  <button
-                    type='button'
-                    className='btn btn-blue'
-                    onClick={addProject}
-                  >
-                    Add
-                  </button>
+                <div className='flex flex-col items-end space-y-4'>
+                  <div className='w-full space-y-2'>
+                    <label htmlFor='projectName'>
+                      {getText('GLOBAL', 'PROJECT_NAME')}
+                    </label>
+                    <input
+                      type='text'
+                      name='projectName'
+                      className='w-full input'
+                      onChange={saveProjectName}
+                      value={projectItemName}
+                    />
+                  </div>
+                  <div className='w-full space-y-2'>
+                    <label htmlFor='projectUrl'>
+                      {getText('GLOBAL', 'PROJECT_URL')}
+                    </label>
+                    <input
+                      type='text'
+                      name='projectUrl'
+                      className='w-full input'
+                      onChange={saveProjectUrl}
+                      value={projectItemUrl}
+                    />
+                  </div>
+                  <div className='flex items-start justify-between w-full'>
+                    <ul className='flex flex-col mt-4 space-y-2'>
+                      {projectsArray &&
+                        projectsArray.map((p) => (
+                          <>
+                            <li className='text-gray-600' key={p.id}>
+                              <button
+                                type='button'
+                                className='mr-4 font-bold text-gray-500'
+                                onClick={() =>
+                                  deleteProject(p.id, p.projectItemName)
+                                }
+                              >
+                                x
+                              </button>
+                              <a
+                                href={p.projectItemUrl}
+                                className='text-teal-600'
+                              >
+                                {p.projectItemName}
+                              </a>
+                            </li>
+                          </>
+                        ))}
+                    </ul>
+                    <button
+                      type='button'
+                      className='btn btn-blue'
+                      onClick={addProject}
+                    >
+                      Add
+                    </button>
+                  </div>
                 </div>
-                <ul className='flex flex-col mt-4 space-y-2'>
-                  {projectsArray &&
-                    projectsArray.map((p) => (
-                      <>
-                        <li className='text-gray-600' key={p.id}>
-                          <button
-                            type='button'
-                            className='mr-4 font-bold text-gray-500'
-                            onClick={() => deleteProject(p.id, p.projectItem)}
-                          >
-                            x
-                          </button>
-                          {p.projectItem}
-                        </li>
-                      </>
-                    ))}
-                </ul>
               </div>
             </div>
 
