@@ -13,7 +13,7 @@ const ContributorsList = ({ contributors, isFounders }) => {
           : 'sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
       }`}
     >
-      {isFounders ? <li className='hidden lg:block'></li> : null}
+      {isFounders ? <li className='hidden lg:block' /> : null}
 
       {contributors
         .filter(({ login }) => login !== 'ImgBotApp')
@@ -26,7 +26,7 @@ const ContributorsList = ({ contributors, isFounders }) => {
           )
         })}
 
-      {isFounders ? <li className='hidden lg:block'></li> : null}
+      {isFounders ? <li className='hidden lg:block' /> : null}
     </ul>
   )
 }
