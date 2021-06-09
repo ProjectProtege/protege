@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import DashboardBanner from 'assets/images/DashboardBanner'
+import DashboardBanner from 'components/dashboard/DashboardBanner'
 
 const DashboardLayout = ({ children, hasBanner }) => {
   return (
