@@ -96,16 +96,27 @@ function MyApp({ Component, pageProps }) {
           <link rel='shortcut icon' href='/protege-logo.png' />
         </Head>
         <Toaster
-          position='bottom-left'
+          position='bottom-right'
           toastOptions={{
+            duration: 10000,
             success: {
               iconTheme: {
-                primary: '#5aa88e',
+                primary: '#fff',
+                secondary: '#5aa88e',
+              },
+              style: {
+                background: '#5aa88e',
+                color: '#fff',
               },
             },
             error: {
               iconTheme: {
-                primary: '#E53E3E',
+                primary: '#fff',
+                secondary: '#E53E3E',
+              },
+              style: {
+                background: '#E53E3E',
+                color: '#fff',
               },
             },
           }}

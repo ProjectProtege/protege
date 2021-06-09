@@ -10,6 +10,8 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import 'react-quill/dist/quill.snow.css'
+import { v4 as uuidv4 } from 'uuid'
+import toast from 'react-hot-toast'
 
 import { db } from 'utils/db'
 import { useAuth } from 'store/AuthContext'
@@ -25,10 +27,45 @@ const CandidateEditProfile = ({ session }) => {
   const { currentUser } = useAuth()
   // const [error, setError] = useState(null)
   const [timezonesArray, setTimezonesArray] = useState([])
+
+  const [techItem, setTechItem] = useState('')
+  const [techArray, setTechArray] = useState([])
+
+  const [projectItemName, setProjectItemName] = useState('')
+  const [projectItemUrl, setProjectItemUrl] = useState('')
+  const [projectsArray, setProjectsArray] = useState([])
+
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
   useEffect(() => {
     setTimezonesArray(timezones)
+
+    async function fetchTech() {
+      await db
+        .collection('candidates')
+        .where('userUid', '==', currentUser.userUid)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            setTechArray(doc.data().tech)
+          })
+        })
+    }
+
+    async function fetchProjects() {
+      await db
+        .collection('candidates')
+        .where('userUid', '==', currentUser.userUid)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            setProjectsArray(doc.data().projects)
+          })
+        })
+    }
+
+    fetchTech()
+    fetchProjects()
   }, [])
 
   const Schema = Yup.object().shape({
@@ -78,6 +115,122 @@ const CandidateEditProfile = ({ session }) => {
     },
   })
 
+  const addToArray = (arrayType, array) => {
+    if (arrayType === 'tech') {
+      db.collection('candidates')
+        .doc(profileInfo.userUid)
+        .update({
+          tech: array,
+        })
+        .then(() => {
+          toast.success(
+            `${techItem} ${getText('GLOBAL', 'TECH_ARRAY_ADD_SUCCESS')}`
+          )
+        })
+        .catch((err) => {
+          toast.error(getText('GLOBAL', 'TECH_ARRAY_ADD_ERROR') + err.message)
+        })
+    } else {
+      db.collection('candidates')
+        .doc(profileInfo.userUid)
+        .update({
+          projects: array,
+        })
+        .then(() => {
+          toast.success(
+            `${projectItemName} ${getText(
+              'GLOBAL',
+              'PROJECT_ARRAY_ADD_SUCCESS'
+            )}`
+          )
+        })
+        .catch((err) => {
+          toast.error(
+            getText('GLOBAL', 'PROJECT_ARRAY_ADD_ERROR') + err.message
+          )
+        })
+    }
+  }
+
+  const removeFromArray = (arrayType, item, array) => {
+    if (arrayType === 'tech') {
+      db.collection('candidates')
+        .doc(profileInfo.userUid)
+        .update({
+          tech: array,
+        })
+        .then(() => {
+          toast.success(
+            `${item} ${getText('GLOBAL', 'TECH_ARRAY_REMOVE_SUCCESS')}`
+          )
+        })
+        .catch((err) => {
+          toast.error(
+            getText('GLOBAL', 'TECH_ARRAY_REMOVE_ERROR') + err.message
+          )
+        })
+    } else {
+      db.collection('candidates')
+        .doc(profileInfo.userUid)
+        .update({
+          projects: array,
+        })
+        .then(() => {
+          toast.success(
+            `${item} ${getText('GLOBAL', 'PROJECT_ARRAY_REMOVE_SUCCESS')}`
+          )
+        })
+        .catch((err) => {
+          toast.error(
+            getText('GLOBAL', 'PROJECT_ARRAY_REMOVE_ERROR') + err.message
+          )
+        })
+    }
+  }
+
+  const saveTech = (e) => {
+    setTechItem(e.target.value)
+  }
+
+  const addTech = () => {
+    setTechArray([...techArray, { id: uuidv4(), techItem }])
+    addToArray('tech', [...techArray, { id: uuidv4(), techItem }])
+    setTechItem('')
+  }
+
+  const deleteTech = (id, item) => {
+    const newTechArray = techArray.filter((el) => el.id !== id)
+    setTechArray(newTechArray)
+    removeFromArray('tech', item, newTechArray)
+  }
+
+  const saveProjectName = (e) => {
+    setProjectItemName(e.target.value)
+  }
+
+  const saveProjectUrl = (e) => {
+    setProjectItemUrl(e.target.value)
+  }
+
+  const addProject = () => {
+    setProjectsArray([
+      ...projectsArray,
+      { id: uuidv4(), projectItemName, projectItemUrl },
+    ])
+    addToArray('projects', [
+      ...projectsArray,
+      { id: uuidv4(), projectItemName, projectItemUrl },
+    ])
+    setProjectItemName('')
+    setProjectItemUrl('')
+  }
+
+  const deleteProject = (id, item) => {
+    const newProjectArray = projectsArray.filter((el) => el.id !== id)
+    setProjectsArray(newProjectArray)
+    removeFromArray('projects', item, newProjectArray)
+  }
+
   const handleProfileForm = (data) => {
     db.collection('candidates')
       .doc(profileInfo.userUid)
@@ -94,6 +247,8 @@ const CandidateEditProfile = ({ session }) => {
         timezone: data.timezone,
         timeframe_from: data.timeframe_from,
         timeframe_to: data.timeframe_to,
+        // tech: techArray,
+        // projects: projectsArray,
         question1: data.question1,
         question2: data.question2,
         question3: data.question3,
@@ -122,7 +277,7 @@ const CandidateEditProfile = ({ session }) => {
             className='mb-6'
           >
             {/* name */}
-            <div className='md:grid grid-cols-2 gap-8'>
+            <div className='grid-cols-2 gap-8 md:grid'>
               <div className='flex flex-col w-full mb-3'>
                 <label htmlFor='firstName'>
                   {getText('GLOBAL', 'FIRST_NAME')}
@@ -161,7 +316,7 @@ const CandidateEditProfile = ({ session }) => {
             </div>
 
             {/* email/portfolio */}
-            <div className='md:grid grid-cols-2 gap-8 mb-12'>
+            <div className='grid-cols-2 gap-8 mb-12 md:grid'>
               <div className='flex flex-col w-full mb-3 '>
                 <label htmlFor='email'>{getText('GLOBAL', 'EMAIL')}</label>
                 <input
@@ -194,14 +349,14 @@ const CandidateEditProfile = ({ session }) => {
             </div>
 
             {/* social/timezone */}
-            <div className='md:grid grid-cols-2 gap-8 mb-12'>
+            <div className='grid-cols-2 gap-8 mb-12 md:grid'>
               <div className='mb-6 md:mb-0'>
-                <label htmlFor='social' className='mb-6'>
+                <label htmlFor='social'>
                   {getText('GLOBAL', 'SOCIAL_ACCOUNTS')}
                 </label>
 
-                <div className='flex items-center my-2'>
-                  <div className='text-3xl opacity-50 mr-4'>
+                <div className='flex items-center my-2 mb-4'>
+                  <div className='mr-4 text-3xl opacity-50'>
                     <i className='fab fa-dev' />
                   </div>
                   <input
@@ -212,8 +367,8 @@ const CandidateEditProfile = ({ session }) => {
                   />
                 </div>
 
-                <div className='flex items-center mb-2'>
-                  <div className='text-3xl opacity-50 mr-3'>
+                <div className='flex items-center mb-4'>
+                  <div className='mr-3 text-3xl opacity-50'>
                     <i className='fab fa-github' />
                   </div>
                   <input
@@ -224,8 +379,8 @@ const CandidateEditProfile = ({ session }) => {
                   />
                 </div>
 
-                <div className='flex items-center mb-2'>
-                  <div className='text-3xl opacity-50 mr-4'>
+                <div className='flex items-center mb-4'>
+                  <div className='mr-4 text-3xl opacity-50'>
                     <i className='fab fa-linkedin' />
                   </div>
                   <input
@@ -236,8 +391,8 @@ const CandidateEditProfile = ({ session }) => {
                   />
                 </div>
 
-                <div className='flex items-center mb-2'>
-                  <div className='text-3xl opacity-50 mr-3'>
+                <div className='flex items-center mb-4'>
+                  <div className='mr-3 text-3xl opacity-50'>
                     <i className='fab fa-twitter' />
                   </div>
                   <input
@@ -374,6 +529,108 @@ const CandidateEditProfile = ({ session }) => {
                         </p>
                       ) : null}
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* tech used/projects */}
+            <div className='grid-cols-2 gap-8 mb-12 md:grid'>
+              <div className='flex flex-col w-full mb-3'>
+                <label htmlFor='tech'>{getText('GLOBAL', 'TECH_USED')}</label>
+                <div className='flex items-center space-x-6'>
+                  <input
+                    type='text'
+                    name='tech'
+                    className='w-full input'
+                    ref={register}
+                    onChange={saveTech}
+                    value={techItem}
+                  />
+                  <button
+                    type='button'
+                    className='btn btn-blue'
+                    onClick={addTech}
+                  >
+                    Add
+                  </button>
+                </div>
+                <ul className='flex flex-col mt-4 space-y-2'>
+                  {techArray.map((t) => (
+                    <>
+                      <li className='text-gray-600' key={t.id}>
+                        <button
+                          type='button'
+                          className='mr-4 font-bold text-gray-500'
+                          onClick={() => deleteTech(t.id, t.techItem)}
+                        >
+                          x
+                        </button>
+                        {t.techItem}
+                      </li>
+                    </>
+                  ))}
+                </ul>
+              </div>
+
+              <div className='flex flex-col w-full mb-3'>
+                <div className='flex flex-col items-end space-y-4'>
+                  <div className='w-full space-y-2'>
+                    <label htmlFor='projectName'>
+                      {getText('GLOBAL', 'PROJECT_NAME')}
+                    </label>
+                    <input
+                      type='text'
+                      name='projectName'
+                      className='w-full input'
+                      onChange={saveProjectName}
+                      value={projectItemName}
+                    />
+                  </div>
+                  <div className='w-full space-y-2'>
+                    <label htmlFor='projectUrl'>
+                      {getText('GLOBAL', 'PROJECT_URL')}
+                    </label>
+                    <input
+                      type='text'
+                      name='projectUrl'
+                      className='w-full input'
+                      onChange={saveProjectUrl}
+                      value={projectItemUrl}
+                    />
+                  </div>
+                  <div className='flex items-start justify-between w-full'>
+                    <ul className='flex flex-col mt-4 space-y-2'>
+                      {projectsArray &&
+                        projectsArray.map((p) => (
+                          <>
+                            <li className='text-gray-600' key={p.id}>
+                              <button
+                                type='button'
+                                className='mr-4 font-bold text-gray-500'
+                                onClick={() =>
+                                  deleteProject(p.id, p.projectItemName)
+                                }
+                              >
+                                x
+                              </button>
+                              <a
+                                href={p.projectItemUrl}
+                                className='text-teal-600'
+                              >
+                                {p.projectItemName}
+                              </a>
+                            </li>
+                          </>
+                        ))}
+                    </ul>
+                    <button
+                      type='button'
+                      className='btn btn-blue'
+                      onClick={addProject}
+                    >
+                      Add
+                    </button>
                   </div>
                 </div>
               </div>

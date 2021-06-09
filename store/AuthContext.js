@@ -94,6 +94,8 @@ export function AuthProvider({ children }) {
           slug: slugify(name),
           accountType,
           email,
+          projects: [],
+          tech: [],
         })
 
       await fetchUserInfo({
