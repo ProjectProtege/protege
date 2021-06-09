@@ -35,7 +35,7 @@ export function AuthProvider({ children }) {
     const unsubscribe = await auth.onIdTokenChanged(async (user) => {
       if (!user) {
         setCurrentUser(null)
-        nookies.set(undefined, 'token', '', {})
+        nookies.destroy(undefined, 'token')
       }
       if (user) {
         const userObject = {
@@ -45,7 +45,7 @@ export function AuthProvider({ children }) {
           emailVerified: user.emailVerified,
           accountType: user.photoURL,
         }
-        const token = await user.getIdToken()
+        const token = await user.getIdToken(true)
 
         // fetchUserInfo(userObject)
         setCurrentUser(userObject)
