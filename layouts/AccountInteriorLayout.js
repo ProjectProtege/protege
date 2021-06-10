@@ -10,7 +10,14 @@ import Link from 'next/link'
 
 const AccountInteriorLayout = ({ children, className }) => {
   const { currentUser } = useAuth()
-  const profileInfo = useProfileInfo((s) => s.profileInfo)
+  const [profileInfo, requiredCompanyProfileFields] = useProfileInfo((s) => [
+    s.profileInfo,
+    s.requiredCompanyProfileFields,
+  ])
+  const companyProfileComplete =
+    requiredCompanyProfileFields.filter((field) => {
+      return !profileInfo[field]
+    }).length === 0
 
   return (
     <>
@@ -52,11 +59,20 @@ const AccountInteriorLayout = ({ children, className }) => {
             </ProfileMenu>
 
             {currentUser?.accountType === 'company' && (
-              <Link href={`/company/${profileInfo?.slug}/post-a-job`}>
-                <a className='btn btn-teal block text-center mt-6'>
-                  Post a Job
-                </a>
-              </Link>
+              <div>
+                <Link href={`/company/${profileInfo?.slug}/post-a-job`}>
+                  <a
+                    className={`btn btn-teal block text-center mt-6 ${
+                      !companyProfileComplete ? 'btn-disabled' : ''
+                    }`}
+                  >
+                    Post a Job
+                  </a>
+                </Link>
+                <p className='opacity-75'>
+                  {!companyProfileComplete ? getText('GLOBAL', 'FILL_OUT') : ''}
+                </p>
+              </div>
             )}
           </aside>
 
