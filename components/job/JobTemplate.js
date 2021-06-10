@@ -32,7 +32,7 @@ const JobTemplate = ({ props }) => {
     roleFocus,
     jobtitle,
     positionType,
-    companyLogo,
+    avatar,
     howToApply,
   } = props
 
@@ -172,14 +172,14 @@ const JobTemplate = ({ props }) => {
           {!isAdmin ? (
             <div className='mt-8 text-center md:w-1/4 md:text-left'>
               <div className='p-4 bg-gray-200'>
-                {companyLogo ? (
+                {avatar ? (
                   <div className='relative flex items-center justify-center w-32 h-32 mb-6 overflow-hidden bg-white rounded-full shadow-md mx-auto md:mx-0'>
                     <Image
                       data-cy='company-logo'
-                      id='companyLogo'
+                      id='avatar'
                       layout='fill'
                       objectFit='contain'
-                      src={companyLogo}
+                      src={avatar}
                       alt={`${companyName} logo`}
                     />
                   </div>
@@ -259,12 +259,12 @@ JobTemplate.propTypes = {
   positionType: PropTypes.string,
   jobDescription: PropTypes.string,
   companyDescription: PropTypes.string,
-  companyLogo: PropTypes.string,
+  avatar: PropTypes.string,
   howToApply: PropTypes.string,
 }
 
 JobTemplate.defaultProps = {
-  companyLogo: '',
+  avatar: '',
   logo: {},
   companyName: '',
   companyWebsite: '',

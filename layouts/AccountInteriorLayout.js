@@ -14,6 +14,7 @@ const AccountInteriorLayout = ({ children, className }) => {
     s.profileInfo,
     s.requiredCompanyProfileFields,
   ])
+
   const companyProfileComplete =
     requiredCompanyProfileFields.filter((field) => {
       return !profileInfo[field]
@@ -59,7 +60,7 @@ const AccountInteriorLayout = ({ children, className }) => {
             </ProfileMenu>
 
             {currentUser?.accountType === 'company' && (
-              <div>
+              <div className='text-center space-y-2'>
                 <Link href={`/company/${profileInfo?.slug}/post-a-job`}>
                   <a
                     className={`btn btn-teal block text-center mt-6 ${
@@ -69,7 +70,7 @@ const AccountInteriorLayout = ({ children, className }) => {
                     Post a Job
                   </a>
                 </Link>
-                <p className='opacity-75'>
+                <p className='opacity-75 text-xs'>
                   {!companyProfileComplete ? getText('GLOBAL', 'FILL_OUT') : ''}
                 </p>
               </div>

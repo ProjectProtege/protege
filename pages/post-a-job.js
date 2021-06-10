@@ -54,7 +54,7 @@ const PostAJob = ({ query }) => {
         approved: false,
         status: 'active',
         companyEmail: data.jobData.companyEmail,
-        companyLogo: data.jobData.companyLogo,
+        avatar: data.jobData.avatar,
         companyName: data.jobData.companyName,
         companyWebsite: data.jobData.companyWebsite,
         companyHQ: data.jobData.companyHQ,

@@ -28,14 +28,14 @@ const JobCard = ({ job }) => {
   return (
     <Link data-cy={`job-card-link-${job.id}`} href={`/job-board/${job.id}`}>
       <a className='flex items-center px-3 py-4 mb-6 overflow-hidden transition duration-150 ease-in-out transform bg-white rounded-md shadow md:mb-12 md:px-6 hover:shadow-md'>
-        <div className='absolute left-0 w-1 h-full bg-gradient-to-t from-teal-500 to-teal-300'></div>
+        <div className='absolute left-0 w-1 h-full bg-gradient-to-t from-teal-500 to-teal-300' />
         <div
           className='relative items-center justify-center hidden overflow-hidden bg-white rounded-full shadow-md md:flex'
           style={{ width: 75, height: 75 }}
         >
           <Image
             data-cy={`job-card-image-${job.id}`}
-            src={job.companyLogo}
+            src={job.avatar}
             alt={`${job.companyName} Logo`}
             className='w-full my-auto'
             width={75}
@@ -87,7 +87,7 @@ JobCard.propTypes = {
   job: PropTypes.shape({
     id: PropTypes.string.isRequired,
     companyName: PropTypes.string.isRequired,
-    companyLogo: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
     jobtitle: PropTypes.string.isRequired,
     roleFocus: PropTypes.string.isRequired,
     postedAt: PropTypes.instanceOf(Date).isRequired,

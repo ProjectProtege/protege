@@ -67,7 +67,7 @@ const PostAJob = ({ session }) => {
         status: 'active',
         userUid: profileInfo.userUid,
         companyEmail: profileInfo.email,
-        companyLogo: profileInfo.avatar,
+        avatar: profileInfo.avatar,
         companyName: profileInfo.companyName,
         companyWebsite: profileInfo.companyWebsite,
         companyHQ: profileInfo.companyHQ,

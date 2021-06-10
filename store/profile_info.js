@@ -5,10 +5,7 @@ export const useProfileInfo = create((set) => ({
   postedJobs: null,
   requiredCompanyProfileFields: [
     'displayName',
-    'accountType',
-    'slug',
     'email',
-    'userUid',
     'companyWebsite',
     'companyEmail',
     'companyHQ',
@@ -16,7 +13,7 @@ export const useProfileInfo = create((set) => ({
     'companyTimeframeFrom',
     'companyTimeframeTo',
     'companyDescription',
-    'companyLogo',
+    'avatar',
   ],
   setProfileInfo: (profileInfo) => {
     return set({ profileInfo })

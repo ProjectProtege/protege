@@ -34,7 +34,7 @@ async function seedData() {
         companyDescription: faker.lorem.paragraph(),
         companyEmail: faker.internet.email(),
         companyHQ: faker.address.state(),
-        companyLogo: faker.random.arrayElement([
+        avatar: faker.random.arrayElement([
           'https://static.files-simplefileupload.com/0anc64bvd4tpqyd9v82gb3v8f3rv/Group 58.png',
           'https://static.files-simplefileupload.com/6mqplngm56hq0785c7hxpd5acw7d/FC_SoftwareIcons_Klaviyo.png',
           'https://static.files-simplefileupload.com/ko5z2ty8btrf5ndrng8z6uwodat1/piedpiper.png',

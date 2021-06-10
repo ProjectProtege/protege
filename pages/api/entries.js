@@ -20,7 +20,7 @@ export default async (req, res) => {
         companyHQ: entry.companyHQ,
         companyName: entry.companyName,
         // postedAt: entry.postedAt.toDate(),
-        companyLogo: entry.companyLogo,
+        avatar: entry.avatar,
         companyDescription: entry.companyDescription,
         howToApply: entry.howToApply,
         companyWebsite: entry.companyWebsite,

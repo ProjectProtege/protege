@@ -65,7 +65,7 @@ const PostAJobForm = ({ jobData }) => {
       jobDescription: jobData.jobDescription,
       howToApply: jobData.howToApply,
       companyName: jobData.companyName,
-      companyLogo: jobData.companyLogo,
+      avatar: jobData.avatar,
       companyWebsite: jobData.companyWebsite,
       companyEmail: jobData.companyEmail,
       companyDescription: jobData.companyDescription,
@@ -106,7 +106,7 @@ const PostAJobForm = ({ jobData }) => {
       companyDescription: data.companyDescription,
       companyEmail: data.companyEmail,
       companyHQ: data.companyHQ,
-      companyLogo: logo,
+      avatar: logo,
       companyName: data.companyName,
       companyWebsite: data.companyWebsite,
       howToApply: data.howToApply,
@@ -413,7 +413,7 @@ const PostAJobForm = ({ jobData }) => {
               <div className='flex flex-col mb-3 md:w-1/2'>
                 {/* TODO: Make this work */}
                 <label
-                  htmlFor='companyLogo'
+                  htmlFor='avatar'
                   className='mb-2 font-semibold text-blue-900'
                 >
                   Logo
@@ -442,7 +442,7 @@ const PostAJobForm = ({ jobData }) => {
                     className='text-xs tracking-tight text-blue-500'
                   >
                     Please provide a .jpg, .jpeg, or .png format of your
-                    company's logo to be displayed with your job opening
+                    company&apos;s logo to be displayed with your job opening
                     listing.
                   </span>
                 </div>
@@ -453,12 +453,12 @@ const PostAJobForm = ({ jobData }) => {
                 /> */}
 
                 <p
-                  name='companyLogo'
+                  name='avatar'
                   component='span'
                   className='input-error'
                   role='alert'
                 >
-                  {errors.companyLogo && errors.companyLogo.message}
+                  {errors.avatar && errors.avatar.message}
                 </p>
               </div>
             </div>
@@ -545,7 +545,7 @@ PostAJobForm.propTypes = {
     companyName: PropTypes.string,
     companyWebsite: PropTypes.string,
     companyEmail: PropTypes.string,
-    companyLogo: PropTypes.string,
+    avatar: PropTypes.string,
     companyDescription: PropTypes.string,
     companyHQ: PropTypes.string,
   }),
@@ -561,7 +561,7 @@ PostAJobForm.defaultProps = {
     companyName: '',
     companyWebsite: '',
     companyEmail: '',
-    companyLogo: '',
+    avatar: '',
     companyDescription: '',
     companyHQ: '',
   },
