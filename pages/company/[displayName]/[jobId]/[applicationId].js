@@ -9,6 +9,7 @@ import { verifyIdToken } from 'utils/db/firebaseAdmin'
 
 import ApplicantCard from 'components/dashboard/CandidateCard'
 import BackArrow from 'assets/images/icons/back-arrow'
+import ExternalLink from 'assets/images/icons/external-link'
 
 const candidateApplication = ({ session }) => {
   const router = useRouter()
@@ -91,6 +92,42 @@ const candidateApplication = ({ session }) => {
                 </a>
               </Link>
 
+              <div className='mt-6 md:grid grid-cols-2 gap-3'>
+                {candidateInfo?.candidateProfile?.tech.length ? (
+                  <div className='mt-6'>
+                    <h3 className='text-xl mb-4'>Tech:</h3>
+                    <ul className='list-disc ml-5'>
+                      {candidateInfo?.candidateProfile?.tech.map((tech) => (
+                        <li className='mb-2'>{tech.techItem}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+
+                {candidateInfo?.candidateProfile?.projects.length ? (
+                  <div className='mt-6'>
+                    <h3 className='text-xl mb-4'>Projects:</h3>
+                    <ul className='list-disc ml-5'>
+                      {candidateInfo?.candidateProfile?.projects.map(
+                        (project) => (
+                          <li className='mb-2'>
+                            <a
+                              className='text-teal-700 underline'
+                              href={project.projectItemUrl}
+                            >
+                              {project.projectItemName}
+                              <span>
+                                <ExternalLink className='w-5 h-5 inline-block -mt-1 ml-2 opacity-75' />
+                              </span>
+                            </a>
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </div>
+                ) : null}
+              </div>
+
               <div className='mt-12'>
                 <div className='mb-6'>
                   <p className='font-bold text-lg mb-3'>
@@ -113,6 +150,16 @@ const candidateApplication = ({ session }) => {
                   <p>{candidateInfo?.candidateProfile?.question3}</p>
                 </div>
               </div>
+
+              <div className='mt-12'>
+                <button className='btn btn-teal mr-10' type='button'>
+                  Contact for Interview
+                </button>
+
+                <button className='opacity-75 hover:opacity-100' type='button'>
+                  Politely Decline
+                </button>
+              </div>
             </article>
           </div>
         </div>
@@ -128,7 +175,7 @@ export async function getServerSideProps(context) {
 
     return {
       props: {
-        session: { ...token },
+        session: token.uid,
       },
     }
   } catch (err) {
