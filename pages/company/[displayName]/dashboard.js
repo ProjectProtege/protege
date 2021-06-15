@@ -20,7 +20,6 @@ const CompanyDashboard = ({ session }) => {
   const { currentUser } = useAuth()
 
   useEffect(async () => {
-    console.log({ session })
     const userJobs = await db
       .collection('jobs')
       .where('userUid', '==', currentUser.userUid)

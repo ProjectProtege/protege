@@ -32,6 +32,7 @@ const UserProfileProvider = ({ children }) => {
 
           return {
             id: doc.id,
+            displayName: entry.displayName,
             jobtitle: entry.jobtitle,
             jobDescription: entry.jobDescription,
             roleFocus: entry.roleFocus,
