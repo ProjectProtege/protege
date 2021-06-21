@@ -38,3 +38,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# java logs
+hs_err_pid[0-9]*.log
