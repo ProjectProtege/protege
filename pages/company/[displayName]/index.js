@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useAuth } from 'store/AuthContext'
@@ -20,6 +20,17 @@ const CompanyProfile = () => {
   const postedJobs = useProfileInfo((s) => s.postedJobs)
   const setPostedJobs = useProfileInfo((s) => s.setPostedJobs)
   const { currentUser } = useAuth()
+  const [activeJobs, setActiveJobs] = useState([])
+
+  useEffect(() => {
+    const active = postedJobs.filter((job) => {
+      return (
+        job.status !== 'inactive' && job.paid === true && job.approved === true
+      )
+    })
+
+    setActiveJobs(active)
+  }, [])
 
   useEffect(async () => {
     const userJobs = await db
@@ -106,6 +117,7 @@ const CompanyProfile = () => {
             <h2 className='text-2xl mb-6'>About {profileInfo.companyName}</h2>
 
             <div
+              className='opacity-75'
               dangerouslySetInnerHTML={createMarkup(
                 profileInfo.companyDescription
               )}
@@ -116,17 +128,21 @@ const CompanyProfile = () => {
             <h2 className='text-2xl mb-6'>Active Jobs</h2>
 
             <ul>
-              {postedJobs.map((job) => (
-                <li>
-                  <Link href={`/job-board/${job.id}`}>
-                    <a className='relative flex justify-between bg-white p-3 pr-4 rounded-md overflow-hidden shadow-md'>
-                      <div className='absolute left-0 top-0 w-1 h-full bg-gradient-to-t from-teal-500 to-teal-300' />
-                      <p className='font-semibold'>{job.jobtitle}</p>
-                      <p className='opacity-50'>{job.positionType}</p>
-                    </a>
-                  </Link>
-                </li>
-              ))}
+              {activeJobs.length ? (
+                activeJobs.map((job) => (
+                  <li className='mb-4'>
+                    <Link href={`/job-board/${job.id}`}>
+                      <a className='relative flex justify-between bg-white p-3 pr-4 rounded-md overflow-hidden shadow-md'>
+                        <div className='absolute left-0 top-0 w-1 h-full bg-gradient-to-t from-teal-500 to-teal-300' />
+                        <p className='font-semibold'>{job.jobtitle}</p>
+                        <p className='opacity-50'>{job.positionType}</p>
+                      </a>
+                    </Link>
+                  </li>
+                ))
+              ) : (
+                <p>No Active Jobs</p>
+              )}
             </ul>
           </div>
         </div>
