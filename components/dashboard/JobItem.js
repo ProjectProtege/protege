@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import Trash from 'assets/images/icons/trash'
 import Edit from 'assets/images/icons/edit'
+import Archive from 'assets/images/icons/archive'
 
 import { useEditJob } from 'store/edit-job_store'
 import { useRouter } from 'next/router'
@@ -38,6 +39,15 @@ const JobItem = ({ job }) => {
 
     fetchApplications()
   }, [])
+
+  const archiveJob = async () => {
+    try {
+      await db.collection('jobs').doc(job.id).update({ status: 'inactive' })
+      toast.success('Job listing archived')
+    } catch {
+      toast.error('oops something went wrong')
+    }
+  }
 
   const deleteJob = async () => {
     try {
@@ -104,21 +114,33 @@ const JobItem = ({ job }) => {
         >
           <Edit />
         </button>
-        <button
-          className='opacity-50 hover:opacity-100 text-error-full'
-          type='button'
-          onClick={() => {
-            if (
-              // eslint-disable-next-line no-alert
-              window.confirm(
-                'This is permanant action. Are you sure you want to delete this job?'
+        {job.status === 'active' ? (
+          <button
+            className='opacity-50 hover:opacity-100 text-error-full'
+            type='button'
+            onClick={() => {
+              archiveJob()
+            }}
+          >
+            <Archive />
+          </button>
+        ) : (
+          <button
+            className='opacity-50 hover:opacity-100 text-error-full'
+            type='button'
+            onClick={() => {
+              if (
+                // eslint-disable-next-line no-alert
+                window.confirm(
+                  'This is permanant action. Are you sure you want to delete this job?'
+                )
               )
-            )
-              deleteJob()
-          }}
-        >
-          <Trash />
-        </button>
+                deleteJob()
+            }}
+          >
+            <Trash />
+          </button>
+        )}
       </div>
     </li>
   )
