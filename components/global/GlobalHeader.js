@@ -123,9 +123,15 @@ const GlobalHeader = () => {
               </NavLink>
             </li>
             <li className='px-6 py-4 border-b border-gray-300'>
-              <Link href='/post-a-job?status=1'>
-                <a className='btn btn-teal'>Post a Job</a>
-              </Link>
+              {currentUser && currentUser?.accountType === 'company' ? (
+                <Link href={`/company/${profileInfo?.slug}/post-a-job`}>
+                  <a className='btn btn-teal'>Post a Job</a>
+                </Link>
+              ) : (
+                <Link href='/post-a-job?status=1'>
+                  <a className='btn btn-teal'>Post a Job</a>
+                </Link>
+              )}
             </li>
             <li className='px-6 py-4'>
               {currentUser ? (
@@ -149,7 +155,11 @@ const GlobalHeader = () => {
                       </Link>
                     </li>
                     <li>
-                      <button className='underline' onClick={handleSignOut}>
+                      <button
+                        className='underline'
+                        onClick={handleSignOut}
+                        type='button'
+                      >
                         Sign Out
                       </button>
                     </li>
@@ -253,9 +263,15 @@ const GlobalHeader = () => {
             </li>
 
             <li className='menu-item'>
-              <Link href='/post-a-job?status=1'>
-                <a className='btn btn-teal'>Post a Job</a>
-              </Link>
+              {currentUser && currentUser?.accountType === 'company' ? (
+                <Link href={`/company/${profileInfo?.slug}/post-a-job`}>
+                  <a className='btn btn-teal'>Post a Job</a>
+                </Link>
+              ) : (
+                <Link href='/post-a-job?status=1'>
+                  <a className='btn btn-teal'>Post a Job</a>
+                </Link>
+              )}
             </li>
           </ul>
 
