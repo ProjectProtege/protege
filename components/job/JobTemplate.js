@@ -2,6 +2,7 @@
 /* eslint-disable react/no-danger */
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import PropTypes from 'prop-types'
 import Image from 'next/image'
 import { db } from 'utils/db'
@@ -171,7 +172,7 @@ const JobTemplate = ({ props }) => {
 
           {!isAdmin ? (
             <div className='mt-8 text-center md:w-1/4 md:text-left'>
-              <div className='p-4 bg-gray-200'>
+              <div className='p-4 bg-gray-200 rounded-md'>
                 {avatar ? (
                   <div className='relative flex items-center justify-center w-32 h-32 mb-6 overflow-hidden bg-white rounded-full shadow-md mx-auto md:mx-0'>
                     <Image
@@ -200,7 +201,7 @@ const JobTemplate = ({ props }) => {
                   >
                     Visit website
                   </a>
-                  <div className='mt-8'>
+                  <div className='mt-4'>
                     {howToApply ? (
                       <a
                         data-cy='how-to-apply-bottom'
@@ -218,20 +219,30 @@ const JobTemplate = ({ props }) => {
                         <ExternalLink className='w-5 h-5 inline-block -mt-1 ml-2 opacity-75' />
                       </a>
                     ) : (
-                      <button
-                        data-cy='how-to-apply'
-                        type='button'
-                        onClick={createApplication}
-                        className={`text-center btn btn-teal mt-8 w-full
+                      <div className='text-center'>
+                        <button
+                          data-cy='how-to-apply'
+                          type='button'
+                          onClick={createApplication}
+                          className={`text-center btn btn-teal mt-8 mb-3 w-full
   ${isPreview ? ' btn-disabled' : ''} ${
-                          profileInfo?.accountType === 'company'
-                            ? 'btn-disabled'
-                            : ''
-                        } ${hasApplied ? 'btn-disabled' : ''}`}
-                        tabIndex={isPreview ? -1 : 0}
-                      >
-                        Apply
-                      </button>
+                            profileInfo?.accountType === 'company'
+                              ? 'btn-disabled'
+                              : ''
+                          } ${hasApplied ? 'btn-disabled' : ''} ${
+                            !currentUser ? 'btn-disabled' : ''
+                          }`}
+                          tabIndex={isPreview ? -1 : 0}
+                        >
+                          Apply
+                        </button>
+                        <span className='tracking-wide text-sm'>
+                          <Link href='/sign-in'>
+                            <a className='text-teal-800 underline'>Sign in</a>
+                          </Link>{' '}
+                          to apply
+                        </span>
+                      </div>
                     )}
                     {hasApplied && (
                       <span className='text-xs tracking-wide'>
