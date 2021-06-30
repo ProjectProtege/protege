@@ -13,7 +13,6 @@ import 'react-quill/dist/quill.snow.css'
 
 // Custom component imports
 import FormCard from 'components/global/FormCard'
-import LogoUpload from './LogoUpload'
 
 const SimpleFileUpload = dynamic(() => import('react-simple-file-upload'), {
   ssr: false,
@@ -27,7 +26,6 @@ const PostAJobForm = ({ jobData }) => {
   // Form and Status state from zustand
   const setForm = useJobForm((s) => s.setForm)
   const setStatus = useJobForm((s) => s.setStatus)
-  const companyLogoFile = useJobForm((s) => s.companyLogoFile)
 
   // Form validation schema
   const Schema = Yup.object().shape({
@@ -77,11 +75,6 @@ const PostAJobForm = ({ jobData }) => {
   const [linkType, setLinkType] = useState('url')
   const [placeholder, setPlaceholder] = useState('')
 
-  function recievingLogo(logo) {
-    setFileValue(logo)
-    // recievingLogo2(logo)
-  }
-
   // toggling placeholder for 'How to apply'
   useEffect(() => {
     if (linkType === 'url') {
@@ -95,10 +88,6 @@ const PostAJobForm = ({ jobData }) => {
   function handleChange(e) {
     setLinkType(e.target.value)
   }
-
-  // function receivingLogo2(logo) {
-  //   receivingLogo(logo)
-  // }
 
   // Form submission event
   function handleFormEntry(data) {

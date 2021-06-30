@@ -72,19 +72,21 @@ const JobTemplate = ({ props }) => {
 
   // grab all applications for job
   useEffect(async () => {
-    const appRef = await db
-      .collection('applications')
-      .where('jobId', '==', jobId)
-      .get()
+    if (!isPreview) {
+      const appRef = await db
+        .collection('applications')
+        .where('jobId', '==', jobId)
+        .get()
 
-    const appRefData = appRef.docs.map((docSnapshot) => {
-      const entry = docSnapshot.data()
+      const appRefData = appRef.docs.map((docSnapshot) => {
+        const entry = docSnapshot.data()
 
-      return {
-        ...entry,
-      }
-    })
-    setApplications(appRefData)
+        return {
+          ...entry,
+        }
+      })
+      setApplications(appRefData)
+    }
   }, [])
 
   // check if user has already applied for job
