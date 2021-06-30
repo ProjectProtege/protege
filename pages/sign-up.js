@@ -71,14 +71,15 @@ const SignUp = ({ accountType }) => {
           autoComplete='on'
           onSubmit={handleSubmit(handleSignUp)}
           className='mb-6'
+          data-cy='sign-up-form'
         >
           <div className='flex flex-col mb-3'>
             {accountType === 'company' ? (
-              <label htmlFor='email' className='mb-2 '>
+              <label htmlFor='name' className='mb-2 '>
                 {getText('GLOBAL', 'COMPANY_NAME')}
               </label>
             ) : (
-              <label htmlFor='email' className='mb-2 '>
+              <label htmlFor='name' className='mb-2 '>
                 {getText('GLOBAL', 'NAME')}
               </label>
             )}
@@ -89,7 +90,11 @@ const SignUp = ({ accountType }) => {
               className='input'
               ref={register}
             />
-            <p className='input-error'>{errors.name && errors.name.message}</p>
+            {errors.name ? (
+              <p className='input-error' data-cy='name-error'>
+                {errors.name && errors.name.message}
+              </p>
+            ) : null}
           </div>
 
           <div className='flex flex-col mb-3'>
@@ -104,10 +109,14 @@ const SignUp = ({ accountType }) => {
               name='email'
               className='input'
               ref={register}
+              data-cy='candidate-email'
             />
-            <p className='input-error'>
-              {errors.email && errors.email.message}
-            </p>
+
+            {errors.email ? (
+              <p className='input-error' data-cy='email-error'>
+                {errors.email && errors.email.message}
+              </p>
+            ) : null}
           </div>
 
           <div className='flex flex-col mb-6'>
@@ -120,10 +129,13 @@ const SignUp = ({ accountType }) => {
               name='password'
               className='input'
               ref={register}
+              data-cy='candidate-password'
             />
-            <p className='input-error'>
-              {errors.password && errors.password.message}
-            </p>
+            {errors.password ? (
+              <p className='input-error' data-cy='password-error'>
+                {errors.password && errors.password.message}
+              </p>
+            ) : null}
           </div>
 
           <button type='submit' className='w-full btn btn-teal'>

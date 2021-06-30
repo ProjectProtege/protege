@@ -17,6 +17,7 @@ import { db } from 'utils/db'
 import { useAuth } from 'store/AuthContext'
 import { useProfileInfo } from 'store/profile_info'
 import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
+import Info from 'assets/images/icons/info'
 
 import getText from 'utils/i18n/Texts'
 
@@ -290,7 +291,7 @@ const CandidateEditProfile = ({ session }) => {
                   ref={register}
                 />
                 {errors.firstName ? (
-                  <p className='input-error'>
+                  <p className='input-error' data-cy='firstName-error'>
                     {errors.firstName && errors.firstName.message}
                   </p>
                 ) : null}
@@ -308,7 +309,7 @@ const CandidateEditProfile = ({ session }) => {
                   ref={register}
                 />
                 {errors.lastName ? (
-                  <p className='input-error'>
+                  <p className='input-error' data-cy='lastName-error'>
                     {errors.lastName && errors.lastName.message}
                   </p>
                 ) : null}
@@ -353,6 +354,7 @@ const CandidateEditProfile = ({ session }) => {
               <div className='mb-6 md:mb-0'>
                 <label htmlFor='social'>
                   {getText('GLOBAL', 'SOCIAL_ACCOUNTS')}
+                  <span className='text-sm font-normal'> (optional)</span>
                 </label>
 
                 <div className='flex items-center my-2 mb-4'>
@@ -450,6 +452,9 @@ const CandidateEditProfile = ({ session }) => {
 
                   <div className='grid grid-cols-2 gap-6'>
                     <div className='flex flex-col w-full '>
+                      <label htmlFor='timeframe_from' className='sr-only'>
+                        {getText('GLOBAL', 'FROM')}
+                      </label>
                       <div className='select-wrap'>
                         <select
                           id='timeframe_from'
@@ -493,6 +498,9 @@ const CandidateEditProfile = ({ session }) => {
                     </div>
 
                     <div className='flex flex-col w-full '>
+                      <label htmlFor='timeframe_to' className='sr-only'>
+                        {getText('GLOBAL', 'TO')}
+                      </label>
                       <div className='select-wrap'>
                         <select
                           id='timeframe_to'
@@ -536,29 +544,44 @@ const CandidateEditProfile = ({ session }) => {
 
             {/* tech used/projects */}
             <div className='grid-cols-2 gap-8 mb-12 md:grid'>
-              <div className='flex flex-col w-full mb-3'>
-                <label htmlFor='tech'>{getText('GLOBAL', 'TECH_USED')}</label>
-                <div className='flex items-center space-x-6'>
-                  <input
-                    type='text'
-                    name='tech'
-                    className='w-full input'
-                    ref={register}
-                    onChange={saveTech}
-                    value={techItem}
-                  />
+              <div className='flex flex-col w-full mb-3 space-y-4'>
+                <div className='flex items-end justify-between'>
+                  <div className='flex-grow mr-4 space-y-2'>
+                    <label htmlFor='tech'>
+                      {getText('GLOBAL', 'TECH_USED')}
+                      <span className='text-sm font-normal'>
+                        {' '}
+                        (optional) <Info />
+                      </span>
+                    </label>
+                    <input
+                      id='tech'
+                      type='text'
+                      name='tech'
+                      className='w-full input'
+                      ref={register}
+                      onChange={saveTech}
+                      value={techItem}
+                    />
+                  </div>
                   <button
                     type='button'
                     className='btn btn-blue'
                     onClick={addTech}
+                    data-cy='submit-tech'
                   >
-                    Add
+                    {getText('GLOBAL', 'ADD')}
                   </button>
                 </div>
-                <ul className='flex flex-col mt-4 space-y-2'>
+
+                <ul className='flex flex-col'>
                   {techArray.map((t) => (
                     <>
-                      <li className='text-gray-600' key={t.id}>
+                      <li
+                        className='text-gray-600'
+                        key={t.id}
+                        data-cy='tech-item'
+                      >
                         <button
                           type='button'
                           className='mr-4 font-bold text-gray-500'
@@ -578,13 +601,20 @@ const CandidateEditProfile = ({ session }) => {
                   <div className='w-full space-y-2'>
                     <label htmlFor='projectName'>
                       {getText('GLOBAL', 'PROJECT_NAME')}
+                      <span className='text-sm font-normal'>
+                        {' '}
+                        (optional) <Info />
+                      </span>
                     </label>
                     <input
+                      id='projectName'
                       type='text'
                       name='projectName'
+                      ref={register}
                       className='w-full input'
                       onChange={saveProjectName}
                       value={projectItemName}
+                      // {...register('projectName')}
                     />
                   </div>
                   <div className='w-full space-y-2'>
@@ -592,19 +622,32 @@ const CandidateEditProfile = ({ session }) => {
                       {getText('GLOBAL', 'PROJECT_URL')}
                     </label>
                     <input
+                      id='projectUrl'
                       type='text'
                       name='projectUrl'
+                      ref={register}
                       className='w-full input'
                       onChange={saveProjectUrl}
                       value={projectItemUrl}
+                      {...register('projectUrl')}
                     />
+                    {errors.projectUrl ? (
+                      <p className='input-error' data-cy='projectUrl-error'>
+                        {errors.projectUrl && errors.projectUrl.message}
+                      </p>
+                    ) : null}
                   </div>
+
                   <div className='flex items-start justify-between w-full'>
-                    <ul className='flex flex-col mt-4 space-y-2'>
+                    <ul className='flex flex-col space-y-2'>
                       {projectsArray &&
                         projectsArray.map((p) => (
                           <>
-                            <li className='text-gray-600' key={p.id}>
+                            <li
+                              className='text-gray-600'
+                              key={p.id}
+                              data-cy='project-item'
+                            >
                               <button
                                 type='button'
                                 className='mr-4 font-bold text-gray-500'
@@ -628,6 +671,7 @@ const CandidateEditProfile = ({ session }) => {
                       type='button'
                       className='btn btn-blue'
                       onClick={addProject}
+                      data-cy='submit-project'
                     >
                       Add
                     </button>
@@ -648,9 +692,10 @@ const CandidateEditProfile = ({ session }) => {
                 cols='30'
                 rows='5'
                 ref={register}
+                data-cy='question-one'
               />
-              {errors ? (
-                <p className='input-error'>
+              {errors.question1 ? (
+                <p className='input-error' data-cy='question-one-error'>
                   {errors.question1 && errors.question1.message}
                 </p>
               ) : null}
@@ -668,9 +713,10 @@ const CandidateEditProfile = ({ session }) => {
                 cols='30'
                 rows='5'
                 ref={register}
+                data-cy='question-two'
               />
-              {errors ? (
-                <p className='input-error'>
+              {errors.question2 ? (
+                <p className='input-error' data-cy='question-two-error'>
                   {errors.question2 && errors.question2.message}
                 </p>
               ) : null}
@@ -688,9 +734,10 @@ const CandidateEditProfile = ({ session }) => {
                 cols='30'
                 rows='5'
                 ref={register}
+                data-cy='question-three'
               />
-              {errors ? (
-                <p className='input-error'>
+              {errors.question3 ? (
+                <p className='input-error' data-cy='question-three-error'>
                   {errors.question3 && errors.question3.message}
                 </p>
               ) : null}

@@ -25,3 +25,28 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 import '@testing-library/cypress/add-commands'
+import firebase from 'firebase'
+
+const firebaseConfig = {
+  apiKey: Cypress.env('apiKey'),
+  authDomain: Cypress.env('authDomain'),
+  databaseURL: Cypress.env('databaseURL'),
+  projectId: Cypress.env('projectId'),
+  storageBucket: Cypress.env('storageBucket'),
+  messagingSenderId: Cypress.env('messagingSenderId'),
+  appId: Cypress.env('appId'),
+}
+
+firebase.initializeApp(firebaseConfig)
+
+if (firebase.app().name) {
+  // eslint-disable-next-line no-console
+  console.info('%c Firebase Mode Activated!', 'color: green')
+} else {
+  // eslint-disable-next-line no-console
+  console.error('Firebase not working. Check firebase/firebase.js file.')
+}
+
+Cypress.Commands.add('logout', () => {
+  return firebase.auth().signOut()
+})

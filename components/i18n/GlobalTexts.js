@@ -8,6 +8,7 @@
 const GlobalTexts = {
   'en-us': {
     ABOUT_THE_JOB: 'About the job',
+    ADD: 'Add',
     ACCOUNT_CREATE: 'Create an Account',
     ACCOUNT_SIGN_IN: 'Already have an account? Sign in',
     ACCOUNT_SIGN_UP: "Don't have an account? Sign up",
@@ -87,6 +88,7 @@ const GlobalTexts = {
     PROFILE_INFO: 'Profile Info',
     PROJECT_NAME: 'Project Name',
     PROJECT_URL: 'Project Url',
+    PROJECT_URL_REQUIRED: 'A project url is required.',
     PROJECT_ARRAY_ADD_ERROR: 'Something went wrong. Please try again.',
     PROJECT_ARRAY_ADD_SUCCESS: 'was added!',
     PROJECT_ARRAY_REMOVE_ERROR: 'Something went wrong. Please try again.',

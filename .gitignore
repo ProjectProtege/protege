@@ -41,3 +41,5 @@ yarn-error.log*
 
 # java logs
 hs_err_pid[0-9]*.log
+config.env.json
+cypress/cypress.env.json

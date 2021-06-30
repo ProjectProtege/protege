@@ -156,9 +156,9 @@ const GlobalHeader = () => {
                     </li>
                     <li>
                       <button
+                        type='button'
                         className='underline'
                         onClick={handleSignOut}
-                        type='button'
                       >
                         Sign Out
                       </button>
@@ -347,7 +347,7 @@ const GlobalHeader = () => {
                         onClick={() => {
                           setIsUserMenuOpen(false)
                         }}
-                      ></div>
+                      />
                     ) : null}
                   </>
                 ) : null}

@@ -96,8 +96,10 @@ function MyApp({ Component, pageProps }) {
           <link rel='shortcut icon' href='/protege-logo.png' />
         </Head>
         <Toaster
+          containerClassName='toast'
           position='bottom-right'
           toastOptions={{
+            className: 'toast',
             duration: 10000,
             success: {
               iconTheme: {

@@ -15,7 +15,15 @@
 /**
  * @type {Cypress.PluginConfig}
  */
-module.exports = (_on, _config) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
+
+// plugins/index.js
+require('dotenv').config()
+
+module.exports = (on, config) => {
+  // eslint-disable-next-line no-param-reassign
+  config.env.apiKey = process.env.API_KEY
+  // config.defaultCommandTimeout = 10000
+  // config.env.ENVIRONMENT = 'development'
+  // console.log(config)
+  return config
 }

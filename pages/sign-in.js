@@ -73,9 +73,11 @@ const SignIn = () => {
               className='input'
               ref={register}
             />
-            <p className='input-error'>
-              {errors.email && errors.email.message}
-            </p>
+            {errors.email ? (
+              <p className='input-error'>
+                {errors.email && errors.email.message}
+              </p>
+            ) : null}
           </div>
 
           <div className='flex flex-col mb-6'>
@@ -98,9 +100,11 @@ const SignIn = () => {
               className='input'
               ref={register}
             />
-            <p className='input-error'>
-              {errors.password && errors.password.message}
-            </p>
+            {errors.password ? (
+              <p className='input-error'>
+                {errors.password && errors.password.message}
+              </p>
+            ) : null}
           </div>
 
           <button type='submit' className='w-full btn btn-teal'>
