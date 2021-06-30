@@ -18,7 +18,7 @@ const GlobalLayout = ({ children }) => {
       <GlobalHeader />
 
       <div
-        className={`fixed h-screen w-screen bg-blue-900 inset-0 z-40 pointer-events-none transition duration-150 ease-in-out ${
+        className={`fixed h-screen w-screen bg-blue-900 inset-0 z-40 pointer-events-none transition duration-150 ease-in-out lg:invisible ${
           isNavOpen ? 'opacity-50' : 'opacity-0'
         }`}
       />
