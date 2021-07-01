@@ -8,7 +8,7 @@ describe('Candidate Edit Profile', () => {
     console.log('logged out')
   })
 
-  it.only('Candidate sign up flow', () => {
+  it('Candidate sign up flow', () => {
     // clicks sign up, checks url, confirms candidate is selected
     cy.findByRole('link', { name: 'Sign Up' }).click()
     cy.url().should('include', '/account-select')

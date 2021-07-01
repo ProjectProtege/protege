@@ -24,6 +24,5 @@ module.exports = (on, config) => {
   config.env.apiKey = process.env.API_KEY
   // config.defaultCommandTimeout = 10000
   // config.env.ENVIRONMENT = 'development'
-  // console.log(config)
   return config
 }
