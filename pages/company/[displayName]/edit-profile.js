@@ -41,7 +41,7 @@ const CompanyEditProfile = ({ session }) => {
     companyDescription: Yup.string().required(
       'Please give a brief description of the company and culture.'
     ),
-    // companyLogo: Yup.mixed().required(
+    // avatar: Yup.mixed().required(
     //   'Please provide a .png format image of your company logo'
     // ),
     companyTimezone: Yup.string().required('Please select a timezone.'),

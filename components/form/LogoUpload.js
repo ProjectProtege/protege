@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 export default function LogoUpload({ register }) {
   const [fileResult, setFileResult] = useState(undefined)
   const [fileName, setFileName] = useState('')
-  const setCompanyLogoFile = useJobForm((s) => s.setCompanyLogoFile)
+  const setavatarFile = useJobForm((s) => s.setavatarFile)
 
   const handleLogoChange = (e) => {
     const reader = new FileReader()
@@ -16,7 +16,7 @@ export default function LogoUpload({ register }) {
       reader.onloadend = () => {
         setFileName(file.name)
         setFileResult(reader.result)
-        setCompanyLogoFile(file)
+        setavatarFile(file)
       }
     }
   }
@@ -25,7 +25,7 @@ export default function LogoUpload({ register }) {
     <div className='md:flex'>
       <div className='flex flex-col md:w-1/2 md:pr-3'>
         <label
-          htmlFor='companyLogo'
+          htmlFor='avatar'
           className='relative h-24 w-full mb-2 border flex border-dashed border-blue-300 text-center cursor-pointer focus-within:outline-teal'
         >
           {fileResult ? (
@@ -42,9 +42,9 @@ export default function LogoUpload({ register }) {
             ref={register}
             data-cy='company-logo-upload'
             className='absolute w-full h-full cursor-pointer opacity-0'
-            id='companyLogo'
+            id='avatar'
             onChange={handleLogoChange}
-            name='companyLogo'
+            name='avatar'
             type='file'
             accept='image/png, image/jpeg, image/jpg'
             multiple={false}

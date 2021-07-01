@@ -26,6 +26,7 @@ const PostAJobForm = ({ jobData }) => {
   // Form and Status state from zustand
   const setForm = useJobForm((s) => s.setForm)
   const setStatus = useJobForm((s) => s.setStatus)
+  const avatarFile = useJobForm((s) => s.avatarFile)
 
   // Form validation schema
   const Schema = Yup.object().shape({
@@ -44,7 +45,7 @@ const PostAJobForm = ({ jobData }) => {
     companyDescription: Yup.string().required(
       'Please give a brief description of the company and culture.'
     ),
-    // companyLogo: Yup.mixed().required(
+    // avatar: Yup.mixed().required(
     //   'Please provide a .png format image of your company logo'
     // ),
     companyHQ: Yup.string().required(

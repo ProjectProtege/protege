@@ -2,10 +2,11 @@ import users from '../../fixtures/users'
 
 describe('Candidate Edit Profile', () => {
   const { candidate } = users
+
   beforeEach(() => {
     cy.visit('/')
     cy.logout()
-    console.log('logged out')
+    cy.log('Signed out')
   })
 
   it('Candidate sign up flow', () => {

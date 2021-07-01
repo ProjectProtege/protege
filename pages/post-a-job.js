@@ -31,7 +31,7 @@ const PostAJob = ({ query }) => {
   const status = useJobForm((s) => s.status)
   const setStatus = useJobForm((s) => s.setStatus)
   const jobData = useJobForm((s) => s.form)
-  const companyLogoFile = useJobForm((s) => s.companyLogoFile)
+  const avatarFile = useJobForm((s) => s.avatarFile)
   const tier = useJobForm((s) => s.tier)
 
   useEffect(() => {
@@ -74,7 +74,7 @@ const PostAJob = ({ query }) => {
   const handlePaymentClick = async () => {
     const stripe = await loadStripe(process.env.STRIPE_API_KEY)
 
-    sendJobtoDB({ jobData, companyLogoFile })
+    sendJobtoDB({ jobData, avatarFile })
 
     const { error } = await stripe
       .redirectToCheckout({
@@ -144,7 +144,7 @@ const PostAJob = ({ query }) => {
               <span className='pl-2 font-semibold'>Edit</span>
             </button>
 
-            <JobTemplate props={jobData} logo={companyLogoFile} />
+            <JobTemplate props={jobData} logo={avatarFile} />
 
             <button
               data-cy='job-posting-approval-button'

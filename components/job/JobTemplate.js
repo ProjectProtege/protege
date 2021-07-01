@@ -174,9 +174,9 @@ const JobTemplate = ({ props }) => {
 
           {!isAdmin ? (
             <div className='mt-8 text-center md:w-1/4 md:text-left'>
-              <div className='p-4 bg-gray-200 rounded-md'>
+              <div className='p-4 bg-gray-200'>
                 {avatar ? (
-                  <div className='relative flex items-center justify-center w-32 h-32 mb-6 overflow-hidden bg-white rounded-full shadow-md mx-auto md:mx-0'>
+                  <div className='relative flex items-center justify-center w-32 h-32 mx-auto mb-6 overflow-hidden bg-white rounded-full shadow-md md:mx-0'>
                     <Image
                       data-cy='company-logo'
                       id='avatar'
@@ -218,7 +218,7 @@ const JobTemplate = ({ props }) => {
                         tabIndex={isPreview ? -1 : 0}
                       >
                         <span>Apply</span>
-                        <ExternalLink className='w-5 h-5 inline-block -mt-1 ml-2 opacity-75' />
+                        <ExternalLink className='inline-block w-5 h-5 ml-2 -mt-1 opacity-75' />
                       </a>
                     ) : (
                       <div className='text-center'>
@@ -238,7 +238,7 @@ const JobTemplate = ({ props }) => {
                         >
                           Apply
                         </button>
-                        <span className='tracking-wide text-sm'>
+                        <span className='text-sm tracking-wide'>
                           <Link href='/sign-in'>
                             <a className='text-teal-800 underline'>Sign in</a>
                           </Link>{' '}
