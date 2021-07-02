@@ -10,15 +10,21 @@ import Link from 'next/link'
 
 const AccountInteriorLayout = ({ children, className }) => {
   const { currentUser } = useAuth()
-  const [profileInfo, requiredCompanyProfileFields] = useProfileInfo((s) => [
-    s.profileInfo,
-    s.requiredCompanyProfileFields,
-  ])
+  const profileInfo = useProfileInfo((s) => s.profileInfo)
+  const requiredCompanyProfileFields = useProfileInfo(
+    (s) => s.requiredCompanyProfileFields
+  )
 
-  const companyProfileComplete =
-    requiredCompanyProfileFields.filter((field) => {
-      return !profileInfo[field]
-    }).length === 0
+  const companyProfileComplete = () => {
+    if (profileInfo) {
+      return (
+        requiredCompanyProfileFields.filter((field) => {
+          return !profileInfo[field]
+        }).length === 0
+      )
+    }
+    return false
+  }
 
   return (
     <>
