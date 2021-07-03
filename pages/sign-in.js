@@ -10,6 +10,7 @@ import { useAuth } from 'store/AuthContext'
 import getText from 'utils/i18n/Texts'
 
 import AccountGraphic from 'assets/images/AccountGraphic'
+import GitHubSignInButton from 'components/signin/GitHubSignInButton'
 
 const SignIn = () => {
   const router = useRouter()
@@ -124,8 +125,8 @@ const SignIn = () => {
             </Link>
           </div>
         </div>
+        <GitHubSignInButton />
       </div>
-
       <AccountGraphic className='md:w-2/3' />
     </div>
   )
