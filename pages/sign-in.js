@@ -14,7 +14,7 @@ import GitHubSignInButton from 'components/signin/GitHubSignInButton'
 
 const SignIn = () => {
   const router = useRouter()
-  const { currentUser, signin, signInWithGithub } = useAuth()
+  const { currentUser, signin } = useAuth()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
@@ -47,15 +47,6 @@ const SignIn = () => {
       setError(error.message)
     }
     setLoading(false)
-  }
-
-  const handleSignInWithGithub = async (data) => {
-    try {
-      await signInWithGithub()
-      router.push('/dashboard')
-    } catch (error) {
-      setError(error.messge)
-    }
   }
 
   return (
