@@ -82,6 +82,10 @@ const CandidateEditProfile = ({ session }) => {
     timeframe_to: Yup.string().required(
       getText('GLOBAL', 'TIMEFRAME_REQUIRED')
     ),
+    projectUrl: Yup.string().when('projectName', (projectName) => {
+      if (projectName)
+        return Yup.string().required(getText('GLOBAL', 'PROJECTURL_REQUIRED'))
+    }),
     question1: Yup.string().required(getText('GLOBAL', 'QUESTION_REQUIRED')),
     question2: Yup.string().required(getText('GLOBAL', 'QUESTION_REQUIRED')),
     question3: Yup.string().required(getText('GLOBAL', 'QUESTION_REQUIRED')),

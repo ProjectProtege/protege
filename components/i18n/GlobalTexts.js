@@ -93,6 +93,7 @@ const GlobalTexts = {
     PROJECT_ARRAY_ADD_SUCCESS: 'was added!',
     PROJECT_ARRAY_REMOVE_ERROR: 'Something went wrong. Please try again.',
     PROJECT_ARRAY_REMOVE_SUCCESS: 'was removed!',
+    PROJECTURL_REQUIRED: 'A project url is required',
     PROTEGE: 'Protegé',
     POSITION_TYPE: 'Position type',
     POSITION_TYPE_OPTIONS: 'Full-time, Part-time, or Contract?',

@@ -4,9 +4,9 @@ describe('Candidate Edit Profile', () => {
   const { candidate } = users
 
   beforeEach(() => {
-    cy.visit('/')
     cy.logout()
     cy.log('Signed out')
+    cy.visit('/')
   })
 
   it('Candidate sign up flow', () => {
@@ -125,19 +125,19 @@ describe('Candidate Edit Profile', () => {
     cy.get('[data-cy="project-item"]').should('be.visible')
     cy.get('.toast').contains(/was added!/g)
 
-    // removes project item and confirms toast
-    cy.get('[data-cy="project-item"]')
-      .last()
-      .findByRole('button', { name: 'x' })
-      .click()
-    cy.get('.toast').contains(/was removed!/g)
+    // // removes project item and confirms toast
+    // cy.get('[data-cy="project-item"]')
+    //   .last()
+    //   .findByRole('button', { name: 'x' })
+    //   .click()
+    // cy.get('.toast').contains(/was removed!/g)
 
-    // removes tech item and confirms toast
-    cy.get('[data-cy="tech-item"]')
-      .last()
-      .findByRole('button', { name: 'x' })
-      .click()
-    cy.get('.toast').contains(/was removed!/g)
+    // // removes tech item and confirms toast
+    // cy.get('[data-cy="tech-item"]')
+    //   .last()
+    //   .findByRole('button', { name: 'x' })
+    //   .click()
+    // cy.get('.toast').contains(/was removed!/g)
 
     // inputs an answer to question one, checkes that error is removed
     cy.get('[data-cy="question-one"]').clear().type('This is an answer')
@@ -150,5 +150,9 @@ describe('Candidate Edit Profile', () => {
     // inputs an answer to question three, checkes that error is removed
     cy.get('[data-cy="question-three"]').clear().type('This is an answer')
     cy.get('[data-cy="question-three-error"]').should('not.exist')
+
+    // Save form and check redirect to Dashboard url
+    cy.findByRole('button', { name: 'Save' }).click()
+    cy.url().should('include', '/dashboard')
   })
 })

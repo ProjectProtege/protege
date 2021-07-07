@@ -17,12 +17,6 @@
  */
 
 // plugins/index.js
-require('dotenv').config()
+// require('dotenv').config()
 
-module.exports = (on, config) => {
-  // eslint-disable-next-line no-param-reassign
-  config.env.apiKey = process.env.API_KEY
-  // config.defaultCommandTimeout = 10000
-  // config.env.ENVIRONMENT = 'development'
-  return config
-}
+module.exports = () => {}
