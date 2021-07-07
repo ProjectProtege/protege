@@ -8,12 +8,10 @@ export const verifyIdToken = async (token) => {
       databaseURL: 'https://protege-dev-env.firebaseio.com',
     })
   }
-  try {
-    await admin.auth().verifyIdToken(token)
-  } catch (err) {
-    // if the token is expired, don't throw an error, it will be refreshed in AuthContext
-    if (err.errorInfo.code !== 'auth/id-token-expired') {
+  return admin
+    .auth()
+    .verifyIdToken(token)
+    .catch((err) => {
       throw err
-    }
-  }
+    })
 }
