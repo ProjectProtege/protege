@@ -70,14 +70,16 @@ const AccountInteriorLayout = ({ children, className }) => {
                 <Link href={`/company/${profileInfo?.slug}/post-a-job`}>
                   <a
                     className={`btn btn-teal block text-center mt-6 ${
-                      !companyProfileComplete ? 'btn-disabled' : ''
+                      !companyProfileComplete() ? 'btn-disabled' : ''
                     }`}
                   >
                     Post a Job
                   </a>
                 </Link>
                 <p className='opacity-75 text-xs'>
-                  {!companyProfileComplete ? getText('GLOBAL', 'FILL_OUT') : ''}
+                  {!companyProfileComplete()
+                    ? getText('GLOBAL', 'FILL_OUT')
+                    : ''}
                 </p>
               </div>
             )}
