@@ -8,6 +8,7 @@ export const verifyIdToken = (token) => {
       databaseURL: 'https://protege-dev-env.firebaseio.com',
     })
   }
+
   return admin
     .auth()
     .verifyIdToken(token)
