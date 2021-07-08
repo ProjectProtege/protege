@@ -45,11 +45,11 @@ export function AuthProvider({ children }) {
           emailVerified: user.emailVerified,
           accountType: user.photoURL,
         }
-        // const token = await user.getIdToken()
-        // // fetchUserInfo(userObject)
-        // setCurrentUser(userObject)
-        // nookies.destroy(undefined, 'token')
-        // nookies.set(undefined, 'token', token, {})
+        const token = await user.getIdToken()
+        // fetchUserInfo(userObject)
+        setCurrentUser(userObject)
+        nookies.destroy(undefined, 'token')
+        nookies.set(undefined, 'token', token, {})
       }
       setIsLoading(false)
     })
