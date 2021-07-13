@@ -35,7 +35,7 @@ export function AuthProvider({ children }) {
     const unsubscribe = await auth.onIdTokenChanged(async (user) => {
       if (!user) {
         setCurrentUser(null)
-        nookies.destroy(undefined, 'token')
+        nookies.destroy(undefined, 'token', { path: '/' })
       }
       if (user) {
         const userObject = {
@@ -48,13 +48,24 @@ export function AuthProvider({ children }) {
         const token = await user.getIdToken()
         // fetchUserInfo(userObject)
         setCurrentUser(userObject)
-        nookies.destroy(undefined, 'token')
-        nookies.set(undefined, 'token', token, {})
+        nookies.set(undefined, 'token', token, { path: '/' })
       }
       setIsLoading(false)
     })
     // onAuthStateChanged accepts a function as it's only arguement and returns the unsubscribe function below that will unsubscribe to function originally passed to onAuthStateChanged
     return unsubscribe
+  }, [])
+
+  // force refresh the token every 10 minutes
+  useEffect(() => {
+    const handle = setInterval(async () => {
+      console.log('refreshing!', new Date())
+      const user = auth.currentUser
+      if (user) await user.getIdToken(true)
+    }, 10 * 60 * 1000)
+
+    // clean up setInterval
+    return () => clearInterval(handle)
   }, [])
 
   async function updateUserProfile(data) {
