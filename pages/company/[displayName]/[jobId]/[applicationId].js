@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { useJobs } from 'store/jobs_store'
+import { useProfileInfo } from 'store/profile_info'
 import { db } from 'utils/db'
 import nookies from 'nookies'
 import { verifyIdToken } from 'utils/db/firebaseAdmin'
@@ -15,6 +16,7 @@ const candidateApplication = ({ session }) => {
   const router = useRouter()
   const applicants = useJobs((s) => s.applicants)
   const setApplicants = useJobs((s) => s.setApplicants)
+  const profileInfo = useProfileInfo((s) => s.profileInfo)
   const [candidateInfo, setCandidateInfo] = useState()
   // const [candidateInfo, setCandidateInfo] = useState()
 
@@ -152,13 +154,19 @@ const candidateApplication = ({ session }) => {
               </div>
 
               <div className='mt-12'>
-                <button className='btn btn-teal mr-10' type='button'>
+                <a
+                  className='btn btn-teal mr-10'
+                  href={`mailto:${candidateInfo?.candidateProfile.email}?subject=Thanks for applying to ${profileInfo?.displayName}! Let's move forward.`}
+                >
                   Contact for Interview
-                </button>
+                </a>
 
-                <button className='opacity-75 hover:opacity-100' type='button'>
+                <a
+                  className='opacity-75 hover:opacity-100'
+                  href={`mailto:${candidateInfo?.candidateProfile.email}?subject=Application for ${profileInfo?.displayName}`}
+                >
                   Politely Decline
-                </button>
+                </a>
               </div>
             </article>
           </div>

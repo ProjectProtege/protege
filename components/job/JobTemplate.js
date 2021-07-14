@@ -1,6 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/no-danger */
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
@@ -15,10 +15,10 @@ import { useProfileInfo } from 'store/profile_info'
 import ExternalLink from 'assets/images/icons/external-link'
 
 const JobTemplate = ({ props }) => {
+  const isMountedRef = useRef(null)
   const { currentUser } = useAuth()
   const router = useRouter()
   const profileInfo = useProfileInfo((s) => s.profileInfo)
-  const [applications, setApplications] = useState([])
   const [hasApplied, setHasApplied] = useState(false)
 
   const isPreview = router.pathname.indexOf('/job-board/') !== 0
@@ -70,14 +70,29 @@ const JobTemplate = ({ props }) => {
     checkAdmin()
   }, [])
 
-  // grab all applications for job
-  useEffect(async () => {
+  // check if user has already applied for job
+  async function checkIfApplied(appRefs) {
+    if (currentUser) {
+      const checkForApplication = await appRefs.map((application) => {
+        return profileInfo.userUid === application.candidateId
+      })
+
+      const returnedApp = checkForApplication[0]
+
+      setHasApplied(returnedApp)
+    }
+  }
+
+  async function getApplications() {
     if (!isPreview) {
       const appRef = await db
         .collection('applications')
         .where('jobId', '==', jobId)
         .get()
 
+      if (isMountedRef.current === false) {
+        return
+      }
       const appRefData = appRef.docs.map((docSnapshot) => {
         const entry = docSnapshot.data()
 
@@ -85,20 +100,22 @@ const JobTemplate = ({ props }) => {
           ...entry,
         }
       })
-      setApplications(appRefData)
-    }
-  }, [])
 
-  // check if user has already applied for job
+      checkIfApplied(appRefData)
+    }
+  }
+
+  // grab all applications for job
   useEffect(() => {
-    if (currentUser) {
-      const checkForApplication = applications.map((application) => {
-        return profileInfo.userUid === application.candidateId
-      })
+    getApplications()
+  }, [currentUser])
 
-      setHasApplied(...checkForApplication)
+  useEffect(() => {
+    isMountedRef.current = true
+    return () => {
+      isMountedRef.current = false
     }
-  }, [])
+  })
 
   function createMarkup(text) {
     return { __html: text }
@@ -237,13 +254,15 @@ const JobTemplate = ({ props }) => {
                           tabIndex={isPreview ? -1 : 0}
                         >
                           Apply
-                        </button>
-                        <span className='tracking-wide text-sm'>
-                          <Link href='/sign-in'>
-                            <a className='text-teal-800 underline'>Sign in</a>
-                          </Link>{' '}
-                          to apply
-                        </span>
+                        </button>{' '}
+                        {!currentUser && (
+                          <span className='tracking-wide text-sm'>
+                            <Link href='/sign-in'>
+                              <a className='text-teal-800 underline'>Sign in</a>
+                            </Link>{' '}
+                            to apply
+                          </span>
+                        )}
                       </div>
                     )}
                     {hasApplied && (
