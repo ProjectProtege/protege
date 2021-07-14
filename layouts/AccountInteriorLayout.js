@@ -10,15 +10,21 @@ import Link from 'next/link'
 
 const AccountInteriorLayout = ({ children, className }) => {
   const { currentUser } = useAuth()
-  const [profileInfo, requiredCompanyProfileFields] = useProfileInfo((s) => [
-    s.profileInfo,
-    s.requiredCompanyProfileFields,
-  ])
+  const profileInfo = useProfileInfo((s) => s.profileInfo)
+  const requiredCompanyProfileFields = useProfileInfo(
+    (s) => s.requiredCompanyProfileFields
+  )
 
-  const companyProfileComplete =
-    requiredCompanyProfileFields.filter((field) => {
-      return !profileInfo[field]
-    }).length === 0
+  const companyProfileComplete = () => {
+    if (profileInfo) {
+      return (
+        requiredCompanyProfileFields.filter((field) => {
+          return !profileInfo[field]
+        }).length === 0
+      )
+    }
+    return false
+  }
 
   return (
     <>
@@ -64,14 +70,16 @@ const AccountInteriorLayout = ({ children, className }) => {
                 <Link href={`/company/${profileInfo?.slug}/post-a-job`}>
                   <a
                     className={`btn btn-teal block text-center mt-6 ${
-                      !companyProfileComplete ? 'btn-disabled' : ''
+                      !companyProfileComplete() ? 'btn-disabled' : ''
                     }`}
                   >
                     Post a Job
                   </a>
                 </Link>
                 <p className='opacity-75 text-xs'>
-                  {!companyProfileComplete ? getText('GLOBAL', 'FILL_OUT') : ''}
+                  {!companyProfileComplete()
+                    ? getText('GLOBAL', 'FILL_OUT')
+                    : ''}
                 </p>
               </div>
             )}
