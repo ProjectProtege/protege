@@ -24,6 +24,7 @@
     "faker": "^5.4.0",
     "firebase": "^8.2.4",
     "firebase-admin": "^9.5.0",
+    "firebaseui": "^4.8.0",
     "next": "10.0.5",
     "nookies": "^2.5.2",
     "prop-types": "^15.7.2",
