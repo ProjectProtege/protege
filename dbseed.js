@@ -16,9 +16,7 @@ const admin = require('firebase-admin')
 const faker = require('faker')
 const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
-const { v4 } = require('uuid');
-const { example } = require('yargs');
-const { auth } = require('firebase-admin');
+const { v4 } = require('uuid')
 
 // The argument --jobs=n can be passed in.
 // If it is not passed in the default seed size is 10.
@@ -37,7 +35,7 @@ async function seedCandidate() {
       uid: candidateUid,
       email: 'candidate@protege.dev',
       password: 'Password1!',
-      displayName: "Test Candidate",
+      displayName: 'Test Candidate',
       // claims: {
       //   'role': 'candidate'
       // }
@@ -45,24 +43,28 @@ async function seedCandidate() {
     })
     .then((userRecord) => {
       // See the UserRecord reference doc for the contents of userRecord.
-      console.log('Successfully created new candidate:', userRecord.uid);
-      console.log(userRecord);
+      console.log('Successfully created new candidate:', userRecord.uid)
+      console.log(userRecord)
 
       const candidate = {
         accountType: 'candidate',
         displayName: 'Test Candidate',
         email: 'candidate@protege.dev',
         slug: 'test-candidate',
-        userUid: userRecord.uid
+        userUid: userRecord.uid,
       }
-      db.collection('candidates').doc(userRecord.uid).set(candidate)
-
-      // eslint-disable-next-line no-console
-      console.log('candidate seed was successful')
+      // set returns a promise so I moved the success log to the 'then'
+      db.collection('candidates')
+        .doc(userRecord.uid)
+        .set(candidate)
+        .then(() => {
+          // eslint-disable-next-line no-console
+          console.log('candidate seed was successful')
+        })
     })
     .catch((error) => {
-      console.log('Error creating new candidate:', error);
-    });
+      console.log('Error creating new candidate:', error)
+    })
 }
 
 async function seedCompany() {
@@ -73,28 +75,31 @@ async function seedCompany() {
       uid: companyUid,
       email: 'company@protege.dev',
       password: 'Password1!',
-      displayName: "Test Company",
+      displayName: 'Test Company',
       // photoURL: 'company'
     })
     .then((userRecord) => {
       // See the UserRecord reference doc for the contents of userRecord.
-      console.log('Successfully created new company:', userRecord.uid);
+      console.log('Successfully created new company:', userRecord.uid)
 
       const company = {
         accountType: 'company',
         displayName: 'Test Company',
         email: 'company@protege.dev',
         slug: 'test-company',
-        userUid: userRecord.uid
+        userUid: userRecord.uid,
       }
-      db.collection('companies').doc(userRecord.uid).set(company)
-
-      // eslint-disable-next-line no-console
-      console.log('company seed was successful')
+      db.collection('companies')
+        .doc(userRecord.uid)
+        .set(company)
+        .then(() => {
+          // eslint-disable-next-line no-console
+          console.log('company seed was successful')
+        })
     })
     .catch((error) => {
-      console.log('Error creating new company:', error);
-    });
+      console.log('Error creating new company:', error)
+    })
 }
 
 async function seedJobs() {
@@ -143,6 +148,6 @@ async function seedJobs() {
   }
 }
 
-// seedCandidate()
-// seedCompany()
+seedCandidate()
+seedCompany()
 seedJobs()
