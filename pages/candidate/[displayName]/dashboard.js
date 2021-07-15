@@ -9,12 +9,13 @@ import { db } from 'utils/db'
 import { useAuth } from 'store/AuthContext'
 import ApplicationItem from 'components/dashboard/ApplicationItem'
 import CandidateDashboardEmpty from 'assets/images/CandidateDashboardEmpty'
+import toast from 'react-hot-toast'
 
 const CandidateDashboard = ({ session }) => {
   const { currentUser } = useAuth()
   const [appliedJobs, setAppliedJobs] = useState()
 
-  useEffect(async () => {
+  async function getApplications() {
     const applications = await db
       .collection('applications')
       .where('candidateId', '==', currentUser.userUid)
@@ -37,7 +38,21 @@ const CandidateDashboard = ({ session }) => {
     if (applicationData) {
       setAppliedJobs(applicationData)
     }
+  }
+
+  useEffect(async () => {
+    getApplications()
   }, [])
+
+  const cancelApplication = async (id) => {
+    try {
+      await db.collection('applications').doc(id).delete()
+      toast.success('Application removed.')
+      getApplications()
+    } catch {
+      toast.error('Oops, something went wrong. Try again!')
+    }
+  }
 
   if (session) {
     return (
@@ -69,7 +84,13 @@ const CandidateDashboard = ({ session }) => {
               <ul>
                 {appliedJobs &&
                   appliedJobs.map((job, index) => {
-                    return <ApplicationItem job={job} key={index} />
+                    return (
+                      <ApplicationItem
+                        job={job}
+                        key={index}
+                        cancelApplication={cancelApplication}
+                      />
+                    )
                   })}
               </ul>
             </div>
