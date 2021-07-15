@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react'
-import { db } from 'utils/db'
 import PropTypes from 'prop-types'
 import { useJobs } from 'store/jobs_store'
 
 import Link from 'next/link'
 import Cancel from 'assets/images/icons/cancel'
-import toast from 'react-hot-toast'
 
-const ApplicationItem = ({ job }) => {
+const ApplicationItem = ({ job, cancelApplication }) => {
   const [jobData, setJobData] = useState()
   const jobs = useJobs((s) => s.jobs)
 
@@ -18,15 +16,6 @@ const ApplicationItem = ({ job }) => {
 
     setJobData(jobInfo[0])
   }, [jobs])
-
-  const cancelApplication = async () => {
-    try {
-      await db.collection('applications').doc(job.id).delete()
-      toast.success('Application removed.')
-    } catch {
-      toast.error('Oops, something went wrong. Try again!')
-    }
-  }
 
   const months = [
     'Jan',
@@ -79,7 +68,7 @@ const ApplicationItem = ({ job }) => {
                 'Are you sure you want to cancel this application?'
               )
             )
-              cancelApplication()
+              cancelApplication(job.id)
           }}
           type='button'
         >
@@ -99,6 +88,7 @@ ApplicationItem.propTypes = {
     viewed: PropTypes.bool.isRequired,
     applicationDate: PropTypes.instanceOf(Date).isRequired,
   }).isRequired,
+  cancelApplication: PropTypes.func.isRequired,
 }
 
 export default ApplicationItem

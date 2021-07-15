@@ -7,6 +7,7 @@ import { useAuth } from 'store/AuthContext'
 
 import nookies from 'nookies'
 import { verifyIdToken } from 'utils/db/firebaseAdmin'
+import toast from 'react-hot-toast'
 
 import CompanyDashboardEmpty from 'assets/images/CompanyDashboardEmpty'
 import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
@@ -40,7 +41,7 @@ const CompanyDashboard = ({ session }) => {
     setArchivedJobs(archived)
   }
 
-  useEffect(async () => {
+  async function getJobs() {
     const userJobs = await db
       .collection('jobs')
       .where('userUid', '==', currentUser.userUid)
@@ -74,7 +75,31 @@ const CompanyDashboard = ({ session }) => {
       filterActiveJobs(userJobsData)
       filterArchivedJobs(userJobsData)
     }
+  }
+
+  useEffect(() => {
+    getJobs()
   }, [])
+
+  const archiveJob = async (id) => {
+    try {
+      await db.collection('jobs').doc(id).update({ status: 'inactive' })
+      toast.success('Job listing archived')
+      getJobs()
+    } catch {
+      toast.error('oops something went wrong')
+    }
+  }
+
+  const deleteJob = async (id) => {
+    try {
+      await db.collection('jobs').doc(id).delete()
+      toast.success('Job listing deleted')
+      getJobs()
+    } catch {
+      toast.error('oops something went wrong')
+    }
+  }
 
   if (session) {
     return (
@@ -106,7 +131,9 @@ const CompanyDashboard = ({ session }) => {
               <ul>
                 {activeJobs &&
                   activeJobs.map((job) => {
-                    return <JobItem job={job} key={job.id} />
+                    return (
+                      <JobItem job={job} key={job.id} archiveJob={archiveJob} />
+                    )
                   })}
               </ul>
             </div>
@@ -150,7 +177,9 @@ const CompanyDashboard = ({ session }) => {
               <ul>
                 {archivedJobs &&
                   archivedJobs.map((job) => {
-                    return <JobItem job={job} key={job.id} />
+                    return (
+                      <JobItem job={job} key={job.id} deleteJob={deleteJob} />
+                    )
                   })}
               </ul>
             </div>

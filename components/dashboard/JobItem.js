@@ -9,9 +9,8 @@ import Archive from 'assets/images/icons/archive'
 import { useEditJob } from 'store/edit-job_store'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
 
-const JobItem = ({ job }) => {
+const JobItem = ({ job, archiveJob, deleteJob }) => {
   const router = useRouter()
   const [applicants, setApplicants] = useState()
   const setEditJob = useEditJob((s) => s.setEditJob)
@@ -39,24 +38,6 @@ const JobItem = ({ job }) => {
 
     fetchApplications()
   }, [])
-
-  const archiveJob = async () => {
-    try {
-      await db.collection('jobs').doc(job.id).update({ status: 'inactive' })
-      toast.success('Job listing archived')
-    } catch {
-      toast.error('oops something went wrong')
-    }
-  }
-
-  const deleteJob = async () => {
-    try {
-      await db.collection('jobs').doc(job.id).delete()
-      toast.success('Job listing deleted')
-    } catch {
-      toast.error('oops something went wrong')
-    }
-  }
 
   const editJob = () => {
     setEditJob({ job })
@@ -107,19 +88,21 @@ const JobItem = ({ job }) => {
         {job.status}
       </p>
       <div className='hidden md:flex col-span-2 items-center justify-end'>
-        <button
-          className='opacity-50 hover:opacity-100 mr-6'
-          type='button'
-          onClick={editJob}
-        >
-          <Edit />
-        </button>
+        {job.status === 'active' && (
+          <button
+            className='opacity-50 hover:opacity-100 mr-6'
+            type='button'
+            onClick={editJob}
+          >
+            <Edit />
+          </button>
+        )}
         {job.status === 'active' ? (
           <button
             className='opacity-50 hover:opacity-100 text-error-full'
             type='button'
             onClick={() => {
-              archiveJob()
+              archiveJob(job.id)
             }}
           >
             <Archive />
@@ -135,7 +118,7 @@ const JobItem = ({ job }) => {
                   'This is permanant action. Are you sure you want to delete this job?'
                 )
               )
-                deleteJob()
+                deleteJob(job.id)
             }}
           >
             <Trash />
@@ -153,6 +136,8 @@ JobItem.propTypes = {
     id: PropTypes.string.isRequired,
     postedAt: PropTypes.instanceOf(Date).isRequired,
   }).isRequired,
+  archiveJob: PropTypes.func.isRequired,
+  deleteJob: PropTypes.func.isRequired,
 }
 
 export default JobItem
