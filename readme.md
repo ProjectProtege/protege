@@ -27,8 +27,14 @@ Getting a local environment set up is fairly simple. If something isn't clear, c
         - [http://localhost:4000](http://localhost:4000) for the emulator suite dashboard UI. Authentication and Firestore should both have "On" status
         - [http://localhost:4000/firestore](http://localhost:4000/firestore) for database UI
     - `yarn dev` - builds the site
-2. Seed the Firebase emulator database by running `dbseed.js` in the root directory of this repo from another terminal session. You can do this by running `node dbseed.js`. This will populate the data with some test data.
+2. Seed the Firebase emulator database and sample candidate and company accounts by running `dbseed.js` in the root directory of this repo from another terminal session. You can do this by running `node dbseed.js`. This will populate the data with some test data.
     - [http://localhost:3000/](http://localhost:3000/) to confirm jobs data on home, all jobs types, and individual jobs
+    - To login using the seeded Candidate account:
+      - **email:** candidate@protege.dev
+      - **password:** Password1!
+    - To login using the seeded Company account:
+      - **email:** company@protege.dev
+      - **password:** Password1!
 
 ### Notes
 - Not all of our APIs are currently configured for local use. At this time you will not be able to use stripe, newsletter, or file upload features. This readme will be updated to reflect the setup of these features if they become available for local testing.
