@@ -38,17 +38,19 @@ export function AuthProvider({ children }) {
         nookies.destroy(undefined, 'token', { path: '/' })
       }
       if (user) {
+        const tokenResult = await user.getIdTokenResult()
+        const { accountType } = tokenResult.claims
         const userObject = {
           userUid: user.uid,
           displayName: user.displayName,
           email: user.email,
           emailVerified: user.emailVerified,
-          accountType: user.photoURL,
+          accountType,
         }
-        const token = await user.getIdToken()
+
         // fetchUserInfo(userObject)
         setCurrentUser(userObject)
-        nookies.set(undefined, 'token', token, { path: '/' })
+        nookies.set(undefined, 'token', tokenResult.token, { path: '/' })
       }
       setIsLoading(false)
     })
@@ -73,7 +75,6 @@ export function AuthProvider({ children }) {
     setCurrentUser((oldVal) => {
       return {
         ...oldVal,
-        accountType: data.photoURL,
         displayName: data.displayName,
       }
     })
@@ -88,7 +89,6 @@ export function AuthProvider({ children }) {
     if (userCredential) {
       await updateUserProfile({
         displayName: name,
-        photoURL: accountType,
       })
 
       // Gets the userUid for the users account object
@@ -121,16 +121,18 @@ export function AuthProvider({ children }) {
     const rawUser = await auth.signInWithEmailAndPassword(email, password)
 
     const { user } = rawUser
+    const tokenResult = await user.getIdTokenResult()
+    const { accountType } = tokenResult.claims
     const slug = user.displayName.replace(' ', '-').toLowerCase()
 
     const userObject = {
       userUid: user.uid,
-      accountType: user.photoURL,
+      accountType,
     }
 
     await fetchUserInfo(userObject)
 
-    router.push(`/${user.photoURL}/${slug}/dashboard`)
+    router.push(`/${accountType}/${slug}/dashboard`)
 
     return rawUser
   }
