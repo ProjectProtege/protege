@@ -123,30 +123,35 @@ const CandidateDashboard = ({ session }) => {
           </aside>
           <section className='col-span-9'>
             <div className='md:grid grid-cols-2 gap-12'>
-              <div className='mb-6 md:mb-0'>
-                <h3 className='text-lg mb-4'>Languages</h3>
-                <ul className='list-disc ml-5 text-blue-700'>
-                  {profileInfo.tech &&
-                    profileInfo.tech.map((item) => <li>{item.techItem}</li>)}
-                </ul>
-              </div>
-
-              <div>
-                <h3 className='text-lg mb-4'>Projects</h3>
-                <ul className='list-disc ml-5'>
-                  {profileInfo.projects &&
-                    profileInfo.projects.map((item) => (
-                      <li>
-                        <a
-                          className='capitalize text-teal-700 underline font-bold'
-                          href={item.projectItemUrl}
-                        >
-                          {item.projectItemName}
-                        </a>
-                      </li>
+              {profileInfo.tech && (
+                <div className='mb-6 md:mb-0'>
+                  <h3 className='text-lg mb-4'>Languages</h3>
+                  <ul className='list-disc ml-5 text-blue-700'>
+                    {profileInfo.tech.map((item) => (
+                      <li>{item.techItem}</li>
                     ))}
-                </ul>
-              </div>
+                  </ul>
+                </div>
+              )}
+
+              {profileInfo.projects && (
+                <div>
+                  <h3 className='text-lg mb-4'>Projects</h3>
+                  <ul className='list-disc ml-5'>
+                    {profileInfo.projects &&
+                      profileInfo.projects.map((item) => (
+                        <li>
+                          <a
+                            className='capitalize text-teal-700 underline font-bold'
+                            href={item.projectItemUrl}
+                          >
+                            {item.projectItemName}
+                          </a>
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              )}
             </div>
 
             <div className='mt-12'>
