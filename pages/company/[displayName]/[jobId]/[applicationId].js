@@ -95,7 +95,7 @@ const candidateApplication = ({ session }) => {
               </Link>
 
               <div className='mt-6 md:grid grid-cols-2 gap-3'>
-                {candidateInfo?.candidateProfile?.tech.length ? (
+                {candidateInfo?.candidateProfile?.tech && (
                   <div className='mt-6'>
                     <h3 className='text-xl mb-4'>Tech:</h3>
                     <ul className='list-disc ml-5'>
@@ -104,9 +104,9 @@ const candidateApplication = ({ session }) => {
                       ))}
                     </ul>
                   </div>
-                ) : null}
+                )}
 
-                {candidateInfo?.candidateProfile?.projects.length ? (
+                {candidateInfo?.candidateProfile?.projects && (
                   <div className='mt-6'>
                     <h3 className='text-xl mb-4'>Projects:</h3>
                     <ul className='list-disc ml-5'>
@@ -127,7 +127,7 @@ const candidateApplication = ({ session }) => {
                       )}
                     </ul>
                   </div>
-                ) : null}
+                )}
               </div>
 
               <div className='mt-12'>

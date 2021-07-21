@@ -556,7 +556,7 @@ const CandidateEditProfile = ({ session }) => {
                   </button>
                 </div>
                 <ul className='flex flex-col mt-4 space-y-2'>
-                  {techArray.map((t) => (
+                  {techArray?.map((t) => (
                     <>
                       <li className='text-gray-600' key={t.id}>
                         <button
