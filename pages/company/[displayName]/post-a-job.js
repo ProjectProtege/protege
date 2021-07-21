@@ -12,7 +12,7 @@ import 'react-quill/dist/quill.snow.css'
 
 // Component imports
 import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
-import TierSelect from 'components/form/TierSelect'
+import TierSelectCard from 'components/form/TierSelectCard'
 import { loadStripe } from '@stripe/stripe-js'
 import firebase from 'firebase/app'
 import { db } from 'utils/db'
@@ -21,6 +21,7 @@ import { v4 as uuidv4 } from 'uuid'
 // Zustand imports
 import { useJobForm } from 'store/job-post_store'
 import { useProfileInfo } from 'store/profile_info'
+import { useEffect } from 'react'
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
@@ -29,6 +30,7 @@ const PostAJob = ({ session }) => {
 
   // Form and Status state from zustand
   const tier = useJobForm((s) => s.tier)
+  const setTier = useJobForm((s) => s.setTier)
   const profileInfo = useProfileInfo((s) => s.profileInfo)
 
   const { displayName } = router.query
@@ -40,6 +42,10 @@ const PostAJob = ({ session }) => {
     jobDescription: Yup.string().required(
       'Please give a description of the job and responsibilities.'
     ),
+  })
+
+  useEffect(() => {
+    setTier(process.env.ACCOUNT_PLAN)
   })
 
   // react-hook-form
@@ -103,11 +109,24 @@ const PostAJob = ({ session }) => {
           <h1 className='sr-only'>Post a Job</h1>
 
           <div className='container relative z-30 p-6 bg-white rounded-lg shadow-md md:p-8'>
-            <TierSelect />
+            <TierSelectCard
+              value={process.env.BASIC_PLAN}
+              className='max-w-[320px]'
+            >
+              <div className='col-span-1 text-center'>
+                <div className='relative text-5xl font-bold leading-none text-blue-900 md:text-6xl'>
+                  <span className='absolute mt-4 -ml-4 text-2xl'>$</span>
+                  99
+                </div>
+              </div>
 
-            <p className='mb-2 tracking-wide text-center text-teal-900'>
-              {getText('GLOBAL', 'SELECT_TIER')}
-            </p>
+              <ul className='col-span-2 pl-2 text-sm leading-6 text-blue-700'>
+                <li>Featured on homepage</li>
+                <li>Included in bi-weekly newsletter</li>
+                <li>Tweet with link to listing</li>
+                <li>Personalized newsletter</li>
+              </ul>
+            </TierSelectCard>
 
             <form className='mt-12' onSubmit={handleSubmit(handleFormEntry)}>
               <h2 className='text-xl text-blue-900 mb-4'>
