@@ -20,8 +20,8 @@ const CandidateDashboard = ({ session }) => {
   if (session) {
     return (
       <div className='container relative z-30 max-w-screen-lg '>
-        <div className='grid-cols-12 gap-10 lg:grid mt-12'>
-          <aside className='col-span-3'>
+        <div className='grid-cols-12 gap-10 lg:grid mt-0 md:mt-12'>
+          <aside className='col-span-3 mb-12 md:mb-0'>
             <div className='relative w-40 h-40 overflow-hidden rounded-full mb-8'>
               {profileInfo?.avatar ? (
                 <Image
@@ -121,7 +121,57 @@ const CandidateDashboard = ({ session }) => {
               )}
             </div>
           </aside>
-          <section className='col-span-9'>2</section>
+          <section className='col-span-9'>
+            <div className='md:grid grid-cols-2 gap-12'>
+              <div className='mb-6 md:mb-0'>
+                <h3 className='text-lg mb-4'>Languages</h3>
+                <ul className='list-disc ml-5 text-blue-700'>
+                  {profileInfo.tech &&
+                    profileInfo.tech.map((item) => <li>{item.techItem}</li>)}
+                </ul>
+              </div>
+
+              <div>
+                <h3 className='text-lg mb-4'>Projects</h3>
+                <ul className='list-disc ml-5'>
+                  {profileInfo.projects &&
+                    profileInfo.projects.map((item) => (
+                      <li>
+                        <a
+                          className='capitalize text-teal-700 underline font-bold'
+                          href={item.projectItemUrl}
+                        >
+                          {item.projectItemName}
+                        </a>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className='mt-12'>
+              <div className='mb-6'>
+                <p className='font-bold text-lg mb-3'>
+                  Describe a difficult problem you solved recently.
+                </p>
+                <p>{profileInfo.question1}</p>
+              </div>
+
+              <div className='mb-6'>
+                <p className='font-bold text-lg mb-3'>
+                  What were your first steps when faced with that problem?
+                </p>
+                <p>{profileInfo.question2}</p>
+              </div>
+
+              <div className='mb-6'>
+                <p className='font-bold text-lg mb-3'>
+                  How did you overcome that problem?
+                </p>
+                <p>{profileInfo.question3}</p>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     )
