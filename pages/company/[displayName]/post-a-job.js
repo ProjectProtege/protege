@@ -110,7 +110,7 @@ const PostAJob = ({ session }) => {
 
           <div className='container relative z-30 p-6 bg-white rounded-lg shadow-md md:p-8'>
             <TierSelectCard
-              value={process.env.BASIC_PLAN}
+              value={process.env.ACCOUNT_PLAN}
               className='max-w-[320px]'
             >
               <div className='col-span-1 text-center'>
