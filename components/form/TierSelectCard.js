@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { useJobForm } from 'store/job-post_store'
 import PropTypes from 'prop-types'
 
-const TierSelectCard = ({ children, value }) => {
+const TierSelectCard = ({ children, value, className }) => {
   const route = useRouter()
   const setTier = useJobForm((s) => s.setTier)
   const tier = useJobForm((s) => s.tier)
@@ -13,7 +13,7 @@ const TierSelectCard = ({ children, value }) => {
 
   return (
     <button
-      className={`overflow-hidden p-6 md:p-8 shadow rounded text-left md:text-center cursor-pointer transform ease-in-out duration-150 bg-white mx-auto mb-4 grid grid-cols-3 md:grid-cols-1 w-full
+      className={`${className} overflow-hidden p-6 md:p-8 shadow rounded text-left md:text-center cursor-pointer transform ease-in-out duration-150 bg-white mx-auto mb-4 grid grid-cols-3 md:grid-cols-1 w-full
       ${
         route.pathname === '/post-a-job'
           ? 'hover:border-teal-300 hover:scale-107 hover:shadow-md'
@@ -43,6 +43,11 @@ const TierSelectCard = ({ children, value }) => {
 TierSelectCard.propTypes = {
   children: PropTypes.node.isRequired,
   value: PropTypes.string.isRequired,
+  className: PropTypes.string,
+}
+
+TierSelectCard.defaultProps = {
+  className: '',
 }
 
 export default TierSelectCard
