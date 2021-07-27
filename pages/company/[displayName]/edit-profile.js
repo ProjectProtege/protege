@@ -19,6 +19,7 @@ import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
 import getText from 'utils/i18n/Texts'
 
 import timezones from 'data/timezones.json'
+import VerifyEmail from 'components/dashboard/VerifyEmail'
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
@@ -109,329 +110,335 @@ const CompanyEditProfile = ({ session }) => {
   if (session) {
     return (
       <AccountInteriorLayout className='mt-12'>
-        <form
-          className='container relative z-30 p-6 bg-white rounded-lg shadow-md md:p-8'
-          onSubmit={handleSubmit(handleFormEntry)}
-        >
-          <h1 className='text-2xl'>{getText('GLOBAL', 'PROFILE_INFO')}</h1>
-          <p className='opacity-75'>{getText('GLOBAL', 'FILL_OUT')}</p>
-          <div className='mt-6 mb-3 md:grid grid-cols-2 gap-6'>
-            <div className='flex flex-col mb-3 md:mb-0'>
-              <label
-                htmlFor='companyName'
-                className='mb-2 font-semibold text-blue-900'
-              >
-                {getText('GLOBAL', 'COMPANY_NAME')}{' '}
-              </label>
-
-              <input
-                id='companyName'
-                name='companyName'
-                className='input'
-                title='name of the company'
-                ref={register}
-                type='text'
-              />
-
-              <p
-                name='companyName'
-                component='span'
-                className='input-error'
-                role='alert'
-              >
-                {errors.companyName && errors.companyName.message}
-              </p>
-            </div>
-
-            <div className='flex flex-col'>
-              <label
-                htmlFor='companyWebsite'
-                className='mb-2 font-semibold text-blue-900'
-              >
-                {getText('GLOBAL', 'COMPANY_WEBSITE')}
-              </label>
-
-              <input
-                id='companyWebsite'
-                name='companyWebsite'
-                className='input'
-                title='url of the company'
-                type='text'
-                ref={register}
-                placeholder='https://'
-              />
-
-              <p
-                name='companyWebsite'
-                component='span'
-                className='input-error'
-                role='alert'
-              >
-                {errors.companyWebsite && errors.companyWebsite.message}
-              </p>
-            </div>
-          </div>
-
-          <div className='md:grid grid-cols-2 gap-6'>
-            <div className='flex flex-col mb-12 '>
-              <label
-                htmlFor='companyEmail'
-                className='mb-2 font-semibold text-blue-900'
-              >
-                {getText('GLOBAL', 'EMAIL')}
-              </label>
-
-              <input
-                id='companyEmail'
-                name='companyEmail'
-                className='input'
-                type='email'
-                ref={register}
-              />
-
-              <p
-                name='companyEmail'
-                component='span'
-                className='input-error'
-                role='alert'
-              >
-                {errors.companyEmail && errors.companyEmail.message}
-              </p>
-            </div>
-          </div>
-
-          <div className='flex flex-col mb-12'>
-            <label
-              htmlFor='companyDescription'
-              className='mb-2 font-semibold text-blue-900'
-            >
-              {getText('GLOBAL', 'COMPANY_DESCRIPTION')}
-            </label>
-
-            <Controller
-              name='companyDescription'
-              control={control}
-              render={({ value, onChange }) => (
-                <ReactQuill
-                  value={value}
-                  onChange={onChange}
-                  modules={{ keyboard: { bindings: { tab: false } } }}
-                />
-              )}
-            />
-
-            <p
-              name='companyDescription'
-              component='span'
-              className='input-error'
-              role='alert'
-            >
-              {errors.companyDescription && errors.companyDescription.message}
-            </p>
-          </div>
-
-          <div className='mb-6 md:grid grid-cols-2 gap-6'>
-            <div className='flex flex-col'>
-              <label
-                htmlFor='companyHQ'
-                className='font-semibold text-blue-900'
-              >
-                {getText('GLOBAL', 'COMPANY_HQ')}
-              </label>
-
-              <span className='mb-2 text-xs tracking-tight text-blue-500'>
-                {getText('GLOBAL', 'COMPANY_HQ_DESC')}
-              </span>
-
-              <input
-                id='companyHQ'
-                name='companyHQ'
-                className='input'
-                ref={register}
-              />
-
-              <p
-                name='companyHQ'
-                component='span'
-                className='input-error'
-                role='alert'
-              >
-                {errors.companyHQ && errors.companyHQ.message}
-              </p>
-            </div>
-            <div className='flex flex-col mb-3 '>
-              <label
-                htmlFor='companyTimezone'
-                className='font-semibold text-blue-900'
-              >
-                {getText('GLOBAL', 'TIMEZONE')}
-              </label>
-
-              <span className='mb-2 text-xs tracking-tight text-blue-500 '>
-                {getText('GLOBAL', 'TIMEZONE_DESC')}
-              </span>
-
-              <div className='select-wrap'>
-                <select
-                  id='companyTimezone'
-                  name='companyTimezone'
-                  ref={register}
-                  className='input input-select '
+        {currentUser.emailVerified ? (
+          <form
+            className='container relative z-30 p-6 bg-white rounded-lg shadow-md md:p-8'
+            onSubmit={handleSubmit(handleFormEntry)}
+          >
+            <h1 className='text-2xl'>{getText('GLOBAL', 'PROFILE_INFO')}</h1>
+            <p className='opacity-75'>{getText('GLOBAL', 'FILL_OUT')}</p>
+            <div className='mt-6 mb-3 md:grid grid-cols-2 gap-6'>
+              <div className='flex flex-col mb-3 md:mb-0'>
+                <label
+                  htmlFor='companyName'
+                  className='mb-2 font-semibold text-blue-900'
                 >
-                  {!profileInfo?.companyTimezone ? (
-                    <option value='' className='text-gray-300'>
-                      {getText('GLOBAL', 'SELECT_ONE')}
-                    </option>
-                  ) : (
-                    ''
-                  )}
+                  {getText('GLOBAL', 'COMPANY_NAME')}{' '}
+                </label>
 
-                  {timezonesArray.map((timezone, index) => {
-                    return (
-                      <option
-                        key={index}
-                        value={timezone.text}
-                        className='text-gray-300'
-                      >
-                        {timezone.text}
-                      </option>
-                    )
-                  })}
-                </select>
+                <input
+                  id='companyName'
+                  name='companyName'
+                  className='input'
+                  title='name of the company'
+                  ref={register}
+                  type='text'
+                />
+
+                <p
+                  name='companyName'
+                  component='span'
+                  className='input-error'
+                  role='alert'
+                >
+                  {errors.companyName && errors.companyName.message}
+                </p>
               </div>
 
-              <p
-                name='companyTimezone'
-                component='span'
-                className='input-error'
-                role='alert'
-              >
-                {errors.companyTimezone && errors.companyTimezone.message}
-              </p>
-            </div>
-          </div>
+              <div className='flex flex-col'>
+                <label
+                  htmlFor='companyWebsite'
+                  className='mb-2 font-semibold text-blue-900'
+                >
+                  {getText('GLOBAL', 'COMPANY_WEBSITE')}
+                </label>
 
-          <div className='flex flex-col'>
-            <div htmlFor='timeframe' className='font-semibold text-blue-900'>
-              {getText('GLOBAL', 'TIMEFRAME')}
-            </div>
+                <input
+                  id='companyWebsite'
+                  name='companyWebsite'
+                  className='input'
+                  title='url of the company'
+                  type='text'
+                  ref={register}
+                  placeholder='https://'
+                />
 
-            <span className='mb-2 text-xs tracking-tight text-blue-500 '>
-              {getText('GLOBAL', 'TIMEZONE_WITHIN')}
-            </span>
+                <p
+                  name='companyWebsite'
+                  component='span'
+                  className='input-error'
+                  role='alert'
+                >
+                  {errors.companyWebsite && errors.companyWebsite.message}
+                </p>
+              </div>
+            </div>
 
             <div className='md:grid grid-cols-2 gap-6'>
-              <div className='mb-3  md:mb-0'>
+              <div className='flex flex-col mb-12 '>
                 <label
-                  htmlFor='timezone-from'
-                  className='font-semibold text-blue-900'
+                  htmlFor='companyEmail'
+                  className='mb-2 font-semibold text-blue-900'
                 >
-                  {getText('GLOBAL', 'FROM')}
+                  {getText('GLOBAL', 'EMAIL')}
                 </label>
 
-                <div className='select-wrap'>
-                  <select
-                    id='timezone-from'
-                    name='companyTimeframeFrom'
-                    ref={register}
-                    className='input input-select '
-                  >
-                    {!profileInfo?.companyTimeframeFrom ? (
-                      <option value='' className='text-gray-300'>
-                        {getText('GLOBAL', 'SELECT_ONE')}
-                      </option>
-                    ) : (
-                      ''
-                    )}
-                    {timezonesArray.map((timezone, index) => {
-                      return (
-                        <option
-                          key={index}
-                          value={timezone.text}
-                          className='text-gray-300'
-                        >
-                          {timezone.text}
-                        </option>
-                      )
-                    })}
-                  </select>
-                </div>
+                <input
+                  id='companyEmail'
+                  name='companyEmail'
+                  className='input'
+                  type='email'
+                  ref={register}
+                />
 
                 <p
-                  name='companyTimeframeFrom'
+                  name='companyEmail'
                   component='span'
                   className='input-error'
                   role='alert'
                 >
-                  {errors.companyTimeframeFrom &&
-                    errors.companyTimeframeFrom.message}
-                </p>
-              </div>
-
-              <div>
-                <label
-                  htmlFor='timezone-to'
-                  className='font-semibold text-blue-900'
-                >
-                  {getText('GLOBAL', 'TO')}
-                </label>
-
-                <div className='select-wrap'>
-                  <select
-                    id='timezone-to'
-                    name='companyTimeframeTo'
-                    ref={register}
-                    className='input input-select '
-                  >
-                    {!profileInfo?.companyTimeframeTo ? (
-                      <option value='' className='text-gray-300'>
-                        {getText('GLOBAL', 'SELECT_ONE')}
-                      </option>
-                    ) : (
-                      ''
-                    )}
-
-                    {timezonesArray.map((timezone, index) => {
-                      return (
-                        <option
-                          key={index}
-                          value={timezone.text}
-                          className='text-gray-300'
-                        >
-                          {timezone.text}
-                        </option>
-                      )
-                    })}
-                  </select>
-                </div>
-
-                <p
-                  name='companyTimeframeTo'
-                  component='span'
-                  className='input-error'
-                  role='alert'
-                >
-                  {errors.companyTimeframeTo &&
-                    errors.companyTimeframeTo.message}
+                  {errors.companyEmail && errors.companyEmail.message}
                 </p>
               </div>
             </div>
-          </div>
 
-          <button
-            data-cy='next-step-button'
-            type='submit'
-            className='w-32 mt-12 btn btn-teal'
-          >
-            {getText('GLOBAL', 'SAVE')}
-          </button>
+            <div className='flex flex-col mb-12'>
+              <label
+                htmlFor='companyDescription'
+                className='mb-2 font-semibold text-blue-900'
+              >
+                {getText('GLOBAL', 'COMPANY_DESCRIPTION')}
+              </label>
 
-          {error ? (
-            <p className='p-3 mt-6 text-lg text-center text-red-500 bg-red-100 rounded-md'>
-              {error}
-            </p>
-          ) : null}
-        </form>
+              <Controller
+                name='companyDescription'
+                control={control}
+                render={({ value, onChange }) => (
+                  <ReactQuill
+                    value={value}
+                    onChange={onChange}
+                    modules={{ keyboard: { bindings: { tab: false } } }}
+                  />
+                )}
+              />
+
+              <p
+                name='companyDescription'
+                component='span'
+                className='input-error'
+                role='alert'
+              >
+                {errors.companyDescription && errors.companyDescription.message}
+              </p>
+            </div>
+
+            <div className='mb-6 md:grid grid-cols-2 gap-6'>
+              <div className='flex flex-col'>
+                <label
+                  htmlFor='companyHQ'
+                  className='font-semibold text-blue-900'
+                >
+                  {getText('GLOBAL', 'COMPANY_HQ')}
+                </label>
+
+                <span className='mb-2 text-xs tracking-tight text-blue-500'>
+                  {getText('GLOBAL', 'COMPANY_HQ_DESC')}
+                </span>
+
+                <input
+                  id='companyHQ'
+                  name='companyHQ'
+                  className='input'
+                  ref={register}
+                />
+
+                <p
+                  name='companyHQ'
+                  component='span'
+                  className='input-error'
+                  role='alert'
+                >
+                  {errors.companyHQ && errors.companyHQ.message}
+                </p>
+              </div>
+              <div className='flex flex-col mb-3 '>
+                <label
+                  htmlFor='companyTimezone'
+                  className='font-semibold text-blue-900'
+                >
+                  {getText('GLOBAL', 'TIMEZONE')}
+                </label>
+
+                <span className='mb-2 text-xs tracking-tight text-blue-500 '>
+                  {getText('GLOBAL', 'TIMEZONE_DESC')}
+                </span>
+
+                <div className='select-wrap'>
+                  <select
+                    id='companyTimezone'
+                    name='companyTimezone'
+                    ref={register}
+                    className='input input-select '
+                  >
+                    {!profileInfo?.companyTimezone ? (
+                      <option value='' className='text-gray-300'>
+                        {getText('GLOBAL', 'SELECT_ONE')}
+                      </option>
+                    ) : (
+                      ''
+                    )}
+
+                    {timezonesArray.map((timezone, index) => {
+                      return (
+                        <option
+                          key={index}
+                          value={timezone.text}
+                          className='text-gray-300'
+                        >
+                          {timezone.text}
+                        </option>
+                      )
+                    })}
+                  </select>
+                </div>
+
+                <p
+                  name='companyTimezone'
+                  component='span'
+                  className='input-error'
+                  role='alert'
+                >
+                  {errors.companyTimezone && errors.companyTimezone.message}
+                </p>
+              </div>
+            </div>
+
+            <div className='flex flex-col'>
+              <div htmlFor='timeframe' className='font-semibold text-blue-900'>
+                {getText('GLOBAL', 'TIMEFRAME')}
+              </div>
+
+              <span className='mb-2 text-xs tracking-tight text-blue-500 '>
+                {getText('GLOBAL', 'TIMEZONE_WITHIN')}
+              </span>
+
+              <div className='md:grid grid-cols-2 gap-6'>
+                <div className='mb-3  md:mb-0'>
+                  <label
+                    htmlFor='timezone-from'
+                    className='font-semibold text-blue-900'
+                  >
+                    {getText('GLOBAL', 'FROM')}
+                  </label>
+
+                  <div className='select-wrap'>
+                    <select
+                      id='timezone-from'
+                      name='companyTimeframeFrom'
+                      ref={register}
+                      className='input input-select '
+                    >
+                      {!profileInfo?.companyTimeframeFrom ? (
+                        <option value='' className='text-gray-300'>
+                          {getText('GLOBAL', 'SELECT_ONE')}
+                        </option>
+                      ) : (
+                        ''
+                      )}
+                      {timezonesArray.map((timezone, index) => {
+                        return (
+                          <option
+                            key={index}
+                            value={timezone.text}
+                            className='text-gray-300'
+                          >
+                            {timezone.text}
+                          </option>
+                        )
+                      })}
+                    </select>
+                  </div>
+
+                  <p
+                    name='companyTimeframeFrom'
+                    component='span'
+                    className='input-error'
+                    role='alert'
+                  >
+                    {errors.companyTimeframeFrom &&
+                      errors.companyTimeframeFrom.message}
+                  </p>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor='timezone-to'
+                    className='font-semibold text-blue-900'
+                  >
+                    {getText('GLOBAL', 'TO')}
+                  </label>
+
+                  <div className='select-wrap'>
+                    <select
+                      id='timezone-to'
+                      name='companyTimeframeTo'
+                      ref={register}
+                      className='input input-select '
+                    >
+                      {!profileInfo?.companyTimeframeTo ? (
+                        <option value='' className='text-gray-300'>
+                          {getText('GLOBAL', 'SELECT_ONE')}
+                        </option>
+                      ) : (
+                        ''
+                      )}
+
+                      {timezonesArray.map((timezone, index) => {
+                        return (
+                          <option
+                            key={index}
+                            value={timezone.text}
+                            className='text-gray-300'
+                          >
+                            {timezone.text}
+                          </option>
+                        )
+                      })}
+                    </select>
+                  </div>
+
+                  <p
+                    name='companyTimeframeTo'
+                    component='span'
+                    className='input-error'
+                    role='alert'
+                  >
+                    {errors.companyTimeframeTo &&
+                      errors.companyTimeframeTo.message}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <button
+              data-cy='next-step-button'
+              type='submit'
+              className='w-32 mt-12 btn btn-teal'
+            >
+              {getText('GLOBAL', 'SAVE')}
+            </button>
+
+            {error ? (
+              <p className='p-3 mt-6 text-lg text-center text-red-500 bg-red-100 rounded-md'>
+                {error}
+              </p>
+            ) : null}
+          </form>
+        ) : (
+          <section className='relative col-span-4 mt-12 lg:mt-32'>
+            <VerifyEmail />
+          </section>
+        )}
       </AccountInteriorLayout>
     )
   }

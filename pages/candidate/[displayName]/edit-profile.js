@@ -17,6 +17,7 @@ import { db } from 'utils/db'
 import { useAuth } from 'store/AuthContext'
 import { useProfileInfo } from 'store/profile_info'
 import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
+import VerifyEmail from 'components/dashboard/VerifyEmail'
 
 import getText from 'utils/i18n/Texts'
 
@@ -265,447 +266,456 @@ const CandidateEditProfile = ({ session }) => {
     return (
       <>
         <AccountInteriorLayout>
-          <div className='flex items-center justify-between mb-6'>
-            <h1 className='mb-3 text-lg text-blue-900'>
-              {getText('GLOBAL', 'PROFILE_INFO')}
-            </h1>
-          </div>
-
-          <form
-            autoComplete='on'
-            onSubmit={handleSubmit(handleProfileForm)}
-            className='mb-6'
-          >
-            {/* name */}
-            <div className='grid-cols-2 gap-8 md:grid'>
-              <div className='flex flex-col w-full mb-3'>
-                <label htmlFor='firstName'>
-                  {getText('GLOBAL', 'FIRST_NAME')}
-                </label>
-                <input
-                  id='firstName'
-                  type='text'
-                  name='firstName'
-                  className='input'
-                  ref={register}
-                />
-                {errors.firstName ? (
-                  <p className='input-error'>
-                    {errors.firstName && errors.firstName.message}
-                  </p>
-                ) : null}
+          {currentUser.emailVerified ? (
+            <>
+              <div className='flex items-center justify-between mb-6'>
+                <h1 className='mb-3 text-lg text-blue-900'>
+                  {getText('GLOBAL', 'PROFILE_INFO')}
+                </h1>
               </div>
 
-              <div className='flex flex-col w-full mb-3'>
-                <label htmlFor='lastName'>
-                  {getText('GLOBAL', 'LAST_NAME')}
-                </label>
-                <input
-                  id='lastName'
-                  type='text'
-                  name='lastName'
-                  className='input'
-                  ref={register}
-                />
-                {errors.lastName ? (
-                  <p className='input-error'>
-                    {errors.lastName && errors.lastName.message}
-                  </p>
-                ) : null}
-              </div>
-            </div>
-
-            {/* email/portfolio */}
-            <div className='grid-cols-2 gap-8 mb-12 md:grid'>
-              <div className='flex flex-col w-full mb-3 '>
-                <label htmlFor='email'>{getText('GLOBAL', 'EMAIL')}</label>
-                <input
-                  id='email'
-                  type='text'
-                  name='email'
-                  className='input'
-                  ref={register}
-                />
-                {errors.email ? (
-                  <p className='input-error'>
-                    {errors.email && errors.email.message}
-                  </p>
-                ) : null}
-              </div>
-
-              <div className='flex flex-col w-full mb-3 '>
-                <label htmlFor='portfolio'>
-                  {getText('GLOBAL', 'PORTFOLIO')}
-                  <span className='text-sm font-normal'> (optional)</span>
-                </label>
-                <input
-                  id='portfolio'
-                  type='text'
-                  name='portfolio'
-                  className='input'
-                  ref={register}
-                />
-              </div>
-            </div>
-
-            {/* social/timezone */}
-            <div className='grid-cols-2 gap-8 mb-12 md:grid'>
-              <div className='mb-6 md:mb-0'>
-                <label htmlFor='social'>
-                  {getText('GLOBAL', 'SOCIAL_ACCOUNTS')}
-                </label>
-
-                <div className='flex items-center my-2 mb-4'>
-                  <div className='mr-4 text-3xl opacity-50'>
-                    <i className='fab fa-dev' />
-                  </div>
-                  <input
-                    type='text'
-                    name='social_dev'
-                    className='w-full input'
-                    ref={register}
-                  />
-                </div>
-
-                <div className='flex items-center mb-4'>
-                  <div className='mr-3 text-3xl opacity-50'>
-                    <i className='fab fa-github' />
-                  </div>
-                  <input
-                    type='text'
-                    name='social_github'
-                    className='w-full input '
-                    ref={register}
-                  />
-                </div>
-
-                <div className='flex items-center mb-4'>
-                  <div className='mr-4 text-3xl opacity-50'>
-                    <i className='fab fa-linkedin' />
-                  </div>
-                  <input
-                    type='text'
-                    name='social_linkedin'
-                    className='w-full input '
-                    ref={register}
-                  />
-                </div>
-
-                <div className='flex items-center mb-4'>
-                  <div className='mr-3 text-3xl opacity-50'>
-                    <i className='fab fa-twitter' />
-                  </div>
-                  <input
-                    type='text'
-                    name='social_twitter'
-                    className='w-full input '
-                    ref={register}
-                  />
-                </div>
-              </div>
-
-              <div className='flex flex-col w-full'>
-                {/* timezone */}
-                <div className='flex flex-col w-full mb-8'>
-                  <label htmlFor='timezone'>
-                    {getText('GLOBAL', 'TIMEZONE')}
-                  </label>
-                  <div className='select-wrap'>
-                    <select
-                      id='timezone'
+              <form
+                autoComplete='on'
+                onSubmit={handleSubmit(handleProfileForm)}
+                className='mb-6'
+              >
+                {/* name */}
+                <div className='grid-cols-2 gap-8 md:grid'>
+                  <div className='flex flex-col w-full mb-3'>
+                    <label htmlFor='firstName'>
+                      {getText('GLOBAL', 'FIRST_NAME')}
+                    </label>
+                    <input
+                      id='firstName'
                       type='text'
-                      name='timezone'
-                      className='w-full input input-select'
+                      name='firstName'
+                      className='input'
                       ref={register}
-                    >
-                      <option value={getText('GLOBAL', 'SELECT')}>
-                        {getText('GLOBAL', 'SELECT')}
-                      </option>
-
-                      {timezonesArray.map((timezone, index) => {
-                        return (
-                          <option
-                            key={index}
-                            value={timezone.text}
-                            className='text-gray-300'
-                          >
-                            {timezone.text}
-                          </option>
-                        )
-                      })}
-                    </select>
+                    />
+                    {errors.firstName ? (
+                      <p className='input-error'>
+                        {errors.firstName && errors.firstName.message}
+                      </p>
+                    ) : null}
                   </div>
-                  {errors.timezone ? (
+
+                  <div className='flex flex-col w-full mb-3'>
+                    <label htmlFor='lastName'>
+                      {getText('GLOBAL', 'LAST_NAME')}
+                    </label>
+                    <input
+                      id='lastName'
+                      type='text'
+                      name='lastName'
+                      className='input'
+                      ref={register}
+                    />
+                    {errors.lastName ? (
+                      <p className='input-error'>
+                        {errors.lastName && errors.lastName.message}
+                      </p>
+                    ) : null}
+                  </div>
+                </div>
+
+                {/* email/portfolio */}
+                <div className='grid-cols-2 gap-8 mb-12 md:grid'>
+                  <div className='flex flex-col w-full mb-3 '>
+                    <label htmlFor='email'>{getText('GLOBAL', 'EMAIL')}</label>
+                    <input
+                      id='email'
+                      type='text'
+                      name='email'
+                      className='input'
+                      ref={register}
+                    />
+                    {errors.email ? (
+                      <p className='input-error'>
+                        {errors.email && errors.email.message}
+                      </p>
+                    ) : null}
+                  </div>
+
+                  <div className='flex flex-col w-full mb-3 '>
+                    <label htmlFor='portfolio'>
+                      {getText('GLOBAL', 'PORTFOLIO')}
+                      <span className='text-sm font-normal'> (optional)</span>
+                    </label>
+                    <input
+                      id='portfolio'
+                      type='text'
+                      name='portfolio'
+                      className='input'
+                      ref={register}
+                    />
+                  </div>
+                </div>
+
+                {/* social/timezone */}
+                <div className='grid-cols-2 gap-8 mb-12 md:grid'>
+                  <div className='mb-6 md:mb-0'>
+                    <label htmlFor='social'>
+                      {getText('GLOBAL', 'SOCIAL_ACCOUNTS')}
+                    </label>
+
+                    <div className='flex items-center my-2 mb-4'>
+                      <div className='mr-4 text-3xl opacity-50'>
+                        <i className='fab fa-dev' />
+                      </div>
+                      <input
+                        type='text'
+                        name='social_dev'
+                        className='w-full input'
+                        ref={register}
+                      />
+                    </div>
+
+                    <div className='flex items-center mb-4'>
+                      <div className='mr-3 text-3xl opacity-50'>
+                        <i className='fab fa-github' />
+                      </div>
+                      <input
+                        type='text'
+                        name='social_github'
+                        className='w-full input '
+                        ref={register}
+                      />
+                    </div>
+
+                    <div className='flex items-center mb-4'>
+                      <div className='mr-4 text-3xl opacity-50'>
+                        <i className='fab fa-linkedin' />
+                      </div>
+                      <input
+                        type='text'
+                        name='social_linkedin'
+                        className='w-full input '
+                        ref={register}
+                      />
+                    </div>
+
+                    <div className='flex items-center mb-4'>
+                      <div className='mr-3 text-3xl opacity-50'>
+                        <i className='fab fa-twitter' />
+                      </div>
+                      <input
+                        type='text'
+                        name='social_twitter'
+                        className='w-full input '
+                        ref={register}
+                      />
+                    </div>
+                  </div>
+
+                  <div className='flex flex-col w-full'>
+                    {/* timezone */}
+                    <div className='flex flex-col w-full mb-8'>
+                      <label htmlFor='timezone'>
+                        {getText('GLOBAL', 'TIMEZONE')}
+                      </label>
+                      <div className='select-wrap'>
+                        <select
+                          id='timezone'
+                          type='text'
+                          name='timezone'
+                          className='w-full input input-select'
+                          ref={register}
+                        >
+                          <option value={getText('GLOBAL', 'SELECT')}>
+                            {getText('GLOBAL', 'SELECT')}
+                          </option>
+
+                          {timezonesArray.map((timezone, index) => {
+                            return (
+                              <option
+                                key={index}
+                                value={timezone.text}
+                                className='text-gray-300'
+                              >
+                                {timezone.text}
+                              </option>
+                            )
+                          })}
+                        </select>
+                      </div>
+                      {errors.timezone ? (
+                        <p className='input-error'>
+                          {errors.timezone && errors.timezone.message}
+                        </p>
+                      ) : null}
+                    </div>
+
+                    {/* timeframe */}
+                    <div className='flex flex-col w-full'>
+                      <label htmlFor='timeframe'>
+                        {getText('GLOBAL', 'WORK_WITHIN')}
+                      </label>
+
+                      <div className='grid grid-cols-2 gap-6'>
+                        <div className='flex flex-col w-full '>
+                          <div className='select-wrap'>
+                            <select
+                              id='timeframe_from'
+                              type='text'
+                              name='timeframe_from'
+                              className='input input-select'
+                              ref={register}
+                            >
+                              {!profileInfo?.timeframe_from ? (
+                                <option value='' className='text-gray-300'>
+                                  {getText('GLOBAL', 'FROM')}
+                                </option>
+                              ) : (
+                                <option
+                                  value={profileInfo.timeframe_from}
+                                  className='text-gray-300'
+                                >
+                                  {profileInfo.timeframe_from}
+                                </option>
+                              )}
+
+                              {timezonesArray.map((timezone, index) => {
+                                return (
+                                  <option
+                                    key={index}
+                                    value={timezone.text}
+                                    className='text-gray-300'
+                                  >
+                                    {timezone.text}
+                                  </option>
+                                )
+                              })}
+                            </select>
+                          </div>
+                          {errors.timeframe_from ? (
+                            <p className='input-error'>
+                              {errors.timeframe_from &&
+                                errors.timeframe_from.message}
+                            </p>
+                          ) : null}
+                        </div>
+
+                        <div className='flex flex-col w-full '>
+                          <div className='select-wrap'>
+                            <select
+                              id='timeframe_to'
+                              type='text'
+                              name='timeframe_to'
+                              className='input input-select'
+                              ref={register}
+                            >
+                              {!profileInfo?.timeframe_to ? (
+                                <option value='' className='text-gray-300'>
+                                  {getText('GLOBAL', 'TO')}
+                                </option>
+                              ) : (
+                                ''
+                              )}
+
+                              {timezonesArray.map((timezone, index) => {
+                                return (
+                                  <option
+                                    key={index}
+                                    value={timezone.text}
+                                    className='text-gray-300'
+                                  >
+                                    {timezone.text}
+                                  </option>
+                                )
+                              })}
+                            </select>
+                          </div>
+
+                          {errors ? (
+                            <p className='input-error'>
+                              {errors.timeframe_to &&
+                                errors.timeframe_to.message}
+                            </p>
+                          ) : null}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* tech used/projects */}
+                <div className='grid-cols-2 gap-8 mb-12 md:grid'>
+                  <div className='flex flex-col w-full mb-3'>
+                    <label htmlFor='tech'>
+                      {getText('GLOBAL', 'TECH_USED')}
+                    </label>
+                    <div className='flex items-center space-x-6'>
+                      <input
+                        type='text'
+                        name='tech'
+                        className='w-full input'
+                        ref={register}
+                        onChange={saveTech}
+                        value={techItem}
+                      />
+                      <button
+                        type='button'
+                        className='btn btn-blue'
+                        onClick={addTech}
+                      >
+                        Add
+                      </button>
+                    </div>
+                    <ul className='flex flex-col mt-4 space-y-2'>
+                      {techArray?.map((t) => (
+                        <>
+                          <li className='text-gray-600' key={t.id}>
+                            <button
+                              type='button'
+                              className='mr-4 font-bold text-gray-500'
+                              onClick={() => deleteTech(t.id, t.techItem)}
+                            >
+                              x
+                            </button>
+                            {t.techItem}
+                          </li>
+                        </>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className='flex flex-col w-full mb-3'>
+                    <div className='flex flex-col items-end space-y-4'>
+                      <div className='w-full space-y-2'>
+                        <label htmlFor='projectName'>
+                          {getText('GLOBAL', 'PROJECT_NAME')}
+                        </label>
+                        <input
+                          type='text'
+                          name='projectName'
+                          className='w-full input'
+                          onChange={saveProjectName}
+                          value={projectItemName}
+                        />
+                      </div>
+                      <div className='w-full space-y-2'>
+                        <label htmlFor='projectUrl'>
+                          {getText('GLOBAL', 'PROJECT_URL')}
+                        </label>
+                        <input
+                          type='text'
+                          name='projectUrl'
+                          className='w-full input'
+                          onChange={saveProjectUrl}
+                          value={projectItemUrl}
+                        />
+                      </div>
+                      <div className='flex items-start justify-between w-full'>
+                        <ul className='flex flex-col mt-4 space-y-2'>
+                          {projectsArray &&
+                            projectsArray.map((p) => (
+                              <>
+                                <li className='text-gray-600' key={p.id}>
+                                  <button
+                                    type='button'
+                                    className='mr-4 font-bold text-gray-500'
+                                    onClick={() =>
+                                      deleteProject(p.id, p.projectItemName)
+                                    }
+                                  >
+                                    x
+                                  </button>
+                                  <a
+                                    href={p.projectItemUrl}
+                                    className='text-teal-600'
+                                  >
+                                    {p.projectItemName}
+                                  </a>
+                                </li>
+                              </>
+                            ))}
+                        </ul>
+                        <button
+                          type='button'
+                          className='btn btn-blue'
+                          onClick={addProject}
+                        >
+                          Add
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* question1 */}
+                <div className='flex flex-col w-full mb-10 space-y-3'>
+                  <label htmlFor='question1'>
+                    {getText('GLOBAL', 'QUESTION1')}
+                  </label>
+                  <textarea
+                    name='question1'
+                    id='question1'
+                    className='input'
+                    cols='30'
+                    rows='5'
+                    ref={register}
+                  />
+                  {errors ? (
                     <p className='input-error'>
-                      {errors.timezone && errors.timezone.message}
+                      {errors.question1 && errors.question1.message}
                     </p>
                   ) : null}
                 </div>
 
-                {/* timeframe */}
-                <div className='flex flex-col w-full'>
-                  <label htmlFor='timeframe'>
-                    {getText('GLOBAL', 'WORK_WITHIN')}
+                {/* question2 */}
+                <div className='flex flex-col w-full mb-10 space-y-3'>
+                  <label htmlFor='question2'>
+                    {getText('GLOBAL', 'QUESTION2')}
                   </label>
-
-                  <div className='grid grid-cols-2 gap-6'>
-                    <div className='flex flex-col w-full '>
-                      <div className='select-wrap'>
-                        <select
-                          id='timeframe_from'
-                          type='text'
-                          name='timeframe_from'
-                          className='input input-select'
-                          ref={register}
-                        >
-                          {!profileInfo?.timeframe_from ? (
-                            <option value='' className='text-gray-300'>
-                              {getText('GLOBAL', 'FROM')}
-                            </option>
-                          ) : (
-                            <option
-                              value={profileInfo.timeframe_from}
-                              className='text-gray-300'
-                            >
-                              {profileInfo.timeframe_from}
-                            </option>
-                          )}
-
-                          {timezonesArray.map((timezone, index) => {
-                            return (
-                              <option
-                                key={index}
-                                value={timezone.text}
-                                className='text-gray-300'
-                              >
-                                {timezone.text}
-                              </option>
-                            )
-                          })}
-                        </select>
-                      </div>
-                      {errors.timeframe_from ? (
-                        <p className='input-error'>
-                          {errors.timeframe_from &&
-                            errors.timeframe_from.message}
-                        </p>
-                      ) : null}
-                    </div>
-
-                    <div className='flex flex-col w-full '>
-                      <div className='select-wrap'>
-                        <select
-                          id='timeframe_to'
-                          type='text'
-                          name='timeframe_to'
-                          className='input input-select'
-                          ref={register}
-                        >
-                          {!profileInfo?.timeframe_to ? (
-                            <option value='' className='text-gray-300'>
-                              {getText('GLOBAL', 'TO')}
-                            </option>
-                          ) : (
-                            ''
-                          )}
-
-                          {timezonesArray.map((timezone, index) => {
-                            return (
-                              <option
-                                key={index}
-                                value={timezone.text}
-                                className='text-gray-300'
-                              >
-                                {timezone.text}
-                              </option>
-                            )
-                          })}
-                        </select>
-                      </div>
-
-                      {errors ? (
-                        <p className='input-error'>
-                          {errors.timeframe_to && errors.timeframe_to.message}
-                        </p>
-                      ) : null}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* tech used/projects */}
-            <div className='grid-cols-2 gap-8 mb-12 md:grid'>
-              <div className='flex flex-col w-full mb-3'>
-                <label htmlFor='tech'>{getText('GLOBAL', 'TECH_USED')}</label>
-                <div className='flex items-center space-x-6'>
-                  <input
-                    type='text'
-                    name='tech'
-                    className='w-full input'
+                  <textarea
+                    name='question2'
+                    id='question2'
+                    className='input'
+                    cols='30'
+                    rows='5'
                     ref={register}
-                    onChange={saveTech}
-                    value={techItem}
                   />
-                  <button
-                    type='button'
-                    className='btn btn-blue'
-                    onClick={addTech}
-                  >
-                    Add
-                  </button>
+                  {errors ? (
+                    <p className='input-error'>
+                      {errors.question2 && errors.question2.message}
+                    </p>
+                  ) : null}
                 </div>
-                <ul className='flex flex-col mt-4 space-y-2'>
-                  {techArray?.map((t) => (
-                    <>
-                      <li className='text-gray-600' key={t.id}>
-                        <button
-                          type='button'
-                          className='mr-4 font-bold text-gray-500'
-                          onClick={() => deleteTech(t.id, t.techItem)}
-                        >
-                          x
-                        </button>
-                        {t.techItem}
-                      </li>
-                    </>
-                  ))}
-                </ul>
-              </div>
 
-              <div className='flex flex-col w-full mb-3'>
-                <div className='flex flex-col items-end space-y-4'>
-                  <div className='w-full space-y-2'>
-                    <label htmlFor='projectName'>
-                      {getText('GLOBAL', 'PROJECT_NAME')}
-                    </label>
-                    <input
-                      type='text'
-                      name='projectName'
-                      className='w-full input'
-                      onChange={saveProjectName}
-                      value={projectItemName}
-                    />
-                  </div>
-                  <div className='w-full space-y-2'>
-                    <label htmlFor='projectUrl'>
-                      {getText('GLOBAL', 'PROJECT_URL')}
-                    </label>
-                    <input
-                      type='text'
-                      name='projectUrl'
-                      className='w-full input'
-                      onChange={saveProjectUrl}
-                      value={projectItemUrl}
-                    />
-                  </div>
-                  <div className='flex items-start justify-between w-full'>
-                    <ul className='flex flex-col mt-4 space-y-2'>
-                      {projectsArray &&
-                        projectsArray.map((p) => (
-                          <>
-                            <li className='text-gray-600' key={p.id}>
-                              <button
-                                type='button'
-                                className='mr-4 font-bold text-gray-500'
-                                onClick={() =>
-                                  deleteProject(p.id, p.projectItemName)
-                                }
-                              >
-                                x
-                              </button>
-                              <a
-                                href={p.projectItemUrl}
-                                className='text-teal-600'
-                              >
-                                {p.projectItemName}
-                              </a>
-                            </li>
-                          </>
-                        ))}
-                    </ul>
-                    <button
-                      type='button'
-                      className='btn btn-blue'
-                      onClick={addProject}
-                    >
-                      Add
-                    </button>
-                  </div>
+                {/* question3 */}
+                <div className='flex flex-col w-full mb-4 space-y-3'>
+                  <label htmlFor='question3'>
+                    {getText('GLOBAL', 'QUESTION3')}
+                  </label>
+                  <textarea
+                    name='question3'
+                    id='question3'
+                    className='input'
+                    cols='30'
+                    rows='5'
+                    ref={register}
+                  />
+                  {errors ? (
+                    <p className='input-error'>
+                      {errors.question3 && errors.question3.message}
+                    </p>
+                  ) : null}
                 </div>
-              </div>
-            </div>
 
-            {/* question1 */}
-            <div className='flex flex-col w-full mb-10 space-y-3'>
-              <label htmlFor='question1'>
-                {getText('GLOBAL', 'QUESTION1')}
-              </label>
-              <textarea
-                name='question1'
-                id='question1'
-                className='input'
-                cols='30'
-                rows='5'
-                ref={register}
-              />
-              {errors ? (
-                <p className='input-error'>
-                  {errors.question1 && errors.question1.message}
-                </p>
-              ) : null}
-            </div>
+                <button type='submit' className='btn btn-teal'>
+                  {getText('GLOBAL', 'SAVE')}
+                </button>
 
-            {/* question2 */}
-            <div className='flex flex-col w-full mb-10 space-y-3'>
-              <label htmlFor='question2'>
-                {getText('GLOBAL', 'QUESTION2')}
-              </label>
-              <textarea
-                name='question2'
-                id='question2'
-                className='input'
-                cols='30'
-                rows='5'
-                ref={register}
-              />
-              {errors ? (
-                <p className='input-error'>
-                  {errors.question2 && errors.question2.message}
-                </p>
-              ) : null}
-            </div>
-
-            {/* question3 */}
-            <div className='flex flex-col w-full mb-4 space-y-3'>
-              <label htmlFor='question3'>
-                {getText('GLOBAL', 'QUESTION3')}
-              </label>
-              <textarea
-                name='question3'
-                id='question3'
-                className='input'
-                cols='30'
-                rows='5'
-                ref={register}
-              />
-              {errors ? (
-                <p className='input-error'>
-                  {errors.question3 && errors.question3.message}
-                </p>
-              ) : null}
-            </div>
-
-            <button type='submit' className='btn btn-teal'>
-              {getText('GLOBAL', 'SAVE')}
-            </button>
-
-            {/* {error ? (
+                {/* {error ? (
             <p className='p-3 mt-6 text-lg text-center text-red-500 bg-red-100 rounded-md'>
               {error}
             </p>
           ) : null} */}
-          </form>
+              </form>
+            </>
+          ) : (
+            <VerifyEmail />
+          )}
         </AccountInteriorLayout>
       </>
     )
