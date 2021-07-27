@@ -86,7 +86,7 @@ const CompanyProfile = () => {
 
             <div>
               <p className='font-bold text-lg mb-2'>
-                {profileInfo.companyName}
+                {profileInfo?.companyName}
               </p>
 
               <a
@@ -104,9 +104,11 @@ const CompanyProfile = () => {
 
               <div className='mt-4 text-sm'>
                 <p className='opacity-50'>Timezone Preference</p>
-                <p>{`${trimTimezone(
-                  profileInfo.companyTimeframeFrom
-                )} - ${trimTimezone(profileInfo.companyTimeframeTo)}`}</p>
+                {profileInfo?.companyTimeframeFrom && (
+                  <p>{`${trimTimezone(
+                    profileInfo.companyTimeframeFrom
+                  )} - ${trimTimezone(profileInfo.companyTimeframeTo)}`}</p>
+                )}
               </div>
             </div>
           </div>
