@@ -144,6 +144,10 @@ export function AuthProvider({ children }) {
     })
   }
 
+  function resendVerificationEmail() {
+    return auth.currentUser.sendEmailVerification()
+  }
+
   function resetPassword(email) {
     return auth.sendPasswordResetEmail(email)
   }
@@ -164,6 +168,7 @@ export function AuthProvider({ children }) {
     resetPassword,
     updateEmail,
     updatePassword,
+    resendVerificationEmail,
   }
 
   return (
