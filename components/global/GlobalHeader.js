@@ -18,6 +18,20 @@ const GlobalHeader = () => {
   const isUserMenuOpen = useUi((s) => s.isUserMenuOpen)
   const setIsUserMenuOpen = useUi((s) => s.setIsUserMenuOpen)
   const profileInfo = useProfileInfo((s) => s.profileInfo)
+  const requiredCompanyProfileFields = useProfileInfo(
+    (s) => s.requiredCompanyProfileFields
+  )
+
+  const companyProfileComplete = () => {
+    if (profileInfo) {
+      return (
+        requiredCompanyProfileFields.filter((field) => {
+          return !profileInfo[field]
+        }).length === 0
+      )
+    }
+    return false
+  }
 
   useEffect(() => {
     const handleRouteChange = () => {
@@ -265,7 +279,14 @@ const GlobalHeader = () => {
             <li className='menu-item'>
               {currentUser && currentUser?.accountType === 'company' ? (
                 <Link href={`/company/${profileInfo?.slug}/post-a-job`}>
-                  <a className='btn btn-teal'>Post a Job</a>
+                  <a
+                    className={`btn btn-teal ${
+                      !companyProfileComplete() ? 'btn-disabled' : ''
+                    }
+                    `}
+                  >
+                    Post a Job
+                  </a>
                 </Link>
               ) : (
                 <Link href='/post-a-job?status=1'>
