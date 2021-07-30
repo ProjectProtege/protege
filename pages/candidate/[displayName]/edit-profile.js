@@ -75,13 +75,9 @@ const CandidateEditProfile = ({ session }) => {
     email: Yup.string()
       .email(getText('GLOBAL', 'EMAIL_VALID'))
       .required(getText('GLOBAL', 'EMAIL_REQUIRED')),
-    timezone: Yup.string().required(getText('GLOBAL', 'TIMEZONE_REQUIRED')),
-    timeframe_from: Yup.string().required(
-      getText('GLOBAL', 'TIMEFRAME_REQUIRED')
-    ),
-    timeframe_to: Yup.string().required(
-      getText('GLOBAL', 'TIMEFRAME_REQUIRED')
-    ),
+    timezone: Yup.string(),
+    timeframe_from: Yup.string(),
+    timeframe_to: Yup.string(),
     question1: Yup.string().required(getText('GLOBAL', 'QUESTION_REQUIRED')),
     question2: Yup.string().required(getText('GLOBAL', 'QUESTION_REQUIRED')),
     question3: Yup.string().required(getText('GLOBAL', 'QUESTION_REQUIRED')),
@@ -266,12 +262,13 @@ const CandidateEditProfile = ({ session }) => {
     return (
       <>
         <AccountInteriorLayout>
-          {currentUser.emailVerified ? (
+          {currentUser?.emailVerified ? (
             <>
-              <div className='flex items-center justify-between mb-6'>
-                <h1 className='mb-3 text-lg text-blue-900'>
+              <div className='flex items-center mb-6'>
+                <h1 className='text-xl text-blue-900 mr-4'>
                   {getText('GLOBAL', 'PROFILE_INFO')}
                 </h1>
+                <span className='text-sm text-teal-600'> * required</span>
               </div>
 
               <form
@@ -284,6 +281,7 @@ const CandidateEditProfile = ({ session }) => {
                   <div className='flex flex-col w-full mb-3'>
                     <label htmlFor='firstName'>
                       {getText('GLOBAL', 'FIRST_NAME')}
+                      <span className='text-teal-600'> *</span>
                     </label>
                     <input
                       id='firstName'
@@ -302,6 +300,7 @@ const CandidateEditProfile = ({ session }) => {
                   <div className='flex flex-col w-full mb-3'>
                     <label htmlFor='lastName'>
                       {getText('GLOBAL', 'LAST_NAME')}
+                      <span className='text-teal-600'> *</span>
                     </label>
                     <input
                       id='lastName'
@@ -321,7 +320,10 @@ const CandidateEditProfile = ({ session }) => {
                 {/* email/portfolio */}
                 <div className='grid-cols-2 gap-8 mb-12 md:grid'>
                   <div className='flex flex-col w-full mb-3 '>
-                    <label htmlFor='email'>{getText('GLOBAL', 'EMAIL')}</label>
+                    <label htmlFor='email'>
+                      {getText('GLOBAL', 'EMAIL')}
+                      <span className='text-teal-600'> *</span>
+                    </label>
                     <input
                       id='email'
                       type='text'
@@ -339,7 +341,7 @@ const CandidateEditProfile = ({ session }) => {
                   <div className='flex flex-col w-full mb-3 '>
                     <label htmlFor='portfolio'>
                       {getText('GLOBAL', 'PORTFOLIO')}
-                      <span className='text-sm font-normal'> (optional)</span>
+                      <span className='text-teal-600'> *</span>
                     </label>
                     <input
                       id='portfolio'
@@ -646,6 +648,7 @@ const CandidateEditProfile = ({ session }) => {
                 <div className='flex flex-col w-full mb-10 space-y-3'>
                   <label htmlFor='question1'>
                     {getText('GLOBAL', 'QUESTION1')}
+                    <span className='text-teal-600'> *</span>
                   </label>
                   <textarea
                     name='question1'
@@ -666,6 +669,7 @@ const CandidateEditProfile = ({ session }) => {
                 <div className='flex flex-col w-full mb-10 space-y-3'>
                   <label htmlFor='question2'>
                     {getText('GLOBAL', 'QUESTION2')}
+                    <span className='text-teal-600'> *</span>
                   </label>
                   <textarea
                     name='question2'
@@ -686,6 +690,7 @@ const CandidateEditProfile = ({ session }) => {
                 <div className='flex flex-col w-full mb-4 space-y-3'>
                   <label htmlFor='question3'>
                     {getText('GLOBAL', 'QUESTION3')}
+                    <span className='text-teal-600'> *</span>
                   </label>
                   <textarea
                     name='question3'

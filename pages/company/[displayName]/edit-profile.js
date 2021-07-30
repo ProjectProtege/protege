@@ -46,26 +46,20 @@ const CompanyEditProfile = ({ session }) => {
     //   'Please provide a .png format image of your company logo'
     // ),
     companyTimezone: Yup.string().required('Please select a timezone.'),
-    companyHQ: Yup.string().required(
-      'Please provide a location for your office headquarters.'
-    ),
-    companyTimeframeFrom: Yup.string().required(
-      'Please select a minimum timezone.'
-    ),
-    companyTimeframeTo: Yup.string().required(
-      'Please select a maximum timezone.'
-    ),
+    companyHQ: Yup.string(),
+    companyTimeframeFrom: Yup.string(),
+    companyTimeframeTo: Yup.string(),
   })
 
   const { register, handleSubmit, control, errors } = useForm({
     resolver: yupResolver(Schema),
     mode: 'onChange',
     defaultValues: {
-      companyName: currentUser.displayName,
+      companyName: currentUser?.displayName,
       companyWebsite: profileInfo?.companyWebsite
         ? profileInfo.companyWebsite
         : '',
-      companyEmail: currentUser.email,
+      companyEmail: currentUser?.email,
       companyDescription: profileInfo?.companyDescription
         ? profileInfo.companyDescription
         : '',
@@ -110,20 +104,25 @@ const CompanyEditProfile = ({ session }) => {
   if (session) {
     return (
       <AccountInteriorLayout className='mt-12'>
-        {currentUser.emailVerified ? (
+        {currentUser?.emailVerified ? (
           <form
             className='container relative z-30 p-6 bg-white rounded-lg shadow-md md:p-8'
             onSubmit={handleSubmit(handleFormEntry)}
           >
-            <h1 className='text-2xl'>{getText('GLOBAL', 'PROFILE_INFO')}</h1>
-            <p className='opacity-75'>{getText('GLOBAL', 'FILL_OUT')}</p>
+            <h1 className='text-2xl'>
+              {getText('GLOBAL', 'PROFILE_INFO')}
+              <span className='text-sm text-teal-600 ml-4'> * required</span>
+            </h1>
+            <p className='opacity-75'>{getText('GLOBAL', 'FILL_OUT')} </p>
+
             <div className='mt-6 mb-3 md:grid grid-cols-2 gap-6'>
               <div className='flex flex-col mb-3 md:mb-0'>
                 <label
                   htmlFor='companyName'
                   className='mb-2 font-semibold text-blue-900'
                 >
-                  {getText('GLOBAL', 'COMPANY_NAME')}{' '}
+                  {getText('GLOBAL', 'COMPANY_NAME')}
+                  <span className='text-teal-600'> *</span>
                 </label>
 
                 <input
@@ -151,6 +150,7 @@ const CompanyEditProfile = ({ session }) => {
                   className='mb-2 font-semibold text-blue-900'
                 >
                   {getText('GLOBAL', 'COMPANY_WEBSITE')}
+                  <span className='text-teal-600'> *</span>
                 </label>
 
                 <input
@@ -180,7 +180,8 @@ const CompanyEditProfile = ({ session }) => {
                   htmlFor='companyEmail'
                   className='mb-2 font-semibold text-blue-900'
                 >
-                  {getText('GLOBAL', 'EMAIL')}
+                  {getText('GLOBAL', 'EMAIL')}{' '}
+                  <span className='text-teal-600'>*</span>
                 </label>
 
                 <input
@@ -208,6 +209,7 @@ const CompanyEditProfile = ({ session }) => {
                 className='mb-2 font-semibold text-blue-900'
               >
                 {getText('GLOBAL', 'COMPANY_DESCRIPTION')}
+                <span className='text-teal-600'> *</span>
               </label>
 
               <Controller
@@ -375,7 +377,7 @@ const CompanyEditProfile = ({ session }) => {
                     htmlFor='timezone-to'
                     className='font-semibold text-blue-900'
                   >
-                    {getText('GLOBAL', 'TO')}
+                    {getText('GLOBAL', 'TO')}{' '}
                   </label>
 
                   <div className='select-wrap'>

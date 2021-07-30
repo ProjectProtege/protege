@@ -58,7 +58,7 @@ const CandidateDashboard = ({ session }) => {
   if (session) {
     return (
       <AccountInteriorLayout>
-        {currentUser.emailVerified ? (
+        {currentUser?.emailVerified ? (
           <div className='relative col-span-4 mt-12 lg:mt-0'>
             <h1 className='mb-3 text-lg text-blue-900'>
               {getText('GLOBAL', 'ACTIVE_APPLICATIONS')}

@@ -8,12 +8,17 @@ export const useProfileInfo = create((set) => ({
     'email',
     'companyWebsite',
     'companyEmail',
-    'companyHQ',
-    'companyTimezone',
-    'companyTimeframeFrom',
-    'companyTimeframeTo',
     'companyDescription',
     'avatar',
+  ],
+  requiredCandidateProfileFields: [
+    'firstName',
+    'lastName',
+    'email',
+    'portfolio',
+    'question1',
+    'question2',
+    'question3',
   ],
   setProfileInfo: (profileInfo) => {
     return set({ profileInfo })

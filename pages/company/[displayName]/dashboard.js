@@ -106,7 +106,7 @@ const CompanyDashboard = ({ session }) => {
     return (
       <AccountInteriorLayout className='mt-12'>
         <section className='relative col-span-4 mt-12 lg:mt-32'>
-          {currentUser.emailVerified ? (
+          {currentUser?.emailVerified ? (
             <>
               <article className='mb-20 lg:mb-32'>
                 <h2 className='mb-6 text-xl'>

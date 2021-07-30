@@ -49,11 +49,7 @@ const AccountInteriorLayout = ({ children, className }) => {
                 <NavLink
                   href={`/${profileInfo?.accountType}/${profileInfo?.slug}/`}
                   activeClassName='text-teal-700 opacity-100'
-                  className={`opacity-75 hover:opacity-100 ${
-                    !companyProfileComplete()
-                      ? 'pointer-events-none opacity-25'
-                      : ''
-                  }`}
+                  className='opacity-75 hover:opacity-100'
                 >
                   {getText('GLOBAL', 'VIEW_PROFILE')}
                 </NavLink>
