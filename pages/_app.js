@@ -7,6 +7,7 @@ import { AuthProvider } from 'store/AuthContext'
 import { Toaster } from 'react-hot-toast'
 import { useJobs } from 'store/jobs_store'
 import UserProfileProvider from 'store/UserProfileProvider'
+import TagProvider from 'store/TagProvider'
 import { db, analytics } from 'utils/db'
 import '@fortawesome/fontawesome-free/js/fontawesome'
 import '@fortawesome/fontawesome-free/js/solid'
@@ -62,6 +63,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <AuthProvider>
       <UserProfileProvider />
+      <TagProvider />
       <GlobalLayout>
         <Head>
           <meta name='viewport' content='width=device-width, initial-scale=1' />

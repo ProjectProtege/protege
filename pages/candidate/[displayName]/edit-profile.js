@@ -16,6 +16,7 @@ import toast from 'react-hot-toast'
 import { db } from 'utils/db'
 import { useAuth } from 'store/AuthContext'
 import { useProfileInfo } from 'store/profile_info'
+import { useTags } from 'store/tags_store'
 import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
 import VerifyEmail from 'components/dashboard/VerifyEmail'
 
@@ -23,13 +24,14 @@ import getText from 'utils/i18n/Texts'
 
 import timezones from 'data/timezones.json'
 
+import { WithContext as ReactTags } from 'react-tag-input'
+
 const CandidateEditProfile = ({ session }) => {
   const router = useRouter()
   const { currentUser } = useAuth()
   // const [error, setError] = useState(null)
   const [timezonesArray, setTimezonesArray] = useState([])
 
-  const [techItem, setTechItem] = useState('')
   const [techArray, setTechArray] = useState([])
 
   const [projectItemName, setProjectItemName] = useState('')
@@ -37,6 +39,7 @@ const CandidateEditProfile = ({ session }) => {
   const [projectsArray, setProjectsArray] = useState([])
 
   const profileInfo = useProfileInfo((s) => s.profileInfo)
+  const tags = useTags((s) => s.tags)
 
   useEffect(() => {
     setTimezonesArray(timezones)
@@ -48,7 +51,7 @@ const CandidateEditProfile = ({ session }) => {
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
-            setTechArray(doc.data().tech)
+            setTechArray(doc.data().tech ?? [])
           })
         })
     }
@@ -60,7 +63,7 @@ const CandidateEditProfile = ({ session }) => {
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
-            setProjectsArray(doc.data().projects)
+            setProjectsArray(doc.data().projects ?? [])
           })
         })
     }
@@ -120,9 +123,7 @@ const CandidateEditProfile = ({ session }) => {
           tech: array,
         })
         .then(() => {
-          toast.success(
-            `${techItem} ${getText('GLOBAL', 'TECH_ARRAY_ADD_SUCCESS')}`
-          )
+          toast.success(`Item ${getText('GLOBAL', 'TECH_ARRAY_ADD_SUCCESS')}`)
         })
         .catch((err) => {
           toast.error(getText('GLOBAL', 'TECH_ARRAY_ADD_ERROR') + err.message)
@@ -149,7 +150,7 @@ const CandidateEditProfile = ({ session }) => {
     }
   }
 
-  const removeFromArray = (arrayType, item, array) => {
+  const removeFromArray = (arrayType, array) => {
     if (arrayType === 'tech') {
       db.collection('candidates')
         .doc(profileInfo.userUid)
@@ -158,7 +159,7 @@ const CandidateEditProfile = ({ session }) => {
         })
         .then(() => {
           toast.success(
-            `${item} ${getText('GLOBAL', 'TECH_ARRAY_REMOVE_SUCCESS')}`
+            `Item ${getText('GLOBAL', 'TECH_ARRAY_REMOVE_SUCCESS')}`
           )
         })
         .catch((err) => {
@@ -174,7 +175,7 @@ const CandidateEditProfile = ({ session }) => {
         })
         .then(() => {
           toast.success(
-            `${item} ${getText('GLOBAL', 'PROJECT_ARRAY_REMOVE_SUCCESS')}`
+            `Item ${getText('GLOBAL', 'PROJECT_ARRAY_REMOVE_SUCCESS')}`
           )
         })
         .catch((err) => {
@@ -185,20 +186,19 @@ const CandidateEditProfile = ({ session }) => {
     }
   }
 
-  const saveTech = (e) => {
-    setTechItem(e.target.value)
+  const addTech = (tech) => {
+    try {
+      setTechArray([...techArray, tech])
+      addToArray('tech', [...techArray, tech])
+    } catch (e) {
+      toast.error('Oops! Something went wrong.')
+    }
   }
 
-  const addTech = () => {
-    setTechArray([...techArray, { id: uuidv4(), techItem }])
-    addToArray('tech', [...techArray, { id: uuidv4(), techItem }])
-    setTechItem('')
-  }
-
-  const deleteTech = (id, item) => {
-    const newTechArray = techArray.filter((el) => el.id !== id)
+  const deleteTech = (i) => {
+    const newTechArray = techArray.filter((tag, index) => index !== i)
     setTechArray(newTechArray)
-    removeFromArray('tech', item, newTechArray)
+    removeFromArray('tech', newTechArray)
   }
 
   const saveProjectName = (e) => {
@@ -547,38 +547,15 @@ const CandidateEditProfile = ({ session }) => {
                       {getText('GLOBAL', 'TECH_USED')}
                     </label>
                     <div className='flex items-center space-x-6'>
-                      <input
-                        type='text'
-                        name='tech'
-                        className='w-full input'
-                        ref={register}
-                        onChange={saveTech}
-                        value={techItem}
+                      <ReactTags
+                        tags={techArray}
+                        suggestions={tags}
+                        handleAddition={addTech}
+                        handleDelete={deleteTech}
+                        inputFieldPosition='top'
+                        className='w-full'
                       />
-                      <button
-                        type='button'
-                        className='btn btn-blue'
-                        onClick={addTech}
-                      >
-                        Add
-                      </button>
                     </div>
-                    <ul className='flex flex-col mt-4 space-y-2'>
-                      {techArray?.map((t) => (
-                        <>
-                          <li className='text-gray-600' key={t.id}>
-                            <button
-                              type='button'
-                              className='mr-4 font-bold text-gray-500'
-                              onClick={() => deleteTech(t.id, t.techItem)}
-                            >
-                              x
-                            </button>
-                            {t.techItem}
-                          </li>
-                        </>
-                      ))}
-                    </ul>
                   </div>
 
                   <div className='flex flex-col w-full mb-3'>
