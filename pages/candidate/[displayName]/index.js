@@ -49,12 +49,12 @@ const CandidateDashboard = ({ session }) => {
 
             <div className='mb-8'>
               <p className='font-semibold text-lg mb-4'>
-                {profileInfo.displayName}
+                {profileInfo?.displayName}
               </p>
 
-              {profileInfo.portfolio && (
+              {profileInfo?.portfolio && (
                 <a
-                  href={profileInfo.portfolio}
+                  href={profileInfo?.portfolio}
                   className='block opacity-75 hover:opacity-100 mb-5'
                 >
                   View Portfolio
@@ -62,7 +62,7 @@ const CandidateDashboard = ({ session }) => {
                 </a>
               )}
 
-              <a href={`mailto:${profileInfo.email}`} className='btn btn-teal'>
+              <a href={`mailto:${profileInfo?.email}`} className='btn btn-teal'>
                 Contact Me
               </a>
             </div>
@@ -70,50 +70,50 @@ const CandidateDashboard = ({ session }) => {
             <div className='mb-8'>
               <div className='mb-6'>
                 <p className='opacity-50'>Timezone</p>
-                <p>{profileInfo.timezone}</p>
+                <p>{profileInfo?.timezone}</p>
               </div>
 
               <div>
                 <p className='opacity-50'>Preference</p>
                 <p>
                   {`${trimTimezone(
-                    profileInfo.timeframe_from
-                  )} to ${trimTimezone(profileInfo.timeframe_to)}`}
+                    profileInfo?.timeframe_from
+                  )} to ${trimTimezone(profileInfo?.timeframe_to)}`}
                 </p>
               </div>
             </div>
 
             <div className='flex space-x-4'>
-              {profileInfo.social_dev && (
+              {profileInfo?.social_dev && (
                 <a
-                  href={profileInfo.social_dev}
+                  href={profileInfo?.social_dev}
                   className='opacity-75 hover:opacity-100'
                 >
                   <DevIcon className='w-6 opacity-75 hover:opacity-100' />
                 </a>
               )}
 
-              {profileInfo.social_github && (
+              {profileInfo?.social_github && (
                 <a
-                  href={profileInfo.social_github}
+                  href={profileInfo?.social_github}
                   className='opacity-75 hover:opacity-100'
                 >
                   <Github className='w-6 opacity-75 hover:opacity-100' />
                 </a>
               )}
 
-              {profileInfo.social_twitter && (
+              {profileInfo?.social_twitter && (
                 <a
-                  href={profileInfo.social_twitter}
+                  href={profileInfo?.social_twitter}
                   className='opacity-75 hover:opacity-100'
                 >
                   <Twitter className='w-6 opacity-75 hover:opacity-100' />
                 </a>
               )}
 
-              {profileInfo.social_linkedin && (
+              {profileInfo?.social_linkedin && (
                 <a
-                  href={profileInfo.social_linkedin}
+                  href={profileInfo?.social_linkedin}
                   className='opacity-75 hover:opacity-100'
                 >
                   <LinkedIn className='w-6 opacity-75 hover:opacity-100' />
@@ -123,22 +123,22 @@ const CandidateDashboard = ({ session }) => {
           </aside>
           <section className='col-span-9'>
             <div className='md:grid grid-cols-2 gap-12'>
-              {profileInfo.tech && (
+              {profileInfo?.tech && (
                 <div className='mb-6 md:mb-0'>
                   <h3 className='text-lg mb-4'>Languages</h3>
                   <ul className='list-disc ml-5 text-blue-700'>
-                    {profileInfo.tech.map((item) => (
+                    {profileInfo?.tech.map((item) => (
                       <li>{item.text}</li>
                     ))}
                   </ul>
                 </div>
               )}
 
-              {profileInfo.projects && (
+              {profileInfo?.projects && (
                 <div>
                   <h3 className='text-lg mb-4'>Projects</h3>
                   <ul className='list-disc ml-5'>
-                    {profileInfo.projects.map((item) => (
+                    {profileInfo?.projects.map((item) => (
                       <li>
                         <a
                           className='capitalize text-teal-700 underline font-bold'
@@ -158,21 +158,21 @@ const CandidateDashboard = ({ session }) => {
                 <p className='font-bold text-lg mb-3'>
                   Describe a difficult problem you solved recently.
                 </p>
-                <p>{profileInfo.question1}</p>
+                <p>{profileInfo?.question1}</p>
               </div>
 
               <div className='mb-6'>
                 <p className='font-bold text-lg mb-3'>
                   What were your first steps when faced with that problem?
                 </p>
-                <p>{profileInfo.question2}</p>
+                <p>{profileInfo?.question2}</p>
               </div>
 
               <div className='mb-6'>
                 <p className='font-bold text-lg mb-3'>
                   How did you overcome that problem?
                 </p>
-                <p>{profileInfo.question3}</p>
+                <p>{profileInfo?.question3}</p>
               </div>
             </div>
           </section>
