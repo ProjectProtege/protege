@@ -222,10 +222,11 @@ const CandidateEditProfile = ({ session }) => {
     setProjectItemUrl('')
   }
 
-  const deleteProject = (id, item) => {
-    const newProjectArray = projectsArray.filter((el) => el.id !== id)
+  const deleteProject = (i) => {
+    console.log(i)
+    const newProjectArray = projectsArray.filter((el, index) => index !== i)
     setProjectsArray(newProjectArray)
-    removeFromArray('projects', item, newProjectArray)
+    removeFromArray('projects', newProjectArray)
   }
 
   const handleProfileForm = (data) => {
@@ -587,37 +588,36 @@ const CandidateEditProfile = ({ session }) => {
                         />
                       </div>
                       <div className='flex items-start justify-between w-full'>
-                        <ul className='flex flex-col mt-4 space-y-2'>
-                          {/* {projectsArray.length > 0 &&
-                            projectsArray?.map((p) => (
-                              <>
-                                <li className='text-gray-600' key={p.id}>
-                                  <button
-                                    type='button'
-                                    className='mr-4 font-bold text-gray-500'
-                                    onClick={() =>
-                                      deleteProject(p.id, p.projectItemName)
-                                    }
-                                  >
-                                    x
-                                  </button>
-                                  <a
-                                    href={p.projectItemUrl}
-                                    className='text-teal-600'
-                                  >
-                                    {p.projectItemName}
-                                  </a>
-                                </li>
-                              </>
-                            ))} */}
-                        </ul>
                         <button
                           type='button'
-                          className='btn btn-blue'
+                          className='btn btn-blue order-last'
                           onClick={addProject}
                         >
                           Add
                         </button>
+                        <ul className='flex flex-col mt-4 space-y-2'>
+                          {projectsArray &&
+                            projectsArray?.map((p, index) => (
+                              <li className='text-gray-600' key={p.id}>
+                                <button
+                                  type='button'
+                                  className='mr-4 font-bold text-gray-500'
+                                  onClick={() => deleteProject(index)}
+                                >
+                                  x{' '}
+                                  <span className='sr-only'>
+                                    Delete {p.projectItemName}
+                                  </span>
+                                </button>
+                                <a
+                                  href={p.projectItemUrl}
+                                  className='text-teal-600'
+                                >
+                                  {p.projectItemName}
+                                </a>
+                              </li>
+                            ))}
+                        </ul>
                       </div>
                     </div>
                   </div>
