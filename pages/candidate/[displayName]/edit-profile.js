@@ -553,6 +553,8 @@ const CandidateEditProfile = ({ session }) => {
                         handleAddition={addTech}
                         handleDelete={deleteTech}
                         inputFieldPosition='top'
+                        autocomplete
+                        allowDragDrop={false}
                         className='w-full'
                       />
                     </div>
@@ -586,8 +588,8 @@ const CandidateEditProfile = ({ session }) => {
                       </div>
                       <div className='flex items-start justify-between w-full'>
                         <ul className='flex flex-col mt-4 space-y-2'>
-                          {projectsArray &&
-                            projectsArray.map((p) => (
+                          {/* {projectsArray.length > 0 &&
+                            projectsArray?.map((p) => (
                               <>
                                 <li className='text-gray-600' key={p.id}>
                                   <button
@@ -607,7 +609,7 @@ const CandidateEditProfile = ({ session }) => {
                                   </a>
                                 </li>
                               </>
-                            ))}
+                            ))} */}
                         </ul>
                         <button
                           type='button'
