@@ -4,8 +4,14 @@ form label {
 }
 
 /*--Input--*/
-.input {
+.input,
+.ReactTags__tagInputField {
   @apply border border-blue-200 p-2 rounded;
+}
+
+.react-tags-wrapper,
+.ReactTags__tagInputField {
+  @apply w-full;
 }
 
 .input-error {
@@ -36,4 +42,24 @@ form label {
 /* Toggle */
 .toggle-checkbox:checked {
   @apply right-0 bg-green-400;
+}
+
+.ReactTags__tagInputField {
+  @apply mb-2;
+}
+
+.ReactTags__tag {
+  @apply bg-teal-600 text-white rounded-full px-2 py-1 mr-2;
+}
+
+.ReactTags__tag button {
+  @apply pl-2;
+}
+
+.ReactTags__suggestions {
+  @apply mb-2;
+}
+
+.ReactTags__suggestions ul li span mark {
+  @apply bg-gray-300 text-blue-900;
 }

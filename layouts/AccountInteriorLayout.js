@@ -30,7 +30,7 @@ const AccountInteriorLayout = ({ children, className }) => {
     <>
       <div className={`container mx-auto ${className}`}>
         <div className='grid-cols-5 gap-10 lg:grid'>
-          <aside className='col-span-1 mb-12 md:mb-0'>
+          <aside className='col-span-1 mb-12 lg:mb-0'>
             <ProfileMenu
               profileUid={currentUser?.userUid}
               accountType={currentUser?.accountType}
