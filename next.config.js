@@ -35,10 +35,5 @@ module.exports = {
     FB_TOKEN_URI: process.env.FB_TOKEN_URI,
     FB_AUTH_PROVIDER_X509_CERT_URL: process.env.FB_AUTH_PROVIDER_X509_CERT_URL,
     FB_CLIENT_X509_CERT_URL: process.env.FB_CLIENT_X509_CERT_URL,
-  },
-  eslint: {
-    // Warning: Dangerously allow production builds to successfully complete even if
-    // your project has ESLint errors.
-    ignoreDuringBuilds: true,
-  },
-}
+        }
+  }
