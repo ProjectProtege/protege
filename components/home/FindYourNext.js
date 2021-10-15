@@ -15,13 +15,7 @@ const FindYourNext = () => {
         >
           <Typewriter
             options={{
-              strings: [
-                "10x'er",
-                'Opportunity',
-                'Blue Chip',
-                'Moment',
-                'Prospect',
-              ],
+              strings: ['Opportunity', 'Protege', 'Moment', 'Prospect'],
               autoStart: true,
               loop: true,
             }}
