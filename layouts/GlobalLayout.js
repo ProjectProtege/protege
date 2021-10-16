@@ -5,6 +5,9 @@ import { useRouter } from 'next/router'
 import GlobalHeader from 'components/global/GlobalHeader'
 import GlobalFooter from 'components/global/GlobalFooter'
 
+import DashboardLayout from 'layouts/DashboardLayout'
+import GeneralLayout from 'layouts/GeneralLayout'
+
 const GlobalLayout = ({ children }) => {
   const isNavOpen = useUi((s) => s.isNavOpen)
 
@@ -15,26 +18,24 @@ const GlobalLayout = ({ children }) => {
       <GlobalHeader />
 
       <div
-        className={`fixed h-screen w-screen bg-blue-900 inset-0 z-40 pointer-events-none transition duration-150 ease-in-out ${
+        className={`fixed h-screen w-screen bg-blue-900 inset-0 z-40 pointer-events-none transition duration-150 ease-in-out lg:invisible ${
           isNavOpen ? 'opacity-50' : 'opacity-0'
         }`}
       />
 
-      <main
-        className={`container flex-grow px-6 xl:px-0 ${
-          location !== '/' ? 'mt-12' : ''
-        }`}
-      >
-        {children}
-      </main>
+      {location.includes('/company/') ? (
+        <DashboardLayout hasBanner>{children}</DashboardLayout>
+      ) : (
+        <GeneralLayout>{children}</GeneralLayout>
+      )}
 
-      <GlobalFooter />
+      {location.includes('/company/') ? null : <GlobalFooter />}
     </div>
   )
 }
 
 GlobalLayout.propTypes = {
-  children: PropTypes.shape({}).isRequired,
+  children: PropTypes.node.isRequired,
 }
 
 export default GlobalLayout

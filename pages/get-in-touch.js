@@ -2,10 +2,8 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import FormCard from 'components/global/FormCard'
 import axios from 'axios'
-// import LoadingSpinner from 'components/LoadingSpinner'
 
 // React Hook Forms
-import { DevTool } from '@hookform/devtools'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
@@ -17,7 +15,7 @@ const GetInTouch = () => {
     submitting: false,
     info: { error: false, msg: null },
   })
-  const [inputs, setInputs] = useState({
+  const [setInputs] = useState({
     name: '',
     email: '',
     comment: '',
@@ -32,7 +30,7 @@ const GetInTouch = () => {
     comment: yup.string().required('A comment is required.'),
   })
 
-  const { register, handleSubmit, control, errors } = useForm({
+  const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(Schema),
     mode: 'onBlur',
   })
@@ -42,7 +40,7 @@ const GetInTouch = () => {
       setStatus({
         submitted: true,
         submitting: false,
-        info: { error: false, msg: msg },
+        info: { error: false, msg },
       })
       setInputs({
         name: '',
@@ -51,9 +49,17 @@ const GetInTouch = () => {
       })
     } else {
       setStatus({
-        info: { error: true, msg: msg },
+        info: { error: true, msg },
       })
     }
+  }
+
+  const encode = (data) => {
+    return Object.keys(data)
+      .map(
+        (key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
+      )
+      .join('&')
   }
 
   const onSubmit = (data) => {
@@ -72,28 +78,20 @@ const GetInTouch = () => {
       })
   }
 
-  const encode = (data) => {
-    return Object.keys(data)
-      .map(
-        (key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
-      )
-      .join('&')
-  }
-
   return (
-    <div className='container' style={{ maxWidth: 680 }}>
+    <div className='container max-w-2xl'>
       <h1 className='mb-3 text-2xl text-blue-900'>
         We&apos;d love to hear from you!
       </h1>
 
-      <p className='mb-12 text-blue-700' style={{ maxWidth: 680 }}>
+      <p className='max-w-2xl mb-12 text-blue-700'>
         Feedback? Complaints? Feature requests? Questions? We want to hear them
         all!
         <br />
         <br />
-        Our goal is to make Protegé.dev the best place for junior developers to
-        find remote work and the best way to do that is with input from you, the
-        people we’re trying to serve!
+        Our goal is to make Protegé.dev the best place for companies and
+        candidates to inclusively find remote work and the best way to do that
+        is with input from you, the people we’re trying to serve!
       </p>
 
       <form autoComplete='on' onSubmit={handleSubmit(onSubmit)}>
@@ -176,19 +174,11 @@ const GetInTouch = () => {
               type='submit'
               className='w-full mt-6 btn btn-teal md:w-auto'
             >
-              {/* {!status.submitting
-                ? !status.submitted
-                  ? 'Send'
-                  : 'Submitted'
-                : (<LoadingSpinner /> 'Submitting...') } */}
-              {/* <LoadingSpinner loading='true' /> */}
-              {/* {status.submitting ? <LoadingSpinner loading='true' /> : null} */}
               {status.submitting ? 'Submitting' : 'Send'}
             </button>
           </div>
         </FormCard>
       </form>
-      {/* <DevTool control={control} /> */}
     </div>
   )
 }

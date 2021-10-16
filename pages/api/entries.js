@@ -13,14 +13,14 @@ export default async (req, res) => {
 
       return {
         id: doc.id,
-        jobTitle: entry.jobtitle,
+        jobtitle: entry.jobtitle,
         jobDescription: entry.jobDescription,
         roleFocus: entry.roleFocus,
         status: entry.status,
         companyHQ: entry.companyHQ,
         companyName: entry.companyName,
-        postedAt: entry.postedAt.toDate(),
-        companyLogo: entry.companyLogo,
+        // postedAt: entry.postedAt.toDate(),
+        avatar: entry.avatar,
         companyDescription: entry.companyDescription,
         howToApply: entry.howToApply,
         companyWebsite: entry.companyWebsite,

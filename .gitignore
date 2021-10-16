@@ -12,12 +12,18 @@
 /.next/
 /out/
 
+# local emulator
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
 # production
 /build
 
 # misc
 .DS_Store
 *.pem
+.idea
 
 # debug
 npm-debug.log*
@@ -30,8 +36,8 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-firestore-debug.log
-ui-debug.log
-
 # vercel
 .vercel
+
+# java logs
+hs_err_pid[0-9]*.log

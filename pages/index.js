@@ -6,8 +6,6 @@ import FindYourNext from 'components/home/FindYourNext'
 import JobCard from 'components/job/JobCard'
 import TierSelect from 'components/form/TierSelect'
 
-// import { db } from 'firebase/firebase'
-
 const Home = () => {
   const jobs = useJobs((s) => s.jobs)
   const tier = useJobForm((s) => s.tier)
@@ -31,31 +29,29 @@ const Home = () => {
         style={{ zIndex: '-999999' }}
       />
 
-      <h1 className='sr-only'>Home</h1>
+      <h1 className='sr-only'>Protege.dev | Inclusive Hiring for All Levels</h1>
 
-      <section className='pt-12'>
+      <section>
         <FindYourNext />
 
         <div className='flex flex-col mx-auto mt-12 text-center text-blue-900 md:w-3/4 md:tracking-wide lg:w-3/4 xl:w-1/2 md:text-lg'>
           <h2 className='mb-4 font-semibold md:text-2xl'>
-            Remote jobs for junior developers.
+            Inclusive Hiring for All Levels
           </h2>
 
-          <p className='mx-auto mb-8 opacity-75'>
-            Looking for your next junior developer role? Look no further! Any
-            jobs listed here are geared for those hungry to work and learn.
+          <p className='mx-auto mb-8'>
+            Use Protege&apos;s inclusive application process to find your next
+            candidate or opportunity fairly. Ensure your prospects are screened
+            fairly and equally.
           </p>
 
-          <Link href='/job-board'>
-            <a className='mx-auto btn btn-teal'>Find a Job</a>
+          <Link href='/sign-up'>
+            <a className='mx-auto btn btn-teal'>Create an Account</a>
           </Link>
         </div>
       </section>
 
-      <section
-        className='min-h-screen mx-auto mt-12 mb-32 lg:pt-16'
-        style={{ maxWidth: 680 }}
-      >
+      <section className='mx-auto mt-12 mb-32 lg:pt-16 max-w-2xl'>
         <h2 className='mb-8 text-2xl text-center text-blue-900'>
           Latest Opportunities
         </h2>
@@ -85,13 +81,13 @@ const Home = () => {
             Get started on your candidate search today.
           </h3>
 
-          <Link href={`/post-a-job?status=1&tier=${tier}`}>
-            <a className='mt-3 btn btn-teal'>Post a Job</a>
+          <Link href='/sign-up'>
+            <a className='mt-3 btn btn-teal'>Create an Account</a>
           </Link>
         </div>
       </section>
 
-      <section className='grid md:grid-cols-2 gap-12 my-24 container mx-auto'>
+      {/* <section className='grid md:grid-cols-2 gap-12 my-24 container mx-auto'>
         <div className='mb-12 md:mb-0'>
           <h2 className='text-3xl mb-6 capitalize'>
             Not your average job board
@@ -131,7 +127,7 @@ const Home = () => {
             />
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   )
 }

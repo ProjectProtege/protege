@@ -7,7 +7,7 @@ export const useJobForm = create((set) => ({
     approved: false,
     status: 'active',
     companyEmail: '',
-    companyLogo: '',
+    avatar: '',
     companyName: '',
     companyWebsite: '',
     companyHQ: '',

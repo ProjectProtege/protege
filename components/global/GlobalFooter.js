@@ -5,6 +5,7 @@ import Link from 'next/link'
 import LogoMark from 'assets/images/protege-logo-mark-gray'
 import TwitterIcon from 'assets/images/TwitterBrands'
 import StripeIcon from 'assets/images/Stripe'
+import toast from 'react-hot-toast'
 
 const GlobalFooter = () => {
   const location = useRouter().pathname
@@ -33,14 +34,14 @@ const GlobalFooter = () => {
       .then((res) => {
         if (!res.ok) {
           throw new Error('Network reponse was not ok').then(
-            alert('Oops! something went wrong.')
+            toast.error('Oops! something went wrong.')
           )
         } else {
-          alert("Congrats! You've successfully subscribed!")
+          toast.success("Congrats! You've successfully subscribed!")
         }
       })
       .catch((err) => {
-        alert('There was a problem with your fetch operation', err)
+        toast.error('There was a problem with your fetch operation', err)
       })
 
     setUserEmail('')

@@ -100,7 +100,7 @@ export default function Contributors({ contributors }) {
 
   return (
     <div className='container mx-auto'>
-      <div className='mx-auto' style={{ maxWidth: 680 }}>
+      <div className='max-w-2xl mx-auto'>
         <h1 className='mb-3 text-2xl text-blue-900'>
           Protegé.dev Contributors!
         </h1>
@@ -136,8 +136,12 @@ export default function Contributors({ contributors }) {
       </div>
 
       <ContributorsList contributors={filteredContributors.regular} />
-      <div className='mx-auto' style={{ maxWidth: 680 }}>
-        <h2 className='mt-16 mb-3 text-xl text-blue-900'>Founders</h2>
+      <div className='mx-auto container-sm'>
+        <div className='grid grid-cols-4 '>
+          <h2 className='col-start-1 mt-16 mb-3 text-xl text-blue-900 lg:col-start-2'>
+            Founders
+          </h2>
+        </div>
         <ContributorsList
           contributors={filteredContributors.founders}
           isFounders

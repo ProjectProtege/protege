@@ -1,4 +1,5 @@
 module.exports = {
+  parser: 'babel-eslint',
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
@@ -9,9 +10,13 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint',
     sourceType: 'module',
+    allowImportExportEverywhere: true,
   },
   rules: {
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'react/react-in-jsx-scope': 'off',
+    'react/no-array-index-key': 'off',
+    'import/prefer-default-export': 'off',
     'jsx-a11y/anchor-is-valid': 'off',
     'react/jsx-props-no-spreading': 'off',
     'prefer-default-export': 'off',

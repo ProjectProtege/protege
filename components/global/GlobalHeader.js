@@ -1,23 +1,42 @@
 import { useEffect } from 'react'
-import { useUi } from 'store/ui_store'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
+import { useAuth } from 'store/AuthContext'
+import { useUi } from 'store/ui_store'
 import NavLink from 'components/global/NavLink'
 import CloseIcon from 'components/global/CloseIcon'
 import MenuIcon from 'assets/images/MenuIcon'
 import Logo from 'assets/images/ProtegeLogo'
+import { useProfileInfo } from 'store/profile_info'
 
 const GlobalHeader = () => {
   const router = useRouter()
+  const { currentUser, signout } = useAuth()
   const isNavOpen = useUi((s) => s.isNavOpen)
   const setIsNavOpen = useUi((s) => s.setIsNavOpen)
+  const isUserMenuOpen = useUi((s) => s.isUserMenuOpen)
+  const setIsUserMenuOpen = useUi((s) => s.setIsUserMenuOpen)
+  const profileInfo = useProfileInfo((s) => s.profileInfo)
+  const requiredCompanyProfileFields = useProfileInfo(
+    (s) => s.requiredCompanyProfileFields
+  )
 
-  const location = useRouter().route
+  const companyProfileComplete = () => {
+    if (profileInfo) {
+      return (
+        requiredCompanyProfileFields.filter((field) => {
+          return !profileInfo[field]
+        }).length === 0
+      )
+    }
+    return false
+  }
 
   useEffect(() => {
     const handleRouteChange = () => {
       setIsNavOpen(false)
+      setIsUserMenuOpen(false)
     }
 
     router.events.on('routeChangeStart', handleRouteChange)
@@ -25,17 +44,21 @@ const GlobalHeader = () => {
     return () => {
       router.events.off('routeChangeStart', handleRouteChange)
     }
-  }, [])
+  }, [isUserMenuOpen, currentUser])
 
-  function toggleNav() {
-    setIsNavOpen(!isNavOpen)
+  const handleSignOut = async () => {
+    try {
+      await signout()
+    } catch (error) {
+      console.log('Sign Out Error:', error)
+    }
   }
 
   return (
-    <header className='py-3'>
-      <div className='relative container flex justify-between items-center px-6 xl:px-2'>
+    <header className='py-3 md:text-xs xl:text-base'>
+      <div className='container relative flex items-center justify-between px-6 xl:px-2'>
         <Link href='/'>
-          <a className='w-2/3 md:w-56'>
+          <a className='w-56'>
             <Logo className='w-full' />
           </a>
         </Link>
@@ -43,7 +66,7 @@ const GlobalHeader = () => {
         <button
           className='absolute right-0 w-12 h-12 p-2 mr-4 text-blue-900 lg:hidden'
           aria-label='navigation'
-          onClick={toggleNav}
+          onClick={() => setIsNavOpen(!isNavOpen)}
           type='button'
         >
           <MenuIcon />
@@ -58,7 +81,7 @@ const GlobalHeader = () => {
           <button
             className='flex items-center justify-center w-16 mt-8 ml-2 text-blue-900 bg-white rounded-full shadow-md h-14 lg:hidden'
             aria-label='navigation'
-            onClick={toggleNav}
+            onClick={() => setIsNavOpen(!isNavOpen)}
             type='button'
           >
             <CloseIcon />
@@ -114,19 +137,72 @@ const GlobalHeader = () => {
               </NavLink>
             </li>
             <li className='px-6 py-4 border-b border-gray-300'>
-              <Link href='/post-a-job?status=1'>
-                <a className='btn btn-teal'>Post a Job</a>
-              </Link>
+              {currentUser && currentUser?.accountType === 'company' ? (
+                <Link href={`/company/${profileInfo?.slug}/post-a-job`}>
+                  <a className='btn btn-teal'>Post a Job</a>
+                </Link>
+              ) : (
+                <Link href='/post-a-job?status=1'>
+                  <a className='btn btn-teal'>Post a Job</a>
+                </Link>
+              )}
+            </li>
+            <li className='px-6 py-4'>
+              {currentUser ? (
+                <div className='absolute bottom-0 mb-12 text-lg'>
+                  <span className='mb-1 text-xs'>Signed in as:</span>
+                  {/**
+                   * TODO: Swap this out with the user photo
+                   */}
+                  <p className='mb-4 text-lg font-bold'>
+                    {currentUser.displayName}
+                  </p>
+                  <ul>
+                    <li className='mb-2'>
+                      <Link href='/'>
+                        <a>View Profile</a>
+                      </Link>
+                    </li>
+                    <li className='mb-6'>
+                      <Link href='/'>
+                        <a>Edit Profile</a>
+                      </Link>
+                    </li>
+                    <li>
+                      <button
+                        className='underline'
+                        onClick={handleSignOut}
+                        type='button'
+                      >
+                        Sign Out
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              ) : (
+                <ul className='absolute bottom-0 mb-12'>
+                  <li className='mb-4'>
+                    <Link href='/sign-in'>
+                      <a className='btn btn-teal'>Sign In</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href='/sign-up'>
+                      <a>Sign Up</a>
+                    </Link>
+                  </li>
+                </ul>
+              )}
             </li>
           </ul>
         </nav>
 
         <nav
           data-cy='desktop-nav'
-          className='z-50 hidden text-sm font-semibold text-blue-900 uppercase lg:block'
+          className='z-50 flex-col hidden font-semibold text-blue-900 uppercase lg:block'
           role='navigation'
         >
-          <ul className='flex justify-between'>
+          <ul className='flex items-center justify-between'>
             <li className='pr-4 cursor-pointer menu-item quick-filter lg:pr-10'>
               <NavLink
                 href='/job-board'
@@ -200,11 +276,104 @@ const GlobalHeader = () => {
               </NavLink>
             </li>
 
-            <li>
-              <Link href='/post-a-job?status=1'>
-                <a className='btn btn-teal'>Post a Job</a>
-              </Link>
+            <li className='menu-item'>
+              {currentUser && currentUser?.accountType === 'company' ? (
+                <Link href={`/company/${profileInfo?.slug}/post-a-job`}>
+                  <a
+                    className={`btn btn-teal ${
+                      !companyProfileComplete() ? 'btn-disabled' : ''
+                    }
+                    `}
+                  >
+                    Post a Job
+                  </a>
+                </Link>
+              ) : (
+                <Link href='/post-a-job?status=1'>
+                  <a className='btn btn-teal'>Post a Job</a>
+                </Link>
+              )}
             </li>
+          </ul>
+
+          <ul className='absolute right-0 flex items-center mt-4 mr-6 space-x-6 text-xs xl:mr-2'>
+            {!currentUser ? (
+              <>
+                <li>
+                  <Link href='/sign-in'>
+                    <a className='opacity-75 hover:opacity-100'>Sign In</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href='/account-select'>
+                    <a className='opacity-75 hover:opacity-100'>Sign Up</a>
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <li>
+                <div className='hidden md:block'>
+                  <div className='flex items-center'>
+                    <div className='relative ml-3'>
+                      <span className='sr-only'>Open user menu</span>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        viewBox='0 0 20 20'
+                        fill='currentColor'
+                        width='32px'
+                        height='32px'
+                        className='w-6 h-6 cursor-pointer'
+                        onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                      >
+                        <path
+                          fillRule='evenodd'
+                          d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z'
+                          clipRule='evenodd'
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                {isUserMenuOpen ? (
+                  <>
+                    <div
+                      className='absolute right-0 z-50 p-2 mt-2 overflow-hidden origin-top-right bg-white rounded-md shadow-lg'
+                      role='menu'
+                      aria-orientation='vertical'
+                      aria-labelledby='user-menu'
+                    >
+                      <Link
+                        href={`/${profileInfo.accountType}/${profileInfo.slug}/dashboard`}
+                      >
+                        <a
+                          className='block px-4 py-1 text-sm text-blue-900 hover:bg-gray-100 whitespace-nowrap'
+                          role='menuitem'
+                        >
+                          Your Profile
+                        </a>
+                      </Link>
+
+                      <button
+                        className='block w-full px-4 py-1 text-sm font-semibold text-left text-blue-900 uppercase hover:bg-gray-100 whitespace-nowrap'
+                        role='menuitem'
+                        onClick={handleSignOut}
+                        type='button'
+                      >
+                        Sign out
+                      </button>
+                    </div>
+                    {isUserMenuOpen ? (
+                      <div
+                        className='fixed inset-0 w-screen h-screen bg-white opacity-0 pointer-events-auto'
+                        onClick={() => {
+                          setIsUserMenuOpen(false)
+                        }}
+                      ></div>
+                    ) : null}
+                  </>
+                ) : null}
+              </li>
+            )}
           </ul>
         </nav>
       </div>

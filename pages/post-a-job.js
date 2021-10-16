@@ -15,6 +15,7 @@ import PostAJobForm from 'components/form/PostAJobForm'
 import JobTemplate from 'components/job/JobTemplate'
 import JobPostingConfirmation from 'components/job/JobPostingConfirmation'
 import BackArrow from 'assets/images/icons/back-arrow'
+import toast from 'react-hot-toast'
 
 export async function getServerSideProps(context) {
   return {
@@ -44,16 +45,16 @@ const PostAJob = ({ query }) => {
   async function sendJobtoDB(data) {
     const postDate = firebase.firestore.Timestamp.fromDate(new Date())
 
-    const uid = uuidv4()
+    const userUid = uuidv4()
 
     await db
       .collection('jobs')
-      .doc(uid)
+      .doc(userUid)
       .set({
         approved: false,
         status: 'active',
         companyEmail: data.jobData.companyEmail,
-        companyLogo: data.jobData.companyLogo,
+        avatar: data.jobData.avatar,
         companyName: data.jobData.companyName,
         companyWebsite: data.jobData.companyWebsite,
         companyHQ: data.jobData.companyHQ,
@@ -67,7 +68,7 @@ const PostAJob = ({ query }) => {
         roleFocus: data.jobData.roleFocus,
         tier,
       })
-      .then(localStorage.setItem('Job ID', uid))
+      .then(localStorage.setItem('Job ID', userUid))
   }
 
   const handlePaymentClick = async () => {
@@ -84,9 +85,9 @@ const PostAJob = ({ query }) => {
       })
       .then(function result() {
         if (error) {
-          alert(result.error.message)
+          toast.error(result.error.message)
         } else {
-          console.log('success')
+          toast.success('Job listing submitted!')
         }
       })
   }

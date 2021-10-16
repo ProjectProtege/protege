@@ -1,5 +1,11 @@
 module.exports = {
-  purge: ['./components/**', './layouts/**', './pages/**', './assests/*'],
+  mode: 'jit',
+  purge: [
+    './components/**/*.js',
+    './layouts/**/*.js',
+    './pages/**/*.js',
+    './assests/**/*.js',
+  ],
   darkMode: false, // or 'media' or 'class'
   theme: {
     container: {
@@ -87,10 +93,13 @@ module.exports = {
         '6xl': '4rem',
         '10xl': '10rem',
       },
+      scale: ['active', 'hover'],
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      height: ['responsive'],
+    },
   },
   plugins: [],
 }

@@ -1,0 +1,227 @@
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+
+import { useJobs } from 'store/jobs_store'
+import { useEditJob } from 'store/edit-job_store'
+import { db } from 'utils/db'
+
+import nookies from 'nookies'
+import { verifyIdToken } from 'utils/db/firebaseAdmin'
+
+import ApplicantCard from 'components/dashboard/CandidateCard'
+import Trash from 'assets/images/icons/trash'
+import Edit from 'assets/images/icons/edit'
+import BackArrow from 'assets/images/icons/back-arrow'
+import toast from 'react-hot-toast'
+
+const ViewListing = ({ session }) => {
+  const router = useRouter()
+  const jobs = useJobs((s) => s.jobs)
+  const applicants = useJobs((s) => s.applicants)
+  const setApplicants = useJobs((s) => s.setApplicants)
+  const [job, setJob] = useState()
+  const setEditJob = useEditJob((s) => s.setEditJob)
+
+  const { jobId } = router.query
+  const { displayName } = router.query
+
+  // Get data about individual job
+  useEffect(() => {
+    const filteredJob = jobs.filter((item) => {
+      return item.id === jobId
+    })
+
+    setJob(filteredJob[0])
+  }, [jobs])
+
+  // Get applications
+  useEffect(async () => {
+    const applications = await db
+      .collection('applications')
+      .where('jobId', '==', jobId)
+      .get()
+
+    const applicationsData = applications.docs.map((docSnapshot) => {
+      const entry = docSnapshot.data()
+
+      return {
+        id: docSnapshot.id,
+        candidateId: entry.candidateId,
+        favorited: entry.favorited,
+        viewed: entry.viewed,
+        applicationDate: entry.applicationDate,
+      }
+    })
+
+    setApplicants(applicationsData)
+  }, [])
+
+  // Formatting react quill content
+  useEffect(() => {
+    // Cleans up the text provided by QuillJS wysiwyg
+    function styleChildren(children) {
+      children.forEach((child) => {
+        const el = child
+
+        el.style = ''
+        if (child.hasChildNodes()) {
+          const grandChildren = [...child.children]
+          styleChildren(grandChildren)
+        }
+      })
+    }
+
+    const jobDescriptionParent = document.getElementById('jobDesc')
+
+    const jobChildren = [...jobDescriptionParent.children]
+    styleChildren(jobChildren)
+
+    const companyDescriptionParent = document.getElementById('companyDesc')
+
+    const companyChildren = [...companyDescriptionParent.children]
+    styleChildren(companyChildren)
+  }, [])
+
+  function createMarkup(text) {
+    return { __html: text }
+  }
+
+  const deleteJob = async () => {
+    try {
+      await db.collection('jobs').doc(job.id).delete()
+    } catch {
+      toast.error('oops something went wrong')
+    }
+  }
+
+  // Sets job data to global store and routes to edit page
+  // Edit page grabs data from global store for form
+  const editJob = () => {
+    setEditJob({ job })
+    router.push(`/company/${displayName}/${job.id}/edit`)
+  }
+
+  if (session) {
+    return (
+      <section className='container mx-auto mt-12 z-50'>
+        <h1 className='sr-only'>Viewing job listing for {job?.jobtitle}</h1>
+
+        <div className='grid-cols-6 gap-10 lg:grid'>
+          <div className='col-span-4 z-30 mt-24 lg:mt-0'>
+            <div className='p-6 bg-white rounded-lg shadow-md md:p-8'>
+              <div className='bg-gray-200 rounded-md mb-8 p-4 flex justify-between items-center'>
+                <Link href={`/company/${displayName}/dashboard`}>
+                  <a className='opacity-75 hover:opacity-100 flex items-center'>
+                    <BackArrow className='inline-block mr-4' />
+                    <span>Back to Dashboard</span>
+                  </a>
+                </Link>
+
+                <div className='col-span-2 flex items-center justify-end'>
+                  <button
+                    className='opacity-50 hover:opacity-100 mr-6'
+                    type='button'
+                    onClick={editJob}
+                  >
+                    <Edit />
+                  </button>
+                  <button
+                    className='opacity-50 hover:opacity-100 text-error-full'
+                    type='button'
+                    onClick={() => {
+                      if (
+                        // eslint-disable-next-line no-alert
+                        window.confirm(
+                          'This is permanant action. Are you sure you want to delete this job?'
+                        )
+                      )
+                        deleteJob()
+                    }}
+                  >
+                    <Trash />
+                  </button>
+                </div>
+              </div>
+
+              <h2 data-cy='job-title' className='text-3xl text-blue-900'>
+                {job?.jobtitle}
+              </h2>
+
+              <div
+                data-cy='role-focus-and-position-type'
+                className='mb-6 tracking-tight text-blue-600 uppercase text-md'
+              >
+                {job?.roleFocus}
+                <span> • </span>
+                {job?.positionType}
+              </div>
+
+              <h3
+                data-cy='job-description-title'
+                className='mb-4 text-2xl text-blue-900'
+              >
+                Job Description
+              </h3>
+
+              <div
+                data-cy='job-description'
+                id='jobDesc'
+                dangerouslySetInnerHTML={createMarkup(job?.jobDescription)}
+                className='mb-6 rich-text-content'
+              />
+
+              <h4
+                data-cy='company-description-title'
+                className='mb-4 text-2xl text-blue-900'
+              >
+                About&nbsp;
+                {job?.companyName}
+              </h4>
+
+              <div
+                data-cy='company-description'
+                className='mt-2 text-blue-300 rich-text-content'
+                id='companyDesc'
+                dangerouslySetInnerHTML={createMarkup(job?.companyDescription)}
+              />
+            </div>
+          </div>
+
+          <div className='col-span-2 mt-20 lg:mt-32'>
+            <h2 className='text-2xl mb-8 text-teal-700'>Applications</h2>
+
+            <ul>
+              {applicants?.map((applicant, index) => (
+                <ApplicantCard application={applicant} key={index} />
+              ))}
+
+              {!applicants?.length && (
+                <li className='opacity-50'>No applications yet!</li>
+              )}
+            </ul>
+          </div>
+        </div>
+      </section>
+    )
+  }
+}
+
+export async function getServerSideProps(context) {
+  try {
+    const cookies = nookies.get(context)
+    const token = await verifyIdToken(cookies.token)
+
+    return {
+      props: {
+        session: { ...token },
+      },
+    }
+  } catch (err) {
+    context.res.writeHead(302, { location: '/sign-in' })
+    context.res.end()
+    return { props: [] }
+  }
+}
+
+export default ViewListing

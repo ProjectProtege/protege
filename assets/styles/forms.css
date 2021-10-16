@@ -1,0 +1,65 @@
+/*--Global Form--*/
+form label {
+  @apply font-bold mb-2;
+}
+
+/*--Input--*/
+.input,
+.ReactTags__tagInputField {
+  @apply border border-blue-200 p-2 rounded;
+}
+
+.react-tags-wrapper,
+.ReactTags__tagInputField {
+  @apply w-full;
+}
+
+.input-error {
+  @apply text-error-full text-xs mt-2;
+}
+
+.input-select {
+  @apply appearance-none w-full pl-4 cursor-pointer;
+}
+
+.select-wrap {
+  position: relative;
+}
+
+.select-wrap::after {
+  content: '▾';
+  position: absolute;
+  top: 50%;
+  margin-top: -10px;
+  right: 1rem;
+  z-index: 1;
+  color: #65bda0;
+  line-height: 1;
+  font-size: 20px;
+  pointer-events: none; /* Don't interfere with clicks */
+}
+
+/* Toggle */
+.toggle-checkbox:checked {
+  @apply right-0 bg-green-400;
+}
+
+.ReactTags__tagInputField {
+  @apply mb-2;
+}
+
+.ReactTags__tag {
+  @apply bg-teal-600 text-white rounded-full px-2 py-1 mr-2;
+}
+
+.ReactTags__tag button {
+  @apply pl-2;
+}
+
+.ReactTags__suggestions {
+  @apply mb-2;
+}
+
+.ReactTags__suggestions ul li span mark {
+  @apply bg-gray-300 text-blue-900;
+}
