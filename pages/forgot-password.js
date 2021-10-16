@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -12,9 +11,8 @@ import getText from 'utils/i18n/Texts'
 import AccountGraphic from 'assets/images/AccountGraphic'
 
 const ForgotPassword = () => {
-  const router = useRouter()
   const { resetPassword } = useAuth()
-  const [loading, setLoading] = useState(true)
+  const [setLoading] = useState(true)
   const [success, setSuccess] = useState(null)
   const [error, setError] = useState(null)
 
