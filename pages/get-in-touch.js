@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import FormCard from 'components/global/FormCard'
 import axios from 'axios'
-// import LoadingSpinner from 'components/LoadingSpinner'
 
 // React Hook Forms
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -16,7 +15,7 @@ const GetInTouch = () => {
     submitting: false,
     info: { error: false, msg: null },
   })
-  const [inputs, setInputs] = useState({
+  const [setInputs] = useState({
     name: '',
     email: '',
     comment: '',
@@ -90,9 +89,9 @@ const GetInTouch = () => {
         all!
         <br />
         <br />
-        Our goal is to make Protegé.dev the best place for junior developers to
-        find remote work and the best way to do that is with input from you, the
-        people we’re trying to serve!
+        Our goal is to make Protegé.dev the best place for companies and
+        candidates to inclusively find remote work and the best way to do that
+        is with input from you, the people we’re trying to serve!
       </p>
 
       <form autoComplete='on' onSubmit={handleSubmit(onSubmit)}>
@@ -175,13 +174,6 @@ const GetInTouch = () => {
               type='submit'
               className='w-full mt-6 btn btn-teal md:w-auto'
             >
-              {/* {!status.submitting
-                ? !status.submitted
-                  ? 'Send'
-                  : 'Submitted'
-                : (<LoadingSpinner /> 'Submitting...') } */}
-              {/* <LoadingSpinner loading='true' /> */}
-              {/* {status.submitting ? <LoadingSpinner loading='true' /> : null} */}
               {status.submitting ? 'Submitting' : 'Send'}
             </button>
           </div>
