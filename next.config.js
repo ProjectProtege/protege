@@ -2,7 +2,7 @@ module.exports = {
   images: {
     domains: [
       'static.files-simplefileupload.com',
-      'protege.devmlqz.files-simplefileupload.com',
+      'protege.files-simplefileupload.com',
       'avatars.githubusercontent.com',
       'avatars1.githubusercontent.com',
       'avatars2.githubusercontent.com',
