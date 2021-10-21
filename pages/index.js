@@ -81,7 +81,7 @@ const Home = () => {
             Get started on your candidate search today.
           </h3>
 
-          <Link href='/sign-up'>
+          <Link href='/account-select'>
             <a className='mt-3 btn btn-teal'>Create an Account</a>
           </Link>
         </div>
