@@ -45,7 +45,7 @@ const Home = () => {
             fairly and equally.
           </p>
 
-          <Link href='/sign-up'>
+          <Link href='/account-select'>
             <a className='mx-auto btn btn-teal'>Create an Account</a>
           </Link>
         </div>
