@@ -223,7 +223,6 @@ const CandidateEditProfile = ({ session }) => {
   }
 
   const deleteProject = (i) => {
-    console.log(i)
     const newProjectArray = projectsArray.filter((el, index) => index !== i)
     setProjectsArray(newProjectArray)
     removeFromArray('projects', newProjectArray)
