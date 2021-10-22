@@ -73,14 +73,16 @@ const CandidateDashboard = ({ session }) => {
                 <p>{profileInfo?.timezone}</p>
               </div>
 
-              <div>
-                <p className='opacity-50'>Preference</p>
-                <p>
-                  {`${trimTimezone(
-                    profileInfo?.timeframe_from
-                  )} to ${trimTimezone(profileInfo?.timeframe_to)}`}
-                </p>
-              </div>
+              {profileInfo?.timeframe_from ? (
+                <div>
+                  <p className='opacity-50'>Preference</p>
+                  <p>
+                    {`${trimTimezone(
+                      profileInfo?.timeframe_from
+                    )} to ${trimTimezone(profileInfo?.timeframe_to)}`}
+                  </p>
+                </div>
+              ) : null}
             </div>
 
             <div className='flex space-x-4'>

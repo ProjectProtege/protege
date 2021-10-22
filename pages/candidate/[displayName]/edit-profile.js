@@ -424,9 +424,18 @@ const CandidateEditProfile = ({ session }) => {
                           className='w-full input input-select'
                           ref={register}
                         >
-                          <option value={getText('GLOBAL', 'SELECT')}>
-                            {getText('GLOBAL', 'SELECT')}
-                          </option>
+                          {profileInfo?.timezone ? (
+                            <option
+                              value={profileInfo.timezone}
+                              className='text-gray-300'
+                            >
+                              {profileInfo.timezone}
+                            </option>
+                          ) : (
+                            <option value={getText('GLOBAL', 'SELECT')}>
+                              {getText('GLOBAL', 'SELECT')}
+                            </option>
+                          )}
 
                           {timezonesArray.map((timezone, index) => {
                             return (
