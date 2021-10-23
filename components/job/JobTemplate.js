@@ -215,7 +215,7 @@ const JobTemplate = ({ props }) => {
                 <div className='tracking-tight text-blue-900 text-md'>
                   <a
                     data-cy='company-website'
-                    className='underline opacity-75 hover:opacity-100'
+                    className='underline'
                     href={companyWebsite}
                   >
                     Visit website
