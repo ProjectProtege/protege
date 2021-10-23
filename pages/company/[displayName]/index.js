@@ -91,23 +91,23 @@ const CompanyProfile = () => {
 
               <a
                 className='opacity-75 underline hover:opacity-100 cursor-pointer'
-                href={profileInfo.companyWebsite}
+                href={profileInfo?.companyWebsite}
               >
-                {profileInfo.companyWebsite}
+                {profileInfo?.companyWebsite}
                 <ExternalLink className='w-5 h-5 inline-block -mt-1 ml-2 opacity-75 text-teal-700' />
               </a>
 
               <div className='mt-4 text-sm'>
                 <p className='opacity-50'>Timezone</p>
-                <p>{profileInfo.companyTimezone}</p>
+                <p>{profileInfo?.companyTimezone}</p>
               </div>
 
               <div className='mt-4 text-sm'>
                 <p className='opacity-50'>Timezone Preference</p>
                 {profileInfo?.companyTimeframeFrom && (
                   <p>{`${trimTimezone(
-                    profileInfo.companyTimeframeFrom
-                  )} - ${trimTimezone(profileInfo.companyTimeframeTo)}`}</p>
+                    profileInfo?.companyTimeframeFrom
+                  )} - ${trimTimezone(profileInfo?.companyTimeframeTo)}`}</p>
                 )}
               </div>
             </div>
@@ -116,12 +116,12 @@ const CompanyProfile = () => {
 
         <div className='col-span-9 mt-32'>
           <article className='mb-12'>
-            <h2 className='text-2xl mb-6'>About {profileInfo.companyName}</h2>
+            <h2 className='text-2xl mb-6'>About {profileInfo?.companyName}</h2>
 
             <div
               className='opacity-75'
               dangerouslySetInnerHTML={createMarkup(
-                profileInfo.companyDescription
+                profileInfo?.companyDescription
               )}
             />
           </article>
