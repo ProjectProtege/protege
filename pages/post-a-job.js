@@ -49,7 +49,7 @@ const PostAJob = ({ query }) => {
 
     await db
       .collection('jobs')
-      .doc(userUid)
+      .doc(`${data.jobData.companyName}-${userUid}`)
       .set({
         approved: false,
         status: 'active',

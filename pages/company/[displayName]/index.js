@@ -91,7 +91,7 @@ const CompanyProfile = () => {
 
               <a
                 className='opacity-75 underline hover:opacity-100 cursor-pointer'
-                href={profileInfo.companywebsite}
+                href={profileInfo.companyWebsite}
               >
                 {profileInfo.companyWebsite}
                 <ExternalLink className='w-5 h-5 inline-block -mt-1 ml-2 opacity-75 text-teal-700' />
