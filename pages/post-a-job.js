@@ -47,9 +47,14 @@ const PostAJob = ({ query }) => {
 
     const userUid = uuidv4()
 
+    function cleanseName(name) {
+      return name.toLowerCase().replace(/[^a-zA-Z ]/g, '')
+    }
+    const companyUid = `${cleanseName(data.jobData.companyName)}-${userUid}`
+
     await db
       .collection('jobs')
-      .doc(`${data.jobData.companyName}-${userUid}`)
+      .doc(companyUid)
       .set({
         approved: false,
         status: 'active',
@@ -68,7 +73,7 @@ const PostAJob = ({ query }) => {
         roleFocus: data.jobData.roleFocus,
         tier,
       })
-      .then(localStorage.setItem('Job ID', userUid))
+      .then(localStorage.setItem('Job ID', companyUid))
   }
 
   const handlePaymentClick = async () => {
