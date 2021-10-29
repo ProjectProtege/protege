@@ -48,7 +48,7 @@ const PostAJob = ({ query }) => {
     const userUid = uuidv4()
 
     function cleanseName(name) {
-      return name.toLowerCase().replace(/[^a-zA-Z ]/g, '')
+      return name.toLowerCase().replace(/[^A-Z0-9]+/gi, '-')
     }
     const companyUid = `${cleanseName(data.jobData.companyName)}-${userUid}`
 
