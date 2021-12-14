@@ -13,7 +13,7 @@ const TierSelectCard = ({ children, value, className }) => {
 
   return (
     <button
-      className={`${className} overflow-hidden p-6 md:p-8 shadow rounded text-left md:text-center cursor-pointer transform ease-in-out duration-150 bg-white mx-auto mb-4 grid grid-cols-3 md:grid-cols-1 w-full
+      className={`${className} overflow-hidden pt-8 pb-6 px-6 md:p-8 shadow rounded text-left md:text-center cursor-pointer transform ease-in-out duration-150 bg-white mx-auto mb-4 grid grid-cols-3 md:grid-cols-1 gap-2 md:gap-0 w-full
       ${
         route.pathname === '/post-a-job'
           ? 'hover:border-teal-300 hover:scale-107 hover:shadow-md'
@@ -29,12 +29,13 @@ const TierSelectCard = ({ children, value, className }) => {
         }`}
       />
       {route.pathname === '/' ? (
-        <div className='absolute z-10 hidden px-4 py-2 -ml-1 text-sm font-semibold tracking-widest text-white uppercase transform shadow bg-error -rotate-15'>
+        <div className='absolute z-10 w-full py-.5 text-xs font-semibold text-center tracking-widest text-white uppercase transform shadow bg-error-full -rotate-15'>
           Free for now!
         </div>
       ) : (
         ''
       )}
+      <div className='h-1 bg-error-full absolute w-24 md:w-32 rounded-full z-20 top-0 mt-[54px] md:mt-16 transform rotate-[30deg] ml-[8%] md:ml-[30%]' />
       {children}
     </button>
   )
