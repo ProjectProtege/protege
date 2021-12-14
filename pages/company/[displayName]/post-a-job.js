@@ -12,7 +12,7 @@ import 'react-quill/dist/quill.snow.css'
 
 // Component imports
 import AccountInteriorLayout from 'layouts/AccountInteriorLayout'
-import TierSelectCard from 'components/form/TierSelectCard'
+// import TierSelectCard from 'components/form/TierSelectCard'
 import { loadStripe } from '@stripe/stripe-js'
 import firebase from 'firebase/app'
 import { db } from 'utils/db'
@@ -21,7 +21,7 @@ import { v4 as uuidv4 } from 'uuid'
 // Zustand imports
 import { useJobForm } from 'store/job-post_store'
 import { useProfileInfo } from 'store/profile_info'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
@@ -62,7 +62,7 @@ const PostAJob = ({ session }) => {
     },
   })
 
-  async function sendJobtoDB(data) {
+  const sendJobToDB = async (data) => {
     const postDate = firebase.firestore.Timestamp.fromDate(new Date())
 
     const userUid = uuidv4()
@@ -95,20 +95,22 @@ const PostAJob = ({ session }) => {
         tier,
       })
       .then(localStorage.setItem('Job ID', companyUid))
+
+    router.push(`/company/${profileInfo.slug}/thanks`)
   }
 
-  const handleFormEntry = async (data) => {
-    const stripe = await loadStripe(process.env.STRIPE_API_KEY)
+  // const handleFormEntry = async (data) => {
+  //   const stripe = await loadStripe(process.env.STRIPE_API_KEY)
 
-    await sendJobtoDB(data)
+  //   await sendJobtoDB(data)
 
-    await stripe.redirectToCheckout({
-      lineItems: [{ price: tier, quantity: 1 }],
-      mode: 'payment',
-      successUrl: `${process.env.BASE_URL}/company/${displayName}/thanks`,
-      cancelUrl: `${process.env.BASE_URL}/company/${displayName}/post-a-job`,
-    })
-  }
+  //   await stripe.redirectToCheckout({
+  //     lineItems: [{ price: tier, quantity: 1 }],
+  //     mode: 'payment',
+  //     successUrl: `${process.env.BASE_URL}/company/${displayName}/thanks`,
+  //     cancelUrl: `${process.env.BASE_URL}/company/${displayName}/post-a-job`,
+  //   })
+  // }
 
   if (session) {
     return (
@@ -117,7 +119,7 @@ const PostAJob = ({ session }) => {
           <h1 className='sr-only'>Post a Job</h1>
 
           <div className='container relative z-30 p-6 bg-white rounded-lg shadow-md md:p-8'>
-            <form onSubmit={handleSubmit(handleFormEntry)}>
+            <form onSubmit={handleSubmit(sendJobToDB)}>
               <h2 className='text-xl text-blue-900 mb-4'>
                 {getText('GLOBAL', 'ABOUT_THE_JOB')}
               </h2>
@@ -297,11 +299,11 @@ const PostAJob = ({ session }) => {
               </div>
 
               <button type='submit' className='btn btn-teal'>
-                {getText('GLOBAL', 'PROCEED_TO_PAYMENT')}
+                Post Job
               </button>
             </form>
 
-            <div className='flex flex-col items-center md:items-start md:flex-row justify-center md:justify-end mt-12 md:-mt-10'>
+            {/* <div className='flex flex-col items-center md:items-start md:flex-row justify-center md:justify-end mt-12 md:-mt-10'>
               <div className='relative font-bold leading-none text-blue-900 text-7xl mr-4'>
                 <span className='absolute mt-4 -ml-4 text-2xl'>$</span>
                 99
@@ -313,7 +315,7 @@ const PostAJob = ({ session }) => {
                 <li>Tweet with link to listing</li>
                 <li>Personalized newsletter</li>
               </ul>
-            </div>
+            </div> */}
           </div>
         </section>
       </AccountInteriorLayout>
