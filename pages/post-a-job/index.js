@@ -47,16 +47,21 @@ const PostAJob = ({ query }) => {
 
     const userUid = uuidv4()
 
+    console.log(data.jobData)
+
     function cleanseName(name) {
       return name.toLowerCase().replace(/[^A-Z0-9]+/gi, '-')
     }
-    const companyUid = `${cleanseName(data.jobData.companyName)}-${userUid}`
+
+    const uidName = cleanseName(data.jobData?.companyName)
+
+    const companyUid = `${uidName}-${userUid}`
 
     await db
       .collection('jobs')
       .doc(companyUid)
       .set({
-        approved: false,
+        approved: true,
         status: 'active',
         companyEmail: data.jobData.companyEmail,
         avatar: data.jobData.avatar,
@@ -71,35 +76,37 @@ const PostAJob = ({ query }) => {
         positionType: data.jobData.positionType,
         postedAt: postDate,
         roleFocus: data.jobData.roleFocus,
-        tier,
+        // tier,
       })
       .then(localStorage.setItem('Job ID', companyUid))
+
+    router.push(`/post-a-job/thanks`)
   }
 
   const handlePaymentClick = async () => {
-    const stripe = await loadStripe(process.env.STRIPE_API_KEY)
+    // const stripe = await loadStripe(process.env.STRIPE_API_KEY)
 
-    sendJobtoDB({ jobData, companyLogoFile })
+    sendJobtoDB({ jobData })
 
-    const { error } = await stripe
-      .redirectToCheckout({
-        lineItems: [{ price: tier, quantity: 1 }],
-        mode: 'payment',
-        successUrl: `${process.env.BASE_URL}/post-a-job?status=3`,
-        cancelUrl: `${process.env.BASE_URL}/post-a-job?status=1`,
-      })
-      .then(function result() {
-        if (error) {
-          toast.error(result.error.message)
-        } else {
-          toast.success('Job listing submitted!')
-        }
-      })
+    // const { error } = await stripe
+    //   .redirectToCheckout({
+    //     lineItems: [{ price: tier, quantity: 1 }],
+    //     mode: 'payment',
+    //     successUrl: `${process.env.BASE_URL}/post-a-job?status=3`,
+    //     cancelUrl: `${process.env.BASE_URL}/post-a-job?status=1`,
+    //   })
+    //   .then(function result() {
+    //     if (error) {
+    //       toast.error(result.error.message)
+    //     } else {
+    //       toast.success('Job listing submitted!')
+    //     }
+    //   })
   }
 
   return (
     <div className='container'>
-      {status === 1 && (
+      {/* {status === 1 && (
         <>
           <div className='container max-w-screen-xl m-auto align-middle sm:max-w-screen-lg text-center'>
             <h1 className='sr-only'>Post a Job</h1>
@@ -120,14 +127,12 @@ const PostAJob = ({ query }) => {
             Select Your Tier
           </p>
         </>
-      )}
-      {status !== 1 && (
-        <h2 className='text-lg leading-snug text-center text-blue-500 md:text-2xl'>
-          Inexperienced doesn’t mean incapable.
-          <br />
-          Fill your role with ambition.
-        </h2>
-      )}
+      )} */}
+      <h2 className='text-lg leading-snug text-center text-blue-500 md:text-2xl'>
+        Inexperienced doesn’t mean incapable.
+        <br />
+        Fill your role with ambition.
+      </h2>
       <StatusBar props={status} />
       {status === 1 && Object.keys(jobData).length && (
         <div>
@@ -157,7 +162,7 @@ const PostAJob = ({ query }) => {
               onClick={handlePaymentClick}
               type='button'
             >
-              Proceed to Payment
+              Post Job
             </button>
           </div>
         </>

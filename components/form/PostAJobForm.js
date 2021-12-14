@@ -515,9 +515,9 @@ const PostAJobForm = ({ jobData }) => {
         <button
           data-cy='next-step-button'
           type='submit'
-          className='w-32 mt-6 btn btn-teal'
+          className='mt-6 btn btn-teal'
         >
-          Next Step
+          Preview Job
         </button>
       </form>
     </div>
